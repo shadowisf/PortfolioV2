@@ -6,7 +6,7 @@ type LinkProps = {
 
 export function LinkNoIcon({ href, children, onClick }: LinkProps) {
   return (
-    <a className="toThinHover" href={href} onClick={onClick}>
+    <a className="toThinHover" href={href} target="_blank" onClick={onClick}>
       {children}
     </a>
   );

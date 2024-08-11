@@ -1,7 +1,6 @@
 import { projectData } from "../pages/Index";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import Click from "../assets/AudioClick.mp3";
 
 function getName(dataID: number) {
   return projectData[dataID].name;
@@ -88,14 +87,22 @@ export function ProjectTile({ dataID }: ProjectTileProps) {
     <div
       id="tile"
       data-key={dataID}
-      className="tile toThinHover noCursor"
+      className="tile toThinHover all noCursor"
       onMouseEnter={() => togglePicture(dataID)}
       onMouseLeave={() => togglePicture(-1)}
       onMouseMove={(e) => movePicture(dataID, e)}
     >
-      <audio id="click" src={Click} />
       <h5 className="title">{getName(dataID)}</h5>
       <small className="year">{getYear(dataID)}</small>
+    </div>
+  );
+}
+
+export function ProjectTilePlaceholder() {
+  return (
+    <div className="tile toThinHover noCursor">
+      <h5 className="title">????</h5>
+      <small className="year">????</small>
     </div>
   );
 }

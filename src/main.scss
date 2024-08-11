@@ -67,6 +67,8 @@ small {
 }
 
 html {
+  background-image: url(assets/ImageNoise.PNG);
+  background-blend-mode: overlay;
   background-color: var(--background-color);
   color: var(--text-color);
   font-family: var(--primary-font);
@@ -86,6 +88,18 @@ a {
     font-variation-settings: "wght" 1000, "CONT" 1000;
     cursor: pointer;
   }
+
+  &.all {
+    transition: box-shadow 0.25s, color 0.25s, font-variation-settings 0.5s,
+      background-color 0.25s, transform 0.5s, color 0.5s;
+  }
+
+  &.all:hover {
+    transform: scale(1.025);
+    box-shadow: 0 0 48px 1px rgba(0, 0, 0, 0.3);
+    background-color: rgba(68, 66, 68, 0.358);
+    color: var(--accent-color);
+  }
 }
 
 .noCursor {
@@ -96,7 +110,7 @@ a {
   cursor: default;
 }
 
-.wrapper {
+.homeWrapper {
   max-width: 75%;
   margin: auto;
 
@@ -140,7 +154,7 @@ a {
   }
 }
 
-.project {
+.projects {
   margin-top: 8rem;
   margin-bottom: 8rem;
 
@@ -162,21 +176,12 @@ a {
 
     gap: 2rem;
 
-    transition: box-shadow 0.25s, color 0.25s, font-variation-settings 0.5s,
-      background-color 0.25s, transform 0.5s;
-
     .year {
       color: var(--text-faded-color);
     }
 
     .title {
       white-space: nowrap;
-    }
-
-    &:hover {
-      transform: scale(1.025);
-      box-shadow: 0 0 48px 1px rgba(0, 0, 0, 0.3);
-      background-color: rgba(68, 66, 68, 0.358);
     }
   }
 }
@@ -197,7 +202,7 @@ a {
 }
 
 @media screen and (max-width: 1000px) {
-  .wrapper {
+  .homeWrapper {
     max-width: 95%;
 
     margin: 4rem auto;

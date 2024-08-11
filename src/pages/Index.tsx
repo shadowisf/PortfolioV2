@@ -4,7 +4,7 @@ import { generateTheme } from "../utils/ColorUtils";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { LinkNoIcon } from "../components/Link";
-import ProjectPlaceholder from "../components/ProjectPlaceholder";
+import { ProjectTilePlaceholder } from "../components/ProjectTile";
 //
 import ApolloHospital from "../assets/ImageApolloHospital1.webp";
 //
@@ -20,6 +20,7 @@ import BellHospital from "../assets/ImageBellHospital1.webp";
 //
 import ProjectPicture from "../components/ProjectPicture";
 //
+import CV from "../assets/FileCV.PDF";
 
 export const projectData = [
   {
@@ -131,18 +132,18 @@ export default function Index() {
   }
 
   return (
-    <main className="wrapper">
-      <section className="project">
+    <main className="homeWrapper">
+      <section className="projects">
         <ProjectTile dataID={0} />
         <ProjectTile dataID={1} />
         <ProjectTile dataID={2} />
         <ProjectTile dataID={3} />
         <ProjectTile dataID={4} />
         <ProjectTile dataID={5} />
-        <ProjectPlaceholder />
-        <ProjectPlaceholder />
-        <ProjectPlaceholder />
-        <ProjectPlaceholder />
+        <ProjectTilePlaceholder />
+        <ProjectTilePlaceholder />
+        <ProjectTilePlaceholder />
+        <ProjectTilePlaceholder />
       </section>
       <section className="personal">
         <ProjectPicture dataID={0} />
@@ -163,7 +164,7 @@ export default function Index() {
           <div className="links noCursor">
             <LinkNoIcon>about me</LinkNoIcon>•
             <LinkNoIcon>contact me</LinkNoIcon>•
-            <LinkNoIcon>view my cv</LinkNoIcon>
+            <LinkNoIcon href={CV}>view my cv</LinkNoIcon>
           </div>
         </div>
       </section>
