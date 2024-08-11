@@ -1,13 +1,19 @@
+import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { projectData } from "../pages/Index";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-function getName(dataID: number) {
+export function getName(dataID: number) {
   return projectData[dataID].name;
 }
 
-function getYear(dataID: number) {
+export function getYear(dataID: number) {
   return projectData[dataID].year;
+}
+
+export function getPicture(dataID: number) {
+  return projectData[dataID].picture;
 }
 
 type ProjectTileProps = {
@@ -15,10 +21,15 @@ type ProjectTileProps = {
 };
 
 export function ProjectTile({ dataID }: ProjectTileProps) {
+  useEffect(() => {
+    setPersonalDiv(document.querySelector(".homeWrapper .right"));
+  }, []);
+
+  const [personalDiv, setPersonalDiv] = useState<Element | null>(null);
+
   const animationPictureDuration = "0.1";
   const animationEase = "power2.inOut";
   const boundaryDividend = 5;
-
   const animationPictureWidth = "1000px";
 
   const animationEnter = {
@@ -84,17 +95,24 @@ export function ProjectTile({ dataID }: ProjectTileProps) {
   );
 
   return (
-    <div
-      id="tile"
-      data-key={dataID}
-      className="tile toThinHover all noCursor"
-      onMouseEnter={() => togglePicture(dataID)}
-      onMouseLeave={() => togglePicture(-1)}
-      onMouseMove={(e) => movePicture(dataID, e)}
-    >
-      <h5 className="title">{getName(dataID)}</h5>
-      <small className="year">{getYear(dataID)}</small>
-    </div>
+    <>
+      <div
+        className="tile toThinHover all noCursor"
+        onMouseEnter={() => togglePicture(dataID)}
+        onMouseLeave={() => togglePicture(-1)}
+        onMouseMove={(e) => movePicture(dataID, e)}
+      >
+        <h5 className="title">{getName(dataID)}</h5>
+        <small className="year">{getYear(dataID)}</small>
+      </div>
+      {personalDiv &&
+        createPortal(
+          <div data-key={dataID} className="picture">
+            <img src={getPicture(dataID)} />
+          </div>,
+          personalDiv
+        )}
+    </>
   );
 }
 

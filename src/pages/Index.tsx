@@ -18,8 +18,6 @@ import Funculator from "../assets/ImageFunCulator1.webp";
 //
 import BellHospital from "../assets/ImageBellHospital1.webp";
 //
-import ProjectPicture from "../components/ProjectPicture";
-//
 import CV from "../assets/FileCV.PDF";
 
 export const projectData = [
@@ -102,14 +100,6 @@ export const projectData = [
 ];
 
 export default function Index() {
-  useGSAP(() => {
-    gsap.set(".picture img", {
-      scale: "0",
-      autoAlpha: "0",
-      display: "none",
-    });
-  }, []);
-
   const [firstTime, setFirstTime] = useState(true);
   const [count, setCount] = useState(0);
 
@@ -133,7 +123,7 @@ export default function Index() {
 
   return (
     <main className="homeWrapper">
-      <section className="projects">
+      <section className="left">
         <ProjectTile dataID={0} />
         <ProjectTile dataID={1} />
         <ProjectTile dataID={2} />
@@ -145,14 +135,7 @@ export default function Index() {
         <ProjectTilePlaceholder />
         <ProjectTilePlaceholder />
       </section>
-      <section className="personal">
-        <ProjectPicture dataID={0} />
-        <ProjectPicture dataID={1} />
-        <ProjectPicture dataID={2} />
-        <ProjectPicture dataID={3} />
-        <ProjectPicture dataID={4} />
-        <ProjectPicture dataID={5} />
-
+      <section className="right">
         <div className="hero">
           <h1 className="name noCursor" onClick={() => handleNameClick()}>
             les ranalan
