@@ -2,16 +2,24 @@ import { useState } from "react";
 import { ProjectTile } from "../components/ProjectTile";
 import { generateTheme } from "../utils/ColorUtils";
 import gsap from "gsap";
-import ApolloHospital from "../assets/ImageApolloHospital1.webp";
-import CircuitCentral from "../assets/ImageCircuitCentral1.webp";
-import PlugInsDatabase from "../assets/ImagePlugInsDatabase1.webp";
-import PortfolioV1 from "../assets/ImagePortfolio1.webp";
-import Funculator from "../assets/ImageFunCulator1.webp";
-import BellHospital from "../assets/ImageBellHospital1.webp";
-import { LinkNoIcon } from "../components/Link";
-import ProjectPicture from "../components/ProjectPicture";
 import { useGSAP } from "@gsap/react";
+import { LinkNoIcon } from "../components/Link";
 import ProjectPlaceholder from "../components/ProjectPlaceholder";
+//
+import ApolloHospital from "../assets/ImageApolloHospital1.webp";
+//
+import CircuitCentral from "../assets/ImageCircuitCentral1.webp";
+//
+import PlugInsDatabase from "../assets/ImagePlugInsDatabase1.webp";
+//
+import PortfolioV1 from "../assets/ImagePortfolio1.webp";
+//
+import Funculator from "../assets/ImageFunCulator1.webp";
+//
+import BellHospital from "../assets/ImageBellHospital1.webp";
+//
+import ProjectPicture from "../components/ProjectPicture";
+//
 
 export const projectData = [
   {

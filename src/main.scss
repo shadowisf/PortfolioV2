@@ -12,6 +12,8 @@
   --background-color: #2f2e2f;
   --accent-color: #deae87;
 
+  --change-layout-at-width: 1000px;
+
   --primary-font: "Kyiv Type Sans";
 
   --border-radius: 12px;
@@ -214,5 +216,9 @@ a {
     .project {
       margin: 0;
     }
+  }
+
+  .picture {
+    display: none;
   }
 }
