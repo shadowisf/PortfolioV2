@@ -1,9 +1,11 @@
-import { StrictMode } from "react";
+import { StrictMode, useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import Index from "./pages/Index.tsx";
 import "./main.scss";
+import Index from "./pages/_Index.tsx";
 
-createRoot(document.getElementById("root")!).render(
+const root = createRoot(document.getElementById("root")!);
+
+root.render(
   <StrictMode>
     <Index />
   </StrictMode>
