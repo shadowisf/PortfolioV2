@@ -6,19 +6,15 @@ import {
   getProjectLinks,
   getProjectName,
   getProjectYear,
+  ProjectProps,
 } from "../utils/ProjectUtils";
+import { signal } from "@preact/signals-react";
 
-type ProjectPageProps = {
-  dataID: number;
-};
+export default function ProjectPage({ dataID }: ProjectProps) {
+  const ifData5 = signal(false);
 
-export default function ProjectPage({ dataID }: ProjectPageProps) {
-  function checkIfDataID5() {
-    if (dataID === 5) {
-      return true;
-    } else {
-      false;
-    }
+  if (dataID === 5 || dataID === 6) {
+    ifData5.value = true;
   }
 
   return (
@@ -40,7 +36,7 @@ export default function ProjectPage({ dataID }: ProjectPageProps) {
       <div className="projectPage">
         <div className="content">{getProjectContent(dataID)}</div>
 
-        {checkIfDataID5() ? (
+        {ifData5.value ? (
           <div>
             <b>attributions:</b>
             <br />

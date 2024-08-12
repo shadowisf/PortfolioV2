@@ -191,8 +191,6 @@ a {
       z-index: 2;
 
       img {
-        display: none;
-
         border-radius: var(--border-radius);
         width: 100%;
         box-shadow: 0 0 48px 1px rgba(0, 0, 0, 0.3);
@@ -298,10 +296,6 @@ a {
       position: static;
 
       height: fit-content;
-
-      .preview {
-        display: none;
-      }
     }
   }
 
