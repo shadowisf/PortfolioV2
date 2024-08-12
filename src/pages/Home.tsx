@@ -27,11 +27,11 @@ export default function Home() {
       generateTheme();
 
       if (firstTime) {
-        gsap.to(highlightedTexts, {
+        gsap.set(highlightedTexts, {
           backgroundColor: "var(--text-color)",
           color: "var(--background-color",
         });
-        gsap.to(fadedTexts, {
+        gsap.set(fadedTexts, {
           autoAlpha: "0.5",
         });
 

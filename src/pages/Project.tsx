@@ -1,5 +1,5 @@
 import mediumZoom from "medium-zoom";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import ProjectPage from "../components/ProjectPage";
 import { getProjectIDs } from "../utils/ProjectUtils";
 import { useGSAP } from "@gsap/react";
@@ -22,10 +22,10 @@ export default function Project() {
   });
 
   return (
-    <main className="projectWrapper">
+    <Fragment>
       {getProjectIDs().map((id) => (
         <ProjectPage key={id} dataID={id} />
       ))}
-    </main>
+    </Fragment>
   );
 }

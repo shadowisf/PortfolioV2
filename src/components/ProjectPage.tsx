@@ -20,7 +20,7 @@ export default function ProjectPage({ dataID }: ProjectProps) {
   }, []);
 
   return (
-    <main className="projectPage" data-key={dataID}>
+    <main className="projectWrapper" data-key={dataID}>
       <div className="header">
         <h1 className="title accent">{getProjectName(dataID)}</h1>
         <h2 className="year faded">{getProjectYear(dataID)}</h2>

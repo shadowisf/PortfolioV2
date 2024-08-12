@@ -28,10 +28,11 @@ export function ProjectTile({ dataID, onClick }: ProjectProps) {
 
   useGSAP(() => {
     gsap.set(".homeWrapper .preview img", animationExit);
-  }, [isMobile]);
+  }, []);
 
-  const animationPreviewDuration = "0.01";
-  const animationEase = "none";
+  const animationPreviewDuration = "0.25";
+  const animationEase = "power2.inOut";
+  const boundaryDividend = 10;
 
   const animationEnter = {
     scale: "1",
@@ -52,13 +53,8 @@ export function ProjectTile({ dataID, onClick }: ProjectProps) {
   const togglePreview = contextSafe((targetID: number) => {
     previewContainer
       ? previewContainer.forEach((container) => {
-          const dataKey = container.getAttribute("data-key");
-          const image = container.querySelector("img");
-
-          if (dataKey === targetID.toString()) {
-            gsap.to(image, animationEnter);
-          } else {
-            gsap.to(image, animationExit);
+          if (container.getAttribute("data-key") === targetID.toString()) {
+            gsap.to(container.querySelector("img"), animationEnter);
           }
         })
       : null;
@@ -67,6 +63,25 @@ export function ProjectTile({ dataID, onClick }: ProjectProps) {
   const resetPreview = contextSafe(() => {
     previewImage ? gsap.to(previewImage, animationExit) : null;
   });
+
+  const movePreview = contextSafe(
+    (targetID: number, event: React.MouseEvent) => {
+      previewContainer &&
+        previewContainer.forEach((container) => {
+          if (container.getAttribute("data-key") === targetID.toString()) {
+            gsap.set(container.getElementsByTagName("img"), {
+              xPercent:
+                (event.clientX / window.innerWidth) * boundaryDividend - 1.5,
+              yPercent:
+                (event.clientY / window.innerHeight) * boundaryDividend - 2,
+
+              ease: animationEase,
+              duration: animationPreviewDuration,
+            });
+          }
+        });
+    }
+  );
 
   return (
     <div
@@ -77,6 +92,9 @@ export function ProjectTile({ dataID, onClick }: ProjectProps) {
       }}
       onMouseLeave={() => {
         isMobile ? resetPreview() : null;
+      }}
+      onMouseMove={(event) => {
+        isMobile ? movePreview(dataID, event) : null;
       }}
     >
       <h5 className="title">{getProjectName(dataID)}</h5>

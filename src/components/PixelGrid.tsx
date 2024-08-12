@@ -49,20 +49,16 @@ export function pixelTransition() {
 
   const changePage = contextSafe((id: number) => {
     const allPages = document.querySelectorAll("main[data-key]");
-    const projectWrapper = document.querySelector(".projectWrapper");
-    const homeWrapper = document.querySelector(".homeWrapper");
+    const home = document.querySelector("main[data-key='home']");
 
     allPages.forEach((page) => {
       const dataKey = page.getAttribute("data-key");
 
       if (dataKey === id.toString()) {
-        gsap.set(homeWrapper, { display: "none" });
-        gsap.set(projectWrapper, { display: "block" });
+        gsap.set(home, { display: "none" });
         gsap.set(page, {
           display: "block",
         });
-      } else {
-        gsap.set(page, { display: "none" });
       }
     });
   });
