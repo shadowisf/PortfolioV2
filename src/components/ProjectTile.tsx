@@ -1,32 +1,37 @@
 import {
+  getProjectImage,
   getProjectName,
   getProjectYear,
   ProjectProps,
 } from "../utils/ProjectUtils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { isMobile } from "../utils/ControlUtil";
-import { effect } from "@preact/signals-react";
+import { useEffect, useState } from "react";
+import { useGlobalState } from "../utils/ControlUtil";
 
 export function ProjectTile({ dataID }: ProjectProps) {
-  useGSAP(() => {
-    gsap.set(previewImageLocation, {
-      autoAlpha: "0",
-      scale: "0.95",
-    });
-  });
+  const { isMobile } = useGlobalState();
 
-  effect(() => {
-    if (isMobile.value) {
-      resetPreview();
-    }
-  });
+  const [previewContainer, setPreviewContainer] =
+    useState<NodeListOf<Element> | null>(null);
+  const [previewImage, setPreviewImage] = useState<NodeListOf<Element> | null>(
+    null
+  );
+
+  useEffect(() => {
+    const preview = document.querySelectorAll(".homeWrapper .preview");
+    const image = document.querySelectorAll(".homeWrapper .preview img");
+
+    setPreviewContainer(preview);
+    setPreviewImage(image);
+  }, []);
+
+  useGSAP(() => {
+    gsap.set(".homeWrapper .preview img", animationExit);
+  }, [isMobile]);
 
   const animationPreviewDuration = "0.01";
   const animationEase = "power2.inOut";
-
-  const previewContainerLocation = ".homeWrapper .right .preview";
-  const previewImageLocation = previewContainerLocation + " img";
 
   const animationEnter = {
     scale: "1",
@@ -45,36 +50,46 @@ export function ProjectTile({ dataID }: ProjectProps) {
   const { contextSafe } = useGSAP();
 
   const togglePreview = contextSafe((targetID: number) => {
-    const previewContainer = document.querySelectorAll(
-      previewContainerLocation
-    );
+    previewContainer
+      ? previewContainer.forEach((container) => {
+          const dataKey = container.getAttribute("data-key");
+          const image = container.querySelector("img");
 
-    previewContainer.forEach((container) => {
-      const dataKey = container.getAttribute("data-key");
-      const image = container.getElementsByTagName("img")[0];
-
-      if (dataKey === targetID.toString()) {
-        gsap.to(image, animationEnter);
-      }
-    });
+          if (dataKey === targetID.toString()) {
+            gsap.to(image, animationEnter);
+          } else {
+            gsap.to(image, animationExit);
+          }
+        })
+      : null;
   });
 
   const resetPreview = contextSafe(() => {
-    gsap.to(previewImageLocation, animationExit);
+    previewImage ? gsap.to(previewImage, animationExit) : null;
   });
 
   return (
     <div
       className="tile toThinHover all noCursor"
       onMouseEnter={() => {
-        isMobile.value ? null : togglePreview(dataID);
+        isMobile ? togglePreview(dataID) : null;
       }}
       onMouseLeave={() => {
-        isMobile.value ? null : resetPreview();
+        isMobile ? resetPreview() : null;
       }}
     >
       <h5 className="title">{getProjectName(dataID)}</h5>
       <small className="year faded">{getProjectYear(dataID)}</small>
+    </div>
+  );
+}
+
+export function ProjectPreview({ dataID }: ProjectProps) {
+  return (
+    <div data-key={dataID} className="preview">
+      {getProjectImage(dataID) && (
+        <img src={getProjectImage(dataID)[0]} loading="lazy" />
+      )}
     </div>
   );
 }

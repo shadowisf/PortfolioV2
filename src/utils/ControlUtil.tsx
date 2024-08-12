@@ -1,15 +1,38 @@
-import { signal } from "@preact/signals-react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-export const isMobile = signal(false);
+const GlobalStateContext = createContext({
+  isMobile: false,
+});
 
-export function checkIfMobile() {
-  const handleResize = () => {
-    isMobile.value = window.matchMedia("(max-width: 1000px)").matches;
-  };
+type GlobalStateProviderProps = {
+  children: React.ReactNode;
+};
 
-  window.addEventListener("resize", handleResize);
+export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
+  const [isMobile, setIsMobile] = useState(false);
 
-  return () => {
-    window.removeEventListener("resize", handleResize);
-  };
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.matchMedia("(min-width: 1000px)").matches);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Initial check
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return (
+    <GlobalStateContext.Provider value={{ isMobile }}>
+      {children}
+    </GlobalStateContext.Provider>
+  );
+}
+
+export function useGlobalState() {
+  return useContext(GlobalStateContext);
 }

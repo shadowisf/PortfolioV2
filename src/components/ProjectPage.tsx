@@ -8,17 +8,19 @@ import {
   getProjectYear,
   ProjectProps,
 } from "../utils/ProjectUtils";
-import { signal } from "@preact/signals-react";
+import { useEffect, useState } from "react";
 
 export default function ProjectPage({ dataID }: ProjectProps) {
-  const ifData5 = signal(false);
+  const [ifData5, setIfData5] = useState(false);
 
-  if (dataID === 5 || dataID === 6) {
-    ifData5.value = true;
-  }
+  useEffect(() => {
+    if (dataID === 5 || dataID === 6) {
+      setIfData5(true);
+    }
+  }, []);
 
   return (
-    <section>
+    <section data-key={dataID}>
       <div className="header">
         <h1 className="title accent">{getProjectName(dataID)}</h1>
         <h2 className="year faded">{getProjectYear(dataID)}</h2>
@@ -36,7 +38,7 @@ export default function ProjectPage({ dataID }: ProjectProps) {
       <div className="projectPage">
         <div className="content">{getProjectContent(dataID)}</div>
 
-        {ifData5.value ? (
+        {ifData5 ? (
           <div>
             <b>attributions:</b>
             <br />

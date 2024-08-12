@@ -4,24 +4,24 @@ import gsap from "gsap";
 import { LinkNoIcon } from "../components/Link";
 import CV from "../assets/FileCV.PDF";
 import { getProjectIDs } from "../utils/ProjectUtils";
-import { signal } from "@preact/signals-react";
-import ProjectPreview from "../components/ProjectPreview";
-
-const firstTime = signal(true);
-const count = signal(0);
+import { ProjectPreview } from "../components/ProjectTile";
+import { useState } from "react";
 
 export default function Home() {
+  const [firstTime, setFirstTime] = useState(true);
+  const [count, setCount] = useState(0);
+
+  const highlightedTexts = [".homeWrapper .name", ".projectWrapper .title"];
+
+  const fadedTexts = [
+    ".homeWrapper .year",
+    ".projectWrapper .year",
+    ".homeWrapper .links",
+  ];
+
   function handleNameClick() {
-    if (count.value === 10) {
+    if (count === 10) {
       generateTheme();
-
-      const highlightedTexts = [".homeWrapper .name", ".projectWrapper .title"];
-
-      const fadedTexts = [
-        ".homeWrapper .year",
-        ".projectWrapper .year",
-        ".homeWrapper .links",
-      ];
 
       if (firstTime) {
         gsap.to(highlightedTexts, {
@@ -32,10 +32,10 @@ export default function Home() {
           autoAlpha: "0.5",
         });
 
-        firstTime.value = false;
+        setFirstTime(false);
       }
     } else {
-      count.value = count.value + 1;
+      setCount(count + 1);
     }
   }
 
