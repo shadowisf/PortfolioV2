@@ -20,7 +20,7 @@ export default function ProjectPage({ dataID }: ProjectProps) {
   }, []);
 
   return (
-    <section data-key={dataID}>
+    <main className="projectPage" data-key={dataID}>
       <div className="header">
         <h1 className="title accent">{getProjectName(dataID)}</h1>
         <h2 className="year faded">{getProjectYear(dataID)}</h2>
@@ -35,8 +35,8 @@ export default function ProjectPage({ dataID }: ProjectProps) {
         ))}
       </div>
 
-      <div className="projectPage">
-        <div className="content">{getProjectContent(dataID)}</div>
+      <div className="content">
+        <div className="paragraph">{getProjectContent(dataID)}</div>
 
         {ifData5 ? (
           <div>
@@ -55,6 +55,6 @@ export default function ProjectPage({ dataID }: ProjectProps) {
           ))}
         </div>
       </div>
-    </section>
+    </main>
   );
 }

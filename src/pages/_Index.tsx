@@ -7,8 +7,9 @@ import { GlobalStateProvider } from "../utils/ControlUtil";
 export default function _Index() {
   return (
     <Fragment>
-      <PixelGrid />
       <GlobalStateProvider>
+        <PixelGrid />
+
         <Home />
         <Project />
       </GlobalStateProvider>

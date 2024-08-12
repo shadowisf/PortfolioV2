@@ -9,7 +9,7 @@ import gsap from "gsap";
 import { useEffect, useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 
-export function ProjectTile({ dataID }: ProjectProps) {
+export function ProjectTile({ dataID, onClick }: ProjectProps) {
   const { isMobile } = useGlobalState();
 
   const [previewContainer, setPreviewContainer] =
@@ -31,7 +31,7 @@ export function ProjectTile({ dataID }: ProjectProps) {
   }, [isMobile]);
 
   const animationPreviewDuration = "0.01";
-  const animationEase = "power2.inOut";
+  const animationEase = "none";
 
   const animationEnter = {
     scale: "1",
@@ -70,6 +70,7 @@ export function ProjectTile({ dataID }: ProjectProps) {
 
   return (
     <div
+      onClick={onClick}
       className="tile toThinHover all noCursor"
       onMouseEnter={() => {
         isMobile ? togglePreview(dataID) : null;

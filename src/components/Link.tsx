@@ -2,7 +2,6 @@ type LinkProps = {
   href?: string;
   children?: React.ReactNode;
   onClick?: () => void;
-  alt?: boolean;
   img?: React.ReactNode;
   className?: string;
 };

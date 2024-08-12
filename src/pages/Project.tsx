@@ -2,6 +2,8 @@ import mediumZoom from "medium-zoom";
 import { useEffect } from "react";
 import ProjectPage from "../components/ProjectPage";
 import { getProjectIDs } from "../utils/ProjectUtils";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 export default function Project() {
   useEffect(() => {
@@ -14,6 +16,10 @@ export default function Project() {
       zoom.detach();
     };
   }, []);
+
+  useGSAP(() => {
+    gsap.set(".projectWrapper", { display: "none" });
+  });
 
   return (
     <main className="projectWrapper">

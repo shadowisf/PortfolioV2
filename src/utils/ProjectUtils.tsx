@@ -1,6 +1,9 @@
 import { Github, LinkedIn, PDF } from "../components/Icon";
 import { LinkWithIcon } from "../components/Link";
 //
+import PortfolioOriginal1 from "../assets/ImageOriginalPortfolio1.webp";
+import PortfolioOriginal2 from "../assets/ImageOriginalPortfolio2.webp";
+//
 import ApolloHospital1 from "../assets/ImageApolloHospital1.webp";
 import ApolloHospital2 from "../assets/ImageApolloHospital2.webp";
 import ApolloHospitalReport from "../assets/FileApolloHospital.PDF";
@@ -14,9 +17,6 @@ import PlugInsDatabase1 from "../assets/ImagePlugInsDatabase1.webp";
 import PlugInsDatabase2 from "../assets/ImagePlugInsDatabase2.webp";
 import PlugInsDatabaseReport from "../assets/FilePlugInsDatabase.PDF";
 //
-import PortfolioOriginal1 from "../assets/ImageOriginalPortfolio1.webp";
-import PortfolioOriginal2 from "../assets/ImageOriginalPortfolio2.webp";
-//
 import Funculator1 from "../assets/ImageFunCulator1.webp";
 import Funculator2 from "../assets/ImageFunCulator2.webp";
 import Funculator3 from "../assets/ImageFunCulator3.webp";
@@ -25,6 +25,12 @@ import FunculatorReport from "../assets/FileFunCulator.PDF";
 import BellHospital1 from "../assets/ImageBellHospital1.webp";
 import BellHospital2 from "../assets/ImageBellHospital1.webp";
 import BellHospitalReport from "../assets/FileBellHospital.PDF";
+//
+const ApolloHospitalGithub = "https://github.com/shadowisf/ApolloHospital";
+const CircuitCentralGithub = "https://github.com/shadowisf/CircuitCentral";
+const PlugInsDatabaseGithub = "https://github.com/shadowisf/PlugInsDatabase";
+const FunculatorGithub = "https://github.com/shadowisf/FunCulator";
+const BellHospitalGithub = "https://github.com/shadowisf/BellHospital";
 //
 export const projectData = [
   {
@@ -92,17 +98,12 @@ export const projectData = [
         <LinkWithIcon
           img={<Github />}
           href="https://github.com/brandonmcconnell"
-          alt={true}
         >
           brandon mcconnell
         </LinkWithIcon>
 
         {/* react-toastify */}
-        <LinkWithIcon
-          img={<Github />}
-          href="https://github.com/fkhadra"
-          alt={true}
-        >
+        <LinkWithIcon img={<Github />} href="https://github.com/fkhadra">
           fadi khadra
         </LinkWithIcon>
 
@@ -110,7 +111,6 @@ export const projectData = [
         <LinkWithIcon
           img={<Github />}
           href="https://github.com/francoischalifour"
-          alt={true}
         >
           françois chalifour
         </LinkWithIcon>
@@ -119,26 +119,17 @@ export const projectData = [
         <LinkWithIcon
           img={<LinkedIn />}
           href="https://www.linkedin.com/in/frankmyles/"
-          alt={true}
         >
           frank myles
         </LinkWithIcon>
 
         {/* gsap */}
-        <LinkWithIcon
-          img={<Github />}
-          href="https://github.com/jackdoyle"
-          alt={true}
-        >
+        <LinkWithIcon img={<Github />} href="https://github.com/jackdoyle">
           jack doyle
         </LinkWithIcon>
 
         {/* remix icons */}
-        <LinkWithIcon
-          img={<Github />}
-          href="https://github.com/xiaochunjimmy"
-          alt={true}
-        >
+        <LinkWithIcon img={<Github />} href="https://github.com/xiaochunjimmy">
           zhang xiaochun
         </LinkWithIcon>
       </>
@@ -174,10 +165,7 @@ export const projectData = [
     ),
     links: (
       <>
-        <LinkWithIcon
-          img={<Github />}
-          href="https://github.com/shadowisf/CircuitCentral"
-        >
+        <LinkWithIcon img={<Github />} href={CircuitCentralGithub}>
           repository
         </LinkWithIcon>
 
@@ -206,7 +194,17 @@ export const projectData = [
     image: [ApolloHospital1, ApolloHospital2],
     imageAlts: ["", ""],
     content: <p></p>,
-    links: <></>,
+    links: (
+      <>
+        <LinkWithIcon img={<Github />} href={ApolloHospitalGithub}>
+          repository
+        </LinkWithIcon>
+
+        <LinkWithIcon img={<PDF />} href={ApolloHospitalReport}>
+          report
+        </LinkWithIcon>
+      </>
+    ),
   },
   {
     id: 2,
@@ -216,7 +214,17 @@ export const projectData = [
     image: [Funculator1, Funculator2, Funculator3],
     imageAlts: [],
     content: <p></p>,
-    links: <></>,
+    links: (
+      <>
+        <LinkWithIcon img={<Github />} href={FunculatorGithub}>
+          repository
+        </LinkWithIcon>
+
+        <LinkWithIcon img={<PDF />} href={FunculatorReport}>
+          report
+        </LinkWithIcon>
+      </>
+    ),
   },
   {
     id: 1,
@@ -226,7 +234,17 @@ export const projectData = [
     image: [BellHospital1, BellHospital2],
     imageAlts: [],
     content: <p></p>,
-    links: <></>,
+    links: (
+      <>
+        <LinkWithIcon img={<Github />} href={BellHospitalGithub}>
+          repository
+        </LinkWithIcon>
+
+        <LinkWithIcon img={<PDF />} href={BellHospitalReport}>
+          report
+        </LinkWithIcon>
+      </>
+    ),
   },
   {
     id: 0,
@@ -236,12 +254,23 @@ export const projectData = [
     image: [PlugInsDatabase1, PlugInsDatabase2],
     imageAlts: [],
     content: <p></p>,
-    links: <></>,
+    links: (
+      <>
+        <LinkWithIcon img={<Github />} href={PlugInsDatabaseGithub}>
+          repository
+        </LinkWithIcon>
+
+        <LinkWithIcon img={<PDF />} href={PlugInsDatabaseReport}>
+          report
+        </LinkWithIcon>
+      </>
+    ),
   },
 ];
 
 export type ProjectProps = {
   dataID: number;
+  onClick?: () => void;
 };
 
 export function getProjectName(dataID: number) {
