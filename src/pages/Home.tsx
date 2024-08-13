@@ -1,10 +1,13 @@
-import { ProjectTile } from "../components/ProjectTile";
+import {
+  ProjectPreview,
+  ProjectTile,
+  ProjectTilePlaceholder,
+} from "../components/ProjectTile";
 import { generateTheme } from "../utils/ColorUtils";
 import gsap from "gsap";
 import { LinkNoIcon } from "../components/Link";
 import CV from "../assets/FileCV.PDF";
 import { getProjectIDs } from "../utils/ProjectUtils";
-import { ProjectPreview } from "../components/ProjectTile";
 import { useState } from "react";
 import { pixelTransition } from "../components/PixelGrid";
 
@@ -54,10 +57,6 @@ export default function Home() {
         ))}
       </section>
       <section className="right">
-        {getProjectIDs().map((id) => (
-          <ProjectPreview key={id} dataID={id} />
-        ))}
-
         <div className="hero">
           <h1
             className="accent name noCursor"

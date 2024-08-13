@@ -13,7 +13,7 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.matchMedia("(min-width: 1000px)").matches);
+      setIsMobile(window.matchMedia("(max-width: 1000px)").matches);
     };
 
     window.addEventListener("resize", handleResize);
