@@ -1,8 +1,4 @@
-import {
-  ProjectPreview,
-  ProjectTile,
-  ProjectTilePlaceholder,
-} from "../components/ProjectTile";
+import { ProjectTile } from "../components/ProjectTile";
 import { generateTheme } from "../utils/ColorUtils";
 import gsap from "gsap";
 import { LinkNoIcon } from "../components/Link";

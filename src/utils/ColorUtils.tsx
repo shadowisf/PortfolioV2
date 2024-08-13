@@ -45,8 +45,10 @@ export function generateTheme() {
     calculateContrastRatio(bgColor, textColor) < 7
   );
 
-  document.documentElement.style.setProperty("--text-color", textColor);
-  document.documentElement.style.setProperty("--background-color", bgColor);
-  document.documentElement.style.setProperty("--text-faded-color", "#");
-  document.documentElement.style.setProperty("--accent-color", "#");
+  requestAnimationFrame(() => {
+    document.documentElement.style.setProperty("--text-color", textColor);
+    document.documentElement.style.setProperty("--background-color", bgColor);
+    document.documentElement.style.setProperty("--text-faded-color", "#");
+    document.documentElement.style.setProperty("--accent-color", textColor);
+  });
 }

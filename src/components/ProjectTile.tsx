@@ -50,7 +50,7 @@ export function ProjectTile({ dataID, onClick }: ProjectProps) {
   const previewImagesTarget = ".homeWrapper .right .preview img";
   const rightDivTarget = ".homeWrapper .right";
 
-  const animationPreviewDuration = "0.25";
+  const animationPreviewDuration = "0.1";
   const animationEase = "power2.inOut";
   const boundaryDividend = 10;
 
