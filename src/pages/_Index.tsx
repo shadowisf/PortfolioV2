@@ -1,18 +1,24 @@
 import { PixelGrid } from "../components/PixelGrid";
 import Home from "./Home";
 import Project from "./Project";
-import { Fragment } from "react/jsx-runtime";
 import { GlobalStateProvider } from "../utils/ControlUtil";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 export default function _Index() {
-  return (
-    <Fragment>
-      <GlobalStateProvider>
-        <PixelGrid />
+  useGSAP(() => {
+    gsap.set(pixelGridTarget, { display: "none" });
+  });
 
-        <Home />
-        <Project />
-      </GlobalStateProvider>
-    </Fragment>
+  const pixelGridTarget = ".pixelGrid";
+
+  return (
+    <GlobalStateProvider>
+      <PixelGrid />
+
+      <Home />
+
+      <Project />
+    </GlobalStateProvider>
   );
 }

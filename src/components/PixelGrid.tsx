@@ -13,25 +13,29 @@ export function PixelGrid() {
 }
 
 export function pixelTransition() {
-  const { contextSafe } = useGSAP();
-
   const [currentPage, setCurrentPage] = useState(0);
 
+  const { contextSafe } = useGSAP();
+
   const startTransition = contextSafe((id: number) => {
-    gsap.set(".pixelGrid", { display: "grid" });
-    gsap.fromTo(
-      ".pixelItem",
-      { opacity: "0" },
-      {
-        opacity: "1",
-        duration: "0.005",
-        stagger: { amount: 0.5, from: "random" },
-        onComplete: () => {
-          changePage(id);
-          endTransition();
-        },
-      }
-    );
+    if (currentPage === id) {
+      console.log("LOL");
+    } else {
+      gsap.set(".pixelGrid", { display: "grid" });
+      gsap.fromTo(
+        ".pixelItem",
+        { opacity: "0" },
+        {
+          opacity: "1",
+          duration: "0.005",
+          stagger: { amount: 0.5, from: "random" },
+          onComplete: () => {
+            changePage(id);
+            endTransition();
+          },
+        }
+      );
+    }
   });
 
   const endTransition = contextSafe(() => {
@@ -49,16 +53,24 @@ export function pixelTransition() {
 
   const changePage = contextSafe((id: number) => {
     const allPages = document.querySelectorAll("main[data-key]");
-    const home = document.querySelector("main[data-key='home']");
 
     allPages.forEach((page) => {
       const dataKey = page.getAttribute("data-key");
 
-      if (dataKey === id.toString()) {
-        gsap.set(home, { display: "none" });
-        gsap.set(page, {
-          display: "block",
-        });
+      switch (dataKey) {
+        case "-1":
+          gsap.set(allPages, {
+            display: "none",
+          });
+          gsap.set(page, { display: "flex" });
+          setCurrentPage(id);
+          break;
+        case id.toString():
+          gsap.set(allPages, { display: "none" });
+          gsap.set(page, { display: "block" });
+          setCurrentPage(id);
+          break;
+        default:
       }
     });
   });

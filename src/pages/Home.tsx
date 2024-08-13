@@ -2,7 +2,6 @@ import { ProjectTile } from "../components/ProjectTile";
 import { generateTheme } from "../utils/ColorUtils";
 import gsap from "gsap";
 import { LinkNoIcon } from "../components/Link";
-import CV from "../assets/FileCV.PDF";
 import { getProjectIDs } from "../utils/ProjectUtils";
 import { useState } from "react";
 import { pixelTransition } from "../components/PixelGrid";
@@ -42,7 +41,7 @@ export default function Home() {
   }
 
   return (
-    <main data-key="home" className="homeWrapper">
+    <main data-key="-1" className="homeWrapper">
       <section className="left">
         {getProjectIDs().map((id) => (
           <ProjectTile
@@ -68,10 +67,7 @@ export default function Home() {
 
           <div className="links faded noCursor">
             <LinkNoIcon className="faded">about me</LinkNoIcon>•
-            <LinkNoIcon className="faded">contact me</LinkNoIcon>•
-            <LinkNoIcon className="faded" href={CV}>
-              view my cv
-            </LinkNoIcon>
+            <LinkNoIcon className="faded">contact me</LinkNoIcon>
           </div>
         </div>
       </section>

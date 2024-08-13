@@ -21,9 +21,9 @@ export function LinkNoIcon({ href, children, onClick, className }: LinkProps) {
 
 export function LinkWithIcon({ href, children, onClick, img }: LinkProps) {
   return (
-    <span onClick={onClick} className="linkWithIcon">
+    <span onClick={onClick} className=" linkWithIcon toThinHover noCursor">
       <picture>{img}</picture>
-      <a className="toThinHover link noCursor" href={href} target="_blank">
+      <a href={href} target="_blank">
         {children}
       </a>
     </span>

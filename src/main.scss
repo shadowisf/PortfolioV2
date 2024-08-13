@@ -20,8 +20,6 @@
   --background-color: #2f2e2f;
   --accent-color: #deae87; */
 
-  --change-layout-at-width: 1000px;
-
   --primary-font: "Kyiv Type Sans";
 
   --border-radius: 12px;
@@ -194,30 +192,92 @@ a {
       pointer-events: none;
 
       justify-content: end;
-      z-index: 2;
+      z-index: 10;
+
+      opacity: 0;
+      visibility: hidden;
 
       img {
         border-radius: var(--border-radius);
         width: 100%;
         box-shadow: var(--img-box-shadow);
       }
+
+      span {
+        display: flex;
+        justify-content: center;
+
+        gap: 0.5rem;
+
+        margin-top: 0.5rem;
+
+        flex-wrap: wrap;
+
+        small {
+          padding: 0.5rem 0.75rem;
+
+          box-shadow: var(--button-box-shadow);
+          border-radius: var(--border-radius);
+
+          font-weight: bolder;
+
+          text-align: center;
+
+          white-space: nowrap;
+        }
+      }
     }
   }
 }
 
 .linkWithIcon {
+  position: relative;
+  text-decoration: none;
+  color: var(--text-color);
+
+  padding-bottom: 5px;
+  padding-right: 5px;
+
   display: flex;
 
   gap: 0.5rem;
 
+  border-bottom: 2px dashed;
+
   picture {
     display: flex;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
   }
 }
 
 .projectWrapper {
   max-width: 700px;
   margin: 4rem auto;
+
+  display: none;
+
+  .mobileBackButton {
+    align-items: center;
+
+    margin-bottom: 2rem;
+    gap: 0.5rem;
+  }
 
   .content {
     display: flex;
@@ -227,6 +287,10 @@ a {
     margin-top: 4rem;
     margin-bottom: 4rem;
     gap: 4rem;
+
+    img {
+      box-shadow: var(--img-box-shadow);
+    }
   }
 
   .header {
@@ -234,6 +298,14 @@ a {
 
     align-items: center;
     justify-content: space-between;
+
+    .title {
+      text-align: center;
+    }
+
+    .desktopBackButton {
+      cursor: pointer;
+    }
   }
 
   .architecture {
@@ -248,8 +320,21 @@ a {
 
     flex-wrap: wrap;
 
+    margin-top: 1rem;
+
+    row-gap: 1rem;
+    column-gap: 1rem;
+
     .item {
+      box-shadow: var(--button-box-shadow);
+
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--border-radius);
+
       white-space: nowrap;
+
+      flex: 1;
+      text-align: center;
     }
   }
 
@@ -283,6 +368,7 @@ a {
   }
 }
 
+// mobile screen
 @media screen and (max-width: 1000px) {
   .homeWrapper {
     max-width: 95%;
@@ -309,9 +395,32 @@ a {
     max-width: 95%;
     margin: 4rem auto;
 
+    .mobileBackButton {
+      display: flex;
+    }
+
     .header {
       justify-content: center;
       gap: 4rem;
+
+      .desktopBackButton {
+        display: none;
+      }
+    }
+  }
+}
+
+// desktop screen
+@media screen and (min-width: 1000px) {
+  .projectWrapper {
+    .mobileBackButton {
+      display: none;
+    }
+
+    .header {
+      .desktopBackButton {
+        display: flex;
+      }
     }
   }
 }

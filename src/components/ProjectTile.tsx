@@ -1,4 +1,5 @@
 import {
+  getProjectArchitecture,
   getProjectImage,
   getProjectName,
   getProjectYear,
@@ -16,21 +17,19 @@ export function ProjectTile({ dataID, onClick }: ProjectProps) {
   const [rightDiv, setRightDiv] = useState<Element | null>(null);
   const [previewContainer, setPreviewContainer] =
     useState<NodeListOf<Element> | null>(null);
-  const [previewImages, setPreviewImages] =
-    useState<NodeListOf<Element> | null>(null);
+  const [heroPersonal, setHeroPersonal] = useState<Element | null>(null);
 
   useEffect(() => {
     setRightDiv(document.querySelector(rightDivTarget));
+    setHeroPersonal(document.querySelector(rightHeroTarget));
 
     requestAnimationFrame(() => {
       setPreviewContainer(document.querySelectorAll(previewContainerTarget));
-      setPreviewImages(document.querySelectorAll(previewImagesTarget));
     });
 
     return () => {
       setRightDiv(null);
       setPreviewContainer(null);
-      setPreviewImages(null);
     };
   }, []);
 
@@ -40,15 +39,9 @@ export function ProjectTile({ dataID, onClick }: ProjectProps) {
     }
   }, [isMobile]);
 
-  useGSAP(() => {
-    requestAnimationFrame(() => {
-      gsap.set(previewImagesTarget, animationExit);
-    });
-  });
-
   const previewContainerTarget = ".homeWrapper .right .preview";
-  const previewImagesTarget = ".homeWrapper .right .preview img";
   const rightDivTarget = ".homeWrapper .right";
+  const rightHeroTarget = ".homeWrapper .right .hero";
 
   const animationPreviewDuration = "0.1";
   const animationEase = "power2.inOut";
@@ -73,26 +66,28 @@ export function ProjectTile({ dataID, onClick }: ProjectProps) {
   const togglePreview = contextSafe((targetID: number) => {
     previewContainer?.forEach((container) => {
       const dataKey = container.getAttribute("data-key");
-      const image = container.getElementsByTagName("img");
 
       if (dataKey === targetID.toString()) {
-        gsap.to(image, animationEnter);
+        gsap.to(container, animationEnter);
+        gsap.to(heroPersonal, animationExit);
       }
     });
   });
 
   const resetPreview = contextSafe(() => {
-    gsap.to(previewImages, animationExit);
+    previewContainer?.forEach((container) => {
+      gsap.to(container, animationExit);
+    });
+    gsap.to(heroPersonal, animationEnter);
   });
 
   const movePreview = contextSafe(
     (targetID: number, event: React.MouseEvent) => {
       previewContainer?.forEach((container) => {
         const dataKey = container.getAttribute("data-key");
-        const image = container.getElementsByTagName("img");
 
         if (dataKey === targetID.toString()) {
-          gsap.set(image, {
+          gsap.set(container, {
             xPercent:
               (event.clientX / window.innerWidth) * boundaryDividend - 1.5,
             yPercent:
@@ -130,7 +125,16 @@ export function ProjectTile({ dataID, onClick }: ProjectProps) {
 export function ProjectPreview({ dataID }: ProjectProps) {
   return (
     <div data-key={dataID} className="preview">
-      <img src={getProjectImage(dataID)[0]} />
+      <img loading="lazy" src={getProjectImage(dataID)[0]} />
+      <span className="architecture">
+        {getProjectArchitecture(dataID)
+          .filter((item) => item.startsWith("*"))
+          .map((item, index) => (
+            <small key={index} className="item">
+              {item.replace("*", "")}
+            </small>
+          ))}
+      </span>
     </div>
   );
 }

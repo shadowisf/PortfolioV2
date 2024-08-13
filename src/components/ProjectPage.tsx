@@ -1,14 +1,16 @@
-import { Fragment } from "react/jsx-runtime";
 import {
   getProjectArchitecture,
   getProjectContent,
   getProjectImage,
+  getProjectImageAlts,
   getProjectLinks,
   getProjectName,
   getProjectYear,
   ProjectProps,
 } from "../utils/ProjectUtils";
 import { useEffect, useState } from "react";
+import { ArrowLeft } from "./Icon";
+import { pixelTransition } from "./PixelGrid";
 
 export default function ProjectPage({ dataID }: ProjectProps) {
   const [ifData5, setIfData5] = useState(false);
@@ -19,19 +21,31 @@ export default function ProjectPage({ dataID }: ProjectProps) {
     }
   }, []);
 
+  const { startTransition } = pixelTransition();
+
   return (
     <main className="projectWrapper" data-key={dataID}>
+      <span
+        className="mobileBackButton toThinHover noCursor"
+        onClick={() => startTransition(-1)}
+      >
+        <ArrowLeft width="24" />
+        <span>back to menu</span>
+      </span>
       <div className="header">
+        <span className="desktopBackButton">
+          <ArrowLeft onClick={() => startTransition(-1)} width="32" />
+        </span>
         <h1 className="title accent">{getProjectName(dataID)}</h1>
-        <h2 className="year faded">{getProjectYear(dataID)}</h2>
+        <span className="desktopBackButton" />
       </div>
 
-      <div className="architecture">
-        {getProjectArchitecture(dataID).map((item, index, arr) => (
-          <Fragment key={index}>
-            <h5 className="item">{item}</h5>
-            {index < arr.length - 1 && <h5 className="noCursor"> • </h5>}
-          </Fragment>
+      <div className="architecture noCursor">
+        <h6 className="item">{getProjectYear(dataID)}</h6>
+        {getProjectArchitecture(dataID).map((item, index) => (
+          <h6 key={index} className="item">
+            {item.replace("*", "")}
+          </h6>
         ))}
       </div>
 
@@ -49,9 +63,14 @@ export default function ProjectPage({ dataID }: ProjectProps) {
           <div className="links">{getProjectLinks(dataID)}</div>
         )}
 
-        <div className="imageContainer noCursor">
+        <div className="imageContainer">
           {getProjectImage(dataID).map((item, index) => (
-            <img key={index} src={item} loading="lazy" />
+            <img
+              loading="lazy"
+              key={index}
+              src={item}
+              alt={getProjectImageAlts(dataID)[index]}
+            />
           ))}
         </div>
       </div>
