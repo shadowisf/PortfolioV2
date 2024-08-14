@@ -15,6 +15,8 @@ export function pixelTransition() {
   const { contextSafe } = useGSAP();
 
   const startTransition = contextSafe((id: number) => {
+
+
     gsap.set(".pixelGrid", { display: "grid" });
     gsap.fromTo(
       ".pixelItem",
@@ -32,14 +34,16 @@ export function pixelTransition() {
   });
 
   const endTransition = contextSafe(() => {
-    gsap.to(".pixelItem", {
-      opacity: "0",
-      duration: "0.005",
-      stagger: { amount: 0.5, from: "random" },
-      onComplete: () => {
-        gsap.set(".pixelGrid", { display: "none" });
-      },
-    });
+    setTimeout(() => {
+      gsap.to(".pixelItem", {
+        opacity: "0",
+        duration: "0.005",
+        stagger: { amount: 0.5, from: "random" },
+        onComplete: () => {
+          gsap.set(".pixelGrid", { display: "none" });
+        },
+      });
+    }, 100);
   });
 
   const changePage = contextSafe((id: number) => {

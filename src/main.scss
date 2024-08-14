@@ -16,9 +16,9 @@ $maxWidthMobile: 90%;
   color-scheme: light dark;
 
   --text-color: light-dark(black, white);
-  --background-color: light-dark(rgb(232, 232, 232), #2f2e2f);
+  --background-color: light-dark(rgb(209, 209, 214), rgb(44, 44, 46));
   --text-faded-color: #817e83;
-  --accent-color: rgb(218, 96, 40);
+  --accent-color: light-dark(#6320ee, #8075ff);
 
   --h1: 2.986rem;
   --h2: 2.488rem;
@@ -295,11 +295,22 @@ small {
 }
 
 html {
-  background-image: url(assets/ImageNoise.PNG);
   background-blend-mode: overlay;
   background-color: var(--background-color);
   color: var(--text-color);
   font-family: $primaryFont;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    background-image: url("../src/assets/ImageNoiseDark.PNG");
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html {
+    background-image: url("../src/assets/ImageNoiseWhite.PNG");
+  }
 }
 
 a {
@@ -410,11 +421,16 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1.25rem 2rem;
 
   .navButtons {
     display: flex;
     gap: 2rem;
+  }
+
+  .hamburger:hover,
+  .logoButton:hover {
+    cursor: pointer;
   }
 }
 
@@ -496,6 +512,10 @@ footer {
     background-color: var(--background-color);
     box-shadow: $boxShadow;
     z-index: 5;
+
+    .navButtons {
+      display: none;
+    }
   }
 
   footer {
@@ -516,6 +536,12 @@ footer {
       .desktopBackButton {
         display: flex;
       }
+    }
+  }
+
+  nav {
+    .hamburger {
+      display: none;
     }
   }
 }

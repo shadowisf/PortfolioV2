@@ -4,13 +4,13 @@ import gsap from "gsap";
 import { LinkNoIcon } from "../components/Link";
 import { getProjectIDs } from "../utils/ProjectUtils";
 import { useState } from "react";
-import { pixelTransition } from "../components/PixelGrid";
+import { useGlobalState } from "../utils/ControlUtil";
 
 export default function Home() {
   const [firstTime, setFirstTime] = useState(true);
   const [count, setCount] = useState(0);
 
-  const { startTransition } = pixelTransition();
+  const { startTransitionGlobal } = useGlobalState();
 
   const highlightedTexts = [".homeWrapper .name", ".projectWrapper .title"];
 
@@ -45,7 +45,7 @@ export default function Home() {
       <section className="left">
         {getProjectIDs().map((id) => (
           <ProjectTile
-            onClick={() => startTransition(id)}
+            onClick={() => startTransitionGlobal(id)}
             key={id}
             dataID={id}
           />
@@ -66,8 +66,19 @@ export default function Home() {
           <br />
 
           <div className="links faded noCursor">
-            <LinkNoIcon className="faded">about me</LinkNoIcon>•
-            <LinkNoIcon className="faded">contact me</LinkNoIcon>
+            <LinkNoIcon
+              className="faded"
+              onClick={() => startTransitionGlobal(-2)}
+            >
+              about me
+            </LinkNoIcon>
+            •
+            <LinkNoIcon
+              className="faded"
+              onClick={() => startTransitionGlobal(-3)}
+            >
+              contact me
+            </LinkNoIcon>
           </div>
         </div>
       </section>

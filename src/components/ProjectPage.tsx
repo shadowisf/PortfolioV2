@@ -10,7 +10,7 @@ import {
 } from "../utils/ProjectUtils";
 import { useEffect, useState } from "react";
 import { ArrowLeft } from "./Icon";
-import { pixelTransition } from "./PixelGrid";
+import { useGlobalState } from "../utils/ControlUtil";
 
 export default function ProjectPage({ dataID }: ProjectProps) {
   const [ifData5, setIfData5] = useState(false);
@@ -21,20 +21,20 @@ export default function ProjectPage({ dataID }: ProjectProps) {
     }
   }, []);
 
-  const { startTransition } = pixelTransition();
+  const { startTransitionGlobal } = useGlobalState();
 
   return (
     <main className="projectWrapper" data-key={dataID}>
       <span
         className="mobileBackButton toThinHover noCursor"
-        onClick={() => startTransition(-1)}
+        onClick={() => startTransitionGlobal(-1)}
       >
         <ArrowLeft width="24" />
         <span>back</span>
       </span>
       <div className="header">
         <span className="desktopBackButton">
-          <ArrowLeft onClick={() => startTransition(-1)} width="32" />
+          <ArrowLeft onClick={() => startTransitionGlobal(-1)} width="32" />
         </span>
         <h1 className="title accent">{getProjectName(dataID)}</h1>
         <span className="desktopBackButton" />

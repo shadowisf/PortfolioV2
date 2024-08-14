@@ -1,25 +1,27 @@
 import { Fragment } from "react";
-import { pixelTransition } from "./PixelGrid";
+import { useGlobalState } from "../utils/ControlUtil";
+import { Hamburger } from "./Icon";
 
 export default function NavBar() {
-  const { startTransition } = pixelTransition();
+  const { startTransitionGlobal } = useGlobalState();
 
   return (
     <Fragment>
       <nav className="noCursor">
-        <h6
-          onClick={() => startTransition(-1)}
-          className="logoButton toThinHover"
-        >
+        <h6 onClick={() => startTransitionGlobal(-1)} className="logoButton">
           ᜎ᜔ᜍ᜔
         </h6>
         <span className="navButtons">
-          <h6 onClick={() => startTransition(-2)} className="toThinHover">
+          <h6 onClick={() => startTransitionGlobal(-2)} className="toThinHover">
             about
           </h6>
-          <h6 onClick={() => startTransition(-3)} className="toThinHover">
+          <h6 onClick={() => startTransitionGlobal(-3)} className="toThinHover">
             contact
           </h6>
+        </span>
+
+        <span className="hamburger">
+          <Hamburger width="24" />
         </span>
       </nav>
     </Fragment>

@@ -1,7 +1,18 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { pixelTransition } from "../components/PixelGrid";
 
-const GlobalStateContext = createContext({
+// Define the shape of the context
+interface GlobalStateContextType {
+  isMobile: boolean;
+  currentPage: number;
+  startTransitionGlobal: (page: number) => void;
+}
+
+// Create the context with a default value
+const GlobalStateContext = createContext<GlobalStateContextType>({
   isMobile: false,
+  currentPage: 0,
+  startTransitionGlobal: () => {},
 });
 
 type GlobalStateProviderProps = {
@@ -10,6 +21,9 @@ type GlobalStateProviderProps = {
 
 export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const [isMobile, setIsMobile] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const { startTransition } = pixelTransition();
 
   useEffect(() => {
     const handleResize = () => {
@@ -18,16 +32,28 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
 
     window.addEventListener("resize", handleResize);
 
-    // Initial check
     handleResize();
+
+    setCurrentPage(-1);
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
+  const updatePage = (page: number) => {
+    if (page === currentPage) {
+      return;
+    } else {
+      setCurrentPage(page);
+      startTransition(page);
+    }
+  };
+
   return (
-    <GlobalStateContext.Provider value={{ isMobile }}>
+    <GlobalStateContext.Provider
+      value={{ isMobile, currentPage, startTransitionGlobal: updatePage }}
+    >
       {children}
     </GlobalStateContext.Provider>
   );
