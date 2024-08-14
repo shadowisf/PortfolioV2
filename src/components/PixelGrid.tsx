@@ -15,8 +15,6 @@ export function pixelTransition() {
   const { contextSafe } = useGSAP();
 
   const startTransition = contextSafe((id: number) => {
-
-
     gsap.set(".pixelGrid", { display: "grid" });
     gsap.fromTo(
       ".pixelItem",

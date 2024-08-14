@@ -1,11 +1,12 @@
 import { Fragment, useEffect, useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
-import { Hamburger, Moon, Sun } from "./Icon";
+import { Cross, Hamburger, Moon, Sun } from "./Icon";
+import gsap from "gsap";
 
 export default function NavBar() {
   const { startTransitionGlobal } = useGlobalState();
 
-  const [userTheme, setUserTheme] = useState("");
+  const [userTheme, setUserTheme] = useState("light dark");
 
   useEffect(() => {
     if (
@@ -13,14 +14,21 @@ export default function NavBar() {
       window.matchMedia("(prefers-color-scheme: dark)").matches
     ) {
       setUserTheme("dark");
+      document.documentElement.style.setProperty("--theme", "dark");
     } else {
       setUserTheme("light");
+      document.documentElement.style.setProperty("--theme", "light");
     }
-  }, [window.matchMedia]);
+  }, []);
 
   function handleThemeClick() {
-    setUserTheme((prev) => (prev === "dark" ? "light" : "dark"));
-    
+    const newTheme = userTheme === "dark" ? "light" : "dark";
+    setUserTheme(newTheme);
+    document.documentElement.style.setProperty("--theme", newTheme);
+  }
+
+  function handleMenuClick() {
+    gsap.to(".menu", { display: "none", autoAlpha: "1" });
   }
 
   return (
@@ -46,6 +54,22 @@ export default function NavBar() {
           <Hamburger width="24" />
         </span>
       </nav>
+
+      <div className="menu noCursor">
+        <span className="closeButton">
+          <Cross width="5vw" />
+        </span>
+
+        <span className="toThinHover" onClick={() => startTransitionGlobal(-2)}>
+          about
+        </span>
+        <span className="toThinHover" onClick={() => startTransitionGlobal(-3)}>
+          contact
+        </span>
+        <span onClick={() => handleThemeClick()} className="themeButton">
+          {userTheme === "dark" ? <Moon width="5vw" /> : <Sun width="5vw" />}
+        </span>
+      </div>
     </Fragment>
   );
 }
