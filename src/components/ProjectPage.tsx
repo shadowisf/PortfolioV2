@@ -30,7 +30,7 @@ export default function ProjectPage({ dataID }: ProjectProps) {
         onClick={() => startTransition(-1)}
       >
         <ArrowLeft width="24" />
-        <span>back to menu</span>
+        <span>back</span>
       </span>
       <div className="header">
         <span className="desktopBackButton">

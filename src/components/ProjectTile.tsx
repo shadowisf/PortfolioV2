@@ -30,6 +30,7 @@ export function ProjectTile({ dataID, onClick }: ProjectProps) {
     return () => {
       setRightDiv(null);
       setPreviewContainer(null);
+      setHeroPersonal(null);
     };
   }, []);
 

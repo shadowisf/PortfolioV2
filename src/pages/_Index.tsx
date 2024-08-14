@@ -2,23 +2,27 @@ import { PixelGrid } from "../components/PixelGrid";
 import Home from "./Home";
 import Project from "./Project";
 import { GlobalStateProvider } from "../utils/ControlUtil";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import NavBar from "../components/NavBar";
+import { Fragment } from "react/jsx-runtime";
+import Contact from "./Contact";
+import About from "./About";
+import { Footer } from "../components/Footer";
 
 export default function _Index() {
-  useGSAP(() => {
-    gsap.set(pixelGridTarget, { display: "none" });
-  });
-
-  const pixelGridTarget = ".pixelGrid";
-
   return (
-    <GlobalStateProvider>
+    <Fragment>
       <PixelGrid />
+      <NavBar />
 
-      <Home />
+      <GlobalStateProvider>
+        <Home />
+      </GlobalStateProvider>
 
       <Project />
-    </GlobalStateProvider>
+      <About />
+      <Contact />
+
+      <Footer />
+    </Fragment>
   );
 }
