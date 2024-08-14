@@ -26,18 +26,18 @@ export default function ProjectPage({ dataID }: ProjectProps) {
   return (
     <main className="projectWrapper" data-key={dataID}>
       <span
-        className="mobileBackButton toThinHover noCursor"
+        className="mobileBackToHomeButton toThinHover noCursor"
         onClick={() => startTransitionGlobal(-1)}
       >
         <ArrowLeft width="24" />
-        <span>back</span>
+        back
       </span>
       <div className="header">
-        <span className="desktopBackButton">
+        <span className="desktopBackToHomeButton">
           <ArrowLeft onClick={() => startTransitionGlobal(-1)} width="32" />
         </span>
         <h1 className="title accent">{getProjectName(dataID)}</h1>
-        <span className="desktopBackButton" />
+        <span className="desktopBackToHomeButton" />
       </div>
 
       <div className="architecture noCursor">

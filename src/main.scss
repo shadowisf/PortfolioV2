@@ -30,9 +30,6 @@ $maxWidthMobile: 90%;
   --small: 0.833rem;
 }
 
-html {
-}
-
 // wrappers
 
 .homeWrapper {
@@ -145,7 +142,7 @@ html {
 
   display: none;
 
-  .mobileBackButton {
+  .mobileBackToHomeButton {
     align-items: center;
 
     padding-bottom: 1rem;
@@ -171,7 +168,7 @@ html {
       text-align: center;
     }
 
-    .desktopBackButton {
+    .desktopBackToHomeButton {
       cursor: pointer;
     }
   }
@@ -429,13 +426,16 @@ nav {
   align-items: center;
   padding: 1.25rem 2rem;
 
+  z-index: 6;
+
   .navButtons {
     display: flex;
     gap: 2rem;
   }
 
   .hamburger:hover,
-  .logoButton:hover {
+  .logoButton:hover,
+  .themeButton:hover {
     cursor: pointer;
   }
 }
@@ -477,6 +477,10 @@ footer {
   align-items: center;
 
   gap: 4rem;
+
+  svg {
+    width: 5vw;
+  }
 
   .closeButton {
     position: absolute;
@@ -539,7 +543,7 @@ footer {
   .projectWrapper {
     max-width: $maxWidthMobile;
 
-    .mobileBackButton {
+    .mobileBackToHomeButton {
       display: flex;
     }
 
@@ -547,7 +551,7 @@ footer {
       justify-content: center;
       gap: 4rem;
 
-      .desktopBackButton {
+      .desktopBackToHomeButton {
         display: none;
       }
     }
@@ -568,17 +572,25 @@ footer {
     display: flex;
     justify-content: flex-end;
   }
+
+  .menu {
+    font-size: 10vh;
+
+    svg {
+      width: 7vh;
+    }
+  }
 }
 
 // desktop screen
 @media screen and (min-width: $minMaxWidth) {
   .projectWrapper {
-    .mobileBackButton {
+    .mobileBackToHomeButton {
       display: none;
     }
 
     .header {
-      .desktopBackButton {
+      .desktopBackToHomeButton {
         display: flex;
       }
     }

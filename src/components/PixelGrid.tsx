@@ -1,5 +1,6 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useEffect, useState } from "react";
 
 export function PixelGrid() {
   function generatePixel(count: number) {
@@ -14,7 +15,7 @@ export function PixelGrid() {
 export function pixelTransition() {
   const { contextSafe } = useGSAP();
 
-  const startTransition = contextSafe((id: number) => {
+  const startTransition = contextSafe((onComplete: () => void) => {
     gsap.set(".pixelGrid", { display: "grid" });
     gsap.fromTo(
       ".pixelItem",
@@ -24,8 +25,9 @@ export function pixelTransition() {
         duration: "0.005",
         stagger: { amount: 0.5, from: "random" },
         onComplete: () => {
-          changePage(id);
-          endTransition();
+          {
+            onComplete();
+          }
         },
       }
     );
@@ -44,27 +46,5 @@ export function pixelTransition() {
     }, 100);
   });
 
-  const changePage = contextSafe((id: number) => {
-    const allPages = document.querySelectorAll("main[data-key]");
-
-    allPages.forEach((page) => {
-      const dataKey = page.getAttribute("data-key");
-
-      switch (dataKey) {
-        case "-1": // home
-          gsap.set(allPages, {
-            display: "none",
-          });
-          gsap.set(page, { display: "flex" });
-          break;
-        case id.toString():
-          gsap.set(allPages, { display: "none" });
-          gsap.set(page, { display: "block" });
-          break;
-        default:
-      }
-    });
-  });
-
-  return { startTransition };
+  return { startTransition, endTransition };
 }

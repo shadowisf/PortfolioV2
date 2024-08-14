@@ -1,4 +1,4 @@
-import { PixelGrid, pixelTransition } from "../components/PixelGrid";
+import { PixelGrid } from "../components/PixelGrid";
 import Home from "./Home";
 import Project from "./Project";
 import { GlobalStateProvider } from "../utils/ControlUtil";
