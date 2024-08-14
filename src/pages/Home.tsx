@@ -40,6 +40,8 @@ export default function Home() {
     }
   }
 
+  
+
   return (
     <main data-key="-1" className="homeWrapper">
       <section className="left">
