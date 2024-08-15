@@ -1,16 +1,25 @@
-import { ProjectTile } from "../components/ProjectTile";
+import { ProjectPreview, ProjectTile } from "../components/ProjectTile";
 import { generateTheme } from "../utils/ColorUtils";
 import gsap from "gsap";
 import { LinkNoIcon } from "../components/Link";
 import { getProjectIDs } from "../utils/ProjectUtils";
 import { useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
+import { useGSAP } from "@gsap/react";
+import { TextPlugin } from "gsap/all";
+import { startUpAnimation } from "../utils/AnimationUtils";
+
+gsap.registerPlugin(TextPlugin, useGSAP, gsap);
 
 export default function Home() {
   const [firstTime, setFirstTime] = useState(true);
   const [count, setCount] = useState(0);
-
   const { startTransitionGlobal } = useGlobalState();
+  const { tileStartUp } = startUpAnimation();
+
+  useGSAP(() => {
+    tileStartUp();
+  });
 
   const highlightedTexts = [".homeWrapper .name", ".projectWrapper .title"];
 
@@ -40,8 +49,6 @@ export default function Home() {
     }
   }
 
-  
-
   return (
     <main data-key="-1" className="homeWrapper">
       <section className="left">
@@ -54,14 +61,20 @@ export default function Home() {
         ))}
       </section>
       <section className="right">
+        {getProjectIDs().map((id) => (
+          <ProjectPreview
+            onClick={() => startTransitionGlobal(id)}
+            key={id}
+            dataID={id}
+          />
+        ))}
+
         <div className="hero">
           <h1
-            className="accent name noCursor"
+            className="name accent noCursor"
             onClick={() => handleNameClick()}
           >
             les ranalan
-            {/* ᜎ᜔ᜍ᜔ */}
-            {/* ᜎᜒᜐ᜔ ᜍᜈᜎᜈ᜔ */}
           </h1>
           <h5>frontend software engineer</h5>
 

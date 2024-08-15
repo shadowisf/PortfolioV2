@@ -10,6 +10,7 @@ $darkBoxShadow: rgba(0, 0, 0, 0.5);
 $boxShadow: 0 0 48px 1px light-dark($lightBoxShadow, $darkBoxShadow);
 
 $maxWidthDesktop: 700px;
+$maxWidthDesktopWide: 75%;
 $maxWidthMobile: 90%;
 
 :root {
@@ -33,7 +34,7 @@ $maxWidthMobile: 90%;
 // wrappers
 
 .homeWrapper {
-  max-width: 75%;
+  max-width: $maxWidthDesktopWide;
   margin: auto;
 
   display: flex;
@@ -100,6 +101,7 @@ $maxWidthMobile: 90%;
 
       opacity: 0;
       visibility: hidden;
+      scale: 0.95;
 
       img {
         border-radius: $borderRadius;
@@ -146,7 +148,16 @@ $maxWidthMobile: 90%;
     align-items: center;
 
     padding-bottom: 1rem;
-    gap: 0.5rem;
+    gap: 0.75rem;
+  }
+
+  .backToTopButton {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10rem;
   }
 
   .content {
@@ -237,9 +248,10 @@ $maxWidthMobile: 90%;
 .aboutWrapper {
   display: none;
 
-  max-width: $maxWidthDesktop;
+  max-width: $maxWidthDesktopWide;
 
-  margin: 8rem auto;
+  margin: auto;
+  padding: 8rem 0;
 }
 
 .contactWrapper {
@@ -247,7 +259,8 @@ $maxWidthMobile: 90%;
 
   max-width: $maxWidthDesktop;
 
-  margin: 8rem auto;
+  margin: auto;
+  padding: 8rem 0;
 }
 
 @font-face {
@@ -330,7 +343,7 @@ a {
 }
 
 .toThinHover {
-  transition: font-variation-settings 0.5s;
+  transition: font-variation-settings 0.5s, box-shadow 0.25s, scale 0.25s;
 
   font-variation-settings: "wght" 400, "CONT" 1;
 
@@ -339,12 +352,9 @@ a {
     cursor: pointer;
   }
 
-  &.all {
-    transition: box-shadow 0.25s, font-variation-settings 0.5s, transform 0.25s;
-  }
-
   &.all:hover {
-    transform: scale(1.025);
+    scale: 1.05;
+
     box-shadow: $boxShadow;
     color: var(--accent-color);
     background-color: var(--background-color);
@@ -433,10 +443,37 @@ nav {
     gap: 2rem;
   }
 
-  .hamburger:hover,
-  .logoButton:hover,
-  .themeButton:hover {
-    cursor: pointer;
+  .logoButton {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+
+    border-radius: $borderRadius;
+
+    padding: 0.5rem 0.75rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .hamburgerButton {
+    svg {
+      display: flex;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .themeButton {
+    svg {
+      display: flex;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
@@ -479,6 +516,7 @@ footer {
   gap: 4rem;
 
   svg {
+    display: flex;
     width: 5vw;
   }
 
@@ -486,7 +524,7 @@ footer {
     position: absolute;
     top: 0;
     right: 0;
-    margin-top: 1rem;
+    margin-top: 2rem;
     margin-right: 2rem;
   }
 
@@ -597,8 +635,20 @@ footer {
   }
 
   nav {
-    .hamburger {
+    .hamburgerButton {
       display: none;
     }
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .box {
+    background-color: red;
+    width: 150px;
+    height: 150px;
   }
 }

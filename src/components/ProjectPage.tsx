@@ -9,11 +9,16 @@ import {
   ProjectProps,
 } from "../utils/ProjectUtils";
 import { useEffect, useState } from "react";
-import { ArrowLeft } from "./Icon";
 import { useGlobalState } from "../utils/ControlUtil";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/all";
+
+gsap.registerPlugin(useGSAP, gsap, ScrollToPlugin);
 
 export default function ProjectPage({ dataID }: ProjectProps) {
   const [ifData5, setIfData5] = useState(false);
+  const { startTransitionGlobal } = useGlobalState();
 
   useEffect(() => {
     if (dataID === 5 || dataID === 6) {
@@ -21,7 +26,11 @@ export default function ProjectPage({ dataID }: ProjectProps) {
     }
   }, []);
 
-  const { startTransitionGlobal } = useGlobalState();
+  const { contextSafe } = useGSAP();
+
+  const handleScrollToTop = contextSafe(() => {
+    gsap.to(window, { scrollTo: { x: "0", y: "0" } });
+  });
 
   return (
     <main className="projectWrapper" data-key={dataID}>
@@ -29,13 +38,15 @@ export default function ProjectPage({ dataID }: ProjectProps) {
         className="mobileBackToHomeButton toThinHover noCursor"
         onClick={() => startTransitionGlobal(-1)}
       >
-        <ArrowLeft width="24" />
-        back
+        ←<span>back</span>
       </span>
       <div className="header">
-        <span className="desktopBackToHomeButton">
-          <ArrowLeft onClick={() => startTransitionGlobal(-1)} width="32" />
-        </span>
+        <h1
+          className="desktopBackToHomeButton toThinHover"
+          onClick={() => startTransitionGlobal(-1)}
+        >
+          ←
+        </h1>
         <h1 className="title accent">{getProjectName(dataID)}</h1>
         <span className="desktopBackToHomeButton" />
       </div>
@@ -74,6 +85,13 @@ export default function ProjectPage({ dataID }: ProjectProps) {
           ))}
         </div>
       </div>
+
+      <span
+        className="backToTopButton toThinHover noCursor"
+        onClick={() => handleScrollToTop()}
+      >
+        ↑ <span>back to top</span>
+      </span>
     </main>
   );
 }

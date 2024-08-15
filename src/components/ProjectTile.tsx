@@ -7,30 +7,22 @@ import {
 } from "../utils/ProjectUtils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
-import { createPortal } from "react-dom";
+
+gsap.registerPlugin(gsap, useGSAP);
 
 export function ProjectTile({ dataID, onClick }: ProjectProps) {
   const { isMobile } = useGlobalState();
 
-  const [rightDiv, setRightDiv] = useState<Element | null>(null);
   const [previewContainer, setPreviewContainer] =
     useState<NodeListOf<Element> | null>(null);
-  const [heroPersonal, setHeroPersonal] = useState<Element | null>(null);
 
   useEffect(() => {
-    setRightDiv(document.querySelector(rightDivTarget));
-    setHeroPersonal(document.querySelector(rightHeroTarget));
-
-    requestAnimationFrame(() => {
-      setPreviewContainer(document.querySelectorAll(previewContainerTarget));
-    });
+    setPreviewContainer(document.querySelectorAll(".homeWrapper .preview"));
 
     return () => {
-      setRightDiv(null);
       setPreviewContainer(null);
-      setHeroPersonal(null);
     };
   }, []);
 
@@ -39,10 +31,6 @@ export function ProjectTile({ dataID, onClick }: ProjectProps) {
       resetPreview();
     }
   }, [isMobile]);
-
-  const previewContainerTarget = ".homeWrapper .right .preview";
-  const rightDivTarget = ".homeWrapper .right";
-  const rightHeroTarget = ".homeWrapper .right .hero";
 
   const animationPreviewDuration = "0.1";
   const animationEase = "power2.inOut";
@@ -70,7 +58,7 @@ export function ProjectTile({ dataID, onClick }: ProjectProps) {
 
       if (dataKey === targetID.toString()) {
         gsap.to(container, animationEnter);
-        gsap.to(heroPersonal, animationExit);
+        gsap.to(".homeWrapper .hero", animationExit);
       }
     });
   });
@@ -79,7 +67,7 @@ export function ProjectTile({ dataID, onClick }: ProjectProps) {
     previewContainer?.forEach((container) => {
       gsap.to(container, animationExit);
     });
-    gsap.to(heroPersonal, animationEnter);
+    gsap.to(".homeWrapper .hero", animationEnter);
   });
 
   const movePreview = contextSafe(
@@ -100,26 +88,22 @@ export function ProjectTile({ dataID, onClick }: ProjectProps) {
   );
 
   return (
-    <Fragment>
-      <div
-        onClick={onClick}
-        className="tile toThinHover all noCursor"
-        onMouseEnter={() => {
-          isMobile ? null : togglePreview(dataID);
-        }}
-        onMouseLeave={() => {
-          isMobile ? null : resetPreview();
-        }}
-        onMouseMove={(event) => {
-          isMobile ? null : movePreview(dataID, event);
-        }}
-      >
-        <h5 className="title">{getProjectName(dataID)}</h5>
-        <small className="year faded">{getProjectYear(dataID)}</small>
-      </div>
-
-      {rightDiv && createPortal(<ProjectPreview dataID={dataID} />, rightDiv)}
-    </Fragment>
+    <div
+      onClick={onClick}
+      className="tile toThinHover all noCursor"
+      onMouseEnter={() => {
+        isMobile ? null : togglePreview(dataID);
+      }}
+      onMouseLeave={() => {
+        isMobile ? null : resetPreview();
+      }}
+      onMouseMove={(event) => {
+        isMobile ? null : movePreview(dataID, event);
+      }}
+    >
+      <h5 className="title">{getProjectName(dataID)}</h5>
+      <small className="year faded">{getProjectYear(dataID)}</small>
+    </div>
   );
 }
 

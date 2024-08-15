@@ -5,16 +5,15 @@ import gsap from "gsap";
 import { pixelTransition } from "./PixelGrid";
 import { useGSAP } from "@gsap/react";
 
-export default function NavBar() {
-  const { startTransitionGlobal } = useGlobalState();
-  const { startTransition, endTransition } = pixelTransition();
+gsap.registerPlugin(gsap, useGSAP);
 
+export default function NavBar() {
+  const { startTransitionGlobal, currentPage } = useGlobalState();
+  const { startTransition, endTransition } = pixelTransition();
+  const { contextSafe } = useGSAP();
   const [userTheme, setUserTheme] = useState("light dark");
-  const [menuContainer, setMenuContainer] = useState<Element | null>(null);
 
   useEffect(() => {
-    setMenuContainer(document.querySelector(".menu"));
-
     if (
       window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -33,11 +32,9 @@ export default function NavBar() {
     document.documentElement.style.setProperty("--theme", newTheme);
   }
 
-  const { contextSafe } = useGSAP();
-
   const handleHamburgerClick = contextSafe(() => {
     startTransition(() => {
-      gsap.to(menuContainer, {
+      gsap.to(".menu", {
         display: "flex",
         autoAlpha: "1",
         duration: "0.5",
@@ -46,7 +43,7 @@ export default function NavBar() {
   });
 
   const handleCloseClick = contextSafe(() => {
-    gsap.to(menuContainer, {
+    gsap.to(".menu", {
       display: "none",
       autoAlpha: "0",
       duration: "0.5",
@@ -57,21 +54,36 @@ export default function NavBar() {
   });
 
   const handleNavButtonClick = contextSafe((page: number) => {
-    gsap.to(menuContainer, {
-      display: "none",
-      autoAlpha: "0",
-      duration: "0.5",
-      onComplete: () => {
-        startTransitionGlobal(page, true);
-      },
-    });
+    if (page === currentPage) {
+      gsap.to(".menu", {
+        display: "none",
+        autoAlpha: "0",
+        duration: "0.5",
+        onComplete: () => {
+          endTransition();
+        },
+      });
+    } else {
+      gsap.to(".menu", {
+        display: "none",
+        autoAlpha: "0",
+        duration: "0.5",
+        onComplete: () => {
+          startTransitionGlobal(page, true);
+        },
+      });
+    }
   });
 
   return (
     <Fragment>
       <nav className="noCursor">
-        <h6 onClick={() => startTransitionGlobal(-1)} className="logoButton">
+        <h6
+          onClick={() => startTransitionGlobal(-1)}
+          className="logoButton toThinHover"
+        >
           ᜎ᜔ᜍ᜔
+          {/* ᜎᜒᜐ᜔ ᜍᜈᜎᜈ᜔ */}
         </h6>
 
         <span className="navButtons">
@@ -86,14 +98,17 @@ export default function NavBar() {
           </span>
         </span>
 
-        <span className="hamburger" onClick={() => handleHamburgerClick()}>
+        <span
+          className="hamburgerButton"
+          onClick={() => handleHamburgerClick()}
+        >
           <Hamburger width="24" />
         </span>
       </nav>
 
       <div className="menu noCursor">
         <span className="closeButton" onClick={() => handleCloseClick()}>
-          <Cross />
+          <Cross width="24" />
         </span>
 
         <span className="toThinHover" onClick={() => handleNavButtonClick(-2)}>
@@ -103,7 +118,7 @@ export default function NavBar() {
           contact
         </span>
         <span onClick={() => handleThemeClick()} className="themeButton">
-          {userTheme === "dark" ? <Moon /> : <Sun />}
+          {userTheme === "dark" ? <Moon width="24" /> : <Sun width="24" />}
         </span>
       </div>
     </Fragment>

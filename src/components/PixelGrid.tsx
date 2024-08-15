@@ -1,6 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useEffect, useState } from "react";
+
+gsap.registerPlugin(gsap, useGSAP);
 
 export function PixelGrid() {
   function generatePixel(count: number) {
