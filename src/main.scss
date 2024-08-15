@@ -31,6 +31,18 @@ $maxWidthMobile: 90%;
   --small: 0.833rem;
 }
 
+@media (prefers-color-scheme: dark) {
+  html {
+    background-image: url("../src/assets/ImageNoiseDark.PNG");
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html {
+    background-image: url("../src/assets/ImageNoiseWhite.PNG");
+  }
+}
+
 // wrappers
 
 .homeWrapper {
@@ -82,7 +94,11 @@ $maxWidthMobile: 90%;
     align-items: center;
 
     .name {
+      gap: 1rem;
+      display: flex;
       width: fit-content;
+
+      z-index: 997;
     }
 
     .links {
@@ -97,7 +113,7 @@ $maxWidthMobile: 90%;
 
       pointer-events: none;
 
-      z-index: 10;
+      z-index: 1;
 
       opacity: 0;
       visibility: hidden;
@@ -106,6 +122,7 @@ $maxWidthMobile: 90%;
       img {
         border-radius: $borderRadius;
         width: 100%;
+        height: auto;
         box-shadow: $boxShadow;
       }
 
@@ -240,6 +257,7 @@ $maxWidthMobile: 90%;
     gap: 2rem;
 
     img {
+      height: auto;
       width: 100%;
     }
   }
@@ -315,18 +333,6 @@ html {
   color: var(--text-color);
   font-family: $primaryFont;
   color-scheme: var(--theme);
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    background-image: url("../src/assets/ImageNoiseDark.PNG");
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  html {
-    background-image: url("../src/assets/ImageNoiseWhite.PNG");
-  }
 }
 
 a {
@@ -436,7 +442,7 @@ nav {
   align-items: center;
   padding: 1.25rem 2rem;
 
-  z-index: 6;
+  z-index: 1;
 
   .navButtons {
     display: flex;
@@ -482,8 +488,6 @@ footer {
 
   width: 100%;
 
-  z-index: 2;
-
   padding: 1.5rem 2rem;
 }
 
@@ -500,7 +504,7 @@ footer {
   display: none;
 
   opacity: 0;
-  visibility: 0;
+  visibility: hidden;
 
   flex-direction: column;
   justify-content: center;
@@ -535,7 +539,6 @@ footer {
   nav {
     background-color: var(--background-color);
     box-shadow: $boxShadow;
-    z-index: 5;
   }
 }
 
@@ -591,7 +594,6 @@ footer {
   nav {
     background-color: var(--background-color);
     box-shadow: $boxShadow;
-    z-index: 5;
 
     .navButtons {
       display: none;

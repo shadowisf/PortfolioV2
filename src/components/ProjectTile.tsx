@@ -6,12 +6,15 @@ import {
   ProjectProps,
 } from "../utils/ProjectUtils";
 import { projectTileAnimation } from "../utils/AnimationUtils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 
 export function ProjectTile({ dataID, onClick }: ProjectProps) {
   const { isMobile } = useGlobalState();
-  const { togglePreview, resetPreview, movePreview } = projectTileAnimation();
+  const [previewContainer, setPreviewContainer] =
+    useState<NodeListOf<Element> | null>(null);
+  const { togglePreview, resetPreview, movePreview } =
+    projectTileAnimation(previewContainer);
 
   useEffect(() => {
     if (isMobile) {
@@ -22,6 +25,14 @@ export function ProjectTile({ dataID, onClick }: ProjectProps) {
       resetPreview();
     };
   }, [isMobile]);
+
+  useEffect(() => {
+    setPreviewContainer(document.querySelectorAll(".homeWrapper .preview"));
+
+    return () => {
+      setPreviewContainer(null);
+    };
+  }, []);
 
   return (
     <div

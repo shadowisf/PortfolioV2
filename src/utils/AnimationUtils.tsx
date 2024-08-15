@@ -1,7 +1,6 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useGlobalState } from "./ControlUtil";
-import { useState, useEffect } from "react";
 import { ScrollToPlugin } from "gsap/all";
 
 gsap.registerPlugin(gsap, useGSAP, ScrollToPlugin);
@@ -11,7 +10,7 @@ export function startUpAnimation() {
 
   const tileStartUp = contextSafe(() => {
     gsap.set(".homeWrapper .tile", {
-      x: "-150",
+      x: "-=150",
       autoAlpha: "0",
       filter: "blur(8px)",
       pointerEvents: "none",
@@ -109,7 +108,7 @@ export function navBarAnimation() {
   const { currentPage, startTransitionGlobal } = useGlobalState();
   const { contextSafe } = useGSAP();
 
-  const handleHamburgerClick = contextSafe(() => {
+  const openMenu = contextSafe(() => {
     startTransition(() => {
       gsap.to(".menu", {
         display: "flex",
@@ -119,7 +118,7 @@ export function navBarAnimation() {
     });
   });
 
-  const handleCloseClick = contextSafe(() => {
+  const closeMenu = contextSafe(() => {
     gsap.to(".menu", {
       display: "none",
       autoAlpha: "0",
@@ -153,24 +152,15 @@ export function navBarAnimation() {
   });
 
   return {
-    handleHamburgerClick,
-    handleCloseClick,
+    openMenu,
+    closeMenu,
     handleNavButtonClick,
   };
 }
 
-export function projectTileAnimation() {
+export function projectTileAnimation(container: NodeListOf<Element> | null) {
   const { contextSafe } = useGSAP();
-  const [previewContainer, setPreviewContainer] =
-    useState<NodeListOf<Element> | null>(null);
-
-  useEffect(() => {
-    setPreviewContainer(document.querySelectorAll(".homeWrapper .preview"));
-
-    return () => {
-      setPreviewContainer(null);
-    };
-  }, []);
+  const previewContainer = container;
 
   const animationEnter = {
     scale: "1",
@@ -224,4 +214,46 @@ export function projectTileAnimation() {
     resetPreview,
     movePreview,
   };
+}
+
+export function homeAnimation() {
+  const { contextSafe } = useGSAP();
+
+  const highlightedTexts = [".homeWrapper .name", ".projectWrapper .title"];
+
+  const fadedTexts = [
+    ".homeWrapper .year",
+    ".projectWrapper .year",
+    ".homeWrapper .links",
+  ];
+
+  const chaseStart = contextSafe(() => {
+    const movementRangeX = 500;
+    const movementRangeY = 500;
+
+    const x = Math.random() * movementRangeX - movementRangeX / 2;
+    const y = Math.random() * movementRangeY - movementRangeY / 2;
+
+    gsap.to(".homeWrapper .name", {
+      x: x,
+      y: y,
+      duration: 0.1,
+    });
+  });
+
+  const chaseEnd = contextSafe(() => {
+    gsap.to(".homeWrapper .name", { x: "0", y: "0", duration: "0.1" });
+  });
+
+  const changeOverallTheme = contextSafe(() => {
+    gsap.set(highlightedTexts, {
+      backgroundColor: "var(--text-color)",
+      color: "var(--background-color",
+    });
+    gsap.set(fadedTexts, {
+      autoAlpha: "0.5",
+    });
+  });
+
+  return { chaseStart, chaseEnd, changeOverallTheme };
 }

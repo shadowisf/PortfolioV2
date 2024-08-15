@@ -7,47 +7,36 @@ import { useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 import { useGSAP } from "@gsap/react";
 import { TextPlugin } from "gsap/all";
-import { startUpAnimation } from "../utils/AnimationUtils";
+import { homeAnimation, startUpAnimation } from "../utils/AnimationUtils";
 
 gsap.registerPlugin(TextPlugin, useGSAP, gsap);
 
 export default function Home() {
+  const { startTransitionGlobal } = useGlobalState();
+  const { chaseStart, chaseEnd, changeOverallTheme } = homeAnimation();
+  const { tileStartUp } = startUpAnimation();
   const [firstTime, setFirstTime] = useState(true);
   const [count, setCount] = useState(0);
-  const { startTransitionGlobal } = useGlobalState();
-  const { tileStartUp } = startUpAnimation();
-
-  useGSAP(() => {
-    tileStartUp();
-  });
-
-  const highlightedTexts = [".homeWrapper .name", ".projectWrapper .title"];
-
-  const fadedTexts = [
-    ".homeWrapper .year",
-    ".projectWrapper .year",
-    ".homeWrapper .links",
-  ];
 
   function handleNameClick() {
-    if (count === 10) {
+    if (count === 5) {
       generateTheme();
 
       if (firstTime) {
-        gsap.set(highlightedTexts, {
-          backgroundColor: "var(--text-color)",
-          color: "var(--background-color",
-        });
-        gsap.set(fadedTexts, {
-          autoAlpha: "0.5",
-        });
+        chaseEnd();
+        changeOverallTheme();
 
         setFirstTime(false);
       }
     } else {
+      chaseStart();
       setCount(count + 1);
     }
   }
+
+  useGSAP(() => {
+    tileStartUp();
+  });
 
   return (
     <main data-key="-1" className="homeWrapper">
@@ -71,11 +60,12 @@ export default function Home() {
 
         <div className="hero">
           <h1
-            className="name accent noCursor"
+            className="name accent toThinHover noCursor"
             onClick={() => handleNameClick()}
           >
             les ranalan
           </h1>
+
           <h5>frontend software engineer</h5>
 
           <br />

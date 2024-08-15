@@ -5,20 +5,22 @@ import { navBarAnimation } from "../utils/AnimationUtils";
 
 export default function NavBar() {
   const { startTransitionGlobal } = useGlobalState();
-  const { handleCloseClick, handleHamburgerClick, handleNavButtonClick } =
-    navBarAnimation();
+  const { openMenu, closeMenu, handleNavButtonClick } = navBarAnimation();
   const [userTheme, setUserTheme] = useState("light dark");
 
   useEffect(() => {
-    if (
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-      setUserTheme("dark");
-      document.documentElement.style.setProperty("--theme", "dark");
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme) {
+      setUserTheme(savedTheme);
+      document.documentElement.style.setProperty("--theme", savedTheme);
     } else {
-      setUserTheme("light");
-      document.documentElement.style.setProperty("--theme", "light");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+        .matches
+        ? "dark"
+        : "light";
+      setUserTheme(systemTheme);
+      document.documentElement.style.setProperty("--theme", systemTheme);
     }
   }, []);
 
@@ -26,6 +28,8 @@ export default function NavBar() {
     const newTheme = userTheme === "dark" ? "light" : "dark";
     setUserTheme(newTheme);
     document.documentElement.style.setProperty("--theme", newTheme);
+
+    localStorage.setItem("theme", newTheme);
   }
 
   return (
@@ -51,16 +55,13 @@ export default function NavBar() {
           </span>
         </span>
 
-        <span
-          className="hamburgerButton"
-          onClick={() => handleHamburgerClick()}
-        >
+        <span className="hamburgerButton" onClick={() => openMenu()}>
           <Hamburger width="24" />
         </span>
       </nav>
 
       <div className="menu noCursor">
-        <span className="closeButton" onClick={() => handleCloseClick()}>
+        <span className="closeButton" onClick={() => closeMenu()}>
           <Cross width="24" />
         </span>
 
