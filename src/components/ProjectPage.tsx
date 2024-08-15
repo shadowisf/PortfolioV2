@@ -10,27 +10,18 @@ import {
 } from "../utils/ProjectUtils";
 import { useEffect, useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/all";
-
-gsap.registerPlugin(useGSAP, gsap, ScrollToPlugin);
+import { scrollingAnimation } from "../utils/AnimationUtils";
 
 export default function ProjectPage({ dataID }: ProjectProps) {
   const [ifData5, setIfData5] = useState(false);
   const { startTransitionGlobal } = useGlobalState();
+  const { scrollToTop } = scrollingAnimation();
 
   useEffect(() => {
     if (dataID === 5 || dataID === 6) {
       setIfData5(true);
     }
   }, []);
-
-  const { contextSafe } = useGSAP();
-
-  const handleScrollToTop = contextSafe(() => {
-    gsap.to(window, { scrollTo: { x: "0", y: "0" } });
-  });
 
   return (
     <main className="projectWrapper" data-key={dataID}>
@@ -88,7 +79,7 @@ export default function ProjectPage({ dataID }: ProjectProps) {
 
       <span
         className="backToTopButton toThinHover noCursor"
-        onClick={() => handleScrollToTop()}
+        onClick={() => scrollToTop()}
       >
         ↑ <span>back to top</span>
       </span>

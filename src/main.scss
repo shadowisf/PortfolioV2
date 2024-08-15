@@ -444,13 +444,6 @@ nav {
   }
 
   .logoButton {
-    background-color: var(--accent-color);
-    color: var(--text-color);
-
-    border-radius: $borderRadius;
-
-    padding: 0.5rem 0.75rem;
-
     &:hover {
       cursor: pointer;
     }

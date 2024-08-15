@@ -5,87 +5,23 @@ import {
   getProjectYear,
   ProjectProps,
 } from "../utils/ProjectUtils";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { useEffect, useState } from "react";
+import { projectTileAnimation } from "../utils/AnimationUtils";
+import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
-
-gsap.registerPlugin(gsap, useGSAP);
 
 export function ProjectTile({ dataID, onClick }: ProjectProps) {
   const { isMobile } = useGlobalState();
-
-  const [previewContainer, setPreviewContainer] =
-    useState<NodeListOf<Element> | null>(null);
-
-  useEffect(() => {
-    setPreviewContainer(document.querySelectorAll(".homeWrapper .preview"));
-
-    return () => {
-      setPreviewContainer(null);
-    };
-  }, []);
+  const { togglePreview, resetPreview, movePreview } = projectTileAnimation();
 
   useEffect(() => {
     if (isMobile) {
       resetPreview();
     }
+
+    return () => {
+      resetPreview();
+    };
   }, [isMobile]);
-
-  const animationPreviewDuration = "0.1";
-  const animationEase = "power2.inOut";
-  const boundaryDividend = 10;
-
-  const animationEnter = {
-    scale: "1",
-    autoAlpha: "1",
-    duration: animationPreviewDuration,
-    ease: animationEase,
-  };
-
-  const animationExit = {
-    scale: "0.95",
-    autoAlpha: "0",
-    duration: animationPreviewDuration,
-    ease: animationEase,
-  };
-
-  const { contextSafe } = useGSAP();
-
-  const togglePreview = contextSafe((targetID: number) => {
-    previewContainer?.forEach((container) => {
-      const dataKey = container.getAttribute("data-key");
-
-      if (dataKey === targetID.toString()) {
-        gsap.to(container, animationEnter);
-        gsap.to(".homeWrapper .hero", animationExit);
-      }
-    });
-  });
-
-  const resetPreview = contextSafe(() => {
-    previewContainer?.forEach((container) => {
-      gsap.to(container, animationExit);
-    });
-    gsap.to(".homeWrapper .hero", animationEnter);
-  });
-
-  const movePreview = contextSafe(
-    (targetID: number, event: React.MouseEvent) => {
-      previewContainer?.forEach((container) => {
-        const dataKey = container.getAttribute("data-key");
-
-        if (dataKey === targetID.toString()) {
-          gsap.set(container, {
-            xPercent:
-              (event.clientX / window.innerWidth) * boundaryDividend - 1.5,
-            yPercent:
-              (event.clientY / window.innerHeight) * boundaryDividend - 2,
-          });
-        }
-      });
-    }
-  );
 
   return (
     <div

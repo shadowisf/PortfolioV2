@@ -1,37 +1,29 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { pixelTransition } from "../components/PixelGrid";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { pixelTransition } from "./AnimationUtils";
 
-interface GlobalStateContextType {
+type GlobalStateContextType = {
   isMobile: boolean;
   currentPage: number;
   startTransitionGlobal: (page: number, skipStart?: boolean) => void;
-}
+};
 
+type GlobalStateProviderProps = {
+  children: React.ReactNode;
+};
+
+// default values
 const GlobalStateContext = createContext<GlobalStateContextType>({
   isMobile: false,
   currentPage: 0,
   startTransitionGlobal: () => {},
 });
 
-type GlobalStateProviderProps = {
-  children: React.ReactNode;
-};
-
 export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [currentPage, setCurrentPage] = useState(-1);
-
-  const { startTransition, endTransition } = pixelTransition();
+  const { startTransition, endTransition, changePage } = pixelTransition();
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.matchMedia("(max-width: 1000px)").matches);
-    };
-
-    window.addEventListener("resize", handleResize);
-
     handleResize();
 
     return () => {
@@ -39,30 +31,12 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
     };
   }, []);
 
-  const { contextSafe } = useGSAP();
+  function handleResize() {
+    setIsMobile(window.matchMedia("(max-width: 1000px)").matches);
+    window.addEventListener("resize", handleResize);
+  }
 
-  const changePage = contextSafe((id: number) => {
-    const allPages = document.querySelectorAll("main[data-key]");
-
-    allPages.forEach((page) => {
-      const dataKey = page.getAttribute("data-key");
-
-      switch (dataKey) {
-        case "-1": // home
-          gsap.set(allPages, {
-            display: "none",
-          });
-          gsap.set(page, { display: "flex" });
-          break;
-        case id.toString():
-          gsap.set(allPages, { display: "none" });
-          gsap.set(page, { display: "block" });
-          break;
-        default:
-      }
-    });
-  });
-
+  // pixel transition w/ page update
   const executeSummary = (page: number, skipStart?: boolean) => {
     if (page === currentPage) {
       return;

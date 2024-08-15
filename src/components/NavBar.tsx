@@ -1,16 +1,12 @@
 import { Fragment, useEffect, useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 import { Cross, Hamburger, Moon, Sun } from "./Icon";
-import gsap from "gsap";
-import { pixelTransition } from "./PixelGrid";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(gsap, useGSAP);
+import { navBarAnimation } from "../utils/AnimationUtils";
 
 export default function NavBar() {
-  const { startTransitionGlobal, currentPage } = useGlobalState();
-  const { startTransition, endTransition } = pixelTransition();
-  const { contextSafe } = useGSAP();
+  const { startTransitionGlobal } = useGlobalState();
+  const { handleCloseClick, handleHamburgerClick, handleNavButtonClick } =
+    navBarAnimation();
   const [userTheme, setUserTheme] = useState("light dark");
 
   useEffect(() => {
@@ -31,49 +27,6 @@ export default function NavBar() {
     setUserTheme(newTheme);
     document.documentElement.style.setProperty("--theme", newTheme);
   }
-
-  const handleHamburgerClick = contextSafe(() => {
-    startTransition(() => {
-      gsap.to(".menu", {
-        display: "flex",
-        autoAlpha: "1",
-        duration: "0.5",
-      });
-    });
-  });
-
-  const handleCloseClick = contextSafe(() => {
-    gsap.to(".menu", {
-      display: "none",
-      autoAlpha: "0",
-      duration: "0.5",
-      onComplete: () => {
-        endTransition();
-      },
-    });
-  });
-
-  const handleNavButtonClick = contextSafe((page: number) => {
-    if (page === currentPage) {
-      gsap.to(".menu", {
-        display: "none",
-        autoAlpha: "0",
-        duration: "0.5",
-        onComplete: () => {
-          endTransition();
-        },
-      });
-    } else {
-      gsap.to(".menu", {
-        display: "none",
-        autoAlpha: "0",
-        duration: "0.5",
-        onComplete: () => {
-          startTransitionGlobal(page, true);
-        },
-      });
-    }
-  });
 
   return (
     <Fragment>
