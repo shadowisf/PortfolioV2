@@ -1,35 +1,26 @@
 import { ProjectPreview, ProjectTile } from "../components/ProjectTile";
-import { generateTheme } from "../utils/ColorUtils";
 import gsap from "gsap";
 import { LinkNoIcon } from "../components/Link";
 import { getProjectIDs } from "../utils/ProjectUtils";
-import { useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 import { useGSAP } from "@gsap/react";
 import { TextPlugin } from "gsap/all";
-import { homeAnimation, startUpAnimation } from "../utils/AnimationUtils";
+import { startUpAnimation } from "../utils/AnimationUtils";
+import { useState } from "react";
+import { generateTheme } from "../utils/ColorUtils";
 
 gsap.registerPlugin(TextPlugin, useGSAP, gsap);
 
 export default function Home() {
-  const { startTransitionGlobal } = useGlobalState();
-  const { chaseStart, chaseEnd, changeOverallTheme } = homeAnimation();
+  const { startTransitionGlobal, setIsCustomTheme } = useGlobalState();
   const { tileStartUp } = startUpAnimation();
-  const [firstTime, setFirstTime] = useState(true);
   const [count, setCount] = useState(0);
 
   function handleNameClick() {
-    if (count === 5) {
+    if (count === 10) {
       generateTheme();
-
-      if (firstTime) {
-        chaseEnd();
-        changeOverallTheme();
-
-        setFirstTime(false);
-      }
+      setIsCustomTheme(true);
     } else {
-      chaseStart();
       setCount(count + 1);
     }
   }

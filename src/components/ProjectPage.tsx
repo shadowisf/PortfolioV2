@@ -79,7 +79,7 @@ export default function ProjectPage({ dataID }: ProjectProps) {
 
       <span
         className="backToTopButton toThinHover noCursor"
-        onClick={() => scrollToTop()}
+        onClick={() => scrollToTop(0.25)}
       >
         ↑ <span>back to top</span>
       </span>

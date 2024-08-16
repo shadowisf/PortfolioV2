@@ -1,3 +1,6 @@
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+
 function getRandomColor() {
   const letters = "0123456789ABCDEF";
   let color = "#";
@@ -33,22 +36,54 @@ function calculateContrastRatio(
   return calculateContrast(foregroundColor, backgroundColor);
 }
 
+const highlightedTexts = [".homeWrapper .name", ".projectWrapper .title"];
+
+const fadedTexts = [
+  ".homeWrapper .year",
+  ".projectWrapper .year",
+  ".homeWrapper .links",
+];
+
 export function generateTheme() {
-  let bgColor, textColor;
+  let bgColor, tColor;
 
   do {
     bgColor = getRandomColor();
-    textColor = getRandomColor();
+    tColor = getRandomColor();
   } while (
-    calculateContrastRatio(textColor, bgColor) < 7 ||
-    calculateContrastRatio(textColor, bgColor) < 4.5 ||
-    calculateContrastRatio(bgColor, textColor) < 7
+    calculateContrastRatio(tColor, bgColor) < 7 ||
+    calculateContrastRatio(tColor, bgColor) < 4.5 ||
+    calculateContrastRatio(bgColor, tColor) < 7
   );
 
-  requestAnimationFrame(() => {
-    document.documentElement.style.setProperty("--text-color", textColor);
-    document.documentElement.style.setProperty("--background-color", bgColor);
-    document.documentElement.style.setProperty("--text-faded-color", "#");
-    document.documentElement.style.setProperty("--accent-color", textColor);
+  document.documentElement.style.setProperty("--text-color", tColor);
+  document.documentElement.style.setProperty("--background-color", bgColor);
+  document.documentElement.style.setProperty("--faded-color", "#");
+  document.documentElement.style.setProperty("--accent-color", tColor);
+
+  gsap.set(highlightedTexts, {
+    backgroundColor: "var(--text-color)",
+    color: "var(--background-color",
   });
+  gsap.set(fadedTexts, {
+    autoAlpha: "0.5",
+  });
+}
+
+export function resetTheme(
+  textColor: string,
+  backgroundColor: string,
+  accentColor: string,
+  fadedColor: string
+) {
+  document.documentElement.style.setProperty("--text-color", textColor);
+  document.documentElement.style.setProperty(
+    "--background-color",
+    backgroundColor
+  );
+  document.documentElement.style.setProperty("--faded-color", fadedColor);
+  document.documentElement.style.setProperty("--accent-color", accentColor);
+
+  gsap.set(highlightedTexts, { clearProps: "all" });
+  gsap.set(fadedTexts, { clearProps: "all" });
 }

@@ -1,12 +1,14 @@
 import { Fragment, useEffect, useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
-import { Cross, Hamburger, Moon, Sun } from "./Icon";
+import { Cross, Hamburger, Moon, Reset, Sun } from "./Icon";
 import { navBarAnimation } from "../utils/AnimationUtils";
 
 export default function NavBar() {
-  const { startTransitionGlobal } = useGlobalState();
-  const { openMenu, closeMenu, handleNavButtonClick } = navBarAnimation();
-  const [userTheme, setUserTheme] = useState("light dark");
+  const { startTransitionGlobal, isCustomTheme } = useGlobalState();
+  const { handleMenuNavButtonClick } = navBarAnimation();
+  const { openMenu, closeMenu } = navBarAnimation();
+  const [userTheme, setUserTheme] = useState("light");
+  const { resetThemeGlobal } = useGlobalState();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -50,12 +52,18 @@ export default function NavBar() {
           <h6 onClick={() => startTransitionGlobal(-3)} className="toThinHover">
             contact
           </h6>
-          <span onClick={() => handleThemeClick()} className="themeButton">
-            {userTheme === "dark" ? <Moon width="24" /> : <Sun width="24" />}
-          </span>
+          {isCustomTheme ? (
+            <span className="resetButton" onClick={() => resetThemeGlobal()}>
+              <Reset width="24" />
+            </span>
+          ) : (
+            <span onClick={() => handleThemeClick()} className="themeButton">
+              {userTheme === "dark" ? <Moon width="24" /> : <Sun width="24" />}
+            </span>
+          )}
         </span>
 
-        <span className="hamburgerButton" onClick={() => openMenu()}>
+        <span className="hamburgerButton" onClick={openMenu}>
           <Hamburger width="24" />
         </span>
       </nav>
@@ -65,15 +73,27 @@ export default function NavBar() {
           <Cross width="24" />
         </span>
 
-        <span className="toThinHover" onClick={() => handleNavButtonClick(-2)}>
+        <span
+          className="toThinHover"
+          onClick={() => handleMenuNavButtonClick(-2)}
+        >
           about
         </span>
-        <span className="toThinHover" onClick={() => handleNavButtonClick(-3)}>
+        <span
+          className="toThinHover"
+          onClick={() => handleMenuNavButtonClick(-3)}
+        >
           contact
         </span>
-        <span onClick={() => handleThemeClick()} className="themeButton">
-          {userTheme === "dark" ? <Moon width="24" /> : <Sun width="24" />}
-        </span>
+        {isCustomTheme ? (
+          <span className="resetButton" onClick={() => resetThemeGlobal()}>
+            <Reset width="24" />
+          </span>
+        ) : (
+          <span onClick={() => handleThemeClick()} className="themeButton">
+            {userTheme === "dark" ? <Moon width="24" /> : <Sun width="24" />}
+          </span>
+        )}
       </div>
     </Fragment>
   );

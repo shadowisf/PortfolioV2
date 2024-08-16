@@ -70,22 +70,15 @@ export function pixelTransition() {
   const changePage = contextSafe((id: number) => {
     const allPages = document.querySelectorAll("main[data-key]");
 
+    gsap.set(allPages, { display: "none" });
+
     allPages.forEach((page) => {
       const dataKey = page.getAttribute("data-key");
 
-      switch (dataKey) {
-        case "-1": // home
-          gsap.set(allPages, {
-            display: "none",
-          });
-          gsap.set(page, { display: "flex" });
-
-          break;
-        case id.toString():
-          gsap.set(allPages, { display: "none" });
-          gsap.set(page, { display: "block" });
-          break;
-        default:
+      if (dataKey === id.toString()) {
+        const displayStyle =
+          dataKey === "-1" || dataKey === "-3" ? "flex" : "block";
+        gsap.set(page, { display: displayStyle });
       }
     });
   });
@@ -96,8 +89,8 @@ export function pixelTransition() {
 export function scrollingAnimation() {
   const { contextSafe } = useGSAP();
 
-  const scrollToTop = contextSafe(() => {
-    gsap.to(window, { scrollTo: { x: "0", y: "0" } });
+  const scrollToTop = contextSafe((duration: number) => {
+    gsap.to(window, { scrollTo: { x: "0", y: "0" }, duration: duration });
   });
 
   return { scrollToTop };
@@ -110,26 +103,31 @@ export function navBarAnimation() {
 
   const openMenu = contextSafe(() => {
     startTransition(() => {
-      gsap.to(".menu", {
-        display: "flex",
-        autoAlpha: "1",
-        duration: "0.5",
-      });
+      setTimeout(() => {
+        gsap.to(".menu", {
+          display: "flex",
+          autoAlpha: "1",
+          duration: "0.5",
+        });
+      }, 200);
     });
   });
 
-  const closeMenu = contextSafe(() => {
+  const closeMenu = contextSafe((onComplete?: () => void) => {
     gsap.to(".menu", {
       display: "none",
       autoAlpha: "0",
       duration: "0.5",
       onComplete: () => {
+        {
+          onComplete;
+        }
         endTransition();
       },
     });
   });
 
-  const handleNavButtonClick = contextSafe((page: number) => {
+  const handleMenuNavButtonClick = contextSafe((page: number) => {
     if (page === currentPage) {
       gsap.to(".menu", {
         display: "none",
@@ -151,10 +149,14 @@ export function navBarAnimation() {
     }
   });
 
+  const handleMenuResetButtonClick = contextSafe(() => {
+    
+  })
+
   return {
     openMenu,
     closeMenu,
-    handleNavButtonClick,
+    handleMenuNavButtonClick,
   };
 }
 
@@ -214,46 +216,4 @@ export function projectTileAnimation(container: NodeListOf<Element> | null) {
     resetPreview,
     movePreview,
   };
-}
-
-export function homeAnimation() {
-  const { contextSafe } = useGSAP();
-
-  const highlightedTexts = [".homeWrapper .name", ".projectWrapper .title"];
-
-  const fadedTexts = [
-    ".homeWrapper .year",
-    ".projectWrapper .year",
-    ".homeWrapper .links",
-  ];
-
-  const chaseStart = contextSafe(() => {
-    const movementRangeX = 500;
-    const movementRangeY = 500;
-
-    const x = Math.random() * movementRangeX - movementRangeX / 2;
-    const y = Math.random() * movementRangeY - movementRangeY / 2;
-
-    gsap.to(".homeWrapper .name", {
-      x: x,
-      y: y,
-      duration: 0.1,
-    });
-  });
-
-  const chaseEnd = contextSafe(() => {
-    gsap.to(".homeWrapper .name", { x: "0", y: "0", duration: "0.1" });
-  });
-
-  const changeOverallTheme = contextSafe(() => {
-    gsap.set(highlightedTexts, {
-      backgroundColor: "var(--text-color)",
-      color: "var(--background-color",
-    });
-    gsap.set(fadedTexts, {
-      autoAlpha: "0.5",
-    });
-  });
-
-  return { chaseStart, chaseEnd, changeOverallTheme };
 }
