@@ -9,12 +9,11 @@ import {
   ProjectProps,
 } from "../utils/ProjectUtils";
 import { useEffect, useState } from "react";
-import { useGlobalState } from "../utils/ControlUtil";
-import { scrollingAnimation } from "../utils/AnimationUtils";
+import { pixelTransition, scrollingAnimation } from "../utils/AnimationUtils";
 
 export default function ProjectPage({ dataID }: ProjectProps) {
   const [ifData5, setIfData5] = useState(false);
-  const { startTransitionGlobal } = useGlobalState();
+  const { executePixelTransition } = pixelTransition();
   const { scrollToTop } = scrollingAnimation();
 
   useEffect(() => {
@@ -27,14 +26,14 @@ export default function ProjectPage({ dataID }: ProjectProps) {
     <main className="projectWrapper" data-key={dataID}>
       <span
         className="mobileBackToHomeButton toThinHover noCursor"
-        onClick={() => startTransitionGlobal(-1)}
+        onClick={() => executePixelTransition(-1)}
       >
         ←<span>back</span>
       </span>
       <div className="header">
         <h1
           className="desktopBackToHomeButton toThinHover"
-          onClick={() => startTransitionGlobal(-1)}
+          onClick={() => executePixelTransition(-1)}
         >
           ←
         </h1>

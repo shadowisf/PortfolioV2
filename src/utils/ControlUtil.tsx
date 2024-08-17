@@ -1,15 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import {
-  navBarAnimation,
-  pixelTransition,
-  scrollingAnimation,
-} from "./AnimationUtils";
+import { navBarAnimation } from "./AnimationUtils";
 import { resetTheme } from "./ColorUtils";
 
 type GlobalStateContextType = {
   isMobile: boolean;
   currentPage: number;
-  startTransitionGlobal: (page: number, skipStart?: boolean) => void;
+  setCurrentPage: (val: number) => void;
   isCustomTheme: boolean;
   setIsCustomTheme: (val: boolean) => void;
   textColor: string;
@@ -27,7 +23,7 @@ type GlobalStateProviderProps = {
 const GlobalStateContext = createContext<GlobalStateContextType>({
   isMobile: false,
   currentPage: 0,
-  startTransitionGlobal: () => {},
+  setCurrentPage: () => {},
   isCustomTheme: false,
   setIsCustomTheme: () => {},
   textColor: "",
@@ -41,8 +37,6 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [isCustomTheme, setIsCustomTheme] = useState(false);
   const [currentPage, setCurrentPage] = useState(-1);
-  const { startTransition, endTransition, changePage } = pixelTransition();
-  const { scrollToTop } = scrollingAnimation();
   const [textColor, setTextColor] = useState("");
   const [backgroundColor, setBackgroundColor] = useState("");
   const [accentColor, setAccentColor] = useState("");
@@ -80,31 +74,12 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
     window.addEventListener("resize", handleResize);
   }
 
-  // pixel transition w/ page update
-  const executePixelTransition = (page: number, skipStart?: boolean) => {
-    if (page === currentPage) {
-      return;
-    } else if (skipStart) {
-      setCurrentPage(page);
-      scrollToTop(0);
-      changePage(page);
-      endTransition();
-    } else {
-      setCurrentPage(page);
-      startTransition(() => {
-        scrollToTop(0);
-        changePage(page);
-        endTransition();
-      });
-    }
-  };
-
   // reset entire theme
   const executeResetTheme = () => {
     setIsCustomTheme(false);
     resetTheme(textColor, backgroundColor, accentColor, fadedColor);
 
-    closeMenu();
+    closeMenu(() => {});
   };
 
   return (
@@ -112,9 +87,9 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
       value={{
         isMobile,
         currentPage,
+        setCurrentPage,
         isCustomTheme,
         setIsCustomTheme,
-        startTransitionGlobal: executePixelTransition,
         resetThemeGlobal: executeResetTheme,
         textColor,
         backgroundColor,

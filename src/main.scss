@@ -302,7 +302,7 @@ $maxWidthMobile: 90%;
     white-space: nowrap;
     flex-wrap: wrap;
 
-    justify-content: space-between;
+    justify-content: space-around;
   }
 
   form {
@@ -541,7 +541,7 @@ nav {
   align-items: center;
   padding: 1.25rem 2rem;
 
-  z-index: 1;
+  z-index: 5;
 
   .navButtons {
     display: flex;

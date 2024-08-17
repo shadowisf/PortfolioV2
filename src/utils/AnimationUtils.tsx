@@ -35,8 +35,11 @@ export function startUpAnimation() {
 
 export function pixelTransition() {
   const { contextSafe } = useGSAP();
+  const { setCurrentPage, currentPage } = useGlobalState();
+  const { scrollToTop } = scrollingAnimation();
 
-  const startTransition = contextSafe((onComplete: () => void) => {
+  // ON COMPLETE REQUIRED
+  const startTransition = contextSafe((onComplete?: () => void) => {
     gsap.set(".pixelGrid", { display: "grid" });
     gsap.fromTo(
       ".pixelItem",
@@ -46,9 +49,7 @@ export function pixelTransition() {
         duration: "0.005",
         stagger: { amount: 0.5, from: "random" },
         onComplete: () => {
-          {
-            onComplete();
-          }
+          onComplete && onComplete();
         },
       }
     );
@@ -67,7 +68,7 @@ export function pixelTransition() {
     }, 100);
   });
 
-  const changePage = contextSafe((id: number) => {
+  const changePage = contextSafe((target: number) => {
     const allPages = document.querySelectorAll("main[data-key]");
 
     gsap.set(allPages, { display: "none" });
@@ -75,7 +76,7 @@ export function pixelTransition() {
     allPages.forEach((page) => {
       const dataKey = page.getAttribute("data-key");
 
-      if (dataKey === id.toString()) {
+      if (dataKey === target.toString()) {
         const displayStyle =
           dataKey === "-1" || dataKey === "-3" ? "flex" : "block";
         gsap.set(page, { display: displayStyle });
@@ -83,7 +84,26 @@ export function pixelTransition() {
     });
   });
 
-  return { startTransition, endTransition, changePage };
+  const executePixelTransition = (page: number, skipStart?: boolean) => {
+    if (page === currentPage) {
+      return;
+    } else if (skipStart) {
+      scrollToTop(0);
+
+      setCurrentPage(page);
+      changePage(page);
+      endTransition();
+    } else {
+      setCurrentPage(page);
+      startTransition(() => {
+        scrollToTop(0);
+        changePage(page);
+        endTransition();
+      });
+    }
+  };
+
+  return { startTransition, endTransition, changePage, executePixelTransition };
 }
 
 export function scrollingAnimation() {
@@ -98,8 +118,9 @@ export function scrollingAnimation() {
 
 export function navBarAnimation() {
   const { startTransition, endTransition } = pixelTransition();
-  const { currentPage, startTransitionGlobal } = useGlobalState();
+  const { currentPage } = useGlobalState();
   const { contextSafe } = useGSAP();
+  const { executePixelTransition } = pixelTransition();
 
   const openMenu = contextSafe(() => {
     startTransition(() => {
@@ -119,44 +140,28 @@ export function navBarAnimation() {
       autoAlpha: "0",
       duration: "0.5",
       onComplete: () => {
-        {
-          onComplete;
-        }
+        onComplete && onComplete();
         endTransition();
       },
     });
   });
 
-  const handleMenuNavButtonClick = contextSafe((page: number) => {
+  const handleMenuButtonClick = contextSafe((page: number) => {
     if (page === currentPage) {
-      gsap.to(".menu", {
-        display: "none",
-        autoAlpha: "0",
-        duration: "0.5",
-        onComplete: () => {
-          endTransition();
-        },
-      });
+      closeMenu();
     } else {
-      gsap.to(".menu", {
-        display: "none",
-        autoAlpha: "0",
-        duration: "0.5",
-        onComplete: () => {
-          startTransitionGlobal(page, true);
-        },
-      });
+      closeMenu(() => executePixelTransition(page, true));
     }
   });
 
   const handleMenuResetButtonClick = contextSafe(() => {
-    
-  })
+    gsap;
+  });
 
   return {
     openMenu,
     closeMenu,
-    handleMenuNavButtonClick,
+    handleMenuButtonClick,
   };
 }
 

@@ -5,16 +5,17 @@ import { getProjectIDs } from "../utils/ProjectUtils";
 import { useGlobalState } from "../utils/ControlUtil";
 import { useGSAP } from "@gsap/react";
 import { TextPlugin } from "gsap/all";
-import { startUpAnimation } from "../utils/AnimationUtils";
+import { pixelTransition, startUpAnimation } from "../utils/AnimationUtils";
 import { useState } from "react";
 import { generateTheme } from "../utils/ColorUtils";
 
 gsap.registerPlugin(TextPlugin, useGSAP, gsap);
 
 export default function Home() {
-  const { startTransitionGlobal, setIsCustomTheme } = useGlobalState();
+  const { setIsCustomTheme } = useGlobalState();
   const { tileStartUp } = startUpAnimation();
   const [count, setCount] = useState(0);
+  const { executePixelTransition } = pixelTransition();
 
   function handleNameClick() {
     if (count === 10) {
@@ -34,7 +35,7 @@ export default function Home() {
       <section className="left">
         {getProjectIDs().map((id) => (
           <ProjectTile
-            onClick={() => startTransitionGlobal(id)}
+            onClick={() => executePixelTransition(id)}
             key={id}
             dataID={id}
           />
@@ -43,7 +44,7 @@ export default function Home() {
       <section className="right">
         {getProjectIDs().map((id) => (
           <ProjectPreview
-            onClick={() => startTransitionGlobal(id)}
+            onClick={() => executePixelTransition(id)}
             key={id}
             dataID={id}
           />
@@ -64,14 +65,14 @@ export default function Home() {
           <div className="links faded noCursor">
             <LinkNoIcon
               className="faded"
-              onClick={() => startTransitionGlobal(-2)}
+              onClick={() => executePixelTransition(-2)}
             >
               about me
             </LinkNoIcon>
             •
             <LinkNoIcon
               className="faded"
-              onClick={() => startTransitionGlobal(-3)}
+              onClick={() => executePixelTransition(-3)}
             >
               contact me
             </LinkNoIcon>
