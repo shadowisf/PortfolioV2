@@ -1,12 +1,12 @@
 import { Fragment } from "react/jsx-runtime";
 
-type timelineProps = {
+type TimelineProps = {
   children?: React.ReactNode;
   img?: React.ReactNode;
   verticalLine?: boolean;
 };
 
-export function TimelineRow({ children, img, verticalLine }: timelineProps) {
+export function TimelineRow({ children, img, verticalLine }: TimelineProps) {
   return (
     <Fragment>
       <section className="timelineRow">

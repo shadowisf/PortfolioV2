@@ -117,10 +117,10 @@ export function scrollingAnimation() {
 }
 
 export function navBarAnimation() {
-  const { startTransition, endTransition } = pixelTransition();
+  const { startTransition, endTransition, executePixelTransition } =
+    pixelTransition();
   const { currentPage } = useGlobalState();
   const { contextSafe } = useGSAP();
-  const { executePixelTransition } = pixelTransition();
 
   const openMenu = contextSafe(() => {
     startTransition(() => {
@@ -134,6 +134,7 @@ export function navBarAnimation() {
     });
   });
 
+  // ON COMPLETE REQUIRED
   const closeMenu = contextSafe((onComplete?: () => void) => {
     gsap.to(".menu", {
       display: "none",
@@ -146,7 +147,7 @@ export function navBarAnimation() {
     });
   });
 
-  const handleMenuButtonClick = contextSafe((page: number) => {
+  const executePixelTransitionFromMenu = contextSafe((page: number) => {
     if (page === currentPage) {
       closeMenu();
     } else {
@@ -154,14 +155,10 @@ export function navBarAnimation() {
     }
   });
 
-  const handleMenuResetButtonClick = contextSafe(() => {
-    gsap;
-  });
-
   return {
     openMenu,
     closeMenu,
-    handleMenuButtonClick,
+    executePixelTransitionFromMenu,
   };
 }
 

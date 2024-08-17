@@ -2,13 +2,21 @@ import { Fragment, useEffect, useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 import { Cross, Hamburger, Moon, Reset, Sun } from "./Icon";
 import { navBarAnimation, pixelTransition } from "../utils/AnimationUtils";
+import { resetTheme } from "../utils/ColorUtils";
 
 export default function NavBar() {
   const { isCustomTheme } = useGlobalState();
   const { executePixelTransition } = pixelTransition();
-  const { openMenu, closeMenu, handleMenuButtonClick } = navBarAnimation();
-  const { resetThemeGlobal } = useGlobalState();
+  const { openMenu, closeMenu, executePixelTransitionFromMenu } =
+    navBarAnimation();
   const [userTheme, setUserTheme] = useState("light");
+  const {
+    setIsCustomTheme,
+    textColor,
+    backgroundColor,
+    accentColor,
+    fadedColor,
+  } = useGlobalState();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -26,12 +34,26 @@ export default function NavBar() {
     }
   }, []);
 
-  function handleNavThemeClick() {
+  // toggle between dark mode and light mode
+  function executeToggleTheme() {
     const newTheme = userTheme === "dark" ? "light" : "dark";
     setUserTheme(newTheme);
     document.documentElement.style.setProperty("--theme", newTheme);
 
     localStorage.setItem("theme", newTheme);
+  }
+
+  // reset theme to default
+  function executeThemeReset(type?: string) {
+    if (type === "menu") {
+      setIsCustomTheme(false);
+      resetTheme(textColor, backgroundColor, accentColor, fadedColor);
+
+      closeMenu();
+    } else {
+      setIsCustomTheme(false);
+      resetTheme(textColor, backgroundColor, accentColor, fadedColor);
+    }
   }
 
   return (
@@ -62,13 +84,13 @@ export default function NavBar() {
             contact
           </h6>
           {isCustomTheme ? (
-            // nav reset button
-            <span className="resetButton" onClick={() => resetThemeGlobal()}>
+            // nav reset theme button
+            <span className="resetButton" onClick={() => {}}>
               <Reset width="24" />
             </span>
           ) : (
-            // nav theme button
-            <span onClick={() => handleNavThemeClick()} className="themeButton">
+            // nav theme toggle button
+            <span onClick={() => executeToggleTheme()} className="themeButton">
               {userTheme === "dark" ? <Moon width="24" /> : <Sun width="24" />}
             </span>
           )}
@@ -87,22 +109,31 @@ export default function NavBar() {
         </span>
 
         {/* menu about button */}
-        <span className="toThinHover" onClick={() => handleMenuButtonClick(-2)}>
+        <span
+          className="toThinHover"
+          onClick={() => executePixelTransitionFromMenu(-2)}
+        >
           about
         </span>
 
         {/* menu contact button */}
-        <span className="toThinHover" onClick={() => handleMenuButtonClick(-3)}>
+        <span
+          className="toThinHover"
+          onClick={() => executePixelTransitionFromMenu(-3)}
+        >
           contact
         </span>
         {isCustomTheme ? (
           // menu reset button
-          <span className="resetButton" onClick={() => resetThemeGlobal()}>
+          <span
+            className="resetButton"
+            onClick={() => executeThemeReset("menu")}
+          >
             <Reset width="24" />
           </span>
         ) : (
           // menu theme button
-          <span onClick={() => handleNavThemeClick()} className="themeButton">
+          <span onClick={() => executeToggleTheme()} className="themeButton">
             {userTheme === "dark" ? <Moon width="24" /> : <Sun width="24" />}
           </span>
         )}
