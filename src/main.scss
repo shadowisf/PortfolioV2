@@ -21,6 +21,7 @@ $maxWidthMobile: 90%;
   --faded-color: #817e83;
   --accent-color: light-dark(#6320ee, #8075ff);
 
+  --h0: calc(var(--h1) * 1.5);
   --h1: 2.986rem;
   --h2: 2.488rem;
   --h3: 2.074rem;
@@ -254,12 +255,44 @@ $maxWidthMobile: 90%;
 .aboutWrapper {
   display: none;
 
-  max-width: $maxWidthDesktopWide;
+  max-width: $maxWidthDesktop;
 
   margin: auto;
   padding: 8rem 0;
 
+  flex-direction: column;
+  gap: 16rem;
+
+  h1 {
+    text-align: center;
+  }
+
+  .bio {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    div {
+      display: flex;
+      gap: 2rem;
+
+      picture {
+        background-color: red;
+        width: 50%;
+      }
+
+      p {
+        font-size: var(--h6);
+        width: 50%;
+      }
+    }
+  }
+
   .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
     .verticalLine {
       margin: 1rem 0;
     }
@@ -292,7 +325,11 @@ $maxWidthMobile: 90%;
   padding: 8rem 0;
 
   flex-direction: column;
-  gap: 8rem;
+  gap: 4rem;
+
+  h1 {
+    text-align: center;
+  }
 
   .links {
     display: flex;
@@ -396,6 +433,10 @@ $maxWidthMobile: 90%;
 
 h1 {
   font-size: var(--h1);
+
+  &.extra {
+    font-size: var(--h0);
+  }
 }
 
 h2 {
@@ -769,17 +810,5 @@ footer {
     .hamburgerButton {
       display: none;
     }
-  }
-}
-
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-
-  .box {
-    background-color: red;
-    width: 150px;
-    height: 150px;
   }
 }

@@ -5,34 +5,6 @@ import { ScrollToPlugin } from "gsap/all";
 
 gsap.registerPlugin(gsap, useGSAP, ScrollToPlugin);
 
-export function startUpAnimation() {
-  const { contextSafe } = useGSAP();
-
-  const tileStartUp = contextSafe(() => {
-    gsap.set(".homeWrapper .tile", {
-      x: "-=150",
-      autoAlpha: "0",
-      filter: "blur(8px)",
-      pointerEvents: "none",
-      onComplete: () => {
-        gsap.to(".homeWrapper .tile", {
-          x: "0",
-          autoAlpha: "1",
-          duration: "1",
-          filter: "blur(0px)",
-          stagger: 0.25,
-          ease: "sine.inOut",
-          onComplete: () => {
-            gsap.set(".tile", { clearProps: "all" });
-          },
-        });
-      },
-    });
-  });
-
-  return { tileStartUp };
-}
-
 export function pixelTransition() {
   const { contextSafe } = useGSAP();
   const { setCurrentPage, currentPage } = useGlobalState();
@@ -78,7 +50,9 @@ export function pixelTransition() {
 
       if (dataKey === target.toString()) {
         const displayStyle =
-          dataKey === "-1" || dataKey === "-3" ? "flex" : "block";
+          dataKey === "-1" || dataKey === "-2" || dataKey === "-3"
+            ? "flex"
+            : "block";
         gsap.set(page, { display: displayStyle });
       }
     });
@@ -204,10 +178,15 @@ export function projectTileAnimation(container: NodeListOf<Element> | null) {
         const dataKey = container.getAttribute("data-key");
 
         if (dataKey === targetID.toString()) {
-          gsap.set(container, {
-            xPercent: (event.clientX / window.innerWidth) * 10 - 1.5,
-            yPercent: (event.clientY / window.innerHeight) * 10 - 2,
+          const quickX = gsap.quickTo(container, "xPercent", {
+            duration: 0.2,
           });
+          const quickY = gsap.quickTo(container, "yPercent", {
+            duration: 0.2,
+          });
+
+          quickX((event.clientX / window.innerWidth) * 10 - 2);
+          quickY((event.clientY / window.innerHeight) * 10 - 2);
         }
       });
     }

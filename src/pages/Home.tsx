@@ -5,7 +5,7 @@ import { getProjectIDs } from "../utils/ProjectUtils";
 import { useGlobalState } from "../utils/ControlUtil";
 import { useGSAP } from "@gsap/react";
 import { TextPlugin } from "gsap/all";
-import { pixelTransition, startUpAnimation } from "../utils/AnimationUtils";
+import { pixelTransition } from "../utils/AnimationUtils";
 import { useState } from "react";
 import { generateTheme } from "../utils/ColorUtils";
 
@@ -13,7 +13,6 @@ gsap.registerPlugin(TextPlugin, useGSAP, gsap);
 
 export default function Home() {
   const { setIsCustomTheme } = useGlobalState();
-  const { tileStartUp } = startUpAnimation();
   const [count, setCount] = useState(0);
   const { executePixelTransition } = pixelTransition();
 
@@ -25,10 +24,6 @@ export default function Home() {
       setCount(count + 1);
     }
   }
-
-  useGSAP(() => {
-    tileStartUp();
-  });
 
   return (
     <main data-key="-1" className="homeWrapper">

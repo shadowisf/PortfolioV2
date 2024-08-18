@@ -37,6 +37,8 @@ export default function Contact() {
 
   return (
     <main data-key="-3" className="contactWrapper">
+      <h1 className="extra accent">get in touch!</h1>
+
       <div className="links">
         <LinkWithIcon
           img={<Email color="text" />}
@@ -45,15 +47,15 @@ export default function Contact() {
           les.ranalan@gmail.com
         </LinkWithIcon>
 
-        <LinkWithIcon img={<Github />} href="https://github.com/shadowisf">
-          shadowisf
-        </LinkWithIcon>
-
         <LinkWithIcon
           img={<LinkedIn />}
           href="https://www.linkedin.com/in/les-paul-ranalan/"
         >
           les paul ranalan
+        </LinkWithIcon>
+
+        <LinkWithIcon img={<Github />} href="https://github.com/shadowisf">
+          shadowisf
         </LinkWithIcon>
 
         <LinkWithIcon

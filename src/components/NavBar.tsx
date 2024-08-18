@@ -85,7 +85,12 @@ export default function NavBar() {
           </h6>
           {isCustomTheme ? (
             // nav reset theme button
-            <span className="resetButton" onClick={() => {}}>
+            <span
+              className="resetButton"
+              onClick={() => {
+                executeThemeReset();
+              }}
+            >
               <Reset width="24" />
             </span>
           ) : (
@@ -104,7 +109,7 @@ export default function NavBar() {
 
       <div className="menu noCursor">
         {/* menu close button */}
-        <span className="closeButton" onClick={() => closeMenu(() => {})}>
+        <span className="closeButton" onClick={() => closeMenu()}>
           <Cross width="24" />
         </span>
 

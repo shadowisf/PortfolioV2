@@ -4,8 +4,22 @@ import { TimelineRow } from "../components/Timeline";
 export default function About() {
   return (
     <main data-key="-2" className="aboutWrapper">
-      <section>
-        <div className="timeline">
+      <section className="bio">
+        <h1 className="extra accent">hey, i'm les!</h1>
+        <div>
+          <picture>placeholder</picture>
+          <p>
+            <b>les paul ranalan</b> is a final-year software engineering student
+            that specializes in frontend development and ui/ux design. his
+            design philosophy mostly centers around simplicity and minimalism,
+            whilst keeping features functional and intuituve.
+          </p>
+        </div>
+      </section>
+
+      <section className="timeline">
+        <h1>my life's arc</h1>
+        <div>
           <TimelineRow img={<Cake />} verticalLine={true}>
             born in davao city, philippines <br /> <b>february 15, 2004</b>
           </TimelineRow>
@@ -22,6 +36,11 @@ export default function About() {
             graduated uob with bachelor in swe <br /> <b>???</b>
           </TimelineRow>
         </div>
+      </section>
+
+      <section className="skillset">
+        <h1>my skillset</h1>
+        <div></div>
       </section>
     </main>
   );
