@@ -1,14 +1,14 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useGlobalState } from "./ControlUtil";
-import { ScrollToPlugin } from "gsap/all";
+import { useNavigate } from "react-router-dom";
 
-gsap.registerPlugin(gsap, useGSAP, ScrollToPlugin);
+gsap.registerPlugin(gsap, useGSAP);
 
 export function pixelTransition() {
   const { contextSafe } = useGSAP();
-  const { setCurrentPage, currentPage } = useGlobalState();
-  const { scrollToTop } = scrollingAnimation();
+  const { currentPage } = useGlobalState();
+  const navigate = useNavigate();
 
   // ON COMPLETE REQUIRED
   const startTransition = contextSafe((onComplete?: () => void) => {
@@ -40,60 +40,26 @@ export function pixelTransition() {
     }, 100);
   });
 
-  const changePage = contextSafe((target: number) => {
-    const allPages = document.querySelectorAll("main[data-key]");
+  const executeTransition = contextSafe((url: string, skipStart?: boolean) => {
 
-    gsap.set(allPages, { display: "none" });
-
-    allPages.forEach((page) => {
-      const dataKey = page.getAttribute("data-key");
-
-      if (dataKey === target.toString()) {
-        const displayStyle =
-          dataKey === "-1" || dataKey === "-2" || dataKey === "-3"
-            ? "flex"
-            : "block";
-        gsap.set(page, { display: displayStyle });
-      }
-    });
-  });
-
-  const executePixelTransition = (page: number, skipStart?: boolean) => {
-    if (page === currentPage) {
+    if (url === currentPage) {
       return;
-    } else if (skipStart) {
-      scrollToTop(0);
-
-      setCurrentPage(page);
-      changePage(page);
-      endTransition();
+    } else if (skipStart === true) {
+      closeMenu(() => {
+        navigate(url);
+      });
     } else {
-      setCurrentPage(page);
       startTransition(() => {
-        scrollToTop(0);
-        changePage(page);
-        endTransition();
+        navigate(url);
       });
     }
-  };
-
-  return { startTransition, endTransition, changePage, executePixelTransition };
-}
-
-export function scrollingAnimation() {
-  const { contextSafe } = useGSAP();
-
-  const scrollToTop = contextSafe((duration: number) => {
-    gsap.to(window, { scrollTo: { x: "0", y: "0" }, duration: duration });
   });
 
-  return { scrollToTop };
+  return { startTransition, endTransition, executeTransition };
 }
 
 export function navBarAnimation() {
-  const { startTransition, endTransition, executePixelTransition } =
-    pixelTransition();
-  const { currentPage } = useGlobalState();
+  const { startTransition, endTransition } = pixelTransition();
   const { contextSafe } = useGSAP();
 
   const openMenu = contextSafe(() => {
@@ -121,18 +87,9 @@ export function navBarAnimation() {
     });
   });
 
-  const executePixelTransitionFromMenu = contextSafe((page: number) => {
-    if (page === currentPage) {
-      closeMenu();
-    } else {
-      closeMenu(() => executePixelTransition(page, true));
-    }
-  });
-
   return {
     openMenu,
     closeMenu,
-    executePixelTransitionFromMenu,
   };
 }
 

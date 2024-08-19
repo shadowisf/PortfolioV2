@@ -1,22 +1,15 @@
 import { Fragment, useEffect, useState } from "react";
-import { useGlobalState } from "../utils/ControlUtil";
-import { Cross, Hamburger, Moon, Reset, Sun } from "./Icon";
+import { Cross, Hamburger, Moon, Sun } from "./Icon";
 import { navBarAnimation, pixelTransition } from "../utils/AnimationUtils";
-import { resetTheme } from "../utils/ColorUtils";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+
+gsap.registerPlugin(useGSAP, gsap);
 
 export default function NavBar() {
-  const { isCustomTheme } = useGlobalState();
-  const { executePixelTransition } = pixelTransition();
-  const { openMenu, closeMenu, executePixelTransitionFromMenu } =
-    navBarAnimation();
+  const { openMenu, closeMenu } = navBarAnimation();
+  const { executeTransition } = pixelTransition();
   const [userTheme, setUserTheme] = useState("light");
-  const {
-    setIsCustomTheme,
-    textColor,
-    backgroundColor,
-    accentColor,
-    fadedColor,
-  } = useGlobalState();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -43,105 +36,52 @@ export default function NavBar() {
     localStorage.setItem("theme", newTheme);
   }
 
-  // reset theme to default
-  function executeThemeReset(type?: string) {
-    if (type === "menu") {
-      setIsCustomTheme(false);
-      resetTheme(textColor, backgroundColor, accentColor, fadedColor);
-
-      closeMenu();
-    } else {
-      setIsCustomTheme(false);
-      resetTheme(textColor, backgroundColor, accentColor, fadedColor);
-    }
-  }
-
   return (
     <Fragment>
       <nav className="noCursor">
-        <h6
-          onClick={() => executePixelTransition(-1)}
-          className="logoButton toThinHover"
+        <a
+          className="logoButton"
+          onClick={() => {
+            executeTransition("/");
+          }}
         >
           ᜎ᜔ᜍ᜔
           {/* ᜎᜒᜐ᜔ ᜍᜈᜎᜈ᜔ */}
-        </h6>
+        </a>
 
         <span className="navButtons">
           {/* nav about button */}
-          <h6
-            onClick={() => executePixelTransition(-2)}
-            className="toThinHover"
+          <a
+            onClick={() => {
+              executeTransition("about", false);
+            }}
           >
             about
-          </h6>
+          </a>
 
-          {/* nav contact button */}
-          <h6
-            onClick={() => executePixelTransition(-3)}
-            className="toThinHover"
-          >
-            contact
-          </h6>
-          {isCustomTheme ? (
-            // nav reset theme button
-            <span
-              className="resetButton"
-              onClick={() => {
-                executeThemeReset();
-              }}
-            >
-              <Reset width="24" />
-            </span>
-          ) : (
-            // nav theme toggle button
-            <span onClick={() => executeToggleTheme()} className="themeButton">
-              {userTheme === "dark" ? <Moon width="24" /> : <Sun width="24" />}
-            </span>
-          )}
+          {/*  nav theme toggle button */}
+          <span onClick={() => executeToggleTheme()} className="themeButton">
+            {userTheme === "dark" ? <Moon width="24" /> : <Sun width="24" />}
+          </span>
         </span>
 
         {/* nav hamburger button */}
-        <span className="hamburgerButton" onClick={openMenu}>
+        <span className="hamburgerButton" onClick={() => openMenu()}>
           <Hamburger width="24" />
         </span>
       </nav>
 
       <div className="menu noCursor">
         {/* menu close button */}
-        <span className="closeButton" onClick={() => closeMenu()}>
+        <a className="closeButton" onClick={() => closeMenu()}>
           <Cross width="24" />
-        </span>
-
+        </a>
         {/* menu about button */}
-        <span
-          className="toThinHover"
-          onClick={() => executePixelTransitionFromMenu(-2)}
-        >
-          about
-        </span>
-
-        {/* menu contact button */}
-        <span
-          className="toThinHover"
-          onClick={() => executePixelTransitionFromMenu(-3)}
-        >
-          contact
-        </span>
-        {isCustomTheme ? (
-          // menu reset button
-          <span
-            className="resetButton"
-            onClick={() => executeThemeReset("menu")}
-          >
-            <Reset width="24" />
-          </span>
-        ) : (
-          // menu theme button
-          <span onClick={() => executeToggleTheme()} className="themeButton">
-            {userTheme === "dark" ? <Moon width="24" /> : <Sun width="24" />}
-          </span>
-        )}
+        <a onClick={() => executeTransition("about", true)}>about</a>
+        {/* menu theme button */}
+        <a onClick={() => executeToggleTheme()} className="themeButton">
+          {userTheme === "dark" ? <Moon width="24" /> : <Sun width="24" />}
+        </a>
       </div>
     </Fragment>
   );

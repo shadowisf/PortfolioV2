@@ -37,7 +37,7 @@ export function ProjectTile({ dataID, onClick }: ProjectProps) {
   return (
     <div
       onClick={onClick}
-      className="tile toThinHover all noCursor"
+      className="tile hover all noCursor"
       onMouseEnter={() => {
         isMobile ? null : togglePreview(dataID);
       }}

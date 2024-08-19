@@ -1,76 +1,65 @@
 import { ProjectPreview, ProjectTile } from "../components/ProjectTile";
 import gsap from "gsap";
-import { LinkNoIcon } from "../components/Link";
+import { LinkWithIconOnly } from "../components/Link";
 import { getProjectIDs } from "../utils/ProjectUtils";
-import { useGlobalState } from "../utils/ControlUtil";
 import { useGSAP } from "@gsap/react";
-import { TextPlugin } from "gsap/all";
-import { pixelTransition } from "../utils/AnimationUtils";
-import { useState } from "react";
-import { generateTheme } from "../utils/ColorUtils";
+import { Email, Github, Instagram, LinkedIn } from "../components/Icon";
+import { useEffect } from "react";
+import { useGlobalState } from "../utils/ControlUtil";
 
-gsap.registerPlugin(TextPlugin, useGSAP, gsap);
+gsap.registerPlugin(useGSAP, gsap);
 
 export default function Home() {
-  const { setIsCustomTheme } = useGlobalState();
-  const [count, setCount] = useState(0);
-  const { executePixelTransition } = pixelTransition();
+  const { setCurrentPage } = useGlobalState();
 
-  function handleNameClick() {
-    if (count === 10) {
-      generateTheme();
-      setIsCustomTheme(true);
-    } else {
-      setCount(count + 1);
-    }
-  }
+  useEffect(() => {
+    setCurrentPage("/");
+  }, []);
 
   return (
-    <main data-key="-1" className="homeWrapper">
+    <main className="homeWrapper">
       <section className="left">
         {getProjectIDs().map((id) => (
-          <ProjectTile
-            onClick={() => executePixelTransition(id)}
-            key={id}
-            dataID={id}
-          />
+          <ProjectTile key={id} dataID={id} />
         ))}
       </section>
       <section className="right">
         {getProjectIDs().map((id) => (
-          <ProjectPreview
-            onClick={() => executePixelTransition(id)}
-            key={id}
-            dataID={id}
-          />
+          <ProjectPreview key={id} dataID={id} />
         ))}
 
         <div className="hero">
-          <h1
-            className="name accent toThinHover noCursor"
-            onClick={() => handleNameClick()}
-          >
-            les ranalan
-          </h1>
+          <h1 className="extra name accent">les ranalan</h1>
 
-          <h5>frontend software engineer</h5>
+          <h5 className="nonBold">
+            <span className="bulletPoint">⊢</span> frontend software engineer
+          </h5>
+          <h5 className="nonBold">
+            <span className="bulletPoint">⊢</span> ui/ux designer
+          </h5>
 
           <br />
 
           <div className="links faded noCursor">
-            <LinkNoIcon
-              className="faded"
-              onClick={() => executePixelTransition(-2)}
-            >
-              about me
-            </LinkNoIcon>
-            •
-            <LinkNoIcon
-              className="faded"
-              onClick={() => executePixelTransition(-3)}
-            >
-              contact me
-            </LinkNoIcon>
+            <LinkWithIconOnly
+              img={<Email width="32px" />}
+              href="mailto:les.ranalan@gmail.com"
+            />
+
+            <LinkWithIconOnly
+              img={<LinkedIn width="32px" />}
+              href="https://www.linkedin.com/in/les-paul-ranalan/"
+            />
+
+            <LinkWithIconOnly
+              img={<Github width="32px" />}
+              href="https://github.com/shadowisf"
+            />
+
+            <LinkWithIconOnly
+              img={<Instagram width="32px" />}
+              href="https://www.instagram.com/les.rx/"
+            />
           </div>
         </div>
       </section>

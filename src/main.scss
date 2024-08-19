@@ -13,11 +13,14 @@ $maxWidthDesktop: 700px;
 $maxWidthDesktopWide: 75%;
 $maxWidthMobile: 90%;
 
+$fontVarNormal: "wght" 400, "CONT" 1;
+$fontVarThin: "wght" 1000, "CONT" 1000;
+
 :root {
   --theme: light dark;
 
   --text-color: light-dark(black, white);
-  --background-color: light-dark(#e5e5ea, #2c2c2e);
+  --background-color: light-dark(#e5e5ea, rgb(36, 36, 38));
   --faded-color: #817e83;
   --accent-color: light-dark(#6320ee, #8075ff);
 
@@ -47,25 +50,35 @@ $maxWidthMobile: 90%;
     margin-bottom: 8rem;
 
     display: grid;
+    gap: 0.25rem;
 
     height: fit-content;
 
     .tile {
       padding: 1rem;
-
       border-radius: $borderRadius;
-
       display: flex;
-
       align-items: center;
       white-space: nowrap;
-
       justify-content: space-between;
-
       gap: 2rem;
+
+      transition: scale 0.25s, box-shadow 0.25s, color 0.25s,
+        font-variation-settings 0.25s;
+
+      font-variation-settings: $fontVarNormal;
 
       .title {
         white-space: nowrap;
+      }
+
+      &:hover {
+        cursor: pointer;
+
+        box-shadow: $boxShadow;
+        color: var(--accent-color);
+        scale: 1.05;
+        font-variation-settings: $fontVarThin;
       }
     }
   }
@@ -89,10 +102,8 @@ $maxWidthMobile: 90%;
     }
 
     .links {
-      white-space: nowrap;
-
       display: flex;
-      gap: 0.5rem;
+      gap: 1rem;
     }
 
     .preview {
@@ -253,15 +264,14 @@ $maxWidthMobile: 90%;
 }
 
 .aboutWrapper {
-  display: none;
-
   max-width: $maxWidthDesktopWide;
 
   margin: auto;
   padding: 8rem 0;
 
+  display: flex;
   flex-direction: column;
-  gap: 16rem;
+  gap: 8rem;
 
   h1 {
     text-align: center;
@@ -272,8 +282,11 @@ $maxWidthMobile: 90%;
     gap: 2rem;
 
     img {
-      background-color: red;
-      width: 25%;
+      box-shadow: $boxShadow;
+      border-radius: $borderRadius;
+      width: 40%;
+
+      pointer-events: none;
     }
   }
 
@@ -301,107 +314,6 @@ $maxWidthMobile: 90%;
         display: flex;
         align-items: center;
       }
-    }
-  }
-}
-
-.contactWrapper {
-  display: none;
-
-  max-width: $maxWidthDesktop;
-
-  margin: auto;
-  padding: 8rem 0;
-
-  flex-direction: column;
-  gap: 4rem;
-
-  h1 {
-    text-align: center;
-  }
-
-  .links {
-    display: flex;
-    column-gap: 1.75rem;
-    row-gap: 1rem;
-
-    white-space: nowrap;
-    flex-wrap: wrap;
-
-    justify-content: space-around;
-  }
-
-  form {
-    display: grid;
-    gap: 2rem;
-
-    .nameAndEmail {
-      display: flex;
-      justify-content: space-between;
-
-      gap: 2rem;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 8rem;
-    }
-
-    input,
-    textarea {
-      background-color: var(--background-color);
-
-      text-align: center;
-
-      font-family: $primaryFont;
-      font-size: var(--p);
-      padding: 1rem 0.5rem;
-
-      outline: none;
-      border: 2px var(--text-color) solid;
-
-      transition: border 0.5s, box-shadow 0.5s;
-
-      &:focus {
-        box-shadow: $boxShadow;
-
-        &::placeholder {
-          opacity: 0;
-        }
-      }
-
-      &::placeholder {
-        color: var(--text-color);
-        opacity: 0.25;
-      }
-
-      &:user-valid {
-        border: 2px var(--accent-color) solid;
-      }
-    }
-
-    button {
-      font-family: $primaryFont;
-      width: 25%;
-      padding: 1rem;
-      font-size: var(--p);
-
-      place-self: flex-end;
-
-      background-color: var(--background-color);
-      border: none;
-      border-radius: $borderRadius;
-
-      color: var(--text-color);
-    }
-
-    label {
-      width: 100%;
-
-      display: flex;
-      flex-direction: column;
-
-      gap: 0.5rem;
     }
   }
 }
@@ -438,10 +350,18 @@ h3 {
 
 h4 {
   font-size: var(--h4);
+
+  &.nonBold {
+    font-weight: 400;
+  }
 }
 
 h5 {
   font-size: var(--h5);
+
+  &.nonBold {
+    font-weight: 400;
+  }
 }
 
 h6 {
@@ -467,6 +387,10 @@ html {
 a {
   text-decoration: none;
   color: var(--text-color);
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .faded {
@@ -477,31 +401,11 @@ a {
   color: var(--accent-color);
 }
 
-.toThinHover {
-  transition: font-variation-settings 0.5s, box-shadow 0.25s, scale 0.25s;
-
-  font-variation-settings: "wght" 400, "CONT" 1;
-
-  &:hover {
-    font-variation-settings: "wght" 1000, "CONT" 1000;
-    cursor: pointer;
-  }
-
-  &.all:hover {
-    scale: 1.05;
-
-    box-shadow: $boxShadow;
-    color: var(--accent-color);
-    background-color: var(--background-color);
-  }
-}
-
 .noCursor {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  cursor: default;
 }
 
 .linkWithIcon {
@@ -537,6 +441,35 @@ a {
 
   &:hover::after {
     transform: scaleX(1);
+  }
+}
+
+.linkWithIconOnly {
+  display: block;
+  line-height: normal;
+
+  padding: 0.5rem;
+
+  transition: scale 0.25s, box-shadow 0.25s;
+  border-radius: $borderRadius;
+
+  transform-origin: center;
+
+  picture {
+    display: flex;
+  }
+
+  svg {
+    transition: fill 0.25s;
+  }
+
+  &:hover {
+    scale: 1.05;
+    box-shadow: $boxShadow;
+  }
+
+  &:hover svg {
+    fill: var(--accent-color);
   }
 }
 
@@ -579,6 +512,8 @@ nav {
   }
 
   .logoButton {
+    font-family: "Arial";
+
     &:hover {
       cursor: pointer;
     }
@@ -649,7 +584,7 @@ footer {
   justify-content: center;
   align-items: center;
 
-  gap: 4rem;
+  gap: 0.5rem;
 
   svg {
     display: flex;
@@ -665,8 +600,20 @@ footer {
     margin-right: 2rem;
   }
 
-  span {
+  a {
+    padding: 1rem;
     color: var(--background-color);
+    border-radius: $borderRadius;
+
+    transition: box-shadow 0.25s, scale 0.25s, font-variation-settings 0.25s;
+
+    font-variation-settings: $fontVarNormal;
+
+    &:hover {
+      box-shadow: $boxShadow;
+      scale: 1.05;
+      font-variation-settings: $fontVarThin;
+    }
   }
 
   .closeButton:hover {
@@ -700,22 +647,6 @@ footer {
 @media screen and (max-width: $minMaxWidth) {
   .aboutWrapper {
     max-width: $maxWidthMobile;
-  }
-
-  .contactWrapper {
-    max-width: $maxWidthMobile;
-
-    form {
-      .nameAndEmail {
-        display: block;
-
-        :first-child {
-          input {
-            margin-bottom: 2rem;
-          }
-        }
-      }
-    }
   }
 
   .homeWrapper {
@@ -800,4 +731,8 @@ footer {
       display: none;
     }
   }
+}
+
+.bulletPoint {
+  font-weight: 1000;
 }

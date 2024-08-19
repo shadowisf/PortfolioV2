@@ -1,18 +1,35 @@
 import { Cake, Glasses, GraduateHat, Location } from "../components/Icon";
 import { TimelineRow } from "../components/Timeline";
 import ProfilePicture from "../assets/ImageProfile.jpeg";
+import { useEffect } from "react";
+import { useGlobalState } from "../utils/ControlUtil";
 
 export default function About() {
+  const { setCurrentPage } = useGlobalState();
+
+  useEffect(() => {
+    setCurrentPage("about");
+  }, []);
+
   return (
-    <main data-key="-2" className="aboutWrapper">
+    <main className="aboutWrapper">
       <section className="bio">
-        <img src={ProfilePicture}></img>
-        <p>
-          <b>les paul ranalan</b> is a final-year software engineering student
-          that specializes in frontend development and ui/ux design. his design
-          philosophy mostly centers around simplicity and minimalism, whilst
-          keeping features functional and intuituve.
-        </p>
+        <img className="noCursor" loading="lazy" src={ProfilePicture} />
+        <div>
+          <h1 className="accent extra">hey, i'm les!</h1>
+          <br />
+          <h4>
+            i’m passionate about designing functional applications, with a
+            strong focus on performance, scalability, and long-term viability of
+            projects.
+          </h4>
+          <br />
+          <p>
+            i primarily work with react, typescript, gsap, firebase, sql, and
+            other libraries and frameworks. though i am highly adaptable to
+            different technologies and languages based on project requirements.
+          </p>
+        </div>
       </section>
 
       <section className="timeline">

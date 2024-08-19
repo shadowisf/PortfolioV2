@@ -21,11 +21,27 @@ export function LinkNoIcon({ href, children, onClick, className }: LinkProps) {
 
 export function LinkWithIcon({ href, children, onClick, img }: LinkProps) {
   return (
-    <span onClick={onClick} className=" linkWithIcon toThinHover noCursor">
+    <a
+      onClick={onClick}
+      href={href}
+      target="_blank"
+      className=" linkWithIcon toThinHover noCursor"
+    >
       <picture>{img}</picture>
-      <a href={href} target="_blank">
-        {children}
-      </a>
-    </span>
+      <span>{children}</span>
+    </a>
+  );
+}
+
+export function LinkWithIconOnly({ href, onClick, img }: LinkProps) {
+  return (
+    <a
+      onClick={onClick}
+      href={href}
+      target="_blank"
+      className="noCursor linkWithIconOnly"
+    >
+      <picture>{img}</picture>
+    </a>
   );
 }
