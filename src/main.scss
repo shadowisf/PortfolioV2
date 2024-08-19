@@ -255,7 +255,7 @@ $maxWidthMobile: 90%;
 .aboutWrapper {
   display: none;
 
-  max-width: $maxWidthDesktop;
+  max-width: $maxWidthDesktopWide;
 
   margin: auto;
   padding: 8rem 0;
@@ -269,22 +269,11 @@ $maxWidthMobile: 90%;
 
   .bio {
     display: flex;
-    flex-direction: column;
     gap: 2rem;
 
-    div {
-      display: flex;
-      gap: 2rem;
-
-      picture {
-        background-color: red;
-        width: 50%;
-      }
-
-      p {
-        font-size: var(--h6);
-        width: 50%;
-      }
+    img {
+      background-color: red;
+      width: 25%;
     }
   }
 

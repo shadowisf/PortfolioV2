@@ -1,24 +1,22 @@
 import { Cake, Glasses, GraduateHat, Location } from "../components/Icon";
 import { TimelineRow } from "../components/Timeline";
+import ProfilePicture from "../assets/ImageProfile.jpeg";
 
 export default function About() {
   return (
     <main data-key="-2" className="aboutWrapper">
       <section className="bio">
-        <h1 className="extra accent">hey, i'm les!</h1>
-        <div>
-          <picture>placeholder</picture>
-          <p>
-            <b>les paul ranalan</b> is a final-year software engineering student
-            that specializes in frontend development and ui/ux design. his
-            design philosophy mostly centers around simplicity and minimalism,
-            whilst keeping features functional and intuituve.
-          </p>
-        </div>
+        <img src={ProfilePicture}></img>
+        <p>
+          <b>les paul ranalan</b> is a final-year software engineering student
+          that specializes in frontend development and ui/ux design. his design
+          philosophy mostly centers around simplicity and minimalism, whilst
+          keeping features functional and intuituve.
+        </p>
       </section>
 
       <section className="timeline">
-        <h1>my life's arc</h1>
+        <h1 className="extra">my life's arc</h1>
         <div>
           <TimelineRow img={<Cake />} verticalLine={true}>
             born in davao city, philippines <br /> <b>february 15, 2004</b>
