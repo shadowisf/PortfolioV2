@@ -107,7 +107,7 @@ export default function Project({ dataID }: ProjectProps) {
         </div>
       </div>
 
-      <span className="backToTopButton" onClick={() => scrollToTop()}>
+      <span className="backToTopButton" onClick={() => scrollToTop(0.25)}>
         ↑ <span>back to top</span>
       </span>
     </main>

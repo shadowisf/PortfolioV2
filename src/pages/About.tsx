@@ -14,11 +14,11 @@ export default function About() {
   return (
     <main className="aboutWrapper">
       <section className="bio">
-        <h1 className="accent extra mobileHeader">hey, i'm les!</h1>
+        <h1 className="accent mobileHeader">hey, i'm les!</h1>
         <br className="mobileHeader" />
         <img className="desktopImg" loading="lazy" src={ProfilePicture} />
         <div>
-          <h1 className="accent extra desktopHeader">hey, i'm les!</h1>
+          <h1 className="accent desktopHeader">hey, i'm les!</h1>
           <br />
           <h4>
             i'm all about designing functional apps with a focus on performance,
@@ -32,14 +32,15 @@ export default function About() {
           </p>
           <br />
           <p>
-            outside of coding, i play video games (which i rarely do), listen to
-            music, and sometimes travel.
+            outside of coding, i play video games (which i rarely do) with my
+            friends, listen to music, or bingewatch tv shows or movies on
+            netflix.
           </p>
         </div>
       </section>
 
       <section className="timeline">
-        <h1 className="extra">my life's arc</h1>
+        <h1>my life's arc</h1>
         <div>
           <TimelineRow img={<Cake />} verticalLine={true}>
             born in davao city, philippines <br /> <b>february 15, 2004</b>
@@ -60,7 +61,7 @@ export default function About() {
       </section>
 
       <section className="skillset">
-        <h1 className="extra">my skillset</h1>
+        <h1>my skillset</h1>
         <div className="skills">
           <span>typescript</span>
           <span>javascript</span>

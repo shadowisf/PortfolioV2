@@ -133,8 +133,8 @@ export function projectTileAnimation(
 export function scrollingAnimation() {
   const { contextSafe } = useGSAP();
 
-  const scrollToTop = contextSafe(() => {
-    gsap.to(window, { scrollTo: { y: 0 } });
+  const scrollToTop = contextSafe((duration: number) => {
+    gsap.to(window, { scrollTo: { y: 0 }, duration: duration });
   });
 
   return { scrollToTop };

@@ -31,6 +31,8 @@ export default function NavBar() {
     document.documentElement.style.setProperty("--theme", newTheme);
 
     localStorage.setItem("theme", newTheme);
+
+    closeMenu();
   }
 
   return (

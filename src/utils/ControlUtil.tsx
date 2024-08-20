@@ -1,6 +1,6 @@
 import { useGSAP } from "@gsap/react";
 import { createContext, useContext, useEffect, useState } from "react";
-import { pixelTransition } from "./AnimationUtils";
+import { pixelTransition, scrollingAnimation } from "./AnimationUtils";
 import { useNavigate } from "react-router-dom";
 
 type GlobalStateContextType = {
@@ -28,6 +28,7 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const { contextSafe } = useGSAP();
   const { closeMenu, startTransition, endTransition } = pixelTransition();
   const navigate = useNavigate();
+  const { scrollToTop } = scrollingAnimation();
 
   useEffect(() => {
     handleResize();
@@ -50,10 +51,12 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
     } else if (currentPage === url && isMobile) {
       closeMenu();
     } else if (skipStart === true) {
+      scrollToTop(0);
       navigate(url);
       closeMenu();
     } else {
       startTransition(() => {
+        scrollToTop(0);
         navigate(url);
         endTransition();
       });

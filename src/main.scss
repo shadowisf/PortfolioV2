@@ -16,7 +16,7 @@ $maxWidthMobile: 90%;
 $fontVarNormal: "wght" 400, "CONT" 1;
 $fontVarThin: "wght" 1000, "CONT" 1000;
 
-$scaleOnHover: 1.1;
+$scaleOnHover: 1.05;
 
 :root {
   --theme: light dark;
@@ -472,7 +472,7 @@ a {
 
   border-bottom: 2px dashed;
 
-  transition: font-variation-settings 0.5s, color 0.5s;
+  transition: font-variation-settings 0.5s, color 0.5s, scale 0.25s;
 
   font-variation-settings: $fontVarNormal;
 
@@ -487,6 +487,7 @@ a {
   &:hover {
     font-variation-settings: $fontVarThin;
     color: var(--accent-color);
+    scale: $scaleOnHover;
 
     svg {
       fill: var(--accent-color);
@@ -516,8 +517,6 @@ a {
   display: block;
   line-height: normal;
 
-  padding: 0.5rem;
-
   transition: scale 0.25s;
   border-radius: $borderRadius;
 
@@ -528,6 +527,7 @@ a {
   }
 
   svg {
+    fill: var(--faded-color);
     transition: fill 0.25s;
   }
 
@@ -579,7 +579,6 @@ nav {
     gap: 2rem;
 
     a {
-      padding: 0.5rem;
       border-radius: $borderRadius;
       transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
 
@@ -593,7 +592,6 @@ nav {
     }
 
     span {
-      padding: 0.5rem;
       border-radius: $borderRadius;
 
       transition: scale 0.25s;
@@ -613,23 +611,20 @@ nav {
   }
 
   .logoButton {
-    padding: 0.5rem;
     border-radius: $borderRadius;
 
     font-family: "Arial";
 
-    transition: color 0.25s, scale 0.25s, box-shadow 0.25s;
+    transition: color 0.25s, scale 0.25s;
 
     &:hover {
       cursor: pointer;
-      box-shadow: $boxShadow;
       scale: $scaleOnHover;
       color: var(--accent-color);
     }
   }
 
   .hamburgerButton {
-    padding: 0.5rem;
     border-radius: $borderRadius;
 
     transition: scale 0.25s;
@@ -725,7 +720,6 @@ footer {
   }
 
   a {
-    padding: 1rem;
     color: var(--background-color);
     border-radius: $borderRadius;
 
@@ -788,7 +782,7 @@ footer {
       }
 
       img {
-        width: 400px;
+        width: 450px;
       }
     }
   }
