@@ -33,7 +33,7 @@ const CircuitCentralGithub = "https://github.com/shadowisf/CircuitCentral";
 const PlugInsDatabaseGithub = "https://github.com/shadowisf/PlugInsDatabase";
 const FunculatorGithub = "https://github.com/shadowisf/FunCulator";
 const BellHospitalGithub = "https://github.com/shadowisf/BellHospital";
-//
+
 export const projectData = [
   {
     id: 6,
@@ -67,27 +67,25 @@ export const projectData = [
       <Fragment>
         {/* medium zoom */}
         <LinkWithIcon
-          img={<Github />}
+          img={<Github width="24" />}
           href="https://github.com/francoischalifour"
         >
           françois chalifour
         </LinkWithIcon>
 
-        {/* theme engine */}
-        <LinkWithIcon
-          img={<LinkedIn />}
-          href="https://www.linkedin.com/in/frankmyles/"
-        >
-          frank myles
-        </LinkWithIcon>
-
         {/* gsap */}
-        <LinkWithIcon img={<Github />} href="https://github.com/jackdoyle">
+        <LinkWithIcon
+          img={<Github width="24" />}
+          href="https://github.com/jackdoyle"
+        >
           jack doyle
         </LinkWithIcon>
 
         {/* remix icons */}
-        <LinkWithIcon img={<Github />} href="https://github.com/xiaochunjimmy">
+        <LinkWithIcon
+          img={<Github width="24" />}
+          href="https://github.com/xiaochunjimmy"
+        >
           zhang xiaochun
         </LinkWithIcon>
       </Fragment>
@@ -129,20 +127,23 @@ export const projectData = [
       <Fragment>
         {/* typedcss */}
         <LinkWithIcon
-          img={<Github />}
+          img={<Github width="24" />}
           href="https://github.com/brandonmcconnell"
         >
           brandon mcconnell
         </LinkWithIcon>
 
         {/* react-toastify */}
-        <LinkWithIcon img={<Github />} href="https://github.com/fkhadra">
+        <LinkWithIcon
+          img={<Github width="24" />}
+          href="https://github.com/fkhadra"
+        >
           fadi khadra
         </LinkWithIcon>
 
         {/* medium zoom */}
         <LinkWithIcon
-          img={<Github />}
+          img={<Github width="24" />}
           href="https://github.com/francoischalifour"
         >
           françois chalifour
@@ -150,19 +151,25 @@ export const projectData = [
 
         {/* theme engine */}
         <LinkWithIcon
-          img={<LinkedIn />}
+          img={<LinkedIn width="24" />}
           href="https://www.linkedin.com/in/frankmyles/"
         >
           frank myles
         </LinkWithIcon>
 
         {/* gsap */}
-        <LinkWithIcon img={<Github />} href="https://github.com/jackdoyle">
+        <LinkWithIcon
+          img={<Github width="24" />}
+          href="https://github.com/jackdoyle"
+        >
           jack doyle
         </LinkWithIcon>
 
         {/* remix icons */}
-        <LinkWithIcon img={<Github />} href="https://github.com/xiaochunjimmy">
+        <LinkWithIcon
+          img={<Github width="24" />}
+          href="https://github.com/xiaochunjimmy"
+        >
           zhang xiaochun
         </LinkWithIcon>
       </Fragment>
@@ -201,7 +208,7 @@ export const projectData = [
     ),
     links: (
       <Fragment>
-        <LinkWithIcon img={<Github />} href={CircuitCentralGithub}>
+        <LinkWithIcon img={<Github width="24" />} href={CircuitCentralGithub}>
           repository
         </LinkWithIcon>
 
@@ -250,7 +257,7 @@ export const projectData = [
     ),
     links: (
       <Fragment>
-        <LinkWithIcon img={<Github />} href={ApolloHospitalGithub}>
+        <LinkWithIcon img={<Github width="24" />} href={ApolloHospitalGithub}>
           repository
         </LinkWithIcon>
 
@@ -288,7 +295,7 @@ export const projectData = [
     ),
     links: (
       <Fragment>
-        <LinkWithIcon img={<Github />} href={FunculatorGithub}>
+        <LinkWithIcon img={<Github width="24" />} href={FunculatorGithub}>
           repository
         </LinkWithIcon>
 
@@ -324,7 +331,7 @@ export const projectData = [
     ),
     links: (
       <Fragment>
-        <LinkWithIcon img={<Github />} href={BellHospitalGithub}>
+        <LinkWithIcon img={<Github width="24" />} href={BellHospitalGithub}>
           repository
         </LinkWithIcon>
 
@@ -358,7 +365,7 @@ export const projectData = [
     ),
     links: (
       <Fragment>
-        <LinkWithIcon img={<Github />} href={PlugInsDatabaseGithub}>
+        <LinkWithIcon img={<Github width="24" />} href={PlugInsDatabaseGithub}>
           repository
         </LinkWithIcon>
 

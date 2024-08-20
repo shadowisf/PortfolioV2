@@ -9,7 +9,7 @@ import {
   ProjectProps,
 } from "../utils/ProjectUtils";
 import { useEffect, useState } from "react";
-import { pixelTransition, scrollingAnimation } from "../utils/AnimationUtils";
+import { scrollingAnimation } from "../utils/AnimationUtils";
 import mediumZoom from "medium-zoom";
 import gsap from "gsap";
 import { useGlobalState } from "../utils/ControlUtil";
@@ -56,23 +56,23 @@ export default function Project({ dataID }: ProjectProps) {
   return (
     <main className="projectWrapper">
       <span
-        className="mobileBackToHomeButton noCursor"
+        className="mobileBackToHomeButton"
         onClick={() => executeTransition("/", false)}
       >
         ←<span>back</span>
       </span>
       <div className="header">
         <h1
-          className="desktopBackToHomeButton noCursor"
-          onClick={() => executeTransition("/")}
+          className="desktopBackToHomeButton"
+          onClick={() => executeTransition("/", false)}
         >
           ←
         </h1>
         <h1 className="title accent">{getProjectName(dataID)}</h1>
-        <span className="desktopBackToHomeButton noCursor" />
+        <span className="desktopBackToHomeButton" />
       </div>
 
-      <div className="architecture noCursor">
+      <div className="architecture">
         <h6 className="item">{getProjectYear(dataID)}</h6>
         {getProjectArchitecture(dataID).map((item, index) => (
           <h6 key={index} className="item">
@@ -107,7 +107,7 @@ export default function Project({ dataID }: ProjectProps) {
         </div>
       </div>
 
-      <span className="backToTopButton noCursor" onClick={() => scrollToTop()}>
+      <span className="backToTopButton" onClick={() => scrollToTop()}>
         ↑ <span>back to top</span>
       </span>
     </main>

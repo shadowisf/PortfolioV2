@@ -8,12 +8,7 @@ type LinkProps = {
 
 export function LinkNoIcon({ href, children, onClick, className }: LinkProps) {
   return (
-    <a
-      className={`toThinHover ${className}`}
-      href={href}
-      target="_blank"
-      onClick={onClick}
-    >
+    <a className={`${className}`} href={href} target="_blank" onClick={onClick}>
       {children}
     </a>
   );
@@ -25,7 +20,7 @@ export function LinkWithIcon({ href, children, onClick, img }: LinkProps) {
       onClick={onClick}
       href={href}
       target="_blank"
-      className=" linkWithIcon toThinHover noCursor"
+      className=" linkWithIcon"
     >
       <picture>{img}</picture>
       <span>{children}</span>
@@ -39,7 +34,7 @@ export function LinkWithIconOnly({ href, onClick, img }: LinkProps) {
       onClick={onClick}
       href={href}
       target="_blank"
-      className="noCursor linkWithIconOnly"
+      className="linkWithIconOnly"
     >
       <picture>{img}</picture>
     </a>

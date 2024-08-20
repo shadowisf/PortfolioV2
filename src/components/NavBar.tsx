@@ -35,7 +35,7 @@ export default function NavBar() {
 
   return (
     <Fragment>
-      <nav className="noCursor">
+      <nav>
         <a
           className="logoButton"
           onClick={() => {
@@ -68,7 +68,7 @@ export default function NavBar() {
         </span>
       </nav>
 
-      <div className="menu noCursor">
+      <div className="menu">
         {/* menu close button */}
         <a className="closeButton" onClick={() => closeMenu()}>
           <Cross width="24" />

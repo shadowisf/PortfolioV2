@@ -1,40 +1,41 @@
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { Email, LinkedIn, Github, Instagram } from "../components/Icon";
-import { LinkWithIconOnly } from "../components/Link";
 import { Fragment } from "react/jsx-runtime";
 
 export default function Test() {
-  useGSAP(() => {
-    gsap.set(".box", { x: "-200" });
-    gsap.to(".box", { x: "100", stagger: 0.1, duration: "3" });
-  });
+  const task1 = () => {
+    return new Promise(function (resolve) {
+      setTimeout(() => {
+        resolve("task1");
+      }, 500);
+    });
+  };
 
-  return (
-    <Fragment>
-      <h1></h1>
-      
-      <div className="test noCursor">
-        <LinkWithIconOnly
-          img={<Email width="32" />}
-          href="mailto:les.ranalan@gmail.com"
-        />
+  const task2 = () => {
+    return new Promise(function (resolve) {
+      setTimeout(() => {
+        resolve("task2");
+      }, 500);
+    });
+  };
 
-        <LinkWithIconOnly
-          img={<LinkedIn width="32" />}
-          href="https://www.linkedin.com/in/les-paul-ranalan/"
-        />
+  const task3 = () => {
+    return new Promise(function (resolve) {
+      setTimeout(() => {
+        resolve("task3");
+      }, 500);
+    });
+  };
 
-        <LinkWithIconOnly
-          img={<Github width="32" />}
-          href="https://github.com/shadowisf"
-        />
+  async function handlePromises() {
+    const array = [];
+    array.push(await task1());
+    console.log(array);
+    array.push(await task2());
+    console.log(array);
+    array.push(await task3());
+    console.log(array);
+  }
 
-        <LinkWithIconOnly
-          img={<Instagram width="32" />}
-          href="https://www.instagram.com/les.rx/"
-        />
-      </div>
-    </Fragment>
-  );
+  handlePromises();
+
+  return <Fragment></Fragment>;
 }

@@ -36,24 +36,24 @@ export default function Home() {
 
           <br />
 
-          <div className="links faded noCursor">
+          <div className="links faded">
             <LinkWithIconOnly
-              img={<Email width="32px" />}
+              img={<Email width="32" />}
               href="mailto:les.ranalan@gmail.com"
             />
 
             <LinkWithIconOnly
-              img={<LinkedIn width="32px" />}
+              img={<LinkedIn width="32" />}
               href="https://www.linkedin.com/in/les-paul-ranalan/"
             />
 
             <LinkWithIconOnly
-              img={<Github width="32px" />}
+              img={<Github width="32" />}
               href="https://github.com/shadowisf"
             />
 
             <LinkWithIconOnly
-              img={<Instagram width="32px" />}
+              img={<Instagram width="32" />}
               href="https://www.instagram.com/les.rx/"
             />
           </div>

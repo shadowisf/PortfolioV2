@@ -14,20 +14,26 @@ export default function About() {
   return (
     <main className="aboutWrapper">
       <section className="bio">
-        <img className="noCursor" loading="lazy" src={ProfilePicture} />
+        <h1 className="accent extra mobileHeader">hey, i'm les!</h1>
+        <br className="mobileHeader" />
+        <img className="desktopImg" loading="lazy" src={ProfilePicture} />
         <div>
-          <h1 className="accent extra">hey, i'm les!</h1>
+          <h1 className="accent extra desktopHeader">hey, i'm les!</h1>
           <br />
           <h4>
-            i’m passionate about designing functional applications, with a
-            strong focus on performance, scalability, and long-term viability of
-            projects.
+            i'm all about designing functional apps with a focus on performance,
+            scalability, and long-term viability.
           </h4>
           <br />
           <p>
             i primarily work with react, typescript, gsap, firebase, sql, and
-            other libraries and frameworks. though i am highly adaptable to
-            different technologies and languages based on project requirements.
+            other libraries and frameworks. though i am highly flexible to
+            different technologies and languages based on requirements.
+          </p>
+          <br />
+          <p>
+            outside of coding, i play video games (which i rarely do), listen to
+            music, and sometimes travel.
           </p>
         </div>
       </section>
@@ -54,8 +60,19 @@ export default function About() {
       </section>
 
       <section className="skillset">
-        <h1>my skillset</h1>
-        <div></div>
+        <h1 className="extra">my skillset</h1>
+        <div className="skills">
+          <span>typescript</span>
+          <span>javascript</span>
+          <span>java</span>
+          <span>python</span>
+          <span>c#</span>
+          <span>html</span>
+          <span>css</span>
+          <span>sass</span>
+          <span>sql</span>
+          <span>firebase</span>
+        </div>
       </section>
     </main>
   );

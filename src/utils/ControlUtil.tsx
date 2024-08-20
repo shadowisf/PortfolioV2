@@ -47,9 +47,9 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const executeTransition = contextSafe((url: string, skipStart?: boolean) => {
     if (currentPage === url && !isMobile) {
       return;
-    } else if (currentPage && isMobile) {
+    } else if (currentPage === url && isMobile) {
       closeMenu();
-    } else if (skipStart) {
+    } else if (skipStart === true) {
       navigate(url);
       closeMenu();
     } else {

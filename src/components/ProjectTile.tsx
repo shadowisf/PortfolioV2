@@ -5,7 +5,7 @@ import {
   getProjectYear,
   ProjectProps,
 } from "../utils/ProjectUtils";
-import { pixelTransition, projectTileAnimation } from "../utils/AnimationUtils";
+import { projectTileAnimation } from "../utils/AnimationUtils";
 import { useEffect, useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 
@@ -40,9 +40,9 @@ export function ProjectTile({ dataID }: ProjectProps) {
   return (
     <div
       onClick={() => {
-        executeTransition(title);
+        executeTransition(title, false);
       }}
-      className="tile hover all noCursor"
+      className="tile hover all"
       onMouseEnter={() => {
         isMobile ? null : togglePreview(dataID);
       }}
@@ -62,7 +62,7 @@ export function ProjectTile({ dataID }: ProjectProps) {
 export function ProjectPreview({ dataID }: ProjectProps) {
   return (
     <div data-key={dataID} className="preview">
-      <img loading="lazy" src={getProjectImage(dataID)[0]} />
+      <img src={getProjectImage(dataID)[0]} />
       <span className="architecture">
         {getProjectArchitecture(dataID)
           .filter((item) => item.startsWith("*"))
@@ -78,7 +78,7 @@ export function ProjectPreview({ dataID }: ProjectProps) {
 
 export function ProjectTilePlaceholder() {
   return (
-    <div className="tile toThinHover noCursor">
+    <div className="tile">
       <h5 className="title">????</h5>
       <small className="faded">????</small>
     </div>

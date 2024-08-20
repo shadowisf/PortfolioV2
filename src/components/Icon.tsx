@@ -1,5 +1,3 @@
-import { LinkProps } from "react-router-dom";
-
 type IconProps = {
   color?: string;
   width?: string;

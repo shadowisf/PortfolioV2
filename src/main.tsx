@@ -10,6 +10,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Test from "./pages/Test.tsx";
 import { getProjectIDs, getProjectName } from "./utils/ProjectUtils.tsx";
 import Project from "./pages/Project.tsx";
+import { Footer } from "./components/Footer.tsx";
 
 const root = createRoot(document.getElementById("root")!);
 
@@ -32,6 +33,8 @@ root.render(
             />
           ))}
         </Routes>
+
+        <Footer />
       </GlobalStateProvider>
     </BrowserRouter>
   </StrictMode>

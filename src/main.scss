@@ -16,13 +16,16 @@ $maxWidthMobile: 90%;
 $fontVarNormal: "wght" 400, "CONT" 1;
 $fontVarThin: "wght" 1000, "CONT" 1000;
 
+$scaleOnHover: 1.1;
+
 :root {
   --theme: light dark;
 
   --text-color: light-dark(black, white);
   --background-color: light-dark(#e5e5ea, rgb(36, 36, 38));
   --faded-color: #817e83;
-  --accent-color: light-dark(#6320ee, #8075ff);
+  /* --accent-color: light-dark(#6320ee, #8075ff); */
+  --accent-color: light-dark(rgb(255, 59, 48), rgb(255, 69, 58));
 
   --h0: calc(var(--h1) * 1.5);
   --h1: 2.986rem;
@@ -64,7 +67,7 @@ $fontVarThin: "wght" 1000, "CONT" 1000;
       gap: 2rem;
 
       transition: scale 0.25s, box-shadow 0.25s, color 0.25s,
-        font-variation-settings 0.25s;
+        font-variation-settings 0.5s;
 
       font-variation-settings: $fontVarNormal;
 
@@ -77,7 +80,7 @@ $fontVarThin: "wght" 1000, "CONT" 1000;
 
         box-shadow: $boxShadow;
         color: var(--accent-color);
-        scale: 1.05;
+        scale: $scaleOnHover;
         font-variation-settings: $fontVarThin;
       }
     }
@@ -167,14 +170,16 @@ $fontVarThin: "wght" 1000, "CONT" 1000;
 
   .mobileBackToHomeButton {
     align-items: center;
-
+    width: fit-content;
     padding-bottom: 1rem;
     gap: 0.75rem;
 
     font-variation-settings: $fontVarNormal;
-    transition: font-variation-settings 0.25s;
+    transition: font-variation-settings 0.5s, color 0.25s, scale 0.25s;
 
     &:hover {
+      scale: $scaleOnHover;
+      color: var(--accent-color);
       cursor: pointer;
       font-variation-settings: $fontVarThin;
     }
@@ -191,9 +196,11 @@ $fontVarThin: "wght" 1000, "CONT" 1000;
     width: fit-content;
 
     font-variation-settings: $fontVarNormal;
-    transition: font-variation-settings 0.25s;
+    transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
 
     &:hover {
+      color: var(--accent-color);
+      scale: $scaleOnHover;
       cursor: pointer;
       font-variation-settings: $fontVarThin;
     }
@@ -220,9 +227,11 @@ $fontVarThin: "wght" 1000, "CONT" 1000;
 
     .desktopBackToHomeButton {
       font-variation-settings: $fontVarNormal;
-      transition: font-variation-settings 0.25s;
+      transition: font-variation-settings 0.5s, scale 0.25s, color 0.25s;
 
       &:hover {
+        color: var(--accent-color);
+        scale: $scaleOnHover;
         font-variation-settings: $fontVarThin;
         cursor: pointer;
       }
@@ -244,8 +253,7 @@ $fontVarThin: "wght" 1000, "CONT" 1000;
     margin-top: 2rem;
     margin-bottom: 4rem;
 
-    row-gap: 1rem;
-    column-gap: 1rem;
+    gap: 1rem;
 
     .item {
       box-shadow: $boxShadow;
@@ -301,18 +309,17 @@ $fontVarThin: "wght" 1000, "CONT" 1000;
   flex-direction: column;
   gap: 8rem;
 
-  h1 {
-    text-align: center;
-  }
-
   .bio {
     display: flex;
-    gap: 2rem;
+    gap: 4rem;
+
+    align-items: center;
 
     img {
       box-shadow: $boxShadow;
       border-radius: $borderRadius;
-      width: 40%;
+      width: 35%;
+      height: 35%;
 
       pointer-events: none;
     }
@@ -341,6 +348,28 @@ $fontVarThin: "wght" 1000, "CONT" 1000;
       svg {
         display: flex;
         align-items: center;
+      }
+    }
+  }
+
+  .skillset {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .skills {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+
+      flex-wrap: wrap;
+
+      span {
+        text-align: center;
+        flex: 1;
+        padding: 0.5rem;
+        border: solid;
+        border-radius: $borderRadius;
       }
     }
   }
@@ -429,13 +458,6 @@ a {
   color: var(--accent-color);
 }
 
-.noCursor {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 .linkWithIcon {
   position: relative;
   text-decoration: none;
@@ -450,8 +472,25 @@ a {
 
   border-bottom: 2px dashed;
 
+  transition: font-variation-settings 0.5s, color 0.5s;
+
+  font-variation-settings: $fontVarNormal;
+
   picture {
     display: flex;
+  }
+
+  svg {
+    transition: fill 0.5s;
+  }
+
+  &:hover {
+    font-variation-settings: $fontVarThin;
+    color: var(--accent-color);
+
+    svg {
+      fill: var(--accent-color);
+    }
   }
 
   &::after {
@@ -461,14 +500,15 @@ a {
     bottom: -2px;
     width: 100%;
     height: 2px;
-    background-color: var(--text-color);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.5s;
+    background-color: var(--text-color);
+    transition: transform 0.5s, background-color 0.5s;
   }
 
   &:hover::after {
     transform: scaleX(1);
+    background-color: var(--accent-color);
   }
 }
 
@@ -478,7 +518,7 @@ a {
 
   padding: 0.5rem;
 
-  transition: scale 0.25s, box-shadow 0.25s;
+  transition: scale 0.25s;
   border-radius: $borderRadius;
 
   transform-origin: center;
@@ -492,8 +532,7 @@ a {
   }
 
   &:hover {
-    scale: 1.05;
-    box-shadow: $boxShadow;
+    scale: $scaleOnHover;
   }
 
   &:hover svg {
@@ -536,20 +575,77 @@ nav {
 
   .navButtons {
     display: flex;
+    align-items: center;
     gap: 2rem;
+
+    a {
+      padding: 0.5rem;
+      border-radius: $borderRadius;
+      transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
+
+      font-variation-settings: $fontVarNormal;
+
+      &:hover {
+        scale: $scaleOnHover;
+        color: var(--accent-color);
+        font-variation-settings: $fontVarThin;
+      }
+    }
+
+    span {
+      padding: 0.5rem;
+      border-radius: $borderRadius;
+
+      transition: scale 0.25s;
+
+      svg {
+        transition: fill 0.25s;
+      }
+
+      &:hover {
+        scale: $scaleOnHover;
+      }
+
+      &:hover svg {
+        fill: var(--accent-color);
+      }
+    }
   }
 
   .logoButton {
+    padding: 0.5rem;
+    border-radius: $borderRadius;
+
     font-family: "Arial";
+
+    transition: color 0.25s, scale 0.25s, box-shadow 0.25s;
 
     &:hover {
       cursor: pointer;
+      box-shadow: $boxShadow;
+      scale: $scaleOnHover;
+      color: var(--accent-color);
     }
   }
 
   .hamburgerButton {
+    padding: 0.5rem;
+    border-radius: $borderRadius;
+
+    transition: scale 0.25s;
+
+    &:hover {
+      scale: $scaleOnHover;
+    }
+
     svg {
       display: flex;
+
+      transition: fill 0.25s;
+    }
+
+    &:hover svg {
+      fill: var(--accent-color);
     }
 
     &:hover {
@@ -612,7 +708,7 @@ footer {
   justify-content: center;
   align-items: center;
 
-  gap: 0.5rem;
+  gap: 4rem;
 
   svg {
     display: flex;
@@ -633,13 +729,12 @@ footer {
     color: var(--background-color);
     border-radius: $borderRadius;
 
-    transition: box-shadow 0.25s, scale 0.25s, font-variation-settings 0.25s;
+    transition: scale 0.25s, font-variation-settings 0.5s;
 
     font-variation-settings: $fontVarNormal;
 
     &:hover {
-      box-shadow: $boxShadow;
-      scale: 1.05;
+      scale: $scaleOnHover;
       font-variation-settings: $fontVarThin;
     }
   }
@@ -675,6 +770,27 @@ footer {
 @media screen and (max-width: $minMaxWidth) {
   .aboutWrapper {
     max-width: $maxWidthMobile;
+
+    h1 {
+      text-align: center;
+    }
+
+    .bio {
+      flex-direction: column;
+      gap: 0;
+
+      .desktopHeader {
+        display: none;
+      }
+
+      .mobileHeader {
+        display: block;
+      }
+
+      img {
+        width: 400px;
+      }
+    }
   }
 
   .homeWrapper {
@@ -757,6 +873,18 @@ footer {
   nav {
     .hamburgerButton {
       display: none;
+    }
+  }
+
+  .aboutWrapper {
+    .bio {
+      .desktopHeader {
+        display: block;
+      }
+
+      .mobileHeader {
+        display: none;
+      }
     }
   }
 }
