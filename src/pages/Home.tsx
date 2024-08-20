@@ -1,13 +1,9 @@
 import { ProjectPreview, ProjectTile } from "../components/ProjectTile";
-import gsap from "gsap";
 import { LinkWithIconOnly } from "../components/Link";
 import { getProjectIDs } from "../utils/ProjectUtils";
-import { useGSAP } from "@gsap/react";
 import { Email, Github, Instagram, LinkedIn } from "../components/Icon";
 import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
-
-gsap.registerPlugin(useGSAP, gsap);
 
 export default function Home() {
   const { setCurrentPage } = useGlobalState();

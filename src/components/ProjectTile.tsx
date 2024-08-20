@@ -5,38 +5,43 @@ import {
   getProjectYear,
   ProjectProps,
 } from "../utils/ProjectUtils";
-import { projectTileAnimation } from "../utils/AnimationUtils";
+import { pixelTransition, projectTileAnimation } from "../utils/AnimationUtils";
 import { useEffect, useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 
-export function ProjectTile({ dataID, onClick }: ProjectProps) {
+export function ProjectTile({ dataID }: ProjectProps) {
   const { isMobile } = useGlobalState();
   const [previewContainer, setPreviewContainer] =
     useState<NodeListOf<Element> | null>(null);
-  const { togglePreview, resetPreview, movePreview } =
-    projectTileAnimation(previewContainer);
+  const [heroContainer, setHeroContainer] = useState<Element | null>(null);
+  const { togglePreview, resetPreview, movePreview } = projectTileAnimation(
+    previewContainer,
+    heroContainer
+  );
+  const title = getProjectName(dataID)?.replace(/\s+/g, "-") || "";
+  const { executeTransition } = useGlobalState();
 
   useEffect(() => {
     if (isMobile) {
       resetPreview();
     }
-
-    return () => {
-      resetPreview();
-    };
   }, [isMobile]);
 
   useEffect(() => {
     setPreviewContainer(document.querySelectorAll(".homeWrapper .preview"));
+    setHeroContainer(document.querySelector(".homeWrapper .hero"));
 
     return () => {
       setPreviewContainer(null);
+      setHeroContainer(null);
     };
   }, []);
 
   return (
     <div
-      onClick={onClick}
+      onClick={() => {
+        executeTransition(title);
+      }}
       className="tile hover all noCursor"
       onMouseEnter={() => {
         isMobile ? null : togglePreview(dataID);

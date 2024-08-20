@@ -1,14 +1,11 @@
 import { Fragment, useEffect, useState } from "react";
 import { Cross, Hamburger, Moon, Sun } from "./Icon";
-import { navBarAnimation, pixelTransition } from "../utils/AnimationUtils";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-
-gsap.registerPlugin(useGSAP, gsap);
+import { pixelTransition } from "../utils/AnimationUtils";
+import { useGlobalState } from "../utils/ControlUtil";
 
 export default function NavBar() {
-  const { openMenu, closeMenu } = navBarAnimation();
-  const { executeTransition } = pixelTransition();
+  const { openMenu, closeMenu } = pixelTransition();
+  const { executeTransition } = useGlobalState();
   const [userTheme, setUserTheme] = useState("light");
 
   useEffect(() => {
@@ -42,7 +39,7 @@ export default function NavBar() {
         <a
           className="logoButton"
           onClick={() => {
-            executeTransition("/");
+            executeTransition("/", false);
           }}
         >
           ᜎ᜔ᜍ᜔

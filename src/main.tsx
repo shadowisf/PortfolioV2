@@ -8,13 +8,15 @@ import About from "./pages/About.tsx";
 import Home from "./pages/Home.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Test from "./pages/Test.tsx";
+import { getProjectIDs, getProjectName } from "./utils/ProjectUtils.tsx";
+import Project from "./pages/Project.tsx";
 
 const root = createRoot(document.getElementById("root")!);
 
 root.render(
   <StrictMode>
-    <GlobalStateProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <GlobalStateProvider>
         <NavBar />
         <PixelGrid />
 
@@ -22,8 +24,15 @@ root.render(
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="test" element={<Test />} />
+          {getProjectIDs().map((id) => (
+            <Route
+              key={id}
+              path={getProjectName(id)?.replace(/\s+/g, "-")}
+              element={<Project dataID={id} />}
+            />
+          ))}
         </Routes>
-      </BrowserRouter>
-    </GlobalStateProvider>
+      </GlobalStateProvider>
+    </BrowserRouter>
   </StrictMode>
 );

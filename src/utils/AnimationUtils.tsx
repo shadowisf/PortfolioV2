@@ -1,17 +1,13 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useGlobalState } from "./ControlUtil";
-import { useNavigate } from "react-router-dom";
+import { ScrollToPlugin } from "gsap/all";
 
-gsap.registerPlugin(gsap, useGSAP);
+gsap.registerPlugin(gsap, useGSAP, ScrollToPlugin);
 
 export function pixelTransition() {
   const { contextSafe } = useGSAP();
-  const { currentPage } = useGlobalState();
-  const navigate = useNavigate();
 
-  // ON COMPLETE REQUIRED
-  const startTransition = contextSafe((onComplete?: () => void) => {
+  const startTransition = contextSafe((whenDone?: () => void) => {
     gsap.set(".pixelGrid", { display: "grid" });
     gsap.fromTo(
       ".pixelItem",
@@ -20,9 +16,7 @@ export function pixelTransition() {
         opacity: "1",
         duration: "0.005",
         stagger: { amount: 0.5, from: "random" },
-        onComplete: () => {
-          onComplete && onComplete();
-        },
+        onComplete: whenDone,
       }
     );
   });
@@ -40,28 +34,6 @@ export function pixelTransition() {
     }, 100);
   });
 
-  const executeTransition = contextSafe((url: string, skipStart?: boolean) => {
-
-    if (url === currentPage) {
-      return;
-    } else if (skipStart === true) {
-      closeMenu(() => {
-        navigate(url);
-      });
-    } else {
-      startTransition(() => {
-        navigate(url);
-      });
-    }
-  });
-
-  return { startTransition, endTransition, executeTransition };
-}
-
-export function navBarAnimation() {
-  const { startTransition, endTransition } = pixelTransition();
-  const { contextSafe } = useGSAP();
-
   const openMenu = contextSafe(() => {
     startTransition(() => {
       setTimeout(() => {
@@ -74,28 +46,30 @@ export function navBarAnimation() {
     });
   });
 
-  // ON COMPLETE REQUIRED
-  const closeMenu = contextSafe((onComplete?: () => void) => {
+  const closeMenu = contextSafe(() => {
     gsap.to(".menu", {
       display: "none",
       autoAlpha: "0",
       duration: "0.5",
       onComplete: () => {
-        onComplete && onComplete();
         endTransition();
       },
     });
   });
 
   return {
-    openMenu,
+    startTransition,
+    endTransition,
     closeMenu,
+    openMenu,
   };
 }
 
-export function projectTileAnimation(container: NodeListOf<Element> | null) {
+export function projectTileAnimation(
+  previewContainer: NodeListOf<Element> | null,
+  heroContainer: Element | null
+) {
   const { contextSafe } = useGSAP();
-  const previewContainer = container;
 
   const animationEnter = {
     scale: "1",
@@ -117,7 +91,7 @@ export function projectTileAnimation(container: NodeListOf<Element> | null) {
 
       if (dataKey === targetID.toString()) {
         gsap.to(container, animationEnter);
-        gsap.to(".homeWrapper .hero", animationExit);
+        gsap.to(heroContainer, animationExit);
       }
     });
   });
@@ -126,7 +100,7 @@ export function projectTileAnimation(container: NodeListOf<Element> | null) {
     previewContainer?.forEach((container) => {
       gsap.to(container, animationExit);
     });
-    gsap.to(".homeWrapper .hero", animationEnter);
+    gsap.to(heroContainer, animationEnter);
   });
 
   const movePreview = contextSafe(
@@ -154,4 +128,14 @@ export function projectTileAnimation(container: NodeListOf<Element> | null) {
     resetPreview,
     movePreview,
   };
+}
+
+export function scrollingAnimation() {
+  const { contextSafe } = useGSAP();
+
+  const scrollToTop = contextSafe(() => {
+    gsap.to(window, { scrollTo: { y: 0 } });
+  });
+
+  return { scrollToTop };
 }

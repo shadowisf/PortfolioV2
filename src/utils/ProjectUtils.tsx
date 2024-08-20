@@ -376,8 +376,7 @@ export type ProjectProps = {
 };
 
 export function getProjectName(dataID: number) {
-  const project = projectData.find((proj) => proj.id === dataID);
-  return project ? project.name : [];
+  return projectData.find((proj) => proj.id === dataID)?.name;
 }
 
 export function getProjectYear(dataID: number) {
@@ -412,4 +411,8 @@ export function getProjectArchitecture(dataID: number) {
 
 export function getProjectIDs() {
   return projectData.map((proj) => proj.id);
+}
+
+export function getAllProjectNames() {
+  return projectData.map((proj) => proj.name);
 }
