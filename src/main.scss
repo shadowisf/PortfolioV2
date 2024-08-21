@@ -328,89 +328,90 @@ $scaleOnHover: 1.05;
   margin: auto;
   padding: 8rem 0;
 
-  display: flex;
-  flex-direction: column;
-  gap: 8rem;
+  display: grid;
+  grid-template:
+    "AAAA AAAA"
+    "BBBB CCCC";
+  row-gap: 8rem;
+  column-gap: 4rem;
 
   .bio {
+    grid-area: AAAA;
     display: flex;
-    gap: 4rem;
-
     align-items: center;
+    gap: 4rem;
 
     img {
       box-shadow: $boxShadow;
       border-radius: $borderRadius;
-      width: 35%;
-      height: 35%;
+      width: 40%;
 
       pointer-events: none;
     }
   }
 
-  .timelineAndSkillset {
+  .timeline {
+    grid-area: BBBB;
+
     display: flex;
-    gap: 4rem;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
 
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      width: 100%;
-
-      .verticalLine {
-        margin: 1rem 0;
-      }
-
-      .timelineRow {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-
-        .timelineCaption {
-          display: flex;
-          flex-direction: column;
-          gap: 0.25rem;
-        }
-
-        svg {
-          display: flex;
-          align-items: center;
-        }
-      }
+    .verticalLine {
+      margin: 1rem 0;
     }
 
-    .skillset {
+    .timelineRow {
       display: flex;
-      flex-direction: column;
-      gap: 2rem;
+      align-items: center;
+      gap: 1rem;
 
-      .skills {
+      .timelineCaption {
         display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      svg {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .skillset {
+    grid-area: CCCC;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .skills {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+
+      flex-wrap: wrap;
+
+      .item {
+        flex: 1;
+        padding: 0.5rem;
+        border-radius: $borderRadius;
+        border: 2px var(--faded-color) solid;
+
+        white-space: nowrap;
+
+        text-align: center;
+
+        display: flex;
+        align-items: center;
         justify-content: center;
+
         gap: 0.5rem;
 
-        flex-wrap: wrap;
-
-        .item {
-          flex: 1;
-          padding: 0.5rem;
-          border-radius: $borderRadius;
-          border: 2px var(--faded-color) solid;
-
-          white-space: nowrap;
-
-          text-align: center;
-
+        .icon {
           display: flex;
-          align-items: center;
-          justify-content: center;
-
-          gap: 0.5rem;
-
-          .icon {
-            display: flex;
-          }
         }
       }
     }
@@ -807,6 +808,11 @@ footer {
   .aboutWrapper {
     max-width: $maxWidthMobile;
 
+    grid-template:
+      "AAAA"
+      "BBBB"
+      "CCCC";
+
     h1 {
       text-align: center;
     }
@@ -925,9 +931,24 @@ footer {
   }
 }
 
-*{border:solid}
-
 .test {
   display: grid;
-  grid-template: "AAAA BBBB";
+  grid-template-areas:
+    "AAAA AAAA"
+    "BBBB CCCC";
+}
+
+.top {
+  grid-area: AAAA;
+  background-color: lightblue;
+}
+
+.bottom-left {
+  grid-area: BBBB;
+  background-color: lightgreen;
+}
+
+.bottom-right {
+  grid-area: CCCC;
+  background-color: lightcoral;
 }

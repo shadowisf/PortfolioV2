@@ -1,20 +1,18 @@
-import { Cake, Glasses, GraduateHat, Location } from "../components/Icon";
-import { TimelineRow } from "../components/Timeline";
-import ProfilePicture from "../assets/ImageProfile.jpeg";
-import { useEffect } from "react";
-import { useGlobalState } from "../utils/ControlUtil";
 import {
   RiCake2Line,
+  RiMapPinLine,
   RiGlasses2Line,
   RiGraduationCapLine,
-  RiMapPinLine,
 } from "react-icons/ri";
+import ProfilePicture from "../assets/ImageProfile.jpeg";
+import { TimelineRow } from "../components/Timeline";
 import {
+  getAboutSkillset,
   architectureColors,
   architectureIcons,
-  getAboutSkillset,
-  getProjectArchitecture,
 } from "../utils/ProjectUtils";
+import { useEffect } from "react";
+import { useGlobalState } from "../utils/ControlUtil";
 
 export default function About() {
   const { setCurrentPage } = useGlobalState();
@@ -29,7 +27,7 @@ export default function About() {
         <h1 className="accent mobileHeader">hey, i'm les!</h1>
         <br className="mobileHeader" />
         <img className="desktopImg" loading="lazy" src={ProfilePicture} />
-        <div>
+        <div className="text">
           <h1 className="accent desktopHeader">hey, i'm les!</h1>
           <br />
           <h4>
@@ -51,81 +49,58 @@ export default function About() {
         </div>
       </section>
 
-      <section className="timelineAndSkillset">
-        <section className="timeline">
-          <h1>my life's arc</h1>
-          <div>
-            <TimelineRow
-              img={<RiCake2Line size={40} fill="var(--accent-color)" />}
-              verticalLine={true}
-            >
-              born in davao city, philippines <br /> <b>february 15, 2004</b>
-            </TimelineRow>
+      <section className="timeline">
+        <h1>my life's arc</h1>
+        <div>
+          <TimelineRow
+            img={<RiCake2Line size={40} fill="var(--accent-color)" />}
+            verticalLine={true}
+          >
+            born in davao city, philippines <br /> <b>february 15, 2004</b>
+          </TimelineRow>
 
-            <TimelineRow
-              img={<RiMapPinLine size={40} fill="var(--accent-color)" />}
-              verticalLine={true}
-            >
-              moved to dubai, united arab emirates <br /> <b>may 12, 2012</b>
-            </TimelineRow>
+          <TimelineRow
+            img={<RiMapPinLine size={40} fill="var(--accent-color)" />}
+            verticalLine={true}
+          >
+            moved to dubai, united arab emirates <br /> <b>may 12, 2012</b>
+          </TimelineRow>
 
-            <TimelineRow
-              img={<RiGlasses2Line size={40} fill="var(--accent-color)" />}
-              verticalLine={true}
-            >
-              first pair of eyeglasses <br /> <b>april 6, 2018</b>
-            </TimelineRow>
+          <TimelineRow
+            img={<RiGlasses2Line size={40} fill="var(--accent-color)" />}
+            verticalLine={true}
+          >
+            first pair of eyeglasses <br /> <b>april 6, 2018</b>
+          </TimelineRow>
 
-            <TimelineRow
-              img={<RiGraduationCapLine size={40} fill="var(--accent-color)" />}
-              verticalLine={false}
-            >
-              graduated uob with bachelor in swe <br /> <b>???</b>
-            </TimelineRow>
-          </div>
-        </section>
+          <TimelineRow
+            img={<RiGraduationCapLine size={40} fill="var(--accent-color)" />}
+            verticalLine={false}
+          >
+            graduated uob with bachelor in swe <br /> <b>???</b>
+          </TimelineRow>
+        </div>
+      </section>
 
-        <section className="skillset">
-          <h1>my skillset</h1>
-          {/* <div className="skills">
-            {getProjectArchitecture(-1).map((item) => {
-              const cleanItem = item.replace("*", "");
-              const color = architectureColors[cleanItem];
-              const icon = architectureIcons[cleanItem];
+      <section className="skillset">
+        <h1>my skillset</h1>
+        <div className="skills">
+          {getAboutSkillset().map((item) => {
+            const color = architectureColors[item];
+            const icon = architectureIcons[item];
 
-              return (
-                <span
-                  className="item"
-                  key={item}
-                  style={{
-                    backgroundColor: color,
-                  }}
-                >
-                  <span className="icon">{icon}</span>
-                  {item}
-                </span>
-              );
-            })}
-          </div> */}
-
-          <div className="skills">
-            {getAboutSkillset().map((item) => {
-              const color = architectureColors[item];
-              const icon = architectureIcons[item];
-
-              return (
-                <span
-                  className="item"
-                  key={item}
-                  style={{ backgroundColor: color }}
-                >
-                  <span className="icon">{icon}</span>
-                  {item}
-                </span>
-              );
-            })}
-          </div>
-        </section>
+            return (
+              <span
+                className="item"
+                key={item}
+                style={{ backgroundColor: color }}
+              >
+                <span className="icon">{icon}</span>
+                {item}
+              </span>
+            );
+          })}
+        </div>
       </section>
     </main>
   );
