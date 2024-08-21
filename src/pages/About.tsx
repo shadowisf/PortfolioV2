@@ -3,6 +3,18 @@ import { TimelineRow } from "../components/Timeline";
 import ProfilePicture from "../assets/ImageProfile.jpeg";
 import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
+import {
+  RiCake2Line,
+  RiGlasses2Line,
+  RiGraduationCapLine,
+  RiMapPinLine,
+} from "react-icons/ri";
+import {
+  architectureColors,
+  architectureIcons,
+  getAboutSkillset,
+  getProjectArchitecture,
+} from "../utils/ProjectUtils";
 
 export default function About() {
   const { setCurrentPage } = useGlobalState();
@@ -39,41 +51,81 @@ export default function About() {
         </div>
       </section>
 
-      <section className="timeline">
-        <h1>my life's arc</h1>
-        <div>
-          <TimelineRow img={<Cake />} verticalLine={true}>
-            born in davao city, philippines <br /> <b>february 15, 2004</b>
-          </TimelineRow>
+      <section className="timelineAndSkillset">
+        <section className="timeline">
+          <h1>my life's arc</h1>
+          <div>
+            <TimelineRow
+              img={<RiCake2Line size={40} fill="var(--accent-color)" />}
+              verticalLine={true}
+            >
+              born in davao city, philippines <br /> <b>february 15, 2004</b>
+            </TimelineRow>
 
-          <TimelineRow img={<Location />} verticalLine={true}>
-            moved to dubai, united arab emirates <br /> <b>may 12, 2012</b>
-          </TimelineRow>
+            <TimelineRow
+              img={<RiMapPinLine size={40} fill="var(--accent-color)" />}
+              verticalLine={true}
+            >
+              moved to dubai, united arab emirates <br /> <b>may 12, 2012</b>
+            </TimelineRow>
 
-          <TimelineRow img={<Glasses />} verticalLine={true}>
-            first pair of eyeglasses <br /> <b>april 6, 2018</b>
-          </TimelineRow>
+            <TimelineRow
+              img={<RiGlasses2Line size={40} fill="var(--accent-color)" />}
+              verticalLine={true}
+            >
+              first pair of eyeglasses <br /> <b>april 6, 2018</b>
+            </TimelineRow>
 
-          <TimelineRow img={<GraduateHat />} verticalLine={false}>
-            graduated uob with bachelor in swe <br /> <b>???</b>
-          </TimelineRow>
-        </div>
-      </section>
+            <TimelineRow
+              img={<RiGraduationCapLine size={40} fill="var(--accent-color)" />}
+              verticalLine={false}
+            >
+              graduated uob with bachelor in swe <br /> <b>???</b>
+            </TimelineRow>
+          </div>
+        </section>
 
-      <section className="skillset">
-        <h1>my skillset</h1>
-        <div className="skills">
-          <span>typescript</span>
-          <span>javascript</span>
-          <span>java</span>
-          <span>python</span>
-          <span>c#</span>
-          <span>html</span>
-          <span>css</span>
-          <span>sass</span>
-          <span>sql</span>
-          <span>firebase</span>
-        </div>
+        <section className="skillset">
+          <h1>my skillset</h1>
+          {/* <div className="skills">
+            {getProjectArchitecture(-1).map((item) => {
+              const cleanItem = item.replace("*", "");
+              const color = architectureColors[cleanItem];
+              const icon = architectureIcons[cleanItem];
+
+              return (
+                <span
+                  className="item"
+                  key={item}
+                  style={{
+                    backgroundColor: color,
+                  }}
+                >
+                  <span className="icon">{icon}</span>
+                  {item}
+                </span>
+              );
+            })}
+          </div> */}
+
+          <div className="skills">
+            {getAboutSkillset().map((item) => {
+              const color = architectureColors[item];
+              const icon = architectureIcons[item];
+
+              return (
+                <span
+                  className="item"
+                  key={item}
+                  style={{ backgroundColor: color }}
+                >
+                  <span className="icon">{icon}</span>
+                  {item}
+                </span>
+              );
+            })}
+          </div>
+        </section>
       </section>
     </main>
   );

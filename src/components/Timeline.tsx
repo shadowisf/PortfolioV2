@@ -22,7 +22,7 @@ export function TimelineRow({ children, img, verticalLine }: TimelineProps) {
         <path
           d="M 20 0 L 20 1000"
           style={{
-            stroke: "var(--text-color)",
+            stroke: "var(--faded-color)",
           }}
           strokeWidth="2"
         />

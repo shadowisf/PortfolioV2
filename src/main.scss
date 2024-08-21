@@ -348,51 +348,70 @@ $scaleOnHover: 1.05;
     }
   }
 
-  .timeline {
+  .timelineAndSkillset {
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    gap: 4rem;
 
-    .verticalLine {
-      margin: 1rem 0;
-    }
-
-    .timelineRow {
+    .timeline {
       display: flex;
-      align-items: center;
-      gap: 1rem;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
 
-      .timelineCaption {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
+      .verticalLine {
+        margin: 1rem 0;
       }
 
-      svg {
+      .timelineRow {
         display: flex;
         align-items: center;
+        gap: 1rem;
+
+        .timelineCaption {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+        }
+
+        svg {
+          display: flex;
+          align-items: center;
+        }
       }
     }
-  }
 
-  .skillset {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-
-    .skills {
+    .skillset {
       display: flex;
-      justify-content: center;
-      gap: 0.5rem;
+      flex-direction: column;
+      gap: 2rem;
 
-      flex-wrap: wrap;
+      .skills {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
 
-      span {
-        text-align: center;
-        flex: 1;
-        padding: 0.5rem;
-        border: solid;
-        border-radius: $borderRadius;
+        flex-wrap: wrap;
+
+        .item {
+          flex: 1;
+          padding: 0.5rem;
+          border-radius: $borderRadius;
+          border: 2px var(--faded-color) solid;
+
+          white-space: nowrap;
+
+          text-align: center;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          gap: 0.5rem;
+
+          .icon {
+            display: flex;
+          }
+        }
       }
     }
   }
@@ -904,4 +923,11 @@ footer {
       }
     }
   }
+}
+
+*{border:solid}
+
+.test {
+  display: grid;
+  grid-template: "AAAA BBBB";
 }

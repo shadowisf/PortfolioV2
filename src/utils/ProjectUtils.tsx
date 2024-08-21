@@ -468,6 +468,34 @@ export const projectData = [
   },
 ];
 
+export const aboutSkillset = {
+  architecture: [
+    "typescript",
+    "react",
+    "html",
+    "css",
+    "bootstrap css",
+    "sass",
+    "git",
+    "firebase",
+    "c-sharp",
+    "java",
+    "python",
+    "windows forms",
+    "microsoft sql server",
+    "django",
+    "flask",
+    "xampp",
+    "swing",
+    "file handling",
+    "php",
+  ],
+};
+
+export function getAboutSkillset() {
+  return aboutSkillset.architecture;
+}
+
 export type ProjectProps = {
   dataID: number;
   onClick?: () => void;
