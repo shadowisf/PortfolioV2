@@ -1,4 +1,3 @@
-import { Github, LinkedIn, PDF } from "../components/Icon";
 import { LinkWithIcon } from "../components/Link";
 import WorkInProgress from "../assets/ImageWorkInProgress.PNG";
 import { Fragment } from "react/jsx-runtime";
@@ -44,6 +43,7 @@ import {
   FaBootstrap,
   FaRegFile,
   FaJava,
+  FaPython,
 } from "react-icons/fa";
 import {
   SiFlask,
@@ -55,14 +55,20 @@ import {
   SiDotnet,
 } from "react-icons/si";
 import { GoPackage, GoCommandPalette } from "react-icons/go";
+import { GrMysql } from "react-icons/gr";
+import {
+  RiFilePdf2Line,
+  RiGithubLine,
+  RiLinkedinBoxLine,
+} from "react-icons/ri";
 //
 export const architectureIcons: Record<string, JSX.Element> = {
-  /* typescript: <BiLogoTypescript />,
+  typescript: <BiLogoTypescript />,
   react: <FaReact />,
   html: <FaHtml5 />,
   css: <FaCss3Alt />,
   sass: <FaSass />,
-  firebase: <IoLogoFirebase />,
+  firebase: <BiLogoFirebase />,
   git: <FaGitAlt />,
   "c-sharp": <SiCsharp />,
   "windows forms": <SiDotnet />,
@@ -73,11 +79,13 @@ export const architectureIcons: Record<string, JSX.Element> = {
   "bootstrap css": <FaBootstrap />,
   xampp: <SiXampp />,
   swing: <GoPackage />,
-  cli: <AiOutlineMacCommand />,
+  cli: <GoCommandPalette />,
   "file handling": <FaRegFile />,
-  php: <SiPhp />, */
+  php: <SiPhp />,
+  mysql: <GrMysql />,
+  python: <FaPython />,
 
-  typescript: <BiLogoTypescript fill="var(--accent-color)" />,
+  /* typescript: <BiLogoTypescript fill="var(--accent-color)" />,
   react: <FaReact fill="var(--accent-color)" />,
   html: <FaHtml5 fill="var(--accent-color)" />,
   css: <FaCss3Alt fill="var(--accent-color)" />,
@@ -95,7 +103,7 @@ export const architectureIcons: Record<string, JSX.Element> = {
   swing: <GoPackage fill="var(--accent-color)" />,
   cli: <GoCommandPalette fill="var(--accent-color)" />,
   "file handling": <FaRegFile fill="var(--accent-color)" />,
-  php: <SiPhp fill="var(--accent-color)" />,
+  php: <SiPhp fill="var(--accent-color)" />, */
 
   /* typescript: <BiLogoTypescript fill="rgb(49, 120, 198)" />,
   react: <FaReact fill="rgb(98, 213, 250)" />,
@@ -117,15 +125,38 @@ export const architectureIcons: Record<string, JSX.Element> = {
   "file handling": <FaRegFile fill="var(--faded-color)" />,
   php: <SiPhp fill="#777BB4" />, */
 };
-
 //
 export const architectureColors: Record<string, string> = {
-  /*  typescript: "rgba(49, 120, 198, 0.8)",
+  /* typescript: "rgba(49, 120, 198, 0.8",
   react: "rgba(98, 213, 250, 0.75)",
   html: "rgb(211, 88, 53)",
   css: "rgb(46, 107, 180)",
   sass: "#cc6699",
-  firebase: "rgb(240, 170, 63)",
+  firebase:
+    "linear-gradient(90deg, rgb(240, 170, 63) 0%, rgb(231, 136, 53) 50%, rgb(244, 204, 91) 100%)",
+  git: "rgb(205, 86, 64)",
+  "c-sharp": "rgb(148, 111, 211)",
+  "windows forms": "rgb(98, 97, 233)",
+  "microsoft sql server": "linear-gradient(90deg, rgb(184, 54, 53) 0%, rgb(146, 156, 168) 100%)",
+  java: "linear-gradient(90deg, rgb(217, 58, 50) 0%, rgb(62, 136, 194) 100%)",
+  flask: "rgb(53, 107, 114)",
+  django: "rgb(80, 157, 116)",
+  "bootstrap css": "#7952b3",
+  xampp: "rgb(234, 130, 61)",
+  swing: "var(--faded-color)",
+  cli: "var(--faded-color)",
+  "file handling": "var(--faded-color)",
+  php: "#777BB4",
+  mysql: "linear-gradient(90deg, rgb(43, 101, 139) 0%, rgb(215, 145, 58) 100%)",
+  python:
+    "linear-gradient(90deg, rgb(70, 119, 175) 0%, rgb(247, 204, 76) 100%)", */
+
+  typescript: "rgba(49, 120, 198, 0.8)",
+  react: "rgba(98, 213, 250, 0.65)",
+  html: "rgb(211, 88, 53)",
+  css: "rgb(46, 107, 180)",
+  sass: "#cc6699",
+  firebase: "rgba(240, 170, 63, 0.9)",
   git: "rgb(205, 86, 64)",
   "c-sharp": "rgb(148, 111, 211)",
   "windows forms": "rgb(98, 97, 233)",
@@ -138,7 +169,9 @@ export const architectureColors: Record<string, string> = {
   swing: "var(--faded-color)",
   cli: "var(--faded-color)",
   "file handling": "var(--faded-color)",
-  php: "#777BB4", */
+  php: "#777BB4",
+  mysql: "rgb(41, 96, 132)",
+  python: "rgb(70, 119, 175)",
 };
 //
 export const projectData = [
@@ -167,7 +200,7 @@ export const projectData = [
       <Fragment>
         {/* medium zoom */}
         <LinkWithIcon
-          img={<Github width="24" />}
+          img={<RiGithubLine size={24} />}
           href="https://github.com/francoischalifour"
         >
           françois chalifour
@@ -175,7 +208,7 @@ export const projectData = [
 
         {/* gsap */}
         <LinkWithIcon
-          img={<Github width="24" />}
+          img={<RiGithubLine size={24} />}
           href="https://github.com/jackdoyle"
         >
           jack doyle
@@ -183,7 +216,7 @@ export const projectData = [
 
         {/* remix icons */}
         <LinkWithIcon
-          img={<Github width="24" />}
+          img={<RiGithubLine size={24} />}
           href="https://github.com/kamijin-fanta"
         >
           kamijin fanta
@@ -227,7 +260,7 @@ export const projectData = [
       <Fragment>
         {/* typedcss */}
         <LinkWithIcon
-          img={<Github width="24" />}
+          img={<RiGithubLine size={24} />}
           href="https://github.com/brandonmcconnell"
         >
           brandon mcconnell
@@ -235,7 +268,7 @@ export const projectData = [
 
         {/* react-toastify */}
         <LinkWithIcon
-          img={<Github width="24" />}
+          img={<RiGithubLine size={24} />}
           href="https://github.com/fkhadra"
         >
           fadi khadra
@@ -243,7 +276,7 @@ export const projectData = [
 
         {/* medium zoom */}
         <LinkWithIcon
-          img={<Github width="24" />}
+          img={<RiGithubLine size={24} />}
           href="https://github.com/francoischalifour"
         >
           françois chalifour
@@ -251,7 +284,7 @@ export const projectData = [
 
         {/* theme engine */}
         <LinkWithIcon
-          img={<LinkedIn width="24" />}
+          img={<RiLinkedinBoxLine size={24} />}
           href="https://www.linkedin.com/in/frankmyles/"
         >
           frank myles
@@ -259,7 +292,7 @@ export const projectData = [
 
         {/* gsap */}
         <LinkWithIcon
-          img={<Github width="24" />}
+          img={<RiGithubLine size={24} />}
           href="https://github.com/jackdoyle"
         >
           jack doyle
@@ -267,7 +300,7 @@ export const projectData = [
 
         {/* remix icons */}
         <LinkWithIcon
-          img={<Github width="24" />}
+          img={<RiGithubLine size={24} />}
           href="https://github.com/xiaochunjimmy"
         >
           zhang xiaochun
@@ -306,15 +339,24 @@ export const projectData = [
     ),
     links: (
       <Fragment>
-        <LinkWithIcon img={<Github width="24" />} href={CircuitCentralGithub}>
+        <LinkWithIcon
+          img={<RiGithubLine size={24} />}
+          href={CircuitCentralGithub}
+        >
           repository
         </LinkWithIcon>
 
-        <LinkWithIcon img={<PDF />} href={CircuitCentralProposalReport}>
+        <LinkWithIcon
+          img={<RiFilePdf2Line size={24} />}
+          href={CircuitCentralProposalReport}
+        >
           proposal report
         </LinkWithIcon>
 
-        <LinkWithIcon img={<PDF />} href={CircuitCentralImplementationReport}>
+        <LinkWithIcon
+          img={<RiFilePdf2Line size={24} />}
+          href={CircuitCentralImplementationReport}
+        >
           implementation report
         </LinkWithIcon>
       </Fragment>
@@ -348,11 +390,17 @@ export const projectData = [
     ),
     links: (
       <Fragment>
-        <LinkWithIcon img={<Github width="24" />} href={ApolloHospitalGithub}>
+        <LinkWithIcon
+          img={<RiGithubLine size={24} />}
+          href={ApolloHospitalGithub}
+        >
           repository
         </LinkWithIcon>
 
-        <LinkWithIcon img={<PDF />} href={ApolloHospitalReport}>
+        <LinkWithIcon
+          img={<RiFilePdf2Line size={24} />}
+          href={ApolloHospitalReport}
+        >
           report
         </LinkWithIcon>
       </Fragment>
@@ -386,11 +434,14 @@ export const projectData = [
     ),
     links: (
       <Fragment>
-        <LinkWithIcon img={<Github width="24" />} href={FunculatorGithub}>
+        <LinkWithIcon img={<RiGithubLine size={24} />} href={FunculatorGithub}>
           repository
         </LinkWithIcon>
 
-        <LinkWithIcon img={<PDF />} href={FunculatorReport}>
+        <LinkWithIcon
+          img={<RiFilePdf2Line size={24} />}
+          href={FunculatorReport}
+        >
           report
         </LinkWithIcon>
       </Fragment>
@@ -422,11 +473,17 @@ export const projectData = [
     ),
     links: (
       <Fragment>
-        <LinkWithIcon img={<Github width="24" />} href={BellHospitalGithub}>
+        <LinkWithIcon
+          img={<RiGithubLine size={24} />}
+          href={BellHospitalGithub}
+        >
           repository
         </LinkWithIcon>
 
-        <LinkWithIcon img={<PDF />} href={BellHospitalReport}>
+        <LinkWithIcon
+          img={<RiFilePdf2Line size={24} />}
+          href={BellHospitalReport}
+        >
           report
         </LinkWithIcon>
       </Fragment>
@@ -456,11 +513,17 @@ export const projectData = [
     ),
     links: (
       <Fragment>
-        <LinkWithIcon img={<Github width="24" />} href={PlugInsDatabaseGithub}>
+        <LinkWithIcon
+          img={<RiGithubLine size={24} />}
+          href={PlugInsDatabaseGithub}
+        >
           repository
         </LinkWithIcon>
 
-        <LinkWithIcon img={<PDF />} href={PlugInsDatabaseReport}>
+        <LinkWithIcon
+          img={<RiFilePdf2Line size={24} />}
+          href={PlugInsDatabaseReport}
+        >
           report
         </LinkWithIcon>
       </Fragment>
@@ -486,9 +549,8 @@ export const aboutSkillset = {
     "django",
     "flask",
     "xampp",
-    "swing",
-    "file handling",
     "php",
+    "mysql",
   ],
 };
 

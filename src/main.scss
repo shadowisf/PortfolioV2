@@ -25,8 +25,8 @@ $scaleOnHover: 1.05;
   --background-color: light-dark(#e5e5ea, rgb(36, 36, 38));
   --faded-color: #817e83;
   /* --accent-color: light-dark(#6320ee, #8075ff); */
-  --accent-color: light-dark(rgb(255, 59, 48), rgb(255, 69, 58));
-  /* --accent-color: light-dark(rgb(0, 122, 255), rgb(10, 132, 255)); */
+  /* --accent-color: light-dark(rgb(255, 59, 48), rgb(255, 69, 58)); */
+  --accent-color: light-dark(rgb(0, 122, 255), rgb(10, 132, 255));
 
   --h0: calc(var(--h1) * 1.5);
   --h1: 2.986rem;
@@ -67,12 +67,12 @@ $scaleOnHover: 1.05;
       justify-content: space-between;
       gap: 2rem;
 
-      transition: scale 0.25s, box-shadow 0.25s, color 0.25s,
-        font-variation-settings 0.5s;
+      transition: scale 0.25s, box-shadow 0.25s, color 0.25s;
 
       font-variation-settings: $fontVarNormal;
 
       .title {
+        transition: font-variation-settings 0.5s;
         white-space: nowrap;
       }
 
@@ -82,7 +82,10 @@ $scaleOnHover: 1.05;
         box-shadow: $boxShadow;
         color: var(--accent-color);
         scale: $scaleOnHover;
-        font-variation-settings: $fontVarThin;
+
+        .title {
+          font-variation-settings: $fontVarThin;
+        }
       }
     }
   }
@@ -150,6 +153,7 @@ $scaleOnHover: 1.05;
           gap: 0.5rem;
 
           align-items: center;
+          justify-content: center;
 
           padding: 0.5rem 0.75rem;
 
@@ -344,7 +348,7 @@ $scaleOnHover: 1.05;
     img {
       box-shadow: $boxShadow;
       border-radius: $borderRadius;
-      width: 40%;
+      width: 38%;
 
       pointer-events: none;
     }
@@ -387,6 +391,27 @@ $scaleOnHover: 1.05;
     flex-direction: column;
     gap: 2rem;
 
+    .header {
+      display: flex;
+      align-items: center;
+
+      justify-content: space-between;
+
+      select {
+        font-size: var(--h6);
+        padding: 1rem;
+        font-family: $primaryFont;
+        background-color: var(--background-color);
+        border-radius: $borderRadius;
+        border: 2px solid var(--accent-color);
+        color: var(--faded-color);
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
     .skills {
       display: flex;
       justify-content: center;
@@ -396,9 +421,8 @@ $scaleOnHover: 1.05;
 
       .item {
         flex: 1;
-        padding: 0.5rem;
+        padding: 0.5rem 0.75rem;
         border-radius: $borderRadius;
-        border: 2px var(--faded-color) solid;
 
         white-space: nowrap;
 
@@ -515,7 +539,7 @@ a {
 
   border-bottom: 2px dashed;
 
-  transition: font-variation-settings 0.5s, color 0.5s, scale 0.25s;
+  transition: font-variation-settings 0.5s, color 0.25s, scale 0.25s;
 
   font-variation-settings: $fontVarNormal;
 
@@ -750,7 +774,6 @@ footer {
 
   svg {
     display: flex;
-    width: 5vw;
     fill: var(--background-color);
   }
 

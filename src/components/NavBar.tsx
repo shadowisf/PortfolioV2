@@ -1,7 +1,12 @@
 import { Fragment, useEffect, useState } from "react";
-import { Cross, Hamburger, Moon, Sun } from "./Icon";
 import { pixelTransition } from "../utils/AnimationUtils";
 import { useGlobalState } from "../utils/ControlUtil";
+import {
+  RiSunLine,
+  RiMoonLine,
+  RiMenu4Line,
+  RiCloseFill,
+} from "react-icons/ri";
 
 export default function NavBar() {
   const { openMenu, closeMenu } = pixelTransition();
@@ -37,7 +42,7 @@ export default function NavBar() {
 
   return (
     <Fragment>
-      <nav className="faded">
+      <nav>
         <a
           className="logoButton"
           onClick={() => {
@@ -60,26 +65,30 @@ export default function NavBar() {
 
           {/*  nav theme toggle button */}
           <span onClick={() => executeToggleTheme()} className="themeButton">
-            {userTheme === "dark" ? <Moon width="24" /> : <Sun width="24" />}
+            {userTheme === "dark" ? (
+              <RiSunLine size={24} />
+            ) : (
+              <RiMoonLine size={24} />
+            )}
           </span>
         </span>
 
         {/* nav hamburger button */}
         <span className="hamburgerButton" onClick={() => openMenu()}>
-          <Hamburger width="24" />
+          <RiMenu4Line size={24} />
         </span>
       </nav>
 
       <div className="menu">
         {/* menu close button */}
         <a className="closeButton" onClick={() => closeMenu()}>
-          <Cross width="24" />
+          <RiCloseFill />
         </a>
         {/* menu about button */}
         <a onClick={() => executeTransition("about", true)}>about</a>
         {/* menu theme button */}
         <a onClick={() => executeToggleTheme()} className="themeButton">
-          {userTheme === "dark" ? <Moon width="24" /> : <Sun width="24" />}
+          {userTheme === "dark" ? <RiSunLine /> : <RiMoonLine />}
         </a>
       </div>
     </Fragment>
