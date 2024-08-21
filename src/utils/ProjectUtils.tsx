@@ -1,6 +1,7 @@
 import { Github, LinkedIn, PDF } from "../components/Icon";
 import { LinkWithIcon } from "../components/Link";
 import WorkInProgress from "../assets/ImageWorkInProgress.PNG";
+import { Fragment } from "react/jsx-runtime";
 //
 import PortfolioOriginal1 from "../assets/ImageOriginalPortfolio1.webp";
 import PortfolioOriginal2 from "../assets/ImageOriginalPortfolio2.webp";
@@ -26,27 +27,126 @@ import FunculatorReport from "../assets/FileFunCulator.PDF";
 import BellHospital1 from "../assets/ImageBellHospital1.webp";
 import BellHospital2 from "../assets/ImageBellHospital1.webp";
 import BellHospitalReport from "../assets/FileBellHospital.PDF";
-import { Fragment } from "react/jsx-runtime";
 //
 const ApolloHospitalGithub = "https://github.com/shadowisf/ApolloHospital";
 const CircuitCentralGithub = "https://github.com/shadowisf/CircuitCentral";
 const PlugInsDatabaseGithub = "https://github.com/shadowisf/PlugInsDatabase";
 const FunculatorGithub = "https://github.com/shadowisf/FunCulator";
 const BellHospitalGithub = "https://github.com/shadowisf/BellHospital";
+//
+import { BiLogoTypescript, BiLogoFirebase } from "react-icons/bi";
+import {
+  FaReact,
+  FaHtml5,
+  FaCss3Alt,
+  FaSass,
+  FaGitAlt,
+  FaBootstrap,
+  FaRegFile,
+  FaJava,
+} from "react-icons/fa";
+import {
+  SiFlask,
+  SiDjango,
+  SiXampp,
+  SiPhp,
+  SiMicrosoftsqlserver,
+  SiCsharp,
+  SiDotnet,
+} from "react-icons/si";
+import { GoPackage, GoCommandPalette } from "react-icons/go";
+//
+export const architectureIcons: Record<string, JSX.Element> = {
+  /* typescript: <BiLogoTypescript />,
+  react: <FaReact />,
+  html: <FaHtml5 />,
+  css: <FaCss3Alt />,
+  sass: <FaSass />,
+  firebase: <IoLogoFirebase />,
+  git: <FaGitAlt />,
+  "c-sharp": <SiCsharp />,
+  "windows forms": <SiDotnet />,
+  "microsoft sql server": <SiMicrosoftsqlserver />,
+  java: <FaJava />,
+  flask: <SiFlask />,
+  django: <SiDjango />,
+  "bootstrap css": <FaBootstrap />,
+  xampp: <SiXampp />,
+  swing: <GoPackage />,
+  cli: <AiOutlineMacCommand />,
+  "file handling": <FaRegFile />,
+  php: <SiPhp />, */
 
+  typescript: <BiLogoTypescript fill="var(--accent-color)" />,
+  react: <FaReact fill="var(--accent-color)" />,
+  html: <FaHtml5 fill="var(--accent-color)" />,
+  css: <FaCss3Alt fill="var(--accent-color)" />,
+  sass: <FaSass fill="var(--accent-color)" />,
+  firebase: <BiLogoFirebase fill="var(--accent-color)" />,
+  git: <FaGitAlt fill="var(--accent-color)" />,
+  "c-sharp": <SiCsharp fill="var(--accent-color)" />,
+  "windows forms": <SiDotnet fill="var(--accent-color)" />,
+  "microsoft sql server": <SiMicrosoftsqlserver fill="var(--accent-color)" />,
+  java: <FaJava fill="var(--accent-color)" />,
+  flask: <SiFlask fill="var(--accent-color)" />,
+  django: <SiDjango fill="var(--accent-color)" />,
+  "bootstrap css": <FaBootstrap fill="var(--accent-color)" />,
+  xampp: <SiXampp fill="var(--accent-color)" />,
+  swing: <GoPackage fill="var(--accent-color)" />,
+  cli: <GoCommandPalette fill="var(--accent-color)" />,
+  "file handling": <FaRegFile fill="var(--accent-color)" />,
+  php: <SiPhp fill="var(--accent-color)" />,
+
+  /* typescript: <BiLogoTypescript fill="rgb(49, 120, 198)" />,
+  react: <FaReact fill="rgb(98, 213, 250)" />,
+  html: <FaHtml5 fill="rgb(211, 88, 53)" />,
+  css: <FaCss3Alt fill="rgb(46, 107, 180)" />,
+  sass: <FaSass fill="#cc6699" />,
+  firebase: <IoLogoFirebase fill="rgb(240, 170, 63)" />,
+  git: <FaGitAlt fill="rgb(205, 86, 64)" />,
+  "c-sharp": <SiCsharp fill="rgb(148, 111, 211)" />,
+  "windows forms": <SiDotnet className="dotNet" fill="white" />,
+  "microsoft sql server": <SiMicrosoftsqlserver fill="rgb(184, 54, 53)" />,
+  java: <FaJava fill="rgb(223, 82, 65)" />,
+  flask: <SiFlask fill="rgb(53, 107, 114)" />,
+  django: <SiDjango fill="rgb(80, 157, 116)" />,
+  "bootstrap css": <FaBootstrap fill="#7952b3" />,
+  xampp: <SiXampp fill="rgb(234, 130, 61)" />,
+  swing: <GoPackage fill="var(--faded-color)" />,
+  cli: <AiOutlineMacCommand fill="var(--faded-color)" />,
+  "file handling": <FaRegFile fill="var(--faded-color)" />,
+  php: <SiPhp fill="#777BB4" />, */
+};
+
+//
+export const architectureColors: Record<string, string> = {
+  /*  typescript: "rgba(49, 120, 198, 0.8)",
+  react: "rgba(98, 213, 250, 0.75)",
+  html: "rgb(211, 88, 53)",
+  css: "rgb(46, 107, 180)",
+  sass: "#cc6699",
+  firebase: "rgb(240, 170, 63)",
+  git: "rgb(205, 86, 64)",
+  "c-sharp": "rgb(148, 111, 211)",
+  "windows forms": "rgb(98, 97, 233)",
+  "microsoft sql server": "rgb(184, 54, 53)",
+  java: "rgb(223, 82, 65)",
+  flask: "rgb(53, 107, 114)",
+  django: "rgb(80, 157, 116)",
+  "bootstrap css": "#7952b3",
+  xampp: "rgb(234, 130, 61)",
+  swing: "var(--faded-color)",
+  cli: "var(--faded-color)",
+  "file handling": "var(--faded-color)",
+  php: "#777BB4", */
+};
+//
 export const projectData = [
   {
     id: 6,
     name: "portfolio v2",
     year: "2024",
-    architecture: [
-      "typesript",
-      "*react",
-      "*html/sass",
-      "*firebase",
-      "git",
-      "ui/ux",
-    ],
+    architecture: ["typescript", "*react", "*html", "*sass", "git"],
     image: [WorkInProgress],
     imageAlts: [],
     content: (
@@ -84,9 +184,9 @@ export const projectData = [
         {/* remix icons */}
         <LinkWithIcon
           img={<Github width="24" />}
-          href="https://github.com/xiaochunjimmy"
+          href="https://github.com/kamijin-fanta"
         >
-          zhang xiaochun
+          kamijin fanta
         </LinkWithIcon>
       </Fragment>
     ),
@@ -98,10 +198,10 @@ export const projectData = [
     architecture: [
       "typescript",
       "*react",
-      "*html/sass",
+      "*html",
+      "*sass",
       "*firebase",
       "git",
-      "ui/ux",
     ],
     image: [PortfolioOriginal1, PortfolioOriginal2],
     imageAlts: [
@@ -180,12 +280,10 @@ export const projectData = [
     name: "circuitcentral",
     year: "2024",
     architecture: [
-      "*c#",
+      "*c-sharp",
       "*windows forms",
       "*microsoft sql server",
       "git",
-      "ui/ux",
-      "crud",
     ],
     image: [CircuitCentral1, CircuitCentral2],
     imageAlt: [
@@ -226,14 +324,7 @@ export const projectData = [
     id: 3,
     name: "apollo hospital",
     year: "2023",
-    architecture: [
-      "flask",
-      "*django",
-      "*html/bootstrap css",
-      "*xampp",
-      "ui/ux",
-      "crud",
-    ],
+    architecture: ["flask", "*django", "*html", "*bootstrap css", "*xampp"],
     image: [ApolloHospital1, ApolloHospital2],
     imageAlts: [
       "first image of the apollo hospital project; it is viewing the home page wherein it displays an illustration of a doctor treating its patient, with the title of the website whch is apollo hospital.",
@@ -271,7 +362,7 @@ export const projectData = [
     id: 2,
     name: "funculator",
     year: "2022",
-    architecture: ["*java", "*swing", "ui/ux"],
+    architecture: ["*java", "*swing"],
     image: [Funculator1, Funculator2, Funculator3],
     imageAlts: [
       "first image of the funculator project. it is currently viewing the index page where it is displaying a calculator with a face in pixel art form. additionally, there is buttons for start and exit on the right.",
@@ -309,7 +400,7 @@ export const projectData = [
     id: 1,
     name: "bell hospital",
     year: "2022",
-    architecture: ["*java", "*cli", "*file handling", "crud"],
+    architecture: ["*java", "*cli", "*file handling"],
     image: [BellHospital1, BellHospital2],
     imageAlts: [
       "first image of the bell hospital project. it is currently viewing the starting page (note that this is a CLI project) where it is displaying all of the possible sections such as patients, doctors, appointments, etc.",
@@ -345,7 +436,7 @@ export const projectData = [
     id: 0,
     name: "plug-ins database",
     year: "2022",
-    architecture: ["*php", "*html/css", "*xampp", "crud"],
+    architecture: ["*php", "*html", "*css", "*xampp"],
     image: [PlugInsDatabase1, PlugInsDatabase2],
     imageAlts: [
       "first image of the plug-ins project. it is currently viewing the index customer page where it is displaying input fields for basic customer information such as name, contact number, address, etc. additionally, it has buttons for inserting the customer information into the database.",

@@ -1,11 +1,12 @@
 import {
+  architectureColors,
+  architectureIcons,
   getProjectArchitecture,
   getProjectContent,
   getProjectImage,
   getProjectImageAlts,
   getProjectLinks,
   getProjectName,
-  getProjectYear,
   ProjectProps,
 } from "../utils/ProjectUtils";
 import { useEffect, useState } from "react";
@@ -69,16 +70,27 @@ export default function Project({ dataID }: ProjectProps) {
           ←
         </h1>
         <h1 className="title accent">{getProjectName(dataID)}</h1>
-        <span className="desktopBackToHomeButton" />
+        <h1
+          className="desktopBackToHomeButton"
+          style={{ visibility: "hidden", pointerEvents: "none" }}
+        >
+          →
+        </h1>
       </div>
 
       <div className="architecture">
-        <h6 className="item">{getProjectYear(dataID)}</h6>
-        {getProjectArchitecture(dataID).map((item, index) => (
-          <h6 key={index} className="item">
-            {item.replace("*", "")}
-          </h6>
-        ))}
+        {getProjectArchitecture(dataID).map((item, index) => {
+          const cleanItem = item.replace("*", "");
+          const color = architectureColors[cleanItem];
+          const icon = architectureIcons[cleanItem];
+
+          return (
+            <p key={index} className="item" style={{ backgroundColor: color }}>
+              {<span className="icon">{icon}</span>}
+              {item.replace("*", "")}
+            </p>
+          );
+        })}
       </div>
 
       <div className="content">
@@ -107,9 +119,17 @@ export default function Project({ dataID }: ProjectProps) {
         </div>
       </div>
 
-      <span className="backToTopButton" onClick={() => scrollToTop(0.25)}>
-        ↑ <span>back to top</span>
-      </span>
+      <div className="bottomNav">
+        <a>
+          ← <span>previous</span>
+        </a>
+        <a onClick={() => scrollToTop(0.25)}>
+          ↑ <span>scroll to top</span>
+        </a>
+        <a>
+          → <span>next</span>
+        </a>
+      </div>
     </main>
   );
 }

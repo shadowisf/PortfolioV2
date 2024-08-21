@@ -1,4 +1,6 @@
 import {
+  architectureColors,
+  architectureIcons,
   getProjectArchitecture,
   getProjectImage,
   getProjectName,
@@ -6,7 +8,7 @@ import {
   ProjectProps,
 } from "../utils/ProjectUtils";
 import { projectTileAnimation } from "../utils/AnimationUtils";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 
 export function ProjectTile({ dataID }: ProjectProps) {
@@ -66,11 +68,24 @@ export function ProjectPreview({ dataID }: ProjectProps) {
       <span className="architecture">
         {getProjectArchitecture(dataID)
           .filter((item) => item.startsWith("*"))
-          .map((item, index) => (
-            <small key={index} className="item">
-              {item.replace("*", "")}
-            </small>
-          ))}
+          .map((item, index) => {
+            const cleanItem = item.replace("*", "");
+            const color = architectureColors[cleanItem];
+            const icon = architectureIcons[cleanItem];
+
+            return (
+              <small
+                style={{
+                  backgroundColor: color,
+                }}
+                key={index}
+                className="item"
+              >
+                <span className="icon">{icon}</span>
+                {cleanItem}
+              </small>
+            );
+          })}
       </span>
     </div>
   );

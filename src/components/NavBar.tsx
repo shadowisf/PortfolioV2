@@ -37,7 +37,7 @@ export default function NavBar() {
 
   return (
     <Fragment>
-      <nav>
+      <nav className="faded">
         <a
           className="logoButton"
           onClick={() => {

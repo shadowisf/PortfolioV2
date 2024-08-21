@@ -1,9 +1,14 @@
 import { ProjectPreview, ProjectTile } from "../components/ProjectTile";
 import { LinkWithIconOnly } from "../components/Link";
 import { getProjectIDs } from "../utils/ProjectUtils";
-import { Email, Github, Instagram, LinkedIn } from "../components/Icon";
 import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
+import {
+  RiGithubLine,
+  RiInstagramLine,
+  RiLinkedinBoxLine,
+  RiMailLine,
+} from "react-icons/ri";
 
 export default function Home() {
   const { setCurrentPage } = useGlobalState();
@@ -38,22 +43,22 @@ export default function Home() {
 
           <div className="links faded">
             <LinkWithIconOnly
-              img={<Email width="32" />}
+              img={<RiMailLine size={32} />}
               href="mailto:les.ranalan@gmail.com"
             />
 
             <LinkWithIconOnly
-              img={<LinkedIn width="32" />}
+              img={<RiLinkedinBoxLine size={32} />}
               href="https://www.linkedin.com/in/les-paul-ranalan/"
             />
 
             <LinkWithIconOnly
-              img={<Github width="32" />}
+              img={<RiGithubLine size={32} />}
               href="https://github.com/shadowisf"
             />
 
             <LinkWithIconOnly
-              img={<Instagram width="32" />}
+              img={<RiInstagramLine size={32} />}
               href="https://www.instagram.com/les.rx/"
             />
           </div>

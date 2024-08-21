@@ -1,6 +1,6 @@
 $primaryFont: "Kyiv Type Sans";
 
-$borderRadius: 12px;
+$borderRadius: 8px;
 
 $minMaxWidth: 1050px;
 $makeNavBackgroundWidth: $minMaxWidth + 200px;
@@ -26,6 +26,7 @@ $scaleOnHover: 1.05;
   --faded-color: #817e83;
   /* --accent-color: light-dark(#6320ee, #8075ff); */
   --accent-color: light-dark(rgb(255, 59, 48), rgb(255, 69, 58));
+  /* --accent-color: light-dark(rgb(0, 122, 255), rgb(10, 132, 255)); */
 
   --h0: calc(var(--h1) * 1.5);
   --h1: 2.986rem;
@@ -131,8 +132,7 @@ $scaleOnHover: 1.05;
         box-shadow: $boxShadow;
       }
 
-      // architecture highlight
-      span {
+      .architecture {
         display: flex;
         justify-content: center;
 
@@ -142,18 +142,28 @@ $scaleOnHover: 1.05;
 
         flex-wrap: wrap;
 
-        // architecture highlight item
-        small {
+        .item {
+          border-radius: $borderRadius;
+          font-weight: bolder;
+
+          display: flex;
+          gap: 0.5rem;
+
+          align-items: center;
+
           padding: 0.5rem 0.75rem;
 
           box-shadow: $boxShadow;
-          border-radius: $borderRadius;
 
           font-weight: bolder;
           text-align: center;
           white-space: nowrap;
 
           background-color: var(--background-color);
+
+          .icon {
+            display: flex;
+          }
         }
       }
     }
@@ -185,24 +195,29 @@ $scaleOnHover: 1.05;
     }
   }
 
-  .backToTopButton {
-    text-align: center;
-    justify-self: center;
+  .bottomNav {
+    display: flex;
+    justify-content: space-between;
 
-    display: grid;
+    a {
+      text-align: center;
+      justify-self: center;
 
-    gap: 0.25rem;
-    margin-top: 4rem;
-    width: fit-content;
+      display: grid;
 
-    font-variation-settings: $fontVarNormal;
-    transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
+      gap: 0.25rem;
+      margin-top: 4rem;
+      width: fit-content;
 
-    &:hover {
-      color: var(--accent-color);
-      scale: $scaleOnHover;
-      cursor: pointer;
-      font-variation-settings: $fontVarThin;
+      font-variation-settings: $fontVarNormal;
+      transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
+
+      &:hover {
+        color: var(--accent-color);
+        scale: $scaleOnHover;
+        cursor: pointer;
+        font-variation-settings: $fontVarThin;
+      }
     }
   }
 
@@ -256,17 +271,25 @@ $scaleOnHover: 1.05;
     gap: 1rem;
 
     .item {
+      border-radius: $borderRadius;
+      font-weight: bolder;
+
+      display: flex;
+      gap: 0.5rem;
+
+      align-items: center;
+      justify-content: center;
       box-shadow: $boxShadow;
 
-      background-color: var(--background-color);
-
       padding: 0.5rem 0.75rem;
-      border-radius: $borderRadius;
 
       white-space: nowrap;
 
       flex: 1;
-      text-align: center;
+
+      .icon {
+        display: flex;
+      }
     }
   }
 
