@@ -120,15 +120,15 @@ export default function Project({ dataID }: ProjectProps) {
       </div>
 
       <div className="bottomNav">
-        <a>
+        {/* <a>
           ← <span>previous</span>
-        </a>
+        </a> */}
         <a onClick={() => scrollToTop(0.25)}>
           ↑ <span>scroll to top</span>
         </a>
-        <a>
+        {/* <a>
           → <span>next</span>
-        </a>
+        </a> */}
       </div>
     </main>
   );

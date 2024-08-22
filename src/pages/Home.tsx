@@ -33,7 +33,7 @@ export default function Home() {
           <h1 className="extra name accent">les ranalan</h1>
 
           <h5 className="nonBold">
-            <span className="bulletPoint">⊢</span> frontend software engineer
+            <span className="bulletPoint">⊢</span> frontend engineer
           </h5>
           <h5 className="nonBold">
             <span className="bulletPoint">⊢</span> ui/ux designer

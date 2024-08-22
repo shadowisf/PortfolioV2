@@ -8,7 +8,7 @@ import {
   ProjectProps,
 } from "../utils/ProjectUtils";
 import { projectTileAnimation } from "../utils/AnimationUtils";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 
 export function ProjectTile({ dataID }: ProjectProps) {

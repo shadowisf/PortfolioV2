@@ -1,9 +1,12 @@
 import { LinkWithIcon } from "../components/Link";
-import WorkInProgress from "../assets/ImageWorkInProgress.PNG";
 import { Fragment } from "react/jsx-runtime";
 //
 import PortfolioOriginal1 from "../assets/ImageOriginalPortfolio1.webp";
 import PortfolioOriginal2 from "../assets/ImageOriginalPortfolio2.webp";
+//
+import PortfolioNew1 from "../assets/ImageNewPortfolio1.png";
+import PortfolioNew2 from "../assets/ImageNewPortfolio2.png";
+import PortfolioNew3 from "../assets/ImageNewPortfolio3.png";
 //
 import ApolloHospital1 from "../assets/ImageApolloHospital1.webp";
 import ApolloHospital2 from "../assets/ImageApolloHospital2.webp";
@@ -26,12 +29,6 @@ import FunculatorReport from "../assets/FileFunCulator.PDF";
 import BellHospital1 from "../assets/ImageBellHospital1.webp";
 import BellHospital2 from "../assets/ImageBellHospital1.webp";
 import BellHospitalReport from "../assets/FileBellHospital.PDF";
-//
-const ApolloHospitalGithub = "https://github.com/shadowisf/ApolloHospital";
-const CircuitCentralGithub = "https://github.com/shadowisf/CircuitCentral";
-const PlugInsDatabaseGithub = "https://github.com/shadowisf/PlugInsDatabase";
-const FunculatorGithub = "https://github.com/shadowisf/FunCulator";
-const BellHospitalGithub = "https://github.com/shadowisf/BellHospital";
 //
 import { BiLogoTypescript, BiLogoFirebase } from "react-icons/bi";
 import {
@@ -61,6 +58,38 @@ import {
   RiGithubLine,
   RiLinkedinBoxLine,
 } from "react-icons/ri";
+//
+const ApolloHospitalGithub = "https://github.com/shadowisf/ApolloHospital";
+const CircuitCentralGithub = "https://github.com/shadowisf/CircuitCentral";
+const PlugInsDatabaseGithub = "https://github.com/shadowisf/PlugInsDatabase";
+const FunculatorGithub = "https://github.com/shadowisf/FunCulator";
+const BellHospitalGithub = "https://github.com/shadowisf/BellHospital";
+//
+export const aboutSkillset = {
+  architecture: [
+    // 3 for expert
+    // 2 for intermediate
+    // 1 for beginner
+    "2typescript",
+    "2react",
+    "3html",
+    "3css",
+    "3bootstrap css",
+    "3sass",
+    "3git",
+    "2firebase",
+    "1c-sharp",
+    "2java",
+    "2python",
+    "3windows forms",
+    "3microsoft sql server",
+    "2django",
+    "2flask",
+    "3xampp",
+    "1php",
+    "2mysql",
+  ],
+};
 //
 export const architectureIcons: Record<string, JSX.Element> = {
   typescript: <BiLogoTypescript />,
@@ -151,12 +180,12 @@ export const architectureColors: Record<string, string> = {
   python:
     "linear-gradient(90deg, rgb(70, 119, 175) 0%, rgb(247, 204, 76) 100%)", */
 
-  typescript: "rgba(49, 120, 198, 0.8)",
-  react: "rgba(98, 213, 250, 0.65)",
+  typescript: "rgb(49, 120, 198)",
+  react: "rgb(77, 167, 197)",
   html: "rgb(211, 88, 53)",
   css: "rgb(46, 107, 180)",
   sass: "#cc6699",
-  firebase: "rgba(240, 170, 63, 0.9)",
+  firebase: "rgb(222, 157, 58)",
   git: "rgb(205, 86, 64)",
   "c-sharp": "rgb(148, 111, 211)",
   "windows forms": "rgb(98, 97, 233)",
@@ -171,7 +200,7 @@ export const architectureColors: Record<string, string> = {
   "file handling": "var(--faded-color)",
   php: "#777BB4",
   mysql: "rgb(41, 96, 132)",
-  python: "rgb(70, 119, 175)",
+  python: "rgb(225, 181, 75)",
 };
 //
 export const projectData = [
@@ -179,9 +208,16 @@ export const projectData = [
     id: 6,
     name: "portfolio v2",
     year: "2024",
-    architecture: ["typescript", "*react", "*html", "*sass", "git"],
-    image: [WorkInProgress],
-    imageAlts: [],
+    architecture: [
+      "typescript",
+      "*react",
+      "*html",
+      "*sass",
+      "*firebase",
+      "git",
+    ],
+    image: [PortfolioNew1, PortfolioNew2, PortfolioNew3],
+    imageAlts: ["LOL", "LMAO"],
     content: (
       <p>
         i decided to redesign my portfolio website when i realized that my
@@ -245,10 +281,10 @@ export const projectData = [
       <p>
         the original design of my portfolio website was of cartoonish design
         inspired by a few websites i saw on the awwwards website. through this,
-        i was able to{" "}
+        i was able to
         <u>
           grasp and understand more about html, css, and javascript/typescript
-        </u>{" "}
+        </u>
         as a baseline for web development.
         <br />
         <br />
@@ -420,8 +456,8 @@ export const projectData = [
     content: (
       <p>
         funculator is an <u>all-in-one calculator application</u> for students.
-        its system features a login system and a menu that shows all possible
-        maethematical operations a student needs; arithmetics, fibonacci
+        its system features a login system and a menu that features all possible
+        mathematical operations a student needs; arithmetics, fibonacci
         sequences, area of different shapes, etc. the design aesthetic for this
         project was heavily inspired by vibrant pixel art and sprites.
         <br />
@@ -530,29 +566,6 @@ export const projectData = [
     ),
   },
 ];
-
-export const aboutSkillset = {
-  architecture: [
-    "typescript",
-    "react",
-    "html",
-    "css",
-    "bootstrap css",
-    "sass",
-    "git",
-    "firebase",
-    "c-sharp",
-    "java",
-    "python",
-    "windows forms",
-    "microsoft sql server",
-    "django",
-    "flask",
-    "xampp",
-    "php",
-    "mysql",
-  ],
-};
 
 export function getAboutSkillset() {
   return aboutSkillset.architecture;

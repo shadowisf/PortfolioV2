@@ -27,6 +27,7 @@ $scaleOnHover: 1.05;
   /* --accent-color: light-dark(#6320ee, #8075ff); */
   /* --accent-color: light-dark(rgb(255, 59, 48), rgb(255, 69, 58)); */
   --accent-color: light-dark(rgb(0, 122, 255), rgb(10, 132, 255));
+  /* --accent-color: light-dark(rgb(0, 122, 255), rgb(10, 132, 255)); */
 
   --h0: calc(var(--h1) * 1.5);
   --h1: 2.986rem;
@@ -201,7 +202,7 @@ $scaleOnHover: 1.05;
 
   .bottomNav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 
     a {
       text-align: center;
@@ -320,6 +321,7 @@ $scaleOnHover: 1.05;
     gap: 2rem;
 
     img {
+      border-radius: $borderRadius;
       height: auto;
       width: 100%;
     }
@@ -348,7 +350,7 @@ $scaleOnHover: 1.05;
     img {
       box-shadow: $boxShadow;
       border-radius: $borderRadius;
-      width: 38%;
+      width: 35%;
 
       pointer-events: none;
     }
@@ -398,13 +400,22 @@ $scaleOnHover: 1.05;
       justify-content: space-between;
 
       select {
-        font-size: var(--h6);
-        padding: 1rem;
+        border-radius: $borderRadius;
+        font-size: var(--small);
+        padding: 0.5rem;
         font-family: $primaryFont;
         background-color: var(--background-color);
-        border-radius: $borderRadius;
+        border-radius: 0;
         border: 2px solid var(--accent-color);
         color: var(--faded-color);
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDE2IDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEuNSAyTDggN0wxNC41IDJMITFaIiBzdHJva2U9IiM4MTdlODMiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgLz48L3N2Zz4=");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 12px 6px;
+        padding-right: 2.5rem;
 
         &:focus {
           outline: none;
@@ -490,6 +501,10 @@ h5 {
 
 h6 {
   font-size: var(--h6);
+
+  &.nonBold {
+    font-weight: 400;
+  }
 }
 
 p {
@@ -548,6 +563,7 @@ a {
   }
 
   svg {
+    fill: var(--text-color);
     transition: fill 0.5s;
   }
 
@@ -585,7 +601,6 @@ a {
   line-height: normal;
 
   transition: scale 0.25s;
-  border-radius: $borderRadius;
 
   transform-origin: center;
 
@@ -646,7 +661,6 @@ nav {
     gap: 2rem;
 
     a {
-      border-radius: $borderRadius;
       transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
 
       font-variation-settings: $fontVarNormal;
@@ -659,8 +673,6 @@ nav {
     }
 
     span {
-      border-radius: $borderRadius;
-
       transition: scale 0.25s;
 
       svg {
@@ -678,8 +690,6 @@ nav {
   }
 
   .logoButton {
-    border-radius: $borderRadius;
-
     font-family: "Arial";
 
     transition: color 0.25s, scale 0.25s;
@@ -692,8 +702,6 @@ nav {
   }
 
   .hamburgerButton {
-    border-radius: $borderRadius;
-
     transition: scale 0.25s;
 
     &:hover {
@@ -787,7 +795,6 @@ footer {
 
   a {
     color: var(--background-color);
-    border-radius: $borderRadius;
 
     transition: scale 0.25s, font-variation-settings 0.5s;
 
@@ -828,6 +835,18 @@ footer {
 
 // mobile screen
 @media screen and (max-width: $minMaxWidth) {
+  :root {
+    --h0: calc(var(--h1) * 1.5);
+    --h1: 2.027rem;
+    --h2: 1.802rem;
+    --h3: 1.602rem;
+    --h4: 1.424rem;
+    --h5: 1.266rem;
+    --h6: 1.125rem;
+    --p: 1rem;
+    --small: 0.889rem;
+  }
+
   .aboutWrapper {
     max-width: $maxWidthMobile;
 
@@ -853,7 +872,8 @@ footer {
       }
 
       img {
-        width: 450px;
+        width: 400px;
+        max-width: 100%;
       }
     }
   }
@@ -952,26 +972,4 @@ footer {
       }
     }
   }
-}
-
-.test {
-  display: grid;
-  grid-template-areas:
-    "AAAA AAAA"
-    "BBBB CCCC";
-}
-
-.top {
-  grid-area: AAAA;
-  background-color: lightblue;
-}
-
-.bottom-left {
-  grid-area: BBBB;
-  background-color: lightgreen;
-}
-
-.bottom-right {
-  grid-area: CCCC;
-  background-color: lightcoral;
 }

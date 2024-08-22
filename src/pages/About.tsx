@@ -3,6 +3,7 @@ import {
   RiMapPinLine,
   RiGlasses2Line,
   RiGraduationCapLine,
+  RiArrowDownSLine,
 } from "react-icons/ri";
 import ProfilePicture from "../assets/ImageProfile.jpeg";
 import { TimelineRow } from "../components/Timeline";
@@ -11,7 +12,7 @@ import {
   architectureColors,
   architectureIcons,
 } from "../utils/ProjectUtils";
-import { useEffect } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 
 export default function About() {
@@ -21,14 +22,20 @@ export default function About() {
     setCurrentPage("about");
   }, []);
 
+  function getSkillsetValue(event: ChangeEvent<HTMLSelectElement>) {
+    const selectedValue = event.target.value;
+
+    console.log("Selected value:", selectedValue);
+  }
+
   return (
     <main className="aboutWrapper">
       <section className="bio">
-        <h1 className="accent mobileHeader">hey, i'm les!</h1>
+        <h1 className="extra accent mobileHeader">hey, i'm les!</h1>
         <br className="mobileHeader" />
         <img className="desktopImg" loading="lazy" src={ProfilePicture} />
         <div className="text">
-          <h1 className="accent desktopHeader">hey, i'm les!</h1>
+          <h1 className="extra accent desktopHeader">hey, i'm les!</h1>
           <br />
           <h4>
             i'm all about designing functional apps with a focus on performance,
@@ -36,14 +43,14 @@ export default function About() {
           </h4>
           <br />
           <p className="faded">
-            i primarily work with react, typescript, gsap, firebase, sql, and
+            i primarily work with react, typescript, gsap, firebase, mysql, and
             other libraries and frameworks. though i am highly flexible to
             different technologies and languages based on requirements.
           </p>
           <br />
           <p className="faded">
-            outside of coding, i play video games (which i rarely do) with my
-            friends, listen to music, or bingewatch tv shows or movies on
+            outside of coding, i play video games (which i rarely do lol) with
+            my friends, listen to music, or bingewatch tv shows/movies on
             netflix.
           </p>
         </div>
@@ -89,24 +96,32 @@ export default function About() {
       <section className="skillset">
         <div className="header">
           <h1>my skillset</h1>
-          <select>
-            <option value="all" selected>
+          <select onChange={(e) => getSkillsetValue(e)}>
+            <option defaultValue={"all"} value="all">
               all
             </option>
-            <option value="expert">expert</option>
-            <option value="intermediate">intermediate</option>
-            <option value="learning">learning</option>
+            <option defaultValue={"expert"} value="expert">
+              expert
+            </option>
+            <option defaultValue={"intermediate"} value="intermediate">
+              intermediate
+            </option>
+            <option defaultValue={"beginner"} value="beginner">
+              beginner
+            </option>
           </select>
         </div>
         <div className="skills">
           {getAboutSkillset().map((item) => {
-            const color = architectureColors[item];
-            const icon = architectureIcons[item];
+            const unwantedChars = /[321]/g;
+            const cleanItem = item.replace(unwantedChars, "");
+            const color = architectureColors[cleanItem];
+            const icon = architectureIcons[cleanItem];
 
             return (
               <span className="item" key={item} style={{ background: color }}>
                 <span className="icon">{icon}</span>
-                {item}
+                {cleanItem}
               </span>
             );
           })}
