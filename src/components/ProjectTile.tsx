@@ -1,6 +1,5 @@
 import {
-  architectureColors,
-  architectureIcons,
+  architectureStyling,
   getProjectArchitecture,
   getProjectImage,
   getProjectName,
@@ -10,6 +9,7 @@ import {
 import { projectTileAnimation } from "../utils/AnimationUtils";
 import { useEffect, useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
+import ArchitectureTile from "./ArchitectureTile";
 
 export function ProjectTile({ dataID }: ProjectProps) {
   const { isMobile } = useGlobalState();
@@ -69,21 +69,14 @@ export function ProjectPreview({ dataID }: ProjectProps) {
         {getProjectArchitecture(dataID)
           .filter((item) => item.startsWith("*"))
           .map((item, index) => {
-            const cleanItem = item.replace("*", "");
-            const color = architectureColors[cleanItem];
-            const icon = architectureIcons[cleanItem];
-
             return (
-              <small
-                style={{
-                  backgroundColor: color,
-                }}
+              <ArchitectureTile
+                architecture={item}
                 key={index}
-                className="item"
-              >
-                <span className="icon">{icon}</span>
-                {cleanItem}
-              </small>
+                classNameContainer="item"
+                classNameIcon="icon"
+                preview={true}
+              />
             );
           })}
       </span>

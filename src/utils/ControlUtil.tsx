@@ -29,6 +29,9 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const { closeMenu, startTransition, endTransition } = pixelTransition();
   const navigate = useNavigate();
   const { scrollToTop } = scrollingAnimation();
+  const minMaxWidth = getComputedStyle(document.documentElement)
+    .getPropertyValue("--minMaxWidth")
+    .trim();
 
   useEffect(() => {
     handleResize();
@@ -40,7 +43,7 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
 
   // handle window resize, set mobile state
   function handleResize() {
-    setIsMobile(window.matchMedia("(max-width: 1000px)").matches);
+    setIsMobile(window.matchMedia(`(max-width: ${minMaxWidth})`).matches);
     window.addEventListener("resize", handleResize);
   }
 

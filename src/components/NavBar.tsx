@@ -6,6 +6,7 @@ import {
   RiMoonLine,
   RiMenu4Line,
   RiCloseFill,
+  RiCloseLargeFill,
 } from "react-icons/ri";
 
 export default function NavBar() {
@@ -82,7 +83,7 @@ export default function NavBar() {
       <div className="menu">
         {/* menu close button */}
         <a className="closeButton" onClick={() => closeMenu()}>
-          <RiCloseFill />
+          <RiCloseLargeFill size={24}/>
         </a>
         {/* menu about button */}
         <a onClick={() => executeTransition("about", true)}>about</a>

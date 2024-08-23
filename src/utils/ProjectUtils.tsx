@@ -30,35 +30,6 @@ import BellHospital1 from "../assets/ImageBellHospital1.webp";
 import BellHospital2 from "../assets/ImageBellHospital1.webp";
 import BellHospitalReport from "../assets/FileBellHospital.PDF";
 //
-import { BiLogoTypescript, BiLogoFirebase } from "react-icons/bi";
-import {
-  FaReact,
-  FaHtml5,
-  FaCss3Alt,
-  FaSass,
-  FaGitAlt,
-  FaBootstrap,
-  FaRegFile,
-  FaJava,
-  FaPython,
-} from "react-icons/fa";
-import {
-  SiFlask,
-  SiDjango,
-  SiXampp,
-  SiPhp,
-  SiMicrosoftsqlserver,
-  SiCsharp,
-  SiDotnet,
-} from "react-icons/si";
-import { GoPackage, GoCommandPalette } from "react-icons/go";
-import { GrMysql } from "react-icons/gr";
-import {
-  RiFilePdf2Line,
-  RiGithubLine,
-  RiLinkedinBoxLine,
-} from "react-icons/ri";
-//
 const ApolloHospitalGithub = "https://github.com/shadowisf/ApolloHospital";
 const CircuitCentralGithub = "https://github.com/shadowisf/CircuitCentral";
 const PlugInsDatabaseGithub = "https://github.com/shadowisf/PlugInsDatabase";
@@ -70,6 +41,7 @@ export const aboutSkillset = {
     // 3 for expert
     // 2 for intermediate
     // 1 for beginner
+    // 0 for planning to learn
     "2typescript",
     "2react",
     "3html",
@@ -81,126 +53,178 @@ export const aboutSkillset = {
     "1c-sharp",
     "2java",
     "2python",
-    "3windows forms",
-    "3microsoft sql server",
-    "2django",
-    "2flask",
+    "2windows forms",
+    "2microsoft sql server",
+    "1django",
+    "1flask",
     "3xampp",
     "1php",
-    "2mysql",
+    "1mysql",
+    "2javascript",
+    "0postgresql",
+    "0restful api",
+    "0angular",
+    "0vue",
+    "0svelte",
+    "0tailwind css"
   ],
 };
 //
-export const architectureIcons: Record<string, JSX.Element> = {
-  typescript: <BiLogoTypescript />,
-  react: <FaReact />,
-  html: <FaHtml5 />,
-  css: <FaCss3Alt />,
-  sass: <FaSass />,
-  firebase: <BiLogoFirebase />,
-  git: <FaGitAlt />,
-  "c-sharp": <SiCsharp />,
-  "windows forms": <SiDotnet />,
-  "microsoft sql server": <SiMicrosoftsqlserver />,
-  java: <FaJava />,
-  flask: <SiFlask />,
-  django: <SiDjango />,
-  "bootstrap css": <FaBootstrap />,
-  xampp: <SiXampp />,
-  swing: <GoPackage />,
-  cli: <GoCommandPalette />,
-  "file handling": <FaRegFile />,
-  php: <SiPhp />,
-  mysql: <GrMysql />,
-  python: <FaPython />,
-
-  /* typescript: <BiLogoTypescript fill="var(--accent-color)" />,
-  react: <FaReact fill="var(--accent-color)" />,
-  html: <FaHtml5 fill="var(--accent-color)" />,
-  css: <FaCss3Alt fill="var(--accent-color)" />,
-  sass: <FaSass fill="var(--accent-color)" />,
-  firebase: <BiLogoFirebase fill="var(--accent-color)" />,
-  git: <FaGitAlt fill="var(--accent-color)" />,
-  "c-sharp": <SiCsharp fill="var(--accent-color)" />,
-  "windows forms": <SiDotnet fill="var(--accent-color)" />,
-  "microsoft sql server": <SiMicrosoftsqlserver fill="var(--accent-color)" />,
-  java: <FaJava fill="var(--accent-color)" />,
-  flask: <SiFlask fill="var(--accent-color)" />,
-  django: <SiDjango fill="var(--accent-color)" />,
-  "bootstrap css": <FaBootstrap fill="var(--accent-color)" />,
-  xampp: <SiXampp fill="var(--accent-color)" />,
-  swing: <GoPackage fill="var(--accent-color)" />,
-  cli: <GoCommandPalette fill="var(--accent-color)" />,
-  "file handling": <FaRegFile fill="var(--accent-color)" />,
-  php: <SiPhp fill="var(--accent-color)" />, */
-
-  /* typescript: <BiLogoTypescript fill="rgb(49, 120, 198)" />,
-  react: <FaReact fill="rgb(98, 213, 250)" />,
-  html: <FaHtml5 fill="rgb(211, 88, 53)" />,
-  css: <FaCss3Alt fill="rgb(46, 107, 180)" />,
-  sass: <FaSass fill="#cc6699" />,
-  firebase: <IoLogoFirebase fill="rgb(240, 170, 63)" />,
-  git: <FaGitAlt fill="rgb(205, 86, 64)" />,
-  "c-sharp": <SiCsharp fill="rgb(148, 111, 211)" />,
-  "windows forms": <SiDotnet className="dotNet" fill="white" />,
-  "microsoft sql server": <SiMicrosoftsqlserver fill="rgb(184, 54, 53)" />,
-  java: <FaJava fill="rgb(223, 82, 65)" />,
-  flask: <SiFlask fill="rgb(53, 107, 114)" />,
-  django: <SiDjango fill="rgb(80, 157, 116)" />,
-  "bootstrap css": <FaBootstrap fill="#7952b3" />,
-  xampp: <SiXampp fill="rgb(234, 130, 61)" />,
-  swing: <GoPackage fill="var(--faded-color)" />,
-  cli: <AiOutlineMacCommand fill="var(--faded-color)" />,
-  "file handling": <FaRegFile fill="var(--faded-color)" />,
-  php: <SiPhp fill="#777BB4" />, */
-};
+import {
+  BiLogoTypescript,
+  BiLogoFirebase,
+  BiLogoJavascript,
+} from "react-icons/bi";
+import {
+  FaReact,
+  FaHtml5,
+  FaCss3Alt,
+  FaSass,
+  FaGitAlt,
+  FaBootstrap,
+  FaJava,
+  FaPython,
+  FaAngular,
+  FaVuejs,
+} from "react-icons/fa";
+import {
+  SiFlask,
+  SiDjango,
+  SiXampp,
+  SiPhp,
+  SiMicrosoftsqlserver,
+  SiCsharp,
+  SiDotnet,
+  SiPostgresql,
+  SiFramework,
+  SiSvelte,
+  SiTailwindcss,
+} from "react-icons/si";
+import { GoCommandPalette } from "react-icons/go";
+import { GrMysql } from "react-icons/gr";
+import {
+  RiFilePdf2Line,
+  RiGithubLine,
+  RiLinkedinBoxLine,
+} from "react-icons/ri";
 //
-export const architectureColors: Record<string, string> = {
-  /* typescript: "rgba(49, 120, 198, 0.8",
-  react: "rgba(98, 213, 250, 0.75)",
-  html: "rgb(211, 88, 53)",
-  css: "rgb(46, 107, 180)",
-  sass: "#cc6699",
-  firebase:
-    "linear-gradient(90deg, rgb(240, 170, 63) 0%, rgb(231, 136, 53) 50%, rgb(244, 204, 91) 100%)",
-  git: "rgb(205, 86, 64)",
-  "c-sharp": "rgb(148, 111, 211)",
-  "windows forms": "rgb(98, 97, 233)",
-  "microsoft sql server": "linear-gradient(90deg, rgb(184, 54, 53) 0%, rgb(146, 156, 168) 100%)",
-  java: "linear-gradient(90deg, rgb(217, 58, 50) 0%, rgb(62, 136, 194) 100%)",
-  flask: "rgb(53, 107, 114)",
-  django: "rgb(80, 157, 116)",
-  "bootstrap css": "#7952b3",
-  xampp: "rgb(234, 130, 61)",
-  swing: "var(--faded-color)",
-  cli: "var(--faded-color)",
-  "file handling": "var(--faded-color)",
-  php: "#777BB4",
-  mysql: "linear-gradient(90deg, rgb(43, 101, 139) 0%, rgb(215, 145, 58) 100%)",
-  python:
-    "linear-gradient(90deg, rgb(70, 119, 175) 0%, rgb(247, 204, 76) 100%)", */
 
-  typescript: "rgb(49, 120, 198)",
-  react: "rgb(77, 167, 197)",
-  html: "rgb(211, 88, 53)",
-  css: "rgb(46, 107, 180)",
-  sass: "#cc6699",
-  firebase: "rgb(222, 157, 58)",
-  git: "rgb(205, 86, 64)",
-  "c-sharp": "rgb(148, 111, 211)",
-  "windows forms": "rgb(98, 97, 233)",
-  "microsoft sql server": "rgb(184, 54, 53)",
-  java: "rgb(223, 82, 65)",
-  flask: "rgb(53, 107, 114)",
-  django: "rgb(80, 157, 116)",
-  "bootstrap css": "#7952b3",
-  xampp: "rgb(234, 130, 61)",
-  swing: "var(--faded-color)",
-  cli: "var(--faded-color)",
-  "file handling": "var(--faded-color)",
-  php: "#777BB4",
-  mysql: "rgb(41, 96, 132)",
-  python: "rgb(225, 181, 75)",
+export const architectureStyling: Record<
+  string,
+  { icon: JSX.Element; color: string }
+> = {
+  typescript: {
+    icon: <BiLogoTypescript />,
+    color: "rgb(49, 120, 198)",
+  },
+  react: {
+    icon: <FaReact />,
+    color: "rgb(77, 167, 197)",
+  },
+  html: {
+    icon: <FaHtml5 />,
+    color: "rgb(211, 88, 53)",
+  },
+  css: {
+    icon: <FaCss3Alt />,
+    color: "rgb(46, 107, 180)",
+  },
+  sass: {
+    icon: <FaSass />,
+    color: "#cc6699",
+  },
+  firebase: {
+    icon: <BiLogoFirebase />,
+    color: "rgb(222, 157, 58)",
+  },
+  git: {
+    icon: <FaGitAlt />,
+    color: "rgb(205, 86, 64)",
+  },
+  "c-sharp": {
+    icon: <SiCsharp />,
+    color: "rgb(148, 111, 211)",
+  },
+  "windows forms": {
+    icon: <SiDotnet />,
+    color: "rgb(98, 97, 233)",
+  },
+  "microsoft sql server": {
+    icon: <SiMicrosoftsqlserver />,
+    color: "rgb(184, 54, 53)",
+  },
+  java: {
+    icon: <FaJava />,
+    color: "rgb(223, 82, 65)",
+  },
+  flask: {
+    icon: <SiFlask />,
+    color: "rgb(53, 107, 114)",
+  },
+  django: {
+    icon: <SiDjango />,
+    color: "rgb(80, 157, 116)",
+  },
+  "bootstrap css": {
+    icon: <FaBootstrap />,
+    color: "#7952b3",
+  },
+  xampp: {
+    icon: <SiXampp />,
+    color: "rgb(234, 130, 61)",
+  },
+  swing: {
+    icon: <SiFramework />,
+    color: "var(--faded-color)",
+  },
+  cli: {
+    icon: <GoCommandPalette />,
+    color: "var(--faded-color)",
+  },
+  "file handling": {
+    icon: <SiFramework />,
+    color: "var(--faded-color)",
+  },
+  php: {
+    icon: <SiPhp />,
+    color: "#777BB4",
+  },
+  mysql: {
+    icon: <GrMysql />,
+    color: "rgb(41, 96, 132)",
+  },
+  python: {
+    icon: <FaPython />,
+    color: "rgb(70, 109, 150)",
+  },
+  postgresql: {
+    icon: <SiPostgresql />,
+    color: "rgb(64, 101, 141)",
+  },
+  javascript: {
+    icon: <BiLogoJavascript />,
+    color: "rgb(210, 174, 68)",
+  },
+  "restful api": {
+    icon: <SiFramework />,
+    color: "var(--faded-color)",
+  },
+  angular: {
+    icon: <FaAngular />,
+    color: "rgb(167, 58, 56)",
+  },
+  vue: {
+    icon: <FaVuejs />,
+    color: "rgb(100, 181, 135)",
+  },
+  svelte: {
+    icon: <SiSvelte />,
+    color: "rgb(235, 79, 39)",
+  },
+  "tailwind css": {
+    icon: <SiTailwindcss />,
+    color: "rgb(94, 200, 183)",
+  },
 };
 //
 export const projectData = [
@@ -402,7 +426,14 @@ export const projectData = [
     id: 3,
     name: "apollo hospital",
     year: "2023",
-    architecture: ["flask", "*django", "*html", "*bootstrap css", "*xampp"],
+    architecture: [
+      "flask",
+      "*django",
+      "*javascript",
+      "*html",
+      "*bootstrap css",
+      "*xampp",
+    ],
     image: [ApolloHospital1, ApolloHospital2],
     imageAlts: [
       "first image of the apollo hospital project; it is viewing the home page wherein it displays an illustration of a doctor treating its patient, with the title of the website whch is apollo hospital.",

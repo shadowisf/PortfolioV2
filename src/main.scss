@@ -2,9 +2,6 @@ $primaryFont: "Kyiv Type Sans";
 
 $borderRadius: 8px;
 
-$minMaxWidth: 1050px;
-$makeNavBackgroundWidth: $minMaxWidth + 200px;
-
 $lightBoxShadow: rgba(0, 0, 0, 0.25);
 $darkBoxShadow: rgba(0, 0, 0, 0.5);
 $boxShadow: 0 0 48px 1px light-dark($lightBoxShadow, $darkBoxShadow);
@@ -18,7 +15,11 @@ $fontVarThin: "wght" 1000, "CONT" 1000;
 
 $scaleOnHover: 1.05;
 
+$minMaxWidth: 1030px;
+$makeNavBackgroundWidth: $minMaxWidth;
 :root {
+  --minMaxWidth: 1030px;
+
   --theme: light dark;
 
   --text-color: light-dark(black, white);
@@ -38,6 +39,7 @@ $scaleOnHover: 1.05;
   --h6: 1.2rem;
   --p: 1rem;
   --small: 0.833rem;
+  --smaller: calc(var(--small) / 1.25);
 }
 
 // wrappers
@@ -111,6 +113,7 @@ $scaleOnHover: 1.05;
       gap: 1rem;
       display: flex;
       width: fit-content;
+      white-space: nowrap;
     }
 
     .links {
@@ -148,7 +151,6 @@ $scaleOnHover: 1.05;
 
         .item {
           border-radius: $borderRadius;
-          font-weight: bolder;
 
           display: flex;
           gap: 0.5rem;
@@ -160,7 +162,6 @@ $scaleOnHover: 1.05;
 
           box-shadow: $boxShadow;
 
-          font-weight: bolder;
           text-align: center;
           white-space: nowrap;
 
@@ -245,15 +246,38 @@ $scaleOnHover: 1.05;
       text-align: center;
     }
 
-    .desktopBackToHomeButton {
-      font-variation-settings: $fontVarNormal;
-      transition: font-variation-settings 0.5s, scale 0.25s, color 0.25s;
+    .nextPrevButton {
+      transition: scale 0.25s, color 0.25s;
+
+      &:hover::before {
+        content: attr(data-tooltip);
+        position: absolute;
+        top: -50%;
+        left: 50%;
+        transform: translate(-50%, 0.5rem);
+        background-color: var(--faded-color);
+        color: var(--text-color);
+        padding: 0.5rem;
+        font-size: var(--smaller);
+        pointer-events: none;
+        font-weight: 400;
+        white-space: nowrap;
+        border-radius: $borderRadius;
+      }
 
       &:hover {
         color: var(--accent-color);
         scale: $scaleOnHover;
-        font-variation-settings: $fontVarThin;
         cursor: pointer;
+      }
+
+      span {
+        transition: font-variation-settings 0.5s;
+        font-variation-settings: $fontVarNormal;
+      }
+
+      &:hover span {
+        font-variation-settings: $fontVarThin;
       }
     }
   }
@@ -277,14 +301,13 @@ $scaleOnHover: 1.05;
 
     .item {
       border-radius: $borderRadius;
-      font-weight: bolder;
+      box-shadow: $boxShadow;
 
       display: flex;
       gap: 0.5rem;
 
       align-items: center;
       justify-content: center;
-      box-shadow: $boxShadow;
 
       padding: 0.5rem 0.75rem;
 
@@ -339,7 +362,7 @@ $scaleOnHover: 1.05;
     "AAAA AAAA"
     "BBBB CCCC";
   row-gap: 8rem;
-  column-gap: 4rem;
+  column-gap: 12rem;
 
   .bio {
     grid-area: AAAA;
@@ -350,7 +373,8 @@ $scaleOnHover: 1.05;
     img {
       box-shadow: $boxShadow;
       border-radius: $borderRadius;
-      width: 35%;
+      width: 375px;
+      max-width: 35%;
 
       pointer-events: none;
     }
@@ -513,6 +537,10 @@ p {
 
 small {
   font-size: var(--small);
+
+  &.smaller {
+    font-size: var(--smaller);
+  }
 }
 
 html {
@@ -724,6 +752,8 @@ nav {
   }
 
   .themeButton {
+    position: relative;
+
     svg {
       display: flex;
     }
@@ -789,8 +819,8 @@ footer {
     position: absolute;
     top: 0;
     right: 0;
-    margin-top: 2rem;
-    margin-right: 2rem;
+    margin-top: 1.25rem;
+    margin-right: 0.75rem;
   }
 
   a {
@@ -845,6 +875,7 @@ footer {
     --h6: 1.125rem;
     --p: 1rem;
     --small: 0.889rem;
+    --smaller: calc(var(--small) / 1.25);
   }
 
   .aboutWrapper {
@@ -863,15 +894,8 @@ footer {
       flex-direction: column;
       gap: 0;
 
-      .desktopHeader {
-        display: none;
-      }
-
-      .mobileHeader {
-        display: block;
-      }
-
       img {
+        margin-top: 1rem;
         width: 400px;
         max-width: 100%;
       }
@@ -902,19 +926,6 @@ footer {
 
   .projectWrapper {
     max-width: $maxWidthMobile;
-
-    .mobileBackToHomeButton {
-      display: flex;
-    }
-
-    .header {
-      justify-content: center;
-      gap: 4rem;
-
-      .desktopBackToHomeButton {
-        display: none;
-      }
-    }
   }
 
   nav {
@@ -943,33 +954,58 @@ footer {
 
 // desktop screen
 @media screen and (min-width: $minMaxWidth) {
-  .projectWrapper {
-    .mobileBackToHomeButton {
-      display: none;
-    }
-
-    .header {
-      .desktopBackToHomeButton {
-        display: flex;
-      }
-    }
-  }
-
   nav {
     .hamburgerButton {
       display: none;
     }
   }
+}
 
-  .aboutWrapper {
-    .bio {
-      .desktopHeader {
-        display: block;
-      }
+.test {
+  .buttons-container {
+    padding: 2rem 0;
+    display: inline-flex;
+    text-align: left;
+    font-size: 1.35em;
+  }
 
-      .mobileHeader {
-        display: none;
-      }
-    }
+  label {
+    display: block;
+  }
+
+  .container {
+    width: 96vw;
+    margin-left: 2vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .item {
+    display: inline-flex;
+    width: 200px;
+    height: 150px;
+    margin: 5px;
+  }
+
+  .logo {
+    position: absolute;
+    width: 60px;
+    bottom: 20px;
+    right: 30px;
+  }
+
+  .purple {
+    background-color: rgb(125, 70, 150);
+  }
+
+  .green {
+    background-color: green;
+  }
+
+  .orange {
+    background-color: orange;
   }
 }

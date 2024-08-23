@@ -1,6 +1,5 @@
 import {
-  architectureColors,
-  architectureIcons,
+  architectureStyling,
   getProjectArchitecture,
   getProjectContent,
   getProjectImage,
@@ -15,6 +14,7 @@ import mediumZoom from "medium-zoom";
 import gsap from "gsap";
 import { useGlobalState } from "../utils/ControlUtil";
 import { useGSAP } from "@gsap/react";
+import ArchitectureTile from "../components/ArchitectureTile";
 
 export default function Project({ dataID }: ProjectProps) {
   const [ifData5, setIfData5] = useState(false);
@@ -56,44 +56,31 @@ export default function Project({ dataID }: ProjectProps) {
 
   return (
     <main className="projectWrapper">
-      <span
-        className="mobileBackToHomeButton"
-        onClick={() => executeTransition("/", false)}
-      >
-        ←<span>back</span>
-      </span>
-      <div className="header">
-        <h1
-          className="desktopBackToHomeButton"
-          onClick={() => executeTransition("/", false)}
-        >
-          ←
+      <section className="header">
+        <h1 className="nextPrevButton" data-tooltip="previous project">
+          <span>←</span>
         </h1>
         <h1 className="title accent">{getProjectName(dataID)}</h1>
-        <h1
-          className="desktopBackToHomeButton"
-          style={{ visibility: "hidden", pointerEvents: "none" }}
-        >
-          →
+        <h1 className="nextPrevButton" data-tooltip="next project">
+          <span>→</span>
         </h1>
-      </div>
+      </section>
 
-      <div className="architecture">
+      <section className="architecture">
         {getProjectArchitecture(dataID).map((item, index) => {
-          const cleanItem = item.replace("*", "");
-          const color = architectureColors[cleanItem];
-          const icon = architectureIcons[cleanItem];
-
           return (
-            <p key={index} className="item" style={{ backgroundColor: color }}>
-              {<span className="icon">{icon}</span>}
-              {item.replace("*", "")}
-            </p>
+            <ArchitectureTile
+              architecture={item}
+              key={index}
+              classNameContainer="item"
+              classNameIcon="icon"
+              preview={false}
+            />
           );
         })}
-      </div>
+      </section>
 
-      <div className="content">
+      <section className="content">
         <div className="paragraph">{getProjectContent(dataID)}</div>
 
         {ifData5 ? (
@@ -117,19 +104,13 @@ export default function Project({ dataID }: ProjectProps) {
             />
           ))}
         </div>
-      </div>
+      </section>
 
-      <div className="bottomNav">
-        {/* <a>
-          ← <span>previous</span>
-        </a> */}
+      <section className="bottomNav">
         <a onClick={() => scrollToTop(0.25)}>
           ↑ <span>scroll to top</span>
         </a>
-        {/* <a>
-          → <span>next</span>
-        </a> */}
-      </div>
+      </section>
     </main>
   );
 }
