@@ -3,14 +3,17 @@ import { Fragment } from "react/jsx-runtime";
 //
 import PortfolioOriginal1 from "../assets/ImageOriginalPortfolio1.webp";
 import PortfolioOriginal2 from "../assets/ImageOriginalPortfolio2.webp";
+import PortfolioOriginalVideo from "../assets/VideoOldPortfolio.webm";
 //
 import PortfolioNew1 from "../assets/ImageNewPortfolio1.png";
 import PortfolioNew2 from "../assets/ImageNewPortfolio2.png";
 import PortfolioNew3 from "../assets/ImageNewPortfolio3.png";
+import PortfolioNewVideo from "../assets/VideoNewPortfolio.webm";
 //
 import ApolloHospital1 from "../assets/ImageApolloHospital1.webp";
 import ApolloHospital2 from "../assets/ImageApolloHospital2.webp";
 import ApolloHospitalReport from "../assets/FileApolloHospital.PDF";
+import ApolloHospitalVideo from "../assets/VideoApolloHospital.webm";
 //
 import CircuitCentral1 from "../assets/ImageCircuitCentral1.webp";
 import CircuitCentral2 from "../assets/ImageCircuitCentral2.webp";
@@ -59,14 +62,14 @@ export const aboutSkillset = {
     "1flask",
     "3xampp",
     "1php",
-    "1mysql",
+    "2mysql",
     "2javascript",
-    "0postgresql",
-    "0restful api",
-    "0angular",
-    "0vue",
-    "0svelte",
-    "0tailwind css"
+    //"0postgresql",
+    //"0restful api",
+    //"0angular",
+    //"0vue",
+    //"0svelte",
+    //"0tailwind css"
   ],
 };
 //
@@ -241,6 +244,7 @@ export const projectData = [
       "git",
     ],
     image: [PortfolioNew1, PortfolioNew2, PortfolioNew3],
+    video: PortfolioNewVideo,
     imageAlts: ["LOL", "LMAO"],
     content: (
       <p>
@@ -297,6 +301,7 @@ export const projectData = [
       "git",
     ],
     image: [PortfolioOriginal1, PortfolioOriginal2],
+    video: PortfolioOriginalVideo,
     imageAlts: [
       "image of the about section in my portfolio project. it has a cartoon illustration of me and and text introducing myself.",
       "image of the project section in my portfolio project. it is currently viewing the circuitcentral project, displaying a short description and its tech stack. additionally, there's links to its github repository and technical report.",
@@ -435,6 +440,7 @@ export const projectData = [
       "*xampp",
     ],
     image: [ApolloHospital1, ApolloHospital2],
+    video: ApolloHospitalVideo,
     imageAlts: [
       "first image of the apollo hospital project; it is viewing the home page wherein it displays an illustration of a doctor treating its patient, with the title of the website whch is apollo hospital.",
       "second image of the apollo hospital project; it is viewing the patient records section wherein it displays the list of patient information. additionally, the ui has buttons for CRUD operations.",
@@ -611,6 +617,10 @@ export function getProjectName(dataID: number) {
   return projectData.find((proj) => proj.id === dataID)?.name;
 }
 
+export function getProjectVideo(dataID: number) {
+  return projectData.find((proj) => proj.id === dataID)?.video;
+}
+
 export function getProjectYear(dataID: number) {
   const project = projectData.find((proj) => proj.id === dataID);
   return project ? project.year : [];
@@ -641,7 +651,7 @@ export function getProjectArchitecture(dataID: number) {
   return project ? project.architecture : [];
 }
 
-export function getProjectIDs() {
+export function getAllProjectIDs() {
   return projectData.map((proj) => proj.id);
 }
 

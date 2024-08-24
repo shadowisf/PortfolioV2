@@ -12,11 +12,13 @@ import { useGlobalState } from "../utils/ControlUtil";
 import gsap from "gsap";
 import { Flip } from "gsap/all";
 import ArchitectureTile from "../components/ArchitectureTile";
+import { scrollingAnimation } from "../utils/AnimationUtils";
 
 gsap.registerPlugin(Flip);
 
 export default function About() {
   const { setCurrentPage, isMobile } = useGlobalState();
+  const { scrollToTop } = scrollingAnimation();
   const bioHeader = document.querySelector(".aboutWrapper .bioHeader");
   const bioContainer = document.querySelector(".aboutWrapper .bio");
   const bioTextContainer = document.querySelector(".aboutWrapper .bio .text");
@@ -26,6 +28,7 @@ export default function About() {
 
   useEffect(() => {
     setCurrentPage("about");
+    scrollToTop(0);
   }, []);
 
   useEffect(() => {
@@ -52,7 +55,35 @@ export default function About() {
     timelineHeader?.classList.remove("extra");
   }
 
-  function getSkillsetValue(event: ChangeEvent<HTMLSelectElement>) {
+  function resetSkillset() {
+    const allSkills = gsap.utils.toArray(".skills .item") as HTMLElement[];
+
+    const state = Flip.getState(allSkills);
+
+    allSkills.forEach((skill) => {
+      gsap.set(skill, { display: "flex" });
+    });
+
+    Flip.from(state, {
+      duration: 0.7,
+      ease: "power2.inOut",
+      stagger: {
+        each: 0.08,
+        from: "start",
+      },
+      absolute: true,
+      onEnter: (elements) =>
+        gsap.fromTo(
+          elements,
+          { opacity: 0, scale: 0 },
+          { opacity: 1, scale: 1, duration: 1 }
+        ),
+      onLeave: (elements) =>
+        gsap.to(elements, { opacity: 0, scale: 0, duration: 1 }),
+    });
+  }
+
+  function filterSkillset(event: ChangeEvent<HTMLSelectElement>) {
     const selectedValue = event.target.value;
     const allSkills = gsap.utils.toArray(".skills .item") as HTMLElement[];
 
@@ -60,16 +91,16 @@ export default function About() {
 
     if (selectedValue === "-1") {
       allSkills.forEach((skill) => {
-        skill.style.display = "flex";
+        gsap.set(skill, { display: "flex" });
       });
     } else {
       allSkills.forEach((skill) => {
         const dataKey = skill.getAttribute("data-key");
 
         if (dataKey?.startsWith(selectedValue)) {
-          skill.style.display = "flex";
+          gsap.set(skill, { display: "flex" });
         } else {
-          skill.style.display = "none";
+          gsap.set(skill, { display: "none" });
         }
       });
     }
@@ -77,7 +108,10 @@ export default function About() {
     Flip.from(state, {
       duration: 0.7,
       ease: "power2.inOut",
-      stagger: 0.08,
+      stagger: {
+        each: 0.08,
+        from: "start",
+      },
       absolute: true,
       onEnter: (elements) =>
         gsap.fromTo(
@@ -116,68 +150,72 @@ export default function About() {
         </div>
       </section>
 
-      <section className="timeline">
-        <h1>my life's arc</h1>
-        <div>
-          <TimelineRow
-            img={<RiCake2Line size={40} fill="var(--accent-color)" />}
-            verticalLine={true}
-          >
-            born in davao city, philippines <br />
-            <span className="faded">february 15, 2004</span>
-          </TimelineRow>
+      <section className="timelineAndSkillset">
+        <section className="timeline">
+          <h1>my life's arc</h1>
+          <div>
+            <TimelineRow
+              img={<RiCake2Line size={40} fill="var(--accent-color)" />}
+              verticalLine={true}
+            >
+              born in davao city, philippines <br />
+              <span className="faded">february 15, 2004</span>
+            </TimelineRow>
 
-          <TimelineRow
-            img={<RiMapPinLine size={40} fill="var(--accent-color)" />}
-            verticalLine={true}
-          >
-            moved to dubai, united arab emirates <br />
-            <span className="faded">may 12, 2012</span>
-          </TimelineRow>
+            <TimelineRow
+              img={<RiMapPinLine size={40} fill="var(--accent-color)" />}
+              verticalLine={true}
+            >
+              moved to dubai, united arab emirates <br />
+              <span className="faded">may 12, 2012</span>
+            </TimelineRow>
 
-          <TimelineRow
-            img={<RiGlasses2Line size={40} fill="var(--accent-color)" />}
-            verticalLine={true}
-          >
-            first pair of eyeglasses <br />
-            <span className="faded">april 6, 2018</span>
-          </TimelineRow>
+            <TimelineRow
+              img={<RiGlasses2Line size={40} fill="var(--accent-color)" />}
+              verticalLine={true}
+            >
+              first pair of eyeglasses <br />
+              <span className="faded">april 6, 2018</span>
+            </TimelineRow>
 
-          <TimelineRow
-            img={<RiGraduationCapLine size={40} fill="var(--accent-color)" />}
-            verticalLine={false}
-          >
-            graduated uob with bachelor in swe <br />
-            <span className="faded">???</span>
-          </TimelineRow>
-        </div>
-      </section>
+            <TimelineRow
+              img={<RiGraduationCapLine size={40} fill="var(--accent-color)" />}
+              verticalLine={false}
+            >
+              graduated uob with bachelor in swe <br />
+              <span className="faded">???</span>
+            </TimelineRow>
+          </div>
+        </section>
 
-      <section className="skillset">
-        <div className="header">
-          <h1>my skillset</h1>
-          <select onChange={(e) => getSkillsetValue(e)}>
-            <option value={"-1"}>all</option>
-            <option value={"3"}>expert</option>
-            <option value={"2"}>intermediate</option>
-            <option value={"1"}>beginner</option>
-            <option value={"0"}>planning to learn</option>
-          </select>
-        </div>
-        <div className="skills">
-          {getAboutSkillset().map((item) => {
-            return (
-              <ArchitectureTile
-                architecture={item}
-                classNameContainer="item"
-                classNameIcon="icon"
-                key={item}
-                dataKey={item}
-                preview={false}
-              />
-            );
-          })}
-        </div>
+        <section className="skillset">
+          <div className="header">
+            <h1>my skillset</h1>
+            <select
+              onMouseDown={() => resetSkillset()}
+              onChange={(e) => filterSkillset(e)}
+            >
+              <option value={"-1"}>all</option>
+              <option value={"3"}>expert</option>
+              <option value={"2"}>intermediate</option>
+              <option value={"1"}>beginner</option>
+            </select>
+          </div>
+          <div className="skills">
+            {getAboutSkillset().map((item) => {
+              return (
+                <ArchitectureTile
+                  architecture={item}
+                  classNameContainer="item"
+                  classNameIcon="icon"
+                  key={item}
+                  dataKey={item}
+                  preview={false}
+                />
+              );
+            })}
+          </div>
+        </section>
       </section>
     </main>
   );

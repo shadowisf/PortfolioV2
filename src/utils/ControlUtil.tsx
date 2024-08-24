@@ -54,12 +54,10 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
     } else if (currentPage === url && isMobile) {
       closeMenu();
     } else if (skipStart === true) {
-      scrollToTop(0);
       navigate(url);
       closeMenu();
     } else {
       startTransition(() => {
-        scrollToTop(0);
         navigate(url);
         endTransition();
       });

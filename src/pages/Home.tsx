@@ -1,6 +1,6 @@
 import { ProjectPreview, ProjectTile } from "../components/ProjectTile";
 import { LinkWithIconOnly } from "../components/Link";
-import { getProjectIDs } from "../utils/ProjectUtils";
+import { getAllProjectIDs } from "../utils/ProjectUtils";
 import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 import {
@@ -20,12 +20,12 @@ export default function Home() {
   return (
     <main className="homeWrapper">
       <section className="left">
-        {getProjectIDs().map((id) => (
+        {getAllProjectIDs().map((id) => (
           <ProjectTile key={id} dataID={id} />
         ))}
       </section>
       <section className="right">
-        {getProjectIDs().map((id) => (
+        {getAllProjectIDs().map((id) => (
           <ProjectPreview key={id} dataID={id} />
         ))}
 

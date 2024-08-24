@@ -88,8 +88,13 @@ export function projectTileAnimation(
   const togglePreview = contextSafe((targetID: number) => {
     previewContainer?.forEach((container) => {
       const dataKey = container.getAttribute("data-key");
+      const video = container.querySelector("video");
 
       if (dataKey === targetID.toString()) {
+        if (video) {
+          video?.play();
+        }
+
         gsap.to(container, animationEnter);
         gsap.to(heroContainer, animationExit);
       }
@@ -98,6 +103,12 @@ export function projectTileAnimation(
 
   const resetPreview = contextSafe(() => {
     previewContainer?.forEach((container) => {
+      const video = container.querySelector("video");
+      if (video) {
+        video.currentTime = 0;
+        video.pause();
+      }
+
       gsap.to(container, animationExit);
     });
     gsap.to(heroContainer, animationEnter);

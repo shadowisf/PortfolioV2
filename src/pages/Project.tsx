@@ -1,5 +1,4 @@
 import {
-  architectureStyling,
   getProjectArchitecture,
   getProjectContent,
   getProjectImage,

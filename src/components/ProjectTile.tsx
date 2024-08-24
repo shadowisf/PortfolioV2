@@ -1,8 +1,8 @@
 import {
-  architectureStyling,
   getProjectArchitecture,
   getProjectImage,
   getProjectName,
+  getProjectVideo,
   getProjectYear,
   ProjectProps,
 } from "../utils/ProjectUtils";
@@ -64,7 +64,11 @@ export function ProjectTile({ dataID }: ProjectProps) {
 export function ProjectPreview({ dataID }: ProjectProps) {
   return (
     <div data-key={dataID} className="preview">
-      <img src={getProjectImage(dataID)[0]} />
+      {getProjectVideo(dataID) ? (
+        <video loop muted src={getProjectVideo(dataID)} />
+      ) : (
+        <img src={getProjectImage(dataID)[0]} />
+      )}
       <span className="architecture">
         {getProjectArchitecture(dataID)
           .filter((item) => item.startsWith("*"))

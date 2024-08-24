@@ -132,7 +132,7 @@ $makeNavBackgroundWidth: $minMaxWidth;
       visibility: hidden;
       scale: 0.95;
 
-      img {
+      img, video {
         border-radius: $borderRadius;
         width: 100%;
         height: auto;
@@ -255,7 +255,6 @@ $makeNavBackgroundWidth: $minMaxWidth;
         top: -50%;
         left: 50%;
         transform: translate(-50%, 0.5rem);
-        background-color: var(--faded-color);
         color: var(--text-color);
         padding: 0.5rem;
         font-size: var(--smaller);
@@ -357,12 +356,9 @@ $makeNavBackgroundWidth: $minMaxWidth;
   margin: auto;
   padding: 8rem 0;
 
-  display: grid;
-  grid-template:
-    "AAAA AAAA"
-    "BBBB CCCC";
-  row-gap: 8rem;
-  column-gap: 12rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
 
   .bio {
     grid-area: AAAA;
@@ -380,97 +376,104 @@ $makeNavBackgroundWidth: $minMaxWidth;
     }
   }
 
-  .timeline {
-    grid-area: BBBB;
-
+  .timelineAndSkillset {
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    width: 100%;
+    gap: 8rem;
 
-    .verticalLine {
-      margin: 1rem 0;
-    }
+    .timeline {
+      grid-area: BBBB;
 
-    .timelineRow {
       display: flex;
-      align-items: center;
-      gap: 1rem;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
 
-      .timelineCaption {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
+      .verticalLine {
+        margin: 1rem 0;
       }
 
-      svg {
+      .timelineRow {
         display: flex;
         align-items: center;
-      }
-    }
-  }
+        gap: 1rem;
 
-  .skillset {
-    grid-area: CCCC;
+        .timelineCaption {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+        }
 
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-
-    .header {
-      display: flex;
-      align-items: center;
-
-      justify-content: space-between;
-
-      select {
-        border-radius: $borderRadius;
-        font-size: var(--small);
-        padding: 0.5rem;
-        font-family: $primaryFont;
-        background-color: var(--background-color);
-        border-radius: 0;
-        border: 2px solid var(--accent-color);
-        color: var(--faded-color);
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDE2IDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEuNSAyTDggN0wxNC41IDJMITFaIiBzdHJva2U9IiM4MTdlODMiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgLz48L3N2Zz4=");
-        background-repeat: no-repeat;
-        background-position: right 1rem center;
-        background-size: 12px 6px;
-        padding-right: 2.5rem;
-
-        &:focus {
-          outline: none;
+        svg {
+          display: flex;
+          align-items: center;
         }
       }
     }
 
-    .skills {
+    .skillset {
+      grid-area: CCCC;
+
+      width: 100%;
+
       display: flex;
-      justify-content: center;
-      gap: 0.5rem;
+      flex-direction: column;
+      gap: 2rem;
 
-      flex-wrap: wrap;
-
-      .item {
-        flex: 1;
-        padding: 0.5rem 0.75rem;
-        border-radius: $borderRadius;
-
-        white-space: nowrap;
-
-        text-align: center;
-
+      .header {
         display: flex;
         align-items: center;
-        justify-content: center;
 
+        justify-content: space-between;
+
+        select {
+          border-radius: $borderRadius;
+          font-size: var(--small);
+          padding: 0.5rem;
+          font-family: $primaryFont;
+          background-color: var(--background-color);
+          border-radius: 0;
+          border: 2px solid var(--accent-color);
+          color: var(--faded-color);
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDE2IDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEuNSAyTDggN0wxNC41IDJMITFaIiBzdHJva2U9IiM4MTdlODMiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgLz48L3N2Zz4=");
+          background-repeat: no-repeat;
+          background-position: right 1rem center;
+          background-size: 12px 6px;
+          padding-right: 2.5rem;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+
+      .skills {
+        display: flex;
+        justify-content: center;
         gap: 0.5rem;
 
-        .icon {
+        flex-wrap: wrap;
+
+        .item {
+          flex: 1;
+          padding: 0.5rem 0.75rem;
+          border-radius: $borderRadius;
+
+          white-space: nowrap;
+
+          text-align: center;
+
           display: flex;
+          align-items: center;
+          justify-content: center;
+
+          gap: 0.5rem;
+
+          .icon {
+            display: flex;
+          }
         }
       }
     }
@@ -881,11 +884,6 @@ footer {
   .aboutWrapper {
     max-width: $maxWidthMobile;
 
-    grid-template:
-      "AAAA"
-      "BBBB"
-      "CCCC";
-
     h1 {
       text-align: center;
     }
@@ -898,6 +896,14 @@ footer {
         margin-top: 1rem;
         width: 400px;
         max-width: 100%;
+      }
+    }
+
+    .timelineAndSkillset {
+      flex-direction: column;
+
+      .skillset {
+        height: 350px;
       }
     }
   }
