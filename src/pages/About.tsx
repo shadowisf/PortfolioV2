@@ -7,25 +7,19 @@ import {
 } from "react-icons/ri";
 import ProfilePicture from "../assets/ImageProfile.jpeg";
 import { TimelineRow } from "../components/Timeline";
-import { getAboutSkillset } from "../utils/ProjectUtils";
 import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 import ArchitectureTile from "../components/ArchitectureTile";
 import { aboutAnimation, scrollingAnimation } from "../utils/AnimationUtils";
 import { LinkWithIcon } from "../components/Link";
 import CV from "../assets/FileCV.PDF";
+import { getAboutSkillset, Views } from "../utils/AboutUtils";
 
 export default function About() {
   const { setCurrentPage, isMobile } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
-  const bioHeader = document.querySelector(".aboutWrapper .bioHeader");
-  const bioContainer = document.querySelector(".aboutWrapper .bio");
-  const bioTextContainer = document.querySelector(".aboutWrapper .bio .text");
-
-  const skillsetHeader = document.querySelector(".aboutWrapper .skillset h1");
-  const timelineHeader = document.querySelector(".aboutWrapper .timeline h1");
-
   const { filterSkillset, resetSkillset } = aboutAnimation();
+  const { mobileView, desktopView } = Views();
 
   useEffect(() => {
     setCurrentPage("about");
@@ -41,20 +35,6 @@ export default function About() {
       desktopView();
     };
   }, [isMobile]);
-
-  function mobileView() {
-    bioContainer?.prepend(bioHeader ? bioHeader : "");
-
-    skillsetHeader?.classList.add("extra");
-    timelineHeader?.classList.add("extra");
-  }
-
-  function desktopView() {
-    bioTextContainer?.prepend(bioHeader ? bioHeader : "");
-
-    skillsetHeader?.classList.remove("extra");
-    timelineHeader?.classList.remove("extra");
-  }
 
   return (
     <main className="aboutWrapper">

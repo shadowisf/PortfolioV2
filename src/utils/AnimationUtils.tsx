@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Flip, ScrollToPlugin } from "gsap/all";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 
 gsap.registerPlugin(gsap, useGSAP, ScrollToPlugin, Flip);
 
@@ -156,6 +156,9 @@ export function aboutAnimation() {
   const { contextSafe } = useGSAP();
   const allSkills = gsap.utils.toArray(".skills .item") as HTMLElement[];
 
+  const [selectedValue, setSelectedValue] = useState("-1");
+  const [previousValue, setPreviousValue] = useState("-1");
+
   const resetSkillset = contextSafe(
     (event: React.MouseEvent<HTMLSelectElement>) => {
       if (event.button === 0) {
@@ -190,11 +193,14 @@ export function aboutAnimation() {
 
   const filterSkillset = contextSafe(
     (event: ChangeEvent<HTMLSelectElement>) => {
-      const selectedValue = event.target.value;
+      const newValue = event.target.value;
+
+      setPreviousValue(selectedValue);
+      setSelectedValue(newValue);
 
       const state = Flip.getState(allSkills);
 
-      if (selectedValue === "-1") {
+      if (newValue === "-1") {
         allSkills.forEach((skill) => {
           gsap.set(skill, { display: "flex" });
         });
@@ -202,7 +208,7 @@ export function aboutAnimation() {
         allSkills.forEach((skill) => {
           const dataKey = skill.getAttribute("data-key");
 
-          if (dataKey?.startsWith(selectedValue)) {
+          if (dataKey?.startsWith(newValue)) {
             gsap.set(skill, { display: "flex" });
           } else {
             gsap.set(skill, { display: "none" });

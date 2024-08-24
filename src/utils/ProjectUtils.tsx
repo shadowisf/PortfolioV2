@@ -1,5 +1,10 @@
 import { LinkWithIcon } from "../components/Link";
 import { Fragment } from "react/jsx-runtime";
+import {
+  RiFilePdf2Line,
+  RiGithubLine,
+  RiLinkedinBoxLine,
+} from "react-icons/ri";
 //
 import PortfolioOriginal1 from "../assets/ImageOriginalPortfolio1.webp";
 import PortfolioOriginal2 from "../assets/ImageOriginalPortfolio2.webp";
@@ -38,189 +43,6 @@ const CircuitCentralGithub = "https://github.com/shadowisf/CircuitCentral";
 const PlugInsDatabaseGithub = "https://github.com/shadowisf/PlugInsDatabase";
 const FunculatorGithub = "https://github.com/shadowisf/FunCulator";
 const BellHospitalGithub = "https://github.com/shadowisf/BellHospital";
-//
-export const aboutSkillset = {
-  architecture: [
-    // 3 for expert
-    // 2 for intermediate
-    // 1 for beginner
-    // 0 for planning to learn
-    "2typescript",
-    "2react",
-    "3html",
-    "3css",
-    "3bootstrap css",
-    "3sass",
-    "3git",
-    "2firebase",
-    "1c-sharp",
-    "2java",
-    "1python",
-    "2microsoft sql server",
-    "1windows forms",
-    "1django",
-    "1flask",
-    "3xampp",
-    "1php",
-    "2javascript",
-    "1swing",
-  ],
-};
-//
-import {
-  BiLogoTypescript,
-  BiLogoFirebase,
-  BiLogoJavascript,
-} from "react-icons/bi";
-import {
-  FaReact,
-  FaHtml5,
-  FaCss3Alt,
-  FaSass,
-  FaGitAlt,
-  FaBootstrap,
-  FaJava,
-  FaPython,
-  FaAngular,
-  FaVuejs,
-} from "react-icons/fa";
-import {
-  SiFlask,
-  SiDjango,
-  SiXampp,
-  SiPhp,
-  SiMicrosoftsqlserver,
-  SiCsharp,
-  SiPostgresql,
-  SiFramework,
-  SiSvelte,
-  SiTailwindcss,
-} from "react-icons/si";
-import { GoCommandPalette } from "react-icons/go";
-import { GrMysql } from "react-icons/gr";
-import {
-  RiFilePdf2Line,
-  RiGithubLine,
-  RiLinkedinBoxLine,
-} from "react-icons/ri";
-//
-export const architectureStyling: Record<
-  string,
-  { icon: JSX.Element; color: string }
-> = {
-  typescript: {
-    icon: <BiLogoTypescript />,
-    color: "rgb(49, 120, 198)",
-  },
-  react: {
-    icon: <FaReact />,
-    color: "rgb(77, 167, 197)",
-  },
-  html: {
-    icon: <FaHtml5 />,
-    color: "rgb(211, 88, 53)",
-  },
-  css: {
-    icon: <FaCss3Alt />,
-    color: "rgb(46, 107, 180)",
-  },
-  sass: {
-    icon: <FaSass />,
-    color: "#cc6699",
-  },
-  firebase: {
-    icon: <BiLogoFirebase />,
-    color: "rgb(222, 157, 58)",
-  },
-  git: {
-    icon: <FaGitAlt />,
-    color: "rgb(205, 86, 64)",
-  },
-  "c-sharp": {
-    icon: <SiCsharp />,
-    color: "rgb(148, 111, 211)",
-  },
-  "windows forms": {
-    icon: <SiFramework />,
-    color: "var(--faded-color)",
-  },
-  "microsoft sql server": {
-    icon: <SiMicrosoftsqlserver />,
-    color: "rgb(184, 54, 53)",
-  },
-  java: {
-    icon: <FaJava />,
-    color: "rgb(223, 82, 65)",
-  },
-  flask: {
-    icon: <SiFlask />,
-    color: "rgb(53, 107, 114)",
-  },
-  django: {
-    icon: <SiDjango />,
-    color: "rgb(80, 157, 116)",
-  },
-  "bootstrap css": {
-    icon: <FaBootstrap />,
-    color: "#7952b3",
-  },
-  xampp: {
-    icon: <SiXampp />,
-    color: "rgb(234, 130, 61)",
-  },
-  swing: {
-    icon: <SiFramework />,
-    color: "var(--faded-color)",
-  },
-  cli: {
-    icon: <GoCommandPalette />,
-    color: "var(--faded-color)",
-  },
-  "file handling": {
-    icon: <SiFramework />,
-    color: "var(--faded-color)",
-  },
-  php: {
-    icon: <SiPhp />,
-    color: "#777BB4",
-  },
-  mysql: {
-    icon: <GrMysql />,
-    color: "rgb(41, 96, 132)",
-  },
-  python: {
-    icon: <FaPython />,
-    color: "rgb(70, 109, 150)",
-  },
-  postgresql: {
-    icon: <SiPostgresql />,
-    color: "rgb(64, 101, 141)",
-  },
-  javascript: {
-    icon: <BiLogoJavascript />,
-    color: "rgb(210, 174, 68)",
-  },
-  "restful api": {
-    icon: <SiFramework />,
-    color: "var(--faded-color)",
-  },
-  angular: {
-    icon: <FaAngular />,
-    color: "rgb(167, 58, 56)",
-  },
-  vue: {
-    icon: <FaVuejs />,
-    color: "rgb(100, 181, 135)",
-  },
-  svelte: {
-    icon: <SiSvelte />,
-    color: "rgb(235, 79, 39)",
-  },
-  "tailwind css": {
-    icon: <SiTailwindcss />,
-    color: "rgb(94, 200, 183)",
-  },
-};
 //
 export const projectData = [
   {
@@ -596,10 +418,6 @@ export const projectData = [
     ),
   },
 ];
-
-export function getAboutSkillset() {
-  return aboutSkillset.architecture;
-}
 
 export type ProjectProps = {
   dataID: number;
