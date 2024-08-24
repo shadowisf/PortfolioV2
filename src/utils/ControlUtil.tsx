@@ -7,7 +7,11 @@ type GlobalStateContextType = {
   isMobile: boolean;
   currentPage: string;
   setCurrentPage: (url: string) => void;
-  executeTransition: (url: string, skipStart: boolean) => void;
+  executeTransition: (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    url: string,
+    skipStart: boolean
+  ) => void;
 };
 
 type GlobalStateProviderProps = {
@@ -48,21 +52,28 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   }
 
   // execute page transition
-  const executeTransition = contextSafe((url: string, skipStart?: boolean) => {
-    if (currentPage === url && !isMobile) {
-      return;
-    } else if (currentPage === url && isMobile) {
-      closeMenu();
-    } else if (skipStart === true) {
-      navigate(url);
-      closeMenu();
-    } else {
-      startTransition(() => {
+  const executeTransition = contextSafe(
+    (
+      event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+      url: string,
+      skipStart?: boolean
+    ) => {
+      event.preventDefault();
+      if (currentPage === url && !isMobile) {
+        return;
+      } else if (currentPage === url && isMobile) {
+        closeMenu();
+      } else if (skipStart === true) {
         navigate(url);
-        endTransition();
-      });
+        closeMenu();
+      } else {
+        startTransition(() => {
+          navigate(url);
+          endTransition();
+        });
+      }
     }
-  });
+  );
 
   return (
     <GlobalStateContext.Provider

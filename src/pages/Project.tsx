@@ -5,6 +5,7 @@ import {
   getProjectImageAlts,
   getProjectLinks,
   getProjectName,
+  getProjectVideo,
   ProjectProps,
 } from "../utils/ProjectUtils";
 import { useEffect, useState } from "react";
@@ -29,6 +30,7 @@ export default function Project({ dataID }: ProjectProps) {
     }
 
     setCurrentPage(title);
+    scrollToTop(0);
 
     const zoom = mediumZoom("img", {
       background: "var(--background-color)",
@@ -93,7 +95,7 @@ export default function Project({ dataID }: ProjectProps) {
           <div className="links">{getProjectLinks(dataID)}</div>
         )}
 
-        <div className="imageContainer">
+        <div className="media">
           {getProjectImage(dataID).map((item, index) => (
             <img
               loading="lazy"
@@ -102,6 +104,10 @@ export default function Project({ dataID }: ProjectProps) {
               alt={getProjectImageAlts(dataID)[index]}
             />
           ))}
+
+          {getProjectVideo(dataID) && (
+            <video controls muted src={getProjectVideo(dataID)} />
+          )}
         </div>
       </section>
 

@@ -132,7 +132,8 @@ $makeNavBackgroundWidth: $minMaxWidth;
       visibility: hidden;
       scale: 0.95;
 
-      img, video {
+      img,
+      video {
         border-radius: $borderRadius;
         width: 100%;
         height: auto;
@@ -337,12 +338,13 @@ $makeNavBackgroundWidth: $minMaxWidth;
     justify-content: space-around;
   }
 
-  .imageContainer {
+  .media {
     display: grid;
 
     gap: 2rem;
 
-    img {
+    img,
+    video {
       border-radius: $borderRadius;
       height: auto;
       width: 100%;

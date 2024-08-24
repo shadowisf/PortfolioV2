@@ -9,12 +9,15 @@ import {
   RiLinkedinBoxLine,
   RiMailLine,
 } from "react-icons/ri";
+import { scrollingAnimation } from "../utils/AnimationUtils";
 
 export default function Home() {
   const { setCurrentPage } = useGlobalState();
+  const { scrollToTop } = scrollingAnimation();
 
   useEffect(() => {
     setCurrentPage("/");
+    scrollToTop(0);
   }, []);
 
   return (

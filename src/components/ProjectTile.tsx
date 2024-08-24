@@ -10,6 +10,7 @@ import { projectTileAnimation } from "../utils/AnimationUtils";
 import { useEffect, useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 import ArchitectureTile from "./ArchitectureTile";
+import { Link } from "react-router-dom";
 
 export function ProjectTile({ dataID }: ProjectProps) {
   const { isMobile } = useGlobalState();
@@ -40,10 +41,9 @@ export function ProjectTile({ dataID }: ProjectProps) {
   }, []);
 
   return (
-    <div
-      onClick={() => {
-        executeTransition(title, false);
-      }}
+    <Link
+      to={`${title}`}
+      onClick={(e) => executeTransition(e, title, false)}
       className="tile hover all"
       onMouseEnter={() => {
         isMobile ? null : togglePreview(dataID);
@@ -57,7 +57,7 @@ export function ProjectTile({ dataID }: ProjectProps) {
     >
       <h5 className="title">{getProjectName(dataID)}</h5>
       <small className="year faded">{getProjectYear(dataID)}</small>
-    </div>
+    </Link>
   );
 }
 

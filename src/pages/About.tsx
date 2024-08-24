@@ -55,32 +55,36 @@ export default function About() {
     timelineHeader?.classList.remove("extra");
   }
 
-  function resetSkillset() {
-    const allSkills = gsap.utils.toArray(".skills .item") as HTMLElement[];
+  function resetSkillset(event: React.MouseEvent<HTMLSelectElement>) {
+    if (event.button === 0) {
+      const allSkills = gsap.utils.toArray(".skills .item") as HTMLElement[];
 
-    const state = Flip.getState(allSkills);
+      const state = Flip.getState(allSkills);
 
-    allSkills.forEach((skill) => {
-      gsap.set(skill, { display: "flex" });
-    });
+      allSkills.forEach((skill) => {
+        gsap.set(skill, { display: "flex" });
+      });
 
-    Flip.from(state, {
-      duration: 0.7,
-      ease: "power2.inOut",
-      stagger: {
-        each: 0.08,
-        from: "start",
-      },
-      absolute: true,
-      onEnter: (elements) =>
-        gsap.fromTo(
-          elements,
-          { opacity: 0, scale: 0 },
-          { opacity: 1, scale: 1, duration: 1 }
-        ),
-      onLeave: (elements) =>
-        gsap.to(elements, { opacity: 0, scale: 0, duration: 1 }),
-    });
+      Flip.from(state, {
+        duration: 0.7,
+        ease: "power2.inOut",
+        stagger: {
+          each: 0.08,
+          from: "start",
+        },
+        absolute: true,
+        onEnter: (elements) =>
+          gsap.fromTo(
+            elements,
+            { opacity: 0, scale: 0 },
+            { opacity: 1, scale: 1, duration: 1 }
+          ),
+        onLeave: (elements) =>
+          gsap.to(elements, { opacity: 0, scale: 0, duration: 1 }),
+      });
+    } else {
+      event.preventDefault();
+    }
   }
 
   function filterSkillset(event: ChangeEvent<HTMLSelectElement>) {
@@ -192,7 +196,7 @@ export default function About() {
           <div className="header">
             <h1>my skillset</h1>
             <select
-              onMouseDown={() => resetSkillset()}
+              onMouseDown={(e) => resetSkillset(e)}
               onChange={(e) => filterSkillset(e)}
             >
               <option value={"-1"}>all</option>

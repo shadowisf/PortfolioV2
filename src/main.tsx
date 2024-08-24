@@ -7,7 +7,6 @@ import { PixelGrid } from "./components/PixelGrid.tsx";
 import About from "./pages/About.tsx";
 import Home from "./pages/Home.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Test from "./pages/Test.tsx";
 import { getAllProjectIDs, getProjectName } from "./utils/ProjectUtils.tsx";
 import Project from "./pages/Project.tsx";
 import { Footer } from "./components/Footer.tsx";

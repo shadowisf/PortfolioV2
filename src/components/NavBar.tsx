@@ -5,9 +5,9 @@ import {
   RiSunLine,
   RiMoonLine,
   RiMenu4Line,
-  RiCloseFill,
   RiCloseLargeFill,
 } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
   const { openMenu, closeMenu } = pixelTransition();
@@ -44,25 +44,23 @@ export default function NavBar() {
   return (
     <Fragment>
       <nav>
-        <a
+        <Link
+          to={"/"}
           className="logoButton"
-          onClick={() => {
-            executeTransition("/", false);
-          }}
+          onClick={(e) => executeTransition(e, "/", false)}
         >
           ᜎ᜔ᜍ᜔
           {/* ᜎᜒᜐ᜔ ᜍᜈᜎᜈ᜔ */}
-        </a>
+        </Link>
 
         <span className="navButtons">
           {/* nav about button */}
-          <a
-            onClick={() => {
-              executeTransition("about", false);
-            }}
+          <Link
+            to={"about"}
+            onClick={(e) => executeTransition(e, "about", false)}
           >
             about
-          </a>
+          </Link>
 
           {/*  nav theme toggle button */}
           <span onClick={() => executeToggleTheme()} className="themeButton">
@@ -83,10 +81,14 @@ export default function NavBar() {
       <div className="menu">
         {/* menu close button */}
         <a className="closeButton" onClick={() => closeMenu()}>
-          <RiCloseLargeFill size={24}/>
+          <RiCloseLargeFill size={24} />
         </a>
+
         {/* menu about button */}
-        <a onClick={() => executeTransition("about", true)}>about</a>
+        <Link to={"about"} onClick={(e) => executeTransition(e, "about", true)}>
+          about
+        </Link>
+
         {/* menu theme button */}
         <a onClick={() => executeToggleTheme()} className="themeButton">
           {userTheme === "dark" ? <RiSunLine /> : <RiMoonLine />}
