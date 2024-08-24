@@ -138,6 +138,7 @@ $makeNavBackgroundWidth: $minMaxWidth;
         width: 100%;
         height: auto;
         box-shadow: $boxShadow;
+        background-color: var(--faded-color);
       }
 
       .architecture {
@@ -206,7 +207,7 @@ $makeNavBackgroundWidth: $minMaxWidth;
     display: flex;
     justify-content: center;
 
-    a {
+    h1 {
       text-align: center;
       justify-self: center;
 
@@ -225,6 +226,23 @@ $makeNavBackgroundWidth: $minMaxWidth;
         cursor: pointer;
         font-variation-settings: $fontVarThin;
       }
+
+      &:hover::before {
+        content: attr(data-tooltip);
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        transform: translate(-50%, 0.5rem);
+        color: var(--text-color);
+        padding: 0.5rem;
+        font-size: var(--smaller);
+        pointer-events: none;
+        font-weight: 400;
+        white-space: nowrap;
+        border-radius: $borderRadius;
+        font-variation-settings: $fontVarNormal;
+        text-align: center;
+      }
     }
   }
 
@@ -232,8 +250,35 @@ $makeNavBackgroundWidth: $minMaxWidth;
     display: grid;
     gap: 4rem;
 
-    img {
-      box-shadow: $boxShadow;
+    .media {
+      display: grid;
+
+      gap: 2rem;
+
+      img,
+      video {
+        border-radius: $borderRadius;
+        box-shadow: $boxShadow;
+        height: auto;
+        width: 100%;
+      }
+    }
+
+    .paragraph {
+      line-height: 2rem;
+
+      text-align: justify;
+    }
+
+    .links {
+      display: flex;
+      column-gap: 2rem;
+      row-gap: 1rem;
+
+      white-space: nowrap;
+      flex-wrap: wrap;
+
+      justify-content: space-around;
     }
   }
 
@@ -248,7 +293,9 @@ $makeNavBackgroundWidth: $minMaxWidth;
     }
 
     .nextPrevButton {
-      transition: scale 0.25s, color 0.25s;
+      transition: scale 0.25s, color 0.25s, font-variation-settings 0.5s;
+      font-size: var(--h1);
+      font-variation-settings: $fontVarNormal;
 
       &:hover::before {
         content: attr(data-tooltip);
@@ -261,22 +308,16 @@ $makeNavBackgroundWidth: $minMaxWidth;
         font-size: var(--smaller);
         pointer-events: none;
         font-weight: 400;
-        white-space: nowrap;
+        text-wrap: nowrap;
         border-radius: $borderRadius;
+        text-align: center;
+        font-variation-settings: $fontVarNormal;
       }
 
       &:hover {
         color: var(--accent-color);
         scale: $scaleOnHover;
         cursor: pointer;
-      }
-
-      span {
-        transition: font-variation-settings 0.5s;
-        font-variation-settings: $fontVarNormal;
-      }
-
-      &:hover span {
         font-variation-settings: $fontVarThin;
       }
     }
@@ -320,36 +361,6 @@ $makeNavBackgroundWidth: $minMaxWidth;
       }
     }
   }
-
-  .paragraph {
-    line-height: 2rem;
-
-    text-align: justify;
-  }
-
-  .links {
-    display: flex;
-    column-gap: 2rem;
-    row-gap: 1rem;
-
-    white-space: nowrap;
-    flex-wrap: wrap;
-
-    justify-content: space-around;
-  }
-
-  .media {
-    display: grid;
-
-    gap: 2rem;
-
-    img,
-    video {
-      border-radius: $borderRadius;
-      height: auto;
-      width: 100%;
-    }
-  }
 }
 
 .aboutWrapper {
@@ -375,6 +386,10 @@ $makeNavBackgroundWidth: $minMaxWidth;
       max-width: 35%;
 
       pointer-events: none;
+    }
+
+    .links {
+      display: flex;
     }
   }
 
@@ -934,6 +949,17 @@ footer {
 
   .projectWrapper {
     max-width: $maxWidthMobile;
+
+    .header {
+      .nextPrevButton {
+        &:hover::before {
+          content: attr(data-tooltip);
+          position: absolute;
+          top: -125%;
+          text-wrap: wrap;
+        }
+      }
+    }
   }
 
   nav {
@@ -967,6 +993,17 @@ footer {
       display: none;
     }
   }
+
+  /* .projectWrapper {
+    .nextPrevButton {
+      &:hover::before {
+        top: -100%;
+        left: 50%;
+        transform: translate(-50%, 0.5rem);
+        text-wrap: nowrap;
+      }
+    }
+  } */
 }
 
 .test {

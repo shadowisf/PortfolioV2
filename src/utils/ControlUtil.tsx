@@ -59,6 +59,7 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
       skipStart?: boolean
     ) => {
       event.preventDefault();
+
       if (currentPage === url && !isMobile) {
         return;
       } else if (currentPage === url && isMobile) {

@@ -1,8 +1,9 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollToPlugin } from "gsap/all";
+import { Flip, ScrollToPlugin } from "gsap/all";
+import { ChangeEvent } from "react";
 
-gsap.registerPlugin(gsap, useGSAP, ScrollToPlugin);
+gsap.registerPlugin(gsap, useGSAP, ScrollToPlugin, Flip);
 
 export function pixelTransition() {
   const { contextSafe } = useGSAP();
@@ -149,4 +150,88 @@ export function scrollingAnimation() {
   });
 
   return { scrollToTop };
+}
+
+export function aboutAnimation() {
+  const { contextSafe } = useGSAP();
+  const allSkills = gsap.utils.toArray(".skills .item") as HTMLElement[];
+
+  const resetSkillset = contextSafe(
+    (event: React.MouseEvent<HTMLSelectElement>) => {
+      if (event.button === 0) {
+        const state = Flip.getState(allSkills);
+
+        allSkills.forEach((skill) => {
+          gsap.set(skill, { display: "flex" });
+        });
+
+        Flip.from(state, {
+          duration: 0.7,
+          ease: "power2.inOut",
+          stagger: {
+            each: 0.08,
+            from: "start",
+          },
+          absolute: true,
+          onEnter: (elements) =>
+            gsap.fromTo(
+              elements,
+              { opacity: 0, scale: 0 },
+              { opacity: 1, scale: 1, duration: 1 }
+            ),
+          onLeave: (elements) =>
+            gsap.to(elements, { opacity: 0, scale: 0, duration: 1 }),
+        });
+      } else {
+        event.preventDefault();
+      }
+    }
+  );
+
+  const filterSkillset = contextSafe(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      const selectedValue = event.target.value;
+
+      const state = Flip.getState(allSkills);
+
+      if (selectedValue === "-1") {
+        allSkills.forEach((skill) => {
+          gsap.set(skill, { display: "flex" });
+        });
+      } else {
+        allSkills.forEach((skill) => {
+          const dataKey = skill.getAttribute("data-key");
+
+          if (dataKey?.startsWith(selectedValue)) {
+            gsap.set(skill, { display: "flex" });
+          } else {
+            gsap.set(skill, { display: "none" });
+          }
+        });
+      }
+
+      Flip.from(state, {
+        duration: 0.7,
+        ease: "power2.inOut",
+        stagger: {
+          each: 0.08,
+          from: "start",
+        },
+        absolute: true,
+        onEnter: (elements) =>
+          gsap.fromTo(
+            elements,
+            { opacity: 0, scale: 0 },
+            { opacity: 1, scale: 1, duration: 1 }
+          ),
+        onLeave: (elements) =>
+          gsap.to(elements, { opacity: 0, scale: 0, duration: 1 }),
+      });
+    }
+  );
+
+  return {
+    resetSkillset,
+    filterSkillset,
+  };
 }

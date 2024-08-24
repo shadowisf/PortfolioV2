@@ -16,12 +16,7 @@ export function LinkNoIcon({ href, children, onClick, className }: LinkProps) {
 
 export function LinkWithIcon({ href, children, onClick, img }: LinkProps) {
   return (
-    <a
-      onClick={onClick}
-      href={href}
-      target="_blank"
-      className=" linkWithIcon"
-    >
+    <a onClick={onClick} href={href} target="_blank" className=" linkWithIcon">
       <picture>{img}</picture>
       <span>{children}</span>
     </a>

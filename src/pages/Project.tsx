@@ -15,6 +15,7 @@ import gsap from "gsap";
 import { useGlobalState } from "../utils/ControlUtil";
 import { useGSAP } from "@gsap/react";
 import ArchitectureTile from "../components/ArchitectureTile";
+import { Link } from "react-router-dom";
 
 export default function Project({ dataID }: ProjectProps) {
   const [ifData5, setIfData5] = useState(false);
@@ -22,15 +23,14 @@ export default function Project({ dataID }: ProjectProps) {
   const { scrollToTop } = scrollingAnimation();
   const { setCurrentPage } = useGlobalState();
   const title = getProjectName(dataID)?.replace(/\s+/g, "-") || "";
+  const prevProject = getProjectName(dataID + 1)?.replace(/\s+/g, "-") || "";
+  const nextProject = getProjectName(dataID - 1)?.replace(/\s+/g, "-") || "";
   const { contextSafe } = useGSAP();
 
   useEffect(() => {
     if (dataID === 5 || dataID === 6) {
       setIfData5(true);
     }
-
-    setCurrentPage(title);
-    scrollToTop(0);
 
     const zoom = mediumZoom("img", {
       background: "var(--background-color)",
@@ -55,16 +55,37 @@ export default function Project({ dataID }: ProjectProps) {
     };
   }, []);
 
+  useEffect(() => {
+    setCurrentPage(title);
+    scrollToTop(0);
+  }, [title]);
+
   return (
     <main className="projectWrapper">
       <section className="header">
-        <h1 className="nextPrevButton" data-tooltip="previous project">
-          <span>←</span>
-        </h1>
+        <Link
+          to={`/${prevProject}`}
+          className="nextPrevButton"
+          data-tooltip="previous project"
+          onClick={(e) => executeTransition(e, prevProject, false)}
+          style={
+            prevProject === "" ? { opacity: "0.25", pointerEvents: "none" } : {}
+          }
+        >
+          ←
+        </Link>
         <h1 className="title accent">{getProjectName(dataID)}</h1>
-        <h1 className="nextPrevButton" data-tooltip="next project">
-          <span>→</span>
-        </h1>
+        <Link
+          to={`/${nextProject}`}
+          className="nextPrevButton"
+          data-tooltip="next project"
+          onClick={(e) => executeTransition(e, nextProject, false)}
+          style={
+            nextProject === "" ? { opacity: "0.25", pointerEvents: "none" } : {}
+          }
+        >
+          →
+        </Link>
       </section>
 
       <section className="architecture">
@@ -112,9 +133,9 @@ export default function Project({ dataID }: ProjectProps) {
       </section>
 
       <section className="bottomNav">
-        <a onClick={() => scrollToTop(0.25)}>
-          ↑ <span>scroll to top</span>
-        </a>
+        <h1 onClick={() => scrollToTop(0.25)} data-tooltip="scroll to top">
+          ↑
+        </h1>
       </section>
     </main>
   );

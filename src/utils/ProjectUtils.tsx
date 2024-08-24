@@ -30,7 +30,7 @@ import Funculator3 from "../assets/ImageFunCulator3.webp";
 import FunculatorReport from "../assets/FileFunCulator.PDF";
 //
 import BellHospital1 from "../assets/ImageBellHospital1.webp";
-import BellHospital2 from "../assets/ImageBellHospital1.webp";
+import BellHospital2 from "../assets/ImageBellHospital2.webp";
 import BellHospitalReport from "../assets/FileBellHospital.PDF";
 //
 const ApolloHospitalGithub = "https://github.com/shadowisf/ApolloHospital";
@@ -55,21 +55,15 @@ export const aboutSkillset = {
     "2firebase",
     "1c-sharp",
     "2java",
-    "2python",
-    "2windows forms",
+    "1python",
     "2microsoft sql server",
+    "1windows forms",
     "1django",
     "1flask",
     "3xampp",
     "1php",
-    "2mysql",
     "2javascript",
-    //"0postgresql",
-    //"0restful api",
-    //"0angular",
-    //"0vue",
-    //"0svelte",
-    //"0tailwind css"
+    "1swing",
   ],
 };
 //
@@ -97,7 +91,6 @@ import {
   SiPhp,
   SiMicrosoftsqlserver,
   SiCsharp,
-  SiDotnet,
   SiPostgresql,
   SiFramework,
   SiSvelte,
@@ -111,7 +104,6 @@ import {
   RiLinkedinBoxLine,
 } from "react-icons/ri";
 //
-
 export const architectureStyling: Record<
   string,
   { icon: JSX.Element; color: string }
@@ -149,8 +141,8 @@ export const architectureStyling: Record<
     color: "rgb(148, 111, 211)",
   },
   "windows forms": {
-    icon: <SiDotnet />,
-    color: "rgb(98, 97, 233)",
+    icon: <SiFramework />,
+    color: "var(--faded-color)",
   },
   "microsoft sql server": {
     icon: <SiMicrosoftsqlserver />,
@@ -433,6 +425,7 @@ export const projectData = [
     year: "2023",
     architecture: [
       "flask",
+      "*python",
       "*django",
       "*javascript",
       "*html",
