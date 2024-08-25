@@ -1,6 +1,6 @@
 import { useGSAP } from "@gsap/react";
 import { createContext, useContext, useEffect, useState } from "react";
-import { pixelTransition, scrollingAnimation } from "./AnimationUtils";
+import { pixelTransition } from "./AnimationUtils";
 import { useNavigate } from "react-router-dom";
 
 type GlobalStateContextType = {
@@ -12,6 +12,8 @@ type GlobalStateContextType = {
     url: string,
     skipStart: boolean
   ) => void;
+  firstTime: boolean;
+  setFirstTime: (val: boolean) => void;
 };
 
 type GlobalStateProviderProps = {
@@ -24,15 +26,17 @@ const GlobalStateContext = createContext<GlobalStateContextType>({
   currentPage: "",
   setCurrentPage: () => {},
   executeTransition: () => {},
+  firstTime: true,
+  setFirstTime: () => {},
 });
 
 export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [currentPage, setCurrentPage] = useState("");
+  const [firstTime, setFirstTime] = useState(true);
   const { contextSafe } = useGSAP();
   const { closeMenu, startTransition, endTransition } = pixelTransition();
   const navigate = useNavigate();
-  const { scrollToTop } = scrollingAnimation();
   const minMaxWidth = getComputedStyle(document.documentElement)
     .getPropertyValue("--minMaxWidth")
     .trim();
@@ -81,6 +85,8 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
       value={{
         isMobile,
         currentPage,
+        firstTime,
+        setFirstTime,
         setCurrentPage,
         executeTransition,
       }}

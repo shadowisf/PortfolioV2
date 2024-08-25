@@ -9,16 +9,22 @@ import {
   RiLinkedinBoxLine,
   RiMailLine,
 } from "react-icons/ri";
-import { scrollingAnimation } from "../utils/AnimationUtils";
+import { homeAnimation, scrollingAnimation } from "../utils/AnimationUtils";
+import { useGSAP } from "@gsap/react";
 
 export default function Home() {
   const { setCurrentPage } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
+  const { startup } = homeAnimation();
 
   useEffect(() => {
     setCurrentPage("/");
     scrollToTop(0);
   }, []);
+
+  useGSAP(() => {
+    startup();
+  });
 
   return (
     <main className="homeWrapper">
@@ -35,11 +41,11 @@ export default function Home() {
         <div className="hero">
           <h1 className="extra name accent">les ranalan</h1>
 
-          <h5 className="nonBold">
+          <h5 className="nonBold title">
             <span className="bulletPoint">⊢</span> frontend developer{" "}
-            <small>(aspiring fullstack)</small>
+            <small className="smaller">(future fullstack)</small>
           </h5>
-          <h5 className="nonBold">
+          <h5 className="nonBold title">
             <span className="bulletPoint">⊢</span> ui/ux designer
           </h5>
 

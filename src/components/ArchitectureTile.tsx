@@ -68,7 +68,7 @@ export const architectureStyling: Record<
   },
   "windows forms": {
     icon: <SiFramework />,
-    color: "var(--faded-color)",
+    color: "gray",
   },
   "microsoft sql server": {
     icon: <SiMicrosoftsqlserver />,
@@ -96,15 +96,15 @@ export const architectureStyling: Record<
   },
   swing: {
     icon: <SiFramework />,
-    color: "var(--faded-color)",
+    color: "gray",
   },
   cli: {
     icon: <GoCommandPalette />,
-    color: "var(--faded-color)",
+    color: "gray",
   },
   "file handling": {
     icon: <SiFramework />,
-    color: "var(--faded-color)",
+    color: "gray",
   },
   php: {
     icon: <SiPhp />,

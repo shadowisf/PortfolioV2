@@ -10,9 +10,9 @@ import PortfolioOriginal1 from "../assets/ImageOriginalPortfolio1.webp";
 import PortfolioOriginal2 from "../assets/ImageOriginalPortfolio2.webp";
 import PortfolioOriginalVideo from "../assets/VideoOldPortfolio.webm";
 //
-import PortfolioNew1 from "../assets/ImageNewPortfolio1.png";
-import PortfolioNew2 from "../assets/ImageNewPortfolio2.png";
-import PortfolioNew3 from "../assets/ImageNewPortfolio3.png";
+import PortfolioNew1 from "../assets/ImageNewPortfolio1.webp";
+import PortfolioNew2 from "../assets/ImageNewPortfolio2.webp";
+import PortfolioNew3 from "../assets/ImageNewPortfolio3.webp";
 import PortfolioNewVideo from "../assets/VideoNewPortfolio.webm";
 //
 import ApolloHospital1 from "../assets/ImageApolloHospital1.webp";
@@ -249,7 +249,7 @@ export const projectData = [
       "flask",
       "*python",
       "*django",
-      "*javascript",
+      "javascript",
       "*html",
       "*bootstrap css",
       "*xampp",

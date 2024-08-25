@@ -5,7 +5,7 @@ import {
   RiGraduationCapLine,
   RiFilePdf2Line,
 } from "react-icons/ri";
-import ProfilePicture from "../assets/ImageProfile.jpeg";
+import ProfilePicture from "../assets/ImageProfile.webp";
 import { TimelineRow } from "../components/Timeline";
 import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
@@ -14,11 +14,15 @@ import { aboutAnimation, scrollingAnimation } from "../utils/AnimationUtils";
 import { LinkWithIcon } from "../components/Link";
 import CV from "../assets/FileCV.PDF";
 import { getAboutSkillset, Views } from "../utils/AboutUtils";
+import gsap, { ScrollTrigger } from "gsap/all";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(gsap, useGSAP, ScrollTrigger);
 
 export default function About() {
   const { setCurrentPage, isMobile } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
-  const { filterSkillset, resetSkillset } = aboutAnimation();
+  const { filterSkill, resetSkill, startup } = aboutAnimation();
   const { mobileView, desktopView } = Views();
 
   useEffect(() => {
@@ -36,10 +40,14 @@ export default function About() {
     };
   }, [isMobile]);
 
+  useGSAP(() => {
+    startup();
+  });
+
   return (
     <main className="aboutWrapper">
       <section className="bio">
-        <img loading="lazy" src={ProfilePicture} />
+        <img id="profile" src={ProfilePicture} />
         <div>
           <h1 className="extra accent bioHeader">hey, i'm les!</h1>
           <br />
@@ -109,10 +117,10 @@ export default function About() {
           <div className="header">
             <h1>my skillset</h1>
             <select
-              onMouseDown={(e) => resetSkillset(e)}
-              onChange={(e) => filterSkillset(e)}
+              onMouseDown={(e) => resetSkill(e)}
+              onChange={(e) => filterSkill(e)}
             >
-              <option value={"-1"}>all</option>
+              <option value={"0"}>all</option>
               <option value={"3"}>expert</option>
               <option value={"2"}>intermediate</option>
               <option value={"1"}>beginner</option>

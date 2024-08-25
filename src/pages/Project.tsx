@@ -6,6 +6,7 @@ import {
   getProjectLinks,
   getProjectName,
   getProjectVideo,
+  getProjectYear,
   ProjectProps,
 } from "../utils/ProjectUtils";
 import { useEffect, useState } from "react";
@@ -87,6 +88,8 @@ export default function Project({ dataID }: ProjectProps) {
           →
         </Link>
       </section>
+
+      <small className="year">{getProjectYear(dataID)}</small>
 
       <section className="architecture">
         {getProjectArchitecture(dataID).map((item, index) => {
