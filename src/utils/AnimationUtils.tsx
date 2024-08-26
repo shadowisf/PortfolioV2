@@ -183,7 +183,7 @@ export function aboutAnimation() {
       autoAlpha: "0",
     });
 
-    gsap.set(bioContainer, {
+    gsap.set([bioContainer, timelineContainer, skillsetContainer], {
       scale: scaleInitial,
       autoAlpha: "0",
       onComplete: () => {
@@ -192,42 +192,36 @@ export function aboutAnimation() {
           scale: "1",
           autoAlpha: "1",
           duration: animationDuration,
-        });
-      },
-    });
-
-    gsap.set([timelineContainer, skillsetContainer], {
-      autoAlpha: "0",
-      scale: scaleInitial,
-      onComplete: () => {
-        gsap.to(timelineContainer, {
-          scrollTrigger: {
-            trigger: timelineContainer,
-            start: "top center",
-            markers: true,
-          },
-          scale: "1",
-          autoAlpha: "1",
-          duration: animationDuration,
           onComplete: () => {
-            gsap.to(allTimelineRows, {
+            gsap.to(timelineContainer, {
+              scrollTrigger: {
+                trigger: timelineContainer,
+                start: "top center",
+              },
+              scale: "1",
               autoAlpha: "1",
               duration: animationDuration,
-              stagger: staggerTime,
+              onComplete: () => {
+                gsap.to(allTimelineRows, {
+                  autoAlpha: "1",
+                  duration: animationDuration,
+                  stagger: staggerTime,
+                  onComplete: () => {
+                    gsap.to(skillsetContainer, {
+                      scale: "1",
+                      autoAlpha: "1",
+                      duration: animationDuration,
+                      scrollTrigger: {
+                        trigger: skillsetContainer,
+                        start: "top center",
+                      },
+                    });
+                  },
+                });
+              },
             });
           },
         });
-      },
-    });
-
-    gsap.to(skillsetContainer, {
-      scale: "1",
-      autoAlpha: "1",
-      duration: animationDuration,
-      scrollTrigger: {
-        trigger: skillsetContainer,
-        start: "top center",
-        markers: true,
       },
     });
   });
