@@ -1,7 +1,6 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Flip, ScrollToPlugin, ScrollTrigger } from "gsap/all";
-import { useGlobalState } from "./ControlUtil";
 
 gsap.registerPlugin(gsap, useGSAP, ScrollToPlugin, ScrollTrigger, Flip);
 
@@ -66,82 +65,6 @@ export function pixelTransition() {
   };
 }
 
-export function projectTileAnimation(
-  previewContainer: NodeListOf<Element> | null,
-  heroContainer: Element | null
-) {
-  const { contextSafe } = useGSAP();
-
-  const animationEnter = {
-    scale: "1",
-    autoAlpha: "1",
-    duration: "0.1",
-    ease: "power2.inOut",
-  };
-
-  const animationExit = {
-    scale: "0.95",
-    autoAlpha: "0",
-    duration: "0.1",
-    ease: "power2.inOut",
-  };
-
-  const togglePreview = contextSafe((targetID: number) => {
-    previewContainer?.forEach((container) => {
-      const dataKey = container.getAttribute("data-key");
-      const video = container.querySelector("video");
-
-      if (dataKey === targetID.toString()) {
-        if (video) {
-          video?.play();
-        }
-
-        gsap.to(container, animationEnter);
-        gsap.to(heroContainer, animationExit);
-      }
-    });
-  });
-
-  const resetPreview = contextSafe(() => {
-    previewContainer?.forEach((container) => {
-      const video = container.querySelector("video");
-      if (video) {
-        video.currentTime = 0;
-        video.pause();
-      }
-
-      gsap.to(container, animationExit);
-    });
-    gsap.to(heroContainer, animationEnter);
-  });
-
-  const movePreview = contextSafe(
-    (targetID: number, event: React.MouseEvent) => {
-      previewContainer?.forEach((container) => {
-        const dataKey = container.getAttribute("data-key");
-
-        if (dataKey === targetID.toString()) {
-          const quickX = gsap.quickTo(container, "xPercent", {
-            duration: 0.2,
-          });
-          const quickY = gsap.quickTo(container, "yPercent", {
-            duration: 0.2,
-          });
-
-          quickX((event.clientX / window.innerWidth) * 10 - 2);
-          quickY((event.clientY / window.innerHeight) * 10 - 2);
-        }
-      });
-    }
-  );
-
-  return {
-    togglePreview,
-    resetPreview,
-    movePreview,
-  };
-}
-
 export function scrollingAnimation() {
   const { contextSafe } = useGSAP();
 
@@ -154,7 +77,8 @@ export function scrollingAnimation() {
 
 export function aboutAnimation() {
   const { contextSafe } = useGSAP();
-  const allSkills = gsap.utils.toArray(".skills .item") as HTMLElement[];
+
+  const allSkills = document.querySelectorAll(".aboutWrapper .skills .item");
 
   const resetSkill = contextSafe((event: React.MouseEvent) => {
     if (event.button === 0) {
@@ -242,23 +166,28 @@ export function aboutAnimation() {
   );
 
   const startup = contextSafe(() => {
-    const allTimeline = document.querySelector(".aboutWrapper .timeline div")
-      ?.childNodes as NodeListOf<HTMLElement>;
+    const allTimelineRows = document.querySelector(
+      ".aboutWrapper .timeline div"
+    )?.childNodes as NodeListOf<HTMLElement>;
+
+    const bioContainer = document.querySelector(".aboutWrapper .bio");
+    const timelineContainer = document.querySelector(".aboutWrapper .timeline");
+    const skillsetContainer = document.querySelector(".aboutWrapper .skillset");
 
     const animationDuration = "0.25";
     const staggerTime = 0.15;
     const scaleInitial = "0.75";
-    const animationDelay = "0.75";
+    const animationDelay = "1";
 
-    gsap.set(allTimeline, {
+    gsap.set(allTimelineRows, {
       autoAlpha: "0",
     });
 
-    gsap.set(".bio", {
+    gsap.set(bioContainer, {
       scale: scaleInitial,
       autoAlpha: "0",
       onComplete: () => {
-        gsap.to(".bio", {
+        gsap.to(bioContainer, {
           delay: animationDelay,
           scale: "1",
           autoAlpha: "1",
@@ -267,37 +196,38 @@ export function aboutAnimation() {
       },
     });
 
-    gsap.set([".timeline", ".skillset"], {
+    gsap.set([timelineContainer, skillsetContainer], {
       autoAlpha: "0",
       scale: scaleInitial,
       onComplete: () => {
-        gsap.to(".timeline", {
+        gsap.to(timelineContainer, {
           scrollTrigger: {
-            trigger: ".timeline",
+            trigger: timelineContainer,
             start: "top center",
+            markers: true,
           },
           scale: "1",
           autoAlpha: "1",
           duration: animationDuration,
           onComplete: () => {
-            gsap.to(allTimeline, {
+            gsap.to(allTimelineRows, {
               autoAlpha: "1",
               duration: animationDuration,
               stagger: staggerTime,
-              onComplete: () => {
-                gsap.to(".skillset", {
-                  scale: "1",
-                  autoAlpha: "1",
-                  duration: animationDuration,
-                  scrollTrigger: {
-                    trigger: ".skillset",
-                    start: "top center",
-                  },
-                });
-              },
             });
           },
         });
+      },
+    });
+
+    gsap.to(skillsetContainer, {
+      scale: "1",
+      autoAlpha: "1",
+      duration: animationDuration,
+      scrollTrigger: {
+        trigger: skillsetContainer,
+        start: "top center",
+        markers: true,
       },
     });
   });
@@ -311,14 +241,80 @@ export function aboutAnimation() {
 
 export function homeAnimation() {
   const { contextSafe } = useGSAP();
-  const { firstTime, setFirstTime } = useGlobalState();
+
+  const previewContainer = document.querySelectorAll(".homeWrapper .preview");
+  const heroContainer = document.querySelector(".homeWrapper .hero");
+
+  const animationEnter = {
+    scale: "1",
+    autoAlpha: "1",
+    duration: "0.1",
+    ease: "power2.inOut",
+  };
+
+  const animationExit = {
+    scale: "0.95",
+    autoAlpha: "0",
+    duration: "0.1",
+    ease: "power2.inOut",
+  };
+
+  const togglePreview = contextSafe((targetID: number) => {
+    previewContainer?.forEach((container) => {
+      const dataKey = container.getAttribute("data-key");
+      const video = container.querySelector("video");
+
+      if (dataKey === targetID.toString()) {
+        if (video) {
+          video?.play();
+        }
+
+        gsap.to(container, animationEnter);
+        gsap.to(heroContainer, animationExit);
+      }
+    });
+  });
+
+  const resetPreview = contextSafe(() => {
+    previewContainer?.forEach((container) => {
+      const video = container.querySelector("video");
+      if (video) {
+        video.currentTime = 0;
+        video.pause();
+      }
+
+      gsap.to(container, animationExit);
+    });
+    gsap.to(heroContainer, animationEnter);
+  });
+
+  const movePreview = contextSafe(
+    (targetID: number, event: React.MouseEvent) => {
+      previewContainer?.forEach((container) => {
+        const dataKey = container.getAttribute("data-key");
+
+        if (dataKey === targetID.toString()) {
+          const quickX = gsap.quickTo(container, "xPercent", {
+            duration: 0.2,
+          });
+          const quickY = gsap.quickTo(container, "yPercent", {
+            duration: 0.2,
+          });
+
+          quickX((event.clientX / window.innerWidth) * 10 - 2);
+          quickY((event.clientY / window.innerHeight) * 10 - 2);
+        }
+      });
+    }
+  );
 
   const startup = contextSafe(() => {
-    const right = document.querySelector(".hero")
+    const rightContainer = document.querySelector(".homeWrapper .hero")
       ?.childNodes as NodeListOf<HTMLElement>;
+    const projectTile = document.querySelectorAll(".homeWrapper .tile");
 
     const moveIntoPlaceDuration = "1";
-    const moveIntoPlaceDelay = firstTime ? "0" : "0.5";
+    const moveIntoPlaceDelay = "0.75";
     const moveIntoPlaceEase = "power2.out";
     const moveIntoPlaceStagger = 0.05;
 
@@ -337,53 +333,93 @@ export function homeAnimation() {
       },
     });
 
-    gsap.set(right, {
-      y: "100vh",
+    gsap.set(rightContainer, {
+      x: "-100vw",
       pointerEvents: "none",
-      autoAlpha: "0",
+      autoAlpha: 0,
       onComplete: () => {
-        gsap.to(right, {
-          y: 0,
+        gsap.to(rightContainer, {
+          x: 0,
           delay: moveIntoPlaceDelay,
           duration: moveIntoPlaceDuration,
           ease: moveIntoPlaceEase,
           stagger: moveIntoPlaceStagger,
-          autoAlpha: "1",
+          autoAlpha: 1,
         });
       },
     });
 
-    gsap.set(".tile", {
+    gsap.set(projectTile, {
       x: "-100vw",
       pointerEvents: "none",
       onComplete: () => {
-        gsap.to(".tile", {
+        gsap.to(projectTile, {
           x: 0,
           delay: moveIntoPlaceDelay,
           duration: moveIntoPlaceDuration,
           ease: moveIntoPlaceEase,
           stagger: moveIntoPlaceStagger,
           onComplete: () => {
-            gsap.to(".tile", {
+            gsap.to(projectTile, {
               clearProps: "pointerEvents",
+              duration: 0.001,
             });
 
             gsap.to("nav", {
               clearProps: "pointerEvents",
+              duration: 0.001,
             });
 
-            gsap.to(right, {
+            gsap.to(rightContainer, {
               clearProps: "pointerEvents",
+              duration: 0.001,
             });
 
-            gsap.set("body", { clearProps: "overflow" });
-
-            setFirstTime(false);
+            gsap.set("body", { clearProps: "overflow", duration: 0.001 });
           },
         });
       },
     });
   });
 
-  return { startup };
+  return { startup, togglePreview, resetPreview, movePreview };
+}
+
+export function projectAnimation() {
+  const { contextSafe } = useGSAP();
+
+  const startup = contextSafe(() => {
+    const mediaContainer = document.querySelector(
+      ".projectWrapper .content .media"
+    )?.childNodes as NodeListOf<HTMLElement>;
+
+    const animationDuration = "0.25";
+    const scaleInitial = "0.75";
+
+    mediaContainer.forEach((container) => {
+      gsap.set(container, {
+        autoAlpha: "0",
+        scale: scaleInitial,
+      });
+    });
+
+    setTimeout(() => {
+      mediaContainer.forEach((container) => {
+        gsap.to(container, {
+          autoAlpha: "1",
+          scale: "1",
+          duration: animationDuration,
+          scrollTrigger: {
+            trigger: container,
+            start: "top center",
+            end: "bottom top",
+          },
+        });
+      });
+    }, 25);
+  });
+
+  return {
+    startup,
+  };
 }

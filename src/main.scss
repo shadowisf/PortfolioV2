@@ -227,7 +227,7 @@ $makeNavBackgroundWidth: $minMaxWidth;
         position: absolute;
         top: 75%;
         left: 50%;
-        transform: translate(-50%, 0.5rem);
+        translate: -50% 0.5rem;
         color: var(--text-color);
         padding: 0.5rem;
         font-size: var(--smaller);
@@ -297,7 +297,7 @@ $makeNavBackgroundWidth: $minMaxWidth;
         position: absolute;
         top: -50%;
         left: 50%;
-        transform: translate(-50%, 0.5rem);
+        translate: -50% 0.5rem;
         color: var(--text-color);
         padding: 0.5rem;
         font-size: var(--smaller);
@@ -990,65 +990,5 @@ footer {
     .hamburgerButton {
       display: none;
     }
-  }
-
-  /* .projectWrapper {
-    .nextPrevButton {
-      &:hover::before {
-        top: -100%;
-        left: 50%;
-        transform: translate(-50%, 0.5rem);
-        text-wrap: nowrap;
-      }
-    }
-  } */
-}
-
-.test {
-  .buttons-container {
-    padding: 2rem 0;
-    display: inline-flex;
-    text-align: left;
-    font-size: 1.35em;
-  }
-
-  label {
-    display: block;
-  }
-
-  .container {
-    width: 96vw;
-    margin-left: 2vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .item {
-    display: inline-flex;
-    width: 200px;
-    height: 150px;
-    margin: 5px;
-  }
-
-  .logo {
-    position: absolute;
-    width: 60px;
-    bottom: 20px;
-    right: 30px;
-  }
-
-  .purple {
-    background-color: rgb(125, 70, 150);
-  }
-
-  .green {
-    background-color: green;
-  }
-
-  .orange {
-    background-color: orange;
   }
 }

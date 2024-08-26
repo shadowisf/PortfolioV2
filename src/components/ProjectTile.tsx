@@ -6,21 +6,15 @@ import {
   getProjectYear,
   ProjectProps,
 } from "../utils/ProjectUtils";
-import { projectTileAnimation } from "../utils/AnimationUtils";
-import { useEffect, useState } from "react";
+import { homeAnimation } from "../utils/AnimationUtils";
+import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 import ArchitectureTile from "./ArchitectureTile";
 import { Link } from "react-router-dom";
 
 export function ProjectTile({ dataID }: ProjectProps) {
   const { isMobile } = useGlobalState();
-  const [previewContainer, setPreviewContainer] =
-    useState<NodeListOf<Element> | null>(null);
-  const [heroContainer, setHeroContainer] = useState<Element | null>(null);
-  const { togglePreview, resetPreview, movePreview } = projectTileAnimation(
-    previewContainer,
-    heroContainer
-  );
+  const { togglePreview, resetPreview, movePreview } = homeAnimation();
   const title = getProjectName(dataID)?.replace(/\s+/g, "-") || "";
   const { executeTransition } = useGlobalState();
 
@@ -29,16 +23,6 @@ export function ProjectTile({ dataID }: ProjectProps) {
       resetPreview();
     }
   }, [isMobile]);
-
-  useEffect(() => {
-    setPreviewContainer(document.querySelectorAll(".homeWrapper .preview"));
-    setHeroContainer(document.querySelector(".homeWrapper .hero"));
-
-    return () => {
-      setPreviewContainer(null);
-      setHeroContainer(null);
-    };
-  }, []);
 
   return (
     <Link

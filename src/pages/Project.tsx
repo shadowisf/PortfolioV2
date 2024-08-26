@@ -10,7 +10,7 @@ import {
   ProjectProps,
 } from "../utils/ProjectUtils";
 import { useEffect, useState } from "react";
-import { scrollingAnimation } from "../utils/AnimationUtils";
+import { projectAnimation, scrollingAnimation } from "../utils/AnimationUtils";
 import mediumZoom from "medium-zoom";
 import gsap from "gsap";
 import { useGlobalState } from "../utils/ControlUtil";
@@ -20,9 +20,11 @@ import { Link } from "react-router-dom";
 
 export default function Project({ dataID }: ProjectProps) {
   const [ifData5, setIfData5] = useState(false);
+  const { startup } = projectAnimation();
   const { executeTransition } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
   const { setCurrentPage } = useGlobalState();
+
   const title = getProjectName(dataID)?.replace(/\s+/g, "-") || "";
   const prevProject = getProjectName(dataID + 1)?.replace(/\s+/g, "-") || "";
   const nextProject = getProjectName(dataID - 1)?.replace(/\s+/g, "-") || "";
@@ -59,6 +61,10 @@ export default function Project({ dataID }: ProjectProps) {
   useEffect(() => {
     setCurrentPage(title);
     scrollToTop(0);
+  }, [title]);
+
+  useGSAP(() => {
+    startup();
   }, [title]);
 
   return (
@@ -110,7 +116,7 @@ export default function Project({ dataID }: ProjectProps) {
 
         {ifData5 ? (
           <div>
-            <b>attributions:</b>
+            <strong>attributions:</strong>
             <br />
             <br />
             <div className="links">{getProjectLinks(dataID)}</div>

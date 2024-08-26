@@ -2,6 +2,9 @@ import { useGSAP } from "@gsap/react";
 import { createContext, useContext, useEffect, useState } from "react";
 import { pixelTransition } from "./AnimationUtils";
 import { useNavigate } from "react-router-dom";
+import gsap from "gsap";
+
+gsap.registerPlugin(gsap, useGSAP);
 
 type GlobalStateContextType = {
   isMobile: boolean;
@@ -12,8 +15,6 @@ type GlobalStateContextType = {
     url: string,
     skipStart: boolean
   ) => void;
-  firstTime: boolean;
-  setFirstTime: (val: boolean) => void;
 };
 
 type GlobalStateProviderProps = {
@@ -26,14 +27,11 @@ const GlobalStateContext = createContext<GlobalStateContextType>({
   currentPage: "",
   setCurrentPage: () => {},
   executeTransition: () => {},
-  firstTime: true,
-  setFirstTime: () => {},
 });
 
 export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [currentPage, setCurrentPage] = useState("");
-  const [firstTime, setFirstTime] = useState(true);
   const { contextSafe } = useGSAP();
   const { closeMenu, startTransition, endTransition } = pixelTransition();
   const navigate = useNavigate();
@@ -43,16 +41,16 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
 
   useEffect(() => {
     handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
   }, []);
 
   // handle window resize, set mobile state
   function handleResize() {
-    setIsMobile(window.matchMedia(`(max-width: ${minMaxWidth})`).matches);
-    window.addEventListener("resize", handleResize);
+    gsap.matchMedia().add(`(max-width: ${minMaxWidth})`, () => {
+      setIsMobile(true);
+    });
+    gsap.matchMedia().add(`(min-width: ${minMaxWidth})`, () => {
+      setIsMobile(false);
+    });
   }
 
   // execute page transition
@@ -85,8 +83,6 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
       value={{
         isMobile,
         currentPage,
-        firstTime,
-        setFirstTime,
         setCurrentPage,
         executeTransition,
       }}

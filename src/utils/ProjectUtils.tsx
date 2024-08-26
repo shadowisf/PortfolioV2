@@ -70,7 +70,7 @@ export const projectData = [
         <u>projects, life history, research, and all things me!</u>
         <br />
         <br />
-        <b>my role:</b> this was a solo project. every tech stack was
+        <strong>my role:</strong> this was a solo project. every tech stack was
         implemented by me.
       </p>
     ),
@@ -131,7 +131,7 @@ export const projectData = [
         as a baseline for web development.
         <br />
         <br />
-        <b>my role:</b> this was a solo project. every tech stack was
+        <strong>my role:</strong> this was a solo project. every tech stack was
         implemented by me.
       </p>
     ),
@@ -212,7 +212,7 @@ export const projectData = [
         input validation, and a login system for two user types.
         <br />
         <br />
-        <b>my role:</b> this was a solo project. every tech stack was
+        <strong>my role:</strong> this was a solo project. every tech stack was
         implemented by me.
       </p>
     ),
@@ -270,10 +270,10 @@ export const projectData = [
         validation, and search filtering of patient records.
         <br />
         <br />
-        <b>my role:</b> this was a group project. i designed and implemented the
-        front-end: overall theme, buttons, navbar, modals, home page, user
-        pages, etc. additionally, i implemented half of the back-end: database
-        schema, error handling, callouts, etc.
+        <strong>my role:</strong> this was a group project. i designed and
+        implemented the front-end: overall theme, buttons, navbar, modals, home
+        page, user pages, etc. additionally, i implemented half of the back-end:
+        database schema, error handling, callouts, etc.
       </p>
     ),
     links: (
@@ -314,10 +314,10 @@ export const projectData = [
         project was heavily inspired by vibrant pixel art and sprites.
         <br />
         <br />
-        <b>my role:</b> this was a group project. i designed and implemented the
-        front-end; the general theme, buttons, menu, calculator avatar, etc.
-        additionally, i implemented half of the back-end; factorial, fibonacci,
-        average, min & max.
+        <strong>my role:</strong> this was a group project. i designed and
+        implemented the front-end; the general theme, buttons, menu, calculator
+        avatar, etc. additionally, i implemented half of the back-end;
+        factorial, fibonacci, average, min & max.
       </p>
     ),
     links: (
@@ -355,7 +355,7 @@ export const projectData = [
         management since it utilizes span files through file handling.
         <br />
         <br />
-        <b>my role:</b> this was a solo project. every tech stack was
+        <strong>my role:</strong> this was a solo project. every tech stack was
         implemented by me.
       </p>
     ),
@@ -395,7 +395,7 @@ export const projectData = [
         display queries can be performed.
         <br />
         <br />
-        <b>my role:</b> this was a solo project. every tech stack was
+        <strong>my role:</strong> this was a solo project. every tech stack was
         implemented by me.
       </p>
     ),
