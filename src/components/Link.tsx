@@ -14,22 +14,33 @@ export function LinkNoIcon({ href, children, onClick, className }: LinkProps) {
   );
 }
 
-export function LinkWithIcon({ href, children, onClick, img }: LinkProps) {
+export function LinkWithIcon({
+  href,
+  children,
+  onClick,
+  img,
+  className,
+}: LinkProps) {
   return (
-    <a onClick={onClick} href={href} target="_blank" className=" linkWithIcon">
+    <a
+      onClick={onClick}
+      href={href}
+      target="_blank"
+      className={`linkWithIcon ${className}`}
+    >
       <picture>{img}</picture>
       <span>{children}</span>
     </a>
   );
 }
 
-export function LinkWithIconOnly({ href, onClick, img }: LinkProps) {
+export function LinkWithIconOnly({ href, onClick, img, className }: LinkProps) {
   return (
     <a
       onClick={onClick}
       href={href}
       target="_blank"
-      className="linkWithIconOnly"
+      className={`linkWithIconOnly ${className}`}
     >
       <picture>{img}</picture>
     </a>

@@ -51,23 +51,27 @@ export default function Home() {
 
           <br />
 
-          <div className="links faded">
+          <div className="links">
             <LinkWithIconOnly
+              className="faded"
               img={<RiMailLine size={32} />}
               href="mailto:les.ranalan@gmail.com"
             />
 
             <LinkWithIconOnly
+              className="faded"
               img={<RiLinkedinBoxLine size={32} />}
               href="https://www.linkedin.com/in/les-paul-ranalan/"
             />
 
             <LinkWithIconOnly
+              className="faded"
               img={<RiGithubLine size={32} />}
               href="https://github.com/shadowisf"
             />
 
             <LinkWithIconOnly
+              className="faded"
               img={<RiInstagramLine size={32} />}
               href="https://www.instagram.com/les.rx/"
             />

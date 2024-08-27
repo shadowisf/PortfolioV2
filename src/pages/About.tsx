@@ -4,6 +4,10 @@ import {
   RiGlasses2Line,
   RiGraduationCapLine,
   RiFilePdf2Line,
+  RiGithubLine,
+  RiInstagramLine,
+  RiLinkedinBoxLine,
+  RiMailLine,
 } from "react-icons/ri";
 import ProfilePicture from "../assets/ImageProfile.webp";
 import { TimelineRow } from "../components/Timeline";
@@ -11,7 +15,7 @@ import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 import ArchitectureTile from "../components/ArchitectureTile";
 import { aboutAnimation, scrollingAnimation } from "../utils/AnimationUtils";
-import { LinkWithIcon } from "../components/Link";
+import { LinkWithIcon, LinkWithIconOnly } from "../components/Link";
 import CV from "../assets/FileCV.PDF";
 import { getAboutSkillset, Views } from "../utils/AboutUtils";
 import gsap, { ScrollTrigger } from "gsap/all";
@@ -68,9 +72,33 @@ export default function About() {
           </p>
           <br />
           <div className="links">
-            <LinkWithIcon img={<RiFilePdf2Line size={24} />} href={CV}>
-              download resume
-            </LinkWithIcon>
+            <span>
+              <LinkWithIcon img={<RiFilePdf2Line size={24} />} href={CV}>
+                download resume
+              </LinkWithIcon>
+            </span>
+
+            <span>
+              <LinkWithIconOnly
+                img={<RiMailLine size={32} />}
+                href="mailto:les.ranalan@gmail.com"
+              />
+
+              <LinkWithIconOnly
+                img={<RiLinkedinBoxLine size={32} />}
+                href="https://www.linkedin.com/in/les-paul-ranalan/"
+              />
+
+              <LinkWithIconOnly
+                img={<RiGithubLine size={32} />}
+                href="https://github.com/shadowisf"
+              />
+
+              <LinkWithIconOnly
+                img={<RiInstagramLine size={32} />}
+                href="https://www.instagram.com/les.rx/"
+              />
+            </span>
           </div>
         </div>
       </section>

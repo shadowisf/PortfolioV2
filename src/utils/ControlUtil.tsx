@@ -35,6 +35,7 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const { contextSafe } = useGSAP();
   const { closeMenu, startTransition, endTransition } = pixelTransition();
   const navigate = useNavigate();
+
   const minMaxWidth = getComputedStyle(document.documentElement)
     .getPropertyValue("--minMaxWidth")
     .trim();

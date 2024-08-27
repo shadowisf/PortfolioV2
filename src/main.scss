@@ -385,6 +385,12 @@ $makeNavBackgroundWidth: $minMaxWidth;
 
     .links {
       display: flex;
+      justify-content: space-between;
+
+      span {
+        display: flex;
+        align-items: center;
+      }
     }
   }
 
@@ -610,6 +616,18 @@ a {
     transition: fill 0.5s;
   }
 
+  &.faded {
+    svg {
+      fill: var(--faded-color);
+    }
+
+    color: var(--faded-color);
+
+    &::after {
+      background-color: var(--faded-color);
+    }
+  }
+
   &:hover {
     font-variation-settings: $fontVarThin;
     color: var(--accent-color);
@@ -645,26 +663,29 @@ a {
 
   transition: scale 0.25s;
 
-  transform-origin: center;
-
   padding: 0.5rem;
+
+  svg {
+    transition: fill 0.25s;
+  }
 
   picture {
     display: flex;
   }
 
-  svg {
-    fill: var(--faded-color);
-    transition: fill 0.25s;
+  &.faded {
+    svg {
+      fill: var(--faded-color);
+    }
   }
 
   &:hover {
     scale: $scaleOnHover;
     cursor: pointer !important;
-  }
 
-  &:hover svg {
-    fill: var(--accent-color);
+    svg {
+      fill: var(--accent-color);
+    }
   }
 }
 

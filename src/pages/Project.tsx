@@ -116,10 +116,9 @@ export default function Project({ dataID }: ProjectProps) {
 
         {ifData5 ? (
           <div>
-            <strong>attributions:</strong>
+            <h6>attributions:</h6>
             <br />
-            <br />
-            <div className="links">{getProjectLinks(dataID)}</div>
+            <p className="links">{getProjectLinks(dataID)}</p>
           </div>
         ) : (
           <div className="links">{getProjectLinks(dataID)}</div>
