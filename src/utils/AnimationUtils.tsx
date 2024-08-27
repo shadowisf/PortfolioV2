@@ -177,7 +177,7 @@ export function aboutAnimation() {
     const animationDuration = "0.25";
     const staggerTime = 0.15;
     const scaleInitial = "0.75";
-    const animationDelay = "1";
+    const animationDelay = "0.75";
 
     gsap.set(allTimelineRows, {
       autoAlpha: "0",
@@ -315,10 +315,12 @@ export function homeAnimation() {
     gsap.set("body", { overflow: "hidden" });
 
     gsap.set("nav", {
+      autoAlpha: 0,
       y: "-8vh",
       pointerEvents: "none",
       onComplete: () => {
         gsap.to("nav", {
+          autoAlpha: 1,
           y: 0,
           delay: moveIntoPlaceDelay,
           duration: moveIntoPlaceDuration,
@@ -328,26 +330,28 @@ export function homeAnimation() {
     });
 
     gsap.set(rightContainer, {
+      autoAlpha: 0,
       x: "-100vw",
       pointerEvents: "none",
-      autoAlpha: 0,
       onComplete: () => {
         gsap.to(rightContainer, {
+          autoAlpha: 1,
           x: 0,
           delay: moveIntoPlaceDelay,
           duration: moveIntoPlaceDuration,
           ease: moveIntoPlaceEase,
           stagger: moveIntoPlaceStagger,
-          autoAlpha: 1,
         });
       },
     });
 
     gsap.set(projectTile, {
+      autoAlpha: 0,
       x: "-100vw",
       pointerEvents: "none",
       onComplete: () => {
         gsap.to(projectTile, {
+          autoAlpha: 1,
           x: 0,
           delay: moveIntoPlaceDelay,
           duration: moveIntoPlaceDuration,

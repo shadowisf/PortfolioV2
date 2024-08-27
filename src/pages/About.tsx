@@ -68,7 +68,7 @@ export default function About() {
           <br />
           <p className="faded">
             outside of coding, i play video games (which i rarely do nowadays
-            lol), listen to music, or bingewatch tv shows/movies.
+            lol), listen to music, and bingewatch tv shows/movies.
           </p>
           <br />
           <div className="links">

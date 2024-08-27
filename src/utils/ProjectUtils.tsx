@@ -17,7 +17,8 @@ import VideoV2Portfolio from "../assets/VideoV2Portfolio.webm";
 //
 import ImageApolloHospital1 from "../assets/ImageApolloHospital1.webp";
 import ImageApolloHospital2 from "../assets/ImageApolloHospital2.webp";
-import FileApolloHospital from "../assets/FileApolloHospital.PDF";
+import FileApolloHospital1 from "../assets/FileApolloHospital1.PDF";
+import FileApolloHospital2 from "../assets/FileApolloHospital2.PDF";
 import VideoApolloHospital from "../assets/VideoApolloHospital.webm";
 //
 import ImageCircuitCentral1 from "../assets/ImageCircuitCentral1.webp";
@@ -366,9 +367,16 @@ export const projectData = [
 
         <LinkWithIcon
           img={<RiFilePdf2Line size={24} />}
-          href={FileApolloHospital}
+          href={FileApolloHospital1}
         >
           report
+        </LinkWithIcon>
+
+        <LinkWithIcon
+          img={<RiFilePdf2Line size={24} />}
+          href={FileApolloHospital2}
+        >
+          documentation
         </LinkWithIcon>
       </Fragment>
     ),
