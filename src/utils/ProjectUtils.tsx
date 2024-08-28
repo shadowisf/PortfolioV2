@@ -42,6 +42,7 @@ import ImageBellHospital1 from "../assets/ImageBellHospital1.webp";
 import ImageBellHospital2 from "../assets/ImageBellHospital2.webp";
 import FileBellHospital from "../assets/FileBellHospital.PDF";
 import VideoBellHospital from "../assets/VideoBellHospital.webm";
+import { GoPackage } from "react-icons/go";
 //
 const ApolloHospitalGithub = "https://github.com/shadowisf/ApolloHospital";
 const CircuitCentralGithub = "https://github.com/shadowisf/CircuitCentral";
@@ -100,7 +101,7 @@ export const projectData = [
         <p>this was a solo project. every tech stack was implemented by me.</p>
       </Fragment>
     ),
-    links: (
+    attributions: (
       <Fragment>
         {/* medium zoom */}
         <LinkWithIcon
@@ -180,6 +181,23 @@ export const projectData = [
       </Fragment>
     ),
     links: (
+      <Fragment>
+        <LinkWithIcon
+          img={<GoPackage size={24} />}
+          href="https://v1-lesranalan.web.app"
+        >
+          demo
+        </LinkWithIcon>
+
+        <LinkWithIcon
+          img={<RiGithubLine size={24} />}
+          href="https://github.com/shadowisf/PortfolioReactV1"
+        >
+          repository
+        </LinkWithIcon>
+      </Fragment>
+    ),
+    attributions: (
       <Fragment>
         {/* typedcss */}
         <LinkWithIcon
@@ -603,6 +621,11 @@ export function getProjectContent(dataID: number) {
 export function getProjectLinks(dataID: number) {
   const project = projectData.find((proj) => proj.id === dataID);
   return project ? project.links : [];
+}
+
+export function getProjectAttributions(dataID: number) {
+  const project = projectData.find((proj) => proj.id === dataID);
+  return project ? project.attributions : [];
 }
 
 export function getProjectArchitecture(dataID: number) {

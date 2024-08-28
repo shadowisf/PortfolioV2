@@ -1,5 +1,6 @@
 import {
   getProjectArchitecture,
+  getProjectAttributions,
   getProjectContent,
   getProjectImage,
   getProjectImageAlts,
@@ -9,7 +10,7 @@ import {
   getProjectYear,
   ProjectProps,
 } from "../utils/ProjectUtils";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import { projectAnimation, scrollingAnimation } from "../utils/AnimationUtils";
 import mediumZoom from "medium-zoom";
 import gsap from "gsap";
@@ -19,7 +20,6 @@ import ArchitectureTile from "../components/ArchitectureTile";
 import { Link } from "react-router-dom";
 
 export default function Project({ dataID }: ProjectProps) {
-  const [ifData5, setIfData5] = useState(false);
   const { startup } = projectAnimation();
   const { executeTransition } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
@@ -31,10 +31,6 @@ export default function Project({ dataID }: ProjectProps) {
   const { contextSafe } = useGSAP();
 
   useEffect(() => {
-    if (dataID === 5 || dataID === 6) {
-      setIfData5(true);
-    }
-
     const zoom = mediumZoom("img", {
       background: "var(--background-color)",
     });
@@ -114,14 +110,24 @@ export default function Project({ dataID }: ProjectProps) {
       <section className="content">
         <div className="paragraph">{getProjectContent(dataID)}</div>
 
-        {ifData5 ? (
+        {getProjectLinks(dataID) ? (
+          <div>
+            <h6>project links:</h6>
+            <br />
+            <div className="links">{getProjectLinks(dataID)}</div>
+          </div>
+        ) : (
+          ""
+        )}
+
+        {getProjectAttributions(dataID) ? (
           <div>
             <h6>attributions:</h6>
             <br />
-            <p className="links">{getProjectLinks(dataID)}</p>
+            <div className="links">{getProjectAttributions(dataID)}</div>
           </div>
         ) : (
-          <div className="links">{getProjectLinks(dataID)}</div>
+          <Fragment></Fragment>
         )}
 
         <div className="media">
