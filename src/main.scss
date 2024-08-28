@@ -1,4 +1,5 @@
 $primaryFont: "Kyiv Type Sans";
+$bayBayinFont: "Noto Sans Tagalog";
 
 $borderRadius: 8px;
 
@@ -10,7 +11,7 @@ $maxWidthDesktop: 700px;
 $maxWidthDesktopWide: 75%;
 $maxWidthMobile: 90%;
 
-$fontVarNormal: "wght" 400, "CONT" 1;
+$fontVarNormal: "wght" 400, "CONT" 0;
 $fontVarThin: "wght" 1000, "CONT" 1000;
 
 $scaleOnHover: 1.05;
@@ -41,6 +42,218 @@ $makeNavBackgroundWidth: $minMaxWidth;
   --p: 1rem;
   --small: 0.833rem;
   --smaller: calc(var(--small) / 1.25);
+}
+
+@font-face {
+  font-family: "Kyiv Type Sans";
+  src: url(../src/fonts/KyivTypeSans-VarGX.ttf) format("truetype");
+
+  font-display: swap;
+  font-weight: 1 1000;
+  font-stretch: 1 1000;
+  font-optical-sizing: 1 1000;
+  font-style: italic 1 1000;
+  font-style: oblique 1 1000;
+}
+
+@font-face {
+  font-family: "Noto Sans Tagalog";
+  src: url(../src/fonts/NotoSansTagalog-Regular.ttf) format("truetype");
+
+  font-display: swap;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  backface-visibility: hidden;
+}
+
+h1 {
+  font-size: var(--h1);
+
+  &.extra {
+    font-size: var(--h0);
+  }
+}
+
+h2 {
+  font-size: var(--h2);
+}
+
+h3 {
+  font-size: var(--h3);
+}
+
+h4 {
+  font-size: var(--h4);
+
+  &.nonBold {
+    font-weight: 400;
+  }
+}
+
+h5 {
+  font-size: var(--h5);
+
+  &.nonBold {
+    font-weight: 400;
+  }
+}
+
+h6 {
+  font-size: var(--h6);
+
+  &.nonBold {
+    font-weight: 400;
+  }
+}
+
+p {
+  font-size: var(--p);
+}
+
+small {
+  font-size: var(--small);
+
+  &.smaller {
+    font-size: var(--smaller);
+  }
+}
+
+html {
+  background-blend-mode: overlay;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: $primaryFont;
+  color-scheme: var(--theme);
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-color);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2rem;
+
+  z-index: 5;
+
+  .navButtons {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    a {
+      transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
+
+      font-variation-settings: $fontVarNormal;
+
+      &:hover {
+        scale: $scaleOnHover;
+        color: var(--accent-color);
+        font-variation-settings: $fontVarThin;
+      }
+    }
+
+    span {
+      transition: scale 0.25s;
+
+      svg {
+        transition: fill 0.25s;
+      }
+
+      &:hover {
+        scale: $scaleOnHover;
+      }
+
+      &:hover svg {
+        fill: var(--accent-color);
+      }
+    }
+  }
+
+  .logoButton {
+    transition: color 0.25s, scale 0.25s;
+    font-family: $bayBayinFont;
+
+    &:hover {
+      cursor: pointer;
+      scale: $scaleOnHover;
+      color: var(--accent-color);
+    }
+  }
+
+  .hamburgerButton {
+    transition: scale 0.25s;
+
+    &:hover {
+      scale: $scaleOnHover;
+    }
+
+    svg {
+      display: flex;
+
+      transition: fill 0.25s;
+    }
+
+    &:hover svg {
+      fill: var(--accent-color);
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .themeButton {
+    position: relative;
+
+    svg {
+      display: flex;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .resetButton {
+    svg {
+      display: flex;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+footer {
+  position: fixed;
+
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  width: 100%;
+
+  padding: 1.5rem 2rem;
 }
 
 // wrappers
@@ -499,89 +712,6 @@ $makeNavBackgroundWidth: $minMaxWidth;
   }
 }
 
-@font-face {
-  font-family: "Kyiv Type Sans";
-  src: url(../src/fonts/KyivTypeSans-VarGX.ttf) format("truetype");
-
-  font-display: swap;
-  font-weight: 1 1000;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  backface-visibility: hidden;
-}
-
-h1 {
-  font-size: var(--h1);
-
-  &.extra {
-    font-size: var(--h0);
-  }
-}
-
-h2 {
-  font-size: var(--h2);
-}
-
-h3 {
-  font-size: var(--h3);
-}
-
-h4 {
-  font-size: var(--h4);
-
-  &.nonBold {
-    font-weight: 400;
-  }
-}
-
-h5 {
-  font-size: var(--h5);
-
-  &.nonBold {
-    font-weight: 400;
-  }
-}
-
-h6 {
-  font-size: var(--h6);
-
-  &.nonBold {
-    font-weight: 400;
-  }
-}
-
-p {
-  font-size: var(--p);
-}
-
-small {
-  font-size: var(--small);
-
-  &.smaller {
-    font-size: var(--smaller);
-  }
-}
-
-html {
-  background-blend-mode: overlay;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  font-family: $primaryFont;
-  color-scheme: var(--theme);
-}
-
-a {
-  text-decoration: none;
-  color: var(--text-color);
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
 .faded {
   color: var(--faded-color);
 }
@@ -707,124 +837,6 @@ a {
     height: 100%;
     background: var(--accent-color);
   }
-}
-
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.25rem 2rem;
-
-  z-index: 5;
-
-  .navButtons {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-
-    a {
-      transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
-
-      font-variation-settings: $fontVarNormal;
-
-      &:hover {
-        scale: $scaleOnHover;
-        color: var(--accent-color);
-        font-variation-settings: $fontVarThin;
-      }
-    }
-
-    span {
-      transition: scale 0.25s;
-
-      svg {
-        transition: fill 0.25s;
-      }
-
-      &:hover {
-        scale: $scaleOnHover;
-      }
-
-      &:hover svg {
-        fill: var(--accent-color);
-      }
-    }
-  }
-
-  .logoButton {
-    font-family: "Arial";
-
-    transition: color 0.25s, scale 0.25s;
-
-    &:hover {
-      cursor: pointer;
-      scale: $scaleOnHover;
-      color: var(--accent-color);
-    }
-  }
-
-  .hamburgerButton {
-    transition: scale 0.25s;
-
-    &:hover {
-      scale: $scaleOnHover;
-    }
-
-    svg {
-      display: flex;
-
-      transition: fill 0.25s;
-    }
-
-    &:hover svg {
-      fill: var(--accent-color);
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  .themeButton {
-    position: relative;
-
-    svg {
-      display: flex;
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  .resetButton {
-    svg {
-      display: flex;
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-}
-
-footer {
-  position: fixed;
-
-  bottom: 0;
-  left: 0;
-
-  display: flex;
-
-  justify-content: flex-end;
-
-  width: 100%;
-
-  padding: 1.5rem 2rem;
 }
 
 .menu {

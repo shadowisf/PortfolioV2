@@ -80,93 +80,6 @@ export function aboutAnimation() {
   const { contextSafe } = useGSAP();
   const { isMobile } = useGlobalState();
 
-  const allSkills = document.querySelectorAll(".aboutWrapper .skills .item");
-
-  const resetSkill = contextSafe((event: React.MouseEvent) => {
-    if (event.button === 0) {
-      const allOptions = document.querySelectorAll(
-        ".aboutWrapper .skillset option"
-      );
-      const state = Flip.getState(allSkills);
-
-      allSkills.forEach((skill) => {
-        gsap.set(skill, {
-          display: "flex",
-        });
-      });
-
-      allOptions.forEach((option) => {
-        const value = option.getAttribute("value");
-
-        const optionElement = option as HTMLOptionElement;
-
-        if (value === "0") {
-          optionElement.selected = true;
-        }
-      });
-
-      Flip.from(state, {
-        duration: 0.7,
-        ease: "power2.inOut",
-        stagger: {
-          each: 0.08,
-          from: "start",
-        },
-        absolute: true,
-        onEnter: (elements) =>
-          gsap.fromTo(
-            elements,
-            { opacity: 0, scale: 0 },
-            { opacity: 1, scale: 1, duration: 1 }
-          ),
-        onLeave: (elements) =>
-          gsap.to(elements, { opacity: 0, scale: 0, duration: 1 }),
-      });
-    }
-  });
-
-  const filterSkill = contextSafe(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const selectedValue = event.target.value;
-
-      const state = Flip.getState(allSkills);
-
-      if (selectedValue === "0") {
-        allSkills.forEach((skill) => {
-          gsap.set(skill, { display: "flex" });
-        });
-      } else {
-        allSkills.forEach((skill) => {
-          const dataKey = skill.getAttribute("data-key");
-
-          if (dataKey?.startsWith(selectedValue)) {
-            gsap.set(skill, { display: "flex" });
-          } else {
-            gsap.set(skill, { display: "none" });
-          }
-        });
-      }
-
-      Flip.from(state, {
-        duration: 0.7,
-        ease: "power2.inOut",
-        stagger: {
-          each: 0.08,
-          from: "start",
-        },
-        absolute: true,
-        onEnter: (elements) =>
-          gsap.fromTo(
-            elements,
-            { opacity: 0, scale: 0 },
-            { opacity: 1, scale: 1, duration: 1 }
-          ),
-        onLeave: (elements) =>
-          gsap.to(elements, { opacity: 0, scale: 0, duration: 1 }),
-      });
-    }
-  );
-
   const startup = contextSafe(() => {
     const allTimelineRows = document.querySelector(
       ".aboutWrapper .timeline div"
@@ -277,6 +190,93 @@ export function aboutAnimation() {
     });
   });
 
+  const allSkills = document.querySelectorAll(".aboutWrapper .skills .item");
+
+  const resetSkill = contextSafe((event: React.MouseEvent) => {
+    if (event.button === 0) {
+      const allOptions = document.querySelectorAll(
+        ".aboutWrapper .skillset option"
+      );
+      const state = Flip.getState(allSkills);
+
+      allSkills.forEach((skill) => {
+        gsap.set(skill, {
+          display: "flex",
+        });
+      });
+
+      allOptions.forEach((option) => {
+        const value = option.getAttribute("value");
+
+        const optionElement = option as HTMLOptionElement;
+
+        if (value === "0") {
+          optionElement.selected = true;
+        }
+      });
+
+      Flip.from(state, {
+        duration: 0.7,
+        ease: "power2.inOut",
+        stagger: {
+          each: 0.08,
+          from: "start",
+        },
+        absolute: true,
+        onEnter: (elements) =>
+          gsap.fromTo(
+            elements,
+            { opacity: 0, scale: 0 },
+            { opacity: 1, scale: 1, duration: 1 }
+          ),
+        onLeave: (elements) =>
+          gsap.to(elements, { opacity: 0, scale: 0, duration: 1 }),
+      });
+    }
+  });
+
+  const filterSkill = contextSafe(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      const selectedValue = event.target.value;
+
+      const state = Flip.getState(allSkills);
+
+      if (selectedValue === "0") {
+        allSkills.forEach((skill) => {
+          gsap.set(skill, { display: "flex" });
+        });
+      } else {
+        allSkills.forEach((skill) => {
+          const dataKey = skill.getAttribute("data-key");
+
+          if (dataKey?.startsWith(selectedValue)) {
+            gsap.set(skill, { display: "flex" });
+          } else {
+            gsap.set(skill, { display: "none" });
+          }
+        });
+      }
+
+      Flip.from(state, {
+        duration: 0.7,
+        ease: "power2.inOut",
+        stagger: {
+          each: 0.08,
+          from: "start",
+        },
+        absolute: true,
+        onEnter: (elements) =>
+          gsap.fromTo(
+            elements,
+            { opacity: 0, scale: 0 },
+            { opacity: 1, scale: 1, duration: 1 }
+          ),
+        onLeave: (elements) =>
+          gsap.to(elements, { opacity: 0, scale: 0, duration: 1 }),
+      });
+    }
+  );
+
   return {
     resetSkill,
     filterSkill,
@@ -286,72 +286,6 @@ export function aboutAnimation() {
 
 export function homeAnimation() {
   const { contextSafe } = useGSAP();
-
-  const previewContainer = document.querySelectorAll(".homeWrapper .preview");
-  const heroContainer = document.querySelector(".homeWrapper .hero");
-
-  const previewEnter = {
-    scale: "1",
-    autoAlpha: "1",
-    duration: "0.1",
-    ease: "power2.inOut",
-  };
-
-  const previewExit = {
-    scale: "0.95",
-    autoAlpha: "0",
-    duration: "0.1",
-    ease: "power2.inOut",
-  };
-
-  const togglePreview = contextSafe((targetID: number) => {
-    previewContainer?.forEach((container) => {
-      const dataKey = container.getAttribute("data-key");
-      const video = container.querySelector("video");
-
-      if (dataKey === targetID.toString()) {
-        if (video) {
-          video?.play();
-        }
-
-        gsap.to(container, previewEnter);
-        gsap.to(heroContainer, previewExit);
-      }
-    });
-  });
-
-  const resetPreview = contextSafe(() => {
-    previewContainer?.forEach((container) => {
-      const video = container.querySelector("video");
-      if (video) {
-        video.currentTime = 0;
-        video.pause();
-      }
-
-      gsap.to(container, previewExit);
-    });
-    gsap.to(heroContainer, previewEnter);
-  });
-
-  const movePreview = contextSafe(
-    (targetID: number, event: React.MouseEvent) => {
-      previewContainer?.forEach((container) => {
-        const dataKey = container.getAttribute("data-key");
-
-        if (dataKey === targetID.toString()) {
-          const quickX = gsap.quickTo(container, "xPercent", {
-            duration: 0.2,
-          });
-          const quickY = gsap.quickTo(container, "yPercent", {
-            duration: 0.2,
-          });
-
-          quickX((event.clientX / window.innerWidth) * 10 - 2);
-          quickY((event.clientY / window.innerHeight) * 10 - 2);
-        }
-      });
-    }
-  );
 
   const startup = contextSafe(() => {
     const rightContainer = document.querySelector(".homeWrapper .hero")
@@ -428,6 +362,72 @@ export function homeAnimation() {
       },
     });
   });
+
+  const previewContainer = document.querySelectorAll(".homeWrapper .preview");
+  const heroContainer = document.querySelector(".homeWrapper .hero");
+
+  const previewEnter = {
+    scale: "1",
+    autoAlpha: "1",
+    duration: "0.1",
+    ease: "power2.inOut",
+  };
+
+  const previewExit = {
+    scale: "0.95",
+    autoAlpha: "0",
+    duration: "0.1",
+    ease: "power2.inOut",
+  };
+
+  const togglePreview = contextSafe((targetID: number) => {
+    previewContainer?.forEach((container) => {
+      const dataKey = container.getAttribute("data-key");
+      const video = container.querySelector("video");
+
+      if (dataKey === targetID.toString()) {
+        if (video) {
+          video?.play();
+        }
+
+        gsap.to(container, previewEnter);
+        gsap.to(heroContainer, previewExit);
+      }
+    });
+  });
+
+  const resetPreview = contextSafe(() => {
+    previewContainer?.forEach((container) => {
+      const video = container.querySelector("video");
+      if (video) {
+        video.currentTime = 0;
+        video.pause();
+      }
+
+      gsap.to(container, previewExit);
+    });
+    gsap.to(heroContainer, previewEnter);
+  });
+
+  const movePreview = contextSafe(
+    (targetID: number, event: React.MouseEvent) => {
+      previewContainer?.forEach((container) => {
+        const dataKey = container.getAttribute("data-key");
+
+        if (dataKey === targetID.toString()) {
+          const quickX = gsap.quickTo(container, "xPercent", {
+            duration: 0.2,
+          });
+          const quickY = gsap.quickTo(container, "yPercent", {
+            duration: 0.2,
+          });
+
+          quickX((event.clientX / window.innerWidth) * 10 - 2);
+          quickY((event.clientY / window.innerHeight) * 10 - 2);
+        }
+      });
+    }
+  );
 
   return { startup, togglePreview, resetPreview, movePreview };
 }

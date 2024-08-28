@@ -25,7 +25,6 @@ root.render(
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
-          {/* <Route path="test" element={<Test />} /> */}
           {getAllProjectIDs().map((id) => (
             <Route
               key={id}

@@ -50,7 +50,6 @@ export default function NavBar() {
           onClick={(e) => executeTransition(e, "/", false)}
         >
           ᜎ᜔ᜍ᜔
-          {/* ᜎᜒᜐ᜔ ᜍᜈᜎᜈ᜔ */}
         </Link>
 
         <span className="navButtons">

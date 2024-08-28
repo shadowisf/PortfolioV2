@@ -39,7 +39,10 @@ export default function Home() {
         ))}
 
         <div className="hero">
-          <h1 className="extra name accent">les ranalan</h1>
+          <h1 className="extra name accent">
+            les ranalan
+            {/* ᜎᜒᜐ᜔ ᜍᜈᜎᜈ᜔ */}
+          </h1>
 
           <h5 className="nonBold">
             <span className="bulletPoint">⊢</span> frontend developer{" "}
@@ -47,6 +50,9 @@ export default function Home() {
           </h5>
           <h5 className="nonBold">
             <span className="bulletPoint">⊢</span> ui/ux designer
+          </h5>
+          <h5 className="nonBold">
+            <span className="bulletPoint">⊢</span> uae-based
           </h5>
 
           <br />
