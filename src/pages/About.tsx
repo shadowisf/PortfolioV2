@@ -51,7 +51,7 @@ export default function About() {
   return (
     <main className="aboutWrapper">
       <section className="bio">
-        <img id="profile" src={ProfilePicture} />
+        <img src={ProfilePicture} />
         <div>
           <h1 className="extra accent bioHeader">hey, i'm les!</h1>
           <br />
@@ -78,7 +78,7 @@ export default function About() {
               </LinkWithIcon>
             </span>
 
-            <span>
+            <span className="icons">
               <LinkWithIconOnly
                 img={<RiMailLine size={32} />}
                 href="mailto:les.ranalan@gmail.com"
@@ -142,8 +142,9 @@ export default function About() {
         </section>
 
         <section className="skillset">
-          <div className="header">
-            <h1>my skillset</h1>
+          <h1>my skillset</h1>
+          <div className="filter">
+            <span>filter:</span>
             <select
               onMouseDown={(e) => resetSkill(e)}
               onChange={(e) => filterSkill(e)}

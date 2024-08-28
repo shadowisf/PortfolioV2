@@ -41,11 +41,11 @@ export default function Home() {
         <div className="hero">
           <h1 className="extra name accent">les ranalan</h1>
 
-          <h5 className="nonBold title">
+          <h5 className="nonBold">
             <span className="bulletPoint">⊢</span> frontend developer{" "}
             <small className="smaller">(future fullstack)</small>
           </h5>
-          <h5 className="nonBold title">
+          <h5 className="nonBold">
             <span className="bulletPoint">⊢</span> ui/ux designer
           </h5>
 

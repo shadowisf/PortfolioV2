@@ -11,6 +11,8 @@ import { getAllProjectIDs, getProjectName } from "./utils/ProjectUtils.tsx";
 import Project from "./pages/Project.tsx";
 import { Footer } from "./components/Footer.tsx";
 
+// firebase deploy --only hosting:les-ranalan
+
 const root = createRoot(document.getElementById("root")!);
 
 root.render(

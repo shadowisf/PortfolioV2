@@ -25,6 +25,7 @@ import ImageCircuitCentral1 from "../assets/ImageCircuitCentral1.webp";
 import ImageCircuitCentral2 from "../assets/ImageCircuitCentral2.webp";
 import FileCircuitCentral1 from "../assets/FileCircuitCentral1.PDF";
 import FileCircuitCentral2 from "../assets/FileCircuitCentral2.PDF";
+import VideoCircuitCentral from "../assets/VideoCircuitCentral.webm";
 //
 import ImagePlugInsDatabase1 from "../assets/ImagePlugInsDatabase1.webp";
 import ImagePlugInsDatabase2 from "../assets/ImagePlugInsDatabase2.webp";
@@ -35,6 +36,7 @@ import ImageFunculator1 from "../assets/ImageFunCulator1.webp";
 import ImageFunculator2 from "../assets/ImageFunCulator2.webp";
 import ImageFunculator3 from "../assets/ImageFunCulator3.webp";
 import FileFunculator from "../assets/FileFunCulator.PDF";
+import VideoFunCulator from "../assets/VideoFunCulator.webm";
 //
 import ImageBellHospital1 from "../assets/ImageBellHospital1.webp";
 import ImageBellHospital2 from "../assets/ImageBellHospital2.webp";
@@ -139,11 +141,12 @@ export const projectData = [
       "git",
     ],
     image: [ImageV1Portfolio1, ImageV1Portfolio2],
-    video: VideoV1Portfolio,
+
     imageAlts: [
       "image of the about section in my portfolio project. it has a cartoon illustration of me and and text introducing myself.",
       "image of the project section in my portfolio project. it is currently viewing the circuitcentral project, displaying a short description and its tech stack. additionally, there's links to its github repository and technical report.",
     ],
+    video: VideoV1Portfolio,
     content: (
       <Fragment>
         <h6>description:</h6>
@@ -243,6 +246,7 @@ export const projectData = [
       "first image of the circuitcentral project; it is viewing the products section wherein it is displaying a list of tech products that a user can add to their cart. additionally, the ui has buttons for CRUD operations.",
       "second image of the circuitcentral project; it is viewing the orders section wherein it displays a list of products that are currently in a cart. additionally, the ui has buttons for CRUD operations.",
     ],
+    video: VideoCircuitCentral,
     content: (
       <Fragment>
         <h6>description:</h6>
@@ -392,6 +396,7 @@ export const projectData = [
       "second image of the funculator project. it is currently viewing the menu section where it is displaying all of the possible operations such as factorial, min&max, fibonacci, etc.",
       "first image of the funculator project. it is currently viewing the index page where it is displaying a calculator with a face in pixel art form. additionally, there is buttons for start and exit on the right.",
     ],
+    video: VideoFunCulator,
     content: (
       <Fragment>
         <h6>description:</h6>
