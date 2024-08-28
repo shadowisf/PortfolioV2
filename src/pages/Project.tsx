@@ -1,6 +1,5 @@
 import {
   getProjectArchitecture,
-  getProjectAttributions,
   getProjectContent,
   getProjectImage,
   getProjectImageAlts,
@@ -118,16 +117,6 @@ export default function Project({ dataID }: ProjectProps) {
           </div>
         ) : (
           ""
-        )}
-
-        {getProjectAttributions(dataID) ? (
-          <div>
-            <h6>attributions:</h6>
-            <br />
-            <div className="links">{getProjectAttributions(dataID)}</div>
-          </div>
-        ) : (
-          <Fragment></Fragment>
         )}
 
         <div className="media">

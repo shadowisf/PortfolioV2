@@ -1,10 +1,6 @@
 import { LinkWithIcon } from "../components/Link";
 import { Fragment } from "react/jsx-runtime";
-import {
-  RiFilePdf2Line,
-  RiGithubLine,
-  RiLinkedinBoxLine,
-} from "react-icons/ri";
+import { RiFilePdf2Line, RiGithubLine } from "react-icons/ri";
 //
 import ImageV1Portfolio1 from "../assets/ImageV1Portfolio1.webp";
 import ImageV1Portfolio2 from "../assets/ImageV1Portfolio2.webp";
@@ -101,31 +97,24 @@ export const projectData = [
         <p>this was a solo project. every tech stack was implemented by me.</p>
       </Fragment>
     ),
+    links: (
+      <Fragment>
+        <LinkWithIcon
+          img={<RiGithubLine size={24} />}
+          href="https://github.com/shadowisf/PortfolioReactV2"
+        >
+          repository
+        </LinkWithIcon>
+      </Fragment>
+    ),
     attributions: (
       <Fragment>
         {/* medium zoom */}
-        <LinkWithIcon
-          img={<RiGithubLine size={24} />}
-          href="https://github.com/francoischalifour"
-        >
-          françois chalifour
-        </LinkWithIcon>
-
+        https://github.com/francoischalifour
         {/* gsap */}
-        <LinkWithIcon
-          img={<RiGithubLine size={24} />}
-          href="https://github.com/jackdoyle"
-        >
-          jack doyle
-        </LinkWithIcon>
-
+        https://github.com/jackdoyle
         {/* remix icons */}
-        <LinkWithIcon
-          img={<RiGithubLine size={24} />}
-          href="https://github.com/kamijin-fanta"
-        >
-          kamijin fanta
-        </LinkWithIcon>
+        https://github.com/kamijin-fanta
       </Fragment>
     ),
   },
@@ -186,7 +175,7 @@ export const projectData = [
           img={<GoPackage size={24} />}
           href="https://v1-lesranalan.web.app"
         >
-          demo
+          live
         </LinkWithIcon>
 
         <LinkWithIcon
@@ -200,52 +189,17 @@ export const projectData = [
     attributions: (
       <Fragment>
         {/* typedcss */}
-        <LinkWithIcon
-          img={<RiGithubLine size={24} />}
-          href="https://github.com/brandonmcconnell"
-        >
-          brandon mcconnell
-        </LinkWithIcon>
-
+        https://github.com/brandonmcconnell
         {/* react-toastify */}
-        <LinkWithIcon
-          img={<RiGithubLine size={24} />}
-          href="https://github.com/fkhadra"
-        >
-          fadi khadra
-        </LinkWithIcon>
-
+        https://github.com/fkhadra
         {/* medium zoom */}
-        <LinkWithIcon
-          img={<RiGithubLine size={24} />}
-          href="https://github.com/francoischalifour"
-        >
-          françois chalifour
-        </LinkWithIcon>
-
+        https://github.com/francoischalifour
         {/* theme engine */}
-        <LinkWithIcon
-          img={<RiLinkedinBoxLine size={24} />}
-          href="https://www.linkedin.com/in/frankmyles/"
-        >
-          frank myles
-        </LinkWithIcon>
-
+        https://www.linkedin.com/in/frankmyles/
         {/* gsap */}
-        <LinkWithIcon
-          img={<RiGithubLine size={24} />}
-          href="https://github.com/jackdoyle"
-        >
-          jack doyle
-        </LinkWithIcon>
-
+        https://github.com/jackdoyle
         {/* remix icons */}
-        <LinkWithIcon
-          img={<RiGithubLine size={24} />}
-          href="https://github.com/xiaochunjimmy"
-        >
-          zhang xiaochun
-        </LinkWithIcon>
+        https://github.com/xiaochunjimmy
       </Fragment>
     ),
   },
@@ -621,11 +575,6 @@ export function getProjectContent(dataID: number) {
 export function getProjectLinks(dataID: number) {
   const project = projectData.find((proj) => proj.id === dataID);
   return project ? project.links : [];
-}
-
-export function getProjectAttributions(dataID: number) {
-  const project = projectData.find((proj) => proj.id === dataID);
-  return project ? project.attributions : [];
 }
 
 export function getProjectArchitecture(dataID: number) {
