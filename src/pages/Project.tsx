@@ -9,7 +9,7 @@ import {
   getProjectYear,
   ProjectProps,
 } from "../utils/ProjectUtils";
-import { Fragment, useEffect } from "react";
+import { useEffect } from "react";
 import { projectAnimation, scrollingAnimation } from "../utils/AnimationUtils";
 import mediumZoom from "medium-zoom";
 import gsap from "gsap";
@@ -89,7 +89,6 @@ export default function Project({ dataID }: ProjectProps) {
           →
         </Link>
       </section>
-
       <small className="year">{getProjectYear(dataID)}</small>
 
       <section className="architecture">
@@ -111,7 +110,7 @@ export default function Project({ dataID }: ProjectProps) {
 
         {getProjectLinks(dataID) ? (
           <div>
-            <h6>project links:</h6>
+            <h6>links:</h6>
             <br />
             <div className="links">{getProjectLinks(dataID)}</div>
           </div>

@@ -175,7 +175,7 @@ export const projectData = [
           img={<GoPackage size={24} />}
           href="https://v1-lesranalan.web.app"
         >
-          live
+          demo
         </LinkWithIcon>
 
         <LinkWithIcon
@@ -492,7 +492,7 @@ export const projectData = [
       <Fragment>
         <h6>description:</h6>
         <p>
-          plug-ins is a <u>database solution</u> for a store that sells
+          plug-ins database is a <u>database solution</u> for a store that sells
           electronic devices. it covers handling of entity information
           (customer, product, order) within the xampp database. additionally, it
           has search filtering and a retrieve method through html and php.
@@ -502,12 +502,12 @@ export const projectData = [
 
         <h6>core concept:</h6>
         <p>
-          plug-ins is centered around database concepts such as normal forms,
-          integrity constraints, and querying, hence the lack of user interface
-          (lol). through that, implemented sql queries, applied integrity
-          constraints and created all stages of normal forms such as first
-          normal form (1nf), second normal form (2nf), and third normal form
-          (3nf).
+          plug-ins database is centered around database concepts such as normal
+          forms, integrity constraints, and querying, hence the lack of user
+          interface (lol). through that, i implemented sql queries, applied
+          integrity constraints and applied all stages of normal forms such as
+          first normal form (1nf), second normal form (2nf), and third normal
+          form (3nf).
         </p>
         <br />
 
@@ -515,7 +515,8 @@ export const projectData = [
 
         <h6>my role:</h6>
         <p>
-          plug-ins was a solo project. every tech stack was implemented by me.
+          plug-ins database was a solo project. every tech stack was implemented
+          by me.
         </p>
       </Fragment>
     ),
