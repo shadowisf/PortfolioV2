@@ -1,6 +1,7 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Flip, ScrollToPlugin, ScrollTrigger } from "gsap/all";
+import { useGlobalState } from "./ControlUtil";
 
 gsap.registerPlugin(gsap, useGSAP, ScrollToPlugin, ScrollTrigger, Flip);
 
@@ -77,6 +78,7 @@ export function scrollingAnimation() {
 
 export function aboutAnimation() {
   const { contextSafe } = useGSAP();
+  const { isMobile } = useGlobalState();
 
   const allSkills = document.querySelectorAll(".aboutWrapper .skills .item");
 
@@ -168,57 +170,106 @@ export function aboutAnimation() {
   const startup = contextSafe(() => {
     const allTimelineRows = document.querySelector(
       ".aboutWrapper .timeline div"
-    )?.childNodes as NodeListOf<HTMLElement>;
+    )?.childNodes as NodeListOf<Element>;
 
-    const bioContainer = document.querySelector(".aboutWrapper .bio");
+    const allSkills = document.querySelector(".aboutWrapper .skillset .skills")
+      ?.childNodes as NodeListOf<Element>;
+
+    const bioPicture = document.querySelector(".aboutWrapper .bio img");
+    const bioContent = document.querySelector(".aboutWrapper .bio div")
+      ?.childNodes as NodeListOf<Element>;
     const timelineContainer = document.querySelector(".aboutWrapper .timeline");
     const skillsetContainer = document.querySelector(".aboutWrapper .skillset");
 
-    const animationDuration = "0.25";
-    const staggerTime = 0.15;
-    const scaleInitial = "0.75";
-    const animationDelay = "0.75";
+    const startupDuration = 1;
+    const startupStagger = 0.025;
+    const startupScaleInitial = 0.95;
+    const startupDelay = isMobile ? 1.25 : 0.75;
+    const startupEase = "power2.out";
 
-    gsap.set(allTimelineRows, {
-      autoAlpha: "0",
-    });
+    const timelineDuration = 1;
+    const timelineDelay = 0.5;
+    const timelineStagger = 0.1;
 
-    gsap.set([bioContainer, timelineContainer, skillsetContainer], {
-      scale: scaleInitial,
+    const skillsetDuration = 1;
+    const skillsetDelay = 0.5;
+    const skillsetStagger = 0.1;
+
+    gsap.set([allTimelineRows, allSkills], { autoAlpha: "0" });
+
+    gsap.set([bioContent, bioPicture, timelineContainer, skillsetContainer], {
+      scale: startupScaleInitial,
       autoAlpha: "0",
+      pointerEvents: "none",
       onComplete: () => {
-        gsap.to(bioContainer, {
-          delay: animationDelay,
+        //bio
+        gsap.to(bioPicture, {
+          delay: startupDelay,
           scale: "1",
           autoAlpha: "1",
-          duration: animationDuration,
+          duration: startupDuration,
+          ease: startupEase,
+        });
+        gsap.to(bioContent, {
+          delay: startupDelay,
+          stagger: startupStagger,
+          scale: "1",
+          autoAlpha: "1",
+          duration: startupDuration,
+          ease: startupEase,
           onComplete: () => {
-            gsap.to(timelineContainer, {
-              scrollTrigger: {
-                trigger: timelineContainer,
-                start: "top center",
-              },
-              scale: "1",
-              autoAlpha: "1",
-              duration: animationDuration,
-              onComplete: () => {
-                gsap.to(allTimelineRows, {
-                  autoAlpha: "1",
-                  duration: animationDuration,
-                  stagger: staggerTime,
-                  onComplete: () => {
-                    gsap.to(skillsetContainer, {
-                      scale: "1",
-                      autoAlpha: "1",
-                      duration: animationDuration,
-                      scrollTrigger: {
-                        trigger: skillsetContainer,
-                        start: "top center",
-                      },
-                    });
-                  },
-                });
-              },
+            gsap.set([bioContent, bioPicture], { clearProps: "pointerEvents" });
+          },
+        });
+
+        // timeline
+        gsap.to(timelineContainer, {
+          scrollTrigger: {
+            trigger: timelineContainer,
+            start: "top center",
+          },
+          autoAlpha: 1,
+          scale: 1,
+          duration: timelineDuration,
+        });
+        gsap.to(allTimelineRows, {
+          delay: timelineDelay,
+          scrollTrigger: {
+            trigger: timelineContainer,
+            start: "top center",
+          },
+          autoAlpha: 1,
+          duration: timelineDuration,
+          stagger: timelineStagger,
+          onComplete: () => {
+            gsap.set([timelineContainer, allTimelineRows], {
+              clearProps: "pointerEvents",
+            });
+          },
+        });
+
+        // skillset
+        gsap.to(skillsetContainer, {
+          scrollTrigger: {
+            trigger: skillsetContainer,
+            start: "top center",
+          },
+          scale: 1,
+          autoAlpha: 1,
+          duration: skillsetDuration,
+        });
+        gsap.to(allSkills, {
+          delay: skillsetDelay,
+          scrollTrigger: {
+            trigger: skillsetContainer,
+            start: "top center",
+          },
+          autoAlpha: 1,
+          duration: skillsetDuration,
+          stagger: skillsetStagger,
+          onComplete: () => {
+            gsap.set([skillsetContainer, allSkills], {
+              clearProps: "pointerEvents",
             });
           },
         });
@@ -239,14 +290,14 @@ export function homeAnimation() {
   const previewContainer = document.querySelectorAll(".homeWrapper .preview");
   const heroContainer = document.querySelector(".homeWrapper .hero");
 
-  const animationEnter = {
+  const previewEnter = {
     scale: "1",
     autoAlpha: "1",
     duration: "0.1",
     ease: "power2.inOut",
   };
 
-  const animationExit = {
+  const previewExit = {
     scale: "0.95",
     autoAlpha: "0",
     duration: "0.1",
@@ -263,8 +314,8 @@ export function homeAnimation() {
           video?.play();
         }
 
-        gsap.to(container, animationEnter);
-        gsap.to(heroContainer, animationExit);
+        gsap.to(container, previewEnter);
+        gsap.to(heroContainer, previewExit);
       }
     });
   });
@@ -277,9 +328,9 @@ export function homeAnimation() {
         video.pause();
       }
 
-      gsap.to(container, animationExit);
+      gsap.to(container, previewExit);
     });
-    gsap.to(heroContainer, animationEnter);
+    gsap.to(heroContainer, previewEnter);
   });
 
   const movePreview = contextSafe(
@@ -307,56 +358,54 @@ export function homeAnimation() {
       ?.childNodes as NodeListOf<HTMLElement>;
     const projectTile = document.querySelectorAll(".homeWrapper .tile");
 
-    const moveIntoPlaceDuration = "1";
-    const moveIntoPlaceDelay = "0.75";
-    const moveIntoPlaceEase = "power2.out";
-    const moveIntoPlaceStagger = 0.05;
+    const startupDuration = "1";
+    const startupDelay = "0.75";
+    const startupEase = "power2.out";
+    const startupStagger = 0.05;
 
-    gsap.set("body", { overflow: "hidden" });
+    const startupScaleInitial = 0.75;
 
     gsap.set("nav", {
       autoAlpha: 0,
-      y: "-8vh",
       pointerEvents: "none",
       onComplete: () => {
         gsap.to("nav", {
           autoAlpha: 1,
-          y: 0,
-          delay: moveIntoPlaceDelay,
-          duration: moveIntoPlaceDuration,
-          ease: moveIntoPlaceEase,
+          delay: startupDelay,
+          duration: startupDuration,
+          ease: startupEase,
         });
       },
     });
 
     gsap.set(rightContainer, {
       autoAlpha: 0,
-      x: "-100vw",
+      scale: startupScaleInitial,
       pointerEvents: "none",
       onComplete: () => {
         gsap.to(rightContainer, {
           autoAlpha: 1,
-          x: 0,
-          delay: moveIntoPlaceDelay,
-          duration: moveIntoPlaceDuration,
-          ease: moveIntoPlaceEase,
-          stagger: moveIntoPlaceStagger,
+          scale: 1,
+          delay: startupDelay,
+          duration: startupDuration,
+          ease: startupEase,
+          stagger: startupStagger,
         });
       },
     });
 
     gsap.set(projectTile, {
       autoAlpha: 0,
-      x: "-100vw",
+      scale: startupScaleInitial,
       pointerEvents: "none",
       onComplete: () => {
         gsap.to(projectTile, {
           autoAlpha: 1,
-          x: 0,
-          delay: moveIntoPlaceDelay,
-          duration: moveIntoPlaceDuration,
-          ease: moveIntoPlaceEase,
-          stagger: moveIntoPlaceStagger,
+          scale: 1,
+          delay: startupDelay,
+          duration: startupDuration,
+          ease: startupEase,
+          stagger: startupStagger,
           onComplete: () => {
             gsap.to(projectTile, {
               clearProps: "pointerEvents",
@@ -391,8 +440,9 @@ export function projectAnimation() {
       ".projectWrapper .content .media"
     )?.childNodes as NodeListOf<HTMLElement>;
 
-    const animationDuration = "0.25";
+    const startupDuration = "0.25";
     const scaleInitial = "0.75";
+    const startupEase = "power2.out";
 
     mediaContainer.forEach((container) => {
       gsap.set(container, {
@@ -406,7 +456,8 @@ export function projectAnimation() {
         gsap.to(container, {
           autoAlpha: "1",
           scale: "1",
-          duration: animationDuration,
+          duration: startupDuration,
+          ease: startupEase,
           scrollTrigger: {
             trigger: container,
             start: "top center",

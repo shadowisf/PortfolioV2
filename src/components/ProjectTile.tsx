@@ -13,7 +13,7 @@ import ArchitectureTile from "./ArchitectureTile";
 import { Link } from "react-router-dom";
 
 export function ProjectTile({ dataID }: ProjectProps) {
-  const { isMobile } = useGlobalState();
+  const { isMobile, currentPage } = useGlobalState();
   const { togglePreview, resetPreview, movePreview } = homeAnimation();
   const title = getProjectName(dataID)?.replace(/\s+/g, "-") || "";
   const { executeTransition } = useGlobalState();
@@ -22,7 +22,7 @@ export function ProjectTile({ dataID }: ProjectProps) {
     if (isMobile) {
       resetPreview();
     }
-  }, [isMobile]);
+  }, [isMobile, currentPage]);
 
   return (
     <Link

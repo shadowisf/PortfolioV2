@@ -24,10 +24,11 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(gsap, useGSAP, ScrollTrigger);
 
 export default function About() {
-  const { setCurrentPage, isMobile } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
   const { filterSkill, resetSkill, startup } = aboutAnimation();
   const { mobileView, desktopView } = Views();
+
+  const { setCurrentPage, currentPage, isMobile } = useGlobalState();
 
   useEffect(() => {
     setCurrentPage("about");
@@ -35,14 +36,8 @@ export default function About() {
   }, []);
 
   useEffect(() => {
-    if (isMobile) {
-      mobileView();
-    }
-
-    return () => {
-      desktopView();
-    };
-  }, [isMobile]);
+    isMobile ? mobileView() : desktopView();
+  }, [isMobile, currentPage]);
 
   useGSAP(() => {
     startup();

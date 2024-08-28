@@ -42,7 +42,7 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
 
   useEffect(() => {
     handleResize();
-  }, []);
+  }, [currentPage]);
 
   // handle window resize, set mobile state
   function handleResize() {

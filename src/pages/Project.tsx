@@ -23,11 +23,11 @@ export default function Project({ dataID }: ProjectProps) {
   const { executeTransition } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
   const { setCurrentPage } = useGlobalState();
+  const { contextSafe } = useGSAP();
 
   const title = getProjectName(dataID)?.replace(/\s+/g, "-") || "";
   const prevProject = getProjectName(dataID + 1)?.replace(/\s+/g, "-") || "";
   const nextProject = getProjectName(dataID - 1)?.replace(/\s+/g, "-") || "";
-  const { contextSafe } = useGSAP();
 
   useEffect(() => {
     const zoom = mediumZoom("img", {
