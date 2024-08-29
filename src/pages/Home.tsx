@@ -49,9 +49,6 @@ export default function Home() {
             <small className="smaller">(future fullstack)</small>
           </h5>
           <h5 className="nonBold">
-            <span className="bulletPoint">⊢</span> ui/ux designer
-          </h5>
-          <h5 className="nonBold">
             <span className="bulletPoint">⊢</span> uae-based
           </h5>
 

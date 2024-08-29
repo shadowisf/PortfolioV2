@@ -64,8 +64,11 @@ $makeNavBackgroundWidth: $minMaxWidth;
   font-weight: 400;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+  padding: 0;
   margin: 0;
   backface-visibility: hidden;
 }

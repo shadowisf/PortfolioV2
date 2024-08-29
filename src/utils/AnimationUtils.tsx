@@ -8,15 +8,22 @@ gsap.registerPlugin(gsap, useGSAP, ScrollToPlugin, ScrollTrigger, Flip);
 export function pixelTransition() {
   const { contextSafe } = useGSAP();
 
+  const duration = 0.005;
+  const staggerAmount = 0.5;
+  const staggerFrom = "random";
+  const ease = "power2.inOut";
+
   const startTransition = contextSafe((whenDone?: () => void) => {
     gsap.set(".pixelGrid", { display: "grid" });
     gsap.fromTo(
       ".pixelItem",
-      { opacity: "0" },
+      { autoAlpha: 0, scale: 0 },
       {
-        opacity: "1",
-        duration: "0.005",
-        stagger: { amount: 0.5, from: "random" },
+        autoAlpha: 1,
+        scale: 1,
+        duration: duration,
+        stagger: { amount: staggerAmount, from: staggerFrom },
+        ease: ease,
         onComplete: whenDone,
       }
     );
@@ -25,9 +32,11 @@ export function pixelTransition() {
   const endTransition = contextSafe(() => {
     setTimeout(() => {
       gsap.to(".pixelItem", {
-        opacity: "0",
-        duration: "0.005",
-        stagger: { amount: 0.5, from: "random" },
+        autoAlpha: 0,
+        scale: 0,
+        duration: duration,
+        stagger: { amount: staggerAmount, from: staggerFrom },
+        ease: ease,
         onComplete: () => {
           gsap.set(".pixelGrid", { display: "none" });
         },
