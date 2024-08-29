@@ -39,7 +39,7 @@ export function ProjectTile({ dataID }: ProjectProps) {
         isMobile ? null : movePreview(dataID, event);
       }}
     >
-      <h6 className="title">{getProjectName(dataID)}</h6>
+      <h5 className="title">{getProjectName(dataID)}</h5>
       <small className="year faded">{getProjectYear(dataID)}</small>
     </Link>
   );

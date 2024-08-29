@@ -72,14 +72,14 @@ export default function Home() {
 
             <LinkWithIconOnly
               className="faded"
-              img={<RiGithubLine size={32} />}
-              href="https://github.com/shadowisf"
+              img={<RiInstagramLine size={32} />}
+              href="https://www.instagram.com/les.rx/"
             />
 
             <LinkWithIconOnly
               className="faded"
-              img={<RiInstagramLine size={32} />}
-              href="https://www.instagram.com/les.rx/"
+              img={<RiGithubLine size={32} />}
+              href="https://github.com/shadowisf"
             />
           </div>
         </div>

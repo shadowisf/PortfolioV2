@@ -69,7 +69,7 @@ export default function About() {
           <div className="links">
             <span>
               <LinkWithIcon img={<RiFilePdf2Line size={24} />} href={CV}>
-                download resume
+                view cv
               </LinkWithIcon>
             </span>
 
@@ -85,13 +85,13 @@ export default function About() {
               />
 
               <LinkWithIconOnly
-                img={<RiGithubLine size={32} />}
-                href="https://github.com/shadowisf"
+                img={<RiInstagramLine size={32} />}
+                href="https://www.instagram.com/les.rx/"
               />
 
               <LinkWithIconOnly
-                img={<RiInstagramLine size={32} />}
-                href="https://www.instagram.com/les.rx/"
+                img={<RiGithubLine size={32} />}
+                href="https://github.com/shadowisf"
               />
             </span>
           </div>
