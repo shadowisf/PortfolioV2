@@ -10,6 +10,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { getAllProjectIDs, getProjectName } from "./utils/ProjectUtils.tsx";
 import Project from "./pages/Project.tsx";
 import { Footer } from "./components/Footer.tsx";
+import YouAreLost from "./components/YouAreLost.tsx";
 
 // firebase deploy --only hosting:les-ranalan
 
@@ -23,7 +24,7 @@ root.render(
         <PixelGrid />
 
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />}></Route>
           <Route path="about" element={<About />} />
           {getAllProjectIDs().map((id) => (
             <Route
@@ -32,6 +33,8 @@ root.render(
               element={<Project dataID={id} />}
             />
           ))}
+
+          <Route path="*" element={<YouAreLost />} />
         </Routes>
 
         <Footer />

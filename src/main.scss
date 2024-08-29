@@ -1028,3 +1028,31 @@ footer {
     }
   }
 }
+
+.lostWrapper {
+  max-width: $maxWidthDesktop;
+
+  padding: 8rem 0;
+  margin: auto;
+
+  height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  gap: 1rem;
+
+  .memeContainer {
+    img {
+      width: 75%;
+    }
+  }
+
+  p {
+    font-size: calc(var(--p) * 2);
+  }
+}
