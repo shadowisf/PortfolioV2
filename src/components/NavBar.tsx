@@ -19,26 +19,33 @@ export default function NavBar() {
 
     if (savedTheme) {
       setUserTheme(savedTheme);
+
       document.documentElement.style.setProperty("--theme", savedTheme);
     } else {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
         .matches
         ? "dark"
         : "light";
+
       setUserTheme(systemTheme);
+
       document.documentElement.style.setProperty("--theme", systemTheme);
     }
   }, []);
 
   // toggle between dark mode and light mode
-  function executeToggleTheme() {
+  function executeToggleTheme(menu: boolean) {
     const newTheme = userTheme === "dark" ? "light" : "dark";
+
     setUserTheme(newTheme);
+
     document.documentElement.style.setProperty("--theme", newTheme);
 
     localStorage.setItem("theme", newTheme);
 
-    closeMenu();
+    if (menu) {
+      closeMenu();
+    }
   }
 
   return (
@@ -62,7 +69,12 @@ export default function NavBar() {
           </Link>
 
           {/*  nav theme toggle button */}
-          <span onClick={() => executeToggleTheme()} className="themeButton">
+          <span
+            onClick={() => {
+              executeToggleTheme(false);
+            }}
+            className="themeButton"
+          >
             {userTheme === "dark" ? (
               <RiSunLine size={24} />
             ) : (
@@ -89,7 +101,12 @@ export default function NavBar() {
         </Link>
 
         {/* menu theme button */}
-        <a onClick={() => executeToggleTheme()} className="themeButton">
+        <a
+          onClick={() => {
+            executeToggleTheme(true);
+          }}
+          className="themeButton"
+        >
           {userTheme === "dark" ? <RiSunLine /> : <RiMoonLine />}
         </a>
       </div>
