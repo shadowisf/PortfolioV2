@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./main.scss";
 import { GlobalStateProvider } from "./utils/ControlUtil.tsx";
 import NavBar from "./components/NavBar.tsx";
-import { PixelGrid } from "./components/PixelGrid.tsx";
+import { PixelGrid } from "./components/TransitionGrid.tsx";
 import About from "./pages/About.tsx";
 import Home from "./pages/Home.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";

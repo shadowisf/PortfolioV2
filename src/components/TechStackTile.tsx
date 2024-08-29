@@ -30,7 +30,7 @@ import {
   SiTailwindcss,
 } from "react-icons/si";
 
-export const architectureStyling: Record<
+export const techStackStyling: Record<
   string,
   { icon: JSX.Element; color: string }
 > = {
@@ -148,25 +148,25 @@ export const architectureStyling: Record<
   },
 };
 
-type ArchitectureTileProps = {
-  architecture: string;
+type TechStackTileProps = {
+  techStackItem: string;
   classNameContainer: string;
   classNameIcon: string;
   dataKey?: string;
   preview: boolean;
 };
 
-export default function ArchitectureTile({
-  architecture,
+export default function TechStackTile({
+  techStackItem,
   classNameContainer,
   classNameIcon,
   dataKey,
   preview,
-}: ArchitectureTileProps) {
+}: TechStackTileProps) {
   const unwantedChars = /[3210*]/g;
 
-  const cleanItem = architecture.replace(unwantedChars, "");
-  const data = architectureStyling[cleanItem];
+  const cleanItem = techStackItem.replace(unwantedChars, "");
+  const data = techStackStyling[cleanItem];
 
   if (!data) {
     return null;

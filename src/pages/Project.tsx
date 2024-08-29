@@ -1,9 +1,11 @@
 import {
-  getProjectArchitecture,
-  getProjectContent,
+  getProjectTechStack,
+  getProjectCoreConcept,
+  getProjectDescription,
   getProjectImage,
   getProjectImageAlts,
   getProjectLinks,
+  getProjectMyRole,
   getProjectName,
   getProjectVideo,
   getProjectYear,
@@ -15,7 +17,7 @@ import mediumZoom from "medium-zoom";
 import gsap from "gsap";
 import { useGlobalState } from "../utils/ControlUtil";
 import { useGSAP } from "@gsap/react";
-import ArchitectureTile from "../components/ArchitectureTile";
+import TechStackTile from "../components/TechStackTile";
 import { Link } from "react-router-dom";
 
 export default function Project({ dataID }: ProjectProps) {
@@ -65,6 +67,7 @@ export default function Project({ dataID }: ProjectProps) {
   return (
     <main className="projectWrapper">
       <section className="header">
+        {/* previouse project */}
         <Link
           to={`/${prevProject}`}
           className="nextPrevButton"
@@ -76,7 +79,11 @@ export default function Project({ dataID }: ProjectProps) {
         >
           ←
         </Link>
+
+        {/* title */}
         <h1 className="title accent">{getProjectName(dataID)}</h1>
+
+        {/* next project */}
         <Link
           to={`/${nextProject}`}
           className="nextPrevButton"
@@ -89,13 +96,16 @@ export default function Project({ dataID }: ProjectProps) {
           →
         </Link>
       </section>
+
+      {/* year */}
       <small className="year">{getProjectYear(dataID)}</small>
 
-      <section className="architecture">
-        {getProjectArchitecture(dataID).map((item, index) => {
+      {/* tech stack */}
+      <section className="techStack">
+        {getProjectTechStack(dataID).map((item, index) => {
           return (
-            <ArchitectureTile
-              architecture={item}
+            <TechStackTile
+              techStackItem={item}
               key={index}
               classNameContainer="item"
               classNameIcon="icon"
@@ -106,18 +116,26 @@ export default function Project({ dataID }: ProjectProps) {
       </section>
 
       <section className="content">
-        <div className="paragraph">{getProjectContent(dataID)}</div>
+        {/* content */}
+        <div className="paragraph">
+          <h5>description:</h5>
+          <p>{getProjectDescription(dataID)}</p>
 
-        {getProjectLinks(dataID) ? (
-          <div>
-            <h6>links:</h6>
-            <br />
-            <div className="links">{getProjectLinks(dataID)}</div>
-          </div>
-        ) : (
-          ""
-        )}
+          <br />
 
+          <h5>core concept:</h5>
+          <p>{getProjectCoreConcept(dataID)}</p>
+
+          <br />
+
+          <h5>my role:</h5>
+          <p>{getProjectMyRole(dataID)}</p>
+        </div>
+
+        {/* links */}
+        <div className="links">{getProjectLinks(dataID)}</div>
+
+        {/* images/videos */}
         <div className="media">
           {getProjectImage(dataID).map((item, index) => (
             <img
@@ -128,9 +146,7 @@ export default function Project({ dataID }: ProjectProps) {
             />
           ))}
 
-          {getProjectVideo(dataID) && (
-            <video controls muted src={getProjectVideo(dataID)} />
-          )}
+          <video controls muted src={getProjectVideo(dataID)} />
         </div>
       </section>
 

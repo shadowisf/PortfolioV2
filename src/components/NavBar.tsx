@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { pixelTransition } from "../utils/AnimationUtils";
+import { pageTransition } from "../utils/AnimationUtils";
 import { useGlobalState } from "../utils/ControlUtil";
 import {
   RiSunLine,
@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 
 export default function NavBar() {
-  const { openMenu, closeMenu } = pixelTransition();
+  const { openMenu, closeMenu } = pageTransition();
   const { executeTransition } = useGlobalState();
   const [userTheme, setUserTheme] = useState("light");
 

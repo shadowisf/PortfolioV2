@@ -13,7 +13,7 @@ import ProfilePicture from "../assets/ImageProfile.webp";
 import { TimelineRow } from "../components/Timeline";
 import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
-import ArchitectureTile from "../components/ArchitectureTile";
+import TechStackTile from "../components/TechStackTile";
 import { aboutAnimation, scrollingAnimation } from "../utils/AnimationUtils";
 import { LinkWithIcon, LinkWithIconOnly } from "../components/Link";
 import CV from "../assets/FileCV.PDF";
@@ -47,7 +47,7 @@ export default function About() {
     <main className="aboutWrapper">
       <section className="bio">
         <img src={ProfilePicture} />
-        <div>
+        <div className="bioContent">
           <h1 className="extra accent bioHeader">hey, i'm les!</h1>
           <br />
           <h4>
@@ -101,7 +101,7 @@ export default function About() {
       <section className="timelineAndSkillset">
         <section className="timeline">
           <h1>my life's arc</h1>
-          <div>
+          <div className="timelineRows">
             <TimelineRow
               img={<RiCake2Line size={40} fill="var(--accent-color)" />}
               verticalLine={true}
@@ -153,8 +153,8 @@ export default function About() {
           <div className="skills">
             {getAboutSkillset().map((item) => {
               return (
-                <ArchitectureTile
-                  architecture={item}
+                <TechStackTile
+                  techStackItem={item}
                   classNameContainer="item"
                   classNameIcon="icon"
                   key={item}

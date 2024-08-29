@@ -1,5 +1,5 @@
 import {
-  getProjectArchitecture,
+  getProjectTechStack,
   getProjectImage,
   getProjectName,
   getProjectVideo,
@@ -9,7 +9,7 @@ import {
 import { homeAnimation } from "../utils/AnimationUtils";
 import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
-import ArchitectureTile from "./ArchitectureTile";
+import TechStackTile from "./TechStackTile";
 import { Link } from "react-router-dom";
 
 export function ProjectTile({ dataID }: ProjectProps) {
@@ -53,13 +53,13 @@ export function ProjectPreview({ dataID }: ProjectProps) {
       ) : (
         <img src={getProjectImage(dataID)[0]} />
       )}
-      <span className="architecture">
-        {getProjectArchitecture(dataID)
+      <span className="techStack">
+        {getProjectTechStack(dataID)
           .filter((item) => item.startsWith("*"))
           .map((item, index) => {
             return (
-              <ArchitectureTile
-                architecture={item}
+              <TechStackTile
+                techStackItem={item}
                 key={index}
                 classNameContainer="item"
                 classNameIcon="icon"

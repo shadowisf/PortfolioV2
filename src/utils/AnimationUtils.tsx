@@ -5,24 +5,22 @@ import { useGlobalState } from "./ControlUtil";
 
 gsap.registerPlugin(gsap, useGSAP, ScrollToPlugin, ScrollTrigger, Flip);
 
-export function pixelTransition() {
+export function pageTransition() {
   const { contextSafe } = useGSAP();
 
-  const duration = 0.005;
-  const staggerAmount = 0.5;
-  const staggerFrom = "random";
-  const ease = "power2.inOut";
+  const duration = 0.75;
+  const ease = "power4.inOut";
 
   const startTransition = contextSafe((whenDone?: () => void) => {
-    gsap.set(".pixelGrid", { display: "grid" });
+    gsap.set(".transitionGrid", { display: "grid" });
     gsap.fromTo(
-      ".pixelItem",
-      { autoAlpha: 0, scale: 0 },
+      ".transitionItem",
+      { y: "-100vh" },
       {
+        y: 0,
         autoAlpha: 1,
         scale: 1,
         duration: duration,
-        stagger: { amount: staggerAmount, from: staggerFrom },
         ease: ease,
         onComplete: whenDone,
       }
@@ -30,29 +28,23 @@ export function pixelTransition() {
   });
 
   const endTransition = contextSafe(() => {
-    setTimeout(() => {
-      gsap.to(".pixelItem", {
-        autoAlpha: 0,
-        scale: 0,
-        duration: duration,
-        stagger: { amount: staggerAmount, from: staggerFrom },
-        ease: ease,
-        onComplete: () => {
-          gsap.set(".pixelGrid", { display: "none" });
-        },
-      });
-    }, 100);
+    gsap.to(".transitionItem", {
+      y: "100vh",
+      duration: duration,
+      ease: ease,
+      onComplete: () => {
+        gsap.set(".transitionGrid", { display: "none" });
+      },
+    });
   });
 
   const openMenu = contextSafe(() => {
     startTransition(() => {
-      setTimeout(() => {
-        gsap.to(".menu", {
-          display: "flex",
-          autoAlpha: "1",
-          duration: "0.5",
-        });
-      }, 200);
+      gsap.to(".menu", {
+        display: "flex",
+        autoAlpha: "1",
+        duration: "0.5",
+      });
     });
   });
 
@@ -82,7 +74,11 @@ export function scrollingAnimation() {
     gsap.to(window, { scrollTo: { y: 0 }, duration: duration });
   });
 
-  return { scrollToTop };
+  const scrollToID = contextSafe((id: string) => {
+    gsap.to(window, { scrollTo: id, duration: 0.5 });
+  });
+
+  return { scrollToTop, scrollToID };
 }
 
 export function aboutAnimation() {
@@ -91,14 +87,14 @@ export function aboutAnimation() {
 
   const startup = contextSafe(() => {
     const allTimelineRows = document.querySelector(
-      ".aboutWrapper .timeline div"
+      ".aboutWrapper .timeline .timelineRows"
     )?.childNodes as NodeListOf<Element>;
 
     const allSkills = document.querySelector(".aboutWrapper .skillset .skills")
       ?.childNodes as NodeListOf<Element>;
 
     const bioPicture = document.querySelector(".aboutWrapper .bio img");
-    const bioContent = document.querySelector(".aboutWrapper .bio div")
+    const bioContent = document.querySelector(".aboutWrapper .bio .bioContent")
       ?.childNodes as NodeListOf<Element>;
     const timelineContainer = document.querySelector(".aboutWrapper .timeline");
     const skillsetContainer = document.querySelector(".aboutWrapper .skillset");
@@ -474,7 +470,7 @@ export function projectAnimation() {
           },
         });
       });
-    }, 25);
+    }, 100);
   });
 
   return {
