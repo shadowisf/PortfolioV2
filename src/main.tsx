@@ -26,13 +26,17 @@ root.render(
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="about" element={<About />} />
-          {getAllProjectIDs().map((id) => (
-            <Route
-              key={id}
-              path={getProjectName(id)?.replace(/\s+/g, "-")}
-              element={<Project dataID={id} />}
-            />
-          ))}
+          {getAllProjectIDs().map((dataID) => {
+            const cleanName = getProjectName(dataID)?.replace(/\s+/g, "-");
+
+            return (
+              <Route
+                key={dataID}
+                path={cleanName}
+                element={<Project dataID={dataID} />}
+              />
+            );
+          })}
 
           <Route path="*" element={<YouAreLost />} />
         </Routes>

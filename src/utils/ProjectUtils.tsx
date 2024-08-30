@@ -142,7 +142,7 @@ export const projectData = [
     id: 4,
     name: "circuitcentral",
     year: "2024",
-    techStack: ["*c-sharp", "*windows forms", "*microsoft sql server", "git"],
+    techStack: ["*c-sharp", "*windows forms", "*transact-sql", "git"],
     image: [ImageCircuitCentral1, ImageCircuitCentral2],
     imageAlt: [
       "first image of the circuitcentral project; it is viewing the products section wherein it is displaying a list of tech products that a user can add to their cart. additionally, the ui has buttons for CRUD operations.",
@@ -194,27 +194,28 @@ export const projectData = [
     name: "apollo hospital",
     year: "2023",
     techStack: [
-      "flask",
-      "*python",
-      "*django",
+      "*flask",
+      "python",
+      "django",
       "javascript",
       "*html",
       "*bootstrap css",
-      "*xampp",
+      "*mysql",
+      "pythonanywhere",
     ],
     image: [ImageApolloHospital1, ImageApolloHospital2],
-    video: VideoApolloHospital,
     imageAlts: [
       "first image of the apollo hospital project; it is viewing the home page wherein it displays an illustration of a doctor treating its patient, with the title of the website whch is apollo hospital.",
       "second image of the apollo hospital project; it is viewing the patient records section wherein it displays the list of patient information. additionally, the ui has buttons for CRUD operations.",
     ],
+    video: VideoApolloHospital,
     description: (
       <Fragment>
         apollo hospital is a <u>hospital management system</u> that covers
         handling patient and doctor information, scheduling appointments with
         patients, and managing patient's prescription and payables. its system
         features fundamental crud operations: create, read, update, delete
-        within the xampp database. additionally, it has a login system for three
+        within the mysql database. additionally, it has a login system for three
         user types (receptionist, doctor, staff), error handling, input
         validation, and search filtering of records.
       </Fragment>
@@ -222,9 +223,21 @@ export const projectData = [
     coreConcept:
       "apollo hospital is centered around software engineering principles such as software development life cycle (sdlc). in which engineers use models to represent processes such as project planning, development, testing,and future proofing. through this, we are able to efficiently execute each process and create this project.",
     myRole:
-      " apollo hospital was a group project. i designed and implemented the front-end: overall theme, buttons, navbar, modals, webpages via html,bootstrap css and javascript. additionally, i implemented half of the back-end: database schema via xampp, error handling, and callouts via django.",
+      " apollo hospital was a group project. i designed and implemented the front-end: overall theme, buttons, navbar, modals, webpages via html,bootstrap css and javascript. additionally, i implemented half of the back-end: database schema via xampp's mariadb database, error handling, and callouts via django.",
     links: (
       <Fragment>
+        <LinkWithIcon
+          img={<GoPackage size={24} />}
+          href="https://apollohospital.pythonanywhere.com"
+          onClick={() => {
+            alert(
+              "note: you have sign-up first and then login to test the app. click close to continue."
+            );
+          }}
+        >
+          demo
+        </LinkWithIcon>
+
         <LinkWithIcon
           img={<RiGithubLine size={24} />}
           href={ApolloHospitalGithub}
@@ -341,7 +354,7 @@ export const projectData = [
     id: 0,
     name: "plug-ins database",
     year: "2022",
-    techStack: ["*php", "*html", "*css", "*xampp"],
+    techStack: ["*php", "*html", "*css", "*mariadb"],
     image: [ImagePlugInsDatabase1, ImagePlugInsDatabase2],
     imageAlts: [
       "first image of the plug-ins project. it is currently viewing the index customer page where it is displaying input fields for basic customer information such as name, contact number, address, etc. additionally, it has buttons for inserting the customer information into the database.",
@@ -352,8 +365,8 @@ export const projectData = [
       <Fragment>
         plug-ins database is a <u>database solution</u> for a store that sells
         electronic devices. it covers handling of entity information (customer,
-        product, order) within the xampp database. additionally, it has search
-        filtering and a retrieve method through html and php.
+        product, order) within xampp's mariadb database. additionally, it has
+        search filtering and a retrieve method through html and php.
       </Fragment>
     ),
     coreConcept:
@@ -436,7 +449,3 @@ export function getProjectTechStack(dataID: number) {
 export function getAllProjectIDs() {
   return projectData.map((proj) => proj.id);
 }
-
-/* export function getAllProjectNames() {
-  return projectData.map((proj) => proj.name);
-} */

@@ -23,11 +23,12 @@ import {
   SiMicrosoftsqlserver,
   SiFlask,
   SiDjango,
-  SiXampp,
   SiPhp,
   SiPostgresql,
   SiSvelte,
   SiTailwindcss,
+  SiMariadb,
+  SiPythonanywhere,
 } from "react-icons/si";
 
 export const techStackStyling: Record<
@@ -70,7 +71,7 @@ export const techStackStyling: Record<
     icon: <SiFramework />,
     color: "gray",
   },
-  "microsoft sql server": {
+  "transact-sql": {
     icon: <SiMicrosoftsqlserver />,
     color: "rgb(184, 54, 53)",
   },
@@ -89,10 +90,6 @@ export const techStackStyling: Record<
   "bootstrap css": {
     icon: <FaBootstrap />,
     color: "#7952b3",
-  },
-  xampp: {
-    icon: <SiXampp />,
-    color: "rgb(234, 130, 61)",
   },
   swing: {
     icon: <SiFramework />,
@@ -145,6 +142,14 @@ export const techStackStyling: Record<
   "tailwind css": {
     icon: <SiTailwindcss />,
     color: "rgb(94, 200, 183)",
+  },
+  mariadb: {
+    icon: <SiMariadb />,
+    color: "rgb(167, 138, 101)",
+  },
+  pythonanywhere: {
+    icon: <SiPythonanywhere />,
+    color: "rgb(85, 168, 222)",
   },
 };
 

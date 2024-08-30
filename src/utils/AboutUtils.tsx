@@ -44,14 +44,12 @@ export function getAboutSkillset() {
       "1c-sharp",
       "2java",
       "1python",
-      "1microsoft sql server",
-      "1windows forms",
+      "1transact-sql",
       "1django",
       "1flask",
-      "3xampp",
+      "3mariadb",
       "1php",
       "2javascript",
-      "1swing",
     ],
   };
 

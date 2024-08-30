@@ -12,7 +12,7 @@ import {
   ProjectProps,
 } from "../utils/ProjectUtils";
 import { useEffect } from "react";
-import { projectAnimation, scrollingAnimation } from "../utils/AnimationUtils";
+import { scrollingAnimation } from "../utils/AnimationUtils";
 import mediumZoom from "medium-zoom";
 import gsap from "gsap";
 import { useGlobalState } from "../utils/ControlUtil";
@@ -21,7 +21,6 @@ import TechStackTile from "../components/TechStackTile";
 import { Link } from "react-router-dom";
 
 export default function Project({ dataID }: ProjectProps) {
-  const { startup } = projectAnimation();
   const { executeTransition } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
   const { setCurrentPage } = useGlobalState();
@@ -58,10 +57,6 @@ export default function Project({ dataID }: ProjectProps) {
   useEffect(() => {
     setCurrentPage(title);
     scrollToTop(0);
-  }, [title]);
-
-  useGSAP(() => {
-    startup();
   }, [title]);
 
   return (
