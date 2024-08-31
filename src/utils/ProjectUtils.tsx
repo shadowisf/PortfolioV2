@@ -13,13 +13,11 @@ import ImageV1Portfolio from "../assets/ImageV1Portfolio.webp";
 import VideoV1Portfolio from "../assets/VideoV1Portfolio.webm";
 //
 import ImageCircuitCentral from "../assets/ImageCircuitCentral.webp";
-import FileCircuitCentral1 from "../assets/FileCircuitCentral1.PDF";
-import FileCircuitCentral2 from "../assets/FileCircuitCentral2.PDF";
+import FileCircuitCentral from "../assets/FileCircuitCentral.PDF";
 import VideoCircuitCentral from "../assets/VideoCircuitCentral.webm";
 //
 import ImageApolloHospital from "../assets/ImageApolloHospital.webp";
-import FileApolloHospital1 from "../assets/FileApolloHospital1.PDF";
-import FileApolloHospital2 from "../assets/FileApolloHospital2.PDF";
+import FileApolloHospital from "../assets/FileApolloHospital.PDF";
 import VideoApolloHospital from "../assets/VideoApolloHospital.webm";
 //
 import ImageFunculator from "../assets/ImageFunCulator.webp";
@@ -188,16 +186,9 @@ export const projectData = [
 
         <LinkWithIcon
           img={<RiFilePdf2Line size={24} />}
-          href={FileCircuitCentral2}
+          href={FileCircuitCentral}
         >
-          proposal report
-        </LinkWithIcon>
-
-        <LinkWithIcon
-          img={<RiFilePdf2Line size={24} />}
-          href={FileCircuitCentral1}
-        >
-          implementation report
+          report
         </LinkWithIcon>
       </Fragment>
     ),
@@ -260,16 +251,9 @@ export const projectData = [
 
         <LinkWithIcon
           img={<RiFilePdf2Line size={24} />}
-          href={FileApolloHospital1}
+          href={FileApolloHospital}
         >
           report
-        </LinkWithIcon>
-
-        <LinkWithIcon
-          img={<RiFilePdf2Line size={24} />}
-          href={FileApolloHospital2}
-        >
-          documentation
         </LinkWithIcon>
       </Fragment>
     ),
