@@ -15,7 +15,11 @@ import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 import TechStackTile from "../components/TechStackTile";
 import { aboutAnimation, scrollingAnimation } from "../utils/AnimationUtils";
-import { LinkWithIcon, LinkWithIconOnly } from "../components/Link";
+import {
+  LinkWithIcon,
+  LinkWithIconOnly,
+  LinkWithNoIcon,
+} from "../components/Link";
 import CV from "../assets/FileCV.PDF";
 import { getAboutSkillset, Views } from "../utils/AboutUtils";
 import gsap, { ScrollTrigger } from "gsap/all";
@@ -128,9 +132,43 @@ export default function About() {
 
             <TimelineRow
               img={<RiGraduationCapLine size={40} fill="var(--accent-color)" />}
+              verticalLine={true}
+            >
+              <span>
+                graduated{" "}
+                <LinkWithNoIcon
+                  className="infoOnHover"
+                  href="https://wincedu.uk"
+                  data-tooltip="western international college"
+                >
+                  winc
+                </LinkWithNoIcon>{" "}
+                with diploma in engineering
+              </span>
+              <span className="faded">september 3, 2022</span>
+            </TimelineRow>
+
+            <TimelineRow
+              img={<RiGraduationCapLine size={40} fill="var(--accent-color)" />}
               verticalLine={false}
             >
-              graduated uob with bachelor in swe <br />
+              <span>
+                graduated{" "}
+                <LinkWithNoIcon
+                  className="infoOnHover"
+                  href="https://www.bolton.ac.uk"
+                  data-tooltip="university of bolton"
+                >
+                  uob
+                </LinkWithNoIcon>{" "}
+                with bachelor in{" "}
+                <LinkWithNoIcon
+                  className="infoOnHover"
+                  data-tooltip="software engineering"
+                >
+                  swe
+                </LinkWithNoIcon>
+              </span>
               <span className="faded">???</span>
             </TimelineRow>
           </div>

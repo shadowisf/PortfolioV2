@@ -1,53 +1,63 @@
 import { LinkWithIcon } from "../components/Link";
 import { Fragment } from "react/jsx-runtime";
 import { RiFilePdf2Line, RiGithubLine } from "react-icons/ri";
+import { GoPackage } from "react-icons/go";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/all";
 gsap.registerPlugin(gsap, ScrollToPlugin);
 //
-import ImageV1Portfolio1 from "../assets/ImageV1Portfolio1.webp";
-import ImageV1Portfolio2 from "../assets/ImageV1Portfolio2.webp";
-import VideoV1Portfolio from "../assets/VideoV1Portfolio.webm";
-//
-import ImageV2Portfolio1 from "../assets/ImageV2Portfolio1.webp";
-import ImageV2Portfolio2 from "../assets/ImageV2Portfolio2.webp";
-import ImageV2Portfolio3 from "../assets/ImageV2Portfolio3.webp";
+import ImageV2Portfolio from "../assets/ImageV2Portfolio.webp";
 import VideoV2Portfolio from "../assets/VideoV2Portfolio.webm";
 //
-import ImageApolloHospital1 from "../assets/ImageApolloHospital1.webp";
-import ImageApolloHospital2 from "../assets/ImageApolloHospital2.webp";
-import FileApolloHospital1 from "../assets/FileApolloHospital1.PDF";
-import FileApolloHospital2 from "../assets/FileApolloHospital2.PDF";
-import VideoApolloHospital from "../assets/VideoApolloHospital.webm";
+import ImageV1Portfolio from "../assets/ImageV1Portfolio.webp";
+import VideoV1Portfolio from "../assets/VideoV1Portfolio.webm";
 //
-import ImageCircuitCentral1 from "../assets/ImageCircuitCentral1.webp";
-import ImageCircuitCentral2 from "../assets/ImageCircuitCentral2.webp";
+import ImageCircuitCentral from "../assets/ImageCircuitCentral.webp";
 import FileCircuitCentral1 from "../assets/FileCircuitCentral1.PDF";
 import FileCircuitCentral2 from "../assets/FileCircuitCentral2.PDF";
 import VideoCircuitCentral from "../assets/VideoCircuitCentral.webm";
 //
-import ImagePlugInsDatabase1 from "../assets/ImagePlugInsDatabase1.webp";
-import ImagePlugInsDatabase2 from "../assets/ImagePlugInsDatabase2.webp";
-import FilePlugInsDatabase from "../assets/FilePlugInsDatabase.PDF";
-import VideoPlugInsDatabase from "../assets/VIdeoPlugInsDatabase.webm";
+import ImageApolloHospital from "../assets/ImageApolloHospital.webp";
+import FileApolloHospital1 from "../assets/FileApolloHospital1.PDF";
+import FileApolloHospital2 from "../assets/FileApolloHospital2.PDF";
+import VideoApolloHospital from "../assets/VideoApolloHospital.webm";
 //
-import ImageFunculator1 from "../assets/ImageFunCulator1.webp";
-import ImageFunculator2 from "../assets/ImageFunCulator2.webp";
-import ImageFunculator3 from "../assets/ImageFunCulator3.webp";
+import ImageFunculator from "../assets/ImageFunCulator.webp";
 import FileFunculator from "../assets/FileFunCulator.PDF";
 import VideoFunCulator from "../assets/VideoFunCulator.webm";
 //
-import ImageBellHospital1 from "../assets/ImageBellHospital1.webp";
-import ImageBellHospital2 from "../assets/ImageBellHospital2.webp";
+import ImageBellHospital from "../assets/ImageBellHospital.webp";
 import FileBellHospital from "../assets/FileBellHospital.PDF";
 import VideoBellHospital from "../assets/VideoBellHospital.webm";
-import { GoPackage } from "react-icons/go";
 //
-const ApolloHospitalGithub = "https://github.com/shadowisf/ApolloHospital";
-const CircuitCentralGithub = "https://github.com/shadowisf/CircuitCentral";
-const PlugInsDatabaseGithub = "https://github.com/shadowisf/PlugInsDatabase";
-const FunculatorGithub = "https://github.com/shadowisf/FunCulator";
-const BellHospitalGithub = "https://github.com/shadowisf/BellHospital";
+import ImagePlugInsDatabase from "../assets/ImagePlugInsDatabase.webp";
+import FilePlugInsDatabase from "../assets/FilePlugInsDatabase.PDF";
+import VideoPlugInsDatabase from "../assets/VIdeoPlugInsDatabase.webm";
+//
+const ApolloHospital = {
+  github: "https://github.com/shadowisf/ApolloHospital",
+  demo: "https://apollohospital.pythonanywhere.com",
+};
+const CircuitCentral = {
+  github: "https://github.com/shadowisf/CircuitCentral",
+  demo: "",
+};
+const PlugInsDatabase = {
+  github: "https://github.com/shadowisf/PlugInsDatabase",
+  demo: "",
+};
+const FunCulator = {
+  github: "https://github.com/shadowisf/FunCulator",
+  demo: "",
+};
+const BellHospital = {
+  github: "https://github.com/shadowisf/BellHospital",
+  demo: "",
+};
+const PortfolioV1 = {
+  github: "https://github.com/shadowisf/PortfolioReactV1",
+  demo: "https://v1-lesranalan.web.app",
+};
 //
 export const projectData = [
   {
@@ -55,13 +65,13 @@ export const projectData = [
     name: "portfolio v2",
     year: "2024",
     techStack: ["typescript", "*react", "*html", "*sass", "*firebase", "git"],
-    image: [ImageV2Portfolio1, ImageV2Portfolio2, ImageV2Portfolio3],
-    video: VideoV2Portfolio,
-    imageAlts: [
+    image: ImageV2Portfolio,
+    imageFlex: "1.6",
+    imageAlt: [
       "image of the about section in my portfolio v2 project. there is a picture of me and a text introducing myself, with a button at the very bottom which downloads my resume. at the bottom portion, there is a timeline where it showcases all important events that happened in my life. on the right side of the timeline, it showcases my skillset wherein you can filter by my skill level such as all, expert, intermediate, and beginner.",
-      "image of the home section in my portfolio v2 project. the left side shows all of the different projects i have done. on the right is the video or image preview of the selected project on hover.",
-      "image of the project section in my portfolio v2 project. it is currently viewing the portfolio v1 project. each project has a short description and its tech stack. additionally, there's links to its github repository and technical report. as you scroll down there are images and videos of that specific project.",
     ],
+    video: VideoV2Portfolio,
+    videoFlex: "1.598148",
     description: (
       <Fragment>
         portfolio v2 is the redesign of my portfolio website from v1. this was
@@ -94,12 +104,14 @@ export const projectData = [
     name: "portfolio v1",
     year: "2024",
     techStack: ["typescript", "*react", "*html", "*sass", "*firebase", "git"],
-    image: [ImageV1Portfolio1, ImageV1Portfolio2],
-    imageAlts: [
+    image: ImageV1Portfolio,
+    imageFlex: "1.6",
+    imageAlt: [
       "image of the about section in my portfolio project. it has a cartoon illustration of me and and text introducing myself.",
       "image of the project section in my portfolio project. it is currently viewing the circuitcentral project, displaying a short description and its tech stack. additionally, there's links to its github repository and technical report.",
     ],
     video: VideoV1Portfolio,
+    videoFlex: "1.599074",
     description: (
       <Fragment>
         portfolio v1 is the original design of my portfolio website and it was
@@ -114,11 +126,8 @@ export const projectData = [
     myRole: "this was a solo project. every tech stack was implemented by me.",
     links: (
       <Fragment>
-        <LinkWithIcon
-          img={<GoPackage size={24} />}
-          href="https://v1-lesranalan.web.app"
-        >
-          demo
+        <LinkWithIcon img={<GoPackage size={24} />} href={PortfolioV1.demo}>
+          live website
         </LinkWithIcon>
 
         <LinkWithIcon
@@ -143,12 +152,12 @@ export const projectData = [
     name: "circuitcentral",
     year: "2024",
     techStack: ["*c-sharp", "*windows forms", "*transact-sql", "git"],
-    image: [ImageCircuitCentral1, ImageCircuitCentral2],
-    imageAlt: [
-      "first image of the circuitcentral project; it is viewing the products section wherein it is displaying a list of tech products that a user can add to their cart. additionally, the ui has buttons for CRUD operations.",
-      "second image of the circuitcentral project; it is viewing the orders section wherein it displays a list of products that are currently in a cart. additionally, the ui has buttons for CRUD operations.",
-    ],
+    image: ImageCircuitCentral,
+    imageFlex: "1.683857",
+    imageAlt:
+      "an image of the circuitcentral project; it is viewing the orders section wherein it displays a list of products that are currently in a cart. additionally, the ui has buttons for CRUD operations.",
     video: VideoCircuitCentral,
+    videoFlex: "1.687037",
     description: (
       <Fragment>
         circuitcentral is an <u>e-commerce management system</u> that sells
@@ -166,9 +175,13 @@ export const projectData = [
     myRole: "this was a solo project. every tech stack was implemented by me.",
     links: (
       <Fragment>
+        <LinkWithIcon img={<GoPackage size={24} />} href={CircuitCentral.demo}>
+          .exe download
+        </LinkWithIcon>
+
         <LinkWithIcon
           img={<RiGithubLine size={24} />}
-          href={CircuitCentralGithub}
+          href={CircuitCentral.github}
         >
           repository
         </LinkWithIcon>
@@ -203,12 +216,12 @@ export const projectData = [
       "*mysql",
       "pythonanywhere",
     ],
-    image: [ImageApolloHospital1, ImageApolloHospital2],
-    imageAlts: [
-      "first image of the apollo hospital project; it is viewing the home page wherein it displays an illustration of a doctor treating its patient, with the title of the website whch is apollo hospital.",
-      "second image of the apollo hospital project; it is viewing the patient records section wherein it displays the list of patient information. additionally, the ui has buttons for CRUD operations.",
-    ],
+    image: ImageApolloHospital,
+    imageFlex: "1.876047",
+    imageAlt:
+      "an image of the apollo hospital project; it is viewing the patient records section wherein it displays the list of patient information. additionally, the ui has buttons for CRUD operations.",
     video: VideoApolloHospital,
+    videoFlex: "1.599074",
     description: (
       <Fragment>
         apollo hospital is a <u>hospital management system</u> that covers
@@ -228,19 +241,19 @@ export const projectData = [
       <Fragment>
         <LinkWithIcon
           img={<GoPackage size={24} />}
-          href="https://apollohospital.pythonanywhere.com"
+          href={ApolloHospital.demo}
           onClick={() => {
             alert(
               "note: you have sign-up first and then login to test the app. click close to continue."
             );
           }}
         >
-          demo
+          live website
         </LinkWithIcon>
 
         <LinkWithIcon
           img={<RiGithubLine size={24} />}
-          href={ApolloHospitalGithub}
+          href={ApolloHospital.github}
         >
           repository
         </LinkWithIcon>
@@ -266,13 +279,12 @@ export const projectData = [
     name: "funculator",
     year: "2022",
     techStack: ["*java", "*swing"],
-    image: [ImageFunculator1, ImageFunculator2, ImageFunculator3],
-    imageAlts: [
-      "first image of the funculator project. it is currently viewing the index page where it is displaying a calculator with a face in pixel art form. additionally, there is buttons for start and exit on the right.",
-      "second image of the funculator project. it is currently viewing the menu section where it is displaying all of the possible operations such as factorial, min&max, fibonacci, etc.",
-      "first image of the funculator project. it is currently viewing the index page where it is displaying a calculator with a face in pixel art form. additionally, there is buttons for start and exit on the right.",
-    ],
+    image: ImageFunculator,
+    imageFlex: "1.864078",
+    imageAlt:
+      "an image of the funculator project. it is currently viewing the menu section where it is displaying all of the possible operations such as factorial, min&max, fibonacci, etc.",
     video: VideoFunCulator,
+    videoFlex: "1.891626",
     description: (
       <Fragment>
         funculator is an <u>all-in-one calculator application</u> for students.
@@ -296,7 +308,11 @@ export const projectData = [
       "funculator was a group project. i designed and implemented the front-end: the general theme, buttons, menu, calculator and avatar via gimp and imported in swing. additionally, i implemented half of the back-end or math operations: factorial, fibonacci, average, and min/max via java.",
     links: (
       <Fragment>
-        <LinkWithIcon img={<RiGithubLine size={24} />} href={FunculatorGithub}>
+        <LinkWithIcon img={<GoPackage size={24} />} href={FunCulator.demo}>
+          .jar download
+        </LinkWithIcon>
+
+        <LinkWithIcon img={<RiGithubLine size={24} />} href={FunCulator.github}>
           repository
         </LinkWithIcon>
 
@@ -311,12 +327,14 @@ export const projectData = [
     name: "bell hospital",
     year: "2022",
     techStack: ["*java", "*cli", "*file handling"],
-    image: [ImageBellHospital1, ImageBellHospital2],
-    imageAlts: [
+    image: ImageBellHospital,
+    imageFlex: "1.518182",
+    imageAlt: [
       "first image of the bell hospital project. it is currently viewing the starting page (note that this is a CLI project) where it is displaying all of the possible sections such as patients, doctors, appointments, etc.",
       "second image of the bell hospital project. it is currently viewing the patients records section where it is displaying all patient information (note that this is a CLI project). additionally, there are commands for CRUD operations.",
     ],
     video: VideoBellHospital,
+    videoFlex: "1.598148",
     description: (
       <Fragment>
         bell hospital is a <u>hospital management system</u> that is intended to
@@ -334,9 +352,13 @@ export const projectData = [
       "bell hospital was a solo project. every tech stack was implemented by me.",
     links: (
       <Fragment>
+        <LinkWithIcon img={<GoPackage size={24} />} href={BellHospital.demo}>
+          live code
+        </LinkWithIcon>
+
         <LinkWithIcon
           img={<RiGithubLine size={24} />}
-          href={BellHospitalGithub}
+          href={BellHospital.github}
         >
           repository
         </LinkWithIcon>
@@ -355,12 +377,12 @@ export const projectData = [
     name: "plug-ins database",
     year: "2022",
     techStack: ["*php", "*html", "*css", "*mariadb"],
-    image: [ImagePlugInsDatabase1, ImagePlugInsDatabase2],
-    imageAlts: [
-      "first image of the plug-ins project. it is currently viewing the index customer page where it is displaying input fields for basic customer information such as name, contact number, address, etc. additionally, it has buttons for inserting the customer information into the database.",
-      "second image of the plug-ins project. it is currently viewing the products page where it is displaying the list of products and their respective information such as price, category, stock quantity, etc.",
-    ],
+    image: ImagePlugInsDatabase,
+    imageFlex: "1.879195",
+    imageAlt:
+      "an image of the plug-ins project. it is currently viewing the products page where it is displaying the list of products and their respective information such as price, category, stock quantity, etc.",
     video: VideoPlugInsDatabase,
+    videoFlex: "1.599074",
     description: (
       <Fragment>
         plug-ins database is a <u>database solution</u> for a store that sells
@@ -377,7 +399,7 @@ export const projectData = [
       <Fragment>
         <LinkWithIcon
           img={<RiGithubLine size={24} />}
-          href={PlugInsDatabaseGithub}
+          href={PlugInsDatabase.github}
         >
           repository
         </LinkWithIcon>
@@ -406,39 +428,45 @@ export function getProjectVideo(dataID: number) {
   return projectData.find((proj) => proj.id === dataID)?.video;
 }
 
+export function getProjectVideoFlex(dataID: number) {
+  return projectData.find((proj) => proj.id === dataID)?.videoFlex;
+}
+
 export function getProjectYear(dataID: number) {
   const project = projectData.find((proj) => proj.id === dataID);
-  return project ? project.year : [];
+  return project ? project.year : "";
 }
 
 export function getProjectImage(dataID: number) {
-  const project = projectData.find((proj) => proj.id === dataID);
-  return project && Array.isArray(project.image) ? project.image : [];
+  return projectData.find((proj) => proj.id === dataID)?.image;
 }
 
-export function getProjectImageAlts(dataID: number) {
-  const project = projectData.find((proj) => proj.id === dataID);
-  return project && Array.isArray(project.imageAlts) ? project.imageAlts : [];
+export function getProjectImageFlex(dataID: number) {
+  return projectData.find((proj) => proj.id === dataID)?.imageFlex;
+}
+
+export function getProjectAlt(dataID: number) {
+  return projectData.find((proj) => proj.id === dataID)?.image;
 }
 
 export function getProjectDescription(dataID: number) {
   const project = projectData.find((proj) => proj.id === dataID);
-  return project ? project.description : [];
+  return project ? project.description : "";
 }
 
 export function getProjectCoreConcept(dataID: number) {
   const project = projectData.find((proj) => proj.id === dataID);
-  return project ? project.coreConcept : [];
+  return project ? project.coreConcept : "";
 }
 
 export function getProjectMyRole(dataID: number) {
   const project = projectData.find((proj) => proj.id === dataID);
-  return project ? project.myRole : [];
+  return project ? project.myRole : "";
 }
 
 export function getProjectLinks(dataID: number) {
   const project = projectData.find((proj) => proj.id === dataID);
-  return project ? project.links : [];
+  return project ? project.links : "";
 }
 
 export function getProjectTechStack(dataID: number) {

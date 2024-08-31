@@ -3,56 +3,31 @@ import {
   getProjectCoreConcept,
   getProjectDescription,
   getProjectImage,
-  getProjectImageAlts,
   getProjectLinks,
   getProjectMyRole,
   getProjectName,
-  getProjectVideo,
   getProjectYear,
   ProjectProps,
+  getProjectImageFlex,
+  getProjectVideo,
+  getProjectVideoFlex,
 } from "../utils/ProjectUtils";
 import { useEffect } from "react";
 import { scrollingAnimation } from "../utils/AnimationUtils";
-import mediumZoom from "medium-zoom";
-import gsap from "gsap";
 import { useGlobalState } from "../utils/ControlUtil";
-import { useGSAP } from "@gsap/react";
 import TechStackTile from "../components/TechStackTile";
 import { Link } from "react-router-dom";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 
 export default function Project({ dataID }: ProjectProps) {
   const { executeTransition } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
   const { setCurrentPage } = useGlobalState();
-  const { contextSafe } = useGSAP();
 
   const title = getProjectName(dataID)?.replace(/\s+/g, "-") || "";
   const prevProject = getProjectName(dataID + 1)?.replace(/\s+/g, "-") || "";
   const nextProject = getProjectName(dataID - 1)?.replace(/\s+/g, "-") || "";
-
-  useEffect(() => {
-    const zoom = mediumZoom("img", {
-      background: "var(--background-color)",
-    });
-
-    zoom.on(
-      "open",
-      contextSafe(() => {
-        gsap.set("nav", { zIndex: "0" });
-      })
-    );
-
-    zoom.on(
-      "close",
-      contextSafe(() => {
-        gsap.set("nav", { zIndex: "1" });
-      })
-    );
-
-    return () => {
-      zoom.detach();
-    };
-  }, []);
 
   useEffect(() => {
     setCurrentPage(title);
@@ -111,6 +86,22 @@ export default function Project({ dataID }: ProjectProps) {
       </section>
 
       <section className="content">
+        {/* images & videos */}
+        <div className="media">
+          <div style={{ flex: getProjectImageFlex(dataID) }}>
+            <Zoom zoomMargin={50}>
+              <img loading="lazy" src={getProjectImage(dataID)} />
+            </Zoom>
+          </div>
+
+          <div style={{ flex: getProjectVideoFlex(dataID) }}>
+            <video controls muted src={getProjectVideo(dataID)}></video>
+          </div>
+        </div>
+
+        {/* links */}
+        <div className="links">{getProjectLinks(dataID)}</div>
+
         {/* content */}
         <div className="paragraph">
           <h5>description:</h5>
@@ -125,23 +116,6 @@ export default function Project({ dataID }: ProjectProps) {
 
           <h5>my role:</h5>
           <p>{getProjectMyRole(dataID)}</p>
-        </div>
-
-        {/* links */}
-        <div className="links">{getProjectLinks(dataID)}</div>
-
-        {/* images/videos */}
-        <div className="media">
-          {getProjectImage(dataID).map((item, index) => (
-            <img
-              loading="lazy"
-              key={index}
-              src={item}
-              alt={getProjectImageAlts(dataID)[index]}
-            />
-          ))}
-
-          <video controls muted src={getProjectVideo(dataID)} />
         </div>
       </section>
 

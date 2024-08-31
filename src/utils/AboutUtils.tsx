@@ -48,6 +48,7 @@ export function getAboutSkillset() {
       "1django",
       "1flask",
       "3mariadb",
+      "3mysql",
       "1php",
       "2javascript",
     ],

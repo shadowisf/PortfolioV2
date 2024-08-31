@@ -11,6 +11,7 @@ import { getAllProjectIDs, getProjectName } from "./utils/ProjectUtils.tsx";
 import Project from "./pages/Project.tsx";
 import { Footer } from "./components/Footer.tsx";
 import YouAreLost from "./components/YouAreLost.tsx";
+import Test from "./pages/Test.tsx";
 
 // firebase deploy --only hosting:les-ranalan
 
@@ -39,6 +40,7 @@ root.render(
           })}
 
           <Route path="*" element={<YouAreLost />} />
+          <Route path="test" element={<Test />} />
         </Routes>
 
         <Footer />

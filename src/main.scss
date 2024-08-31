@@ -44,6 +44,10 @@ $makeNavBackgroundWidth: $minMaxWidth;
   --smaller: calc(var(--small) / 1.25);
 }
 
+[data-rmiz-modal-overlay="visible"] {
+  background-color: var(--background-color) !important;
+}
+
 @font-face {
   font-family: "Kyiv Type Sans";
   src: url(../src/fonts/KyivTypeSans-VarGX.ttf) format("truetype");
@@ -438,7 +442,7 @@ footer {
       &:hover::before {
         content: attr(data-tooltip);
         position: absolute;
-        top: 75%;
+        top: 100%;
         left: 50%;
         translate: -50% 0.5rem;
         color: var(--text-color);
@@ -459,9 +463,8 @@ footer {
     gap: 4rem;
 
     .media {
-      display: grid;
-
-      gap: 2rem;
+      display: flex;
+      gap: 1rem;
 
       img,
       video {
@@ -480,8 +483,7 @@ footer {
 
     .links {
       display: flex;
-      column-gap: 2rem;
-      row-gap: 1rem;
+      gap: 1rem;
 
       white-space: nowrap;
       flex-wrap: wrap;
@@ -536,8 +538,6 @@ footer {
 
     justify-content: center;
 
-    column-gap: 0.5rem;
-
     margin-left: 0;
     padding-left: 0;
 
@@ -550,7 +550,6 @@ footer {
 
     .item {
       border-radius: $borderRadius;
-      box-shadow: $boxShadow;
 
       display: flex;
       gap: 0.5rem;
@@ -641,6 +640,28 @@ footer {
         svg {
           display: flex;
           align-items: center;
+        }
+
+        .infoOnHover {
+          position: relative;
+
+          &:hover::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            translate: -50% -0.5rem;
+            color: var(--text-color);
+            padding: 0.5rem;
+            font-size: var(--smaller);
+            pointer-events: none;
+            font-weight: 400;
+            white-space: nowrap;
+            border-radius: $borderRadius;
+            font-variation-settings: $fontVarNormal;
+            text-align: center;
+            background-color: var(--accent-color);
+          }
         }
       }
     }
@@ -736,7 +757,7 @@ footer {
 
   gap: 0.5rem;
 
-  border-bottom: 2px dashed;
+  border-bottom: 1px dashed;
 
   transition: font-variation-settings 0.5s, color 0.25s, scale 0.25s;
 
@@ -777,9 +798,55 @@ footer {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -2px;
+    bottom: -1px;
     width: 100%;
-    height: 2px;
+    height: 1px;
+    transform: scaleX(0);
+    transform-origin: left;
+    background-color: var(--text-color);
+    transition: transform 0.5s, background-color 0.5s;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    background-color: var(--accent-color);
+  }
+}
+
+.linkWithNoIcon {
+  position: relative;
+  text-decoration: none;
+  color: var(--text-color);
+
+  padding-bottom: 1px;
+
+  border-bottom: 1px dashed;
+
+  transition: font-variation-settings 0.5s, color 0.25s, scale 0.25s;
+
+  font-variation-settings: $fontVarNormal;
+
+  &.faded {
+    color: var(--faded-color);
+
+    &::after {
+      background-color: var(--faded-color);
+    }
+  }
+
+  &:hover {
+    font-variation-settings: $fontVarThin;
+    color: var(--accent-color);
+    scale: $scaleOnHover;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 1px;
     transform: scaleX(0);
     transform-origin: left;
     background-color: var(--text-color);

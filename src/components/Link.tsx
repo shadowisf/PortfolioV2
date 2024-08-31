@@ -6,9 +6,21 @@ type LinkProps = {
   className?: string;
 };
 
-export function LinkNoIcon({ href, children, onClick, className }: LinkProps) {
+export function LinkWithNoIcon({
+  href,
+  children,
+  onClick,
+  className,
+  ...props
+}: LinkProps) {
   return (
-    <a className={`${className}`} href={href} target="_blank" onClick={onClick}>
+    <a
+      className={`${className} linkWithNoIcon`}
+      href={href}
+      target="_blank"
+      onClick={onClick}
+      {...props}
+    >
       {children}
     </a>
   );
