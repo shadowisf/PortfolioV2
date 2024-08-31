@@ -72,7 +72,7 @@ export default function Project({ dataID }: ProjectProps) {
 
       {/* tech stack */}
       <section className="techStack">
-        {getProjectTechStack(dataID).map((item, index) => {
+        {getProjectTechStack(dataID)?.map((item, index) => {
           return (
             <TechStackTile
               techStackItem={item}

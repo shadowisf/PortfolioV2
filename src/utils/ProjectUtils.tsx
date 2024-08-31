@@ -424,17 +424,16 @@ export function getProjectName(dataID: number) {
   return projectData.find((proj) => proj.id === dataID)?.name;
 }
 
+export function getProjectYear(dataID: number) {
+  return projectData.find((proj) => proj.id === dataID)?.year;
+}
+
 export function getProjectVideo(dataID: number) {
   return projectData.find((proj) => proj.id === dataID)?.video;
 }
 
 export function getProjectVideoFlex(dataID: number) {
   return projectData.find((proj) => proj.id === dataID)?.videoFlex;
-}
-
-export function getProjectYear(dataID: number) {
-  const project = projectData.find((proj) => proj.id === dataID);
-  return project ? project.year : "";
 }
 
 export function getProjectImage(dataID: number) {
@@ -445,33 +444,28 @@ export function getProjectImageFlex(dataID: number) {
   return projectData.find((proj) => proj.id === dataID)?.imageFlex;
 }
 
-export function getProjectAlt(dataID: number) {
-  return projectData.find((proj) => proj.id === dataID)?.image;
+export function getProjectImageAlt(dataID: number) {
+  return projectData.find((proj) => proj.id === dataID)?.imageAlt;
 }
 
 export function getProjectDescription(dataID: number) {
-  const project = projectData.find((proj) => proj.id === dataID);
-  return project ? project.description : "";
+  return projectData.find((proj) => proj.id === dataID)?.description;
 }
 
 export function getProjectCoreConcept(dataID: number) {
-  const project = projectData.find((proj) => proj.id === dataID);
-  return project ? project.coreConcept : "";
+  return projectData.find((proj) => proj.id === dataID)?.coreConcept;
 }
 
 export function getProjectMyRole(dataID: number) {
-  const project = projectData.find((proj) => proj.id === dataID);
-  return project ? project.myRole : "";
+  return projectData.find((proj) => proj.id === dataID)?.myRole;
 }
 
 export function getProjectLinks(dataID: number) {
-  const project = projectData.find((proj) => proj.id === dataID);
-  return project ? project.links : "";
+  return projectData.find((proj) => proj.id === dataID)?.links;
 }
 
 export function getProjectTechStack(dataID: number) {
-  const project = projectData.find((proj) => proj.id === dataID);
-  return project ? project.techStack : [];
+  return projectData.find((proj) => proj.id === dataID)?.techStack;
 }
 
 export function getAllProjectIDs() {
