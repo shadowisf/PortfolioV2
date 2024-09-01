@@ -11,11 +11,13 @@ import {
 } from "react-icons/ri";
 import { homeAnimation, scrollingAnimation } from "../utils/AnimationUtils";
 import { useGSAP } from "@gsap/react";
+import { email, github, instagram, linkedin } from "../utils/SocialUtils";
 
 export default function Home() {
   const { setCurrentPage } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
   const { startup } = homeAnimation();
+  const allProjectIDs = getAllProjectIDs();
 
   useEffect(() => {
     setCurrentPage("/");
@@ -29,13 +31,13 @@ export default function Home() {
   return (
     <main className="homeWrapper">
       <section className="left">
-        {getAllProjectIDs().map((id) => (
-          <ProjectTile key={id} dataID={id} />
+        {allProjectIDs.map((id) => (
+          <ProjectTile key={id} dataID={Number(id)} />
         ))}
       </section>
       <section className="right">
-        {getAllProjectIDs().map((id) => (
-          <ProjectPreview key={id} dataID={id} />
+        {allProjectIDs.map((id) => (
+          <ProjectPreview key={id} dataID={Number(id)} />
         ))}
 
         <div className="hero">
@@ -58,25 +60,25 @@ export default function Home() {
             <LinkWithIconOnly
               className="faded"
               img={<RiMailLine size={32} />}
-              href="mailto:les.ranalan@gmail.com"
+              href={email}
             />
 
             <LinkWithIconOnly
               className="faded"
               img={<RiLinkedinBoxLine size={32} />}
-              href="https://www.linkedin.com/in/les-paul-ranalan/"
+              href={linkedin}
             />
 
             <LinkWithIconOnly
               className="faded"
               img={<RiInstagramLine size={32} />}
-              href="https://www.instagram.com/les.rx/"
+              href={instagram}
             />
 
             <LinkWithIconOnly
               className="faded"
               img={<RiGithubLine size={32} />}
-              href="https://github.com/shadowisf"
+              href={github}
             />
           </div>
         </div>

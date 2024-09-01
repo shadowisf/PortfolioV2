@@ -1,11 +1,4 @@
-import {
-  getProjectTechStack,
-  getProjectImage,
-  getProjectName,
-  getProjectVideo,
-  getProjectYear,
-  ProjectProps,
-} from "../utils/ProjectUtils";
+import { getProjectData, ProjectProps } from "../utils/ProjectUtils";
 import { homeAnimation } from "../utils/AnimationUtils";
 import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
@@ -13,10 +6,12 @@ import TechStackTile from "./TechStackTile";
 import { Link } from "react-router-dom";
 
 export function ProjectTile({ dataID }: ProjectProps) {
-  const { isMobile, currentPage } = useGlobalState();
+  const { isMobile, currentPage, executeTransition } = useGlobalState();
   const { togglePreview, resetPreview, movePreview } = homeAnimation();
-  const title = getProjectName(dataID)?.replace(/\s+/g, "-") || "";
-  const { executeTransition } = useGlobalState();
+
+  const project = getProjectData(dataID);
+
+  const title = project.name.replace(/\s+/g, "-") || "";
 
   useEffect(() => {
     if (isMobile) {
@@ -39,22 +34,24 @@ export function ProjectTile({ dataID }: ProjectProps) {
         isMobile ? null : movePreview(dataID, event);
       }}
     >
-      <h5 className="title">{getProjectName(dataID)}</h5>
-      <small className="year faded">{getProjectYear(dataID)}</small>
+      <h5 className="title">{project.name}</h5>
+      <small className="year faded">{project.year}</small>
     </Link>
   );
 }
 
 export function ProjectPreview({ dataID }: ProjectProps) {
+  const project = getProjectData(dataID);
+
   return (
     <div data-key={dataID} className="preview">
-      {getProjectVideo(dataID) ? (
-        <video loop muted src={getProjectVideo(dataID)} />
+      {project.video ? (
+        <video loop muted src={project.video} />
       ) : (
-        <img src={getProjectImage(dataID)[0]} />
+        <img src={project.image} />
       )}
       <span className="techStack">
-        {getProjectTechStack(dataID)
+        {project.techStack
           .filter((item) => item.startsWith("*"))
           .map((item, index) => {
             return (

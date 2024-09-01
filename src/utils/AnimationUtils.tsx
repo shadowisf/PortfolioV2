@@ -85,6 +85,26 @@ export function aboutAnimation() {
   const { contextSafe } = useGSAP();
   const { isMobile } = useGlobalState();
 
+  const flipperino = contextSafe((state: Flip.FlipState) => {
+    Flip.from(state, {
+      duration: 0.7,
+      ease: "power2.inOut",
+      stagger: {
+        each: 0.08,
+        from: "start",
+      },
+      absolute: true,
+      onEnter: (elements) =>
+        gsap.fromTo(
+          elements,
+          { opacity: 0, scale: 0 },
+          { opacity: 1, scale: 1, duration: 1 }
+        ),
+      onLeave: (elements) =>
+        gsap.to(elements, { opacity: 0, scale: 0, duration: 1 }),
+    });
+  });
+
   const startup = contextSafe(() => {
     const allTimelineRows = document.querySelector(
       ".aboutWrapper .timeline .timelineRows"
@@ -202,6 +222,7 @@ export function aboutAnimation() {
       const allOptions = document.querySelectorAll(
         ".aboutWrapper .skillset option"
       );
+
       const state = Flip.getState(allSkills);
 
       allSkills.forEach((skill) => {
@@ -220,23 +241,7 @@ export function aboutAnimation() {
         }
       });
 
-      Flip.from(state, {
-        duration: 0.7,
-        ease: "power2.inOut",
-        stagger: {
-          each: 0.08,
-          from: "start",
-        },
-        absolute: true,
-        onEnter: (elements) =>
-          gsap.fromTo(
-            elements,
-            { opacity: 0, scale: 0 },
-            { opacity: 1, scale: 1, duration: 1 }
-          ),
-        onLeave: (elements) =>
-          gsap.to(elements, { opacity: 0, scale: 0, duration: 1 }),
-      });
+      flipperino(state);
     }
   });
 
@@ -254,7 +259,7 @@ export function aboutAnimation() {
         allSkills.forEach((skill) => {
           const dataKey = skill.getAttribute("data-key");
 
-          if (dataKey?.startsWith(selectedValue)) {
+          if (dataKey?.match(selectedValue)) {
             gsap.set(skill, { display: "flex" });
           } else {
             gsap.set(skill, { display: "none" });
@@ -262,23 +267,7 @@ export function aboutAnimation() {
         });
       }
 
-      Flip.from(state, {
-        duration: 0.7,
-        ease: "power2.inOut",
-        stagger: {
-          each: 0.08,
-          from: "start",
-        },
-        absolute: true,
-        onEnter: (elements) =>
-          gsap.fromTo(
-            elements,
-            { opacity: 0, scale: 0 },
-            { opacity: 1, scale: 1, duration: 1 }
-          ),
-        onLeave: (elements) =>
-          gsap.to(elements, { opacity: 0, scale: 0, duration: 1 }),
-      });
+      flipperino(state);
     }
   );
 
@@ -344,7 +333,7 @@ export function homeAnimation() {
           delay: startupDelay,
           duration: startupDuration,
           ease: startupEase,
-          stagger: startupStagger,
+          stagger: { each: startupStagger, from: "end" },
           onComplete: () => {
             gsap.to(projectTile, {
               clearProps: "pointerEvents",

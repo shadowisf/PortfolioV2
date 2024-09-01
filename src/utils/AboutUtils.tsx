@@ -26,33 +26,35 @@ export function Views() {
   };
 }
 
-export function getAboutSkillset() {
-  const aboutSkillset = {
-    architecture: [
-      // 3 for expert
-      // 2 for intermediate
-      // 1 for beginner
-      // 0 for planning to learn
-      "2typescript",
-      "2react",
-      "3html",
-      "3css",
-      "3bootstrap css",
-      "3sass",
-      "3git",
-      "2firebase",
-      "1c-sharp",
-      "2java",
-      "1python",
-      "1transact-sql",
-      "1django",
-      "1flask",
-      "3mariadb",
-      "3mysql",
-      "1php",
-      "2javascript",
-    ],
-  };
+const aboutSkillset: { [key: string]: number } = {
+  // 3 for expert
+  // 2 for intermediate
+  // 1 for beginner
+  // 0 for planning to learn
+  typescript: 2,
+  react: 2,
+  html: 3,
+  css: 3,
+  "bootstrap css": 3,
+  sass: 3,
+  git: 3,
+  firebase: 2,
+  "c-sharp": 1,
+  java: 2,
+  python: 1,
+  "transact-sql": 1,
+  django: 1,
+  flask: 1,
+  mariadb: 3,
+  mysql: 3,
+  php: 1,
+  javascript: 2,
+};
 
-  return aboutSkillset.architecture;
+export function getAllSkills() {
+  return Object.keys(aboutSkillset);
+}
+
+export function getSkillLevel(skill: string) {
+  return aboutSkillset[skill];
 }

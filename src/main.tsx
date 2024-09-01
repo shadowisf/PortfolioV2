@@ -7,13 +7,15 @@ import { PixelGrid } from "./components/TransitionGrid.tsx";
 import About from "./pages/About.tsx";
 import Home from "./pages/Home.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { getAllProjectIDs, getProjectName } from "./utils/ProjectUtils.tsx";
+import { getAllProjectIDs, getProjectData } from "./utils/ProjectUtils.tsx";
 import Project from "./pages/Project.tsx";
 import { Footer } from "./components/Footer.tsx";
 import YouAreLost from "./components/YouAreLost.tsx";
 import Test from "./pages/Test.tsx";
 
 // firebase deploy --only hosting:les-ranalan
+
+const allProjectIDs = getAllProjectIDs();
 
 const root = createRoot(document.getElementById("root")!);
 
@@ -27,14 +29,14 @@ root.render(
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="about" element={<About />} />
-          {getAllProjectIDs().map((dataID) => {
-            const cleanName = getProjectName(dataID)?.replace(/\s+/g, "-");
+          {allProjectIDs.map((key) => {
+            const name = getProjectData(Number(key)).name.replace(/\s+/g, "-");
 
             return (
               <Route
-                key={dataID}
-                path={cleanName}
-                element={<Project dataID={dataID} />}
+                key={key}
+                path={`/${name}`}
+                element={<Project dataID={Number(key)} />}
               />
             );
           })}

@@ -20,10 +20,10 @@ import {
   LinkWithIconOnly,
   LinkWithNoIcon,
 } from "../components/Link";
-import CV from "../assets/FileCV.PDF";
-import { getAboutSkillset, Views } from "../utils/AboutUtils";
+import { getAllSkills, getSkillLevel, Views } from "../utils/AboutUtils";
 import gsap, { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
+import { cv, email, github, instagram, linkedin } from "../utils/SocialUtils";
 
 gsap.registerPlugin(gsap, useGSAP, ScrollTrigger);
 
@@ -72,30 +72,27 @@ export default function About() {
           <br />
           <div className="links">
             <span>
-              <LinkWithIcon img={<RiFilePdf2Line size={24} />} href={CV}>
+              <LinkWithIcon img={<RiFilePdf2Line size={24} />} href={cv}>
                 view cv
               </LinkWithIcon>
             </span>
 
             <span className="icons">
-              <LinkWithIconOnly
-                img={<RiMailLine size={32} />}
-                href="mailto:les.ranalan@gmail.com"
-              />
+              <LinkWithIconOnly img={<RiMailLine size={32} />} href={email} />
 
               <LinkWithIconOnly
                 img={<RiLinkedinBoxLine size={32} />}
-                href="https://www.linkedin.com/in/les-paul-ranalan/"
+                href={linkedin}
               />
 
               <LinkWithIconOnly
                 img={<RiInstagramLine size={32} />}
-                href="https://www.instagram.com/les.rx/"
+                href={instagram}
               />
 
               <LinkWithIconOnly
                 img={<RiGithubLine size={32} />}
-                href="https://github.com/shadowisf"
+                href={github}
               />
             </span>
           </div>
@@ -189,14 +186,29 @@ export default function About() {
             </select>
           </div>
           <div className="skills">
-            {getAboutSkillset().map((item) => {
+            {/* {getAboutSkillset().map((item, index) => {
               return (
                 <TechStackTile
                   techStackItem={item}
                   classNameContainer="item"
                   classNameIcon="icon"
-                  key={item}
+                  key={index}
                   dataKey={item}
+                  preview={false}
+                />
+              );
+            })} */}
+
+            {getAllSkills().map((item, index) => {
+              const level = getSkillLevel(item);
+
+              return (
+                <TechStackTile
+                  techStackItem={item}
+                  classNameContainer="item"
+                  classNameIcon="icon"
+                  key={index}
+                  dataKey={level.toString()}
                   preview={false}
                 />
               );
