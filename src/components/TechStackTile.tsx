@@ -37,119 +37,119 @@ export const techStackStyling: Record<
 > = {
   typescript: {
     icon: <BiLogoTypescript />,
-    color: "rgb(49, 120, 198)",
+    color: "light-dark(rgb(49, 120, 198), rgb(30, 100, 180))",
   },
   react: {
     icon: <FaReact />,
-    color: "rgb(77, 167, 197)",
+    color: "light-dark(rgb(77, 167, 197), rgb(60, 140, 170))",
   },
   html: {
     icon: <FaHtml5 />,
-    color: "rgb(211, 88, 53)",
+    color: "light-dark(rgb(231, 100, 60), rgb(170, 70, 45))",
   },
   css: {
     icon: <FaCss3Alt />,
-    color: "rgb(46, 107, 180)",
+    color: "light-dark(rgb(56, 133, 207), rgb(35, 85, 140))",
   },
   sass: {
     icon: <FaSass />,
-    color: "#cc6699",
+    color: "light-dark(#cc6699, #a64d7f)",
   },
   firebase: {
     icon: <BiLogoFirebase />,
-    color: "rgb(222, 157, 58)",
+    color: "light-dark(rgb(222, 157, 58), rgb(180, 120, 45))",
   },
   git: {
     icon: <FaGitAlt />,
-    color: "rgb(205, 86, 64)",
+    color: "light-dark(#d95b44, rgb(205, 86, 64))",
   },
   "c-sharp": {
     icon: <SiCsharp />,
-    color: "rgb(148, 111, 211)",
+    color: "light-dark(#9d76e0, rgb(148, 111, 211))",
   },
   "windows forms": {
     icon: <SiFramework />,
-    color: "gray",
+    color: "light-dark(#949494, gray)",
   },
   "transact-sql": {
     icon: <SiMicrosoftsqlserver />,
-    color: "rgb(184, 54, 53)",
+    color: "light-dark(rgb(204, 84, 83), rgb(184, 54, 53))",
   },
   java: {
     icon: <FaJava />,
-    color: "rgb(223, 82, 65)",
+    color: "light-dark(rgb(256, 104, 87), rgb(180, 65, 55))",
   },
   flask: {
     icon: <SiFlask />,
-    color: "rgb(53, 107, 114)",
+    color: "light-dark(#5d898e, rgb(53, 107, 114))",
   },
   django: {
     icon: <SiDjango />,
-    color: "rgb(80, 157, 116)",
+    color: "light-dark(rgb(80, 157, 116), rgb(70, 140, 105))",
   },
   "bootstrap css": {
     icon: <FaBootstrap />,
-    color: "#7952b3",
+    color: "light-dark(#a184ca, #7952b3)",
   },
   swing: {
     icon: <SiFramework />,
-    color: "gray",
+    color: "light-dark(#949494, gray)",
   },
   cli: {
     icon: <GoCommandPalette />,
-    color: "gray",
+    color: "light-dark(#949494, gray)",
   },
   "file handling": {
     icon: <SiFramework />,
-    color: "gray",
+    color: "light-dark(#949494, gray)",
   },
   php: {
     icon: <SiPhp />,
-    color: "#777BB4",
+    color: "light-dark(#777BB4, #666aa3)",
   },
   mysql: {
     icon: <GrMysql />,
-    color: "rgb(41, 96, 132)",
+    color: "light-dark(rgb(79, 136, 169), rgb(35, 80, 115))",
   },
   python: {
     icon: <FaPython />,
-    color: "rgb(70, 109, 150)",
+    color: "light-dark(#6b8aaa, rgb(70, 109, 150))",
   },
   postgresql: {
     icon: <SiPostgresql />,
-    color: "rgb(64, 101, 141)",
+    color: "light-dark(rgb(64, 101, 141), rgb(50, 85, 115))",
   },
   javascript: {
     icon: <BiLogoJavascript />,
-    color: "rgb(210, 174, 68)",
+    color: "light-dark(rgb(210, 174, 68), rgb(180, 155, 55))",
   },
   "restful api": {
     icon: <SiFramework />,
-    color: "var(--faded-color)",
+    color: "light-dark(#949494, gray)",
   },
   angular: {
     icon: <FaAngular />,
-    color: "rgb(167, 58, 56)",
+    color: "light-dark(rgb(167, 58, 56), rgb(145, 45, 45))",
   },
   vue: {
     icon: <FaVuejs />,
-    color: "rgb(100, 181, 135)",
+    color: "light-dark(rgb(100, 181, 135), rgb(80, 150, 100))",
   },
   svelte: {
     icon: <SiSvelte />,
-    color: "rgb(235, 79, 39)",
+    color: "light-dark(rgb(235, 79, 39), rgb(200, 70, 35))",
   },
   "tailwind css": {
     icon: <SiTailwindcss />,
-    color: "rgb(94, 200, 183)",
+    color: "light-dark(rgb(94, 200, 183), rgb(80, 170, 160))",
   },
   mariadb: {
     icon: <SiMariadb />,
-    color: "rgb(167, 138, 101)",
+    color: "light-dark(rgb(167, 138, 101), rgb(150, 125, 90))",
   },
   pythonanywhere: {
     icon: <SiPythonanywhere />,
-    color: "rgb(85, 168, 222)",
+    color: "light-dark(rgb(85, 168, 222), rgb(70, 150, 200))",
   },
 };
 

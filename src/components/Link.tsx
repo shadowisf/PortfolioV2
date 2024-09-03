@@ -32,7 +32,6 @@ export function LinkWithIcon({
   onClick,
   img,
   className,
-  ...props
 }: LinkProps) {
   return (
     <a

@@ -79,7 +79,7 @@ export default function Project({ dataID }: ProjectProps) {
               key={index}
               classNameContainer="item"
               classNameIcon="icon"
-              preview={true}
+              preview={false}
             />
           );
         })}
@@ -104,38 +104,27 @@ export default function Project({ dataID }: ProjectProps) {
 
         {/* content */}
         <div className="paragraph">
-          <h5 id="description">
-            <LinkWithNoIcon onClick={() => scrollToID("#description")}>
-              #
-            </LinkWithNoIcon>{" "}
-            description:
-          </h5>
+          <h5 className="accent">description:</h5>
           <p>{project.description}</p>
 
           <br />
 
-          <h5 id="coreConcept">
-            <LinkWithNoIcon onClick={() => scrollToID("#coreConcept")}>
-              #
-            </LinkWithNoIcon>{" "}
-            core concept:
-          </h5>
+          <h5 className="accent">core concept:</h5>
           <p>{project.coreConcept}</p>
 
           <br />
 
-          <h5 id="myRole">
-            <LinkWithNoIcon onClick={() => scrollToID("#myRole")}>
-              #
-            </LinkWithNoIcon>{" "}
-            my role:
-          </h5>
+          <h5 className="accent">my role:</h5>
           <p>{project.myRole}</p>
         </div>
       </section>
 
       <section className="bottomNav">
-        <h1 onClick={() => scrollToTop(0.25)} data-tooltip="scroll to top">
+        <h1
+          className="infoOnHover bottom"
+          onClick={() => scrollToTop(0.25)}
+          data-tooltip="scroll to top"
+        >
           ↑
         </h1>
       </section>

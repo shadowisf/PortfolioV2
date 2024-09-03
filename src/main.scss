@@ -25,12 +25,11 @@ $makeNavBackgroundWidth: $minMaxWidth;
   --theme: light dark;
 
   --text-color: light-dark(black, white);
-  --background-color: light-dark(#e5e5ea, rgb(36, 36, 38));
+  --background-color: light-dark(rgb(209, 209, 214), rgb(28, 28, 30));
   --faded-color: #817e83;
   /* --accent-color: light-dark(#6320ee, #8075ff); */
   /* --accent-color: light-dark(rgb(255, 59, 48), rgb(255, 69, 58)); */
   --accent-color: light-dark(rgb(0, 122, 255), rgb(10, 132, 255));
-  /* --accent-color: light-dark(rgb(0, 122, 255), rgb(10, 132, 255)); */
 
   --h0: calc(var(--h1) * 1.5);
   --h1: 2.986rem;
@@ -130,11 +129,14 @@ small {
 }
 
 html {
-  background-blend-mode: overlay;
   background-color: var(--background-color);
   color: var(--text-color);
   font-family: $primaryFont;
   color-scheme: var(--theme);
+
+  background-blend-mode: overlay;
+  background-image: url("src/assets/ImageGrain.svg");
+  background-size: 128px;
 }
 
 a {
@@ -506,6 +508,7 @@ footer {
     display: flex;
 
     justify-content: center;
+    align-items: center;
 
     margin-left: 0;
     padding-left: 0;
@@ -1035,22 +1038,15 @@ footer {
 
   .projectWrapper {
     max-width: $maxWidthMobile;
-
-    .header {
-      .nextPrevButton {
-        &:hover::before {
-          content: attr(data-tooltip);
-          position: absolute;
-          top: -125%;
-          text-wrap: wrap;
-        }
-      }
-    }
   }
 
   nav {
     background-color: var(--background-color);
     box-shadow: $boxShadow;
+
+    background-blend-mode: overlay;
+    background-image: url("src/assets/ImageGrain.svg");
+    background-size: 128px;
 
     display: flex;
 
@@ -1072,6 +1068,24 @@ footer {
 
     svg {
       width: 7vh;
+    }
+  }
+
+  .infoOnHover {
+    &.top {
+      &:hover::before {
+        bottom: 75%;
+      }
+    }
+
+    &.bottom {
+      &:hover::before {
+        bottom: -100%;
+      }
+    }
+
+    &:hover::before {
+      text-wrap: wrap;
     }
   }
 }
