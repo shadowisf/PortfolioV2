@@ -151,57 +151,12 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  display: flex;
+  display: none;
   justify-content: space-between;
   align-items: center;
   padding: 1.25rem 2rem;
 
   z-index: 5;
-
-  .navButtons {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-
-    a {
-      transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
-
-      font-variation-settings: $fontVarNormal;
-
-      &:hover {
-        scale: $scaleOnHover;
-        color: var(--accent-color);
-        font-variation-settings: $fontVarThin;
-      }
-    }
-
-    .themeButton {
-      transition: scale 0.25s;
-
-      svg {
-        transition: fill 0.25s;
-      }
-
-      &:hover {
-        scale: $scaleOnHover;
-      }
-
-      &:hover svg {
-        fill: var(--accent-color);
-      }
-    }
-  }
-
-  .logoButton {
-    transition: color 0.25s, scale 0.25s;
-    font-family: $bayBayinFont;
-
-    &:hover {
-      cursor: pointer;
-      scale: $scaleOnHover;
-      color: var(--accent-color);
-    }
-  }
 
   .hamburgerButton {
     transition: scale 0.25s;
@@ -224,26 +179,75 @@ nav {
       cursor: pointer;
     }
   }
+}
 
-  .themeButton {
-    position: relative;
+.themeButton {
+  position: relative;
 
-    svg {
-      display: flex;
-    }
+  svg {
+    display: flex;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.logoButton {
+  transition: color 0.25s, scale 0.25s;
+  font-family: $bayBayinFont;
+
+  &:hover {
+    cursor: pointer;
+    scale: $scaleOnHover;
+    color: var(--accent-color);
+  }
+
+  &.alt {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 1.25rem 2rem;
+  }
+}
+
+.navButtons {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  &.alt {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 1.25rem 2rem;
+  }
+
+  a {
+    transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
+
+    font-variation-settings: $fontVarNormal;
 
     &:hover {
-      cursor: pointer;
+      scale: $scaleOnHover;
+      color: var(--accent-color);
+      font-variation-settings: $fontVarThin;
     }
   }
 
-  .resetButton {
+  .themeButton {
+    transition: scale 0.25s;
+
     svg {
-      display: flex;
+      transition: fill 0.25s;
     }
 
     &:hover {
-      cursor: pointer;
+      scale: $scaleOnHover;
+    }
+
+    &:hover svg {
+      fill: var(--accent-color);
     }
   }
 }
@@ -252,15 +256,13 @@ footer {
   position: fixed;
 
   bottom: 0;
-  left: 0;
+  right: 0;
 
   display: flex;
 
   justify-content: flex-end;
 
-  width: 100%;
-
-  padding: 1.5rem 2rem;
+  margin: 1.5rem 2rem;
 }
 
 // wrappers
@@ -439,23 +441,6 @@ footer {
         cursor: pointer;
         font-variation-settings: $fontVarThin;
       }
-
-      &:hover::before {
-        content: attr(data-tooltip);
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        translate: -50% 0.5rem;
-        color: var(--text-color);
-        padding: 0.5rem;
-        font-size: var(--smaller);
-        pointer-events: none;
-        font-weight: 400;
-        white-space: nowrap;
-        border-radius: $borderRadius;
-        font-variation-settings: $fontVarNormal;
-        text-align: center;
-      }
     }
   }
 
@@ -507,23 +492,6 @@ footer {
       transition: scale 0.25s, color 0.25s, font-variation-settings 0.5s;
       font-size: var(--h1);
       font-variation-settings: $fontVarNormal;
-
-      &:hover::before {
-        content: attr(data-tooltip);
-        position: absolute;
-        top: -50%;
-        left: 50%;
-        translate: -50% 0.5rem;
-        color: var(--text-color);
-        padding: 0.5rem;
-        font-size: var(--smaller);
-        pointer-events: none;
-        font-weight: 400;
-        text-wrap: nowrap;
-        border-radius: $borderRadius;
-        text-align: center;
-        font-variation-settings: $fontVarNormal;
-      }
 
       &:hover {
         color: var(--accent-color);
@@ -642,28 +610,6 @@ footer {
           display: flex;
           align-items: center;
         }
-
-        .infoOnHover {
-          position: relative;
-
-          &:hover::before {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            translate: -50% -0.5rem;
-            color: var(--text-color);
-            padding: 0.5rem;
-            font-size: var(--smaller);
-            pointer-events: none;
-            font-weight: 400;
-            white-space: nowrap;
-            border-radius: $borderRadius;
-            font-variation-settings: $fontVarNormal;
-            text-align: center;
-            background-color: var(--accent-color);
-          }
-        }
       }
     }
 
@@ -744,6 +690,44 @@ footer {
 
 .accent {
   color: var(--accent-color);
+}
+
+.infoOnHover {
+  position: relative;
+
+  &.top {
+    &:hover::before {
+      bottom: 75%;
+    }
+  }
+
+  &.bottom {
+    &:hover::before {
+      bottom: -50%;
+    }
+  }
+
+  &.alt {
+    &:hover::before {
+      background-color: var(--accent-color);
+    }
+  }
+
+  &:hover::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 50%;
+    translate: -50% -0.5rem;
+    color: var(--text-color);
+    padding: 0.5rem;
+    font-size: var(--smaller);
+    pointer-events: none;
+    font-weight: 400;
+    white-space: nowrap;
+    border-radius: $borderRadius;
+    font-variation-settings: $fontVarNormal;
+    text-align: center;
+  }
 }
 
 .linkWithIcon {
@@ -1068,15 +1052,19 @@ footer {
     background-color: var(--background-color);
     box-shadow: $boxShadow;
 
+    display: flex;
+
     .navButtons {
       display: none;
     }
   }
 
+  .navAlt {
+    display: none;
+  }
+
   footer {
     position: unset;
-    display: flex;
-    justify-content: flex-end;
   }
 
   .menu {

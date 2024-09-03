@@ -134,7 +134,7 @@ export default function About() {
               <span>
                 graduated{" "}
                 <LinkWithNoIcon
-                  className="infoOnHover"
+                  className="infoOnHover top alt"
                   href="https://wincedu.uk"
                   data-tooltip="western international college"
                 >
@@ -152,7 +152,7 @@ export default function About() {
               <span>
                 graduated{" "}
                 <LinkWithNoIcon
-                  className="infoOnHover"
+                  className="infoOnHover top alt"
                   href="https://www.bolton.ac.uk"
                   data-tooltip="university of bolton"
                 >
@@ -160,7 +160,7 @@ export default function About() {
                 </LinkWithNoIcon>{" "}
                 with bachelor in{" "}
                 <LinkWithNoIcon
-                  className="infoOnHover"
+                  className="infoOnHover top alt"
                   data-tooltip="software engineering"
                 >
                   swe
@@ -186,19 +186,6 @@ export default function About() {
             </select>
           </div>
           <div className="skills">
-            {/* {getAboutSkillset().map((item, index) => {
-              return (
-                <TechStackTile
-                  techStackItem={item}
-                  classNameContainer="item"
-                  classNameIcon="icon"
-                  key={index}
-                  dataKey={item}
-                  preview={false}
-                />
-              );
-            })} */}
-
             {getAllSkills().map((item, index) => {
               const level = getSkillLevel(item);
 

@@ -10,19 +10,16 @@ import ImagePlugInsDatabase from "../assets/ImagePlugInsDatabase.webp";
 import FilePlugInsDatabase from "../assets/FilePlugInsDatabase.PDF";
 import VideoPlugInsDatabase from "../assets/VIdeoPlugInsDatabase.webm";
 const GitHubPlugInsDatabase = "https://github.com/shadowisf/PlugInsDatabase";
-const DemoPlugInsDatabase = "";
 //
 import ImageBellHospital from "../assets/ImageBellHospital.webp";
 import FileBellHospital from "../assets/FileBellHospital.PDF";
 import VideoBellHospital from "../assets/VideoBellHospital.webm";
 const GitHubBellHospital = "https://github.com/shadowisf/BellHospital";
-const DemoBellHospital = "";
 //
 import ImageFunculator from "../assets/ImageFunCulator.webp";
 import FileFunculator from "../assets/FileFunCulator.PDF";
 import VideoFunCulator from "../assets/VideoFunCulator.webm";
 const GitHubFunCulator = "https://github.com/shadowisf/FunCulator";
-const DemoFunCulator = "";
 //
 import ImageApolloHospital from "../assets/ImageApolloHospital.webp";
 import FileApolloHospital from "../assets/FileApolloHospital.PDF";
@@ -34,7 +31,6 @@ import ImageCircuitCentral from "../assets/ImageCircuitCentral.webp";
 import FileCircuitCentral from "../assets/FileCircuitCentral.PDF";
 import VideoCircuitCentral from "../assets/VideoCircuitCentral.webm";
 const GitHubCircuitCentral = "https://github.com/shadowisf/CircuitCentral";
-const DemoCircuitCentral = "";
 //
 import ImageV1Portfolio from "../assets/ImageV1Portfolio.webp";
 import VideoV1Portfolio from "../assets/VideoV1Portfolio.webm";
@@ -89,13 +85,6 @@ export const projectData: {
       <Fragment>
         <LinkWithIcon
           img={<RiGithubLine size={24} />}
-          href={DemoPlugInsDatabase}
-        >
-          live website
-        </LinkWithIcon>
-
-        <LinkWithIcon
-          img={<RiGithubLine size={24} />}
           href={GitHubPlugInsDatabase}
         >
           repository
@@ -139,10 +128,6 @@ export const projectData: {
       "bell hospital was a solo project. every tech stack was implemented by me.",
     links: (
       <Fragment>
-        <LinkWithIcon img={<GoPackage size={24} />} href={DemoBellHospital}>
-          live code
-        </LinkWithIcon>
-
         <LinkWithIcon
           img={<RiGithubLine size={24} />}
           href={GitHubBellHospital}
@@ -194,10 +179,6 @@ export const projectData: {
       "funculator was a group project. i designed and implemented the front-end: the general theme, buttons, menu, calculator and avatar via gimp and imported in swing. additionally, i implemented half of the back-end or math operations: factorial, fibonacci, average, and min/max via java.",
     links: (
       <Fragment>
-        <LinkWithIcon img={<GoPackage size={24} />} href={DemoFunCulator}>
-          .jar download
-        </LinkWithIcon>
-
         <LinkWithIcon img={<RiGithubLine size={24} />} href={GitHubFunCulator}>
           repository
         </LinkWithIcon>
@@ -215,8 +196,8 @@ export const projectData: {
     year: "2023",
     techStack: [
       "*flask",
+      "*django",
       "python",
-      "django",
       "javascript",
       "*html",
       "*bootstrap css",
@@ -303,10 +284,6 @@ export const projectData: {
     myRole: "this was a solo project. every tech stack was implemented by me.",
     links: (
       <Fragment>
-        <LinkWithIcon img={<GoPackage size={24} />} href={DemoCircuitCentral}>
-          .exe download
-        </LinkWithIcon>
-
         <LinkWithIcon
           img={<RiGithubLine size={24} />}
           href={GitHubCircuitCentral}

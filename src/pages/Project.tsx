@@ -6,6 +6,7 @@ import TechStackTile from "../components/TechStackTile";
 import { Link } from "react-router-dom";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
+import { LinkWithNoIcon } from "../components/Link";
 
 export default function Project({ dataID }: ProjectProps) {
   const { executeTransition, setCurrentPage } = useGlobalState();
@@ -35,7 +36,7 @@ export default function Project({ dataID }: ProjectProps) {
         {/* previouse project */}
         <Link
           to={`/${prevProjectTitle}`}
-          className="nextPrevButton"
+          className="nextPrevButton infoOnHover top"
           data-tooltip="previous project"
           onClick={(e) => executeTransition(e, prevProjectTitle, false)}
           style={
@@ -53,7 +54,7 @@ export default function Project({ dataID }: ProjectProps) {
         {/* next project */}
         <Link
           to={`/${nextProjectTitle}`}
-          className="nextPrevButton"
+          className="nextPrevButton infoOnHover top"
           data-tooltip="next project"
           onClick={(e) => executeTransition(e, nextProjectTitle, false)}
           style={
@@ -103,19 +104,32 @@ export default function Project({ dataID }: ProjectProps) {
 
         {/* content */}
         <div className="paragraph">
-          <h5>
-            <span onClick={() => scrollToID}>#</span> description:
+          <h5 id="description">
+            <LinkWithNoIcon onClick={() => scrollToID("#description")}>
+              #
+            </LinkWithNoIcon>{" "}
+            description:
           </h5>
           <p>{project.description}</p>
 
           <br />
 
-          <h5>core concept:</h5>
+          <h5 id="coreConcept">
+            <LinkWithNoIcon onClick={() => scrollToID("#coreConcept")}>
+              #
+            </LinkWithNoIcon>{" "}
+            core concept:
+          </h5>
           <p>{project.coreConcept}</p>
 
           <br />
 
-          <h5>my role:</h5>
+          <h5 id="myRole">
+            <LinkWithNoIcon onClick={() => scrollToID("#myRole")}>
+              #
+            </LinkWithNoIcon>{" "}
+            my role:
+          </h5>
           <p>{project.myRole}</p>
         </div>
       </section>

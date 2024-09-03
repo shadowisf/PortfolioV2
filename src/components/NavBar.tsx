@@ -50,6 +50,40 @@ export default function NavBar() {
 
   return (
     <Fragment>
+      <div className="navAlt">
+        <Link
+          to={"/"}
+          className="logoButton alt"
+          onClick={(e) => executeTransition(e, "/", false)}
+        >
+          ᜎ᜔ᜍ᜔
+        </Link>
+
+        <span className="navButtons alt">
+          {/* nav about button */}
+          <Link
+            to={"about"}
+            onClick={(e) => executeTransition(e, "about", false)}
+          >
+            about
+          </Link>
+
+          {/*  nav theme toggle button */}
+          <span
+            onClick={() => {
+              executeToggleTheme(false);
+            }}
+            className="themeButton"
+          >
+            {userTheme === "dark" ? (
+              <RiSunLine size={24} />
+            ) : (
+              <RiMoonLine size={24} />
+            )}
+          </span>
+        </span>
+      </div>
+
       <nav>
         <Link
           to={"/"}

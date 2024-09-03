@@ -75,7 +75,7 @@ export function scrollingAnimation() {
   });
 
   const scrollToID = contextSafe((id: string) => {
-    gsap.to(window, { scrollTo: id, duration: 0.5 });
+    gsap.to(window, { scrollTo: { y: id, offsetY: 150 }, duration: 0.5 });
   });
 
   return { scrollToTop, scrollToID };
