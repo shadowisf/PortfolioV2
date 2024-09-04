@@ -423,5 +423,10 @@ export function homeAnimation() {
     }
   );
 
-  return { startup, togglePreview, resetPreview, movePreview };
+  return {
+    startup,
+    togglePreview,
+    resetPreview,
+    movePreview,
+  };
 }

@@ -2,26 +2,29 @@ import { useEffect, useState } from "react";
 
 type ProgressiveImgProps = {
   realSrc: string;
-  tinySrc: string;
+  placeholderSrc: string;
   alt: string;
 };
 
 export default function ProgressiveImg({
   realSrc,
-  tinySrc,
+  placeholderSrc,
   alt,
 }: ProgressiveImgProps) {
-  const [imgSrc, setImgSrc] = useState(realSrc || tinySrc);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
-    const img = new Image();
-
-    img.src = realSrc;
-
-    img.onload = () => {
-      setImgSrc(realSrc);
+    const image = new Image();
+    image.onload = () => {
+      setImageLoaded(true);
     };
+
+    image.src = realSrc;
   }, [realSrc]);
 
-  return <img alt={alt} src={imgSrc} />;
+  return !imageLoaded ? (
+    <img src={placeholderSrc} />
+  ) : (
+    <img src={realSrc} alt={alt} />
+  );
 }

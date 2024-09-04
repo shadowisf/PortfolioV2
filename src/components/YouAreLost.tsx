@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { LinkWithNoIcon } from "./Link";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
-import { Link } from "react-router-dom";
-import { useGlobalState } from "../utils/ControlUtil";
 
 interface MemeData {
   postLink: string;

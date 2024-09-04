@@ -1,23 +1,20 @@
 import { getProjectData, ProjectProps } from "../utils/ProjectUtils";
 import { homeAnimation } from "../utils/AnimationUtils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 import TechStackTile from "./TechStackTile";
 import { Link } from "react-router-dom";
 
 export function ProjectTile({ dataID }: ProjectProps) {
-  const { isMobile, currentPage, executeTransition } = useGlobalState();
+  const { isMobile, executeTransition } = useGlobalState();
   const { togglePreview, resetPreview, movePreview } = homeAnimation();
-
+  const [isHighlighted, setIsHighlighted] = useState(false);
   const project = getProjectData(dataID);
-
   const title = project.name.replace(/\s+/g, "-") || "";
 
   useEffect(() => {
-    if (isMobile) {
-      resetPreview();
-    }
-  }, [isMobile, currentPage]);
+    isMobile && isHighlighted ? resetPreview() : "";
+  }, [isMobile]);
 
   return (
     <Link
@@ -26,9 +23,11 @@ export function ProjectTile({ dataID }: ProjectProps) {
       className="tile hover all"
       onMouseEnter={() => {
         isMobile ? null : togglePreview(dataID);
+        setIsHighlighted(true);
       }}
       onMouseLeave={() => {
         isMobile ? null : resetPreview();
+        setIsHighlighted(false);
       }}
       onMouseMove={(event) => {
         isMobile ? null : movePreview(dataID, event);

@@ -10,6 +10,7 @@ import {
   RiMailLine,
 } from "react-icons/ri";
 import ProfilePicture from "../assets/ImageProfile.webp";
+import ProfilePictureTiny from "../assets/ImageProfile_tiny.webp";
 import { TimelineRow } from "../components/Timeline";
 import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
@@ -23,12 +24,12 @@ import {
 import { getAllSkills, getSkillLevel, Views } from "../utils/AboutUtils";
 import { useGSAP } from "@gsap/react";
 import { cv, email, github, instagram, linkedin } from "../utils/SocialUtils";
+import ProgressiveImg from "../components/ProgressiveImg";
 
 export default function About() {
   const { scrollToTop } = scrollingAnimation();
   const { filterSkill, resetSkill, startup } = aboutAnimation();
   const { mobileView, desktopView } = Views();
-
   const { setCurrentPage, currentPage, isMobile } = useGlobalState();
 
   useEffect(() => {
@@ -47,7 +48,11 @@ export default function About() {
   return (
     <main className="aboutWrapper">
       <section className="bio">
-        <img src={ProfilePicture} />
+        <ProgressiveImg
+          realSrc={ProfilePicture}
+          placeholderSrc={ProfilePictureTiny}
+          alt="a picture of me"
+        />
         <div className="content">
           <h1 className="extra header">hey, i'm les!</h1>
           <br />

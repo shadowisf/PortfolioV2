@@ -91,9 +91,9 @@ export default function Project({ dataID }: ProjectProps) {
           <div style={{ flex: project.imageFlex }}>
             <Zoom zoomMargin={50}>
               <ProgressiveImg
-                alt={project.imageAlt}
-                tinySrc={project.imageTiny}
                 realSrc={project.image}
+                placeholderSrc={project.imageTiny}
+                alt={project.imageAlt}
               />
             </Zoom>
           </div>
