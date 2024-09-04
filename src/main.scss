@@ -17,7 +17,6 @@ $fontVarThin: "wght" 1000, "CONT" 1000;
 $scaleOnHover: 1.05;
 
 $minMaxWidth: 1030px;
-$makeNavBackgroundWidth: $minMaxWidth;
 
 :root {
   --minMaxWidth: 1030px;
@@ -183,6 +182,72 @@ nav {
   }
 }
 
+.menu {
+  position: fixed;
+
+  width: 100%;
+  height: 100vh;
+
+  z-index: 999;
+
+  font-size: 7vw;
+
+  display: none;
+
+  opacity: 0;
+  visibility: hidden;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 4rem;
+
+  svg {
+    display: flex;
+    fill: var(--background-color);
+  }
+
+  .closeButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 1.25rem;
+    margin-right: 0.75rem;
+  }
+
+  a {
+    color: var(--background-color);
+
+    transition: scale 0.25s, font-variation-settings 0.5s;
+
+    font-variation-settings: $fontVarNormal;
+
+    &:hover {
+      scale: $scaleOnHover;
+      font-variation-settings: $fontVarThin;
+    }
+  }
+
+  .closeButton:hover {
+    cursor: pointer;
+  }
+
+  .themeButton:hover {
+    cursor: pointer;
+  }
+
+  .resetButton {
+    svg {
+      display: flex;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
 .themeButton {
   position: relative;
 
@@ -255,6 +320,7 @@ nav {
 }
 
 footer {
+  color: var(--faded-color);
   position: fixed;
 
   bottom: 0;
@@ -305,6 +371,10 @@ footer {
         white-space: nowrap;
       }
 
+      .year {
+        color: var(--faded-color);
+      }
+
       &:hover {
         cursor: pointer !important;
 
@@ -338,6 +408,7 @@ footer {
       }
 
       .name {
+        color: var(--accent-color);
         width: fit-content;
         white-space: nowrap;
       }
@@ -414,10 +485,10 @@ footer {
   display: grid;
 
   .year {
+    color: var(--faded-color);
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--faded-color);
   }
 
   .bottomNav {
@@ -487,6 +558,7 @@ footer {
     justify-content: space-between;
 
     .title {
+      color: var(--accent-color);
       text-align: center;
     }
 
@@ -557,6 +629,14 @@ footer {
     align-items: center;
     gap: 4rem;
 
+    .header {
+      color: var(--accent-color);
+    }
+
+    p {
+      color: var(--faded-color);
+    }
+
     img {
       box-shadow: $boxShadow;
       border-radius: $borderRadius;
@@ -607,6 +687,10 @@ footer {
           display: flex;
           flex-direction: column;
           gap: 0.25rem;
+
+          .date {
+            color: var(--faded-color);
+          }
         }
 
         svg {
@@ -630,6 +714,7 @@ footer {
         gap: 1rem;
 
         select {
+          color: var(--faded-color);
           border-radius: $borderRadius;
           font-size: var(--p);
           padding-top: 0.5rem;
@@ -639,7 +724,6 @@ footer {
           background-color: var(--background-color);
           border-radius: 0;
           border: 2px solid var(--accent-color);
-          color: var(--faded-color);
           -webkit-appearance: none;
           -moz-appearance: none;
           appearance: none;
@@ -687,12 +771,48 @@ footer {
   }
 }
 
-.faded {
-  color: var(--faded-color);
-}
+.lostWrapper {
+  max-width: $maxWidthDesktop;
 
-.accent {
-  color: var(--accent-color);
+  padding: 8rem 0;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+
+  text-align: center;
+
+  gap: 2rem;
+
+  .memeContainer {
+    img {
+      max-width: 75%;
+      max-height: 80vh;
+      width: auto;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+  strong {
+    font-size: var(--h0);
+    color: var(--accent-color);
+  }
+
+  p {
+    font-size: var(--h6);
+  }
+
+  .links {
+    display: flex;
+    gap: 8rem;
+    justify-content: center;
+  }
 }
 
 .infoOnHover {
@@ -747,7 +867,7 @@ footer {
 
   border-bottom: 1px dashed;
 
-  transition: font-variation-settings 0.5s, color 0.25s, scale 0.25s;
+  transition: font-variation-settings 0.5s, color 0.5s, scale 0.25s;
 
   font-variation-settings: $fontVarNormal;
 
@@ -806,11 +926,11 @@ footer {
   text-decoration: none;
   color: var(--text-color);
 
-  padding-bottom: 1px;
+  padding-bottom: 4px;
 
   border-bottom: 1px dashed;
 
-  transition: font-variation-settings 0.5s, color 0.25s, scale 0.25s;
+  transition: font-variation-settings 0.5s, color 0.5s, scale 0.25s;
 
   font-variation-settings: $fontVarNormal;
 
@@ -854,7 +974,7 @@ footer {
   transition: scale 0.25s;
 
   svg {
-    transition: fill 0.25s;
+    transition: fill 0.5s;
   }
 
   picture {
@@ -862,6 +982,8 @@ footer {
   }
 
   &.faded {
+    color: var(--faded-color);
+
     svg {
       fill: var(--faded-color);
     }
@@ -895,80 +1017,6 @@ footer {
     width: 100%;
     height: 100%;
     background: var(--accent-color);
-  }
-}
-
-.menu {
-  position: fixed;
-
-  width: 100%;
-  height: 100vh;
-
-  z-index: 999;
-
-  font-size: 7vw;
-
-  display: none;
-
-  opacity: 0;
-  visibility: hidden;
-
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  gap: 4rem;
-
-  svg {
-    display: flex;
-    fill: var(--background-color);
-  }
-
-  .closeButton {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-top: 1.25rem;
-    margin-right: 0.75rem;
-  }
-
-  a {
-    color: var(--background-color);
-
-    transition: scale 0.25s, font-variation-settings 0.5s;
-
-    font-variation-settings: $fontVarNormal;
-
-    &:hover {
-      scale: $scaleOnHover;
-      font-variation-settings: $fontVarThin;
-    }
-  }
-
-  .closeButton:hover {
-    cursor: pointer;
-  }
-
-  .themeButton:hover {
-    cursor: pointer;
-  }
-
-  .resetButton {
-    svg {
-      display: flex;
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-}
-
-// make nav have background
-@media screen and (max-width: $makeNavBackgroundWidth) {
-  nav {
-    background-color: var(--background-color);
-    box-shadow: $boxShadow;
   }
 }
 
@@ -1087,42 +1135,5 @@ footer {
     &:hover::before {
       text-wrap: wrap;
     }
-  }
-}
-
-// desktop screen
-@media screen and (min-width: $minMaxWidth) {
-  nav {
-    .hamburgerButton {
-      display: none;
-    }
-  }
-}
-
-.lostWrapper {
-  max-width: $maxWidthDesktop;
-
-  padding: 8rem 0;
-  margin: auto;
-
-  height: 100dvh;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  text-align: center;
-
-  gap: 1rem;
-
-  .memeContainer {
-    img {
-      width: 75%;
-    }
-  }
-
-  p {
-    font-size: calc(var(--p) * 2);
   }
 }

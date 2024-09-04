@@ -35,7 +35,7 @@ export function ProjectTile({ dataID }: ProjectProps) {
       }}
     >
       <h5 className="title">{project.name}</h5>
-      <small className="year faded">{project.year}</small>
+      <small className="year">{project.year}</small>
     </Link>
   );
 }
@@ -73,7 +73,7 @@ export function ProjectTilePlaceholder() {
   return (
     <div className="tile">
       <h5 className="title">????</h5>
-      <small className="faded">????</small>
+      <small>???</small>
     </div>
   );
 }

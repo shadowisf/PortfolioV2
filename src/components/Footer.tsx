@@ -1,3 +1,3 @@
 export function Footer() {
-  return <footer className="faded">sept '24</footer>;
+  return <footer>sept '24</footer>;
 }

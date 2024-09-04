@@ -6,11 +6,11 @@ import TechStackTile from "../components/TechStackTile";
 import { Link } from "react-router-dom";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
-import { LinkWithNoIcon } from "../components/Link";
+import ProgressiveImg from "../components/ProgressiveImg";
 
 export default function Project({ dataID }: ProjectProps) {
   const { executeTransition, setCurrentPage } = useGlobalState();
-  const { scrollToTop, scrollToID } = scrollingAnimation();
+  const { scrollToTop } = scrollingAnimation();
 
   const project = getProjectData(dataID);
   const currentProjectTitle = project.name.replace(/\s+/g, "-");
@@ -49,7 +49,7 @@ export default function Project({ dataID }: ProjectProps) {
         </Link>
 
         {/* title */}
-        <h1 className="title accent">{project.name}</h1>
+        <h1 className="title">{project.name}</h1>
 
         {/* next project */}
         <Link
@@ -90,7 +90,11 @@ export default function Project({ dataID }: ProjectProps) {
         <div className="media">
           <div style={{ flex: project.imageFlex }}>
             <Zoom zoomMargin={50}>
-              <img loading="lazy" src={project.image} />
+              <ProgressiveImg
+                alt={project.imageAlt}
+                tinySrc={project.imageTiny}
+                realSrc={project.image}
+              />
             </Zoom>
           </div>
 

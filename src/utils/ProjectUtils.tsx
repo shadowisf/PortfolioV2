@@ -6,38 +6,45 @@ import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/all";
 gsap.registerPlugin(gsap, ScrollToPlugin);
 //
-import ImagePlugInsDatabase from "../assets/ImagePlugInsDatabase.webp";
+/* import ImagePlugInsDatabase from "../assets/ImagePlugInsDatabase.webp";
+import ImageTinyPlugInsDatabase from "../assets/ImagePlugInsDatabase_tiny.webp";
 import FilePlugInsDatabase from "../assets/FilePlugInsDatabase.PDF";
 import VideoPlugInsDatabase from "../assets/VIdeoPlugInsDatabase.webm";
-const GitHubPlugInsDatabase = "https://github.com/shadowisf/PlugInsDatabase";
+const GitHubPlugInsDatabase = "https://github.com/shadowisf/PlugInsDatabase"; */
 //
 import ImageBellHospital from "../assets/ImageBellHospital.webp";
+import ImageTinyBellHospital from "../assets/ImageBellHospital_tiny.webp";
 import FileBellHospital from "../assets/FileBellHospital.PDF";
 import VideoBellHospital from "../assets/VideoBellHospital.webm";
 const GitHubBellHospital = "https://github.com/shadowisf/BellHospital";
 //
 import ImageFunculator from "../assets/ImageFunCulator.webp";
+import ImageTinyFunculator from "../assets/ImageFunCulator_tiny.webp";
 import FileFunculator from "../assets/FileFunCulator.PDF";
 import VideoFunCulator from "../assets/VideoFunCulator.webm";
 const GitHubFunCulator = "https://github.com/shadowisf/FunCulator";
 //
 import ImageApolloHospital from "../assets/ImageApolloHospital.webp";
+import ImageTinyApolloHospital from "../assets/ImageApolloHospital_tiny.webp";
 import FileApolloHospital from "../assets/FileApolloHospital.PDF";
 import VideoApolloHospital from "../assets/VideoApolloHospital.webm";
 const GitHubApolloHospital = "https://github.com/shadowisf/ApolloHospital";
 const DemoApolloHospital = "https://apollohospital.pythonanywhere.com";
 //
 import ImageCircuitCentral from "../assets/ImageCircuitCentral.webp";
+import ImageTinyCircuitCentral from "../assets/ImageCircuitCentral_tiny.webp";
 import FileCircuitCentral from "../assets/FileCircuitCentral.PDF";
 import VideoCircuitCentral from "../assets/VideoCircuitCentral.webm";
 const GitHubCircuitCentral = "https://github.com/shadowisf/CircuitCentral";
 //
 import ImageV1Portfolio from "../assets/ImageV1Portfolio.webp";
+import ImageTinyV1Portfolio from "../assets/ImageV1Portfolio_tiny.webp";
 import VideoV1Portfolio from "../assets/VideoV1Portfolio.webm";
 const GitHubV1Portfolio = "https://github.com/shadowisf/PortfolioReactV1";
 const DemoV1Portfolio = "https://v1-lesranalan.web.app";
 //
 import ImageV2Portfolio from "../assets/ImageV2Portfolio.webp";
+import ImageTinyV2Portfolio from "../assets/ImageV2Portfolio_tiny.webp";
 import VideoV2Portfolio from "../assets/VideoV2Portfolio.webm";
 const GitHubV2Portfolio = "https://github.com/shadowisf/PortfolioReactV2";
 //
@@ -47,6 +54,7 @@ export const projectData: {
     year: string;
     techStack: string[];
     image: string;
+    imageTiny: string;
     imageFlex: string;
     imageAlt: string;
     video: string;
@@ -59,11 +67,12 @@ export const projectData: {
   };
 } = {
   // plug-ins database
-  0: {
+  /* 0: {
     name: "plug-ins database",
     year: "2022",
     techStack: ["*php", "*html", "*css", "*mariadb"],
     image: ImagePlugInsDatabase,
+    imageTiny: ImageTinyPlugInsDatabase,
     imageFlex: "1.879195",
     imageAlt:
       "an image of the plug-ins project. it is currently viewing the products page where it is displaying the list of products and their respective information such as price, category, stock quantity, etc.",
@@ -98,7 +107,7 @@ export const projectData: {
         </LinkWithIcon>
       </Fragment>
     ),
-  },
+  }, */
 
   // bell hospital
   1: {
@@ -106,6 +115,7 @@ export const projectData: {
     year: "2022",
     techStack: ["*java", "*cli", "*file handling"],
     image: ImageBellHospital,
+    imageTiny: ImageTinyBellHospital,
     imageFlex: "1.518182",
     imageAlt:
       "an image of the bell hospital project. it is currently viewing the patients records section where it is displaying all patient information (note that this is a CLI project). additionally, there are commands for CRUD operations.",
@@ -151,6 +161,7 @@ export const projectData: {
     year: "2022",
     techStack: ["*java", "*swing"],
     image: ImageFunculator,
+    imageTiny: ImageTinyFunculator,
     imageFlex: "1.864078",
     imageAlt:
       "an image of the funculator project. it is currently viewing the menu section where it is displaying all of the possible operations such as factorial, min&max, fibonacci, etc.",
@@ -205,6 +216,7 @@ export const projectData: {
       "pythonanywhere",
     ],
     image: ImageApolloHospital,
+    imageTiny: ImageTinyApolloHospital,
     imageFlex: "1.876047",
     imageAlt:
       "an image of the apollo hospital project; it is viewing the patient records section wherein it displays the list of patient information. additionally, the ui has buttons for CRUD operations.",
@@ -262,6 +274,7 @@ export const projectData: {
     year: "2024",
     techStack: ["*c-sharp", "*windows forms", "*transact-sql", "git"],
     image: ImageCircuitCentral,
+    imageTiny: ImageTinyCircuitCentral,
     imageFlex: "1.683857",
     imageAlt:
       "an image of the circuitcentral project; it is viewing the orders section wherein it displays a list of products that are currently in a cart. additionally, the ui has buttons for CRUD operations.",
@@ -307,6 +320,7 @@ export const projectData: {
     year: "2024",
     techStack: ["typescript", "*react", "*html", "*sass", "*firebase", "git"],
     image: ImageV1Portfolio,
+    imageTiny: ImageTinyV1Portfolio,
     imageFlex: "1.6",
     imageAlt:
       "image of the about section in my portfolio project. it has a cartoon illustration of me and and text introducing myself.",
@@ -351,6 +365,7 @@ export const projectData: {
     year: "2024",
     techStack: ["typescript", "*react", "*html", "*sass", "*firebase", "git"],
     image: ImageV2Portfolio,
+    imageTiny: ImageTinyV2Portfolio,
     imageFlex: "1.6",
     imageAlt:
       "image of the about section in my portfolio v2 project. there is a picture of me and a text introducing myself, with a button at the very bottom which downloads my resume. at the bottom portion, there is a timeline where it showcases all important events that happened in my life. on the right side of the timeline, it showcases my skillset wherein you can filter by my skill level such as all, expert, intermediate, and beginner.",

@@ -11,7 +11,7 @@ type GlobalStateContextType = {
   currentPage: string;
   setCurrentPage: (url: string) => void;
   executeTransition: (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent> | null,
     url: string,
     skipStart: boolean
   ) => void;
@@ -57,11 +57,11 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   // execute page transition
   const executeTransition = contextSafe(
     (
-      event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+      event: React.MouseEvent<HTMLAnchorElement, MouseEvent> | null,
       url: string,
       skipStart?: boolean
     ) => {
-      event.preventDefault();
+      event?.preventDefault();
 
       if (currentPage === url && !isMobile) {
         return;

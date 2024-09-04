@@ -21,11 +21,8 @@ import {
   LinkWithNoIcon,
 } from "../components/Link";
 import { getAllSkills, getSkillLevel, Views } from "../utils/AboutUtils";
-import gsap, { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { cv, email, github, instagram, linkedin } from "../utils/SocialUtils";
-
-gsap.registerPlugin(gsap, useGSAP, ScrollTrigger);
 
 export default function About() {
   const { scrollToTop } = scrollingAnimation();
@@ -51,21 +48,21 @@ export default function About() {
     <main className="aboutWrapper">
       <section className="bio">
         <img src={ProfilePicture} />
-        <div className="bioContent">
-          <h1 className="extra accent bioHeader">hey, i'm les!</h1>
+        <div className="content">
+          <h1 className="extra header">hey, i'm les!</h1>
           <br />
           <h4>
             i'm all about creating functional, performant, scalable, and
             long-term apps.
           </h4>
           <br />
-          <p className="faded">
+          <p>
             i primarily work with react, typescript, sass, gsap, firebase, and
             other libraries and frameworks. though i am highly flexible to
             different technologies and languages.
           </p>
           <br />
-          <p className="faded">
+          <p>
             outside of coding, i play video games (which i rarely do nowadays
             lol), listen to music, and bingewatch tv shows/movies.
           </p>
@@ -104,69 +101,59 @@ export default function About() {
           <h1>my life's arc</h1>
           <div className="timelineRows">
             <TimelineRow
+              date="february 15, 2004"
               img={<RiCake2Line size={40} fill="var(--accent-color)" />}
               verticalLine={true}
             >
-              born in davao city, philippines <br />
-              <span className="faded">february 15, 2004</span>
+              born in davao city, philippines
             </TimelineRow>
 
             <TimelineRow
+              date="may 12, 2012"
               img={<RiMapPinLine size={40} fill="var(--accent-color)" />}
               verticalLine={true}
             >
-              moved to dubai, united arab emirates <br />
-              <span className="faded">may 12, 2012</span>
+              moved to dubai, united arab emirates
             </TimelineRow>
 
             <TimelineRow
+              date="april 6, 2018"
               img={<RiGlasses2Line size={40} fill="var(--accent-color)" />}
               verticalLine={true}
             >
-              first pair of eyeglasses <br />
-              <span className="faded">april 6, 2018</span>
+              first pair of eyeglasses
             </TimelineRow>
 
             <TimelineRow
+              date="september 3, 2022"
               img={<RiGraduationCapLine size={40} fill="var(--accent-color)" />}
               verticalLine={true}
             >
-              <span>
-                graduated{" "}
-                <LinkWithNoIcon
-                  className="infoOnHover top alt"
-                  href="https://wincedu.uk"
-                  data-tooltip="western international college"
-                >
-                  winc
-                </LinkWithNoIcon>{" "}
-                with diploma in engineering
-              </span>
-              <span className="faded">september 3, 2022</span>
+              graduated{" "}
+              <LinkWithNoIcon
+                className="infoOnHover top alt"
+                href="https://wincedu.uk"
+                data-tooltip="western international college"
+              >
+                winc
+              </LinkWithNoIcon>{" "}
+              with diploma in general engineering
             </TimelineRow>
 
             <TimelineRow
+              date="???"
               img={<RiGraduationCapLine size={40} fill="var(--accent-color)" />}
               verticalLine={false}
             >
-              <span>
-                graduated{" "}
-                <LinkWithNoIcon
-                  className="infoOnHover top alt"
-                  href="https://www.bolton.ac.uk"
-                  data-tooltip="university of bolton"
-                >
-                  uob
-                </LinkWithNoIcon>{" "}
-                with bachelor in{" "}
-                <LinkWithNoIcon
-                  className="infoOnHover top alt"
-                  data-tooltip="software engineering"
-                >
-                  swe
-                </LinkWithNoIcon>
-              </span>
-              <span className="faded">???</span>
+              graduated{" "}
+              <LinkWithNoIcon
+                className="infoOnHover top alt"
+                href="https://www.bolton.ac.uk"
+                data-tooltip="university of bolton"
+              >
+                uob
+              </LinkWithNoIcon>{" "}
+              with bachelor in software engineering
             </TimelineRow>
           </div>
         </section>

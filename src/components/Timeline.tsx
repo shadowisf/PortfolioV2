@@ -4,14 +4,22 @@ type TimelineProps = {
   children?: React.ReactNode;
   img?: React.ReactNode;
   verticalLine?: boolean;
+  date: string;
 };
 
-export function TimelineRow({ children, img, verticalLine }: TimelineProps) {
+export function TimelineRow({
+  children,
+  img,
+  verticalLine,
+  date,
+}: TimelineProps) {
   return (
     <Fragment>
       <section className="timelineRow">
-        <span>{img}</span>
-        <span className="timelineCaption">{children}</span>
+        <picture>{img}</picture>
+        <span className="timelineCaption">
+          <span>{children}</span> <span className="date">{date}</span>
+        </span>
       </section>
       <svg
         style={verticalLine ? { display: "block" } : { display: "none" }}

@@ -41,7 +41,7 @@ export function LinkWithIcon({
       className={`linkWithIcon ${className}`}
     >
       <picture>{img}</picture>
-      <span>{children}</span>
+      <span className={className === "faded" ? "faded" : ""}>{children}</span>
     </a>
   );
 }

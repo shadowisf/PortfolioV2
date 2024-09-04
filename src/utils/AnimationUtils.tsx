@@ -114,7 +114,7 @@ export function aboutAnimation() {
       ?.childNodes as NodeListOf<Element>;
 
     const bioPicture = document.querySelector(".aboutWrapper .bio img");
-    const bioContent = document.querySelector(".aboutWrapper .bio .bioContent")
+    const bioContent = document.querySelector(".aboutWrapper .bio .content")
       ?.childNodes as NodeListOf<Element>;
     const timelineContainer = document.querySelector(".aboutWrapper .timeline");
     const skillsetContainer = document.querySelector(".aboutWrapper .skillset");
@@ -293,11 +293,11 @@ export function homeAnimation() {
 
     const startupScaleInitial = 0.75;
 
-    gsap.set("nav", {
+    gsap.set(["nav", ".navAlt"], {
       autoAlpha: 0,
       pointerEvents: "none",
       onComplete: () => {
-        gsap.to("nav", {
+        gsap.to(["nav", ".navAlt"], {
           autoAlpha: 1,
           delay: startupDelay,
           duration: startupDuration,
@@ -340,7 +340,7 @@ export function homeAnimation() {
               duration: 0.001,
             });
 
-            gsap.to("nav", {
+            gsap.to(["nav", ".navAlt"], {
               clearProps: "pointerEvents",
               duration: 0.001,
             });

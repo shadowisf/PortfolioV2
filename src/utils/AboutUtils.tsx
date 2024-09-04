@@ -1,7 +1,9 @@
 export function Views() {
-  const bioHeader = document.querySelector(".aboutWrapper .bioHeader");
+  const bioHeader = document.querySelector(".aboutWrapper .bio .header");
   const bioContainer = document.querySelector(".aboutWrapper .bio");
-  const bioTextContainer = document.querySelector(".aboutWrapper .bio div");
+  const bioTextContainer = document.querySelector(
+    ".aboutWrapper .bio .content"
+  );
 
   const skillsetHeader = document.querySelector(".aboutWrapper .skillset h1");
   const timelineHeader = document.querySelector(".aboutWrapper .timeline h1");

@@ -77,7 +77,7 @@ export const techStackStyling: Record<
   },
   java: {
     icon: <FaJava />,
-    color: "light-dark(rgb(256, 104, 87), rgb(180, 65, 55))",
+    color: "light-dark(rgb(240, 87, 70), rgb(180, 65, 55))",
   },
   flask: {
     icon: <SiFlask />,

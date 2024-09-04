@@ -1,4 +1,9 @@
 import { useState, useEffect } from "react";
+import { LinkWithNoIcon } from "./Link";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
+import { Link } from "react-router-dom";
+import { useGlobalState } from "../utils/ControlUtil";
 
 interface MemeData {
   postLink: string;
@@ -15,34 +20,58 @@ interface MemeData {
 export default function YouAreLost() {
   const [meme, setMeme] = useState<MemeData | null>(null);
 
+  async function fetchMeme() {
+    const subReddits = [
+      "shitposting",
+      "Memes_Of_The_Dank",
+      "shid_and_camed",
+      "PrequelMemes",
+      "TikTokCringe",
+      "ProgrammerHumor",
+    ];
+
+    const randomIndex = Math.floor(Math.random() * subReddits.length);
+    const selectedSubReddit = subReddits[randomIndex];
+
+    const response = await fetch(
+      `https://meme-api.com/gimme/${selectedSubReddit}`
+    ).then((res) => {
+      return res.json();
+    });
+
+    setMeme(response);
+  }
+
   useEffect(() => {
-    async function fetchMeme() {
-      try {
-        const response = await fetch("https://meme-api.com/gimme");
-
-        if (response.ok) {
-          const data = await response.json();
-          setMeme(data);
-        } else {
-          throw new Error("failed to fetch meme.");
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
     fetchMeme();
   }, []);
 
   return (
     <main className="lostWrapper">
-      <div className="memeContainer">
-        <img src={meme?.url} alt="Refuses to elaborate" />
-      </div>
-      <p>
-        <strong>error 404</strong>: <br />
-        page not found.
-      </p>
+      <section>
+        <strong>error 404</strong>
+        <p>you seem to be lost but here's a meme:</p>
+      </section>
+
+      <section className="memeContainer">
+        <Zoom zoomMargin={50}>
+          <img src={meme?.url} />
+        </Zoom>
+      </section>
+
+      <section className="links">
+        <a href={"/"} className="linkWithNoIcon">
+          back to home
+        </a>
+
+        <LinkWithNoIcon
+          onClick={() => {
+            fetchMeme();
+          }}
+        >
+          generate new meme
+        </LinkWithNoIcon>
+      </section>
     </main>
   );
 }
