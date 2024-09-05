@@ -24,7 +24,7 @@ $minMaxWidth: 1030px;
   --theme: light dark;
 
   --text-color: light-dark(black, white);
-  --background-color: light-dark(rgb(209, 209, 214), rgb(28, 28, 30));
+  --background-color: light-dark(rgb(199, 199, 204), rgb(28, 28, 30));
   --faded-color: #817e83;
   /* --accent-color: light-dark(#6320ee, #8075ff); */
   /* --accent-color: light-dark(rgb(255, 59, 48), rgb(255, 69, 58)); */
@@ -133,9 +133,9 @@ html {
   font-family: $primaryFont;
   color-scheme: var(--theme);
 
-  background-blend-mode: overlay;
-  background-image: url("./assets/ImageGrain.svg");
-  background-size: 128px;
+  background-blend-mode: soft-light;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgMjUwIDI1MCcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJz4KICA8ZmlsdGVyIGlkPSdub2lzZUZpbHRlcic+CiAgICA8ZmVUdXJidWxlbmNlIAogICAgICB0eXBlPSdmcmFjdGFsTm9pc2UnIAogICAgICBiYXNlRnJlcXVlbmN5PScxJyAKICAgICAgbnVtT2N0YXZlcz0nMycgCiAgICAgIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz4KICA8L2ZpbHRlcj4KCiAgPHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsdGVyPSd1cmwoI25vaXNlRmlsdGVyKScvPgo8L3N2Zz4=);
+  background-size: 64px;
 }
 
 a {

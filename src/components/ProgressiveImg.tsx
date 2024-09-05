@@ -14,16 +14,23 @@ export default function ProgressiveImg({
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
-    const image = new Image();
-    image.onload = () => {
+    const loadImage = async () => {
+      const image = new Image();
+      image.src = realSrc;
+
+      await new Promise((resolve, reject) => {
+        image.onload = () => resolve(null);
+        image.onerror = () => reject(new Error("image load failed"));
+      });
+
       setImageLoaded(true);
     };
 
-    image.src = realSrc;
+    loadImage().catch(console.error); // Handle errors
   }, [realSrc]);
 
   return !imageLoaded ? (
-    <img src={placeholderSrc} />
+    <img src={placeholderSrc} alt={alt} />
   ) : (
     <img src={realSrc} alt={alt} />
   );

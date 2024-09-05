@@ -1,4 +1,4 @@
-import { Fragment, lazy, StrictMode } from "react";
+import { Fragment, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./main.scss";
 import { GlobalStateProvider } from "./utils/ControlUtil.tsx";
@@ -8,12 +8,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { getAllProjectIDs, getProjectData } from "./utils/ProjectUtils.tsx";
 import { Footer } from "./components/Footer.tsx";
 import Home from "./pages/Home.tsx";
+import About from "./pages/About.tsx";
+import Project from "./pages/Project.tsx";
+import YouAreLost from "./components/YouAreLost.tsx";
 
 // firebase deploy --only hosting:les-ranalan
-
-const About = lazy(() => import("./pages/About.tsx"));
-const Project = lazy(() => import("./pages/Project.tsx"));
-const Lost = lazy(() => import("./components/YouAreLost.tsx"));
 
 const allProjectIDs = getAllProjectIDs();
 
@@ -65,7 +64,7 @@ root.render(
           })}
 
           {/* lost */}
-          <Route path="*" element={<Lost />} />
+          <Route path="*" element={<YouAreLost />} />
         </Routes>
 
         <Footer />

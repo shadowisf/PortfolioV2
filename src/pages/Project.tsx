@@ -4,9 +4,9 @@ import { scrollingAnimation } from "../utils/AnimationUtils";
 import { useGlobalState } from "../utils/ControlUtil";
 import TechStackTile from "../components/TechStackTile";
 import { Link } from "react-router-dom";
+import ProgressiveImg from "../components/ProgressiveImg";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
-import ProgressiveImg from "../components/ProgressiveImg";
 
 export default function Project({ dataID }: ProjectProps) {
   const { executeTransition, setCurrentPage } = useGlobalState();
