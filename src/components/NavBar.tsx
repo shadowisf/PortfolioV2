@@ -125,9 +125,9 @@ export default function NavBar() {
 
       <div className="menu">
         {/* menu close button */}
-        <a className="closeButton" onClick={() => closeMenu()}>
+        <button className="closeButton" onClick={() => closeMenu()}>
           <RiCloseLargeFill size={24} />
-        </a>
+        </button>
 
         {/* menu about button */}
         <Link to={"about"} onClick={(e) => executeTransition(e, "about", true)}>
@@ -135,14 +135,18 @@ export default function NavBar() {
         </Link>
 
         {/* menu theme button */}
-        <a
+        <button
           onClick={() => {
             executeToggleTheme(true);
           }}
           className="themeButton"
         >
-          {userTheme === "dark" ? <RiSunLine /> : <RiMoonLine />}
-        </a>
+          {userTheme === "dark" ? (
+            <RiSunLine size={64} />
+          ) : (
+            <RiMoonLine size={64} />
+          )}
+        </button>
       </div>
     </Fragment>
   );

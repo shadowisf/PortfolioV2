@@ -4,6 +4,7 @@ type LinkProps = {
   onClick?: () => void;
   img?: React.ReactNode;
   className?: string;
+  label?: string;
 };
 
 export function LinkWithNoIcon({
@@ -46,7 +47,13 @@ export function LinkWithIcon({
   );
 }
 
-export function LinkWithIconOnly({ href, onClick, img, className }: LinkProps) {
+export function LinkWithIconOnly({
+  href,
+  onClick,
+  img,
+  className,
+  label,
+}: LinkProps) {
   return (
     <a
       onClick={onClick}
@@ -54,7 +61,8 @@ export function LinkWithIconOnly({ href, onClick, img, className }: LinkProps) {
       target="_blank"
       className={`linkWithIconOnly ${className}`}
     >
-      <picture>{img}</picture>
+      <span className="label">{label}</span>
+      {img}
     </a>
   );
 }

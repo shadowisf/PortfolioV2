@@ -28,7 +28,7 @@ $minMaxWidth: 1030px;
   --faded-color: #817e83;
   /* --accent-color: light-dark(#6320ee, #8075ff); */
   /* --accent-color: light-dark(rgb(255, 59, 48), rgb(255, 69, 58)); */
-  --accent-color: light-dark(rgb(0, 122, 255), rgb(10, 132, 255));
+  --accent-color: light-dark(rgb(0, 122, 255), #0a84ff);
 
   --h0: calc(var(--h1) * 1.5);
   --h1: 2.986rem;
@@ -89,6 +89,10 @@ h1 {
 
 h2 {
   font-size: var(--h2);
+
+  &.nonBold {
+    font-weight: 400;
+  }
 }
 
 h3 {
@@ -129,6 +133,11 @@ small {
   &.smaller {
     font-size: var(--smaller);
   }
+}
+
+button {
+  background: none;
+  border: none;
 }
 
 html {
@@ -193,12 +202,12 @@ nav {
 .menu {
   position: fixed;
 
+  font-size: 7vw;
+
   width: 100%;
   height: 100vh;
 
   z-index: 999;
-
-  font-size: 7vw;
 
   display: none;
 
@@ -216,15 +225,8 @@ nav {
     fill: var(--background-color);
   }
 
-  .closeButton {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-top: 1.25rem;
-    margin-right: 0.75rem;
-  }
-
-  a {
+  a,
+  button {
     color: var(--background-color);
 
     transition: scale 0.25s, font-variation-settings 0.5s;
@@ -237,22 +239,17 @@ nav {
     }
   }
 
-  .closeButton:hover {
-    cursor: pointer;
+  .closeButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 1.25rem;
+    margin-right: 2rem;
   }
 
+  .closeButton:hover,
   .themeButton:hover {
     cursor: pointer;
-  }
-
-  .resetButton {
-    svg {
-      display: flex;
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
   }
 }
 
@@ -425,6 +422,10 @@ footer {
         display: flex;
         gap: 1rem;
       }
+    }
+
+    h2 {
+      font-size: var(--h6);
     }
 
     .preview {
@@ -642,18 +643,21 @@ footer {
       color: var(--accent-color);
     }
 
+    h2 {
+      font-size: var(--h4);
+    }
+
     p {
       color: var(--faded-color);
     }
 
     img {
+      flex: 1;
       box-shadow: $boxShadow;
       border-radius: $borderRadius;
       width: 375px;
       height: auto;
-      max-width: 35%;
-
-      pointer-events: none;
+      max-width: 600px;
     }
 
     .links {
@@ -981,11 +985,15 @@ footer {
   transition: scale 0.25s;
 
   svg {
+    display: flex;
     transition: fill 0.5s;
   }
 
-  picture {
-    display: flex;
+  .label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
   }
 
   &.faded {
@@ -1054,9 +1062,11 @@ footer {
       gap: 0;
 
       img {
+        flex: 1;
         margin-top: 1rem;
         width: 400px;
-        max-width: 100%;
+        height: auto;
+        max-width: 75%;
       }
     }
 
@@ -1116,10 +1126,6 @@ footer {
 
   .menu {
     font-size: 10vh;
-
-    svg {
-      width: 7vh;
-    }
   }
 
   .infoOnHover {
@@ -1131,7 +1137,7 @@ footer {
 
     &.bottom {
       &:hover::before {
-        bottom: -100%;
+        bottom: -175%;
       }
     }
 

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /portfolio-v2
+Allow: /portfolio-v1
+Allow: /circuitcentral
+Allow: /apollo-hospital
+Allow: /funculator
+Allow: /bell-hospital

@@ -26,6 +26,13 @@ import { useGSAP } from "@gsap/react";
 import { cv, email, github, instagram, linkedin } from "../utils/SocialUtils";
 import ProgressiveImg from "../components/ProgressiveImg";
 
+export function getProfilePictureTiny() {
+  return ProfilePictureTiny;
+}
+export function getProfilePicture() {
+  return ProfilePicture;
+}
+
 export default function About() {
   const { scrollToTop } = scrollingAnimation();
   const { filterSkill, resetSkill, startup } = aboutAnimation();
@@ -52,14 +59,15 @@ export default function About() {
           realSrc={ProfilePicture}
           placeholderSrc={ProfilePictureTiny}
           alt="a picture of me"
+          zoom={false}
         />
         <div className="content">
           <h1 className="extra header">hey, i'm les!</h1>
           <br />
-          <h4>
+          <h2>
             i'm all about creating functional, performant, scalable, and
             long-term apps.
-          </h4>
+          </h2>
           <br />
           <p>
             i primarily work with react, typescript, sass, gsap, firebase, and
@@ -80,21 +88,28 @@ export default function About() {
             </span>
 
             <span className="icons">
-              <LinkWithIconOnly img={<RiMailLine size={32} />} href={email} />
+              <LinkWithIconOnly
+                img={<RiMailLine size={32} />}
+                href={email}
+                label="email"
+              />
 
               <LinkWithIconOnly
                 img={<RiLinkedinBoxLine size={32} />}
                 href={linkedin}
+                label="linkedin"
               />
 
               <LinkWithIconOnly
                 img={<RiInstagramLine size={32} />}
                 href={instagram}
+                label="instagram"
               />
 
               <LinkWithIconOnly
                 img={<RiGithubLine size={32} />}
                 href={github}
+                label="github"
               />
             </span>
           </div>

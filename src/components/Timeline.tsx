@@ -16,7 +16,7 @@ export function TimelineRow({
   return (
     <Fragment>
       <section className="timelineRow">
-        <picture>{img}</picture>
+        {img}
         <span className="timelineCaption">
           <span>{children}</span> <span className="date">{date}</span>
         </span>

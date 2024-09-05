@@ -392,7 +392,7 @@ export const projectData: {
       </Fragment>
     ),
     attributions: [
-      "medium zoom: https://github.com/francoischalifour",
+      "zoom-vanilla.js: https://github.com/spinningarrow",
       "gsap: https://github.com/jackdoyle",
       "remix icons: https://github.com/kamijin-fanta",
     ],

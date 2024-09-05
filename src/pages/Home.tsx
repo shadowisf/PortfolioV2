@@ -12,6 +12,7 @@ import {
 import { homeAnimation, scrollingAnimation } from "../utils/AnimationUtils";
 import { useGSAP } from "@gsap/react";
 import { email, github, instagram, linkedin } from "../utils/SocialUtils";
+import { preloadTinyImages } from "../components/ProgressiveImg";
 
 export default function Home() {
   const { setCurrentPage } = useGlobalState();
@@ -20,6 +21,8 @@ export default function Home() {
   const allProjectIDs = getAllProjectIDs();
 
   useEffect(() => {
+    preloadTinyImages();
+
     setCurrentPage("/");
     scrollToTop(0);
   }, []);
@@ -42,17 +45,17 @@ export default function Home() {
 
         <div className="hero">
           <h1 className="extra name accent">
-            les ranalan
             {/* ᜎᜒᜐ᜔ ᜍᜈᜎᜈ᜔ */}
+            les ranalan
           </h1>
 
-          <h5 className="nonBold">
+          <h2 className="nonBold">
             <span className="bulletPoint">⊢</span> frontend developer{" "}
             <small className="smaller">(future fullstack)</small>
-          </h5>
-          <h5 className="nonBold">
+          </h2>
+          <h2 className="nonBold">
             <span className="bulletPoint">⊢</span> uae-based
-          </h5>
+          </h2>
 
           <br />
 
@@ -61,24 +64,28 @@ export default function Home() {
               className="faded"
               img={<RiMailLine size={32} />}
               href={email}
+              label="email"
             />
 
             <LinkWithIconOnly
               className="faded"
               img={<RiLinkedinBoxLine size={32} />}
               href={linkedin}
+              label="linkedin"
             />
 
             <LinkWithIconOnly
               className="faded"
               img={<RiInstagramLine size={32} />}
               href={instagram}
+              label="instagram"
             />
 
             <LinkWithIconOnly
               className="faded"
               img={<RiGithubLine size={32} />}
               href={github}
+              label="github"
             />
           </div>
         </div>
