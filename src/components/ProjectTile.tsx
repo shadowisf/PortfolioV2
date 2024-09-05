@@ -44,11 +44,7 @@ export function ProjectPreview({ dataID }: ProjectProps) {
 
   return (
     <div data-key={dataID} className="preview">
-      {project.video ? (
-        <video loop muted src={project.video} />
-      ) : (
-        <img src={project.image} />
-      )}
+      <video loop muted src={project.video} />
       <span className="techStack">
         {project.techStack
           .filter((item) => item.startsWith("*"))

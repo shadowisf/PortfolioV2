@@ -66,6 +66,10 @@ $minMaxWidth: 1030px;
   font-weight: 400;
 }
 
+.zoom-overlay {
+  background: var(--background-color) !important;
+}
+
 *,
 *::before,
 *::after {
@@ -158,6 +162,10 @@ nav {
   padding: 1.25rem 2rem;
 
   z-index: 5;
+
+  background-blend-mode: soft-light;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgMjUwIDI1MCcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJz4KICA8ZmlsdGVyIGlkPSdub2lzZUZpbHRlcic+CiAgICA8ZmVUdXJidWxlbmNlIAogICAgICB0eXBlPSdmcmFjdGFsTm9pc2UnIAogICAgICBiYXNlRnJlcXVlbmN5PScxJyAKICAgICAgbnVtT2N0YXZlcz0nMycgCiAgICAgIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz4KICA8L2ZpbHRlcj4KCiAgPHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsdGVyPSd1cmwoI25vaXNlRmlsdGVyKScvPgo8L3N2Zz4=);
+  background-size: 64px;
 
   .hamburgerButton {
     transition: scale 0.25s;
@@ -531,6 +539,7 @@ footer {
         box-shadow: $boxShadow;
         height: auto;
         width: 100%;
+        background-color: var(--faded-color);
       }
     }
 
@@ -926,8 +935,6 @@ footer {
   text-decoration: none;
   color: var(--text-color);
 
-  padding-bottom: 4px;
-
   border-bottom: 1px dashed;
 
   transition: font-variation-settings 0.5s, color 0.5s, scale 0.25s;
@@ -1091,10 +1098,6 @@ footer {
   nav {
     background-color: var(--background-color);
     box-shadow: $boxShadow;
-
-    background-blend-mode: overlay;
-    background-image: url("src/assets/ImageGrain.svg");
-    background-size: 128px;
 
     display: flex;
 

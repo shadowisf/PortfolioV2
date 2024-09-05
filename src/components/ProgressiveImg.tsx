@@ -30,7 +30,7 @@ export default function ProgressiveImg({
   }, [realSrc]);
 
   return !imageLoaded ? (
-    <img src={placeholderSrc} alt={alt} />
+    <img style={{ backgroundColor: "var(--faded-color)" }} />
   ) : (
     <img src={realSrc} alt={alt} />
   );

@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { LinkWithNoIcon } from "./Link";
-import Zoom from "react-medium-image-zoom";
-import "react-medium-image-zoom/dist/styles.css";
 
 interface MemeData {
   postLink: string;
@@ -52,9 +50,7 @@ export default function YouAreLost() {
       </section>
 
       <section className="memeContainer">
-        <Zoom zoomMargin={50}>
-          <img src={meme?.url} />
-        </Zoom>
+        <img src={meme?.url} data-action="zoom" />
       </section>
 
       <section className="links">

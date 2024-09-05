@@ -5,8 +5,11 @@ import { useGlobalState } from "../utils/ControlUtil";
 import TechStackTile from "../components/TechStackTile";
 import { Link } from "react-router-dom";
 import ProgressiveImg from "../components/ProgressiveImg";
+/* import mediumZoom from "medium-zoom";
 import Zoom from "react-medium-image-zoom";
-import "react-medium-image-zoom/dist/styles.css";
+import "react-medium-image-zoom/dist/styles.css"; */
+import "zoom-vanilla.js/dist/zoom.css";
+import "zoom-vanilla.js/dist/zoom-vanilla.min.js";
 
 export default function Project({ dataID }: ProjectProps) {
   const { executeTransition, setCurrentPage } = useGlobalState();
@@ -29,6 +32,16 @@ export default function Project({ dataID }: ProjectProps) {
     setCurrentPage(currentProjectTitle);
     scrollToTop(0);
   }, [currentProjectTitle]);
+
+  /* useEffect(() => {
+    const zoom = mediumZoom("img", {
+      background: "var(--background-color)",
+    });
+
+    return () => {
+      zoom.detach();
+    };
+  }, []); */
 
   return (
     <main className="projectWrapper">
@@ -89,13 +102,14 @@ export default function Project({ dataID }: ProjectProps) {
         {/* images & videos */}
         <div className="media">
           <div style={{ flex: project.imageFlex }}>
-            <Zoom zoomMargin={50}>
+            {/* <Zoom>
               <ProgressiveImg
                 realSrc={project.image}
                 placeholderSrc={project.imageTiny}
                 alt={project.imageAlt}
               />
-            </Zoom>
+            </Zoom> */}
+            <img src={project.image} data-action="zoom" alt="" />
           </div>
 
           <div style={{ flex: project.videoFlex }}>
