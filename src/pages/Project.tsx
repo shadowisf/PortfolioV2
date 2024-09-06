@@ -107,17 +107,17 @@ export default function Project({ dataID }: ProjectProps) {
 
         {/* content */}
         <div className="paragraph">
-          <h5>description:</h5>
+          <h1>description:</h1>
           <p>{project.description}</p>
 
           <br />
 
-          <h5>core concept:</h5>
+          <h1>core concept:</h1>
           <p>{project.coreConcept}</p>
 
           <br />
 
-          <h5>my role:</h5>
+          <h1>my role:</h1>
           <p>{project.myRole}</p>
         </div>
       </section>

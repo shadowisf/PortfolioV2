@@ -1,4 +1,4 @@
-import cvFile from "../assets/FileCV.PDF";
+import cvFile from "../assets/FileCV.pdf";
 
 export const instagram = "https://www.instagram.com/les.rx/";
 

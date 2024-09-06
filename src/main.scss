@@ -529,7 +529,6 @@ footer {
   }
 
   .content {
-    min-height: 500px;
     display: grid;
     gap: 4rem;
 
@@ -552,7 +551,8 @@ footer {
 
       text-align: justify;
 
-      h5 {
+      h1 {
+        font-size: var(--h5);
         color: var(--accent-color);
       }
     }
@@ -1001,6 +1001,7 @@ footer {
     position: absolute;
     top: 0;
     left: 0;
+    font-size: 0px;
     opacity: 0;
   }
 
@@ -1053,6 +1054,10 @@ footer {
 
 // mobile screen
 @media screen and (max-width: $minMaxWidth) {
+  html {
+    background-size: 32px;
+  }
+
   #fs {
     display: none;
   }

@@ -14,26 +14,26 @@ const GitHubPlugInsDatabase = "https://github.com/shadowisf/PlugInsDatabase"; */
 //
 import ImageBellHospital from "../assets/ImageBellHospital.webp";
 import ImageTinyBellHospital from "../assets/ImageBellHospital_tiny.webp";
-import FileBellHospital from "../assets/FileBellHospital.PDF";
+import FileBellHospital from "../assets/FileBellHospital.pdf";
 import VideoBellHospital from "../assets/VideoBellHospital.webm";
 const GitHubBellHospital = "https://github.com/shadowisf/BellHospital";
 //
 import ImageFunculator from "../assets/ImageFunCulator.webp";
 import ImageTinyFunculator from "../assets/ImageFunCulator_tiny.webp";
-import FileFunculator from "../assets/FileFunCulator.PDF";
+import FileFunculator from "../assets/FileFunCulator.pdf";
 import VideoFunCulator from "../assets/VideoFunCulator.webm";
 const GitHubFunCulator = "https://github.com/shadowisf/FunCulator";
 //
 import ImageApolloHospital from "../assets/ImageApolloHospital.webp";
 import ImageTinyApolloHospital from "../assets/ImageApolloHospital_tiny.webp";
-import FileApolloHospital from "../assets/FileApolloHospital.PDF";
+import FileApolloHospital from "../assets/FileApolloHospital.pdf";
 import VideoApolloHospital from "../assets/VideoApolloHospital.webm";
 const GitHubApolloHospital = "https://github.com/shadowisf/ApolloHospital";
 const DemoApolloHospital = "https://apollohospital.pythonanywhere.com";
 //
 import ImageCircuitCentral from "../assets/ImageCircuitCentral.webp";
 import ImageTinyCircuitCentral from "../assets/ImageCircuitCentral_tiny.webp";
-import FileCircuitCentral from "../assets/FileCircuitCentral.PDF";
+import FileCircuitCentral from "../assets/FileCircuitCentral.pdf";
 import VideoCircuitCentral from "../assets/VideoCircuitCentral.webm";
 const GitHubCircuitCentral = "https://github.com/shadowisf/CircuitCentral";
 //
