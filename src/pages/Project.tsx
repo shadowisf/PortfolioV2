@@ -107,17 +107,17 @@ export default function Project({ dataID }: ProjectProps) {
 
         {/* content */}
         <div className="paragraph">
-          <h5 className="accent">description:</h5>
+          <h5>description:</h5>
           <p>{project.description}</p>
 
           <br />
 
-          <h5 className="accent">core concept:</h5>
+          <h5>core concept:</h5>
           <p>{project.coreConcept}</p>
 
           <br />
 
-          <h5 className="accent">my role:</h5>
+          <h5>my role:</h5>
           <p>{project.myRole}</p>
         </div>
       </section>
@@ -126,7 +126,7 @@ export default function Project({ dataID }: ProjectProps) {
         <h1
           className="infoOnHover bottom"
           onClick={() => scrollToTop(0.25)}
-          data-tooltip="scroll to top"
+          data-tooltip="to top"
         >
           ↑
         </h1>

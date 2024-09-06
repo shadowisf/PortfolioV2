@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getProfilePictureTiny } from "../pages/About";
-import { getAllProjectIDs, getProjectData } from "../utils/ProjectUtils";
 
 type ProgressiveImgProps = {
   realSrc: string;
@@ -67,13 +66,6 @@ async function preloadImages(imagesURL: string[]) {
 
 export function preloadTinyImages() {
   const images: string[] = [];
-  const allProjectIDs = getAllProjectIDs();
-
-  allProjectIDs.forEach((id) => {
-    const project = getProjectData(Number(id));
-
-    images.push(project.imageTiny);
-  });
 
   images.push(getProfilePictureTiny());
 

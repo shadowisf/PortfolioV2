@@ -336,6 +336,8 @@ footer {
   justify-content: flex-end;
 
   margin: 1.5rem 2rem;
+
+  font-size: var(--smaller);
 }
 
 // wrappers
@@ -425,7 +427,7 @@ footer {
     }
 
     h2 {
-      font-size: var(--h6);
+      font-size: var(--h5);
     }
 
     .preview {
@@ -527,6 +529,7 @@ footer {
   }
 
   .content {
+    min-height: 500px;
     display: grid;
     gap: 4rem;
 
@@ -548,6 +551,10 @@ footer {
       line-height: 2rem;
 
       text-align: justify;
+
+      h5 {
+        color: var(--accent-color);
+      }
     }
 
     .links {
@@ -657,7 +664,7 @@ footer {
       border-radius: $borderRadius;
       width: 375px;
       height: auto;
-      max-width: 600px;
+      max-width: 35%;
     }
 
     .links {
@@ -979,6 +986,7 @@ footer {
 }
 
 .linkWithIconOnly {
+  position: relative;
   display: block;
   line-height: normal;
 
@@ -1035,8 +1043,24 @@ footer {
   }
 }
 
+#hs {
+  display: none;
+}
+
+#fs {
+  display: block;
+}
+
 // mobile screen
 @media screen and (max-width: $minMaxWidth) {
+  #fs {
+    display: none;
+  }
+
+  #hs {
+    display: block;
+  }
+
   :root {
     --h0: calc(var(--h1) * 1.5);
     --h1: 2.027rem;
@@ -1072,6 +1096,10 @@ footer {
 
     .timelineAndSkillset {
       flex-direction: column;
+
+      .header {
+        font-size: var(--h0);
+      }
 
       .skillset {
         height: 500px;
@@ -1137,7 +1165,7 @@ footer {
 
     &.bottom {
       &:hover::before {
-        bottom: -175%;
+        bottom: -150%;
       }
     }
 

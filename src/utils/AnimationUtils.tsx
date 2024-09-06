@@ -18,8 +18,6 @@ export function pageTransition() {
       { y: "-100vh" },
       {
         y: 0,
-        autoAlpha: 1,
-        scale: 1,
         duration: duration,
         ease: ease,
         onComplete: whenDone,
@@ -97,11 +95,11 @@ export function aboutAnimation() {
       onEnter: (elements) =>
         gsap.fromTo(
           elements,
-          { opacity: 0, scale: 0 },
-          { opacity: 1, scale: 1, duration: 1 }
+          { autoAlpha: 0, scale: 0 },
+          { autoAlpha: 1, scale: 1, duration: 1 }
         ),
       onLeave: (elements) =>
-        gsap.to(elements, { opacity: 0, scale: 0, duration: 1 }),
+        gsap.to(elements, { autoAlpha: 0, scale: 0, duration: 1 }),
     });
   });
 
@@ -116,6 +114,7 @@ export function aboutAnimation() {
     const bioPicture = document.querySelector(".aboutWrapper .bio img");
     const bioContent = document.querySelector(".aboutWrapper .bio .content")
       ?.childNodes as NodeListOf<Element>;
+    const bioContentHS = document.querySelector(".aboutWrapper .bio #hs");
     const timelineContainer = document.querySelector(".aboutWrapper .timeline");
     const skillsetContainer = document.querySelector(".aboutWrapper .skillset");
 
@@ -135,84 +134,95 @@ export function aboutAnimation() {
 
     gsap.set([allTimelineRows, allSkills], { autoAlpha: "0" });
 
-    gsap.set([bioContent, bioPicture, timelineContainer, skillsetContainer], {
-      scale: startupScaleInitial,
-      autoAlpha: "0",
-      pointerEvents: "none",
-      onComplete: () => {
-        //bio
-        gsap.to(bioPicture, {
-          delay: startupDelay,
-          scale: "1",
-          autoAlpha: "1",
-          duration: startupDuration,
-          ease: startupEase,
-        });
-        gsap.to(bioContent, {
-          delay: startupDelay,
-          stagger: startupStagger,
-          scale: "1",
-          autoAlpha: "1",
-          duration: startupDuration,
-          ease: startupEase,
-          onComplete: () => {
-            gsap.set([bioContent, bioPicture], { clearProps: "pointerEvents" });
-          },
-        });
+    gsap.set(
+      [
+        bioContent,
+        bioContentHS,
+        bioPicture,
+        timelineContainer,
+        skillsetContainer,
+      ],
+      {
+        transform: `scale(${startupScaleInitial})`,
+        autoAlpha: "0",
+        pointerEvents: "none",
+        onComplete: () => {
+          //bio
+          gsap.to([bioPicture, bioContentHS], {
+            delay: startupDelay,
+            transform: "scale(1)",
+            autoAlpha: "1",
+            duration: startupDuration,
+            ease: startupEase,
+          });
+          gsap.to(bioContent, {
+            delay: startupDelay,
+            stagger: startupStagger,
+            transform: "scale(1)",
+            autoAlpha: "1",
+            duration: startupDuration,
+            ease: startupEase,
+            onComplete: () => {
+              gsap.set([bioContent, bioPicture, bioContentHS], {
+                clearProps: "pointerEvents",
+              });
+            },
+          });
 
-        // timeline
-        gsap.to(timelineContainer, {
-          scrollTrigger: {
-            trigger: timelineContainer,
-            start: "top center",
-          },
-          autoAlpha: 1,
-          scale: 1,
-          duration: timelineDuration,
-        });
-        gsap.to(allTimelineRows, {
-          delay: timelineDelay,
-          scrollTrigger: {
-            trigger: timelineContainer,
-            start: "top center",
-          },
-          autoAlpha: 1,
-          duration: timelineDuration,
-          stagger: timelineStagger,
-          onComplete: () => {
-            gsap.set([timelineContainer, allTimelineRows], {
-              clearProps: "pointerEvents",
-            });
-          },
-        });
+          // timeline
+          gsap.to(timelineContainer, {
+            scrollTrigger: {
+              trigger: timelineContainer,
+              start: "top center",
+            },
+            autoAlpha: 1,
+            transform: "scale(1)",
+            duration: timelineDuration,
+          });
+          gsap.to(allTimelineRows, {
+            delay: timelineDelay,
+            scrollTrigger: {
+              trigger: timelineContainer,
+              start: "top center",
+            },
+            autoAlpha: 1,
+            duration: timelineDuration,
+            stagger: timelineStagger,
+            onComplete: () => {
+              gsap.set([timelineContainer, allTimelineRows], {
+                clearProps: "pointerEvents",
+              });
+            },
+          });
 
-        // skillset
-        gsap.to(skillsetContainer, {
-          scrollTrigger: {
-            trigger: skillsetContainer,
-            start: "top center",
-          },
-          scale: 1,
-          autoAlpha: 1,
-          duration: skillsetDuration,
-        });
-        gsap.to(allSkills, {
-          delay: skillsetDelay,
-          scrollTrigger: {
-            trigger: skillsetContainer,
-            start: "top center",
-          },
-          autoAlpha: 1,
-          duration: skillsetDuration,
-          stagger: skillsetStagger,
-          onComplete: () => {
-            gsap.set([skillsetContainer, allSkills], {
-              clearProps: "pointerEvents",
-            });
-          },
-        });
-      },
-    });
+          // skillset
+          gsap.to(skillsetContainer, {
+            scrollTrigger: {
+              trigger: skillsetContainer,
+              start: "top center",
+            },
+            transform: "scale(1)",
+            autoAlpha: 1,
+            duration: skillsetDuration,
+          });
+          gsap.to(allSkills, {
+            delay: skillsetDelay,
+            scrollTrigger: {
+              trigger: skillsetContainer,
+              start: "top center",
+            },
+            autoAlpha: 1,
+            duration: skillsetDuration,
+            stagger: skillsetStagger,
+            onComplete: () => {
+              gsap.set([skillsetContainer, allSkills], {
+                clearProps: "pointerEvents",
+              });
+            },
+          });
+        },
+      }
+    );
   });
 
   const allSkills = document.querySelectorAll(".aboutWrapper .skills .item");
@@ -308,12 +318,12 @@ export function homeAnimation() {
 
     gsap.set(rightContainer, {
       autoAlpha: 0,
-      scale: startupScaleInitial,
+      transform: `scale(${startupScaleInitial})`,
       pointerEvents: "none",
       onComplete: () => {
         gsap.to(rightContainer, {
           autoAlpha: 1,
-          scale: 1,
+          transform: "scale(1)",
           delay: startupDelay,
           duration: startupDuration,
           ease: startupEase,
@@ -324,12 +334,12 @@ export function homeAnimation() {
 
     gsap.set(projectTile, {
       autoAlpha: 0,
-      scale: startupScaleInitial,
+      transform: `scale(${startupScaleInitial})`,
       pointerEvents: "none",
       onComplete: () => {
         gsap.to(projectTile, {
           autoAlpha: 1,
-          scale: 1,
+          transform: "scale(1)",
           delay: startupDelay,
           duration: startupDuration,
           ease: startupEase,
@@ -361,14 +371,14 @@ export function homeAnimation() {
   const heroContainer = document.querySelector(".homeWrapper .hero");
 
   const previewEnter = {
-    scale: "1",
+    transform: "scale(1)",
     autoAlpha: "1",
     duration: "0.1",
     ease: "power2.inOut",
   };
 
   const previewExit = {
-    scale: "0.95",
+    transform: "scale(0.95)",
     autoAlpha: "0",
     duration: "0.1",
     ease: "power2.inOut",

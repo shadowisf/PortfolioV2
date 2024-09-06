@@ -14,6 +14,8 @@ import YouAreLost from "./components/YouAreLost.tsx";
 
 // firebase deploy --only hosting:les-ranalan
 
+// firebase hosting:channel:deploy les-ranalan
+
 const allProjectIDs = getAllProjectIDs();
 
 const root = createRoot(document.getElementById("root")!);

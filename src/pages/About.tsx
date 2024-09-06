@@ -21,7 +21,7 @@ import {
   LinkWithIconOnly,
   LinkWithNoIcon,
 } from "../components/Link";
-import { getAllSkills, getSkillLevel, Views } from "../utils/AboutUtils";
+import { getAllSkills, getSkillLevel } from "../utils/AboutUtils";
 import { useGSAP } from "@gsap/react";
 import { cv, email, github, instagram, linkedin } from "../utils/SocialUtils";
 import ProgressiveImg from "../components/ProgressiveImg";
@@ -36,17 +36,13 @@ export function getProfilePicture() {
 export default function About() {
   const { scrollToTop } = scrollingAnimation();
   const { filterSkill, resetSkill, startup } = aboutAnimation();
-  const { mobileView, desktopView } = Views();
-  const { setCurrentPage, currentPage, isMobile } = useGlobalState();
+  /*   const { mobileView, desktopView } = Views(); */
+  const { setCurrentPage } = useGlobalState();
 
   useEffect(() => {
     setCurrentPage("about");
     scrollToTop(0);
   }, []);
-
-  useEffect(() => {
-    isMobile ? mobileView() : desktopView();
-  }, [isMobile, currentPage]);
 
   useGSAP(() => {
     startup();
@@ -55,6 +51,9 @@ export default function About() {
   return (
     <main className="aboutWrapper">
       <section className="bio">
+        <h1 id="hs" className="extra header">
+          hey, i'm les!
+        </h1>
         <ProgressiveImg
           realSrc={ProfilePicture}
           placeholderSrc={ProfilePictureTiny}
@@ -62,7 +61,9 @@ export default function About() {
           zoom={false}
         />
         <div className="content">
-          <h1 className="extra header">hey, i'm les!</h1>
+          <h1 id="fs" className="extra header">
+            hey, i'm les!
+          </h1>
           <br />
           <h2>
             i'm all about creating functional, performant, scalable, and
@@ -118,7 +119,7 @@ export default function About() {
 
       <section className="timelineAndSkillset">
         <section className="timeline">
-          <h1>my life's arc</h1>
+          <h1 className="header">my life's arc</h1>
           <div className="timelineRows">
             <TimelineRow
               date="february 15, 2004"
@@ -149,7 +150,7 @@ export default function About() {
               img={<RiGraduationCapLine size={40} fill="var(--accent-color)" />}
               verticalLine={true}
             >
-              graduated{" "}
+              graduated from{" "}
               <LinkWithNoIcon
                 className="infoOnHover top alt"
                 href="https://wincedu.uk"
@@ -165,7 +166,7 @@ export default function About() {
               img={<RiGraduationCapLine size={40} fill="var(--accent-color)" />}
               verticalLine={false}
             >
-              graduated{" "}
+              graduated from{" "}
               <LinkWithNoIcon
                 className="infoOnHover top alt"
                 href="https://www.bolton.ac.uk"
@@ -179,7 +180,7 @@ export default function About() {
         </section>
 
         <section className="skillset">
-          <h1>my skillset</h1>
+          <h1 className="header">my skillset</h1>
           <div className="filter">
             <span>filter:</span>
             <select
