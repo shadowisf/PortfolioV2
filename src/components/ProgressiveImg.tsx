@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getProfilePictureTiny } from "../pages/About";
+import ProfilePictureTiny from "../assets/ImageProfile_tiny.webp";
 
 type ProgressiveImgProps = {
   realSrc: string;
@@ -8,17 +8,12 @@ type ProgressiveImgProps = {
   zoom?: boolean;
 };
 
-export default function ProgressiveImg({
-  realSrc,
-  placeholderSrc,
-  alt,
-  zoom,
-}: ProgressiveImgProps) {
+export default function ProgressiveImg(p: ProgressiveImgProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   async function loadImage() {
     const image = new Image();
-    image.src = realSrc;
+    image.src = p.realSrc;
 
     await new Promise((resolve) => {
       image.onload = () => resolve(null);
@@ -34,12 +29,12 @@ export default function ProgressiveImg({
     requestAnimationFrame(() => {
       loadImage();
     });
-  }, [realSrc]);
+  }, [p.realSrc]);
 
   return !imageLoaded ? (
-    <img src={placeholderSrc} />
+    <img src={p.placeholderSrc} />
   ) : (
-    <img src={realSrc} alt={alt} data-action={zoom ? "zoom" : ""} />
+    <img src={p.realSrc} alt={p.alt} data-action={p.zoom ? "zoom" : ""} />
   );
 }
 
@@ -67,7 +62,7 @@ async function preloadImages(imagesURL: string[]) {
 export function preloadTinyImages() {
   const images: string[] = [];
 
-  images.push(getProfilePictureTiny());
+  images.push(ProfilePictureTiny);
 
   preloadImages(images);
 }

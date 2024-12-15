@@ -8,10 +8,10 @@ type LinkProps = {
 };
 
 export function LinkWithNoIcon({
-  href,
-  children,
-  onClick,
   className,
+  href,
+  onClick,
+  children,
   ...props
 }: LinkProps) {
   return (
@@ -27,42 +27,32 @@ export function LinkWithNoIcon({
   );
 }
 
-export function LinkWithIcon({
-  href,
-  children,
-  onClick,
-  img,
-  className,
-}: LinkProps) {
+export function LinkWithIcon(p: LinkProps) {
   return (
     <a
-      onClick={onClick}
-      href={href}
+      onClick={p.onClick}
+      href={p.href}
       target="_blank"
-      className={`linkWithIcon ${className}`}
+      className={`linkWithIcon ${p.className}`}
     >
-      <picture>{img}</picture>
-      <span className={className === "faded" ? "faded" : ""}>{children}</span>
+      <picture>{p.img}</picture>
+      <span className={p.className === "faded" ? "faded" : ""}>
+        {p.children}
+      </span>
     </a>
   );
 }
 
-export function LinkWithIconOnly({
-  href,
-  onClick,
-  img,
-  className,
-  label,
-}: LinkProps) {
+export function LinkWithIconOnly(p: LinkProps) {
   return (
     <a
-      onClick={onClick}
-      href={href}
+      onClick={p.onClick}
+      href={p.href}
       target="_blank"
-      className={`linkWithIconOnly ${className}`}
+      className={`linkWithIconOnly ${p.className}`}
     >
-      <span className="label">{label}</span>
-      {img}
+      <span className="label">{p.label}</span>
+      {p.img}
     </a>
   );
 }

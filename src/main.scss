@@ -145,10 +145,6 @@ html {
   color: var(--text-color);
   font-family: $primaryFont;
   color-scheme: var(--theme);
-
-  background-blend-mode: soft-light;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgMjUwIDI1MCcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJz4KICA8ZmlsdGVyIGlkPSdub2lzZUZpbHRlcic+CiAgICA8ZmVUdXJidWxlbmNlIAogICAgICB0eXBlPSdmcmFjdGFsTm9pc2UnIAogICAgICBiYXNlRnJlcXVlbmN5PScxJyAKICAgICAgbnVtT2N0YXZlcz0nMycgCiAgICAgIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz4KICA8L2ZpbHRlcj4KCiAgPHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsdGVyPSd1cmwoI25vaXNlRmlsdGVyKScvPgo8L3N2Zz4=);
-  background-size: 64px;
 }
 
 a {
@@ -478,6 +474,8 @@ footer {
 
           background-color: var(--background-color);
 
+          color: white !important;
+
           .icon {
             display: flex;
           }
@@ -781,6 +779,8 @@ footer {
           justify-content: center;
 
           gap: 0.5rem;
+
+          color: white !important;
 
           .icon {
             display: flex;

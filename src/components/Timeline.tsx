@@ -1,5 +1,3 @@
-import { Fragment } from "react/jsx-runtime";
-
 type TimelineProps = {
   children?: React.ReactNode;
   img?: React.ReactNode;
@@ -7,22 +5,17 @@ type TimelineProps = {
   date: string;
 };
 
-export function TimelineRow({
-  children,
-  img,
-  verticalLine,
-  date,
-}: TimelineProps) {
+export function TimelineRow(p: TimelineProps) {
   return (
-    <Fragment>
+    <>
       <section className="timelineRow">
-        {img}
+        {p.img}
         <span className="timelineCaption">
-          <span>{children}</span> <span className="date">{date}</span>
+          <span>{p.children}</span> <span className="date">{p.date}</span>
         </span>
       </section>
       <svg
-        style={verticalLine ? { display: "block" } : { display: "none" }}
+        style={p.verticalLine ? { display: "block" } : { display: "none" }}
         width="40"
         height="50"
         className="verticalLine"
@@ -35,6 +28,6 @@ export function TimelineRow({
           strokeWidth="2"
         />
       </svg>
-    </Fragment>
+    </>
   );
 }

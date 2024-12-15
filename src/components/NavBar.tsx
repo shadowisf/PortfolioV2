@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { pageTransition } from "../utils/AnimationUtils";
 import { useGlobalState } from "../utils/ControlUtil";
 import {
@@ -49,7 +49,7 @@ export default function NavBar() {
   }
 
   return (
-    <Fragment>
+    <>
       <div className="navAlt">
         <Link
           to={"/"}
@@ -148,6 +148,6 @@ export default function NavBar() {
           )}
         </button>
       </div>
-    </Fragment>
+    </>
   );
 }

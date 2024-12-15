@@ -1,6 +1,5 @@
 import { ProjectPreview, ProjectTile } from "../components/ProjectTile";
 import { LinkWithIconOnly } from "../components/Link";
-import { getAllProjectIDs } from "../utils/ProjectUtils";
 import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtil";
 import {
@@ -11,14 +10,20 @@ import {
 } from "react-icons/ri";
 import { homeAnimation, scrollingAnimation } from "../utils/AnimationUtils";
 import { useGSAP } from "@gsap/react";
-import { email, github, instagram, linkedin } from "../utils/SocialUtils";
 import { preloadTinyImages } from "../components/ProgressiveImg";
+import {
+  email,
+  linkedin,
+  instagram,
+  github,
+  projectData,
+} from "../utils/GODMODE";
 
 export default function Home() {
   const { setCurrentPage } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
   const { startup } = homeAnimation();
-  const allProjectIDs = getAllProjectIDs();
+  const allProjectIDs = Object.keys(projectData);
 
   useEffect(() => {
     preloadTinyImages();
@@ -50,7 +55,7 @@ export default function Home() {
           </h1>
 
           <h2 className="nonBold">
-            <span className="bulletPoint">⊢</span> frontend developer{" "}
+            <span className="bulletPoint">⊢</span> full-stack developer{" "}
             <small className="smaller">(future fullstack)</small>
           </h2>
           <h2 className="nonBold">

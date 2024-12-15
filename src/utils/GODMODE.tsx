@@ -1,16 +1,52 @@
 import { LinkWithIcon } from "../components/Link";
-import { Fragment } from "react/jsx-runtime";
 import { RiFilePdf2Line, RiGithubLine } from "react-icons/ri";
 import { GoPackage } from "react-icons/go";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/all";
 gsap.registerPlugin(gsap, ScrollToPlugin);
 //
-/* import ImagePlugInsDatabase from "../assets/ImagePlugInsDatabase.webp";
+import cvFile from "../assets/FileCV.pdf";
+//
+import {
+  BiLogoTypescript,
+  BiLogoFirebase,
+  BiLogoJavascript,
+} from "react-icons/bi";
+import {
+  FaReact,
+  FaHtml5,
+  FaCss3Alt,
+  FaSass,
+  FaGitAlt,
+  FaJava,
+  FaBootstrap,
+  FaPython,
+  FaAngular,
+  FaVuejs,
+} from "react-icons/fa";
+import { GoCommandPalette } from "react-icons/go";
+import { GrMysql } from "react-icons/gr";
+import {
+  SiCsharp,
+  SiFramework,
+  SiMicrosoftsqlserver,
+  SiFlask,
+  SiDjango,
+  SiPhp,
+  SiPostgresql,
+  SiSvelte,
+  SiTailwindcss,
+  SiMariadb,
+  SiPythonanywhere,
+  SiExpo,
+  SiNextdotjs,
+} from "react-icons/si";
+//
+import ImagePlugInsDatabase from "../assets/ImagePlugInsDatabase.webp";
 import ImageTinyPlugInsDatabase from "../assets/ImagePlugInsDatabase_tiny.webp";
-import FilePlugInsDatabase from "../assets/FilePlugInsDatabase.PDF";
+import FilePlugInsDatabase from "../assets/FilePlugInsDatabase.pdf";
 import VideoPlugInsDatabase from "../assets/VIdeoPlugInsDatabase.webm";
-const GitHubPlugInsDatabase = "https://github.com/shadowisf/PlugInsDatabase"; */
+const GitHubPlugInsDatabase = "https://github.com/shadowisf/PlugInsDatabase";
 //
 import ImageBellHospital from "../assets/ImageBellHospital.webp";
 import ImageTinyBellHospital from "../assets/ImageBellHospital_tiny.webp";
@@ -48,6 +84,175 @@ import ImageTinyV2Portfolio from "../assets/ImageV2Portfolio_tiny.webp";
 import VideoV2Portfolio from "../assets/VideoV2Portfolio.webm";
 const GitHubV2Portfolio = "https://github.com/shadowisf/PortfolioReactV2";
 //
+export const instagram = "https://www.instagram.com/les.rx/";
+export const linkedin = "https://www.linkedin.com/in/ranalan/";
+export const github = "https://github.com/shadowisf";
+export const email = "mailto:les.ranalan@gmail.com";
+export const cv = cvFile;
+
+export const techStackStyling: Record<
+  string,
+  { icon: JSX.Element; color: string }
+> = {
+  typescript: {
+    icon: <BiLogoTypescript />,
+    color: "light-dark(rgb(49, 120, 198), rgb(30, 100, 180))",
+  },
+  react: {
+    icon: <FaReact />,
+    color: "light-dark(rgb(77, 167, 197), rgb(60, 140, 170))",
+  },
+  html: {
+    icon: <FaHtml5 />,
+    color: "light-dark(rgb(231, 100, 60), rgb(170, 70, 45))",
+  },
+  css: {
+    icon: <FaCss3Alt />,
+    color: "light-dark(rgb(56, 133, 207), rgb(35, 85, 140))",
+  },
+  sass: {
+    icon: <FaSass />,
+    color: "light-dark(#cc6699, #a64d7f)",
+  },
+  firebase: {
+    icon: <BiLogoFirebase />,
+    color: "light-dark(rgb(222, 157, 58), rgb(180, 120, 45))",
+  },
+  git: {
+    icon: <FaGitAlt />,
+    color: "light-dark(#d95b44, rgb(205, 86, 64))",
+  },
+  "c-sharp": {
+    icon: <SiCsharp />,
+    color: "light-dark(#9d76e0, rgb(148, 111, 211))",
+  },
+  "windows forms": {
+    icon: <SiFramework />,
+    color: "light-dark(#949494, gray)",
+  },
+  "transact-sql": {
+    icon: <SiMicrosoftsqlserver />,
+    color: "light-dark(rgb(204, 84, 83), rgb(184, 54, 53))",
+  },
+  java: {
+    icon: <FaJava />,
+    color: "light-dark(rgb(240, 87, 70), rgb(180, 65, 55))",
+  },
+  flask: {
+    icon: <SiFlask />,
+    color: "light-dark(#5d898e, rgb(53, 107, 114))",
+  },
+  django: {
+    icon: <SiDjango />,
+    color: "light-dark(rgb(80, 157, 116), rgb(70, 140, 105))",
+  },
+  "bootstrap css": {
+    icon: <FaBootstrap />,
+    color: "light-dark(#a184ca, #7952b3)",
+  },
+  swing: {
+    icon: <SiFramework />,
+    color: "light-dark(#949494, gray)",
+  },
+  cli: {
+    icon: <GoCommandPalette />,
+    color: "light-dark(#949494, gray)",
+  },
+  "file handling": {
+    icon: <SiFramework />,
+    color: "light-dark(#949494, gray)",
+  },
+  php: {
+    icon: <SiPhp />,
+    color: "light-dark(#777BB4, #666aa3)",
+  },
+  mysql: {
+    icon: <GrMysql />,
+    color: "light-dark(rgb(79, 136, 169), rgb(35, 80, 115))",
+  },
+  python: {
+    icon: <FaPython />,
+    color: "light-dark(#6b8aaa, rgb(70, 109, 150))",
+  },
+  postgresql: {
+    icon: <SiPostgresql />,
+    color: "light-dark(rgb(64, 101, 141), rgb(50, 85, 115))",
+  },
+  javascript: {
+    icon: <BiLogoJavascript />,
+    color: "light-dark(rgb(210, 174, 68), rgb(180, 155, 55))",
+  },
+  "restful api": {
+    icon: <SiFramework />,
+    color: "light-dark(#949494, gray)",
+  },
+  angular: {
+    icon: <FaAngular />,
+    color: "light-dark(rgb(167, 58, 56), rgb(145, 45, 45))",
+  },
+  vue: {
+    icon: <FaVuejs />,
+    color: "light-dark(rgb(100, 181, 135), rgb(80, 150, 100))",
+  },
+  svelte: {
+    icon: <SiSvelte />,
+    color: "light-dark(rgb(235, 79, 39), rgb(200, 70, 35))",
+  },
+  "tailwind css": {
+    icon: <SiTailwindcss />,
+    color: "light-dark(rgb(94, 200, 183), rgb(80, 170, 160))",
+  },
+  mariadb: {
+    icon: <SiMariadb />,
+    color: "light-dark(rgb(167, 138, 101), rgb(150, 125, 90))",
+  },
+  pythonanywhere: {
+    icon: <SiPythonanywhere />,
+    color: "light-dark(rgb(85, 168, 222), rgb(70, 150, 200))",
+  },
+  "react native": {
+    icon: <FaReact />,
+    color: "light-dark(rgb(77, 167, 197), rgb(60, 140, 170))",
+  },
+  expo: {
+    icon: <SiExpo />,
+    color: "light-dark(rgb(12, 13, 14), rgb(12, 13, 14)",
+  },
+  nextjs: {
+    icon: <SiNextdotjs />,
+    color: "light-dark(rgb(0, 0, 0), rgb(0, 0, 0))",
+  },
+};
+
+export const aboutSkillset: { [key: string]: number } = {
+  // 3 for expert
+  // 2 for intermediate
+  // 1 for beginner
+  // 0 for planning to learn
+  typescript: 3,
+  react: 2,
+  html: 3,
+  css: 3,
+  "bootstrap css": 3,
+  sass: 3,
+  git: 3,
+  firebase: 3,
+  "c-sharp": 1,
+  java: 2,
+  python: 1,
+  "transact-sql": 1,
+  django: 1,
+  flask: 1,
+  mariadb: 3,
+  mysql: 3,
+  php: 1,
+  javascript: 2,
+  "tailwind css": 2,
+  "react native": 2,
+  expo: 3,
+  nextjs: 1,
+};
+
 export const projectData: {
   [key: number]: {
     name: string;
@@ -58,16 +263,17 @@ export const projectData: {
     imageFlex: string;
     imageAlt: string;
     video: string;
+    videoAlt?: string;
     videoFlex: string;
     description: JSX.Element;
-    coreConcept: JSX.Element | string;
+    coreConcept: string;
     myRole: string;
     links: JSX.Element;
     attributions?: string[];
   };
 } = {
   // plug-ins database
-  /* 0: {
+  0: {
     name: "plug-ins database",
     year: "2022",
     techStack: ["*php", "*html", "*css", "*mariadb"],
@@ -79,19 +285,19 @@ export const projectData: {
     video: VideoPlugInsDatabase,
     videoFlex: "1.599074",
     description: (
-      <Fragment>
+      <>
         plug-ins database is a <u>database solution</u> for a store that sells
         electronic devices. it covers handling of entity information (customer,
         product, order) within xampp's mariadb database. additionally, it has
         search filtering and a retrieve method through html and php.
-      </Fragment>
+      </>
     ),
     coreConcept:
       "plug-ins database is centered around database concepts such as normal forms, integrity constraints, and querying, hence the lack of user interface (lol). through that, i implemented sql queries, applied integrity constraints and applied all stages of normal forms such as first normal form (1nf), second normal form (2nf), and third normal form (3nf).",
     myRole:
       "plug-ins database was a solo project. every tech stack was implemented by me.",
     links: (
-      <Fragment>
+      <>
         <LinkWithIcon
           img={<RiGithubLine size={24} />}
           href={GitHubPlugInsDatabase}
@@ -105,9 +311,9 @@ export const projectData: {
         >
           report
         </LinkWithIcon>
-      </Fragment>
+      </>
     ),
-  }, */
+  },
 
   // bell hospital
   1: {
@@ -122,7 +328,7 @@ export const projectData: {
     video: VideoBellHospital,
     videoFlex: "1.598148",
     description: (
-      <Fragment>
+      <>
         bell hospital is a <u>hospital management system</u> that is intended to
         be used with a command line interface (cli). it covers handling entity
         (patient and doctor) information, appointment scheduling, and managing
@@ -130,14 +336,14 @@ export const projectData: {
         create, read, update, and delete via file handling, this means that data
         is stored in a .txt file in a local directory. additionally, it has
         error handling and persistent data after program reload.
-      </Fragment>
+      </>
     ),
     coreConcept:
       "bell hospital is centered around object-oriented programming (oop) via java. this means creating objects and methods to be repeatedly executed in the application.",
     myRole:
       "bell hospital was a solo project. every tech stack was implemented by me.",
     links: (
-      <Fragment>
+      <>
         <LinkWithIcon
           img={<RiGithubLine size={24} />}
           href={GitHubBellHospital}
@@ -151,7 +357,7 @@ export const projectData: {
         >
           report
         </LinkWithIcon>
-      </Fragment>
+      </>
     ),
   },
 
@@ -168,28 +374,21 @@ export const projectData: {
     video: VideoFunCulator,
     videoFlex: "1.891626",
     description: (
-      <Fragment>
+      <>
         funculator is an <u>all-in-one calculator application</u> for students.
         its system features a login system for one user type (students) and a
         menu that features all mathematical operations a student needs;
         arithmetics, fibonacci sequences, area of different shapes, etc. the
         design aesthetic for this project was heavily inspired by vibrant pixel
         art and sprites.
-      </Fragment>
+      </>
     ),
-    coreConcept: (
-      <Fragment>
-        funculator is centered around conditional statements and loops in java
-        and how it can be used for math operations. <em>for</em> loops and
-        <em>while</em> loops are especially present within fibonacci sequence,
-        factorial, and average. while <em>if</em> statements are present in
-        arithmetic, and odd/even.
-      </Fragment>
-    ),
+    coreConcept:
+      "funculator is centered around conditional statements and loops in java and how it can be used for math operations. for loops and while loops are especially present within fibonacci sequence, factorial, and average. while if statements are present in arithmetic, and odd/even.",
     myRole:
       "funculator was a group project. i designed and implemented the front-end: the general theme, buttons, menu, calculator and avatar via gimp and imported in swing. additionally, i implemented half of the back-end or math operations: factorial, fibonacci, average, and min/max via java.",
     links: (
-      <Fragment>
+      <>
         <LinkWithIcon img={<RiGithubLine size={24} />} href={GitHubFunCulator}>
           repository
         </LinkWithIcon>
@@ -197,7 +396,7 @@ export const projectData: {
         <LinkWithIcon img={<RiFilePdf2Line size={24} />} href={FileFunculator}>
           report
         </LinkWithIcon>
-      </Fragment>
+      </>
     ),
   },
 
@@ -223,7 +422,7 @@ export const projectData: {
     video: VideoApolloHospital,
     videoFlex: "1.599074",
     description: (
-      <Fragment>
+      <>
         apollo hospital is a <u>hospital management system</u> that covers
         handling patient and doctor information, scheduling appointments with
         patients, and managing patient's prescription and payables. its system
@@ -231,14 +430,14 @@ export const projectData: {
         within the mysql database. additionally, it has a login system for three
         user types (receptionist, doctor, staff), error handling, input
         validation, and search filtering of records.
-      </Fragment>
+      </>
     ),
     coreConcept:
       "apollo hospital is centered around software engineering principles such as software development life cycle (sdlc). in which engineers use models to represent processes such as project planning, development, testing,and future proofing. through this, we are able to efficiently execute each process and create this project.",
     myRole:
       " apollo hospital was a group project. i designed and implemented the front-end: overall theme, buttons, navbar, modals, webpages via html,bootstrap css and javascript. additionally, i implemented half of the back-end: database schema via xampp's mariadb database, error handling, and callouts via django.",
     links: (
-      <Fragment>
+      <>
         <LinkWithIcon
           img={<GoPackage size={24} />}
           href={DemoApolloHospital}
@@ -264,7 +463,7 @@ export const projectData: {
         >
           report
         </LinkWithIcon>
-      </Fragment>
+      </>
     ),
   },
 
@@ -281,7 +480,7 @@ export const projectData: {
     video: VideoCircuitCentral,
     videoFlex: "1.687037",
     description: (
-      <Fragment>
+      <>
         circuitcentral is an <u>e-commerce management system</u> that sells
         electronic devices. it covers ordering products, viewing product
         catalogs, and handling entity (customer, staff, supplier) information.
@@ -290,13 +489,13 @@ export const projectData: {
         features search filtering on all records, error handling of all user
         events, input validation, and a login system for two user types: user
         and admin.
-      </Fragment>
+      </>
     ),
     coreConcept:
       "circuitcentral is centered around creating windows-only applications with the use of c# via object-oriented programming (oop); this means creating objects and methods that are to be executed repeatedly. additionally it also covers test cases through microsoft visual studio 2022, version control via git, and all things .net or microsoft related; hence most of the tech stack are frameworks/applications by microsoft.",
     myRole: "this was a solo project. every tech stack was implemented by me.",
     links: (
-      <Fragment>
+      <>
         <LinkWithIcon
           img={<RiGithubLine size={24} />}
           href={GitHubCircuitCentral}
@@ -310,7 +509,7 @@ export const projectData: {
         >
           report
         </LinkWithIcon>
-      </Fragment>
+      </>
     ),
   },
 
@@ -327,19 +526,19 @@ export const projectData: {
     video: VideoV1Portfolio,
     videoFlex: "1.599074",
     description: (
-      <Fragment>
+      <>
         portfolio v1 is the original design of my portfolio website and it was
         of cartoonish design inspired by a few websites i saw on the awwwards
         website. through this, i was able to{" "}
         <u>grasp and understand more about html, css, and typescript</u> as a
         baseline for web development.
-      </Fragment>
+      </>
     ),
     coreConcept:
       "portfolio v1 is centered around the concepts based on the react framework via typescript (these concepts can also be applied in javascript with react). such concepts are functional components which are basically a group of html elements that can be placed within a web page repeatedly. additionally, there are states, hooks, props, and a lot more.",
     myRole: "this was a solo project. every tech stack was implemented by me.",
     links: (
-      <Fragment>
+      <>
         <LinkWithIcon img={<GoPackage size={24} />} href={DemoV1Portfolio}>
           live website
         </LinkWithIcon>
@@ -347,7 +546,7 @@ export const projectData: {
         <LinkWithIcon img={<RiGithubLine size={24} />} href={GitHubV1Portfolio}>
           repository
         </LinkWithIcon>
-      </Fragment>
+      </>
     ),
     attributions: [
       "typedcss: https://github.com/brandonmcconnell",
@@ -370,9 +569,10 @@ export const projectData: {
     imageAlt:
       "image of the about section in my portfolio v2 project. there is a picture of me and a text introducing myself, with a button at the very bottom which downloads my resume. at the bottom portion, there is a timeline where it showcases all important events that happened in my life. on the right side of the timeline, it showcases my skillset wherein you can filter by my skill level such as all, expert, intermediate, and beginner.",
     video: VideoV2Portfolio,
+    videoAlt: "",
     videoFlex: "1.598148",
     description: (
-      <Fragment>
+      <>
         portfolio v2 is the redesign of my portfolio website from v1. this was
         when i realized that my initial design philosophy to minimalism needed
         rethinking. most of the libraries and frameworks are still the same.
@@ -380,16 +580,15 @@ export const projectData: {
         and more performant. the content remains the same as v1, showcasing my{" "}
         <u>projects, life history, research, and all things me!</u> but now with
         better optimization, design, animations, and a cleaner aesthetic.
-      </Fragment>
+      </>
     ),
-    coreConcept: `portfolio v2 is centered around green sock animation platform (gsap), an animation framework for javascript (and/or typescript). through this, it gave me more freedom and control in animating html elements through javascript, rather than sticking to pure css. additionally, my react concepts were expanded further than portfolio v1, such concepts are contexts, react routers, and portals.`,
+    coreConcept:
+      "portfolio v2 is centered around green sock animation platform (gsap), an animation framework for javascript (and/or typescript). through this, it gave me more freedom and control in animating html elements through javascript, rather than sticking to pure css. additionally, my react concepts were expanded further than portfolio v1, such concepts are contexts, react routers, and portals.",
     myRole: "this was a solo project. every tech stack was implemented by me.",
     links: (
-      <Fragment>
-        <LinkWithIcon img={<RiGithubLine size={24} />} href={GitHubV2Portfolio}>
-          repository
-        </LinkWithIcon>
-      </Fragment>
+      <LinkWithIcon img={<RiGithubLine size={24} />} href={GitHubV2Portfolio}>
+        repository
+      </LinkWithIcon>
     ),
     attributions: [
       "zoom-vanilla.js: https://github.com/spinningarrow",
@@ -397,17 +596,61 @@ export const projectData: {
       "remix icons: https://github.com/kamijin-fanta",
     ],
   },
-};
 
-export function getProjectData(dataID: number) {
-  return projectData[dataID];
-}
+  // WIP
+  // clip detective
+  7: {
+    name: "clip detective",
+    year: "2024",
+    techStack: [
+      "*typescript",
+      "*react",
+      "*html",
+      "*tailwind css",
+      "*firebase",
+      "git",
+    ],
+    image: "",
+    imageTiny: "",
+    imageFlex: "",
+    imageAlt: "",
+    video: "",
+    videoFlex: "",
+    description: (
+      <>
+        clipdetective is a web game that allows users to identify different
+        clips/scenes from shows that i have previously watched. THIS PAGE IS
+        WORK IN PROGRESS
+      </>
+    ),
+    coreConcept: "",
+    myRole: "this was a solo project. every tech stack was implemented by me.",
+    links: (
+      <LinkWithIcon img={<RiGithubLine size={24} />} href="">
+        repository
+      </LinkWithIcon>
+    ),
+  },
 
-export function getAllProjectIDs() {
-  return Object.keys(projectData);
-}
-
-export type ProjectProps = {
-  dataID: number;
-  onClick?: () => void;
+  // WIP
+  // feeltok
+  8: {
+    name: "feeltok",
+    year: "2024",
+    techStack: ["*typescript", "*react native", "*firebase", "git"],
+    image: "",
+    imageTiny: "",
+    imageFlex: "",
+    imageAlt: "",
+    video: "",
+    videoFlex: "",
+    description: <>THIS PAGE IS WORK IN PROGRESS</>,
+    coreConcept: "",
+    myRole: "",
+    links: (
+      <LinkWithIcon img={<RiGithubLine size={24} />} href="">
+        repository
+      </LinkWithIcon>
+    ),
+  },
 };

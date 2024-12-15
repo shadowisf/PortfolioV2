@@ -21,22 +21,20 @@ import {
   LinkWithIconOnly,
   LinkWithNoIcon,
 } from "../components/Link";
-import { getAllSkills, getSkillLevel } from "../utils/AboutUtils";
 import { useGSAP } from "@gsap/react";
-import { cv, email, github, instagram, linkedin } from "../utils/SocialUtils";
 import ProgressiveImg from "../components/ProgressiveImg";
-
-export function getProfilePictureTiny() {
-  return ProfilePictureTiny;
-}
-export function getProfilePicture() {
-  return ProfilePicture;
-}
+import {
+  aboutSkillset,
+  cv,
+  email,
+  github,
+  instagram,
+  linkedin,
+} from "../utils/GODMODE";
 
 export default function About() {
   const { scrollToTop } = scrollingAnimation();
   const { filterSkill, resetSkill, startup } = aboutAnimation();
-  /*   const { mobileView, desktopView } = Views(); */
   const { setCurrentPage } = useGlobalState();
 
   useEffect(() => {
@@ -142,7 +140,7 @@ export default function About() {
               img={<RiGlasses2Line size={40} fill="var(--accent-color)" />}
               verticalLine={true}
             >
-              first pair of eyeglasses
+              got my first pair of eyeglasses
             </TimelineRow>
 
             <TimelineRow
@@ -158,7 +156,7 @@ export default function About() {
               >
                 winc
               </LinkWithNoIcon>{" "}
-              with diploma in general engineering
+              with diploma in engineering
             </TimelineRow>
 
             <TimelineRow
@@ -194,8 +192,8 @@ export default function About() {
             </select>
           </div>
           <div className="skills">
-            {getAllSkills().map((item, index) => {
-              const level = getSkillLevel(item);
+            {Object.keys(aboutSkillset).map((item, index) => {
+              const level = aboutSkillset[item];
 
               return (
                 <TechStackTile

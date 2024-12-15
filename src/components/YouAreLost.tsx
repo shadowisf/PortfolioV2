@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { LinkWithNoIcon } from "./Link";
 
-interface MemeData {
+type MemeData = {
   postLink: string;
   subreddit: string;
   title: string;
@@ -11,7 +11,7 @@ interface MemeData {
   author: string;
   ups: number;
   preview: string[];
-}
+};
 
 export default function YouAreLost() {
   const [meme, setMeme] = useState<MemeData | null>(null);

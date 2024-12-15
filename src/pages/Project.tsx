@@ -1,26 +1,31 @@
-import { ProjectProps, getProjectData } from "../utils/ProjectUtils";
-import { useEffect } from "react";
+import { Key, useEffect } from "react";
 import { scrollingAnimation } from "../utils/AnimationUtils";
 import { useGlobalState } from "../utils/ControlUtil";
 import TechStackTile from "../components/TechStackTile";
 import { Link } from "react-router-dom";
+import { projectData } from "../utils/GODMODE";
 import ProgressiveImg from "../components/ProgressiveImg";
 import "zoom-vanilla.js/dist/zoom.css";
 import "zoom-vanilla.js/dist/zoom-vanilla.min.js";
 
-export default function Project({ dataID }: ProjectProps) {
+type ProjectProps = {
+  dataID: number;
+  onClick?: () => void;
+};
+
+export default function Project(p: ProjectProps) {
   const { executeTransition, setCurrentPage } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
 
-  const project = getProjectData(dataID);
+  const project = projectData[p.dataID];
   const currentProjectTitle = project.name.replace(/\s+/g, "-");
 
-  const prevProject = getProjectData(dataID + 1);
+  const prevProject = projectData[p.dataID - 1];
   const prevProjectTitle = prevProject
     ? prevProject.name.replace(/\s+/g, "-")
     : "";
 
-  const nextProject = getProjectData(dataID - 1);
+  const nextProject = projectData[p.dataID + 1];
   const nextProjectTitle = nextProject
     ? nextProject.name.replace(/\s+/g, "-")
     : "";
@@ -72,17 +77,19 @@ export default function Project({ dataID }: ProjectProps) {
 
       {/* tech stack */}
       <section className="techStack">
-        {project.techStack?.map((item, index) => {
-          return (
-            <TechStackTile
-              techStackItem={item}
-              key={index}
-              classNameContainer="item"
-              classNameIcon="icon"
-              preview={false}
-            />
-          );
-        })}
+        {project.techStack?.map(
+          (item: string, index: Key | null | undefined) => {
+            return (
+              <TechStackTile
+                techStackItem={item}
+                key={index}
+                classNameContainer="item"
+                classNameIcon="icon"
+                preview={false}
+              />
+            );
+          }
+        )}
       </section>
 
       <section className="content">
