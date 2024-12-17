@@ -56,10 +56,13 @@ export default function Home() {
 
           <h2 className="nonBold">
             <span className="bulletPoint">⊢</span> full-stack developer{" "}
-            <small className="smaller">(future fullstack)</small>
+            <small className="smaller">(improving everyday)</small>
           </h2>
           <h2 className="nonBold">
-            <span className="bulletPoint">⊢</span> uae-based
+            <span className="bulletPoint">⊢</span> dubai-based
+          </h2>
+          <h2 className="nonBold">
+            <span className="bulletPoint">⊢</span> open to work
           </h2>
 
           <br />

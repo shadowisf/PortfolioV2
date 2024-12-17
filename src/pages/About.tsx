@@ -69,9 +69,9 @@ export default function About() {
           </h2>
           <br />
           <p>
-            i primarily work with react, typescript, sass, gsap, firebase, and
+            i primarily work with typescript, react, sass, firebase, sql, and
             other libraries and frameworks. though i am highly flexible to
-            different technologies and languages.
+            different technologies and programming languages.
           </p>
           <br />
           <p>
@@ -192,20 +192,22 @@ export default function About() {
             </select>
           </div>
           <div className="skills">
-            {Object.keys(aboutSkillset).map((item, index) => {
-              const level = aboutSkillset[item];
+            {Object.keys(aboutSkillset)
+              .sort(() => Math.random() - 0.5) // Shuffle keys
+              .map((item, index) => {
+                const level = aboutSkillset[item];
 
-              return (
-                <TechStackTile
-                  techStackItem={item}
-                  classNameContainer="item"
-                  classNameIcon="icon"
-                  key={index}
-                  dataKey={level.toString()}
-                  preview={false}
-                />
-              );
-            })}
+                return (
+                  <TechStackTile
+                    techStackItem={item}
+                    classNameContainer="item"
+                    classNameIcon="icon"
+                    key={index}
+                    dataKey={level.toString()}
+                    preview={false}
+                  />
+                );
+              })}
           </div>
         </section>
       </section>

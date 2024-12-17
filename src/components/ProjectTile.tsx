@@ -44,12 +44,12 @@ export function ProjectTile(p: ProjectProps) {
   );
 }
 
-export function ProjectPreview({ dataID }: ProjectProps) {
-  const project = projectData[dataID];
+export function ProjectPreview(p: ProjectProps) {
+  const project = projectData[p.dataID];
 
   return (
-    <div data-key={dataID} className="preview">
-      {dataID === 6 ? (
+    <div data-key={p.dataID} className="preview">
+      {p.dataID === 6 ? (
         <h1 style={{ textAlign: "center" }}>
           you are currently <br /> viewing portfolio v2
         </h1>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { LinkWithNoIcon } from "./Link";
+import { Link } from "react-router-dom";
 
 type MemeData = {
   postLink: string;
@@ -15,8 +16,15 @@ type MemeData = {
 
 export default function YouAreLost() {
   const [meme, setMeme] = useState<MemeData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchMeme();
+  }, []);
 
   async function fetchMeme() {
+    setIsLoading(true);
+
     const subReddits = [
       "shitposting",
       "Memes_Of_The_Dank",
@@ -31,16 +39,13 @@ export default function YouAreLost() {
 
     const response = await fetch(
       `https://meme-api.com/gimme/${selectedSubReddit}`
-    ).then((res) => {
-      return res.json();
-    });
+    );
+    const responseJson = await response.json();
 
-    setMeme(response);
+    setMeme(responseJson);
+
+    setIsLoading(false);
   }
-
-  useEffect(() => {
-    fetchMeme();
-  }, []);
 
   return (
     <main className="lostWrapper">
@@ -50,19 +55,19 @@ export default function YouAreLost() {
       </section>
 
       <section className="memeContainer">
-        <img src={meme?.url} data-action="zoom" />
+        {!isLoading ? (
+          <img src={meme?.url} data-action="zoom" />
+        ) : (
+          <p style={{ color: "gray" }}>Loading...</p>
+        )}
       </section>
 
       <section className="links">
-        <a href={"/"} className="linkWithNoIcon">
+        <Link to={"/"} className="linkWithNoIcon">
           back to home
-        </a>
+        </Link>
 
-        <LinkWithNoIcon
-          onClick={() => {
-            fetchMeme();
-          }}
-        >
+        <LinkWithNoIcon onClick={() => fetchMeme()}>
           generate new meme
         </LinkWithNoIcon>
       </section>
