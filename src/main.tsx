@@ -25,28 +25,13 @@ root.render(
     <BrowserRouter>
       <GlobalStateProvider>
         <PixelGrid />
+        <NavBar />
 
         <Routes>
           {/* home */}
-          <Route
-            path="/"
-            element={
-              <>
-                <NavBar />
-                <Home />
-              </>
-            }
-          />
+          <Route path="/" element={<Home />} />
           {/* about */}
-          <Route
-            path="about"
-            element={
-              <>
-                <NavBar />
-                <About />
-              </>
-            }
-          />
+          <Route path="about" element={<About />} />
 
           {/* projects */}
           {allProjectIDs.map((key: Key | null | undefined) => {
@@ -55,12 +40,7 @@ root.render(
               <Route
                 key={key}
                 path={`/${name}`}
-                element={
-                  <>
-                    <NavBar />
-                    <Project dataID={Number(key)} />
-                  </>
-                }
+                element={<Project dataID={Number(key)} />}
               />
             );
           })}

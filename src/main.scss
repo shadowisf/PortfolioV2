@@ -16,10 +16,10 @@ $fontVarThin: "wght" 1000, "CONT" 1000;
 
 $scaleOnHover: 1.05;
 
-$minMaxWidth: 1030px;
+$minMaxWidth: 1020px;
 
 :root {
-  --minMaxWidth: 1030px;
+  --minMaxWidth: 1020px;
 
   --theme: light dark;
 
@@ -168,10 +168,6 @@ nav {
 
   z-index: 5;
 
-  background-blend-mode: soft-light;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgMjUwIDI1MCcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJz4KICA8ZmlsdGVyIGlkPSdub2lzZUZpbHRlcic+CiAgICA8ZmVUdXJidWxlbmNlIAogICAgICB0eXBlPSdmcmFjdGFsTm9pc2UnIAogICAgICBiYXNlRnJlcXVlbmN5PScxJyAKICAgICAgbnVtT2N0YXZlcz0nMycgCiAgICAgIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz4KICA8L2ZpbHRlcj4KCiAgPHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsdGVyPSd1cmwoI25vaXNlRmlsdGVyKScvPgo8L3N2Zz4=);
-  background-size: 64px;
-
   .hamburgerButton {
     transition: scale 0.25s;
 
@@ -279,6 +275,17 @@ nav {
   }
 }
 
+.link-with-arrow {
+  display: inline-block;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDE2IDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEuNSAyTDggN0wxNC41IDJMITFaIiBzdHJva2U9IiM4MTdlODMiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgLz48L3N2Zz4=");
+  background-repeat: no-repeat;
+  background-size: 16px 8px; /* Adjust size */
+  background-position: right center; /* Position the arrow */
+  padding-right: 20px; /* Space for the arrow */
+  text-decoration: none;
+  color: inherit; /* Ensure it uses the text color */
+}
+
 .navButtons {
   display: flex;
   align-items: center;
@@ -289,6 +296,7 @@ nav {
     top: 0;
     right: 0;
     margin: 1.25rem 2rem;
+    z-index: 500;
   }
 
   a {
@@ -427,6 +435,10 @@ footer {
     }
 
     .preview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
       position: absolute;
 
       pointer-events: none;
@@ -436,13 +448,21 @@ footer {
       opacity: 0;
       visibility: hidden;
 
-      img,
+      .currentPortfolio {
+        text-align: center;
+        padding: 100px 100px;
+        border-radius: $borderRadius;
+        box-shadow: $boxShadow;
+        background-color: var(--accent-color);
+      }
+
       video {
         border-radius: $borderRadius;
-        width: 100%;
+        width: auto;
+        max-width: 100%;
         height: auto;
+        max-height: 700px;
         box-shadow: $boxShadow;
-        background-color: var(--faded-color);
       }
 
       .techStack {
@@ -620,6 +640,8 @@ footer {
       white-space: nowrap;
 
       flex: 1;
+
+      color: white !important;
 
       .icon {
         display: flex;
@@ -1051,12 +1073,25 @@ footer {
   display: block;
 }
 
-// mobile screen
-@media screen and (max-width: $minMaxWidth) {
-  html {
-    background-size: 32px;
+@media screen and ((min-width: $minMaxWidth) and (max-width: 1200px)) {
+  nav {
+    background-color: var(--background-color);
+    box-shadow: $boxShadow;
+
+    display: flex;
+
+    .hamburgerButton {
+      display: none;
+    }
   }
 
+  .navAlt {
+    display: none;
+  }
+}
+
+// mobile screen
+@media screen and (max-width: $minMaxWidth) {
   #fs {
     display: none;
   }
@@ -1177,4 +1212,32 @@ footer {
       text-wrap: wrap;
     }
   }
+}
+
+.projectsDropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--background-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 8px 0;
+  z-index: 1000;
+}
+
+.dropdownMenu a {
+  display: block;
+  padding: 8px 16px;
+  color: var(--text-color);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.dropdownMenu a:hover {
+  background: var(--highlight-color);
 }

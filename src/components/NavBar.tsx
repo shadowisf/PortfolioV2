@@ -8,11 +8,14 @@ import {
   RiCloseLargeFill,
 } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { projectData } from "../utils/GODMODE";
 
 export default function NavBar() {
   const { openMenu, closeMenu } = pageTransition();
   const { executeTransition } = useGlobalState();
+
   const [userTheme, setUserTheme] = useState("light");
+  const [isProjectsDropdownOpen, setIsProjectsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -34,7 +37,7 @@ export default function NavBar() {
   }, []);
 
   // toggle between dark mode and light mode
-  function executeToggleTheme(menu: boolean) {
+  function handleToggleTheme(menu: boolean) {
     const newTheme = userTheme === "dark" ? "light" : "dark";
 
     setUserTheme(newTheme);
@@ -46,6 +49,12 @@ export default function NavBar() {
     if (menu) {
       closeMenu();
     }
+  }
+
+  function handleOpenProjectDropDown(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+
+    setIsProjectsDropdownOpen(!isProjectsDropdownOpen);
   }
 
   return (
@@ -60,6 +69,34 @@ export default function NavBar() {
         </Link>
 
         <span className="navButtons alt">
+          <Link
+            to={""}
+            onClick={(e) => handleOpenProjectDropDown(e)}
+            className="link-with-arrow"
+          >
+            projects
+          </Link>
+          {isProjectsDropdownOpen && (
+            <div className="dropdownMenu">
+              {Object.keys(projectData).map((project, index) => {
+                const title =
+                  projectData[index].name.replace(/\s+/g, "-") || "";
+
+                return (
+                  <Link
+                    to="/project1"
+                    onClick={(e) => {
+                      executeTransition(e, title, false);
+                      setIsProjectsDropdownOpen(false);
+                    }}
+                  >
+                    {projectData[index].name}
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+
           {/* nav about button */}
           <Link
             to={"about"}
@@ -71,7 +108,7 @@ export default function NavBar() {
           {/*  nav theme toggle button */}
           <span
             onClick={() => {
-              executeToggleTheme(false);
+              handleToggleTheme(false);
             }}
             className="themeButton"
           >
@@ -105,7 +142,7 @@ export default function NavBar() {
           {/*  nav theme toggle button */}
           <span
             onClick={() => {
-              executeToggleTheme(false);
+              handleToggleTheme(false);
             }}
             className="themeButton"
           >
@@ -137,7 +174,7 @@ export default function NavBar() {
         {/* menu theme button */}
         <button
           onClick={() => {
-            executeToggleTheme(true);
+            handleToggleTheme(true);
           }}
           className="themeButton"
         >

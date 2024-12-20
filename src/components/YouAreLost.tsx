@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { LinkWithNoIcon } from "./Link";
-import { Link } from "react-router-dom";
 
 type MemeData = {
   postLink: string;
@@ -63,10 +62,6 @@ export default function YouAreLost() {
       </section>
 
       <section className="links">
-        <Link to={"/"} className="linkWithNoIcon">
-          back to home
-        </Link>
-
         <LinkWithNoIcon onClick={() => fetchMeme()}>
           generate new meme
         </LinkWithNoIcon>

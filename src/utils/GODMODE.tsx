@@ -278,7 +278,6 @@ export const projectData: {
     imageFlex: string;
     imageAlt: string;
     video: string;
-    videoAlt?: string;
     videoFlex: string;
     description: JSX.Element;
     coreConcept: JSX.Element;
@@ -298,7 +297,6 @@ export const projectData: {
     imageAlt:
       "an image of the plug-ins project. it is currently viewing the products page where it is displaying the list of products and their respective information such as price, category, stock quantity, etc.",
     video: VideoPlugIns,
-    videoAlt: "",
     videoFlex: "1.599074",
     description: (
       <>
@@ -344,7 +342,6 @@ export const projectData: {
     imageAlt:
       "an image of the bell hospital project. it is currently viewing the patients records section where it is displaying all patient information (note that this is a CLI project). additionally, there are commands for CRUD operations.",
     video: VideoBellHospital,
-    videoAlt: "",
     videoFlex: "1.598148",
     description: (
       <>
@@ -400,7 +397,6 @@ export const projectData: {
     imageAlt:
       "an image of the funculator project. it is currently viewing the menu section where it is displaying all of the possible operations such as factorial, min&max, fibonacci, etc.",
     video: VideoFunCulator,
-    videoAlt: "",
     videoFlex: "1.891626",
     description: (
       <>
@@ -462,7 +458,6 @@ export const projectData: {
     imageAlt:
       "an image of the apollo hospital project; it is viewing the patient records section wherein it displays the list of patient information. additionally, the ui has buttons for CRUD operations.",
     video: VideoApolloHospital,
-    videoAlt: "",
     videoFlex: "1.599074",
     description: (
       <>
@@ -535,7 +530,6 @@ export const projectData: {
     imageAlt:
       "an image of the circuitcentral project; it is viewing the orders section wherein it displays a list of products that are currently in a cart. additionally, the ui has buttons for CRUD operations.",
     video: VideoCircuitCentral,
-    videoAlt: "",
     videoFlex: "1.687037",
     description: (
       <>
@@ -560,7 +554,10 @@ export const projectData: {
       </>
     ),
     myRole: (
-      <>this was a solo project. every tech stack was implemented by me.</>
+      <>
+        circuitcentral was a solo project. every tech stack was implemented by
+        me.
+      </>
     ),
     links: (
       <>
@@ -600,7 +597,6 @@ export const projectData: {
     imageAlt:
       "image of the about section in my portfolio project. it has a cartoon illustration of me and and text introducing myself.",
     video: VideoV1Portfolio,
-    videoAlt: "",
     videoFlex: "1.599074",
     description: (
       <>
@@ -622,7 +618,9 @@ export const projectData: {
       </>
     ),
     myRole: (
-      <>this was a solo project. every tech stack was implemented by me.</>
+      <>
+        portfolio v1 was a solo project. every tech stack was implemented by me.
+      </>
     ),
     links: (
       <>
@@ -664,7 +662,6 @@ export const projectData: {
     imageAlt:
       "image of the about section in my portfolio v2 project. there is a picture of me and a text introducing myself, with a button at the very bottom which downloads my resume. at the bottom portion, there is a timeline where it showcases all important events that happened in my life. on the right side of the timeline, it showcases my skillset wherein you can filter by my skill level such as all, expert, intermediate, and beginner.",
     video: VideoV2Portfolio,
-    videoAlt: "",
     videoFlex: "1.598148",
     description: (
       <>
@@ -688,7 +685,9 @@ export const projectData: {
       </>
     ),
     myRole: (
-      <>this was a solo project. every tech stack was implemented by me.</>
+      <>
+        portfolio v2 was a solo project. every tech stack was implemented by me.
+      </>
     ),
     links: (
       <LinkWithIcon img={<RiGithubLine size={24} />} href={GitHubV2Portfolio}>
@@ -721,7 +720,6 @@ export const projectData: {
     imageAlt:
       "image of the index page of the clipdetective web app. there is a text introducing the website, a text saying 'can you guess 5-second clips from movies/series?', and three buttons at the bottom: an option to play with series, to play with movies, and a help button.",
     video: VideoClipDetective,
-    videoAlt: "",
     videoFlex: "1.599074",
     description: (
       <>
@@ -742,7 +740,10 @@ export const projectData: {
       </>
     ),
     myRole: (
-      <>this was a solo project. every tech stack was implemented by me.</>
+      <>
+        clipdetective was a solo project. every tech stack was implemented by
+        me.
+      </>
     ),
     links: (
       <>
@@ -760,7 +761,6 @@ export const projectData: {
     ),
   },
 
-  // WIP
   // feeltok
   8: {
     name: "feeltok",
@@ -778,13 +778,46 @@ export const projectData: {
     image: ImageFeelTok,
     imageTiny: ImageTinyFeelTok,
     imageFlex: "1.600556",
-    imageAlt: "",
+    imageAlt:
+      "image of the feeltok admin dashboard. right now, it is viewing the posts tab wherein all post details can be seen. on the very right of each post entry, there are two buttons: view and delete. clicking the view button will bring up a modal on what the post actually looks like from the user's perspective, while the delete button will delete the post.",
     video: VideoFeelTok,
-    videoAlt: "",
     videoFlex: "0.47901",
-    description: <>THIS PAGE IS WORK IN PROGRESS</>,
-    coreConcept: <>THIS PAGE IS WORK IN PROGRESS</>,
-    myRole: <>THIS PAGE IS WORK IN PROGRESS</>,
+    description: (
+      <>
+        feeltok is a <u>mobile social media platform</u> that is aimed at
+        connecting people from all communities by sharing their “feelings”. at
+        the core of feeltok, there are six hi-key emotions: love, gratitude,
+        apology, appreciation, mindfulness, and thankfulness, all of which the
+        platform fully supports and serves as the platform’s fundamental
+        pillars. its system covers user authentication with easy google sign-in,
+        user posting with six hi-key emotions, full profile editing, a user and
+        post reporting system, a timer reminder system, and an admin dashboard.
+      </>
+    ),
+    coreConcept: (
+      <>
+        feeltok is centered around object-oriented programming with mobile
+        development wherein react native, via typescript, was heavily used in
+        the development process. additionally, expo was used in the mix to make
+        development builds possible and access device-specific features such as
+        the image gallery without the need of writing native code (swift,
+        kotlin). firebase was then used as a serverless cloud backend solution
+        wherein it features all the basic options such as authentication and
+        firestore. firebase, together with cloudinary and emailjs, make up the
+        entire backend system: cloudinary for image storage, and emailjs for
+        two-factor authentication via email.
+      </>
+    ),
+    myRole: (
+      <>
+        feeltok was a group project. i designed and implemented half of the
+        front-end: overall theme, buttons, modals via typescript. additionally,
+        i implemented most of the back-end: database schema via firebase’s
+        firestore, error handling, timer reminder system, user authentication,
+        user profile settings, image upload to cloudinary, api calls to emailjs,
+        and user moderation of the admin dashboard.
+      </>
+    ),
     links: (
       <>
         <LinkWithIcon img={<RiGithubLine size={24} />} href={GitHubFeelTok}>

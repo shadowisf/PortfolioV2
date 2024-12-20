@@ -50,11 +50,16 @@ export function ProjectPreview(p: ProjectProps) {
   return (
     <div data-key={p.dataID} className="preview">
       {p.dataID === 6 ? (
-        <h1 style={{ textAlign: "center" }}>
-          you are currently <br /> viewing portfolio v2
+        <h1 className="currentPortfolio">
+          you are currently viewing portfolio v2
         </h1>
       ) : (
-        <video loop muted src={project.video} />
+        <video
+          style={p.dataID === 8 ? { borderRadius: "60px" } : {}}
+          loop
+          muted
+          src={project.video}
+        />
       )}
 
       <span className="techStack">

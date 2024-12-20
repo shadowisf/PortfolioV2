@@ -23,7 +23,6 @@ export default function Home() {
   const { setCurrentPage } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
   const { startup } = homeAnimation();
-  const allProjectIDs = Object.keys(projectData);
 
   useEffect(() => {
     preloadTinyImages();
@@ -39,12 +38,12 @@ export default function Home() {
   return (
     <main className="homeWrapper">
       <section className="left">
-        {allProjectIDs.map((id) => (
+        {Object.keys(projectData).map((id) => (
           <ProjectTile key={id} dataID={Number(id)} />
         ))}
       </section>
       <section className="right">
-        {allProjectIDs.map((id) => (
+        {Object.keys(projectData).map((id) => (
           <ProjectPreview key={id} dataID={Number(id)} />
         ))}
 
