@@ -29,6 +29,10 @@ const GlobalStateContext = createContext<GlobalStateContextType>({
   executeTransition: () => {},
 });
 
+export function useGlobalState() {
+  return useContext(GlobalStateContext);
+}
+
 export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [currentPage, setCurrentPage] = useState("");
@@ -93,6 +97,6 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   );
 }
 
-export function useGlobalState() {
-  return useContext(GlobalStateContext);
+export function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }

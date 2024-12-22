@@ -275,15 +275,54 @@ nav {
   }
 }
 
-.link-with-arrow {
-  display: inline-block;
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDE2IDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEuNSAyTDggN0wxNC41IDJMITFaIiBzdHJva2U9IiM4MTdlODMiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgLz48L3N2Zz4=");
-  background-repeat: no-repeat;
-  background-size: 16px 8px; /* Adjust size */
-  background-position: right center; /* Position the arrow */
-  padding-right: 20px; /* Space for the arrow */
-  text-decoration: none;
-  color: inherit; /* Ensure it uses the text color */
+.selectContainer {
+  width: 72px;
+
+  &.alt {
+    color: var(--background-color);
+
+    transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
+
+    font-variation-settings: $fontVarNormal;
+
+    width: 4.3em;
+    position: relative;
+
+    &:hover {
+      scale: $scaleOnHover;
+      color: var(--background-color);
+      font-variation-settings: $fontVarThin;
+
+      cursor: pointer;
+    }
+
+    select {
+      position: absolute;
+      top: 0;
+      font-size: var(--h4);
+
+      width: 100%;
+      min-height: 100%;
+
+      opacity: 0;
+    }
+  }
+
+  select {
+    all: unset;
+
+    transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
+
+    font-variation-settings: $fontVarNormal;
+
+    &:hover {
+      scale: $scaleOnHover;
+      color: var(--accent-color);
+      font-variation-settings: $fontVarThin;
+
+      cursor: pointer;
+    }
+  }
 }
 
 .navButtons {
@@ -296,7 +335,7 @@ nav {
     top: 0;
     right: 0;
     margin: 1.25rem 2rem;
-    z-index: 500;
+    z-index: 250;
   }
 
   a {
@@ -345,7 +384,6 @@ footer {
 }
 
 // wrappers
-
 .homeWrapper {
   max-width: $maxWidthDesktopWide;
   margin: auto;
@@ -450,18 +488,22 @@ footer {
 
       .currentPortfolio {
         text-align: center;
-        padding: 100px 100px;
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        padding: 75px;
         border-radius: $borderRadius;
         box-shadow: $boxShadow;
         background-color: var(--accent-color);
       }
 
       video {
+        margin-top: 50px;
         border-radius: $borderRadius;
         width: auto;
         max-width: 100%;
         height: auto;
-        max-height: 700px;
+        max-height: 675px;
         box-shadow: $boxShadow;
       }
 
@@ -551,7 +593,7 @@ footer {
 
     .media {
       display: flex;
-      gap: 1rem;
+      gap: 0.5rem;
 
       img,
       video {
@@ -1073,7 +1115,7 @@ footer {
   display: block;
 }
 
-@media screen and ((min-width: $minMaxWidth) and (max-width: 1200px)) {
+@media screen and ((min-width: $minMaxWidth) and (max-width: 1250px)) {
   nav {
     background-color: var(--background-color);
     box-shadow: $boxShadow;
@@ -1212,32 +1254,4 @@ footer {
       text-wrap: wrap;
     }
   }
-}
-
-.projectsDropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdownMenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: var(--background-color);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  padding: 8px 0;
-  z-index: 1000;
-}
-
-.dropdownMenu a {
-  display: block;
-  padding: 8px 16px;
-  color: var(--text-color);
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.dropdownMenu a:hover {
-  background: var(--highlight-color);
 }

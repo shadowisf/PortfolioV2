@@ -11,6 +11,14 @@ type ProgressiveImgProps = {
 export default function ProgressiveImg(p: ProgressiveImgProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
+  useEffect(() => {
+    setImageLoaded(false);
+
+    requestAnimationFrame(() => {
+      loadImage();
+    });
+  }, [p.realSrc]);
+
   async function loadImage() {
     const image = new Image();
     image.src = p.realSrc;
@@ -23,14 +31,6 @@ export default function ProgressiveImg(p: ProgressiveImgProps) {
     setImageLoaded(true);
   }
 
-  useEffect(() => {
-    setImageLoaded(false);
-
-    requestAnimationFrame(() => {
-      loadImage();
-    });
-  }, [p.realSrc]);
-
   return !imageLoaded ? (
     <img src={p.placeholderSrc} />
   ) : (
@@ -38,31 +38,29 @@ export default function ProgressiveImg(p: ProgressiveImgProps) {
   );
 }
 
-function preloadImage(src: string) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.src = src;
-    img.onload = () => {
-      resolve(src);
-    };
-    img.onerror = () => {
-      reject(src);
-    };
-  });
-}
-
-async function preloadImages(imagesURL: string[]) {
-  try {
-    await Promise.all(imagesURL.map((src) => preloadImage(src)));
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-export function preloadTinyImages() {
+export async function preloadTinyImages() {
   const images: string[] = [];
 
   images.push(ProfilePictureTiny);
 
-  preloadImages(images);
+  try {
+    await Promise.all(
+      images.map((src) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+
+          img.src = src;
+          img.onload = () => {
+            resolve(src);
+          };
+
+          img.onerror = () => {
+            reject(src);
+          };
+        });
+      })
+    );
+  } catch (error) {
+    console.log(error);
+  }
 }

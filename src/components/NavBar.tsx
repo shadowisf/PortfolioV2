@@ -1,42 +1,50 @@
 import { useEffect, useState } from "react";
 import { pageTransition } from "../utils/AnimationUtils";
-import { useGlobalState } from "../utils/ControlUtil";
+import { delay, useGlobalState } from "../utils/ControlUtil";
 import {
   RiSunLine,
   RiMoonLine,
   RiMenu4Line,
   RiCloseLargeFill,
 } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { projectData } from "../utils/GODMODE";
 
 export default function NavBar() {
   const { openMenu, closeMenu } = pageTransition();
-  const { executeTransition } = useGlobalState();
+  const { executeTransition, isMobile } = useGlobalState();
 
   const [userTheme, setUserTheme] = useState("light");
-  const [isProjectsDropdownOpen, setIsProjectsDropdownOpen] = useState(false);
+  const [isProjectPage, setIsProjectPage] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    async function handleChangeProjectPage() {
+      if (isMobile) {
+        await delay(500);
+      }
+
+      setIsProjectPage(location.pathname !== "/");
+    }
+
+    handleChangeProjectPage();
+  }, [location.pathname]);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+      .matches
+      ? "dark"
+      : "light";
 
-    if (savedTheme) {
-      setUserTheme(savedTheme);
+    const theme = savedTheme || systemTheme;
 
-      document.documentElement.style.setProperty("--theme", savedTheme);
-    } else {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light";
+    setUserTheme(theme);
 
-      setUserTheme(systemTheme);
-
-      document.documentElement.style.setProperty("--theme", systemTheme);
-    }
+    document.documentElement.style.setProperty("--theme", theme);
   }, []);
 
-  // toggle between dark mode and light mode
   function handleToggleTheme(menu: boolean) {
     const newTheme = userTheme === "dark" ? "light" : "dark";
 
@@ -51,17 +59,23 @@ export default function NavBar() {
     }
   }
 
-  function handleOpenProjectDropDown(e: React.MouseEvent<HTMLAnchorElement>) {
-    e.preventDefault();
+  function handleProjectSelect(
+    e: React.ChangeEvent<HTMLSelectElement>,
+    menu: boolean
+  ) {
+    const projectPath = e.target.value;
 
-    setIsProjectsDropdownOpen(!isProjectsDropdownOpen);
+    if (projectPath) {
+      executeTransition(null, projectPath, menu);
+    }
   }
 
   return (
     <>
+      {/* Alternate Navigation */}
       <div className="navAlt">
         <Link
-          to={"/"}
+          to="/"
           className="logoButton alt"
           onClick={(e) => executeTransition(e, "/", false)}
         >
@@ -69,47 +83,40 @@ export default function NavBar() {
         </Link>
 
         <span className="navButtons alt">
-          <Link
-            to={""}
-            onClick={(e) => handleOpenProjectDropDown(e)}
-            className="link-with-arrow"
-          >
-            projects
-          </Link>
-          {isProjectsDropdownOpen && (
-            <div className="dropdownMenu">
-              {Object.keys(projectData).map((project, index) => {
-                const title =
-                  projectData[index].name.replace(/\s+/g, "-") || "";
-
-                return (
-                  <Link
-                    to="/project1"
-                    onClick={(e) => {
-                      executeTransition(e, title, false);
-                      setIsProjectsDropdownOpen(false);
-                    }}
-                  >
-                    {projectData[index].name}
-                  </Link>
-                );
-              })}
+          {isProjectPage && (
+            <div className="selectContainer">
+              <select
+                onChange={(e) => handleProjectSelect(e, false)}
+                defaultValue={"projects"}
+                value={"projects"}
+              >
+                <option value={"projects"} disabled>
+                  projects
+                </option>
+                {Object.keys(projectData)
+                  .reverse()
+                  .map((id) => {
+                    const project = projectData[Number(id)];
+                    const title = project.name.replace(/\s+/g, "-");
+                    return (
+                      <option key={id} value={title}>
+                        {project.name}
+                      </option>
+                    );
+                  })}
+              </select>
             </div>
           )}
 
-          {/* nav about button */}
           <Link
-            to={"about"}
+            to="about"
             onClick={(e) => executeTransition(e, "about", false)}
           >
             about
           </Link>
 
-          {/*  nav theme toggle button */}
-          <span
-            onClick={() => {
-              handleToggleTheme(false);
-            }}
+          <button
+            onClick={() => handleToggleTheme(false)}
             className="themeButton"
           >
             {userTheme === "dark" ? (
@@ -117,13 +124,14 @@ export default function NavBar() {
             ) : (
               <RiMoonLine size={24} />
             )}
-          </span>
+          </button>
         </span>
       </div>
 
+      {/* Main Navigation */}
       <nav>
         <Link
-          to={"/"}
+          to="/"
           className="logoButton"
           onClick={(e) => executeTransition(e, "/", false)}
         >
@@ -131,19 +139,40 @@ export default function NavBar() {
         </Link>
 
         <span className="navButtons">
-          {/* nav about button */}
+          {isProjectPage && (
+            <div className="selectContainer">
+              <select
+                onChange={(e) => handleProjectSelect(e, false)}
+                defaultValue={"projects"}
+                value={"projects"}
+              >
+                <option value={"projects"} disabled>
+                  projects
+                </option>
+                {Object.keys(projectData)
+                  .reverse()
+                  .map((id) => {
+                    const project = projectData[Number(id)];
+                    const title = project.name.replace(/\s+/g, "-");
+                    return (
+                      <option key={id} value={title}>
+                        {project.name}
+                      </option>
+                    );
+                  })}
+              </select>
+            </div>
+          )}
+
           <Link
-            to={"about"}
+            to="about"
             onClick={(e) => executeTransition(e, "about", false)}
           >
             about
           </Link>
 
-          {/*  nav theme toggle button */}
-          <span
-            onClick={() => {
-              handleToggleTheme(false);
-            }}
+          <button
+            onClick={() => handleToggleTheme(false)}
             className="themeButton"
           >
             {userTheme === "dark" ? (
@@ -151,33 +180,51 @@ export default function NavBar() {
             ) : (
               <RiMoonLine size={24} />
             )}
-          </span>
+          </button>
         </span>
 
-        {/* nav hamburger button */}
-        <span className="hamburgerButton" onClick={() => openMenu()}>
+        <button className="hamburgerButton" onClick={openMenu}>
           <RiMenu4Line size={24} />
-        </span>
+        </button>
       </nav>
 
+      {/* Menu */}
       <div className="menu">
-        {/* menu close button */}
-        <button className="closeButton" onClick={() => closeMenu()}>
+        <button className="closeButton" onClick={closeMenu}>
           <RiCloseLargeFill size={24} />
         </button>
 
-        {/* menu about button */}
-        <Link to={"about"} onClick={(e) => executeTransition(e, "about", true)}>
+        {isProjectPage && (
+          <div className="selectContainer alt">
+            projects
+            <select
+              onChange={(e) => handleProjectSelect(e, true)}
+              defaultValue={"projects"}
+              value={"projects"}
+            >
+              <option value={"projects"} disabled>
+                projects
+              </option>
+              {Object.keys(projectData)
+                .reverse()
+                .map((id) => {
+                  const project = projectData[Number(id)];
+                  const title = project.name.replace(/\s+/g, "-");
+                  return (
+                    <option key={id} value={title}>
+                      {project.name}
+                    </option>
+                  );
+                })}
+            </select>
+          </div>
+        )}
+
+        <Link to="about" onClick={(e) => executeTransition(e, "about", true)}>
           about
         </Link>
 
-        {/* menu theme button */}
-        <button
-          onClick={() => {
-            handleToggleTheme(true);
-          }}
-          className="themeButton"
-        >
+        <button onClick={() => handleToggleTheme(true)} className="themeButton">
           {userTheme === "dark" ? (
             <RiSunLine size={64} />
           ) : (
