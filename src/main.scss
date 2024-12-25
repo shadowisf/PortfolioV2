@@ -276,7 +276,7 @@ nav {
 }
 
 .selectContainer {
-  width: 72px;
+  width: auto;
 
   &.alt {
     color: var(--background-color);
@@ -285,8 +285,10 @@ nav {
 
     font-variation-settings: $fontVarNormal;
 
-    width: 4.3em;
+    width: auto;
     position: relative;
+
+    text-align: center;
 
     &:hover {
       scale: $scaleOnHover;
@@ -299,6 +301,7 @@ nav {
     select {
       position: absolute;
       top: 0;
+      left: 0;
       font-size: var(--h4);
 
       width: 100%;
@@ -1115,7 +1118,7 @@ footer {
   display: block;
 }
 
-@media screen and ((min-width: $minMaxWidth) and (max-width: 1250px)) {
+@media screen and ((min-width: $minMaxWidth) and (max-width: 1350px)) {
   nav {
     background-color: var(--background-color);
     box-shadow: $boxShadow;

@@ -25,11 +25,21 @@ export default function NavBar() {
         await delay(500);
       }
 
-      setIsProjectPage(location.pathname !== "/");
+      if (location.pathname === "/" || location.pathname === "/about") {
+        setIsProjectPage(false);
+      } else {
+        setIsProjectPage(true);
+      }
     }
 
     handleChangeProjectPage();
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isMobile) {
+      closeMenu();
+    }
+  }, [isMobile]);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -91,7 +101,7 @@ export default function NavBar() {
                 value={"projects"}
               >
                 <option value={"projects"} disabled>
-                  projects
+                  switch projects
                 </option>
                 {Object.keys(projectData)
                   .reverse()
@@ -147,7 +157,7 @@ export default function NavBar() {
                 value={"projects"}
               >
                 <option value={"projects"} disabled>
-                  projects
+                  switch projects
                 </option>
                 {Object.keys(projectData)
                   .reverse()
@@ -196,14 +206,14 @@ export default function NavBar() {
 
         {isProjectPage && (
           <div className="selectContainer alt">
-            projects
+            switch projects
             <select
               onChange={(e) => handleProjectSelect(e, true)}
               defaultValue={"projects"}
               value={"projects"}
             >
               <option value={"projects"} disabled>
-                projects
+                switch projects
               </option>
               {Object.keys(projectData)
                 .reverse()

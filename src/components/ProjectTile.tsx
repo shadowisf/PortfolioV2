@@ -13,7 +13,9 @@ type ProjectProps = {
 export function ProjectTile(p: ProjectProps) {
   const { isMobile, executeTransition } = useGlobalState();
   const { togglePreview, resetPreview, movePreview } = homeAnimation();
+
   const [isHighlighted, setIsHighlighted] = useState(false);
+
   const project = projectData[p.dataID];
   const title = project.name.replace(/\s+/g, "-") || "";
 
