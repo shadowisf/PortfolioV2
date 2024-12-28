@@ -24,7 +24,7 @@ $minMaxWidth: 1020px;
   --theme: light dark;
 
   --text-color: light-dark(black, white);
-  --background-color: light-dark(rgb(199, 199, 204), rgb(28, 28, 30));
+  --background-color: light-dark(rgb(229, 229, 234), rgb(28, 28, 30));
   --faded-color: #817e83;
   /* --accent-color: light-dark(#6320ee, #8075ff); */
   /* --accent-color: light-dark(rgb(255, 59, 48), rgb(255, 69, 58)); */
@@ -214,12 +214,12 @@ nav {
 
   svg {
     display: flex;
-    fill: var(--background-color);
+    fill: black;
   }
 
   a,
   button {
-    color: var(--background-color);
+    color: black;
 
     transition: scale 0.25s, font-variation-settings 0.5s;
 
@@ -276,23 +276,48 @@ nav {
 }
 
 .selectContainer {
-  width: auto;
+  width: 62px;
 
-  &.alt {
-    color: var(--background-color);
+  select {
+    all: unset;
 
     transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
 
     font-variation-settings: $fontVarNormal;
 
-    width: auto;
-    position: relative;
+    background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDE2IDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEuNSAyTDggN0wxNC41IDJMITFaIiBzdHJva2U9IiM4MTdlODMiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgLz48L3N2Zz4=")
+      no-repeat right center;
+    background-position-x: 45px;
 
-    text-align: center;
+    width: 62px;
 
     &:hover {
       scale: $scaleOnHover;
-      color: var(--background-color);
+      color: var(--accent-color);
+      font-variation-settings: $fontVarThin;
+
+      cursor: pointer;
+    }
+  }
+
+  &.alt {
+    color: black;
+
+    transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
+
+    font-variation-settings: $fontVarNormal;
+
+    width: 3.75em;
+
+    position: relative;
+
+    background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDE2IDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEuNSAyTDggN0wxNC41IDJMITFaIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgLz48L3N2Zz4=")
+      no-repeat right center;
+    background-position-x: 2.75em;
+    background-size: 75px;
+
+    &:hover {
+      scale: $scaleOnHover;
       font-variation-settings: $fontVarThin;
 
       cursor: pointer;
@@ -308,22 +333,6 @@ nav {
       min-height: 100%;
 
       opacity: 0;
-    }
-  }
-
-  select {
-    all: unset;
-
-    transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
-
-    font-variation-settings: $fontVarNormal;
-
-    &:hover {
-      scale: $scaleOnHover;
-      color: var(--accent-color);
-      font-variation-settings: $fontVarThin;
-
-      cursor: pointer;
     }
   }
 }
@@ -1116,23 +1125,6 @@ footer {
 
 #fs {
   display: block;
-}
-
-@media screen and ((min-width: $minMaxWidth) and (max-width: 1350px)) {
-  nav {
-    background-color: var(--background-color);
-    box-shadow: $boxShadow;
-
-    display: flex;
-
-    .hamburgerButton {
-      display: none;
-    }
-  }
-
-  .navAlt {
-    display: none;
-  }
 }
 
 // mobile screen

@@ -14,6 +14,7 @@ export function TimelineRow(p: TimelineProps) {
           <span>{p.children}</span> <span className="date">{p.date}</span>
         </span>
       </section>
+
       <svg
         style={p.verticalLine ? { display: "block" } : { display: "none" }}
         width="40"

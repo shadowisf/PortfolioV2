@@ -15,6 +15,8 @@ type GlobalStateContextType = {
     url: string,
     skipStart: boolean
   ) => void;
+  handleToggleTheme: (menu: boolean) => void;
+  userTheme: string;
 };
 
 type GlobalStateProviderProps = {
@@ -27,6 +29,8 @@ const GlobalStateContext = createContext<GlobalStateContextType>({
   currentPage: "",
   setCurrentPage: () => {},
   executeTransition: () => {},
+  handleToggleTheme: () => {},
+  userTheme: "",
 });
 
 export function useGlobalState() {
@@ -35,9 +39,12 @@ export function useGlobalState() {
 
 export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const [isMobile, setIsMobile] = useState(false);
+  const [userTheme, setUserTheme] = useState("");
   const [currentPage, setCurrentPage] = useState("");
+
   const { contextSafe } = useGSAP();
   const { closeMenu, startTransition, endTransition } = pageTransition();
+
   const navigate = useNavigate();
 
   const minMaxWidth = getComputedStyle(document.documentElement)
@@ -47,6 +54,44 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   useEffect(() => {
     handleResize();
   }, [currentPage]);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+      .matches
+      ? "dark"
+      : "light";
+
+    const theme = savedTheme || systemTheme;
+    const themeColorMetaTag = document.querySelector(
+      'meta[name="theme-color"]'
+    );
+
+    setUserTheme(theme);
+
+    document.documentElement.style.setProperty("--theme", theme);
+
+    if (theme === "dark") {
+      themeColorMetaTag?.setAttribute("content", "rgb(28, 28, 30)");
+    }
+
+    if (theme === "light") {
+      themeColorMetaTag?.setAttribute("content", "rgb(229, 229, 234)");
+    }
+  }, [userTheme]);
+
+  // handle theme toggle
+  function handleToggleTheme(menu: boolean) {
+    const newTheme = userTheme === "dark" ? "light" : "dark";
+
+    setUserTheme(newTheme);
+
+    localStorage.setItem("theme", newTheme);
+
+    if (menu) {
+      closeMenu(false);
+    }
+  }
 
   // handle window resize, set mobile state
   function handleResize() {
@@ -70,10 +115,10 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
       if (currentPage === url && !isMobile) {
         return;
       } else if (currentPage === url && isMobile) {
-        closeMenu();
+        closeMenu(false);
       } else if (skipStart === true) {
         navigate(url);
-        closeMenu();
+        closeMenu(false);
       } else {
         startTransition(() => {
           navigate(url);
@@ -90,6 +135,8 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
         currentPage,
         setCurrentPage,
         executeTransition,
+        handleToggleTheme,
+        userTheme,
       }}
     >
       {children}

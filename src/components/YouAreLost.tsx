@@ -31,6 +31,12 @@ export default function YouAreLost() {
       "PrequelMemes",
       "TikTokCringe",
       "ProgrammerHumor",
+      "memes",
+      "memesopdidnotlike",
+      "raimimemes",
+      "HistoryMemes",
+      "idksterling",
+      "darussianbadger",
     ];
 
     const randomIndex = Math.floor(Math.random() * subReddits.length);
@@ -55,9 +61,9 @@ export default function YouAreLost() {
 
       <section className="memeContainer">
         {!isLoading ? (
-          <img src={meme?.url} data-action="zoom" />
+          <img src={meme?.url} data-action="zoom" onError={() => fetchMeme()} />
         ) : (
-          <p style={{ color: "gray" }}>Loading...</p>
+          <p style={{ color: "gray" }}>loading...</p>
         )}
       </section>
 

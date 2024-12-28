@@ -1,75 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { pageTransition } from "../utils/AnimationUtils";
-import { delay, useGlobalState } from "../utils/ControlUtil";
+import { useGlobalState } from "../utils/ControlUtil";
 import {
   RiSunLine,
   RiMoonLine,
   RiMenu4Line,
   RiCloseLargeFill,
 } from "react-icons/ri";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { projectData } from "../utils/GODMODE";
 
 export default function NavBar() {
   const { openMenu, closeMenu } = pageTransition();
-  const { executeTransition, isMobile } = useGlobalState();
-
-  const [userTheme, setUserTheme] = useState("light");
-  const [isProjectPage, setIsProjectPage] = useState(false);
-
-  const location = useLocation();
-
-  useEffect(() => {
-    async function handleChangeProjectPage() {
-      if (isMobile) {
-        await delay(500);
-      }
-
-      if (location.pathname === "/" || location.pathname === "/about") {
-        setIsProjectPage(false);
-      } else {
-        setIsProjectPage(true);
-      }
-    }
-
-    handleChangeProjectPage();
-  }, [location.pathname]);
+  const { executeTransition, isMobile, userTheme, handleToggleTheme } =
+    useGlobalState();
 
   useEffect(() => {
     if (!isMobile) {
-      closeMenu();
+      closeMenu(true);
     }
   }, [isMobile]);
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-      .matches
-      ? "dark"
-      : "light";
-
-    const theme = savedTheme || systemTheme;
-
-    setUserTheme(theme);
-
-    document.documentElement.style.setProperty("--theme", theme);
-  }, []);
-
-  function handleToggleTheme(menu: boolean) {
-    const newTheme = userTheme === "dark" ? "light" : "dark";
-
-    setUserTheme(newTheme);
-
-    document.documentElement.style.setProperty("--theme", newTheme);
-
-    localStorage.setItem("theme", newTheme);
-
-    if (menu) {
-      closeMenu();
-    }
-  }
-
-  function handleProjectSelect(
+  function handleworkelect(
     e: React.ChangeEvent<HTMLSelectElement>,
     menu: boolean
   ) {
@@ -82,7 +34,6 @@ export default function NavBar() {
 
   return (
     <>
-      {/* Alternate Navigation */}
       <div className="navAlt">
         <Link
           to="/"
@@ -93,30 +44,24 @@ export default function NavBar() {
         </Link>
 
         <span className="navButtons alt">
-          {isProjectPage && (
-            <div className="selectContainer">
-              <select
-                onChange={(e) => handleProjectSelect(e, false)}
-                defaultValue={"projects"}
-                value={"projects"}
-              >
-                <option value={"projects"} disabled>
-                  switch projects
-                </option>
-                {Object.keys(projectData)
-                  .reverse()
-                  .map((id) => {
-                    const project = projectData[Number(id)];
-                    const title = project.name.replace(/\s+/g, "-");
-                    return (
-                      <option key={id} value={title}>
-                        {project.name}
-                      </option>
-                    );
-                  })}
-              </select>
-            </div>
-          )}
+          <div className="selectContainer">
+            <select onChange={(e) => handleworkelect(e, false)} value={"work"}>
+              <option value={"work"} disabled>
+                work
+              </option>
+              {Object.keys(projectData)
+                .reverse()
+                .map((id) => {
+                  const project = projectData[Number(id)];
+                  const title = project.name.replace(/\s+/g, "-");
+                  return (
+                    <option key={id} value={title}>
+                      {project.name}
+                    </option>
+                  );
+                })}
+            </select>
+          </div>
 
           <Link
             to="about"
@@ -138,7 +83,6 @@ export default function NavBar() {
         </span>
       </div>
 
-      {/* Main Navigation */}
       <nav>
         <Link
           to="/"
@@ -149,30 +93,24 @@ export default function NavBar() {
         </Link>
 
         <span className="navButtons">
-          {isProjectPage && (
-            <div className="selectContainer">
-              <select
-                onChange={(e) => handleProjectSelect(e, false)}
-                defaultValue={"projects"}
-                value={"projects"}
-              >
-                <option value={"projects"} disabled>
-                  switch projects
-                </option>
-                {Object.keys(projectData)
-                  .reverse()
-                  .map((id) => {
-                    const project = projectData[Number(id)];
-                    const title = project.name.replace(/\s+/g, "-");
-                    return (
-                      <option key={id} value={title}>
-                        {project.name}
-                      </option>
-                    );
-                  })}
-              </select>
-            </div>
-          )}
+          <div className="selectContainer">
+            <select onChange={(e) => handleworkelect(e, false)} value={"work"}>
+              <option value={"work"} disabled>
+                work
+              </option>
+              {Object.keys(projectData)
+                .reverse()
+                .map((id) => {
+                  const project = projectData[Number(id)];
+                  const title = project.name.replace(/\s+/g, "-");
+                  return (
+                    <option key={id} value={title}>
+                      {project.name}
+                    </option>
+                  );
+                })}
+            </select>
+          </div>
 
           <Link
             to="about"
@@ -198,37 +136,30 @@ export default function NavBar() {
         </button>
       </nav>
 
-      {/* Menu */}
       <div className="menu">
-        <button className="closeButton" onClick={closeMenu}>
+        <button className="closeButton" onClick={() => closeMenu(false)}>
           <RiCloseLargeFill size={24} />
         </button>
 
-        {isProjectPage && (
-          <div className="selectContainer alt">
-            switch projects
-            <select
-              onChange={(e) => handleProjectSelect(e, true)}
-              defaultValue={"projects"}
-              value={"projects"}
-            >
-              <option value={"projects"} disabled>
-                switch projects
-              </option>
-              {Object.keys(projectData)
-                .reverse()
-                .map((id) => {
-                  const project = projectData[Number(id)];
-                  const title = project.name.replace(/\s+/g, "-");
-                  return (
-                    <option key={id} value={title}>
-                      {project.name}
-                    </option>
-                  );
-                })}
-            </select>
-          </div>
-        )}
+        <div className="selectContainer alt">
+          work
+          <select onChange={(e) => handleworkelect(e, true)} value={"work"}>
+            <option value={"work"} disabled>
+              work
+            </option>
+            {Object.keys(projectData)
+              .reverse()
+              .map((id) => {
+                const project = projectData[Number(id)];
+                const title = project.name.replace(/\s+/g, "-");
+                return (
+                  <option key={id} value={title}>
+                    {project.name}
+                  </option>
+                );
+              })}
+          </select>
+        </div>
 
         <Link to="about" onClick={(e) => executeTransition(e, "about", true)}>
           about

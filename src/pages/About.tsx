@@ -52,33 +52,43 @@ export default function About() {
         <h1 id="hs" className="extra header">
           hey, i'm les!
         </h1>
+
         <ProgressiveImg
           realSrc={ProfilePicture}
           placeholderSrc={ProfilePictureTiny}
           alt="a picture of me"
-          zoom={false}
+          zoom={true}
         />
+
         <div className="content">
           <h1 id="fs" className="extra header">
             hey, i'm les!
           </h1>
+
           <br />
+
           <h2>
             i'm all about creating functional, performant, scalable, and
             long-term apps.
           </h2>
+
           <br />
+
           <p>
             i primarily work with typescript, react, sass, firebase, sql, and
             other libraries and frameworks. though i am highly flexible to
             different technologies and programming languages.
           </p>
+
           <br />
+
           <p>
             outside of coding, i play video games (which i rarely do nowadays
             lol), listen to music, and bingewatch tv shows/movies.
           </p>
+
           <br />
+
           <div className="links">
             <span>
               <LinkWithIcon img={<RiFilePdf2Line size={24} />} href={cv}>
@@ -118,6 +128,7 @@ export default function About() {
       <section className="timelineAndSkillset">
         <section className="timeline">
           <h1 className="header">my life's arc</h1>
+
           <div className="timelineRows">
             <TimelineRow
               date="february 15, 2004"
@@ -179,6 +190,7 @@ export default function About() {
 
         <section className="skillset">
           <h1 className="header">my skillset</h1>
+
           <div className="filter">
             <span>filter:</span>
             <select
@@ -191,6 +203,7 @@ export default function About() {
               <option value={"1"}>beginner</option>
             </select>
           </div>
+
           <div className="skills">
             {Object.keys(aboutSkillset)
               .sort(() => Math.random() - 0.5) // Shuffle keys

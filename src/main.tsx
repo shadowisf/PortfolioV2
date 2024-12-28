@@ -8,7 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer.tsx";
 import Home from "./pages/Home.tsx";
 import About from "./pages/About.tsx";
-import Project from "./pages/Project.tsx";
+import Project from "./pages/Work.tsx";
 import YouAreLost from "./components/YouAreLost.tsx";
 import { projectData } from "./utils/GODMODE.tsx";
 

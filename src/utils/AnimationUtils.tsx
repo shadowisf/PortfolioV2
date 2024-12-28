@@ -46,15 +46,26 @@ export function pageTransition() {
     });
   });
 
-  const closeMenu = contextSafe(() => {
-    gsap.to(".menu", {
-      display: "none",
-      autoAlpha: "0",
-      duration: "0.5",
-      onComplete: () => {
-        endTransition();
-      },
-    });
+  const closeMenu = contextSafe((instant: boolean) => {
+    if (instant) {
+      gsap.to(".menu", {
+        display: "none",
+        autoAlpha: "0",
+        duration: "0",
+        onComplete: () => {
+          endTransition();
+        },
+      });
+    } else {
+      gsap.to(".menu", {
+        display: "none",
+        autoAlpha: "0",
+        duration: "0.5",
+        onComplete: () => {
+          endTransition();
+        },
+      });
+    }
   });
 
   return {
