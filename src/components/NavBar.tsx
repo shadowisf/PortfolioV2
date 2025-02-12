@@ -21,7 +21,7 @@ export default function NavBar() {
     }
   }, [isMobile]);
 
-  function handleworkelect(
+  function handleWorkSelect(
     e: React.ChangeEvent<HTMLSelectElement>,
     menu: boolean
   ) {
@@ -45,7 +45,7 @@ export default function NavBar() {
 
         <span className="navButtons alt">
           <div className="selectContainer">
-            <select onChange={(e) => handleworkelect(e, false)} value={"work"}>
+            <select onChange={(e) => handleWorkSelect(e, false)} value={"work"}>
               <option value={"work"} disabled>
                 work
               </option>
@@ -94,7 +94,7 @@ export default function NavBar() {
 
         <span className="navButtons">
           <div className="selectContainer">
-            <select onChange={(e) => handleworkelect(e, false)} value={"work"}>
+            <select onChange={(e) => handleWorkSelect(e, false)} value={"work"}>
               <option value={"work"} disabled>
                 work
               </option>
@@ -143,7 +143,7 @@ export default function NavBar() {
 
         <div className="selectContainer alt">
           work
-          <select onChange={(e) => handleworkelect(e, true)} value={"work"}>
+          <select onChange={(e) => handleWorkSelect(e, true)} value={"work"}>
             <option value={"work"} disabled>
               work
             </option>

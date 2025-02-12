@@ -769,7 +769,6 @@ export const projectData: {
       "*typescript",
       "*react native",
       "expo",
-      "*react",
       "next",
       "*firebase",
       "*cloudinary",

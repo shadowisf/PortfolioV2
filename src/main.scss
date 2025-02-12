@@ -293,10 +293,14 @@ nav {
 
     &:hover {
       scale: $scaleOnHover;
-      color: var(--accent-color);
       font-variation-settings: $fontVarThin;
-
+      color: var(--accent-color);
       cursor: pointer;
+    }
+
+    option {
+      background-color: var(--background-color);
+      color: var(--text-color);
     }
   }
 
@@ -651,7 +655,7 @@ footer {
     }
 
     .nextPrevButton {
-      transition: scale 0.25s, color 0.25s, font-variation-settings 0.5s;
+      transition: color 0.25s, font-variation-settings 0.5s;
       font-size: var(--h1);
       font-variation-settings: $fontVarNormal;
 
@@ -827,6 +831,10 @@ footer {
           padding-right: 2.5rem;
           width: fit-content;
 
+          option {
+            color: var(--text-color);
+          }
+
           &:focus {
             outline: none;
           }
@@ -916,18 +924,23 @@ footer {
   &.top {
     &:hover::before {
       bottom: 75%;
+      background-color: var(--accent-color);
+      color: white;
     }
   }
 
   &.bottom {
     &:hover::before {
-      bottom: -50%;
+      bottom: -75%;
+      background-color: var(--accent-color);
+      color: white;
     }
   }
 
   &.alt {
     &:hover::before {
       background-color: var(--accent-color);
+      color: white;
     }
   }
 

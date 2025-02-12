@@ -42,6 +42,7 @@ export default function Home() {
           <ProjectTile key={id} dataID={Number(id)} />
         ))}
       </section>
+
       <section className="right">
         {Object.keys(projectData).map((id) => (
           <ProjectPreview key={id} dataID={Number(id)} />
@@ -54,12 +55,14 @@ export default function Home() {
           </h1>
 
           <h2 className="nonBold">
-            <span className="bulletPoint">⊢</span> full-stack developer{" "}
+            <span className="bulletPoint">⊢</span> full-stack dev{" "}
             <small className="smaller">(improving everyday)</small>
           </h2>
+
           <h2 className="nonBold">
             <span className="bulletPoint">⊢</span> dubai-based
           </h2>
+
           <h2 className="nonBold">
             <span className="bulletPoint">⊢</span> open to work
           </h2>
