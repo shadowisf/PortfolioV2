@@ -28,7 +28,8 @@ $minMaxWidth: 1020px;
   --faded-color: #817e83;
   /* --accent-color: light-dark(#6320ee, #8075ff); */
   /* --accent-color: light-dark(rgb(255, 59, 48), rgb(255, 69, 58)); */
-  --accent-color: light-dark(rgb(0, 122, 255), #0a84ff);
+  /* --accent-color: light-dark(rgb(0, 122, 255), #0a84ff); */
+  --accent-color: light-dark(rgb(0, 0, 0), #ffffff);
 
   --h0: calc(var(--h1) * 1.5);
   --h1: 2.986rem;
@@ -214,12 +215,12 @@ nav {
 
   svg {
     display: flex;
-    fill: black;
+    fill: var(--background-color);
   }
 
   a,
   button {
-    color: black;
+    color: var(--background-color);
 
     transition: scale 0.25s, font-variation-settings 0.5s;
 
@@ -305,7 +306,7 @@ nav {
   }
 
   &.alt {
-    color: black;
+    color: var(--background-color);
 
     transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
 
@@ -315,8 +316,8 @@ nav {
 
     position: relative;
 
-    background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDE2IDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEuNSAyTDggN0wxNC41IDJMITFaIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgLz48L3N2Zz4=")
-      no-repeat right center;
+    background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDE2IDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIgMS41TDggNi41TDE0IDEuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjODg4ODg4IiBzdHJva2Utd2lkdGg9IjIiIC8+PC9zdmc+")
+      no-repeat center center;
     background-position-x: 2.75em;
     background-size: 75px;
 
@@ -505,12 +506,13 @@ footer {
       .currentPortfolio {
         text-align: center;
         width: auto;
-        max-width: 100%;
+        max-width: 700px;
         height: auto;
         padding: 75px;
         border-radius: $borderRadius;
         box-shadow: $boxShadow;
         background-color: var(--accent-color);
+        color: var(--background-color);
       }
 
       video {
@@ -592,7 +594,7 @@ footer {
       width: fit-content;
 
       font-variation-settings: $fontVarNormal;
-      transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
+      transition: color 0.25s, font-variation-settings 0.5s;
 
       &:hover {
         color: var(--accent-color);
@@ -924,23 +926,23 @@ footer {
   &.top {
     &:hover::before {
       bottom: 75%;
-      background-color: var(--accent-color);
-      color: white;
+      background-color: var(--text-color);
+      color: var(--background-color);
     }
   }
 
   &.bottom {
     &:hover::before {
       bottom: -75%;
-      background-color: var(--accent-color);
-      color: white;
+      background-color: var(--text-color);
+      color: var(--background-color);
     }
   }
 
   &.alt {
     &:hover::before {
-      background-color: var(--accent-color);
-      color: white;
+      background-color: var(--text-color);
+      color: var(--background-color);
     }
   }
 

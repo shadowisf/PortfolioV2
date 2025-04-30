@@ -31,9 +31,9 @@ export default function Home() {
     scrollToTop(0);
   }, []);
 
-  useGSAP(() => {
+  /* useGSAP(() => {
     startup();
-  });
+  }); */
 
   return (
     <main className="homeWrapper">
@@ -55,16 +55,16 @@ export default function Home() {
           </h1>
 
           <h2 className="nonBold">
-            <span className="bulletPoint">⊢</span> full-stack dev{" "}
+            <span className="bulletPoint">⊢ </span>software engineer{" "}
             <small className="smaller">(improving everyday)</small>
           </h2>
 
           <h2 className="nonBold">
-            <span className="bulletPoint">⊢</span> dubai-based
+            <span className="bulletPoint">⊢ </span>dubai-based
           </h2>
 
           <h2 className="nonBold">
-            <span className="bulletPoint">⊢</span> open to work
+            <span className="bulletPoint">⊢ </span>open to work
           </h2>
 
           <br />

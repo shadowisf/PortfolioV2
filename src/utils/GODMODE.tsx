@@ -35,6 +35,7 @@ import {
   SiNextdotjs,
   SiCloudinary,
   SiVite,
+  SiSupabase,
 } from "react-icons/si";
 //
 import ImagePlugIns from "../assets/ImagePlugIns.webp";
@@ -78,6 +79,7 @@ import ImageV2Portfolio from "../assets/ImageV2Portfolio.webp";
 import ImageTinyV2Portfolio from "../assets/ImageV2Portfolio_tiny.webp";
 import VideoV2Portfolio from "../assets/VideoV2Portfolio.webm";
 const GitHubV2Portfolio = "https://github.com/shadowisf/PortfolioReactV2";
+const DemoV2Portfolio = "https://les-ranalan.web.app";
 //
 import ImageClipDetective from "../assets/ImageClipDetective.webp";
 import ImageTinyClipDetective from "../assets/ImageClipDetective_tiny.webp";
@@ -237,6 +239,10 @@ export const techStackStyling: Record<
     icon: <SiVite />,
     color: "light-dark(rgb(174, 63, 245), rgb(121, 43, 169))",
   },
+  supabase: {
+    icon: <SiSupabase />,
+    color: "light-dark(rgb(51, 121, 52), rgb(40, 96, 41))",
+  },
 };
 
 export const aboutSkillset: { [key: string]: number } = {
@@ -265,7 +271,8 @@ export const aboutSkillset: { [key: string]: number } = {
   "tailwind css": 2,
   "react native": 2,
   expo: 2,
-  next: 2,
+  next: 3,
+  supabase: 3,
 };
 
 export const projectData: {
@@ -583,9 +590,9 @@ export const projectData: {
     name: "portfolio v1",
     year: "2024",
     techStack: [
+      "*vite",
       "*typescript",
       "*react",
-      "vite",
       "*html",
       "*sass",
       "*firebase",
@@ -648,9 +655,9 @@ export const projectData: {
     name: "portfolio v2",
     year: "2024",
     techStack: [
+      "*vite",
       "*typescript",
       "*react",
-      "vite",
       "*html",
       "*sass",
       "*firebase",
@@ -690,9 +697,15 @@ export const projectData: {
       </>
     ),
     links: (
-      <LinkWithIcon img={<RiGithubLine size={24} />} href={GitHubV2Portfolio}>
-        repository
-      </LinkWithIcon>
+      <>
+        <LinkWithIcon img={<GoPackage size={24} />} href={DemoV2Portfolio}>
+          live website
+        </LinkWithIcon>
+
+        <LinkWithIcon img={<RiGithubLine size={24} />} href={GitHubV2Portfolio}>
+          repository
+        </LinkWithIcon>
+      </>
     ),
     attributions: [
       "zoom-vanilla.js: https://github.com/spinningarrow",
@@ -706,9 +719,9 @@ export const projectData: {
     name: "clipdetective",
     year: "2024",
     techStack: [
+      "*vite",
       "*typescript",
       "*react",
-      "vite",
       "*html",
       "*tailwind css",
       "*firebase",
@@ -766,10 +779,9 @@ export const projectData: {
     name: "feeltok",
     year: "2024",
     techStack: [
+      "*expo",
       "*typescript",
       "*react native",
-      "expo",
-      "next",
       "*firebase",
       "*cloudinary",
       "git",
@@ -830,4 +842,63 @@ export const projectData: {
     ),
     attributions: ["remix icons: https://github.com/xiaochunjimmy"],
   },
+
+  9: {
+    name: "whealthyvessel",
+    year: "2025",
+    techStack: ["*vite", "*typescript", "*react", "*html", "*sass"],
+    image: "",
+    imageTiny: "",
+    imageFlex: "",
+    imageAlt: "",
+    video: "",
+    videoFlex: "",
+    description: <></>,
+    coreConcept: <></>,
+    myRole: <></>,
+    links: <></>,
+    attributions: ["remix icons: https://github.com/xiaochunjimmy"],
+  },
+
+  10: {
+    name: "examiq",
+    year: "2025",
+    techStack: [
+      "*next",
+      "*typescript",
+      "*react",
+      "*html",
+      "*sass",
+      "*supabase",
+      "git",
+    ],
+    image: "",
+    imageTiny: "",
+    imageFlex: "",
+    imageAlt: "",
+    video: "",
+    videoFlex: "",
+    description: <></>,
+    coreConcept: <></>,
+    myRole: <></>,
+    links: <></>,
+    attributions: ["remix icons: https://github.com/xiaochunjimmy"],
+  },
+
+  /* 100: {
+    name: "",
+    year: "",
+    techStack: [""],
+    image: "",
+    imageTiny: "",
+    imageFlex: "",
+    imageAlt: "",
+    video: "",
+    videoFlex: "",
+    description: <></>,
+    coreConcept: <></>,
+    myRole: <></>,
+    links: <></>,
+    attributions: [""],
+  }, */
 };

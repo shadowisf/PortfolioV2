@@ -120,10 +120,11 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
         navigate(url);
         closeMenu(false);
       } else {
-        startTransition(() => {
+        navigate(url);
+        /* startTransition(() => {
           navigate(url);
           endTransition();
-        });
+        }); */
       }
     }
   );

@@ -42,7 +42,7 @@ export default function Project(p: ProjectProps) {
         <Link
           to={`/${prevProjectTitle}`}
           className="nextPrevButton infoOnHover top"
-          data-tooltip="previous project"
+          data-tooltip="prev proj"
           onClick={(e) => executeTransition(e, prevProjectTitle, false)}
           style={
             prevProjectTitle === ""
@@ -60,7 +60,7 @@ export default function Project(p: ProjectProps) {
         <Link
           to={`/${nextProjectTitle}`}
           className="nextPrevButton infoOnHover top"
-          data-tooltip="next project"
+          data-tooltip="next proj"
           onClick={(e) => executeTransition(e, nextProjectTitle, false)}
           style={
             nextProjectTitle === ""

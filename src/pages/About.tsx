@@ -31,6 +31,7 @@ import {
   instagram,
   linkedin,
 } from "../utils/GODMODE";
+import { CgWorkAlt } from "react-icons/cg";
 
 export default function About() {
   const { scrollToTop } = scrollingAnimation();
@@ -42,9 +43,9 @@ export default function About() {
     scrollToTop(0);
   }, []);
 
-  useGSAP(() => {
+  /* useGSAP(() => {
     startup();
-  });
+  }); */
 
   return (
     <main className="aboutWrapper">
@@ -171,6 +172,14 @@ export default function About() {
             </TimelineRow>
 
             <TimelineRow
+              date="february 5, 2025"
+              img={<CgWorkAlt size={40} fill="var(--accent-color)" />}
+              verticalLine={true}
+            >
+              worked as website developer of whealthyvessel
+            </TimelineRow>
+
+            <TimelineRow
               date="???"
               img={<RiGraduationCapLine size={40} fill="var(--accent-color)" />}
               verticalLine={false}
@@ -179,11 +188,11 @@ export default function About() {
               <LinkWithNoIcon
                 className="infoOnHover top alt"
                 href="https://www.bolton.ac.uk"
-                data-tooltip="university of bolton"
+                data-tooltip="university of greater manchester"
               >
-                uob
+                uogm
               </LinkWithNoIcon>{" "}
-              with bachelor in software engineering
+              with bachelor of engineering (beng) in software engineering
             </TimelineRow>
           </div>
         </section>
