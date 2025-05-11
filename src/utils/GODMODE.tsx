@@ -7,7 +7,7 @@ import { PlugIns } from "../projects/PlugIns";
 import { PortfolioV2 } from "../projects/PortfolioV2";
 import { ClipDetective } from "../projects/ClipDetective";
 import { FeelTok } from "../projects/FeelTok";
-import { WhealthyVessel } from "../projects/WhealthyVessel";
+/* import { WhealthyVessel } from "../projects/WhealthyVessel"; */
 import { Examiq } from "../projects/Examiq";
 import { AiFillApi } from "react-icons/ai";
 import {

@@ -43,7 +43,7 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const [currentPage, setCurrentPage] = useState("");
 
   const { contextSafe } = useGSAP();
-  const { closeMenu, startTransition, endTransition } = pageTransition();
+  const { closeMenu /* , startTransition, endTransition */ } = pageTransition();
 
   const navigate = useNavigate();
 

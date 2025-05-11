@@ -8,8 +8,10 @@ import {
   RiLinkedinBoxLine,
   RiMailLine,
 } from "react-icons/ri";
-import { homeAnimation, scrollingAnimation } from "../utils/AnimationUtils";
-import { useGSAP } from "@gsap/react";
+import {
+  /* homeAnimation, */ scrollingAnimation,
+} from "../utils/AnimationUtils";
+/* import { useGSAP } from "@gsap/react"; */
 import { preloadTinyImages } from "../components/ProgressiveImg";
 import {
   email,
@@ -22,7 +24,7 @@ import {
 export default function Home() {
   const { setCurrentPage } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
-  const { startup } = homeAnimation();
+  /* const { startup } = homeAnimation(); */
 
   useEffect(() => {
     preloadTinyImages();

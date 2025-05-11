@@ -22,7 +22,7 @@ import {
   LinkWithIconOnly,
   LinkWithNoIcon,
 } from "../components/Link";
-import { useGSAP } from "@gsap/react";
+/* import { useGSAP } from "@gsap/react"; */
 import ProgressiveImg from "../components/ProgressiveImg";
 import {
   aboutSkillset,
@@ -35,7 +35,7 @@ import {
 
 export default function About() {
   const { scrollToTop } = scrollingAnimation();
-  const { filterSkill, resetSkill, startup } = aboutAnimation();
+  const { filterSkill, resetSkill /* , startup */ } = aboutAnimation();
   const { setCurrentPage } = useGlobalState();
 
   useEffect(() => {
