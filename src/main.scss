@@ -23,14 +23,15 @@ $minMaxWidth: 1020px;
 
   --theme: light dark;
 
-  --text-color: light-dark(black, white);
+  --text-color: light-dark(rgb(0, 0, 0), white);
   --background-color: light-dark(rgb(229, 229, 234), rgb(28, 28, 30));
-  --faded-color: #817e83;
-  /* --accent-color: light-dark(#6320ee, #8075ff); */
+  --faded-color: rgb(129, 126, 131);
+  --accent-color: light-dark(rgb(99, 32, 238), rgb(128, 117, 255));
   /* --accent-color: light-dark(rgb(255, 59, 48), rgb(255, 69, 58)); */
   /* --accent-color: light-dark(rgb(0, 122, 255), #0a84ff); */
-  /* --accent-color: light-dark(rgb(163, 174, 143), rgb(180, 192, 157)); */
-  --accent-color: light-dark(rgb(0, 0, 0), #ffffff);
+  /* --accent-color: light-dark(rgb(160, 174, 140), rgb(180, 192, 157)); */
+  /* --accent-color: light-dark(rgb(227, 191, 213), rgb(255, 210, 237)); */
+  --accent-color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));
 
   --h0: calc(var(--h1) * 1.5);
   --h1: 2.986rem;
@@ -938,7 +939,7 @@ footer {
   &.top {
     &:hover::before {
       bottom: 75%;
-      background-color: var(--text-color);
+      background-color: var(--accent-color);
       color: var(--background-color);
     }
   }
@@ -946,14 +947,14 @@ footer {
   &.bottom {
     &:hover::before {
       bottom: -75%;
-      background-color: var(--text-color);
+      background-color: var(--accent-color);
       color: var(--background-color);
     }
   }
 
   &.alt {
     &:hover::before {
-      background-color: var(--text-color);
+      background-color: var(--accent-color);
       color: var(--background-color);
     }
   }

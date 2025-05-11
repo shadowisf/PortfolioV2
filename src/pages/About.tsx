@@ -8,6 +8,7 @@ import {
   RiInstagramLine,
   RiLinkedinBoxLine,
   RiMailLine,
+  RiBriefcaseLine,
 } from "react-icons/ri";
 import ProfilePicture from "../assets/ImageProfile.webp";
 import ProfilePictureTiny from "../assets/ImageProfile_tiny.webp";
@@ -31,7 +32,6 @@ import {
   instagram,
   linkedin,
 } from "../utils/GODMODE";
-import { CgWorkAlt } from "react-icons/cg";
 
 export default function About() {
   const { scrollToTop } = scrollingAnimation();
@@ -173,7 +173,7 @@ export default function About() {
 
             <TimelineRow
               date="february 5, 2025"
-              img={<CgWorkAlt size={40} fill="var(--accent-color)" />}
+              img={<RiBriefcaseLine size={40} fill="var(--accent-color)" />}
               verticalLine={true}
             >
               worked as web developer for whealthyvessel
