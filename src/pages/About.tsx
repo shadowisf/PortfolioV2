@@ -136,7 +136,7 @@ export default function About() {
               img={<RiCake2Line size={40} fill="var(--accent-color)" />}
               verticalLine={true}
             >
-              born in davao city, philippines
+              born in davao, philippines
             </TimelineRow>
 
             <TimelineRow
@@ -152,7 +152,7 @@ export default function About() {
               img={<RiGlasses2Line size={40} fill="var(--accent-color)" />}
               verticalLine={true}
             >
-              got my first pair of eyeglasses
+              acquired first pair of eyeglasses
             </TimelineRow>
 
             <TimelineRow
@@ -176,11 +176,11 @@ export default function About() {
               img={<CgWorkAlt size={40} fill="var(--accent-color)" />}
               verticalLine={true}
             >
-              worked as website developer of whealthyvessel
+              worked as web developer for whealthyvessel
             </TimelineRow>
 
             <TimelineRow
-              date="???"
+              date="may 8, 2025"
               img={<RiGraduationCapLine size={40} fill="var(--accent-color)" />}
               verticalLine={false}
             >
@@ -192,7 +192,7 @@ export default function About() {
               >
                 uogm
               </LinkWithNoIcon>{" "}
-              with bachelor of engineering (beng) in software engineering
+              with bachelor of engineering (honors) in software engineering
             </TimelineRow>
           </div>
         </section>

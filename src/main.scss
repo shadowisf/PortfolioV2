@@ -29,6 +29,7 @@ $minMaxWidth: 1020px;
   /* --accent-color: light-dark(#6320ee, #8075ff); */
   /* --accent-color: light-dark(rgb(255, 59, 48), rgb(255, 69, 58)); */
   /* --accent-color: light-dark(rgb(0, 122, 255), #0a84ff); */
+  /* --accent-color: light-dark(rgb(163, 174, 143), rgb(180, 192, 157)); */
   --accent-color: light-dark(rgb(0, 0, 0), #ffffff);
 
   --h0: calc(var(--h1) * 1.5);
@@ -122,6 +123,12 @@ h6 {
   &.nonBold {
     font-weight: 400;
   }
+}
+
+code {
+  background-color: var(--faded-color);
+  border-radius: 4px;
+  padding: 2px;
 }
 
 p {
@@ -572,6 +579,10 @@ footer {
 
   display: grid;
 
+  ul {
+    margin-left: 48px;
+  }
+
   .year {
     color: var(--faded-color);
     display: flex;
@@ -793,6 +804,7 @@ footer {
         }
 
         svg {
+          min-width: 40px;
           display: flex;
           align-items: center;
         }

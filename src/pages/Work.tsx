@@ -123,10 +123,7 @@ export default function Project(p: ProjectProps) {
           <p>{project.description}</p>
 
           <br />
-
-          <h1>core concept:</h1>
-          <p>{project.coreConcept}</p>
-
+          <br />
           <br />
 
           <h1>my role:</h1>

@@ -41,7 +41,7 @@ export function pageTransition() {
       gsap.to(".menu", {
         display: "flex",
         autoAlpha: "1",
-        duration: "0.5",
+        duration: duration,
       });
     });
   });
@@ -60,7 +60,7 @@ export function pageTransition() {
       gsap.to(".menu", {
         display: "none",
         autoAlpha: "0",
-        duration: "0.5",
+        duration: duration,
         onComplete: () => {
           endTransition();
         },

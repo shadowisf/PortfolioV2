@@ -1,0 +1,16 @@
+/* 100: {
+    name: "",
+    year: "",
+    techStack: [""],
+    image: "",
+    imageTiny: "",
+    imageFlex: "",
+    imageAlt: "",
+    video: "",
+    videoFlex: "",
+    description: <></>,
+    coreConcept: <></>,
+    myRole: <></>,
+    links: <></>,
+    attributions: [""],
+  }, */

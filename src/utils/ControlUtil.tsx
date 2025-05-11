@@ -121,6 +121,7 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
         closeMenu(false);
       } else {
         navigate(url);
+
         /* startTransition(() => {
           navigate(url);
           endTransition();
