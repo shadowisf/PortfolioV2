@@ -176,13 +176,13 @@ export default function About() {
               img={<RiBriefcaseLine size={40} fill="var(--accent-color)" />}
               verticalLine={true}
             >
-              worked as web developer for whealthyvessel
+              working as full-stack web developer for whealthy vessel
             </TimelineRow>
 
             <TimelineRow
               date="may 8, 2025"
               img={<RiGraduationCapLine size={40} fill="var(--accent-color)" />}
-              verticalLine={false}
+              verticalLine={true}
             >
               graduated from{" "}
               <LinkWithNoIcon
@@ -193,6 +193,14 @@ export default function About() {
                 uogm
               </LinkWithNoIcon>{" "}
               with bachelor of engineering (honors) in software engineering
+            </TimelineRow>
+
+            <TimelineRow
+              date="may 12, 2025"
+              img={<RiBriefcaseLine size={40} fill="var(--accent-color)" />}
+              verticalLine={false}
+            >
+              working as full-stack web developer for let there be fragrance
             </TimelineRow>
           </div>
         </section>
