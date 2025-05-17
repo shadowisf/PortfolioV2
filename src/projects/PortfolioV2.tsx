@@ -7,20 +7,19 @@ import ImageV2Portfolio from "../assets/ImageV2Portfolio.webp";
 import ImageTinyV2Portfolio from "../assets/ImageV2Portfolio_tiny.webp";
 import VideoV2Portfolio from "../assets/VideoV2Portfolio.webm";
 //
-const GitHubV2Portfolio = "https://github.com/shadowisf/PortfolioReactV2";
+const GitHubV2Portfolio = "https://github.com/shadowisf/PortfolioV2";
 const DemoV2Portfolio = "https://les-ranalan.web.app";
 
 export const PortfolioV2: ProjectEntry = {
   name: "portfolio v2",
   year: "2024",
   techStack: [
-    "*vite",
-    "*react",
+    "vite",
+    "*react.js",
     "*typescript",
-    "*html",
     "*scss",
+    "*gsap",
     "*firebase",
-    "nosql",
     "git",
   ],
   image: ImageV2Portfolio,
@@ -32,8 +31,8 @@ export const PortfolioV2: ProjectEntry = {
   videoFlex: "1.598148",
   description: (
     <>
-      portfolio v2 is a complete redesign of my original portfolio, moving
-      beyond the cartoonish minimalism of v1 into a more refined,
+      portfolio v2 is a <u>complete redesign of my original portfolio</u>,
+      moving beyond the cartoonish minimalism of v1 into a more refined,
       performance-focused experience. while keeping the core content (projects,
       bio, research), this iteration prioritizes:
       <ul>
@@ -50,8 +49,8 @@ export const PortfolioV2: ProjectEntry = {
           for better readability.
         </li>
         <li>
-          <b>performance focus</b>: critical css inlining, lazy loading,
-          dependency optimization.
+          <b>performance focus</b>: lazy loading, image optimization, dependency
+          optimization.
         </li>
         <li>
           <b>scalable architecture</b>: modular components with typescript
@@ -62,18 +61,13 @@ export const PortfolioV2: ProjectEntry = {
   ),
   myRole: (
     <>
-      portfolio v2 is a solo project where i:
+      portfolio v2 is a <u>solo project</u> where i:
       <ul>
         <li>
           audited v1’s pain points and iterated on layout, color, and motion.
         </li>
-        <li>
-          crafted gsap sequences (e.g., staggered fades, scroll-linked
-          transforms).
-        </li>
-        <li>
-          migrated from css-in-js to scss modules, trimmed unused dependencies.
-        </li>
+        <li>crafted gsap sequences (e.g., mobile transitions).</li>
+        <li>migrated from css to scss modules, trimmed unused dependencies.</li>
         <li>ported all v1 content while improving its presentation.</li>
       </ul>
       <br />

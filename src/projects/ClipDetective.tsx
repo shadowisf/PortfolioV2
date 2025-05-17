@@ -14,13 +14,12 @@ export const ClipDetective: ProjectEntry = {
   name: "clipdetective",
   year: "2024",
   techStack: [
-    "*vite",
-    "*react",
+    "vite",
+    "*react.js",
     "*typescript",
-    "*html",
     "*tailwind css",
     "*firebase",
-    "nosql",
+    "*nosql",
     "git",
   ],
   image: ImageClipDetective,
@@ -32,10 +31,10 @@ export const ClipDetective: ProjectEntry = {
   videoFlex: "1.599074",
   description: (
     <>
-      clipdetective is a web-based mini game that challenges users to identify
-      scenes from shows and movies i’ve binge-watched. designed as a solo side
-      project, it pushed me to work independently with react and tailwind css,
-      avoiding tutorials or external guides. key features include:
+      clipdetective is a <u>web-based mini game</u> that challenges users to
+      identify scenes from shows and movies i’ve binge-watched. designed as a
+      solo side project, it pushed me to work independently with react.js and
+      tailwind css, avoiding tutorials or external guides. key features include:
       <ul>
         <li>
           <b>interactive quizzes</b>: users guess clips from random snippets of
@@ -50,28 +49,28 @@ export const ClipDetective: ProjectEntry = {
           clean styling.
         </li>
         <li>
-          <b>react implementation</b>: real-time state management for scores and
-          progress
+          <b>react.js implementation</b>: real-time state management for scores
+          and progress.
         </li>
         <li>
           <b>dynamic rendering</b>: conditionally displays questions, feedback
-          and results
+          and results.
         </li>
         <li>
           <b>custom logic</b>: clip randomization and non-repeating question
-          flow
+          flow.
         </li>
       </ul>
     </>
   ),
   myRole: (
     <>
-      clipdetective is a solo project where i:
+      clipdetective is a <u>solo project</u> where i:
       <ul>
         <li>structured the quiz flow and ui entirely from scratch.</li>
         <li>
-          wrote react hooks for state, built clip-triggering logic, and styled
-          with tailwind.
+          wrote react.js hooks for state, built clip-triggering logic, and
+          styled with tailwind.
         </li>
         <li>handpicked and edited clips for the game library.</li>
         <li>debugged challenges like clip preloading and score persistence.</li>
@@ -79,7 +78,7 @@ export const ClipDetective: ProjectEntry = {
       <br />
       this passion project demonstrates my ability to independently
       conceptualize, build and ship complete web applications while expanding my
-      react expertise.
+      react.js expertise.
     </>
   ),
   links: (

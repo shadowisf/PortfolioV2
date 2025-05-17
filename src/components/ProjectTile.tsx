@@ -56,12 +56,7 @@ export function ProjectPreview(p: ProjectProps) {
           you are currently viewing portfolio v2
         </h1>
       ) : (
-        <video
-          style={p.dataID === 8 ? { borderRadius: "60px" } : {}}
-          loop
-          muted
-          src={project.video}
-        />
+        <video loop muted src={project.video} />
       )}
 
       <span className="techStack">

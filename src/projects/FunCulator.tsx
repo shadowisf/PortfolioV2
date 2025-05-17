@@ -33,8 +33,8 @@ export const FunCulator: ProjectEntry = {
         </li>
         <li>
           <b>oop design</b>: encapsulated methods (e.g.,{" "}
-          <code>calculatearea()</code>, <code>converttobinary()</code>) ensure
-          modularity.
+          <code>calculateArea()</code>, <code>convertToBinary()</code>) to
+          ensure modularity.
         </li>
         <li>
           <b>dynamic gui</b>: swing components (jframe, jbutton) with
@@ -45,7 +45,7 @@ export const FunCulator: ProjectEntry = {
           negative factorials, invalid inputs) via try-catch blocks.
         </li>
         <li>
-          <b>efficient algorithms</b>: loops (for/while) power factorial,
+          <b>efficient algorithms</b>: for/while loops power factorial,
           fibonacci, and averaging operations.
         </li>
         <li>
@@ -65,7 +65,7 @@ export const FunCulator: ProjectEntry = {
   ),
   myRole: (
     <>
-      funculator is a group project where i:
+      funculator is a <u>group project</u> where i:
       <ul>
         <li>
           designed pixel-art ui (gimp) and integrated assets into swing

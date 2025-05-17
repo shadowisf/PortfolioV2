@@ -105,12 +105,7 @@ export default function Project(p: ProjectProps) {
           </div>
 
           <div style={{ flex: project.videoFlex }}>
-            <video
-              style={p.dataID === 8 ? { borderRadius: "29px" } : {}}
-              controls
-              muted
-              src={project.video}
-            />
+            <video controls muted src={project.video} />
           </div>
         </div>
 

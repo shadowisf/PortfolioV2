@@ -15,11 +15,9 @@ export const FeelTok: ProjectEntry = {
   techStack: [
     "*next.js",
     "*expo",
-    "*react",
-    "*react native",
     "*typescript",
     "*firebase",
-    "nosql",
+    "*nosql",
     "*cloudinary",
     "*email.js",
     "*restful api",
@@ -52,11 +50,11 @@ export const FeelTok: ProjectEntry = {
         </li>
         <li>
           <b>emailjs</b>: email-based two-factor authentication (2fa)
-          implementation
+          implementation.
         </li>
         <li>
           <b>expo</b>: device feature access (camera/gallery) without native
-          code
+          code.
         </li>
         <li>
           <b>moderation tools</b>: admin dashboard for content/user management.
@@ -69,17 +67,17 @@ export const FeelTok: ProjectEntry = {
   ),
   myRole: (
     <>
-      feeltok is a group project where i:
+      feeltok is a <u>group project</u> where i:
       <ul>
-        <li>designed theme system, reusable components (buttons/modals)</li>
-        <li>architected firestore database schema</li>
-        <li>implemented auth flows (email/google)</li>
-        <li>developed image uploads to cloudinary</li>
-        <li>built admin moderation tools</li>
-        <li>implemented timer/reminder functionality</li>
+        <li>designed theme system, reusable components (buttons/modals).</li>
+        <li>architected firestore database schema.</li>
+        <li>implemented authentication flows (email/google).</li>
+        <li>developed image uploads to cloudinary.</li>
+        <li>built admin moderation tools.</li>
+        <li>implemented timer/reminder functionality.</li>
         <li>
           implemented email.js api integration for two-factor authentication
-          (2fa)
+          (2fa).
         </li>
         <li>ensured comprehensive error handling.</li>
       </ul>

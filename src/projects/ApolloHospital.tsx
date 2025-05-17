@@ -15,15 +15,13 @@ export const ApolloHospital: ProjectEntry = {
   name: "apollo hospital",
   year: "2023",
   techStack: [
-    "flask",
     "*django",
     "*python",
     "javascript",
-    "*html",
     "*bootstrap css",
     "*xampp",
-    "mariadb",
-    "pythonanywhere",
+    "*mariadb",
+    "*pythonanywhere",
     "git",
   ],
   image: ImageApolloHospital,
@@ -43,8 +41,9 @@ export const ApolloHospital: ProjectEntry = {
           scheduling, prescription tracking, and billing.
         </li>
         <li>
-          <b>user roles</b>: secure login for receptionists (crud operations),
-          doctors (medical records), and staff (test reports).
+          <b>user roles</b>: secure login for receptionists (patient records),
+          doctors (medical records), and staff (test reports), all equipped with
+          create/read/update/delete (crud) operations.
         </li>
         <li>
           <b>data integrity</b>: mariadb database with relational tables
@@ -56,23 +55,23 @@ export const ApolloHospital: ProjectEntry = {
           systems, reducing errors and improving accessibility.
         </li>
         <li>
-          <b>responsive frontend</b>: bootstrap ui with dynamic tables, modals,
-          and pdf report generation
+          <b>responsive frontend</b>: bootstrap css with dynamic tables, modals,
+          and pdf report generation.
         </li>
         <li>
           <b>robust backend</b>: flask routes handling crud operations with
-          mysql-connector integration
+          mysql-connector integration.
         </li>
         <li>
           <b>error handling</b>: form validation, sql exception management, and
-          duplicate entry prevention
+          duplicate entry prevention.
         </li>
       </ul>
     </>
   ),
   myRole: (
     <>
-      apollo hospital is a group project where i:
+      apollo hospital is a <u>group project</u> where i:
       <ul>
         <li>
           designed 10+ interactive webpages (html/css/bootstrap) with consistent
@@ -81,12 +80,12 @@ export const ApolloHospital: ProjectEntry = {
           (javascript).
         </li>
         <li>
-          architected mysql database schema (erd design) with xampp, ensuring
-          referential integrity.
+          architected mysql database schema via entity-relationship diagram
+          (erd) with xampp, ensuring referential integrity.
         </li>
         <li>
           implemented flask routes for data operations (e.g.,{" "}
-          <code>@app.route('/add_patient', methods=['POST']</code>)
+          <code>@app.route('/add_patient', methods=['POST']</code>).
         </li>
         <li>
           added input validation (e.g., date formats) and error handling (sql
@@ -104,15 +103,7 @@ export const ApolloHospital: ProjectEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<GoPackage size={24} />}
-        href={DemoApolloHospital}
-        onClick={() => {
-          alert(
-            "note: you have sign-up first and then login to test the app. click close to continue."
-          );
-        }}
-      >
+      <LinkWithIcon img={<GoPackage size={24} />} href={DemoApolloHospital}>
         live website
       </LinkWithIcon>
 

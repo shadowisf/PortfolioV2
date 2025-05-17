@@ -33,47 +33,48 @@ export const BellHospital: ProjectEntry = {
         <li>
           <b>oop implementation</b>: encapsulation via self-contained classes
           (patient, doctor, etc.), reusable modules for file i/o and search
-          operations, and abstraction through methods like
-          getappointmentdoctorid()
+          operations, and abstraction through methods like{" "}
+          <code>getAppointmentDoctorID()</code>.
         </li>
         <li>
-          <b>data persistence</b>: uses objectoutputstream/objectinputstream to
-          save encrypted .txt files, maintaining data between sessions.
+          <b>data persistence</b>: uses <code>ObjectOutputStream</code>/
+          <code>ObjectInputStream</code> to save encrypted .txt files,
+          maintaining data between sessions.
         </li>
         <li>
-          <b>file-based crud</b>: full create/read/update/delete operations with
-          serialized storage
+          <b>file-based crud</b>: full create/read/update/delete (crud)
+          operations with serialized storage.
         </li>
         <li>
           <b>advanced search</b>: multi-filter queries (date ranges, id lookups,
-          medicine expiry)
+          medicine expiry).
         </li>
         <li>
           <b>error resilience</b>: input validation and graceful exception
-          handling
+          handling.
         </li>
         <li>
           <b>modular architecture</b>: designed for future expansion
-          (billing/lab modules)
+          (billing/lab modules).
         </li>
       </ul>
     </>
   ),
   myRole: (
     <>
-      bell hospital is a solo project where i:
+      bell hospital is a <u>solo project</u> where i:
       <ul>
         <li>
           designed class structures mirroring real-world relationships
-          (patient↔appointment)
+          (patient↔appointment).
         </li>
         <li>
           implemented file operations using java i/o streams for data
-          persistence
+          persistence.
         </li>
-        <li>built search algorithms for appointments and inventory</li>
-        <li>wrote documented, maintainable code with robust error handling</li>
-        <li>created user-friendly console prompts and menus</li>
+        <li>built search algorithms for appointments and inventory.</li>
+        <li>wrote documented, maintainable code with robust error handling.</li>
+        <li>created user-friendly console prompts and menus.</li>
       </ul>
       <br />
       this project solidified my java oop skills while solving practical data

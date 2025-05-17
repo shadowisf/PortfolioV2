@@ -3,7 +3,7 @@ import { ProjectEntry } from "../utils/GODMODE";
 export const WhealthyVessel: ProjectEntry = {
   name: "whealthyvessel",
   year: "2025",
-  techStack: ["*vite", "*react", "*typescript", "*html", "*scss", "git"],
+  techStack: ["vite", "*react.js", "*typescript", "*scss", "git"],
   image: "",
   imageTiny: "",
   imageFlex: "",

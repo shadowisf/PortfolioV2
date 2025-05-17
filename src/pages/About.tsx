@@ -76,9 +76,9 @@ export default function About() {
           <br />
 
           <p>
-            i primarily work with typescript, react, sass, firebase, sql, and
-            other libraries and frameworks. though i am highly flexible to
-            different technologies and programming languages.
+            i primarily work with next.js, react.js, typescript, scss, supabase,
+            postgresql, and other libraries and frameworks. though i am highly
+            flexible to different technologies and programming languages.
           </p>
 
           <br />
@@ -168,7 +168,7 @@ export default function About() {
               >
                 winc
               </LinkWithNoIcon>{" "}
-              with diploma in engineering
+              with international diploma in engineering
             </TimelineRow>
 
             <TimelineRow
@@ -192,7 +192,7 @@ export default function About() {
               >
                 uogm
               </LinkWithNoIcon>{" "}
-              with bachelor of engineering (honors) in software engineering
+              with beng (hons) software engineering
             </TimelineRow>
 
             <TimelineRow

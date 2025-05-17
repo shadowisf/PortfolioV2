@@ -9,6 +9,8 @@ import { ClipDetective } from "../projects/ClipDetective";
 import { FeelTok } from "../projects/FeelTok";
 /* import { WhealthyVessel } from "../projects/WhealthyVessel"; */
 import { Examiq } from "../projects/Examiq";
+/* import { LetThereBeFragrance } from "../projects/LetThereBeFragrance"; */
+//
 import { AiFillApi } from "react-icons/ai";
 import {
   BiLogoFirebase,
@@ -37,16 +39,20 @@ import {
   SiDjango,
   SiExpo,
   SiFlask,
+  SiFramer,
   SiFramework,
+  SiGreensock,
   SiMariadb,
   SiMicrosoftsqlserver,
   SiNextdotjs,
   SiPhp,
+  SiPocketbase,
   SiPostgresql,
   SiPythonanywhere,
   SiSupabase,
   SiSvelte,
   SiTailwindcss,
+  SiVercel,
   SiVite,
   SiXampp,
 } from "react-icons/si";
@@ -66,7 +72,7 @@ export const techStackStyling: Record<
     icon: <BiLogoTypescript />,
     color: "light-dark(rgb(49, 120, 198), rgb(30, 100, 180))",
   },
-  react: {
+  "react.js": {
     icon: <FaReact />,
     color: "light-dark(rgb(77, 167, 197), rgb(60, 140, 170))",
   },
@@ -94,7 +100,7 @@ export const techStackStyling: Record<
     icon: <FaGitAlt />,
     color: "light-dark(rgb(217, 91, 68), rgb(205, 86, 64))",
   },
-  "c-sharp": {
+  "c#": {
     icon: <SiCsharp />,
     color: "light-dark(rgb(157, 118, 224), rgb(148, 111, 211))",
   },
@@ -230,6 +236,22 @@ export const techStackStyling: Record<
     icon: <SiMicrosoftsqlserver />,
     color: "light-dark(rgb(204, 84, 83), rgb(184, 54, 53))",
   },
+  vercel: {
+    icon: <SiVercel />,
+    color: "light-dark(rgb(75, 75, 75), rgb(75, 75, 75))",
+  },
+  gsap: {
+    icon: <SiGreensock />,
+    color: "light-dark(rgb(151, 204, 63), rgb(127, 172, 54))",
+  },
+  "framer motion": {
+    icon: <SiFramer />,
+    color: "light-dark(rgb(180, 40, 192), rgb(180, 40, 192))",
+  },
+  pocketbase: {
+    icon: <SiPocketbase />,
+    color: "light-dark(rgb(130, 150, 156), rgb(130, 150, 156))",
+  },
 };
 
 export const aboutSkillset: { [key: string]: number } = {
@@ -239,14 +261,14 @@ export const aboutSkillset: { [key: string]: number } = {
   // 0 - planning to learn
 
   typescript: 3,
-  react: 3,
+  "react.js": 3,
   html: 3,
   css: 3,
   scss: 3,
   firebase: 3,
   sql: 3,
   git: 3,
-  "c-sharp": 1,
+  "c#": 1,
   // "windows forms": 0,
   // "transact-sql": 1,
   java: 2,
@@ -272,14 +294,18 @@ export const aboutSkillset: { [key: string]: number } = {
   expo: 2,
   "next.js": 3,
   // cloudinary: 1,
-  vite: 3,
+  // vite: 3,
   supabase: 3,
   // email.js: 0,
   // webgazer.js: 0,
   // deepseek: 0,
   // nosql: 0,
   // xampp: 0,
-  // microsoft sql server: 0,
+  // "microsoft sql server": 0,
+  // vercel: 0,
+  // gsap: 0,
+  // "framer motion": 0,
+  // pocketbase: 0,
 };
 
 export interface ProjectEntry {
@@ -312,7 +338,8 @@ export const projectData: {
   7: ClipDetective,
   8: FeelTok,
   9: WhealthyVessel,
-  10: Examiq, */
+  10: Examiq,
+  11: LetThereBeFragrance, */
 
   // filtered
   0: PlugIns,

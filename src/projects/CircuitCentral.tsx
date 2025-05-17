@@ -13,10 +13,10 @@ export const CircuitCentral: ProjectEntry = {
   name: "circuitcentral",
   year: "2024",
   techStack: [
-    "*c-sharp",
+    "*c#",
     "*windows forms",
     "*microsoft sql server",
-    "transact-sql",
+    "*transact-sql",
     "git",
   ],
   image: ImageCircuitCentral,
@@ -36,8 +36,8 @@ export const CircuitCentral: ProjectEntry = {
           order tracking.
         </li>
         <li>
-          <b>admin operations</b>: crud management for customers, staff,
-          suppliers, and products via winforms ui.
+          <b>admin operations</b>: create/read/update/delete (crud) operations
+          for customers, staff, suppliers, and products via winforms ui.
         </li>
         <li>
           <b>
@@ -47,10 +47,10 @@ export const CircuitCentral: ProjectEntry = {
         </li>
         <li>
           <b>role-based access</b>: separate views for customers (order-focused)
-          and admins (full crud privileges).
+          and admins with full create/read/update/delete (crud) privileges.
         </li>
         <li>
-          <b>winforms ui</b>: datagridview tables, modal forms, and
+          <b>winforms ui</b>: data grid view tables, modal forms, and
           role-specific views.
         </li>
         <li>
@@ -66,7 +66,7 @@ export const CircuitCentral: ProjectEntry = {
   ),
   myRole: (
     <>
-      circuitcentral is a solo project where i:
+      circuitcentral is a <u>solo project</u> where i:
       <ul>
         <li>
           designed 10+ winforms screens (login, product catalog, order
@@ -78,8 +78,8 @@ export const CircuitCentral: ProjectEntry = {
           procedures.
         </li>
         <li>
-          wrote c# classes for crud operations, error handling, and role-based
-          routing.
+          wrote c# classes for create/read/update/delete (crud) operations,
+          error handling, and role-based routing.
         </li>
         <li>refactored code using oop patterns to improve maintainability.</li>
         <li>

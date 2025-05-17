@@ -17,15 +17,14 @@ export const Examiq: ProjectEntry = {
   year: "2025",
   techStack: [
     "*next.js",
-    "*react",
     "*typescript",
-    "*html",
     "*scss",
     "*supabase",
-    "postgresql",
+    "*postgresql",
     "*webgazer.js",
     "*deepseek",
     "*restful api",
+    "*vercel",
     "git",
   ],
   image: ImageExamiq,
@@ -54,21 +53,24 @@ export const Examiq: ProjectEntry = {
           role-specific user interfaces.
         </li>
         <li>
-          <b>supabase</b>: postgresql database with real-time auth and crud
-          operations.
+          <b>supabase</b>: postgresql database with real-time authentication and
+          create/read/update/delete (crud) operations.
         </li>
         <li>
           <b>ai integration</b>: webgazer.js for gaze-tracking (no external data
-          transfer) deepseek v3 api for grading open-ended responses.
+          transfer), deepseek v3 api for grading open-ended responses.
         </li>
       </ul>
     </>
   ),
   myRole: (
     <>
-      examiq is a solo project where i:
+      examiq is a <u>solo project</u> where i:
       <ul>
-        <li>designed erd/dfd diagrams and implemented Supabase schema</li>
+        <li>
+          designed entity-relationship diagram (erd), data-flow diagrams (dfd)
+          and implemented supabase schema.
+        </li>
         <li>
           built all frontend components (next.js) including admin user
           management, teacher exam/course creation, and student exam interface
@@ -87,15 +89,7 @@ export const Examiq: ProjectEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<GoPackage size={24} />}
-        href={DemoExamiq}
-        onClick={() => {
-          alert(
-            "note: you have sign-up first and then login to test the app. click close to continue."
-          );
-        }}
-      >
+      <LinkWithIcon img={<GoPackage size={24} />} href={DemoExamiq}>
         live website
       </LinkWithIcon>
 
