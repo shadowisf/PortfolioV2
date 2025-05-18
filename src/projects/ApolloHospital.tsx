@@ -1,10 +1,9 @@
-import { ProjectEntry } from "../utils/GODMODE";
+import { ProjectEntry } from "../utils/_GODMODE";
 import { GoPackage } from "react-icons/go";
 import { RiGithubLine, RiFilePdf2Line } from "react-icons/ri";
 import { LinkWithIcon } from "../components/Link";
 //
 import ImageApolloHospital from "../assets/ImageApolloHospital.webp";
-import ImageTinyApolloHospital from "../assets/ImageApolloHospital_tiny.webp";
 import VideoApolloHospital from "../assets/VideoApolloHospital.webm";
 import FileApolloHospital from "../assets/FileApolloHospital.pdf";
 //
@@ -25,7 +24,6 @@ export const ApolloHospital: ProjectEntry = {
     "git",
   ],
   image: ImageApolloHospital,
-  imageTiny: ImageTinyApolloHospital,
   imageFlex: "1.876047",
   imageAlt:
     "an image of the apollo hospital project; it is viewing the patient records section wherein it displays the list of patient information. additionally, the ui has buttons for CRUD operations.",

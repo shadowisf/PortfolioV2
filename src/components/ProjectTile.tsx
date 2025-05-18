@@ -1,9 +1,10 @@
 import { homeAnimation } from "../utils/AnimationUtils";
 import { Key, useEffect, useState } from "react";
-import { useGlobalState } from "../utils/ControlUtil";
+import { useGlobalState } from "../utils/ControlUtils";
 import TechStackTile from "./TechStackTile";
 import { Link } from "react-router-dom";
-import { projectData } from "../utils/GODMODE";
+import { projectData } from "../utils/_GODMODE";
+import Spinner from "./Spinner";
 
 type ProjectProps = {
   dataID: number;
@@ -48,6 +49,11 @@ export function ProjectTile(p: ProjectProps) {
 
 export function ProjectPreview(p: ProjectProps) {
   const project = projectData[p.dataID];
+  const [loading, setLoading] = useState(true);
+
+  function handleLoadedMetadata() {
+    setLoading(false);
+  }
 
   return (
     <div data-key={p.dataID} className="preview">
@@ -55,24 +61,33 @@ export function ProjectPreview(p: ProjectProps) {
         <h1 className="currentPortfolio">
           you are currently viewing portfolio v2
         </h1>
+      ) : project.video ? (
+        <>
+          {loading && <Spinner />}
+          <video
+            loop
+            muted
+            src={project.video}
+            onLoadedMetadata={handleLoadedMetadata}
+            style={{ display: loading ? "none" : "block" }}
+          />
+        </>
       ) : (
-        <video loop muted src={project.video} />
+        <Spinner />
       )}
 
       <span className="techStack">
         {project.techStack
           .filter((item: string) => item.startsWith("*"))
-          .map((item: string, index: Key | null | undefined) => {
-            return (
-              <TechStackTile
-                techStackItem={item}
-                key={index}
-                classNameContainer="item"
-                classNameIcon="icon"
-                preview={true}
-              />
-            );
-          })}
+          .map((item: string, index: Key | null | undefined) => (
+            <TechStackTile
+              techStackItem={item}
+              key={index}
+              classNameContainer="item"
+              classNameIcon="icon"
+              preview={true}
+            />
+          ))}
       </span>
     </div>
   );

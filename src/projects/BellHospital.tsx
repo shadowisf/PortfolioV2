@@ -1,9 +1,8 @@
-import { ProjectEntry } from "../utils/GODMODE";
+import { ProjectEntry } from "../utils/_GODMODE";
 import { RiGithubLine, RiFilePdf2Line } from "react-icons/ri";
 import { LinkWithIcon } from "../components/Link";
 //
 import ImageBellHospital from "../assets/ImageBellHospital.webp";
-import ImageTinyBellHospital from "../assets/ImageBellHospital_tiny.webp";
 import VideoBellHospital from "../assets/VideoBellHospital.webm";
 import FileBellHospital from "../assets/FileBellHospital.pdf";
 //
@@ -14,7 +13,6 @@ export const BellHospital: ProjectEntry = {
   year: "2022",
   techStack: ["*java", "*cli", "*file handling", "git"],
   image: ImageBellHospital,
-  imageTiny: ImageTinyBellHospital,
   imageFlex: "1.518182",
   imageAlt:
     "an image of the bell hospital project. it is currently viewing the patients records section where it is displaying all patient information (note that this is a CLI project). additionally, there are commands for CRUD operations.",

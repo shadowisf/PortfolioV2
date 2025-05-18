@@ -1,9 +1,8 @@
-import { ProjectEntry } from "../utils/GODMODE";
+import { ProjectEntry } from "../utils/_GODMODE";
 import { RiGithubLine, RiFilePdf2Line } from "react-icons/ri";
 import { LinkWithIcon } from "../components/Link";
 //
 import ImageFeelTok from "../assets/ImageFeelTok.webp";
-import ImageTinyFeelTok from "../assets/ImageFeelTok_tiny.webp";
 import VideoFeelTok from "../assets/VideoFeelTok.webm";
 import FileFeelTok from "../assets/FileFeelTok.pdf";
 //
@@ -24,7 +23,6 @@ export const FeelTok: ProjectEntry = {
     "git",
   ],
   image: ImageFeelTok,
-  imageTiny: ImageTinyFeelTok,
   imageFlex: "1.600556",
   imageAlt:
     "image of the feeltok admin dashboard. right now, it is viewing the posts tab wherein all post details can be seen. on the very right of each post entry, there are two buttons: view and delete. clicking the view button will bring up a modal on what the post actually looks like from the user's perspective, while the delete button will delete the post.",

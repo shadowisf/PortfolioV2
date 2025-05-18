@@ -1,9 +1,8 @@
-import { ProjectEntry } from "../utils/GODMODE";
+import { ProjectEntry } from "../utils/_GODMODE";
 import { RiGithubLine, RiFilePdf2Line } from "react-icons/ri";
 import { LinkWithIcon } from "../components/Link";
 //
 import ImageFunculator from "../assets/ImageFunCulator.webp";
-import ImageTinyFunculator from "../assets/ImageFunCulator_tiny.webp";
 import VideoFunCulator from "../assets/VideoFunCulator.webm";
 import FileFunculator from "../assets/FileFunCulator.pdf";
 //
@@ -14,7 +13,6 @@ export const FunCulator: ProjectEntry = {
   year: "2022",
   techStack: ["*java", "*swing", "git"],
   image: ImageFunculator,
-  imageTiny: ImageTinyFunculator,
   imageFlex: "1.864078",
   imageAlt:
     "an image of the funculator project. it is currently viewing the menu section where it is displaying all of the possible operations such as factorial, min&max, fibonacci, etc.",

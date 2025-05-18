@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { pageTransition } from "../utils/AnimationUtils";
-import { useGlobalState } from "../utils/ControlUtil";
+import { useGlobalState } from "../utils/ControlUtils";
 import {
   RiSunLine,
   RiMoonLine,
@@ -8,7 +8,7 @@ import {
   RiCloseLargeFill,
 } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import { projectData } from "../utils/GODMODE";
+import { projectData } from "../utils/_GODMODE";
 
 export default function NavBar() {
   const { openMenu, closeMenu } = pageTransition();

@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Flip, ScrollToPlugin, ScrollTrigger } from "gsap/all";
-import { useGlobalState } from "./ControlUtil";
+import { useGlobalState } from "./ControlUtils";
 
 gsap.registerPlugin(gsap, useGSAP, ScrollToPlugin, ScrollTrigger, Flip);
 

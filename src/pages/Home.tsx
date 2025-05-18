@@ -1,7 +1,7 @@
 import { ProjectPreview, ProjectTile } from "../components/ProjectTile";
 import { LinkWithIconOnly } from "../components/Link";
 import { useEffect } from "react";
-import { useGlobalState } from "../utils/ControlUtil";
+import { useGlobalState } from "../utils/ControlUtils";
 import {
   RiGithubLine,
   RiInstagramLine,
@@ -12,14 +12,13 @@ import {
   /* homeAnimation, */ scrollingAnimation,
 } from "../utils/AnimationUtils";
 /* import { useGSAP } from "@gsap/react"; */
-import { preloadTinyImages } from "../components/ProgressiveImg";
 import {
   email,
   linkedin,
   instagram,
   github,
   projectData,
-} from "../utils/GODMODE";
+} from "../utils/_GODMODE";
 
 export default function Home() {
   const { setCurrentPage } = useGlobalState();
@@ -27,8 +26,6 @@ export default function Home() {
   /* const { startup } = homeAnimation(); */
 
   useEffect(() => {
-    preloadTinyImages();
-
     setCurrentPage("/");
     scrollToTop(0);
   }, []);

@@ -1,10 +1,9 @@
-import { ProjectEntry } from "../utils/GODMODE";
+import { ProjectEntry } from "../utils/_GODMODE";
 import { GoPackage } from "react-icons/go";
 import { RiGithubLine } from "react-icons/ri";
 import { LinkWithIcon } from "../components/Link";
 //
 import ImageV1Portfolio from "../assets/ImageV1Portfolio.webp";
-import ImageTinyV1Portfolio from "../assets/ImageV1Portfolio_tiny.webp";
 import VideoV1Portfolio from "../assets/VideoV1Portfolio.webm";
 //
 const GitHubV1Portfolio = "https://github.com/shadowisf/PortfolioV1";
@@ -15,7 +14,6 @@ export const PortfolioV1: ProjectEntry = {
   year: "2024",
   techStack: ["vite", "*react.js", "*typescript", "*scss", "*firebase", "git"],
   image: ImageV1Portfolio,
-  imageTiny: ImageTinyV1Portfolio,
   imageFlex: "1.6",
   imageAlt:
     "image of the about section in my portfolio project. it has a cartoon illustration of me and and text introducing myself.",

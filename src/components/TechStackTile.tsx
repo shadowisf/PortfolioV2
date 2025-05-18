@@ -1,4 +1,4 @@
-import { techStackStyling } from "../utils/GODMODE";
+import { techStackStyling } from "../utils/_GODMODE";
 
 type TechStackTileProps = {
   techStackItem: string;

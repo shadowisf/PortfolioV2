@@ -1,4 +1,4 @@
-import { ProjectEntry } from "../utils/GODMODE";
+import { ProjectEntry } from "../utils/_GODMODE";
 
 export const LetThereBeFragrance: ProjectEntry = {
   name: "let there be fragrance",
@@ -13,7 +13,6 @@ export const LetThereBeFragrance: ProjectEntry = {
     "git",
   ],
   image: "",
-  imageTiny: "",
   imageFlex: "",
   imageAlt: "",
   video: "",

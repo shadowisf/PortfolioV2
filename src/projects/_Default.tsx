@@ -5,7 +5,6 @@ export const Project: ProjectEntry = {
   year: "",
   techStack: [""],
   image: "",
-  imageTiny: "",
   imageFlex: "",
   imageAlt: "",
   video: "",

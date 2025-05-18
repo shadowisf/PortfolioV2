@@ -1,4 +1,4 @@
-$primaryFont: "Kyiv Type Sans";
+$primaryFont: "Kyiv Type Sans", Arial, sans-serif;
 $bayBayinFont: "Noto Sans Tagalog";
 
 $borderRadius: 8px;
@@ -511,6 +511,19 @@ footer {
       opacity: 0;
       visibility: hidden;
 
+      .spinner {
+        /* margin-top: 50px; */
+        border-radius: $borderRadius;
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        /* max-height: 675px; */
+        max-height: 70vh;
+        box-shadow: $boxShadow;
+        padding: 75px;
+        display: flex;
+      }
+
       .currentPortfolio {
         text-align: center;
         width: auto;
@@ -524,7 +537,7 @@ footer {
       }
 
       video {
-        margin-top: 50px;
+        /* margin-top: 50px; */
         border-radius: $borderRadius;
         width: auto;
         max-width: 100%;
@@ -625,6 +638,14 @@ footer {
     .media {
       display: flex;
       gap: 0.5rem;
+
+      .spinner {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
       img,
       video {
@@ -740,6 +761,14 @@ footer {
 
     .header {
       color: var(--accent-color);
+    }
+
+    .spinner {
+      width: 750px;
+      height: 425px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     h2 {

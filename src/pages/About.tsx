@@ -11,10 +11,9 @@ import {
   RiBriefcaseLine,
 } from "react-icons/ri";
 import ProfilePicture from "../assets/ImageProfile.webp";
-import ProfilePictureTiny from "../assets/ImageProfile_tiny.webp";
 import { TimelineRow } from "../components/Timeline";
-import { useEffect } from "react";
-import { useGlobalState } from "../utils/ControlUtil";
+import { useEffect, useState } from "react";
+import { useGlobalState } from "../utils/ControlUtils";
 import TechStackTile from "../components/TechStackTile";
 import { aboutAnimation, scrollingAnimation } from "../utils/AnimationUtils";
 import {
@@ -23,7 +22,6 @@ import {
   LinkWithNoIcon,
 } from "../components/Link";
 /* import { useGSAP } from "@gsap/react"; */
-import ProgressiveImg from "../components/ProgressiveImg";
 import {
   aboutSkillset,
   cv,
@@ -31,14 +29,19 @@ import {
   github,
   instagram,
   linkedin,
-} from "../utils/GODMODE";
+} from "../utils/_GODMODE";
+import Spinner from "../components/Spinner";
 
 export default function About() {
   const { scrollToTop } = scrollingAnimation();
   const { filterSkill, resetSkill /* , startup */ } = aboutAnimation();
   const { setCurrentPage } = useGlobalState();
 
+  const [imageLoading, setImageLoading] = useState(true);
+
   useEffect(() => {
+    /* preloadTinyImages(); */
+
     setCurrentPage("about");
     scrollToTop(0);
   }, []);
@@ -54,11 +57,13 @@ export default function About() {
           hey, i'm les!
         </h1>
 
-        <ProgressiveImg
-          realSrc={ProfilePicture}
-          placeholderSrc={ProfilePictureTiny}
-          alt="a picture of me"
-          zoom={true}
+        {imageLoading && <Spinner />}
+        <img
+          src={ProfilePicture}
+          alt={"a picture of me"}
+          data-action="zoom"
+          onLoad={() => setImageLoading(false)}
+          style={{ display: imageLoading ? "none" : "block" }}
         />
 
         <div className="content">

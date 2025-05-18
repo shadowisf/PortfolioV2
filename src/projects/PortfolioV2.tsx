@@ -1,10 +1,9 @@
-import { ProjectEntry } from "../utils/GODMODE";
+import { ProjectEntry } from "../utils/_GODMODE";
 import { GoPackage } from "react-icons/go";
 import { RiGithubLine } from "react-icons/ri";
 import { LinkWithIcon } from "../components/Link";
 //
 import ImageV2Portfolio from "../assets/ImageV2Portfolio.webp";
-import ImageTinyV2Portfolio from "../assets/ImageV2Portfolio_tiny.webp";
 import VideoV2Portfolio from "../assets/VideoV2Portfolio.webm";
 //
 const GitHubV2Portfolio = "https://github.com/shadowisf/PortfolioV2";
@@ -23,7 +22,6 @@ export const PortfolioV2: ProjectEntry = {
     "git",
   ],
   image: ImageV2Portfolio,
-  imageTiny: ImageTinyV2Portfolio,
   imageFlex: "1.6",
   imageAlt:
     "image of the about section in my portfolio v2 project. there is a picture of me and a text introducing myself, with a button at the very bottom which downloads my resume. at the bottom portion, there is a timeline where it showcases all important events that happened in my life. on the right side of the timeline, it showcases my skillset wherein you can filter by my skill level such as all, expert, intermediate, and beginner.",

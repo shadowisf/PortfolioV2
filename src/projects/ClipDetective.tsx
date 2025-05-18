@@ -1,10 +1,9 @@
-import { ProjectEntry } from "../utils/GODMODE";
+import { ProjectEntry } from "../utils/_GODMODE";
 import { GoPackage } from "react-icons/go";
 import { RiGithubLine } from "react-icons/ri";
 import { LinkWithIcon } from "../components/Link";
 //
 import ImageClipDetective from "../assets/ImageClipDetective.webp";
-import ImageTinyClipDetective from "../assets/ImageClipDetective_tiny.webp";
 import VideoClipDetective from "../assets/VideoClipDetective.webm";
 //
 const GitHubClipDetective = "https://github.com/shadowisf/ClipDetective";
@@ -23,7 +22,6 @@ export const ClipDetective: ProjectEntry = {
     "git",
   ],
   image: ImageClipDetective,
-  imageTiny: ImageTinyClipDetective,
   imageFlex: "1.6",
   imageAlt:
     "image of the index page of the clipdetective web app. there is a text introducing the website, a text saying 'can you guess 5-second clips from movies/series?', and three buttons at the bottom: an option to play with series, to play with movies, and a help button.",

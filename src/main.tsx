@@ -1,7 +1,7 @@
 import { Key, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./main.scss";
-import { GlobalStateProvider } from "./utils/ControlUtil.tsx";
+import { GlobalStateProvider } from "./utils/ControlUtils.tsx";
 import NavBar from "./components/NavBar.tsx";
 import { PixelGrid } from "./components/TransitionPanel.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -10,7 +10,7 @@ import Home from "./pages/Home.tsx";
 import About from "./pages/About.tsx";
 import Project from "./pages/Work.tsx";
 import YouAreLost from "./components/YouAreLost.tsx";
-import { projectData } from "./utils/GODMODE.tsx";
+import { projectData } from "./utils/_GODMODE.tsx";
 
 // firebase deploy --only hosting:les-ranalan
 

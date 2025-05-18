@@ -1,9 +1,8 @@
-import { ProjectEntry } from "../utils/GODMODE";
+import { ProjectEntry } from "../utils/_GODMODE";
 import { RiGithubLine, RiFilePdf2Line } from "react-icons/ri";
 import { LinkWithIcon } from "../components/Link";
 //
 import ImageCircuitCentral from "../assets/ImageCircuitCentral.webp";
-import ImageTinyCircuitCentral from "../assets/ImageCircuitCentral_tiny.webp";
 import VideoCircuitCentral from "../assets/VideoCircuitCentral.webm";
 import FileCircuitCentral from "../assets/FileCircuitCentral.pdf";
 //
@@ -20,7 +19,6 @@ export const CircuitCentral: ProjectEntry = {
     "git",
   ],
   image: ImageCircuitCentral,
-  imageTiny: ImageTinyCircuitCentral,
   imageFlex: "1.683857",
   imageAlt:
     "an image of the circuitcentral project; it is viewing the orders section wherein it displays a list of products that are currently in a cart. additionally, the ui has buttons for CRUD operations.",

@@ -1,9 +1,8 @@
-import { ProjectEntry } from "../utils/GODMODE";
+import { ProjectEntry } from "../utils/_GODMODE";
 import { RiGithubLine, RiFilePdf2Line } from "react-icons/ri";
 import { LinkWithIcon } from "../components/Link";
 //
 import ImagePlugIns from "../assets/ImagePlugIns.webp";
-import ImageTinyPlugIns from "../assets/ImagePlugIns_tiny.webp";
 import VideoPlugIns from "../assets/VideoPlugIns.webm";
 import FilePlugIns from "../assets/FilePlugIns.pdf";
 //
@@ -14,7 +13,6 @@ export const PlugIns: ProjectEntry = {
   year: "2022",
   techStack: ["*php", "*xampp", "*mariadb", "git"],
   image: ImagePlugIns,
-  imageTiny: ImageTinyPlugIns,
   imageFlex: "1.879195",
   imageAlt:
     "an image of the plug-ins project. it is currently viewing the products page",

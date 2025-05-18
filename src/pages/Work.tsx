@@ -1,12 +1,12 @@
-import { Key, useEffect } from "react";
+import { Key, useEffect, useState } from "react";
 import { scrollingAnimation } from "../utils/AnimationUtils";
-import { useGlobalState } from "../utils/ControlUtil";
+import { useGlobalState } from "../utils/ControlUtils";
 import TechStackTile from "../components/TechStackTile";
 import { Link } from "react-router-dom";
-import { projectData } from "../utils/GODMODE";
-import ProgressiveImg from "../components/ProgressiveImg";
+import { projectData } from "../utils/_GODMODE";
 import "zoom-vanilla.js/dist/zoom.css";
 import "zoom-vanilla.js/dist/zoom-vanilla.min.js";
+import Spinner from "../components/Spinner";
 
 type ProjectProps = {
   dataID: number;
@@ -30,15 +30,23 @@ export default function Project(p: ProjectProps) {
     ? nextProject.name.replace(/\s+/g, "-")
     : "";
 
+  // State for loading image and video
+  const [imageLoading, setImageLoading] = useState(true);
+  const [videoLoading, setVideoLoading] = useState(true);
+
   useEffect(() => {
     setCurrentPage(currentProjectTitle);
     scrollToTop(0);
+
+    // Reset loading states when project changes
+    setImageLoading(true);
+    setVideoLoading(true);
   }, [currentProjectTitle]);
 
   return (
     <main className="projectWrapper">
       <section className="header">
-        {/* previouse project */}
+        {/* previous project */}
         <Link
           to={`/${prevProjectTitle}`}
           className="nextPrevButton infoOnHover top"
@@ -78,17 +86,15 @@ export default function Project(p: ProjectProps) {
       {/* tech stack */}
       <section className="techStack">
         {project.techStack?.map(
-          (item: string, index: Key | null | undefined) => {
-            return (
-              <TechStackTile
-                techStackItem={item}
-                key={index}
-                classNameContainer="item"
-                classNameIcon="icon"
-                preview={false}
-              />
-            );
-          }
+          (item: string, index: Key | null | undefined) => (
+            <TechStackTile
+              techStackItem={item}
+              key={index}
+              classNameContainer="item"
+              classNameIcon="icon"
+              preview={false}
+            />
+          )
         )}
       </section>
 
@@ -96,16 +102,25 @@ export default function Project(p: ProjectProps) {
         {/* images & videos */}
         <div className="media">
           <div style={{ flex: project.imageFlex }}>
-            <ProgressiveImg
-              realSrc={project.image}
-              placeholderSrc={project.imageTiny}
+            {imageLoading && <Spinner />}
+            <img
+              src={project.image}
               alt={project.imageAlt}
-              zoom={true}
+              data-action="zoom"
+              onLoad={() => setImageLoading(false)}
+              style={{ display: imageLoading ? "none" : "block" }}
             />
           </div>
 
           <div style={{ flex: project.videoFlex }}>
-            <video controls muted src={project.video} />
+            {videoLoading && <Spinner />}
+            <video
+              controls
+              muted
+              src={project.video}
+              onLoadedMetadata={() => setVideoLoading(false)}
+              style={{ display: videoLoading ? "none" : "block" }}
+            />
           </div>
         </div>
 
@@ -115,14 +130,14 @@ export default function Project(p: ProjectProps) {
         {/* content */}
         <div className="paragraph">
           <h1>description:</h1>
-          <p>{project.description}</p>
+          {project.description}
 
           <br />
           <br />
           <br />
 
           <h1>my role:</h1>
-          <p>{project.myRole}</p>
+          {project.myRole}
         </div>
       </section>
 
