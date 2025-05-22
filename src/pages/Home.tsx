@@ -9,9 +9,9 @@ import {
   RiMailLine,
 } from "react-icons/ri";
 import {
-  /* homeAnimation, */ scrollingAnimation,
+  homeAnimation, scrollingAnimation,
 } from "../utils/AnimationUtils";
-/* import { useGSAP } from "@gsap/react"; */
+import { useGSAP } from "@gsap/react";
 import {
   email,
   linkedin,
@@ -24,16 +24,16 @@ import { ProjectPreview } from "../components/ProjectPreview";
 export default function Home() {
   const { setCurrentPage } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
-  /* const { startup } = homeAnimation(); */
+  const { startup } = homeAnimation();
 
   useEffect(() => {
     setCurrentPage("/");
     scrollToTop(0);
   }, []);
 
-  /* useGSAP(() => {
+  useGSAP(() => {
     startup();
-  }); */
+  });
 
   return (
     <main className="homeWrapper">

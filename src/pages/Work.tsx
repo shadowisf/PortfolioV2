@@ -17,6 +17,9 @@ export default function Project(p: ProjectProps) {
   const { executeTransition, setCurrentPage } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
 
+  const [imageLoading, setImageLoading] = useState(true);
+  const [videoLoading, setVideoLoading] = useState(true);
+
   const project = projectData[p.dataID];
   const currentProjectTitle = project.name.replace(/\s+/g, "-");
 
@@ -29,9 +32,6 @@ export default function Project(p: ProjectProps) {
   const nextProjectTitle = nextProject
     ? nextProject.name.replace(/\s+/g, "-")
     : "";
-
-  const [imageLoading, setImageLoading] = useState(true);
-  const [videoLoading, setVideoLoading] = useState(true);
 
   useEffect(() => {
     setCurrentPage(currentProjectTitle);

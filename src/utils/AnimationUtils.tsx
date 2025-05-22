@@ -3,7 +3,7 @@ import { useGSAP } from "@gsap/react";
 import { Flip, ScrollToPlugin, ScrollTrigger } from "gsap/all";
 import { useGlobalState } from "./ControlUtils";
 
-gsap.registerPlugin(gsap, useGSAP, ScrollToPlugin, ScrollTrigger, Flip);
+gsap.registerPlugin(ScrollToPlugin, ScrollTrigger, Flip);
 
 export function pageTransition() {
   const { contextSafe } = useGSAP();
@@ -83,51 +83,34 @@ export function scrollingAnimation() {
     gsap.to(window, { scrollTo: { y: 0 }, duration: duration });
   });
 
-  const scrollToID = contextSafe((id: string) => {
-    gsap.to(window, { scrollTo: { y: id, offsetY: 150 }, duration: 0.5 });
-  });
-
-  return { scrollToTop, scrollToID };
+  return { scrollToTop };
 }
 
 export function aboutAnimation() {
   const { contextSafe } = useGSAP();
   const { isMobile } = useGlobalState();
 
-  const flipperino = contextSafe((state: Flip.FlipState) => {
-    Flip.from(state, {
-      duration: 0.7,
-      ease: "power2.inOut",
-      stagger: {
-        each: 0.08,
-        from: "start",
-      },
-      absolute: true,
-      onEnter: (elements) =>
-        gsap.fromTo(
-          elements,
-          { autoAlpha: 0, scale: 0 },
-          { autoAlpha: 1, scale: 1, duration: 1 }
-        ),
-      onLeave: (elements) =>
-        gsap.to(elements, { autoAlpha: 0, scale: 0, duration: 1 }),
-    });
-  });
-
   const startup = contextSafe(() => {
-    const allTimelineRows = document.querySelector(
-      ".aboutWrapper .timeline .timelineRows"
-    )?.childNodes as NodeListOf<Element>;
+    const scrollPrompt = document.querySelector(".aboutWrapper .scrollPrompt");
+    const scrollPromptMobile = document.querySelector(
+      ".aboutWrapper .scrollPrompt.mobile"
+    );
 
-    const allSkills = document.querySelector(".aboutWrapper .skillset .skills")
-      ?.childNodes as NodeListOf<Element>;
-
+    const bioSpinner = document.querySelector(".aboutWrapper .bio .spinner");
     const bioPicture = document.querySelector(".aboutWrapper .bio img");
     const bioContent = document.querySelector(".aboutWrapper .bio .content")
       ?.childNodes as NodeListOf<Element>;
     const bioContentHS = document.querySelector(".aboutWrapper .bio #hs");
+
     const timelineContainer = document.querySelector(".aboutWrapper .timeline");
+    const timelineAllRows = document.querySelector(
+      ".aboutWrapper .timeline .timelineRows"
+    )?.childNodes as NodeListOf<Element>;
+
     const skillsetContainer = document.querySelector(".aboutWrapper .skillset");
+    const skillsetAllSkills = document.querySelector(
+      ".aboutWrapper .skillset .skills"
+    )?.childNodes as NodeListOf<Element>;
 
     const startupDuration = 1;
     const startupStagger = 0.025;
@@ -143,13 +126,16 @@ export function aboutAnimation() {
     const skillsetDelay = 0.5;
     const skillsetStagger = 0.1;
 
-    gsap.set([allTimelineRows, allSkills], { autoAlpha: "0" });
+    gsap.set([scrollPrompt, timelineAllRows, skillsetAllSkills], {
+      autoAlpha: "0",
+    });
 
     gsap.set(
       [
+        bioSpinner,
+        bioPicture,
         bioContent,
         bioContentHS,
-        bioPicture,
         timelineContainer,
         skillsetContainer,
       ],
@@ -158,8 +144,8 @@ export function aboutAnimation() {
         autoAlpha: "0",
         pointerEvents: "none",
         onComplete: () => {
-          //bio
-          gsap.to([bioPicture, bioContentHS], {
+          // bio
+          gsap.to([bioSpinner, bioPicture, bioContentHS], {
             delay: startupDelay,
             transform: "scale(1)",
             autoAlpha: "1",
@@ -174,10 +160,19 @@ export function aboutAnimation() {
             duration: startupDuration,
             ease: startupEase,
             onComplete: () => {
-              gsap.set([bioContent, bioPicture, bioContentHS], {
+              gsap.set([bioSpinner, bioPicture, bioContent, bioContentHS], {
                 clearProps: "pointerEvents",
               });
             },
+          });
+
+          // scroll prompt
+          gsap.to(scrollPrompt, {
+            delay: startupDelay,
+            transform: "scale(1)",
+            autoAlpha: "1",
+            duration: startupDuration,
+            ease: startupEase,
           });
 
           // timeline
@@ -189,8 +184,16 @@ export function aboutAnimation() {
             autoAlpha: 1,
             transform: "scale(1)",
             duration: timelineDuration,
+            onStart: () => {
+              gsap.to(scrollPrompt, {
+                transform: `scale(${startupScaleInitial})`,
+                autoAlpha: "0",
+                duration: startupDuration,
+                ease: startupEase,
+              });
+            },
           });
-          gsap.to(allTimelineRows, {
+          gsap.to(timelineAllRows, {
             delay: timelineDelay,
             scrollTrigger: {
               trigger: timelineContainer,
@@ -200,7 +203,7 @@ export function aboutAnimation() {
             duration: timelineDuration,
             stagger: timelineStagger,
             onComplete: () => {
-              gsap.set([timelineContainer, allTimelineRows], {
+              gsap.set([timelineContainer, timelineAllRows], {
                 clearProps: "pointerEvents",
               });
             },
@@ -215,8 +218,16 @@ export function aboutAnimation() {
             transform: "scale(1)",
             autoAlpha: 1,
             duration: skillsetDuration,
+            onStart: () => {
+              gsap.to(scrollPromptMobile, {
+                transform: `scale(${startupScaleInitial})`,
+                autoAlpha: "0",
+                duration: startupDuration,
+                ease: startupEase,
+              });
+            },
           });
-          gsap.to(allSkills, {
+          gsap.to(skillsetAllSkills, {
             delay: skillsetDelay,
             scrollTrigger: {
               trigger: skillsetContainer,
@@ -226,7 +237,7 @@ export function aboutAnimation() {
             duration: skillsetDuration,
             stagger: skillsetStagger,
             onComplete: () => {
-              gsap.set([skillsetContainer, allSkills], {
+              gsap.set([skillsetContainer, skillsetAllSkills], {
                 clearProps: "pointerEvents",
               });
             },
@@ -236,17 +247,43 @@ export function aboutAnimation() {
     );
   });
 
-  const allSkills = document.querySelectorAll(".aboutWrapper .skills .item");
+  const skillFlip = contextSafe((state: Flip.FlipState) => {
+    const duration = 0.7;
+    const ease = "power2.inOut";
+    const staggerEach = 0.08;
+
+    Flip.from(state, {
+      duration: duration,
+      ease: ease,
+      stagger: {
+        each: staggerEach,
+        from: "start",
+      },
+      absolute: true,
+      onEnter: (elements) =>
+        gsap.fromTo(
+          elements,
+          { autoAlpha: 0, scale: 0 },
+          { autoAlpha: 1, scale: 1, duration: 1 }
+        ),
+      onLeave: (elements) =>
+        gsap.to(elements, { autoAlpha: 0, scale: 0, duration: 1 }),
+    });
+  });
 
   const resetSkill = contextSafe((event: React.MouseEvent) => {
+    const skillsetAllSkills = document.querySelector(
+      ".aboutWrapper .skillset .skills"
+    )?.childNodes as NodeListOf<Element>;
+
     if (event.button === 0) {
       const allOptions = document.querySelectorAll(
         ".aboutWrapper .skillset option"
       );
 
-      const state = Flip.getState(allSkills);
+      const state = Flip.getState(skillsetAllSkills);
 
-      allSkills.forEach((skill) => {
+      skillsetAllSkills.forEach((skill) => {
         gsap.set(skill, {
           display: "flex",
         });
@@ -262,22 +299,26 @@ export function aboutAnimation() {
         }
       });
 
-      flipperino(state);
+      skillFlip(state);
     }
   });
 
   const filterSkill = contextSafe(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
+      const skillsetAllSkills = document.querySelector(
+        ".aboutWrapper .skillset .skills"
+      )?.childNodes as NodeListOf<Element>;
+
       const selectedValue = event.target.value;
 
-      const state = Flip.getState(allSkills);
+      const state = Flip.getState(skillsetAllSkills);
 
       if (selectedValue === "0") {
-        allSkills.forEach((skill) => {
+        skillsetAllSkills.forEach((skill) => {
           gsap.set(skill, { display: "flex" });
         });
       } else {
-        allSkills.forEach((skill) => {
+        skillsetAllSkills.forEach((skill) => {
           const dataKey = skill.getAttribute("data-key");
 
           if (dataKey?.match(selectedValue)) {
@@ -288,7 +329,7 @@ export function aboutAnimation() {
         });
       }
 
-      flipperino(state);
+      skillFlip(state);
     }
   );
 
@@ -305,6 +346,7 @@ export function homeAnimation() {
   const startup = contextSafe(() => {
     const rightContainer = document.querySelector(".homeWrapper .hero")
       ?.childNodes as NodeListOf<HTMLElement>;
+
     const projectTile = document.querySelectorAll(".homeWrapper .tile");
 
     const startupDuration = "1";

@@ -764,7 +764,12 @@ footer {
 
   display: flex;
   flex-direction: column;
-  gap: 8rem;
+  gap: 4rem;
+
+  .scrollPrompt {
+    display: grid;
+    place-items: center;
+  }
 
   .bio {
     display: flex;
@@ -778,6 +783,8 @@ footer {
     .spinner {
       width: 750px;
       height: 425px;
+      padding: 75px;
+      box-shadow: $boxShadow;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -820,6 +827,12 @@ footer {
   .timelineAndSkillset {
     display: flex;
     gap: 8rem;
+
+    .scrollPrompt {
+      &.mobile {
+        display: none;
+      }
+    }
 
     .timeline {
       display: flex;
@@ -1248,6 +1261,12 @@ footer {
       .skillset {
         height: 500px;
       }
+
+      .scrollPrompt {
+        &.mobile {
+          display: grid;
+        }
+      }
     }
   }
 
@@ -1318,3 +1337,8 @@ footer {
     }
   }
 }
+
+/* * {
+  border: 1px solid red;
+}
+ */

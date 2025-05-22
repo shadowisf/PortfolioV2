@@ -4,8 +4,6 @@ import { pageTransition } from "./AnimationUtils";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 
-gsap.registerPlugin(gsap, useGSAP);
-
 type GlobalStateContextType = {
   isMobile: boolean;
   currentPage: string;
