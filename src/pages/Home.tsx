@@ -1,4 +1,4 @@
-import { ProjectPreview, ProjectTile } from "../components/ProjectTile";
+import { ProjectTile } from "../components/ProjectTile";
 import { LinkWithIconOnly } from "../components/Link";
 import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtils";
@@ -19,6 +19,7 @@ import {
   github,
   projectData,
 } from "../utils/_GODMODE";
+import { ProjectPreview } from "../components/ProjectPreview";
 
 export default function Home() {
   const { setCurrentPage } = useGlobalState();

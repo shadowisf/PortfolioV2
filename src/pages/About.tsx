@@ -40,8 +40,6 @@ export default function About() {
   const [imageLoading, setImageLoading] = useState(true);
 
   useEffect(() => {
-    /* preloadTinyImages(); */
-
     setCurrentPage("about");
     scrollToTop(0);
   }, []);
@@ -181,7 +179,7 @@ export default function About() {
               img={<RiBriefcaseLine size={40} fill="var(--accent-color)" />}
               verticalLine={true}
             >
-              working as full-stack web developer for whealthy vessel
+              working as part-time full-stack web developer for whealthy vessel
             </TimelineRow>
 
             <TimelineRow
@@ -205,7 +203,8 @@ export default function About() {
               img={<RiBriefcaseLine size={40} fill="var(--accent-color)" />}
               verticalLine={false}
             >
-              working as full-stack web developer for let there be fragrance
+              working as part-time full-stack web developer for let there be
+              fragrance
             </TimelineRow>
           </div>
         </section>

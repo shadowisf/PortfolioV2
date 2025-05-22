@@ -1,12 +1,10 @@
 import { homeAnimation } from "../utils/AnimationUtils";
-import { Key, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalState } from "../utils/ControlUtils";
-import TechStackTile from "./TechStackTile";
 import { Link } from "react-router-dom";
 import { projectData } from "../utils/_GODMODE";
-import Spinner from "./Spinner";
 
-type ProjectProps = {
+export type ProjectProps = {
   dataID: number;
   onClick?: () => void;
 };
@@ -44,52 +42,6 @@ export function ProjectTile(p: ProjectProps) {
       <h5 className="title">{project.name}</h5>
       <small className="year">{project.year}</small>
     </Link>
-  );
-}
-
-export function ProjectPreview(p: ProjectProps) {
-  const project = projectData[p.dataID];
-  const [loading, setLoading] = useState(true);
-
-  function handleLoadedMetadata() {
-    setLoading(false);
-  }
-
-  return (
-    <div data-key={p.dataID} className="preview">
-      {p.dataID === 6 ? (
-        <h1 className="currentPortfolio">
-          you are currently viewing portfolio v2
-        </h1>
-      ) : project.video ? (
-        <>
-          {loading && <Spinner />}
-          <video
-            loop
-            muted
-            src={project.video}
-            onLoadedMetadata={handleLoadedMetadata}
-            style={{ display: loading ? "none" : "block" }}
-          />
-        </>
-      ) : (
-        <Spinner />
-      )}
-
-      <span className="techStack">
-        {project.techStack
-          .filter((item: string) => item.startsWith("*"))
-          .map((item: string, index: Key | null | undefined) => (
-            <TechStackTile
-              techStackItem={item}
-              key={index}
-              classNameContainer="item"
-              classNameIcon="icon"
-              preview={true}
-            />
-          ))}
-      </span>
-    </div>
   );
 }
 

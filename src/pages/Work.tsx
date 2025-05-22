@@ -30,7 +30,6 @@ export default function Project(p: ProjectProps) {
     ? nextProject.name.replace(/\s+/g, "-")
     : "";
 
-  // State for loading image and video
   const [imageLoading, setImageLoading] = useState(true);
   const [videoLoading, setVideoLoading] = useState(true);
 
@@ -38,7 +37,6 @@ export default function Project(p: ProjectProps) {
     setCurrentPage(currentProjectTitle);
     scrollToTop(0);
 
-    // Reset loading states when project changes
     setImageLoading(true);
     setVideoLoading(true);
   }, [currentProjectTitle]);
@@ -101,7 +99,7 @@ export default function Project(p: ProjectProps) {
       <section className="content">
         {/* images & videos */}
         <div className="media">
-          <div style={{ flex: project.imageFlex }}>
+          <div style={{ flex: project.imageFlex, width: "100%" }}>
             {imageLoading && <Spinner />}
             <img
               src={project.image}
@@ -112,7 +110,7 @@ export default function Project(p: ProjectProps) {
             />
           </div>
 
-          <div style={{ flex: project.videoFlex }}>
+          <div style={{ flex: project.videoFlex, width: "100%" }}>
             {videoLoading && <Spinner />}
             <video
               controls

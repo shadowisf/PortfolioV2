@@ -7,9 +7,9 @@ import { PlugIns } from "../projects/PlugIns";
 import { PortfolioV2 } from "../projects/PortfolioV2";
 import { ClipDetective } from "../projects/ClipDetective";
 import { FeelTok } from "../projects/FeelTok";
-import { WhealthyVessel } from "../projects/WhealthyVessel";
+/* import { WhealthyVessel } from "../projects/WhealthyVessel"; */
 import { Examiq } from "../projects/Examiq";
-import { LetThereBeFragrance } from "../projects/LetThereBeFragrance";
+/* import { LetThereBeFragrance } from "../projects/LetThereBeFragrance"; */
 //
 import { AiFillApi } from "react-icons/ai";
 import {
@@ -327,7 +327,7 @@ export const projectData: {
   [key: number]: ProjectEntry;
 } = {
   // all
-  0: PlugIns,
+  /* 0: PlugIns,
   1: BellHospital,
   2: FunCulator,
   3: ApolloHospital,
@@ -338,10 +338,10 @@ export const projectData: {
   8: FeelTok,
   9: WhealthyVessel,
   10: Examiq,
-  11: LetThereBeFragrance,
+  11: LetThereBeFragrance, */
 
   // filtered
-  /* 0: PlugIns,
+  0: PlugIns,
   1: BellHospital,
   2: FunCulator,
   3: ApolloHospital,
@@ -350,5 +350,5 @@ export const projectData: {
   6: PortfolioV2,
   7: ClipDetective,
   8: FeelTok,
-  9: Examiq, */
+  9: Examiq,
 };
