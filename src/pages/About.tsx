@@ -238,7 +238,7 @@ export default function About() {
             <h1 className="header">my skillset</h1>
 
             <div className="filter">
-              <span>filter:</span>
+              <span>filter by skill level:</span>
               <select
                 onMouseDown={(e) => resetSkill(e)}
                 onChange={(e) => filterSkill(e)}

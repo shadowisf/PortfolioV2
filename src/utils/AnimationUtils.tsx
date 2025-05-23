@@ -353,7 +353,6 @@ export function homeAnimation() {
     const startupDelay = 0.25;
     const startupEase = "power2.out";
     const startupStagger = 0.05;
-
     const startupScaleInitial = 0.75;
 
     gsap.set(["nav", ".navAlt"], {
@@ -425,15 +424,15 @@ export function homeAnimation() {
 
   const previewEnter = {
     transform: "scale(1)",
-    autoAlpha: "1",
-    duration: "0.1",
+    autoAlpha: 1,
+    duration: 0.1,
     ease: "power2.inOut",
   };
 
   const previewExit = {
     transform: "scale(0.95)",
-    autoAlpha: "0",
-    duration: "0.1",
+    autoAlpha: 0,
+    duration: 0.1,
     ease: "power2.inOut",
   };
 
