@@ -11,7 +11,6 @@ export function ProjectPreview(p: ProjectProps) {
 
   function onCanPlay() {
     setLoading(false);
-    videoRef.current?.play();
   }
 
   return (
@@ -26,10 +25,8 @@ export function ProjectPreview(p: ProjectProps) {
           <video
             ref={videoRef}
             src={project.video}
-            autoPlay
             muted
             loop
-            playsInline
             onCanPlay={onCanPlay}
             style={{
               visibility: loading ? "hidden" : "visible",

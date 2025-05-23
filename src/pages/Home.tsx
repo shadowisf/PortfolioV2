@@ -8,9 +8,7 @@ import {
   RiLinkedinBoxLine,
   RiMailLine,
 } from "react-icons/ri";
-import {
-  homeAnimation, scrollingAnimation,
-} from "../utils/AnimationUtils";
+import { homeAnimation, scrollingAnimation } from "../utils/AnimationUtils";
 import { useGSAP } from "@gsap/react";
 import {
   email,

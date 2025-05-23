@@ -115,7 +115,7 @@ export function aboutAnimation() {
     const startupDuration = 1;
     const startupStagger = 0.025;
     const startupScaleInitial = 0.95;
-    const startupDelay = isMobile ? 1.25 : 0.75;
+    const startupDelay = isMobile ? 1.25 : 0.25;
     const startupEase = "power2.out";
 
     const timelineDuration = 1;
@@ -127,7 +127,7 @@ export function aboutAnimation() {
     const skillsetStagger = 0.1;
 
     gsap.set([scrollPrompt, timelineAllRows, skillsetAllSkills], {
-      autoAlpha: "0",
+      autoAlpha: 0,
     });
 
     gsap.set(
@@ -141,14 +141,14 @@ export function aboutAnimation() {
       ],
       {
         transform: `scale(${startupScaleInitial})`,
-        autoAlpha: "0",
+        autoAlpha: 0,
         pointerEvents: "none",
         onComplete: () => {
           // bio
           gsap.to([bioSpinner, bioPicture, bioContentHS], {
             delay: startupDelay,
             transform: "scale(1)",
-            autoAlpha: "1",
+            autoAlpha: 1,
             duration: startupDuration,
             ease: startupEase,
           });
@@ -156,7 +156,7 @@ export function aboutAnimation() {
             delay: startupDelay,
             stagger: startupStagger,
             transform: "scale(1)",
-            autoAlpha: "1",
+            autoAlpha: 1,
             duration: startupDuration,
             ease: startupEase,
             onComplete: () => {
@@ -170,7 +170,7 @@ export function aboutAnimation() {
           gsap.to(scrollPrompt, {
             delay: startupDelay,
             transform: "scale(1)",
-            autoAlpha: "1",
+            autoAlpha: 1,
             duration: startupDuration,
             ease: startupEase,
           });
@@ -187,7 +187,7 @@ export function aboutAnimation() {
             onStart: () => {
               gsap.to(scrollPrompt, {
                 transform: `scale(${startupScaleInitial})`,
-                autoAlpha: "0",
+                autoAlpha: 0,
                 duration: startupDuration,
                 ease: startupEase,
               });
@@ -221,7 +221,7 @@ export function aboutAnimation() {
             onStart: () => {
               gsap.to(scrollPromptMobile, {
                 transform: `scale(${startupScaleInitial})`,
-                autoAlpha: "0",
+                autoAlpha: 0,
                 duration: startupDuration,
                 ease: startupEase,
               });
@@ -349,8 +349,8 @@ export function homeAnimation() {
 
     const projectTile = document.querySelectorAll(".homeWrapper .tile");
 
-    const startupDuration = "1";
-    const startupDelay = "0.75";
+    const startupDuration = 1;
+    const startupDelay = 0.25;
     const startupEase = "power2.out";
     const startupStagger = 0.05;
 
@@ -444,7 +444,17 @@ export function homeAnimation() {
 
       if (dataKey === targetID.toString()) {
         if (video) {
-          video?.play();
+          if (video.readyState >= 2) {
+            video.play();
+          } else {
+            video.addEventListener(
+              "loadeddata",
+              () => {
+                video.play();
+              },
+              { once: true }
+            );
+          }
         }
 
         gsap.to(container, previewEnter);

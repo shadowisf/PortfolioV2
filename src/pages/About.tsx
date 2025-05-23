@@ -80,10 +80,18 @@ export default function About() {
             <br />
 
             <p>
-              i primarily work with next.js, react.js, typescript, scss,
-              supabase, postgresql, and other libraries/frameworks. though i am
-              highly flexible to different technologies and programming
-              languages.
+              i first got into coding when i was introduced to scratch, visual
+              programming language, during high school where i built a pong game
+              using drag-and-drop blocks of different functions. i quickly fell
+              in love with the idea, and one thing led to the next.
+            </p>
+
+            <br />
+
+            <p>
+              i primarily work with next.js, react.js, typescript, scss/tailwind
+              css, and sql. though i am highly flexible to different
+              frameworks/libraries and programming languages.
             </p>
 
             <br />
@@ -240,11 +248,12 @@ export default function About() {
                 <option value={"2"}>intermediate</option>
                 <option value={"1"}>beginner</option>
               </select>
+              <small>(try it :p)</small>
             </div>
 
             <div className="skills">
               {Object.keys(aboutSkillset)
-                .sort(() => Math.random() - 0.5) // Shuffle keys
+                .sort(() => Math.random() - 0.5)
                 .map((item, index) => {
                   const level = aboutSkillset[item];
 
