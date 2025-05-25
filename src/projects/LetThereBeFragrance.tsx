@@ -11,6 +11,7 @@ export const LetThereBeFragrance: ProjectEntry = {
     "*supabase",
     "*postgresql",
     "git",
+    "figma",
   ],
   image: "",
   imageFlex: "",

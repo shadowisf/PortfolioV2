@@ -39,10 +39,12 @@ import {
   SiDjango,
   SiDotnet,
   SiExpo,
+  SiFigma,
   SiFlask,
   SiFramer,
   SiFramework,
   SiGreensock,
+  SiJira,
   SiMariadb,
   SiMicrosoftsqlserver,
   SiNextdotjs,
@@ -253,6 +255,14 @@ export const techStackStyling: Record<
     icon: <SiPocketbase />,
     color: "light-dark(rgb(130, 150, 156), rgb(130, 150, 156))",
   },
+  jira: {
+    icon: <SiJira />,
+    color: "light-dark(rgb(35, 83, 199), rgb(35, 83, 199))",
+  },
+  figma: {
+    icon: <SiFigma />,
+    color: "light-dark(rgb(81, 167, 101), rgb(81, 167, 101))",
+  },
 };
 
 export const aboutSkillset: { [key: string]: number } = {
@@ -283,7 +293,7 @@ export const aboutSkillset: { [key: string]: number } = {
   // mysql: 3,
   python: 2,
   // postgresql: 0,
-  javascript: 2,
+  javascript: 3,
   "restful api": 2,
   // angular: 0,
   // vue: 0,
@@ -307,6 +317,8 @@ export const aboutSkillset: { [key: string]: number } = {
   // gsap: 0,
   // "framer motion": 0,
   // pocketbase: 0,
+  jira: 2,
+  figma: 3,
 };
 
 export interface ProjectEntry {

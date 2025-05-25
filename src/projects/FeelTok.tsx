@@ -21,6 +21,8 @@ export const FeelTok: ProjectEntry = {
     "*email.js",
     "*restful api",
     "git",
+    "*jira",
+    "*figma",
   ],
   image: ImageFeelTok,
   imageFlex: "1.600556",
