@@ -35,7 +35,7 @@ export function LinkWithIcon(p: LinkProps) {
       target="_blank"
       className={`linkWithIcon ${p.className}`}
     >
-      <picture>{p.img}</picture>
+      {p.img}
       <span className={p.className === "faded" ? "faded" : ""}>
         {p.children}
       </span>

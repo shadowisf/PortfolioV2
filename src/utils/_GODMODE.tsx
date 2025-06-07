@@ -285,7 +285,7 @@ export const aboutSkillset: { [key: string]: number } = {
   sql: 3,
   git: 3,
   "c#": 1,
-  "windows forms": 1,
+  // "windows forms": 1,
   // "transact-sql": 1,
   java: 2,
   // flask: 1,

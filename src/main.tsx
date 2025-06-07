@@ -1,7 +1,6 @@
 import { Key, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./main.scss";
-import { GlobalStateProvider } from "./utils/ControlUtils.tsx";
 import NavBar from "./components/NavBar.tsx";
 import { PixelGrid } from "./components/TransitionPanel.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -11,6 +10,7 @@ import About from "./pages/About.tsx";
 import Work from "./pages/Work.tsx";
 import YouAreLost from "./components/YouAreLost.tsx";
 import { projectData } from "./utils/_GODMODE.tsx";
+import { GlobalStateProvider } from "./utils/ControlUtils.tsx";
 
 // firebase deploy --only hosting:les-ranalan
 

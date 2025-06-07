@@ -1,5 +1,4 @@
 import { ProjectEntry } from "../utils/_GODMODE";
-import { RiGithubLine, RiFilePdf2Line } from "react-icons/ri";
 import { LinkWithIcon } from "../components/Link";
 //
 import ImagePlugIns from "../assets/ImagePlugIns.webp";
@@ -92,11 +91,18 @@ export const PlugIns: ProjectEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon img={<RiGithubLine size={24} />} href={GitHubPlugIns}>
-        repository
+      <LinkWithIcon
+        img={<img src="src/assets/IconOctopus.svg" />}
+        href={GitHubPlugIns}
+      >
+        source code
       </LinkWithIcon>
-      <LinkWithIcon img={<RiFilePdf2Line size={24} />} href={FilePlugIns}>
-        report
+
+      <LinkWithIcon
+        img={<img src="src/assets/IconMemo.svg" />}
+        href={FilePlugIns}
+      >
+        case study
       </LinkWithIcon>
     </>
   ),

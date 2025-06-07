@@ -1,5 +1,4 @@
 import { ProjectEntry } from "../utils/_GODMODE";
-import { RiGithubLine, RiFilePdf2Line } from "react-icons/ri";
 import { LinkWithIcon } from "../components/Link";
 //
 import ImageCircuitCentral from "../assets/ImageCircuitCentral.webp";
@@ -93,17 +92,17 @@ export const CircuitCentral: ProjectEntry = {
   links: (
     <>
       <LinkWithIcon
-        img={<RiGithubLine size={24} />}
+        img={<img src="src/assets/IconOctopus.svg" />}
         href={GitHubCircuitCentral}
       >
-        repository
+        source code
       </LinkWithIcon>
 
       <LinkWithIcon
-        img={<RiFilePdf2Line size={24} />}
+        img={<img src="src/assets/IconMemo.svg" />}
         href={FileCircuitCentral}
       >
-        report
+        case study
       </LinkWithIcon>
     </>
   ),

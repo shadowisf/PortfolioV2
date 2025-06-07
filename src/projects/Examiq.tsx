@@ -1,12 +1,9 @@
 import { ProjectEntry } from "../utils/_GODMODE";
-import { RiGithubLine, RiFilePdf2Line } from "react-icons/ri";
 import { LinkWithIcon } from "../components/Link";
 //
-
 import ImageExamiq from "../assets/ImageExamiq.webp";
 import VideoExamiq from "../assets/VideoExamiq.webm";
 import FileExamiq from "../assets/FileExamiq.pdf";
-import { GoPackage } from "react-icons/go";
 //
 const GitHubExamiq = "https://github.com/shadowisf/Examiq";
 const DemoExamiq = "https://examiq-seven.vercel.app";
@@ -87,16 +84,25 @@ export const Examiq: ProjectEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon img={<GoPackage size={24} />} href={DemoExamiq}>
+      <LinkWithIcon
+        img={<img src="src/assets/IconGlobe.svg" />}
+        href={DemoExamiq}
+      >
         live website
       </LinkWithIcon>
 
-      <LinkWithIcon img={<RiGithubLine size={24} />} href={GitHubExamiq}>
-        repository
+      <LinkWithIcon
+        img={<img src="src/assets/IconOctopus.svg" />}
+        href={GitHubExamiq}
+      >
+        source code
       </LinkWithIcon>
 
-      <LinkWithIcon img={<RiFilePdf2Line size={24} />} href={FileExamiq}>
-        report
+      <LinkWithIcon
+        img={<img src="src/assets/IconMemo.svg" />}
+        href={FileExamiq}
+      >
+        case study
       </LinkWithIcon>
     </>
   ),

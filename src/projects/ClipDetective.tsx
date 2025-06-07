@@ -1,6 +1,4 @@
 import { ProjectEntry } from "../utils/_GODMODE";
-import { GoPackage } from "react-icons/go";
-import { RiGithubLine } from "react-icons/ri";
 import { LinkWithIcon } from "../components/Link";
 //
 import ImageClipDetective from "../assets/ImageClipDetective.webp";
@@ -81,12 +79,18 @@ export const ClipDetective: ProjectEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon img={<GoPackage size={24} />} href={DemoClipDetective}>
+      <LinkWithIcon
+        img={<img src="src/assets/IconGlobe.svg" />}
+        href={DemoClipDetective}
+      >
         live website
       </LinkWithIcon>
 
-      <LinkWithIcon img={<RiGithubLine size={24} />} href={GitHubClipDetective}>
-        repository
+      <LinkWithIcon
+        img={<img src="src/assets/IconOctopus.svg" />}
+        href={GitHubClipDetective}
+      >
+        source code
       </LinkWithIcon>
     </>
   ),

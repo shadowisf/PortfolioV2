@@ -16,10 +16,10 @@ $fontVarThin: "wght" 1000, "CONT" 1000;
 
 $scaleOnHover: 1.05;
 
-$minMaxWidth: 1020px;
+$minMaxWidth: 1030px;
 
 :root {
-  --minMaxWidth: 1020px;
+  --minMaxWidth: 1030px;
 
   --theme: light dark;
 
@@ -488,6 +488,16 @@ footer {
         white-space: nowrap;
       }
 
+      .intro {
+        display: flex;
+        gap: 0.5rem;
+
+        .swirlEmoji {
+          margin-top: 10px;
+          width: 50px;
+        }
+      }
+
       .links {
         display: flex;
         justify-content: space-between;
@@ -780,7 +790,7 @@ footer {
 
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 8rem;
 
   .scrollPrompt {
     display: grid;
@@ -814,7 +824,7 @@ footer {
       color: var(--faded-color);
     }
 
-    img {
+    .profilePicture {
       flex: 1;
       box-shadow: $boxShadow;
       border-radius: $borderRadius;
@@ -823,25 +833,21 @@ footer {
       max-width: 35%;
     }
 
-    .readMoreContainer {
-      height: 0;
-      overflow: hidden;
-    }
-
-    .readMoreButton {
+    .intro {
+      text-wrap: nowrap;
       display: flex;
-      justify-content: center;
       align-items: center;
-      cursor: pointer;
+      gap: 1rem;
 
-      transition: font-variation-settings 0.5s, color 0.5s, scale 0.25s;
+      .waveEmojiWrapper {
+        transform: scaleX(-1);
+        display: inline-block;
 
-      font-variation-settings: $fontVarNormal;
-
-      &:hover {
-        font-variation-settings: $fontVarThin;
-        color: var(--accent-color);
-        scale: $scaleOnHover;
+        .waveEmoji {
+          margin-top: 10px;
+          display: inline-block;
+          width: 50px;
+        }
       }
     }
 
@@ -895,6 +901,10 @@ footer {
           .date {
             color: var(--faded-color);
           }
+        }
+
+        img {
+          width: 40px;
         }
 
         svg {
@@ -1072,9 +1082,6 @@ footer {
   text-decoration: none;
   color: var(--text-color);
 
-  padding-bottom: 5px;
-  padding-right: 5px;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1082,14 +1089,32 @@ footer {
 
   gap: 0.5rem;
 
-  /* border-bottom: 1px dashed; */
-
   transition: font-variation-settings 0.5s, color 0.5s, scale 0.25s;
 
   font-variation-settings: $fontVarNormal;
 
-  picture {
+  span {
+    position: relative;
+    border-bottom: 1px dashed var(--text-color);
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 100%;
+      height: 1px;
+      background-color: currentColor;
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 0.5s ease, background-color 0.5s ease;
+    }
+  }
+
+  img {
     display: flex;
+    width: 24px;
+    pointer-events: none;
   }
 
   svg {
@@ -1100,12 +1125,16 @@ footer {
   &.faded {
     color: var(--faded-color);
 
-    svg {
-      fill: var(--faded-color);
+    span {
+      border-bottom: 1px dashed var(--faded-color);
+
+      &::after {
+        background-color: var(--faded-color);
+      }
     }
 
-    &::after {
-      background-color: var(--faded-color);
+    svg {
+      fill: var(--faded-color);
     }
   }
 
@@ -1117,25 +1146,12 @@ footer {
     svg {
       fill: var(--accent-color);
     }
-  }
 
-  /* &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -1px;
-    width: 100%;
-    height: 1px;
-    transform: scaleX(0);
-    transform-origin: left;
-    background-color: var(--text-color);
-    transition: transform 0.5s, background-color 0.5s;
+    span::after {
+      transform: scaleX(1);
+      background-color: var(--accent-color);
+    }
   }
-
-  &:hover::after {
-    transform: scaleX(1);
-    background-color: var(--accent-color);
-  } */
 }
 
 .linkWithNoIcon {
@@ -1283,7 +1299,7 @@ footer {
       flex-direction: column;
       gap: 0;
 
-      img {
+      .profilePicture {
         flex: 1;
         margin-top: 1rem;
         width: 400px;
@@ -1327,9 +1343,20 @@ footer {
     }
 
     .right {
+      display: block;
+
       position: static;
 
       height: fit-content;
+
+      .hero {
+        .intro {
+          .swirlEmoji {
+            width: 35px;
+            margin-top: 5px;
+          }
+        }
+      }
     }
   }
 

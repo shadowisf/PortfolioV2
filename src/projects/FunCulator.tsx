@@ -1,5 +1,4 @@
 import { ProjectEntry } from "../utils/_GODMODE";
-import { RiGithubLine, RiFilePdf2Line } from "react-icons/ri";
 import { LinkWithIcon } from "../components/Link";
 //
 import ImageFunculator from "../assets/ImageFunCulator.webp";
@@ -89,12 +88,18 @@ export const FunCulator: ProjectEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon img={<RiGithubLine size={24} />} href={GitHubFunCulator}>
-        repository
+      <LinkWithIcon
+        img={<img src="src/assets/IconOctopus.svg" />}
+        href={GitHubFunCulator}
+      >
+        source code
       </LinkWithIcon>
 
-      <LinkWithIcon img={<RiFilePdf2Line size={24} />} href={FileFunculator}>
-        report
+      <LinkWithIcon
+        img={<img src="src/assets/IconMemo.svg" />}
+        href={FileFunculator}
+      >
+        case study
       </LinkWithIcon>
     </>
   ),

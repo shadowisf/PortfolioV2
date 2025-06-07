@@ -1,8 +1,8 @@
 import { useGSAP } from "@gsap/react";
 import { createContext, useContext, useEffect, useState } from "react";
-import { pageTransition } from "./AnimationUtils";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
+import { usePageTransition } from "./usePageTransition";
 
 type GlobalStateContextType = {
   isMobile: boolean;
@@ -41,7 +41,8 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const [currentPage, setCurrentPage] = useState("");
 
   const { contextSafe } = useGSAP();
-  const { closeMenu /* , startTransition, endTransition */ } = pageTransition();
+  const { closeMenu /* , startTransition, endTransition */ } =
+    usePageTransition();
 
   const navigate = useNavigate();
 

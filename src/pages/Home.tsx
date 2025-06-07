@@ -1,39 +1,21 @@
 import { ProjectTile } from "../components/ProjectTile";
-import { LinkWithIcon, LinkWithIconOnly } from "../components/Link";
 import { useEffect } from "react";
-import { useGlobalState } from "../utils/ControlUtils";
-import {
-  RiFilePdf2Line,
-  RiGithubLine,
-  RiInstagramLine,
-  RiLinkedinBoxLine,
-  RiMailLine,
-} from "react-icons/ri";
-import { homeAnimation, scrollingAnimation } from "../utils/AnimationUtils";
-import {
-  email,
-  linkedin,
-  instagram,
-  github,
-  projectData,
-  cv,
-} from "../utils/_GODMODE";
+import { email, linkedin, github, projectData, cv } from "../utils/_GODMODE";
 import { ProjectPreview } from "../components/ProjectPreview";
-import { useGSAP } from "@gsap/react";
+import { LinkWithIcon } from "../components/Link";
+import { useGlobalState } from "../utils/ControlUtils";
+import { useScrollingAnimation } from "../utils/useScrollingAnimation";
+import { useHomeAnimation } from "../utils/useHomeAnimation";
 
 export default function Home() {
   const { setCurrentPage } = useGlobalState();
-  const { scrollToTop } = scrollingAnimation();
-  const { startup } = homeAnimation();
+  const { scrollToTop } = useScrollingAnimation();
+  const { swirlOnHover, swirlOnLeave } = useHomeAnimation();
 
   useEffect(() => {
     setCurrentPage("/");
     scrollToTop(0);
   }, []);
-
-  useGSAP(() => {
-    startup();
-  });
 
   return (
     <main className="homeWrapper">
@@ -49,13 +31,18 @@ export default function Home() {
         ))}
 
         <div className="hero">
-          <h1 className="extra name accent">
-            {/* ᜎᜒᜐ᜔ ᜍᜈᜎᜈ᜔ */}
-            les ranalan
-          </h1>
+          <div className="intro">
+            <h1 className="extra name accent">les ranalan</h1>
+            <img
+              className="swirlEmoji"
+              src="src/assets/IconSwirl.svg"
+              onMouseEnter={swirlOnHover}
+              onMouseLeave={swirlOnLeave}
+            />
+          </div>
 
           <h2 className="nonBold">
-            <span className="bulletPoint">⊢ </span>fullstack software engineer
+            <span className="bulletPoint">⊢ </span>full-stack software engineer
           </h2>
 
           <h2 className="nonBold">
@@ -69,43 +56,30 @@ export default function Home() {
           <br />
 
           <div className="links">
-            <LinkWithIcon
-              className="faded"
-              img={<RiFilePdf2Line size={32} />}
-              href={cv}
-            >
+            <LinkWithIcon img={<img src="src/assets/IconMemo.svg" />} href={cv}>
               resume
             </LinkWithIcon>
 
-            <div>
-              <LinkWithIconOnly
-                className="faded"
-                img={<RiMailLine size={32} />}
-                href={email}
-                label="email"
-              />
+            <LinkWithIcon
+              img={<img src="src/assets/IconEmail.svg" />}
+              href={email}
+            >
+              email
+            </LinkWithIcon>
 
-              <LinkWithIconOnly
-                className="faded"
-                img={<RiLinkedinBoxLine size={32} />}
-                href={linkedin}
-                label="linkedin"
-              />
+            <LinkWithIcon
+              img={<img src="src/assets/IconBriefcase.svg" />}
+              href={linkedin}
+            >
+              linkedin
+            </LinkWithIcon>
 
-              <LinkWithIconOnly
-                className="faded"
-                img={<RiInstagramLine size={32} />}
-                href={instagram}
-                label="instagram"
-              />
-
-              <LinkWithIconOnly
-                className="faded"
-                img={<RiGithubLine size={32} />}
-                href={github}
-                label="github"
-              />
-            </div>
+            <LinkWithIcon
+              img={<img src="src/assets/IconOctopus.svg" />}
+              href={github}
+            >
+              github
+            </LinkWithIcon>
           </div>
         </div>
       </section>

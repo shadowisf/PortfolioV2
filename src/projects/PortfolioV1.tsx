@@ -1,6 +1,4 @@
 import { ProjectEntry } from "../utils/_GODMODE";
-import { GoPackage } from "react-icons/go";
-import { RiGithubLine } from "react-icons/ri";
 import { LinkWithIcon } from "../components/Link";
 //
 import ImageV1Portfolio from "../assets/ImageV1Portfolio.webp";
@@ -73,12 +71,18 @@ export const PortfolioV1: ProjectEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon img={<GoPackage size={24} />} href={DemoV1Portfolio}>
+      <LinkWithIcon
+        img={<img src="src/assets/IconGlobe.svg" />}
+        href={DemoV1Portfolio}
+      >
         live website
       </LinkWithIcon>
 
-      <LinkWithIcon img={<RiGithubLine size={24} />} href={GitHubV1Portfolio}>
-        repository
+      <LinkWithIcon
+        img={<img src="src/assets/IconOctopus.svg" />}
+        href={GitHubV1Portfolio}
+      >
+        source code
       </LinkWithIcon>
     </>
   ),

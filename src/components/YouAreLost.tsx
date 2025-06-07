@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { LinkWithNoIcon } from "./Link";
+import Spinner from "./Spinner";
 
 type MemeData = {
   postLink: string;
@@ -63,7 +64,7 @@ export default function YouAreLost() {
         {!isLoading ? (
           <img src={meme?.url} data-action="zoom" onError={() => fetchMeme()} />
         ) : (
-          <p style={{ color: "gray" }}>loading...</p>
+          <Spinner />
         )}
       </section>
 

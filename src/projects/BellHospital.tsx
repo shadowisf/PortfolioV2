@@ -1,5 +1,4 @@
 import { ProjectEntry } from "../utils/_GODMODE";
-import { RiGithubLine, RiFilePdf2Line } from "react-icons/ri";
 import { LinkWithIcon } from "../components/Link";
 //
 import ImageBellHospital from "../assets/ImageBellHospital.webp";
@@ -81,12 +80,18 @@ export const BellHospital: ProjectEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon img={<RiGithubLine size={24} />} href={GitHubBellHospital}>
-        repository
+      <LinkWithIcon
+        img={<img src="src/assets/IconOctopus.svg" />}
+        href={GitHubBellHospital}
+      >
+        source code
       </LinkWithIcon>
 
-      <LinkWithIcon img={<RiFilePdf2Line size={24} />} href={FileBellHospital}>
-        report
+      <LinkWithIcon
+        img={<img src="src/assets/IconMemo.svg" />}
+        href={FileBellHospital}
+      >
+        case study
       </LinkWithIcon>
     </>
   ),

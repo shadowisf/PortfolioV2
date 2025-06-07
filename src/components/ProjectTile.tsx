@@ -1,8 +1,8 @@
-import { homeAnimation } from "../utils/AnimationUtils";
 import { useEffect, useState } from "react";
-import { useGlobalState } from "../utils/ControlUtils";
 import { Link } from "react-router-dom";
 import { projectData } from "../utils/_GODMODE";
+import { useGlobalState } from "../utils/ControlUtils";
+import { useHomeAnimation } from "../utils/useHomeAnimation";
 
 export type ProjectProps = {
   dataID: number;
@@ -11,7 +11,7 @@ export type ProjectProps = {
 
 export function ProjectTile(p: ProjectProps) {
   const { isMobile, executeTransition } = useGlobalState();
-  const { togglePreview, resetPreview, movePreview } = homeAnimation();
+  const { togglePreview, resetPreview, movePreview } = useHomeAnimation();
 
   const [isHighlighted, setIsHighlighted] = useState(false);
 
