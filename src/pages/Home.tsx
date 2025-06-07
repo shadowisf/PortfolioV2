@@ -1,23 +1,25 @@
 import { ProjectTile } from "../components/ProjectTile";
-import { LinkWithIconOnly } from "../components/Link";
+import { LinkWithIcon, LinkWithIconOnly } from "../components/Link";
 import { useEffect } from "react";
 import { useGlobalState } from "../utils/ControlUtils";
 import {
+  RiFilePdf2Line,
   RiGithubLine,
   RiInstagramLine,
   RiLinkedinBoxLine,
   RiMailLine,
 } from "react-icons/ri";
 import { homeAnimation, scrollingAnimation } from "../utils/AnimationUtils";
-import { useGSAP } from "@gsap/react";
 import {
   email,
   linkedin,
   instagram,
   github,
   projectData,
+  cv,
 } from "../utils/_GODMODE";
 import { ProjectPreview } from "../components/ProjectPreview";
+import { useGSAP } from "@gsap/react";
 
 export default function Home() {
   const { setCurrentPage } = useGlobalState();
@@ -53,12 +55,11 @@ export default function Home() {
           </h1>
 
           <h2 className="nonBold">
-            <span className="bulletPoint">⊢ </span>software engineer{" "}
-            <small className="smaller">(improving everyday)</small>
+            <span className="bulletPoint">⊢ </span>fullstack software engineer
           </h2>
 
           <h2 className="nonBold">
-            <span className="bulletPoint">⊢ </span>dubai-based
+            <span className="bulletPoint">⊢ </span>based in dubai
           </h2>
 
           <h2 className="nonBold">
@@ -68,33 +69,43 @@ export default function Home() {
           <br />
 
           <div className="links">
-            <LinkWithIconOnly
+            <LinkWithIcon
               className="faded"
-              img={<RiMailLine size={32} />}
-              href={email}
-              label="email"
-            />
+              img={<RiFilePdf2Line size={32} />}
+              href={cv}
+            >
+              resume
+            </LinkWithIcon>
 
-            <LinkWithIconOnly
-              className="faded"
-              img={<RiLinkedinBoxLine size={32} />}
-              href={linkedin}
-              label="linkedin"
-            />
+            <div>
+              <LinkWithIconOnly
+                className="faded"
+                img={<RiMailLine size={32} />}
+                href={email}
+                label="email"
+              />
 
-            <LinkWithIconOnly
-              className="faded"
-              img={<RiInstagramLine size={32} />}
-              href={instagram}
-              label="instagram"
-            />
+              <LinkWithIconOnly
+                className="faded"
+                img={<RiLinkedinBoxLine size={32} />}
+                href={linkedin}
+                label="linkedin"
+              />
 
-            <LinkWithIconOnly
-              className="faded"
-              img={<RiGithubLine size={32} />}
-              href={github}
-              label="github"
-            />
+              <LinkWithIconOnly
+                className="faded"
+                img={<RiInstagramLine size={32} />}
+                href={instagram}
+                label="instagram"
+              />
+
+              <LinkWithIconOnly
+                className="faded"
+                img={<RiGithubLine size={32} />}
+                href={github}
+                label="github"
+              />
+            </div>
           </div>
         </div>
       </section>

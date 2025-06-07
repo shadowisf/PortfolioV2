@@ -57,6 +57,7 @@ import {
   SiTailwindcss,
   SiVercel,
   SiVite,
+  SiWebflow,
   SiXampp,
 } from "react-icons/si";
 import { ReactElement } from "react";
@@ -263,6 +264,10 @@ export const techStackStyling: Record<
     icon: <SiFigma />,
     color: "light-dark(rgb(81, 167, 101), rgb(81, 167, 101))",
   },
+  webflow: {
+    icon: <SiWebflow />,
+    color: "light-dark(rgb(51, 108, 236), rgb(51, 108, 236))",
+  },
 };
 
 export const aboutSkillset: { [key: string]: number } = {
@@ -314,11 +319,12 @@ export const aboutSkillset: { [key: string]: number } = {
   // xampp: 0,
   // "microsoft sql server": 0,
   // vercel: 0,
-  // gsap: 0,
+  gsap: 2,
   // "framer motion": 0,
   // pocketbase: 0,
   jira: 2,
   figma: 3,
+  webflow: 2,
 };
 
 export interface ProjectEntry {

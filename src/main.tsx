@@ -8,7 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer.tsx";
 import Home from "./pages/Home.tsx";
 import About from "./pages/About.tsx";
-import Project from "./pages/Work.tsx";
+import Work from "./pages/Work.tsx";
 import YouAreLost from "./components/YouAreLost.tsx";
 import { projectData } from "./utils/_GODMODE.tsx";
 
@@ -40,7 +40,7 @@ root.render(
               <Route
                 key={key}
                 path={`/${name}`}
-                element={<Project dataID={Number(key)} />}
+                element={<Work key={key} dataID={Number(key)} />}
               />
             );
           })}

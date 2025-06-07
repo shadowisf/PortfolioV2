@@ -6,8 +6,9 @@ import { ProjectProps } from "./ProjectTile";
 
 export function ProjectPreview(p: ProjectProps) {
   const project = projectData[p.dataID];
-  const [loading, setLoading] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const [loading, setLoading] = useState(true);
 
   function onCanPlay() {
     setLoading(false);

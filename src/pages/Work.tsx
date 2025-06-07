@@ -8,12 +8,11 @@ import "zoom-vanilla.js/dist/zoom.css";
 import "zoom-vanilla.js/dist/zoom-vanilla.min.js";
 import Spinner from "../components/Spinner";
 
-type ProjectProps = {
+type WorkProps = {
   dataID: number;
-  onClick?: () => void;
 };
 
-export default function Project(p: ProjectProps) {
+export default function Work(p: WorkProps) {
   const { executeTransition, setCurrentPage } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
 
@@ -36,13 +35,10 @@ export default function Project(p: ProjectProps) {
   useEffect(() => {
     setCurrentPage(currentProjectTitle);
     scrollToTop(0);
-
-    setImageLoading(true);
-    setVideoLoading(true);
   }, [currentProjectTitle]);
 
   return (
-    <main className="projectWrapper">
+    <main className="workWrapper">
       <section className="header">
         {/* previous project */}
         <Link

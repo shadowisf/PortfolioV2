@@ -185,6 +185,8 @@ nav {
     }
 
     svg {
+      fill: white;
+      outline: none;
       display: flex;
 
       transition: fill 0.25s;
@@ -488,7 +490,20 @@ footer {
 
       .links {
         display: flex;
-        gap: 1rem;
+        justify-content: space-between;
+        align-items: center;
+
+        div {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+        }
+
+        span {
+          display: flex;
+          align-items: center;
+        }
       }
     }
 
@@ -592,7 +607,7 @@ footer {
   }
 }
 
-.projectWrapper {
+.workWrapper {
   max-width: $maxWidthDesktop;
 
   padding: 8rem 0;
@@ -682,6 +697,7 @@ footer {
 
     .links {
       display: flex;
+      align-items: center;
       gap: 1rem;
 
       white-space: nowrap;
@@ -805,6 +821,28 @@ footer {
       width: 375px;
       height: auto;
       max-width: 35%;
+    }
+
+    .readMoreContainer {
+      height: 0;
+      overflow: hidden;
+    }
+
+    .readMoreButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      transition: font-variation-settings 0.5s, color 0.5s, scale 0.25s;
+
+      font-variation-settings: $fontVarNormal;
+
+      &:hover {
+        font-variation-settings: $fontVarThin;
+        color: var(--accent-color);
+        scale: $scaleOnHover;
+      }
     }
 
     .links {
@@ -1038,10 +1076,13 @@ footer {
   padding-right: 5px;
 
   display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 
   gap: 0.5rem;
 
-  border-bottom: 1px dashed;
+  /* border-bottom: 1px dashed; */
 
   transition: font-variation-settings 0.5s, color 0.5s, scale 0.25s;
 
@@ -1078,7 +1119,7 @@ footer {
     }
   }
 
-  &::after {
+  /* &::after {
     content: "";
     position: absolute;
     left: 0;
@@ -1094,7 +1135,7 @@ footer {
   &:hover::after {
     transform: scaleX(1);
     background-color: var(--accent-color);
-  }
+  } */
 }
 
 .linkWithNoIcon {
@@ -1292,7 +1333,7 @@ footer {
     }
   }
 
-  .projectWrapper {
+  .workWrapper {
     max-width: $maxWidthMobile;
 
     .content {

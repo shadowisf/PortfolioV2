@@ -69,8 +69,8 @@ export function pageTransition() {
   });
 
   return {
-    startTransition,
-    endTransition,
+    /* startTransition,
+    endTransition, */
     closeMenu,
     openMenu,
   };
@@ -334,9 +334,9 @@ export function aboutAnimation() {
   );
 
   return {
+    startup,
     resetSkill,
     filterSkill,
-    startup,
   };
 }
 
