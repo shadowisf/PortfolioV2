@@ -1,5 +1,7 @@
 import { Key, useEffect, useState } from "react";
-import { scrollingAnimation } from "../utils/AnimationUtils";
+import {
+  scrollingAnimation /* , workAnimation  */,
+} from "../utils/AnimationUtils";
 import { useGlobalState } from "../utils/ControlUtils";
 import TechStackTile from "../components/TechStackTile";
 import { Link } from "react-router-dom";
@@ -7,6 +9,7 @@ import { projectData } from "../utils/_GODMODE";
 import "zoom-vanilla.js/dist/zoom.css";
 import "zoom-vanilla.js/dist/zoom-vanilla.min.js";
 import Spinner from "../components/Spinner";
+/* import { useGSAP } from "@gsap/react"; */
 
 type WorkProps = {
   dataID: number;
@@ -15,6 +18,7 @@ type WorkProps = {
 export default function Work(p: WorkProps) {
   const { executeTransition, setCurrentPage } = useGlobalState();
   const { scrollToTop } = scrollingAnimation();
+  /* const { startup } = workAnimation(); */
 
   const [imageLoading, setImageLoading] = useState(true);
   const [videoLoading, setVideoLoading] = useState(true);
@@ -36,6 +40,10 @@ export default function Work(p: WorkProps) {
     setCurrentPage(currentProjectTitle);
     scrollToTop(0);
   }, [currentProjectTitle]);
+
+  /* useGSAP(() => {
+    startup();
+  }); */
 
   return (
     <main className="workWrapper">
