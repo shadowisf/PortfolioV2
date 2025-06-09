@@ -7,8 +7,8 @@ import Spinner from "../components/Spinner";
 import { useMemo } from "react";
 import { useGlobalState } from "../providers/GlobalStateProvider";
 import { useScrollingAnimation } from "../utils/gsap/useScrollingAnimation";
-import { useAboutAnimation } from "../utils/gsap/useAboutAnimation";;
-import { skillsetRating } from "../utils/SkillsetRating";
+import { useAboutAnimation } from "../utils/gsap/useAboutAnimation";
+import { skillsetRating } from "../utils/_logic/skillsetRating";
 import { useGSAP } from "@gsap/react";
 
 export default function About() {

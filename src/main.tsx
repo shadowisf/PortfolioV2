@@ -10,7 +10,7 @@ import About from "./pages/About.tsx";
 import Work from "./pages/Work.tsx";
 import YouAreLost from "./components/YouAreLost.tsx";
 import { GlobalStateProvider } from "./providers/GlobalStateProvider.tsx";
-import { workMapping } from "./utils/WorkMapping.ts";
+import { workMapping } from "./utils/_logic/workMapping.ts";
 
 // firebase deploy --only hosting:les-ranalan
 
@@ -20,7 +20,9 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter
+      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+    >
       <GlobalStateProvider>
         <PixelGrid />
         <NavBar />

@@ -6,8 +6,13 @@ import { useGlobalState } from "../providers/GlobalStateProvider";
 import { useScrollingAnimation } from "../utils/gsap/useScrollingAnimation";
 import { useHomeAnimation } from "../utils/gsap/useHomeAnimation";
 import { useGSAP } from "@gsap/react";
-import { resume, email, linkedin, github } from "../utils/IdentityMapping";
-import { workMapping } from "../utils/WorkMapping";
+import {
+  resume,
+  email,
+  linkedin,
+  github,
+} from "../utils/_logic/identitySetting";
+import { workMapping } from "../utils/_logic/workMapping";
 
 export default function Home() {
   const { setCurrentPage } = useGlobalState();

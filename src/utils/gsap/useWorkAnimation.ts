@@ -1,7 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useGlobalState } from "../../providers/GlobalStateProvider";
-import { workMapping } from "../WorkMapping";
+import { workMapping } from "../_logic/workMapping";
 
 export function useWorkAnimation() {
   const { contextSafe } = useGSAP();

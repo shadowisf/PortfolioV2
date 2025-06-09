@@ -8,7 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import { useGlobalState } from "../providers/GlobalStateProvider";
 import { usePageTransition } from "../utils/gsap/usePageTransition";
-import { workMapping } from "../utils/WorkMapping";
+import { workMapping } from "../utils/_logic/workMapping";
 
 export default function NavBar() {
   const { openMenu, closeMenu } = usePageTransition();

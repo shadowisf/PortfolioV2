@@ -4,7 +4,6 @@ import { LinkWithIcon } from "../../components/Link";
 import ImageApolloHospital from "@/assets/ImageApolloHospital.webp";
 import VideoApolloHospital from "@/assets/VideoApolloHospital.webm";
 import FileApolloHospital from "@/assets/FileApolloHospital.pdf";
-
 //
 const GitHubApolloHospital = "https://github.com/shadowisf/ApolloHospital";
 const DemoApolloHospital = "https://apollohospital.pythonanywhere.com";

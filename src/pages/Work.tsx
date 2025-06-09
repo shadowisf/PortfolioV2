@@ -1,7 +1,7 @@
 import { Key, useEffect, useState } from "react";
 import TechStackTile from "../components/TechStackTile";
 import { Link } from "react-router-dom";
-import { workMapping } from "../utils/WorkMapping";
+import { workMapping } from "../utils/_logic/workMapping";
 import "zoom-vanilla.js/dist/zoom.css";
 import "zoom-vanilla.js/dist/zoom-vanilla.min.js";
 import Spinner from "../components/Spinner";
