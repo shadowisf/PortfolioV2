@@ -224,7 +224,7 @@ nav {
   gap: 4rem;
 
   svg {
-    display: flex;
+    position: relative;
     fill: var(--background-color);
   }
 
@@ -252,18 +252,6 @@ nav {
 
   .closeButton:hover,
   .themeButton:hover {
-    cursor: pointer;
-  }
-}
-
-.themeButton {
-  position: relative;
-
-  svg {
-    display: flex;
-  }
-
-  &:hover {
     cursor: pointer;
   }
 }
@@ -378,9 +366,12 @@ nav {
   }
 
   .themeButton {
+    position: relative;
     transition: scale 0.25s;
 
     svg {
+      display: flex;
+      fill: var(--text-color);
       transition: fill 0.25s;
     }
 
@@ -388,8 +379,12 @@ nav {
       scale: $scaleOnHover;
     }
 
-    &:hover svg {
-      fill: var(--accent-color);
+    &:hover {
+      cursor: pointer;
+
+      svg {
+        fill: var(--accent-color);
+      }
     }
   }
 }
@@ -420,8 +415,7 @@ footer {
   gap: 8rem;
 
   .left {
-    margin-top: 8rem;
-    margin-bottom: 8rem;
+    margin: 8rem 0;
 
     display: flex;
     flex-direction: column-reverse;
@@ -790,7 +784,7 @@ footer {
 
   display: flex;
   flex-direction: column;
-  gap: 8rem;
+  gap: 4rem;
 
   .scrollPrompt {
     display: grid;
@@ -1349,7 +1343,15 @@ footer {
 
       height: fit-content;
 
+      padding: 0 1rem;
+
       .hero {
+        .links {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.25rem;
+        }
+
         .intro {
           .swirlEmoji {
             width: 35px;
@@ -1404,12 +1406,8 @@ footer {
 
     &.bottom {
       &:hover::before {
-        bottom: -150%;
+        bottom: -100%;
       }
-    }
-
-    &:hover::before {
-      text-wrap: wrap;
     }
   }
 }

@@ -4,12 +4,11 @@ import gsap from "gsap";
 export function useHomeAnimation() {
   const { contextSafe } = useGSAP();
 
-  /* const startup = contextSafe(() => {
+  const startup = contextSafe(() => {
     const rightContainer = document.querySelector(".homeWrapper .hero")
       ?.childNodes as NodeListOf<HTMLElement>;
 
     const projectTile = document.querySelectorAll(".homeWrapper .tile");
-    const navs = ["nav", ".navAlt"];
 
     const startupDuration = 1;
     const startupDelay = 0.25;
@@ -30,12 +29,6 @@ export function useHomeAnimation() {
       scale: startupScaleInitial,
       pointerEvents: "none",
     });
-
-    gsap.set([...navs], {
-      autoAlpha: 0,
-    });
-
-    tl.to(navs, { autoAlpha: 1 }, 0);
 
     tl.to(
       rightContainer,
@@ -58,12 +51,12 @@ export function useHomeAnimation() {
     );
 
     tl.add(() => {
-      gsap.set([...navs, rightContainer, projectTile], {
+      gsap.set([rightContainer, projectTile], {
         clearProps: "pointerEvents",
       });
       gsap.set("body", { clearProps: "overflow" });
     });
-  }); */
+  });
 
   const previewContainer = document.querySelectorAll(".homeWrapper .preview");
   const heroContainer = document.querySelector(".homeWrapper .hero");
@@ -142,25 +135,28 @@ export function useHomeAnimation() {
   );
 
   let swirlTween: gsap.core.Tween | null = null;
+  let isTweening = false;
 
   const swirlOnHover = contextSafe(() => {
     const swirlEmoji = document.querySelector(".homeWrapper .hero .swirlEmoji");
-
-    const rotationStr = gsap.getProperty(swirlEmoji, "rotation") as string;
-    const currentRotation = parseFloat(rotationStr) || 0;
-
-    swirlTween?.kill();
+    if (!swirlEmoji || isTweening) return;
 
     swirlTween = gsap.to(swirlEmoji, {
-      rotate: currentRotation - 360,
+      rotate: "-=360",
       duration: 1,
       repeat: -1,
       ease: "none",
+      onStart: () => {
+        isTweening = true;
+      },
     });
   });
 
   const swirlOnLeave = contextSafe(() => {
     const swirlEmoji = document.querySelector(".homeWrapper .hero .swirlEmoji");
+    if (!swirlEmoji || !isTweening) return;
+
+    isTweening = false;
 
     swirlTween?.kill();
     swirlTween = null;
@@ -169,11 +165,12 @@ export function useHomeAnimation() {
       rotate: 0,
       duration: 1,
       ease: "power2.out",
+      overwrite: true,
     });
   });
 
   return {
-    /* startup, */
+    startup,
     togglePreview,
     resetPreview,
     movePreview,

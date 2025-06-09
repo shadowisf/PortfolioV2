@@ -6,16 +6,21 @@ import { LinkWithIcon } from "../components/Link";
 import { useGlobalState } from "../utils/ControlUtils";
 import { useScrollingAnimation } from "../utils/useScrollingAnimation";
 import { useHomeAnimation } from "../utils/useHomeAnimation";
+import { useGSAP } from "@gsap/react";
 
 export default function Home() {
   const { setCurrentPage } = useGlobalState();
   const { scrollToTop } = useScrollingAnimation();
-  const { swirlOnHover, swirlOnLeave } = useHomeAnimation();
+  const { startup, swirlOnHover, swirlOnLeave } = useHomeAnimation();
 
   useEffect(() => {
     setCurrentPage("/");
     scrollToTop(0);
   }, []);
+
+  useGSAP(() => {
+    startup();
+  });
 
   return (
     <main className="homeWrapper">

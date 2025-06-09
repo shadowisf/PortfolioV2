@@ -1,4 +1,4 @@
-import { Key, StrictMode } from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./main.scss";
 import NavBar from "./components/NavBar.tsx";
@@ -16,8 +16,6 @@ import { GlobalStateProvider } from "./utils/ControlUtils.tsx";
 
 // firebase hosting:channel:deploy les-ranalan
 
-const allProjectIDs = Object.keys(projectData);
-
 const root = createRoot(document.getElementById("root")!);
 
 root.render(
@@ -34,7 +32,7 @@ root.render(
           <Route path="about" element={<About />} />
 
           {/* projects */}
-          {allProjectIDs.map((key: Key | null | undefined) => {
+          {Object.keys(projectData).map((key) => {
             const name = projectData[Number(key)].name.replace(/\s+/g, "-");
             return (
               <Route

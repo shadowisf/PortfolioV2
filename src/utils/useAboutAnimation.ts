@@ -1,5 +1,5 @@
 import { useGSAP } from "@gsap/react";
-/* import { useGlobalState } from "./ControlUtils"; */
+import { useGlobalState } from "./ControlUtils";
 import { Flip } from "gsap/all";
 import { ScrollTrigger } from "gsap/all";
 import gsap from "gsap";
@@ -8,16 +8,18 @@ gsap.registerPlugin(Flip, ScrollTrigger);
 
 export function useAboutAnimation() {
   const { contextSafe } = useGSAP();
-  /* const { isMobile } = useGlobalState(); */
+  const { isMobile } = useGlobalState();
 
-  /* const startup = contextSafe(() => {
+  const startup = contextSafe(() => {
     const scrollPrompt = document.querySelector(".aboutWrapper .scrollPrompt");
     const scrollPromptMobile = document.querySelector(
       ".aboutWrapper .scrollPrompt.mobile"
     );
 
     const bioSpinner = document.querySelector(".aboutWrapper .bio .spinner");
-    const bioPicture = document.querySelector(".aboutWrapper .bio img");
+    const bioPicture = document.querySelector(
+      ".aboutWrapper .bio .profilePicture"
+    );
     const bioContent = document.querySelector(".aboutWrapper .bio .content")
       ?.childNodes as NodeListOf<Element>;
     const bioContentHS = document.querySelector(".aboutWrapper .bio #hs");
@@ -171,7 +173,7 @@ export function useAboutAnimation() {
           },
         });
       });
-  }); */
+  });
 
   const skillFlip = contextSafe((state: Flip.FlipState) => {
     const duration = 0.7;
@@ -259,30 +261,34 @@ export function useAboutAnimation() {
     }
   );
 
-  const waveEmoji = document.querySelectorAll(".waveEmoji");
-
   const waveOnHover = contextSafe(() => {
+    const waveEmoji = document.querySelectorAll(
+      ".aboutWrapper .bio .waveEmoji"
+    );
+
     gsap.set(waveEmoji, { transformOrigin: "70% 70%" });
 
-    gsap.fromTo(
-      waveEmoji,
-      { rotation: 0 },
-      {
-        keyframes: [
-          { rotation: 14, duration: 0.25 },
-          { rotation: -8, duration: 0.25 },
-          { rotation: 14, duration: 0.25 },
-          { rotation: -4, duration: 0.25 },
-          { rotation: 10, duration: 0.25 },
-          { rotation: 0, duration: 0.25 },
-        ],
-        ease: "power1.inOut",
-      }
-    );
+    if (!gsap.isTweening(waveEmoji)) {
+      gsap.fromTo(
+        waveEmoji,
+        { rotation: 0 },
+        {
+          keyframes: [
+            { rotation: 14, duration: 0.25 },
+            { rotation: -8, duration: 0.25 },
+            { rotation: 14, duration: 0.25 },
+            { rotation: -4, duration: 0.25 },
+            { rotation: 10, duration: 0.25 },
+            { rotation: 0, duration: 0.25 },
+          ],
+          ease: "power2.inOut",
+        }
+      );
+    }
   });
 
   return {
-    /* startup, */
+    startup,
     resetSkill,
     filterSkill,
     waveOnHover,

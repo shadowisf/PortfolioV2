@@ -1,7 +1,22 @@
-/* export function useWorkAnimation() {
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useGlobalState } from "./ControlUtils";
+import { projectData } from "./_GODMODE";
+
+export function useWorkAnimation() {
   const { contextSafe } = useGSAP();
+  const { currentPage, isMobile } = useGlobalState();
 
   const startup = contextSafe(() => {
+    const projectRoutes = Object.entries(projectData).map(([key, project]) => ({
+      key: Number(key),
+      path: project.name.replace(/\s+/g, "-"),
+    }));
+
+    if (projectRoutes.some((route) => route.path === currentPage)) {
+      return;
+    }
+
     const header = document.querySelector(".workWrapper .header");
     const year = document.querySelector(".workWrapper .year");
     const techStackItems = document.querySelectorAll(
@@ -13,7 +28,7 @@
     const bottomNav = document.querySelector(".workWrapper .bottomNav");
 
     const startupDuration = 1;
-    const startupDelay = 0.25;
+    const startupDelay = isMobile ? 1.25 : 0.25;
     const startupEase = "power2.out";
     const startupStagger = 0.075;
     const startupScaleInitial = 0.9;
@@ -66,4 +81,4 @@
   });
 
   return { startup };
-} */
+}

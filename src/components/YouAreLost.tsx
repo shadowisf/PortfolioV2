@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { LinkWithNoIcon } from "./Link";
+import { LinkWithIcon } from "./Link";
 import Spinner from "./Spinner";
 
 type MemeData = {
@@ -69,9 +69,12 @@ export default function YouAreLost() {
       </section>
 
       <section className="links">
-        <LinkWithNoIcon onClick={() => fetchMeme()}>
+        <LinkWithIcon
+          onClick={() => fetchMeme()}
+          img={<img src="src/assets/IconGear.svg"></img>}
+        >
           generate new meme
-        </LinkWithNoIcon>
+        </LinkWithIcon>
       </section>
     </main>
   );

@@ -9,10 +9,11 @@ import { useMemo } from "react";
 import { useGlobalState } from "../utils/ControlUtils";
 import { useScrollingAnimation } from "../utils/useScrollingAnimation";
 import { useAboutAnimation } from "../utils/useAboutAnimation";
+import { useGSAP } from "@gsap/react";
 
 export default function About() {
   const { scrollToTop } = useScrollingAnimation();
-  const { filterSkill, resetSkill, waveOnHover } = useAboutAnimation();
+  const { startup, filterSkill, resetSkill, waveOnHover } = useAboutAnimation();
   const { setCurrentPage } = useGlobalState();
 
   const [imageLoading, setImageLoading] = useState(true);
@@ -25,6 +26,10 @@ export default function About() {
     setCurrentPage("about");
     scrollToTop(0);
   }, []);
+
+  useGSAP(() => {
+    startup();
+  });
 
   return (
     <main className="aboutWrapper">
@@ -69,25 +74,28 @@ export default function About() {
           <br />
 
           <h2>
-            i'm all about creating functional, performant, scalable, and
-            long-term apps.
+            i build functional, performant, and scalable apps — with a focus on
+            long-term maintainability.
           </h2>
 
           <br />
 
           <p>
-            i primarily work with next.js, react.js, typescript, scss/tailwind
-            css, supabase, and sql. though i am highly flexible to different
-            frameworks/libraries and programming languages.
+            my current tech stack includes next.js, react.js, typescript,
+            scss/tailwind css, supabase, and sql. but i’m always open to new
+            tools, frameworks, or languages — i adapt fast.
           </p>
 
           <br />
 
           <p>
-            outside of coding, i play video games (which i rarely do nowadays
-            lol), listen to music, bingewatch tv shows/movies, and doomscroll
-            for{" "}
-            <LinkWithNoIcon className="faded" href="/memes">
+            outside of code, i enjoy music, movies, games (when i have time),
+            and getting lost in rabbit holes of{" "}
+            <LinkWithNoIcon
+              className="infoOnHover faded top"
+              href="/memes"
+              data-tooltip="there is where productivity goes to die"
+            >
               memes
             </LinkWithNoIcon>
             .
@@ -96,18 +104,24 @@ export default function About() {
           <br />
 
           <p>
-            i first got into coding when i was introduced to scratch, a visual
-            programming language, during high school where i built a pong game
-            using drag-and-drop blocks of different functions. i quickly fell in
-            love with the idea, and one thing led to the next.
+            i got into programming through{" "}
+            <LinkWithNoIcon
+              className="infoOnHover faded top alt"
+              href="https://scratch.mit.edu"
+              data-tooltip="it literally does not need type safety"
+            >
+              scratch
+            </LinkWithNoIcon>{" "}
+            in high school, where i made a pong game with drag-and-drop blocks.
+            since then, i’ve been hooked ever since.
           </p>
         </div>
       </section>
 
-      {/* <section className="scrollPrompt">
+      <section className="scrollPrompt">
         <p>scroll</p>
         <p>↓</p>
-      </section> */}
+      </section>
 
       <section className="timelineAndSkillset">
         <section className="timeline">
@@ -189,10 +203,10 @@ export default function About() {
           </div>
         </section>
 
-        {/* <section className="scrollPrompt mobile">
+        <section className="scrollPrompt mobile">
           <p>scroll</p>
           <p>↓</p>
-        </section> */}
+        </section>
 
         <section className="skillset">
           <h1 className="header">my skillset</h1>

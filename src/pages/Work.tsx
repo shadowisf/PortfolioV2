@@ -7,6 +7,8 @@ import "zoom-vanilla.js/dist/zoom-vanilla.min.js";
 import Spinner from "../components/Spinner";
 import { useGlobalState } from "../utils/ControlUtils";
 import { useScrollingAnimation } from "../utils/useScrollingAnimation";
+import { useGSAP } from "@gsap/react";
+import { useWorkAnimation } from "../utils/useWorkAnimation";
 
 type WorkProps = {
   dataID: number;
@@ -15,6 +17,7 @@ type WorkProps = {
 export default function Work(p: WorkProps) {
   const { executeTransition, setCurrentPage } = useGlobalState();
   const { scrollToTop } = useScrollingAnimation();
+  const { startup } = useWorkAnimation();
 
   const [imageLoading, setImageLoading] = useState(true);
   const [videoLoading, setVideoLoading] = useState(true);
@@ -37,9 +40,9 @@ export default function Work(p: WorkProps) {
     scrollToTop(0);
   }, [currentProjectTitle]);
 
-  /* useGSAP(() => {
+  useGSAP(() => {
     startup();
-  }); */
+  });
 
   return (
     <main className="workWrapper">
@@ -48,7 +51,7 @@ export default function Work(p: WorkProps) {
         <Link
           to={`/${prevProjectTitle}`}
           className="nextPrevButton infoOnHover top"
-          data-tooltip="prev proj"
+          data-tooltip="prev"
           onClick={(e) => executeTransition(e, prevProjectTitle, false)}
           style={
             prevProjectTitle === ""
@@ -66,7 +69,7 @@ export default function Work(p: WorkProps) {
         <Link
           to={`/${nextProjectTitle}`}
           className="nextPrevButton infoOnHover top"
-          data-tooltip="next proj"
+          data-tooltip="next"
           onClick={(e) => executeTransition(e, nextProjectTitle, false)}
           style={
             nextProjectTitle === ""
@@ -143,7 +146,7 @@ export default function Work(p: WorkProps) {
         <h1
           className="infoOnHover bottom"
           onClick={() => scrollToTop(0.25)}
-          data-tooltip="to top"
+          data-tooltip="top"
         >
           ↑
         </h1>
