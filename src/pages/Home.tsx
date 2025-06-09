@@ -6,13 +6,15 @@ import { useGlobalState } from "../providers/GlobalStateProvider";
 import { useScrollingAnimation } from "../utils/gsap/useScrollingAnimation";
 import { useHomeAnimation } from "../utils/gsap/useHomeAnimation";
 import { useGSAP } from "@gsap/react";
+import { resume, email, linkedin, github } from "../utils/identitySetting";
+import { workMapping } from "../utils/workMapping";
 import {
-  resume,
-  email,
-  linkedin,
-  github,
-} from "../utils/_logic/identitySetting";
-import { workMapping } from "../utils/_logic/workMapping";
+  IconBriefcase,
+  IconEmail,
+  IconMemo,
+  IconOctopus,
+  IconSwirl,
+} from "../utils/iconSetting";
 
 export default function Home() {
   const { setCurrentPage } = useGlobalState();
@@ -46,7 +48,7 @@ export default function Home() {
             <h1 className="extra name accent">les ranalan</h1>
             <img
               className="swirlEmoji"
-              src="src/assets/IconSwirl.svg"
+              src={IconSwirl}
               onMouseEnter={swirlOnHover}
               onMouseLeave={swirlOnLeave}
             />
@@ -67,31 +69,19 @@ export default function Home() {
           <br />
 
           <div className="links">
-            <LinkWithIcon
-              img={<img src="src/assets/IconMemo.svg" />}
-              href={resume}
-            >
+            <LinkWithIcon img={<img src={IconMemo} />} href={resume}>
               resume
             </LinkWithIcon>
 
-            <LinkWithIcon
-              img={<img src="src/assets/IconEmail.svg" />}
-              href={email}
-            >
+            <LinkWithIcon img={<img src={IconEmail} />} href={email}>
               email
             </LinkWithIcon>
 
-            <LinkWithIcon
-              img={<img src="src/assets/IconBriefcase.svg" />}
-              href={linkedin}
-            >
+            <LinkWithIcon img={<img src={IconBriefcase} />} href={linkedin}>
               linkedin
             </LinkWithIcon>
 
-            <LinkWithIcon
-              img={<img src="src/assets/IconOctopus.svg" />}
-              href={github}
-            >
+            <LinkWithIcon img={<img src={IconOctopus} />} href={github}>
               github
             </LinkWithIcon>
           </div>

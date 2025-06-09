@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { workMapping } from "../utils/_logic/workMapping";
+import { workMapping } from "../utils/workMapping";
 import { useGlobalState } from "../providers/GlobalStateProvider";
 import { useHomeAnimation } from "../utils/gsap/useHomeAnimation";
 

@@ -47,7 +47,6 @@ import {
   SiFigma,
   SiWebflow,
 } from "react-icons/si";
-import { TbBrandCSharp } from "react-icons/tb";
 
 export const techStackStyling: Record<
   string,
@@ -86,7 +85,7 @@ export const techStackStyling: Record<
     color: "light-dark(rgb(217, 91, 68), rgb(205, 86, 64))",
   },
   "c#": {
-    icon: TbBrandCSharp,
+    icon: SiDotnet,
     color: "light-dark(rgb(157, 118, 224), rgb(148, 111, 211))",
   },
   "windows forms": {

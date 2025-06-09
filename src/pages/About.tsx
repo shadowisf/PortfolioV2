@@ -1,4 +1,3 @@
-import ProfilePicture from "../assets/ImageProfile.webp";
 import { TimelineRow } from "../components/Timeline";
 import { useEffect, useState } from "react";
 import TechStackTile from "../components/TechStackTile";
@@ -8,8 +7,17 @@ import { useMemo } from "react";
 import { useGlobalState } from "../providers/GlobalStateProvider";
 import { useScrollingAnimation } from "../utils/gsap/useScrollingAnimation";
 import { useAboutAnimation } from "../utils/gsap/useAboutAnimation";
-import { skillsetRating } from "../utils/_logic/skillsetRating";
+import { skillsetRating } from "../utils/skillsetRating";
 import { useGSAP } from "@gsap/react";
+import { profilePicture } from "../utils/identitySetting";
+import {
+  IconBriefcase,
+  IconCake,
+  IconGlasses,
+  IconGraduation,
+  IconHandWave,
+  IconPin,
+} from "../utils/iconSetting";
 
 export default function About() {
   const { scrollToTop } = useScrollingAnimation();
@@ -40,7 +48,7 @@ export default function About() {
             <span className="waveEmojiWrapper">
               <img
                 className="waveEmoji"
-                src="src/assets/IconHandWave.svg"
+                src={IconHandWave}
                 onMouseEnter={waveOnHover}
               />
             </span>
@@ -49,7 +57,7 @@ export default function About() {
 
         {imageLoading && <Spinner />}
         <img
-          src={ProfilePicture}
+          src={profilePicture}
           alt={"a picture of me"}
           data-action="zoom"
           onLoad={() => setImageLoading(false)}
@@ -64,7 +72,7 @@ export default function About() {
               <span className="waveEmojiWrapper">
                 <img
                   className="waveEmoji"
-                  src="src/assets/IconHandWave.svg"
+                  src={IconHandWave}
                   onMouseEnter={waveOnHover}
                 />
               </span>
@@ -130,7 +138,7 @@ export default function About() {
           <div className="timelineRows">
             <TimelineRow
               date="february 15, 2004"
-              img={<img src="src/assets/IconCake.svg" />}
+              img={<img src={IconCake} />}
               verticalLine={true}
             >
               born in davao, philippines
@@ -138,7 +146,7 @@ export default function About() {
 
             <TimelineRow
               date="may 12, 2012"
-              img={<img src="src/assets/IconPin.svg" />}
+              img={<img src={IconPin} />}
               verticalLine={true}
             >
               moved to dubai, united arab emirates
@@ -146,7 +154,7 @@ export default function About() {
 
             <TimelineRow
               date="april 6, 2018"
-              img={<img src="src/assets/IconGlasses.svg" />}
+              img={<img src={IconGlasses} />}
               verticalLine={true}
             >
               acquired first pair of eyeglasses
@@ -154,7 +162,7 @@ export default function About() {
 
             <TimelineRow
               date="september 3, 2022"
-              img={<img src="src/assets/IconGraduation.svg" />}
+              img={<img src={IconGraduation} />}
               verticalLine={true}
             >
               graduated from{" "}
@@ -170,7 +178,7 @@ export default function About() {
 
             <TimelineRow
               date="february 5, 2025"
-              img={<img src="src/assets/IconBriefcase.svg" />}
+              img={<img src={IconBriefcase} />}
               verticalLine={true}
             >
               worked as part-time full-stack web developer for whealthy vessel
@@ -178,7 +186,7 @@ export default function About() {
 
             <TimelineRow
               date="may 8, 2025"
-              img={<img src="src/assets/IconGraduation.svg" />}
+              img={<img src={IconGraduation} />}
               verticalLine={true}
             >
               graduated from{" "}
@@ -194,7 +202,7 @@ export default function About() {
 
             <TimelineRow
               date="may 12, 2025"
-              img={<img src="src/assets/IconBriefcase.svg" />}
+              img={<img src={IconBriefcase} />}
               verticalLine={false}
             >
               worked as part-time full-stack web developer for let there be

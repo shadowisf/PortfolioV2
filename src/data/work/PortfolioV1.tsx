@@ -1,5 +1,6 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
+import { IconGlobe, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageV1Portfolio from "@/assets/ImageV1Portfolio.webp";
 import VideoV1Portfolio from "@/assets/VideoV1Portfolio.webm";
@@ -71,17 +72,11 @@ export const PortfolioV1: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img src="src/@/assets/IconGlobe.svg" />}
-        href={DemoV1Portfolio}
-      >
+      <LinkWithIcon img={<img src={IconGlobe} />} href={DemoV1Portfolio}>
         live website
       </LinkWithIcon>
 
-      <LinkWithIcon
-        img={<img src="src/@/assets/IconOctopus.svg" />}
-        href={GitHubV1Portfolio}
-      >
+      <LinkWithIcon img={<img src={IconOctopus} />} href={GitHubV1Portfolio}>
         source code
       </LinkWithIcon>
     </>

@@ -10,7 +10,7 @@ import About from "./pages/About.tsx";
 import Work from "./pages/Work.tsx";
 import YouAreLost from "./components/YouAreLost.tsx";
 import { GlobalStateProvider } from "./providers/GlobalStateProvider.tsx";
-import { workMapping } from "./utils/_logic/workMapping.ts";
+import { workMapping } from "./utils/workMapping.ts";
 
 // firebase deploy --only hosting:les-ranalan
 

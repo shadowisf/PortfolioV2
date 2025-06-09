@@ -1,5 +1,5 @@
 import { useRef, useState, Key } from "react";
-import { workMapping } from "../utils/_logic/workMapping";
+import { workMapping } from "../utils/workMapping";
 import TechStackTile from "./TechStackTile";
 import { ProjectProps } from "./ProjectTile";
 import Spinner from "./Spinner";

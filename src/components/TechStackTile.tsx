@@ -1,4 +1,4 @@
-import { techStackStyling } from "../utils/_logic/techStackStyling";
+import { techStackStyling } from "../utils/techStackStyling";
 
 type TechStackTileProps = {
   techStackItem: string;

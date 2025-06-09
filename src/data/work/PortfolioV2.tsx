@@ -1,5 +1,6 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
+import { IconGlobe, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageV2Portfolio from "@/assets/ImageV2Portfolio.webp";
 import VideoV2Portfolio from "@/assets/VideoV2Portfolio.webm";
@@ -34,7 +35,7 @@ export const PortfolioV2: WorkEntry = {
       <ul>
         <li>
           <b>optimized performance</b>: removed bulky libraries and streamlined
-          assets for faster loading.
+          functions for faster loading.
         </li>
         <li>
           <b>enhanced animations</b>: replaced css animations with gsap for
@@ -73,17 +74,11 @@ export const PortfolioV2: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img src="src/assets/IconGlobe.svg" />}
-        href={DemoV2Portfolio}
-      >
+      <LinkWithIcon img={<img src={IconGlobe} />} href={DemoV2Portfolio}>
         live website
       </LinkWithIcon>
 
-      <LinkWithIcon
-        img={<img src="src/assets/IconOctopus.svg" />}
-        href={GitHubV2Portfolio}
-      >
+      <LinkWithIcon img={<img src={IconOctopus} />} href={GitHubV2Portfolio}>
         source code
       </LinkWithIcon>
     </>

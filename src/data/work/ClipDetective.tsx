@@ -1,5 +1,6 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
+import { IconGlobe, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageClipDetective from "@/assets/ImageClipDetective.webp";
 import VideoClipDetective from "@/assets/VideoClipDetective.webm";
@@ -79,17 +80,11 @@ export const ClipDetective: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img src="src/@/assets/IconGlobe.svg" />}
-        href={DemoClipDetective}
-      >
+      <LinkWithIcon img={<img src={IconGlobe} />} href={DemoClipDetective}>
         live website
       </LinkWithIcon>
 
-      <LinkWithIcon
-        img={<img src="src/@/assets/IconOctopus.svg" />}
-        href={GitHubClipDetective}
-      >
+      <LinkWithIcon img={<img src={IconOctopus} />} href={GitHubClipDetective}>
         source code
       </LinkWithIcon>
     </>

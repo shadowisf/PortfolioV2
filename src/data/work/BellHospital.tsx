@@ -1,5 +1,6 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
+import { IconMemo, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageBellHospital from "@/assets/ImageBellHospital.webp";
 import VideoBellHospital from "@/assets/VideoBellHospital.webm";
@@ -80,17 +81,11 @@ export const BellHospital: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img src="src/assets/IconOctopus.svg" />}
-        href={GitHubBellHospital}
-      >
+      <LinkWithIcon img={<img src={IconOctopus} />} href={GitHubBellHospital}>
         source code
       </LinkWithIcon>
 
-      <LinkWithIcon
-        img={<img src="src/assets/IconMemo.svg" />}
-        href={FileBellHospital}
-      >
+      <LinkWithIcon img={<img src={IconMemo} />} href={FileBellHospital}>
         case study
       </LinkWithIcon>
     </>

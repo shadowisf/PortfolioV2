@@ -1,5 +1,6 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
+import { IconGlobe, IconMemo, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageExamiq from "@/assets/ImageExamiq.webp";
 import VideoExamiq from "@/assets/VideoExamiq.webm";
@@ -84,24 +85,15 @@ export const Examiq: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img src="src/@/assets/IconGlobe.svg" />}
-        href={DemoExamiq}
-      >
+      <LinkWithIcon img={<img src={IconGlobe} />} href={DemoExamiq}>
         live website
       </LinkWithIcon>
 
-      <LinkWithIcon
-        img={<img src="src/@/assets/IconOctopus.svg" />}
-        href={GitHubExamiq}
-      >
+      <LinkWithIcon img={<img src={IconOctopus} />} href={GitHubExamiq}>
         source code
       </LinkWithIcon>
 
-      <LinkWithIcon
-        img={<img src="src/@/assets/IconMemo.svg" />}
-        href={FileExamiq}
-      >
+      <LinkWithIcon img={<img src={IconMemo} />} href={FileExamiq}>
         case study
       </LinkWithIcon>
     </>

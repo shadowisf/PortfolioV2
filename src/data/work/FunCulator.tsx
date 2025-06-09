@@ -1,5 +1,6 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
+import { IconMemo, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageFunculator from "@/assets/ImageFunCulator.webp";
 import VideoFunCulator from "@/assets/VideoFunCulator.webm";
@@ -65,7 +66,7 @@ export const FunCulator: WorkEntry = {
       funculator is a <u>group project</u> where i:
       <ul>
         <li>
-          designed pixel-art ui (gimp) and integrated @/assets into swing
+          designed pixel-art ui (gimp) and integrated assets into swing
           (jpanels, event listeners).
         </li>
         <li>
@@ -88,17 +89,11 @@ export const FunCulator: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img src="src/@/assets/IconOctopus.svg" />}
-        href={GitHubFunCulator}
-      >
+      <LinkWithIcon img={<img src={IconOctopus} />} href={GitHubFunCulator}>
         source code
       </LinkWithIcon>
 
-      <LinkWithIcon
-        img={<img src="src/@/assets/IconMemo.svg" />}
-        href={FileFunculator}
-      >
+      <LinkWithIcon img={<img src={IconMemo} />} href={FileFunculator}>
         case study
       </LinkWithIcon>
     </>
