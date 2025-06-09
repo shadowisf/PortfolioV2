@@ -1,13 +1,13 @@
-import { ProjectEntry } from "../utils/_GODMODE";
-import { LinkWithIcon } from "../components/Link";
+import { WorkEntry } from "../../utils/types/WorkEntry";
+import { LinkWithIcon } from "../../components/Link";
 //
-import ImageBellHospital from "../assets/ImageBellHospital.webp";
-import VideoBellHospital from "../assets/VideoBellHospital.webm";
-import FileBellHospital from "../assets/FileBellHospital.pdf";
+import ImageBellHospital from "@/assets/ImageBellHospital.webp";
+import VideoBellHospital from "@/assets/VideoBellHospital.webm";
+import FileBellHospital from "@/assets/FileBellHospital.pdf";
 //
 const GitHubBellHospital = "https://github.com/shadowisf/BellHospital";
 
-export const BellHospital: ProjectEntry = {
+export const BellHospital: WorkEntry = {
   name: "bell hospital",
   year: "2022",
   techStack: ["*java", "*cli", "*file handling", "git"],

@@ -1,13 +1,13 @@
-import { ProjectEntry } from "../utils/_GODMODE";
-import { LinkWithIcon } from "../components/Link";
+import { WorkEntry } from "../../utils/types/WorkEntry";
+import { LinkWithIcon } from "../../components/Link";
 //
-import ImageCircuitCentral from "../assets/ImageCircuitCentral.webp";
-import VideoCircuitCentral from "../assets/VideoCircuitCentral.webm";
-import FileCircuitCentral from "../assets/FileCircuitCentral.pdf";
+import ImageCircuitCentral from "@/assets/ImageCircuitCentral.webp";
+import VideoCircuitCentral from "@/assets/VideoCircuitCentral.webm";
+import FileCircuitCentral from "@/assets/FileCircuitCentral.pdf";
 //
 const GitHubCircuitCentral = "https://github.com/shadowisf/CircuitCentral";
 
-export const CircuitCentral: ProjectEntry = {
+export const CircuitCentral: WorkEntry = {
   name: "circuitcentral",
   year: "2024",
   techStack: [

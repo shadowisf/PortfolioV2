@@ -1,13 +1,13 @@
-import { ProjectEntry } from "../utils/_GODMODE";
-import { LinkWithIcon } from "../components/Link";
+import { WorkEntry } from "../../utils/types/WorkEntry";
+import { LinkWithIcon } from "../../components/Link";
 //
-import ImageV1Portfolio from "../assets/ImageV1Portfolio.webp";
-import VideoV1Portfolio from "../assets/VideoV1Portfolio.webm";
+import ImageV1Portfolio from "@/assets/ImageV1Portfolio.webp";
+import VideoV1Portfolio from "@/assets/VideoV1Portfolio.webm";
 //
 const GitHubV1Portfolio = "https://github.com/shadowisf/PortfolioV1";
 const DemoV1Portfolio = "https://v1-lesranalan.web.app";
 
-export const PortfolioV1: ProjectEntry = {
+export const PortfolioV1: WorkEntry = {
   name: "portfolio v1",
   year: "2024",
   techStack: ["vite", "*react.js", "*typescript", "*scss", "*firebase", "git"],
@@ -72,14 +72,14 @@ export const PortfolioV1: ProjectEntry = {
   links: (
     <>
       <LinkWithIcon
-        img={<img src="src/assets/IconGlobe.svg" />}
+        img={<img src="src/@/assets/IconGlobe.svg" />}
         href={DemoV1Portfolio}
       >
         live website
       </LinkWithIcon>
 
       <LinkWithIcon
-        img={<img src="src/assets/IconOctopus.svg" />}
+        img={<img src="src/@/assets/IconOctopus.svg" />}
         href={GitHubV1Portfolio}
       >
         source code

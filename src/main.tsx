@@ -9,8 +9,8 @@ import Home from "./pages/Home.tsx";
 import About from "./pages/About.tsx";
 import Work from "./pages/Work.tsx";
 import YouAreLost from "./components/YouAreLost.tsx";
-import { projectData } from "./utils/_GODMODE.tsx";
-import { GlobalStateProvider } from "./utils/ControlUtils.tsx";
+import { GlobalStateProvider } from "./providers/GlobalStateProvider.tsx";
+import { workMapping } from "./utils/WorkMapping.ts";
 
 // firebase deploy --only hosting:les-ranalan
 
@@ -32,8 +32,8 @@ root.render(
           <Route path="about" element={<About />} />
 
           {/* projects */}
-          {Object.keys(projectData).map((key) => {
-            const name = projectData[Number(key)].name.replace(/\s+/g, "-");
+          {Object.keys(workMapping).map((key) => {
+            const name = workMapping[Number(key)].name.replace(/\s+/g, "-");
             return (
               <Route
                 key={key}

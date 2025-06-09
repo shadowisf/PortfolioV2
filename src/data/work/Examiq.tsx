@@ -1,14 +1,14 @@
-import { ProjectEntry } from "../utils/_GODMODE";
-import { LinkWithIcon } from "../components/Link";
+import { WorkEntry } from "../../utils/types/WorkEntry";
+import { LinkWithIcon } from "../../components/Link";
 //
-import ImageExamiq from "../assets/ImageExamiq.webp";
-import VideoExamiq from "../assets/VideoExamiq.webm";
-import FileExamiq from "../assets/FileExamiq.pdf";
+import ImageExamiq from "@/assets/ImageExamiq.webp";
+import VideoExamiq from "@/assets/VideoExamiq.webm";
+import FileExamiq from "@/assets/FileExamiq.pdf";
 //
 const GitHubExamiq = "https://github.com/shadowisf/Examiq";
 const DemoExamiq = "https://examiq-seven.vercel.app";
 
-export const Examiq: ProjectEntry = {
+export const Examiq: WorkEntry = {
   name: "examiq",
   year: "2025",
   techStack: [
@@ -85,21 +85,21 @@ export const Examiq: ProjectEntry = {
   links: (
     <>
       <LinkWithIcon
-        img={<img src="src/assets/IconGlobe.svg" />}
+        img={<img src="src/@/assets/IconGlobe.svg" />}
         href={DemoExamiq}
       >
         live website
       </LinkWithIcon>
 
       <LinkWithIcon
-        img={<img src="src/assets/IconOctopus.svg" />}
+        img={<img src="src/@/assets/IconOctopus.svg" />}
         href={GitHubExamiq}
       >
         source code
       </LinkWithIcon>
 
       <LinkWithIcon
-        img={<img src="src/assets/IconMemo.svg" />}
+        img={<img src="src/@/assets/IconMemo.svg" />}
         href={FileExamiq}
       >
         case study

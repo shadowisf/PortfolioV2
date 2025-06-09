@@ -1,13 +1,13 @@
-import { ProjectEntry } from "../utils/_GODMODE";
-import { LinkWithIcon } from "../components/Link";
+import { WorkEntry } from "../../utils/types/WorkEntry";
+import { LinkWithIcon } from "../../components/Link";
 //
-import ImageV2Portfolio from "../assets/ImageV2Portfolio.webp";
-import VideoV2Portfolio from "../assets/VideoV2Portfolio.webm";
+import ImageV2Portfolio from "@/assets/ImageV2Portfolio.webp";
+import VideoV2Portfolio from "@/assets/VideoV2Portfolio.webm";
 //
 const GitHubV2Portfolio = "https://github.com/shadowisf/PortfolioV2";
 const DemoV2Portfolio = "https://les-ranalan.web.app";
 
-export const PortfolioV2: ProjectEntry = {
+export const PortfolioV2: WorkEntry = {
   name: "portfolio v2",
   year: "2024",
   techStack: [

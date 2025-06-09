@@ -6,9 +6,9 @@ import {
   RiCloseLargeFill,
 } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import { projectData } from "../utils/_GODMODE";
-import { useGlobalState } from "../utils/ControlUtils";
-import { usePageTransition } from "../utils/usePageTransition";
+import { useGlobalState } from "../providers/GlobalStateProvider";
+import { usePageTransition } from "../utils/gsap/usePageTransition";
+import { workMapping } from "../utils/WorkMapping";
 
 export default function NavBar() {
   const { openMenu, closeMenu } = usePageTransition();
@@ -49,10 +49,10 @@ export default function NavBar() {
               <option value={"work"} disabled>
                 work
               </option>
-              {Object.keys(projectData)
+              {Object.keys(workMapping)
                 .reverse()
                 .map((id) => {
-                  const project = projectData[Number(id)];
+                  const project = workMapping[Number(id)];
                   const title = project.name.replace(/\s+/g, "-");
                   return (
                     <option key={id} value={title}>
@@ -98,10 +98,10 @@ export default function NavBar() {
               <option value={"work"} disabled>
                 work
               </option>
-              {Object.keys(projectData)
+              {Object.keys(workMapping)
                 .reverse()
                 .map((id) => {
-                  const project = projectData[Number(id)];
+                  const project = workMapping[Number(id)];
                   const title = project.name.replace(/\s+/g, "-");
                   return (
                     <option key={id} value={title}>
@@ -147,10 +147,10 @@ export default function NavBar() {
             <option value={"work"} disabled>
               work
             </option>
-            {Object.keys(projectData)
+            {Object.keys(workMapping)
               .reverse()
               .map((id) => {
-                const project = projectData[Number(id)];
+                const project = workMapping[Number(id)];
                 const title = project.name.replace(/\s+/g, "-");
                 return (
                   <option key={id} value={title}>

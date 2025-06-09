@@ -1,4 +1,4 @@
-import { techStackStyling } from "../utils/_GODMODE";
+import { techStackStyling } from "../utils/TechStackStyling";
 
 type TechStackTileProps = {
   techStackItem: string;
@@ -23,7 +23,9 @@ export default function TechStackTile(p: TechStackTileProps) {
       className={p.classNameContainer}
       style={{ backgroundColor: data.color }}
     >
-      <span className={p.classNameIcon}>{data.icon}</span>
+      <span className={p.classNameIcon}>
+        <data.icon />
+      </span>
       {cleanItem}
     </small>
   ) : (
@@ -32,7 +34,9 @@ export default function TechStackTile(p: TechStackTileProps) {
       style={{ backgroundColor: data.color }}
       data-key={p.dataKey}
     >
-      <span className={p.classNameIcon}>{data.icon}</span>
+      <span className={p.classNameIcon}>
+        <data.icon />
+      </span>
       {cleanItem}
     </span>
   );

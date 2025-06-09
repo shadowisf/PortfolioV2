@@ -1,16 +1,4 @@
-import { ApolloHospital } from "../projects/ApolloHospital";
-import { CircuitCentral } from "../projects/CircuitCentral";
-import { PortfolioV1 } from "../projects/PortfolioV1";
-import { BellHospital } from "../projects/BellHospital";
-import { FunCulator } from "../projects/FunCulator";
-import { PlugIns } from "../projects/PlugIns";
-import { PortfolioV2 } from "../projects/PortfolioV2";
-import { ClipDetective } from "../projects/ClipDetective";
-import { FeelTok } from "../projects/FeelTok";
-/* import { WhealthyVessel } from "../projects/WhealthyVessel"; */
-import { Examiq } from "../projects/Examiq";
-/* import { LetThereBeFragrance } from "../projects/LetThereBeFragrance"; */
-//
+import { IconType } from "react-icons";
 import { AiFillApi } from "react-icons/ai";
 import {
   BiLogoFirebase,
@@ -18,356 +6,247 @@ import {
   BiLogoTypescript,
 } from "react-icons/bi";
 import { BsDatabase } from "react-icons/bs";
+import { DiMsqlServer } from "react-icons/di";
 import {
-  FaAngular,
-  FaBootstrap,
-  FaCss3Alt,
-  FaGitAlt,
-  FaHtml5,
-  FaJava,
-  FaPython,
   FaReact,
+  FaHtml5,
+  FaCss3Alt,
   FaSass,
+  FaGitAlt,
+  FaJava,
+  FaBootstrap,
+  FaPython,
+  FaAngular,
   FaVuejs,
 } from "react-icons/fa";
 import { GiSpermWhale } from "react-icons/gi";
 import { GoCommandPalette } from "react-icons/go";
 import { GrMysql } from "react-icons/gr";
 import {
-  SiCloudinary,
-  SiCsharp,
-  SiDjango,
   SiDotnet,
-  SiExpo,
-  SiFigma,
   SiFlask,
-  SiFramer,
+  SiDjango,
   SiFramework,
-  SiGreensock,
-  SiJira,
-  SiMariadb,
-  SiMicrosoftsqlserver,
-  SiNextdotjs,
   SiPhp,
-  SiPocketbase,
   SiPostgresql,
-  SiPythonanywhere,
-  SiSupabase,
   SiSvelte,
   SiTailwindcss,
-  SiVercel,
+  SiMariadb,
+  SiPythonanywhere,
+  SiExpo,
+  SiNextdotjs,
+  SiCloudinary,
   SiVite,
-  SiWebflow,
+  SiSupabase,
   SiXampp,
+  SiVercel,
+  SiGreensock,
+  SiFramer,
+  SiPocketbase,
+  SiJira,
+  SiFigma,
+  SiWebflow,
 } from "react-icons/si";
-import { ReactElement } from "react";
-
-export const instagram = "https://www.instagram.com/les.rx/";
-export const linkedin = "https://www.linkedin.com/in/ranalan/";
-export const github = "https://github.com/shadowisf";
-export const email = "mailto:les.ranalan@gmail.com";
-export { default as cv } from "../assets/FileCV.pdf";
+import { TbBrandCSharp } from "react-icons/tb";
 
 export const techStackStyling: Record<
   string,
-  { icon: JSX.Element; color: string }
+  { icon: IconType; color: string }
 > = {
   typescript: {
-    icon: <BiLogoTypescript />,
+    icon: BiLogoTypescript,
     color: "light-dark(rgb(49, 120, 198), rgb(30, 100, 180))",
   },
   "react.js": {
-    icon: <FaReact />,
+    icon: FaReact,
     color: "light-dark(rgb(77, 167, 197), rgb(60, 140, 170))",
   },
   html: {
-    icon: <FaHtml5 />,
+    icon: FaHtml5,
     color: "light-dark(rgb(231, 100, 60), rgb(170, 70, 45))",
   },
   css: {
-    icon: <FaCss3Alt />,
+    icon: FaCss3Alt,
     color: "light-dark(rgb(56, 133, 207), rgb(35, 85, 140))",
   },
   scss: {
-    icon: <FaSass />,
+    icon: FaSass,
     color: "light-dark(rgb(204, 102, 153),rgb(166, 77, 127))",
   },
   firebase: {
-    icon: <BiLogoFirebase />,
+    icon: BiLogoFirebase,
     color: "light-dark(rgb(222, 157, 58), rgb(180, 120, 45))",
   },
   sql: {
-    icon: <BsDatabase />,
+    icon: BsDatabase,
     color: "light-dark(rgb(206, 140, 140), rgb(173, 121, 121))",
   },
   git: {
-    icon: <FaGitAlt />,
+    icon: FaGitAlt,
     color: "light-dark(rgb(217, 91, 68), rgb(205, 86, 64))",
   },
   "c#": {
-    icon: <SiCsharp />,
+    icon: TbBrandCSharp,
     color: "light-dark(rgb(157, 118, 224), rgb(148, 111, 211))",
   },
   "windows forms": {
-    icon: <SiDotnet />,
+    icon: SiDotnet,
     color: "light-dark(rgb(115, 80, 255), rgb(115, 80, 255))",
   },
   "transact-sql": {
-    icon: <BsDatabase />,
+    icon: BsDatabase,
     color: "light-dark(rgb(148, 148, 148), rgb(128, 128, 128))",
   },
   java: {
-    icon: <FaJava />,
+    icon: FaJava,
     color: "light-dark(rgb(240, 87, 70), rgb(180, 65, 55))",
   },
   flask: {
-    icon: <SiFlask />,
+    icon: SiFlask,
     color: "light-dark(rgb(93, 137, 142), rgb(53, 107, 114))",
   },
   django: {
-    icon: <SiDjango />,
+    icon: SiDjango,
     color: "light-dark(rgb(80, 157, 116), rgb(70, 140, 105))",
   },
   "bootstrap css": {
-    icon: <FaBootstrap />,
+    icon: FaBootstrap,
     color: "light-dark(rgb(161, 132, 202), rgb(121, 82, 179))",
   },
   swing: {
-    icon: <SiFramework />,
+    icon: SiFramework,
     color: "light-dark(rgb(148, 148, 148), rgb(128, 128, 128))",
   },
   cli: {
-    icon: <GoCommandPalette />,
+    icon: GoCommandPalette,
     color: "light-dark(rgb(148, 148, 148), rgb(128, 128, 128))",
   },
   "file handling": {
-    icon: <SiFramework />,
+    icon: SiFramework,
     color: "light-dark(rgb(148, 148, 148), rgb(128, 128, 128))",
   },
   php: {
-    icon: <SiPhp />,
+    icon: SiPhp,
     color: "light-dark(rgb(119, 123, 180), rgb(102, 106, 163))",
   },
   mysql: {
-    icon: <GrMysql />,
+    icon: GrMysql,
     color: "light-dark(rgb(79, 136, 169), rgb(35, 80, 115))",
   },
   python: {
-    icon: <FaPython />,
+    icon: FaPython,
     color: "light-dark(rgb(107, 138, 170), rgb(70, 109, 150))",
   },
   postgresql: {
-    icon: <SiPostgresql />,
+    icon: SiPostgresql,
     color: "light-dark(rgb(64, 101, 141), rgb(50, 85, 115))",
   },
   javascript: {
-    icon: <BiLogoJavascript />,
+    icon: BiLogoJavascript,
     color: "light-dark(rgb(210, 174, 68), rgb(180, 155, 55))",
   },
   "restful api": {
-    icon: <AiFillApi />,
+    icon: AiFillApi,
     color: "light-dark(rgb(181, 105, 71), rgb(130, 70, 50))",
   },
   angular: {
-    icon: <FaAngular />,
+    icon: FaAngular,
     color: "light-dark(rgb(167, 58, 56), rgb(145, 45, 45))",
   },
   vue: {
-    icon: <FaVuejs />,
+    icon: FaVuejs,
     color: "light-dark(rgb(100, 181, 135), rgb(80, 150, 100))",
   },
   svelte: {
-    icon: <SiSvelte />,
+    icon: SiSvelte,
     color: "light-dark(rgb(235, 79, 39), rgb(200, 70, 35))",
   },
   "tailwind css": {
-    icon: <SiTailwindcss />,
+    icon: SiTailwindcss,
     color: "light-dark(rgb(94, 200, 183), rgb(80, 170, 160))",
   },
   mariadb: {
-    icon: <SiMariadb />,
+    icon: SiMariadb,
     color: "light-dark(rgb(167, 138, 101), rgb(150, 125, 90))",
   },
   pythonanywhere: {
-    icon: <SiPythonanywhere />,
+    icon: SiPythonanywhere,
     color: "light-dark(rgb(85, 168, 222), rgb(70, 150, 200))",
   },
   "react native": {
-    icon: <FaReact />,
+    icon: FaReact,
     color: "light-dark(rgb(77, 167, 197), rgb(60, 140, 170))",
   },
   expo: {
-    icon: <SiExpo />,
+    icon: SiExpo,
     color: "light-dark(rgb(77, 77, 77), rgb(77, 77, 77)",
   },
   "next.js": {
-    icon: <SiNextdotjs />,
+    icon: SiNextdotjs,
     color: "light-dark(rgb(53, 53, 53), rgb(53, 53, 53))",
   },
   cloudinary: {
-    icon: <SiCloudinary />,
+    icon: SiCloudinary,
     color: "light-dark(rgb(56, 71, 190), rgb(46, 59, 152))",
   },
   vite: {
-    icon: <SiVite />,
+    icon: SiVite,
     color: "light-dark(rgb(174, 63, 245), rgb(121, 43, 169))",
   },
   supabase: {
-    icon: <SiSupabase />,
+    icon: SiSupabase,
     color: "light-dark(rgb(51, 121, 52), rgb(40, 96, 41))",
   },
   "email.js": {
-    icon: <SiFramework />,
+    icon: SiFramework,
     color: "light-dark(rgb(148, 148, 148), rgb(128, 128, 128))",
   },
   "webgazer.js": {
-    icon: <SiFramework />,
+    icon: SiFramework,
     color: "light-dark(rgb(148, 148, 148), rgb(128, 128, 128))",
   },
   deepseek: {
-    icon: <GiSpermWhale />,
+    icon: GiSpermWhale,
     color: "light-dark(rgb(84, 107, 246), rgb(72, 94, 214))",
   },
   nosql: {
-    icon: <BsDatabase />,
+    icon: BsDatabase,
     color: "light-dark(rgb(148, 148, 148), rgb(128, 128, 128))",
   },
   xampp: {
-    icon: <SiXampp />,
+    icon: SiXampp,
     color: "light-dark(rgb(234, 130, 61), rgb(196, 108, 49))",
   },
   "microsoft sql server": {
-    icon: <SiMicrosoftsqlserver />,
+    icon: DiMsqlServer,
     color: "light-dark(rgb(204, 84, 83), rgb(184, 54, 53))",
   },
   vercel: {
-    icon: <SiVercel />,
+    icon: SiVercel,
     color: "light-dark(rgb(75, 75, 75), rgb(75, 75, 75))",
   },
   gsap: {
-    icon: <SiGreensock />,
+    icon: SiGreensock,
     color: "light-dark(rgb(151, 204, 63), rgb(127, 172, 54))",
   },
   "framer motion": {
-    icon: <SiFramer />,
+    icon: SiFramer,
     color: "light-dark(rgb(180, 40, 192), rgb(180, 40, 192))",
   },
   pocketbase: {
-    icon: <SiPocketbase />,
+    icon: SiPocketbase,
     color: "light-dark(rgb(130, 150, 156), rgb(130, 150, 156))",
   },
   jira: {
-    icon: <SiJira />,
+    icon: SiJira,
     color: "light-dark(rgb(35, 83, 199), rgb(35, 83, 199))",
   },
   figma: {
-    icon: <SiFigma />,
+    icon: SiFigma,
     color: "light-dark(rgb(81, 167, 101), rgb(81, 167, 101))",
   },
   webflow: {
-    icon: <SiWebflow />,
+    icon: SiWebflow,
     color: "light-dark(rgb(51, 108, 236), rgb(51, 108, 236))",
   },
-};
-
-export const aboutSkillset: { [key: string]: number } = {
-  // 3 - expert
-  // 2 - intermediate
-  // 1 - beginner
-  // 0 - planning to learn
-
-  typescript: 3,
-  "react.js": 3,
-  html: 3,
-  css: 3,
-  scss: 3,
-  firebase: 3,
-  sql: 3,
-  git: 3,
-  "c#": 1,
-  // "windows forms": 1,
-  // "transact-sql": 1,
-  java: 2,
-  // flask: 1,
-  django: 1,
-  "bootstrap css": 2,
-  // swing: 0,
-  // cli: 0,
-  // "file handling": 0,
-  php: 1,
-  // mysql: 3,
-  python: 2,
-  // postgresql: 0,
-  javascript: 3,
-  "restful api": 2,
-  // angular: 0,
-  // vue: 0,
-  // svelte: 0,
-  "tailwind css": 3,
-  // mariadb: 3,
-  // pythonanywhere: 1,
-  "react native": 3,
-  expo: 3,
-  "next.js": 3,
-  // cloudinary: 1,
-  // vite: 3,
-  supabase: 3,
-  // email.js: 0,
-  // webgazer.js: 0,
-  // deepseek: 0,
-  // nosql: 0,
-  // xampp: 0,
-  // "microsoft sql server": 0,
-  // vercel: 0,
-  gsap: 2,
-  // "framer motion": 0,
-  // pocketbase: 0,
-  jira: 2,
-  figma: 3,
-  webflow: 2,
-};
-
-export interface ProjectEntry {
-  name: string;
-  year: string;
-  techStack: string[];
-  image: string;
-  imageFlex: string;
-  imageAlt: string;
-  video: string;
-  videoFlex: string;
-  description: ReactElement;
-  myRole: ReactElement;
-  links: ReactElement;
-  attributions?: string[];
-}
-
-export const projectData: {
-  [key: number]: ProjectEntry;
-} = {
-  // all
-  /* 0: PlugIns,
-  1: BellHospital,
-  2: FunCulator,
-  3: ApolloHospital,
-  4: CircuitCentral,
-  5: PortfolioV1,
-  6: PortfolioV2,
-  7: ClipDetective,
-  8: FeelTok,
-  9: WhealthyVessel,
-  10: Examiq,
-  11: LetThereBeFragrance, */
-
-  // filtered
-  0: PlugIns,
-  1: BellHospital,
-  2: FunCulator,
-  3: ApolloHospital,
-  4: CircuitCentral,
-  5: PortfolioV1,
-  6: PortfolioV2,
-  7: ClipDetective,
-  8: FeelTok,
-  9: Examiq,
 };

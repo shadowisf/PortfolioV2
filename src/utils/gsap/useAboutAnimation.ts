@@ -1,5 +1,5 @@
 import { useGSAP } from "@gsap/react";
-import { useGlobalState } from "./ControlUtils";
+import { useGlobalState } from "../../providers/GlobalStateProvider";
 import { Flip } from "gsap/all";
 import { ScrollTrigger } from "gsap/all";
 import gsap from "gsap";

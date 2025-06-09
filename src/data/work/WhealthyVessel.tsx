@@ -1,6 +1,6 @@
-import { ProjectEntry } from "../utils/_GODMODE";
+import { WorkEntry } from "../../utils/types/WorkEntry";
 
-export const WhealthyVessel: ProjectEntry = {
+export const WhealthyVessel: WorkEntry = {
   name: "whealthy vessel",
   year: "2025",
   techStack: ["vite", "*react.js", "*typescript", "*scss", "git"],

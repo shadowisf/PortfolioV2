@@ -1,11 +1,11 @@
 import { useRef, useState, Key } from "react";
-import { projectData } from "../utils/_GODMODE";
-import Spinner from "./Spinner";
+import { workMapping } from "../utils/WorkMapping";
 import TechStackTile from "./TechStackTile";
 import { ProjectProps } from "./ProjectTile";
+import Spinner from "./Spinner";
 
 export function ProjectPreview(p: ProjectProps) {
-  const project = projectData[p.dataID];
+  const project = workMapping[p.dataID];
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const [loading, setLoading] = useState(true);

@@ -1,14 +1,14 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useGlobalState } from "./ControlUtils";
-import { projectData } from "./_GODMODE";
+import { useGlobalState } from "../../providers/GlobalStateProvider";
+import { workMapping } from "../WorkMapping";
 
 export function useWorkAnimation() {
   const { contextSafe } = useGSAP();
   const { currentPage, isMobile } = useGlobalState();
 
   const startup = contextSafe(() => {
-    const projectRoutes = Object.entries(projectData).map(([key, project]) => ({
+    const projectRoutes = Object.entries(workMapping).map(([key, project]) => ({
       key: Number(key),
       path: project.name.replace(/\s+/g, "-"),
     }));

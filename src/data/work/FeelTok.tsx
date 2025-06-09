@@ -1,13 +1,13 @@
-import { ProjectEntry } from "../utils/_GODMODE";
-import { LinkWithIcon } from "../components/Link";
+import { WorkEntry } from "../../utils/types/WorkEntry";
+import { LinkWithIcon } from "../../components/Link";
 //
-import ImageFeelTok from "../assets/ImageFeelTok.webp";
-import VideoFeelTok from "../assets/VideoFeelTok.webm";
-import FileFeelTok from "../assets/FileFeelTok.pdf";
+import ImageFeelTok from "@/assets/ImageFeelTok.webp";
+import VideoFeelTok from "@/assets/VideoFeelTok.webm";
+import FileFeelTok from "@/assets/FileFeelTok.pdf";
 //
 const GitHubFeelTok = "https://github.com/shadowisf/FeelTok";
 
-export const FeelTok: ProjectEntry = {
+export const FeelTok: WorkEntry = {
   name: "feeltok",
   year: "2024",
   techStack: [
@@ -88,14 +88,14 @@ export const FeelTok: ProjectEntry = {
   links: (
     <>
       <LinkWithIcon
-        img={<img src="src/assets/IconOctopus.svg" />}
+        img={<img src="src/@/assets/IconOctopus.svg" />}
         href={GitHubFeelTok}
       >
         source code
       </LinkWithIcon>
 
       <LinkWithIcon
-        img={<img src="src/assets/IconMemo.svg" />}
+        img={<img src="src/@/assets/IconMemo.svg" />}
         href={FileFeelTok}
       >
         case study

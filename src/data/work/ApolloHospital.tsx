@@ -1,14 +1,15 @@
-import { ProjectEntry } from "../utils/_GODMODE";
-import { LinkWithIcon } from "../components/Link";
+import { WorkEntry } from "../../utils/types/WorkEntry";
+import { LinkWithIcon } from "../../components/Link";
 //
-import ImageApolloHospital from "../assets/ImageApolloHospital.webp";
-import VideoApolloHospital from "../assets/VideoApolloHospital.webm";
-import FileApolloHospital from "../assets/FileApolloHospital.pdf";
+import ImageApolloHospital from "@/assets/ImageApolloHospital.webp";
+import VideoApolloHospital from "@/assets/VideoApolloHospital.webm";
+import FileApolloHospital from "@/assets/FileApolloHospital.pdf";
+
 //
 const GitHubApolloHospital = "https://github.com/shadowisf/ApolloHospital";
 const DemoApolloHospital = "https://apollohospital.pythonanywhere.com";
 
-export const ApolloHospital: ProjectEntry = {
+export const ApolloHospital: WorkEntry = {
   name: "apollo hospital",
   year: "2023",
   techStack: [
@@ -81,7 +82,7 @@ export const ApolloHospital: ProjectEntry = {
         </li>
         <li>
           implemented flask routes for data operations (e.g.,{" "}
-          <code>@app.route('/add_patient', methods=['POST']</code>).
+          <code>..app.route('/add_patient', methods=['POST']</code>).
         </li>
         <li>
           added input validation (e.g., date formats) and error handling (sql

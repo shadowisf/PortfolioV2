@@ -3,12 +3,12 @@ import { TimelineRow } from "../components/Timeline";
 import { useEffect, useState } from "react";
 import TechStackTile from "../components/TechStackTile";
 import { LinkWithNoIcon } from "../components/Link";
-import { aboutSkillset } from "../utils/_GODMODE";
 import Spinner from "../components/Spinner";
 import { useMemo } from "react";
-import { useGlobalState } from "../utils/ControlUtils";
-import { useScrollingAnimation } from "../utils/useScrollingAnimation";
-import { useAboutAnimation } from "../utils/useAboutAnimation";
+import { useGlobalState } from "../providers/GlobalStateProvider";
+import { useScrollingAnimation } from "../utils/gsap/useScrollingAnimation";
+import { useAboutAnimation } from "../utils/gsap/useAboutAnimation";;
+import { skillsetRating } from "../utils/SkillsetRating";
 import { useGSAP } from "@gsap/react";
 
 export default function About() {
@@ -19,7 +19,7 @@ export default function About() {
   const [imageLoading, setImageLoading] = useState(true);
 
   const shuffledSkills = useMemo(() => {
-    return Object.keys(aboutSkillset).sort(() => Math.random() - 0.5);
+    return Object.keys(skillsetRating).sort(() => Math.random() - 0.5);
   }, []);
 
   useEffect(() => {
@@ -227,7 +227,7 @@ export default function About() {
 
           <div className="skills">
             {shuffledSkills.map((item, index) => {
-              const level = aboutSkillset[item];
+              const level = skillsetRating[item];
 
               return (
                 <TechStackTile

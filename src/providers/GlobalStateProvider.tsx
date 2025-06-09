@@ -2,7 +2,7 @@ import { useGSAP } from "@gsap/react";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
-import { usePageTransition } from "./usePageTransition";
+import { usePageTransition } from "../utils/gsap/usePageTransition";
 
 type GlobalStateContextType = {
   isMobile: boolean;
@@ -143,8 +143,4 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
       {children}
     </GlobalStateContext.Provider>
   );
-}
-
-export function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }

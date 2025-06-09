@@ -1,13 +1,13 @@
-import { ProjectEntry } from "../utils/_GODMODE";
-import { LinkWithIcon } from "../components/Link";
+import { WorkEntry } from "../../utils/types/WorkEntry";
+import { LinkWithIcon } from "../../components/Link";
 //
-import ImageFunculator from "../assets/ImageFunCulator.webp";
-import VideoFunCulator from "../assets/VideoFunCulator.webm";
-import FileFunculator from "../assets/FileFunCulator.pdf";
+import ImageFunculator from "@/assets/ImageFunCulator.webp";
+import VideoFunCulator from "@/assets/VideoFunCulator.webm";
+import FileFunculator from "@/assets/FileFunCulator.pdf";
 //
 const GitHubFunCulator = "https://github.com/shadowisf/FunCulator";
 
-export const FunCulator: ProjectEntry = {
+export const FunCulator: WorkEntry = {
   name: "funculator",
   year: "2022",
   techStack: ["*java", "*swing", "git"],
@@ -65,7 +65,7 @@ export const FunCulator: ProjectEntry = {
       funculator is a <u>group project</u> where i:
       <ul>
         <li>
-          designed pixel-art ui (gimp) and integrated assets into swing
+          designed pixel-art ui (gimp) and integrated @/assets into swing
           (jpanels, event listeners).
         </li>
         <li>
@@ -89,14 +89,14 @@ export const FunCulator: ProjectEntry = {
   links: (
     <>
       <LinkWithIcon
-        img={<img src="src/assets/IconOctopus.svg" />}
+        img={<img src="src/@/assets/IconOctopus.svg" />}
         href={GitHubFunCulator}
       >
         source code
       </LinkWithIcon>
 
       <LinkWithIcon
-        img={<img src="src/assets/IconMemo.svg" />}
+        img={<img src="src/@/assets/IconMemo.svg" />}
         href={FileFunculator}
       >
         case study

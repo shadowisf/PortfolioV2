@@ -1,13 +1,13 @@
-import { ProjectEntry } from "../utils/_GODMODE";
-import { LinkWithIcon } from "../components/Link";
+import { WorkEntry } from "../../utils/types/WorkEntry";
+import { LinkWithIcon } from "../../components/Link";
 //
-import ImagePlugIns from "../assets/ImagePlugIns.webp";
-import VideoPlugIns from "../assets/VideoPlugIns.webm";
-import FilePlugIns from "../assets/FilePlugIns.pdf";
+import ImagePlugIns from "@/assets/ImagePlugIns.webp";
+import VideoPlugIns from "@/assets/VideoPlugIns.webm";
+import FilePlugIns from "@/assets/FilePlugIns.pdf";
 //
 const GitHubPlugIns = "https://github.com/shadowisf/PlugIns";
 
-export const PlugIns: ProjectEntry = {
+export const PlugIns: WorkEntry = {
   name: "plug-ins",
   year: "2022",
   techStack: ["*php", "*xampp", "*mariadb", "git"],

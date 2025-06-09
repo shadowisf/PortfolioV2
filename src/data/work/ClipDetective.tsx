@@ -1,13 +1,13 @@
-import { ProjectEntry } from "../utils/_GODMODE";
-import { LinkWithIcon } from "../components/Link";
+import { WorkEntry } from "../../utils/types/WorkEntry";
+import { LinkWithIcon } from "../../components/Link";
 //
-import ImageClipDetective from "../assets/ImageClipDetective.webp";
-import VideoClipDetective from "../assets/VideoClipDetective.webm";
+import ImageClipDetective from "@/assets/ImageClipDetective.webp";
+import VideoClipDetective from "@/assets/VideoClipDetective.webm";
 //
 const GitHubClipDetective = "https://github.com/shadowisf/ClipDetective";
 const DemoClipDetective = "https://clipdetective-2b40e.web.app";
 
-export const ClipDetective: ProjectEntry = {
+export const ClipDetective: WorkEntry = {
   name: "clipdetective",
   year: "2024",
   techStack: [
@@ -80,14 +80,14 @@ export const ClipDetective: ProjectEntry = {
   links: (
     <>
       <LinkWithIcon
-        img={<img src="src/assets/IconGlobe.svg" />}
+        img={<img src="src/@/assets/IconGlobe.svg" />}
         href={DemoClipDetective}
       >
         live website
       </LinkWithIcon>
 
       <LinkWithIcon
-        img={<img src="src/assets/IconOctopus.svg" />}
+        img={<img src="src/@/assets/IconOctopus.svg" />}
         href={GitHubClipDetective}
       >
         source code

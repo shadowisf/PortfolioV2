@@ -1,12 +1,13 @@
 import { ProjectTile } from "../components/ProjectTile";
 import { useEffect } from "react";
-import { email, linkedin, github, projectData, cv } from "../utils/_GODMODE";
 import { ProjectPreview } from "../components/ProjectPreview";
 import { LinkWithIcon } from "../components/Link";
-import { useGlobalState } from "../utils/ControlUtils";
-import { useScrollingAnimation } from "../utils/useScrollingAnimation";
-import { useHomeAnimation } from "../utils/useHomeAnimation";
+import { useGlobalState } from "../providers/GlobalStateProvider";
+import { useScrollingAnimation } from "../utils/gsap/useScrollingAnimation";
+import { useHomeAnimation } from "../utils/gsap/useHomeAnimation";
 import { useGSAP } from "@gsap/react";
+import { resume, email, linkedin, github } from "../utils/IdentityMapping";
+import { workMapping } from "../utils/WorkMapping";
 
 export default function Home() {
   const { setCurrentPage } = useGlobalState();
@@ -25,13 +26,13 @@ export default function Home() {
   return (
     <main className="homeWrapper">
       <section className="left">
-        {Object.keys(projectData).map((id) => (
+        {Object.keys(workMapping).map((id) => (
           <ProjectTile key={id} dataID={Number(id)} />
         ))}
       </section>
 
       <section className="right">
-        {Object.keys(projectData).map((id) => (
+        {Object.keys(workMapping).map((id) => (
           <ProjectPreview key={id} dataID={Number(id)} />
         ))}
 
@@ -61,7 +62,10 @@ export default function Home() {
           <br />
 
           <div className="links">
-            <LinkWithIcon img={<img src="src/assets/IconMemo.svg" />} href={cv}>
+            <LinkWithIcon
+              img={<img src="src/assets/IconMemo.svg" />}
+              href={resume}
+            >
               resume
             </LinkWithIcon>
 

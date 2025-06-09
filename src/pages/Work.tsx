@@ -1,14 +1,14 @@
 import { Key, useEffect, useState } from "react";
 import TechStackTile from "../components/TechStackTile";
 import { Link } from "react-router-dom";
-import { projectData } from "../utils/_GODMODE";
+import { workMapping } from "../utils/WorkMapping";
 import "zoom-vanilla.js/dist/zoom.css";
 import "zoom-vanilla.js/dist/zoom-vanilla.min.js";
 import Spinner from "../components/Spinner";
-import { useGlobalState } from "../utils/ControlUtils";
-import { useScrollingAnimation } from "../utils/useScrollingAnimation";
+import { useGlobalState } from "../providers/GlobalStateProvider";
+import { useScrollingAnimation } from "../utils/gsap/useScrollingAnimation";
 import { useGSAP } from "@gsap/react";
-import { useWorkAnimation } from "../utils/useWorkAnimation";
+import { useWorkAnimation } from "../utils/gsap/useWorkAnimation";
 
 type WorkProps = {
   dataID: number;
@@ -22,15 +22,15 @@ export default function Work(p: WorkProps) {
   const [imageLoading, setImageLoading] = useState(true);
   const [videoLoading, setVideoLoading] = useState(true);
 
-  const project = projectData[p.dataID];
+  const project = workMapping[p.dataID];
   const currentProjectTitle = project.name.replace(/\s+/g, "-");
 
-  const prevProject = projectData[p.dataID - 1];
+  const prevProject = workMapping[p.dataID - 1];
   const prevProjectTitle = prevProject
     ? prevProject.name.replace(/\s+/g, "-")
     : "";
 
-  const nextProject = projectData[p.dataID + 1];
+  const nextProject = workMapping[p.dataID + 1];
   const nextProjectTitle = nextProject
     ? nextProject.name.replace(/\s+/g, "-")
     : "";
