@@ -55,7 +55,7 @@ export default function Home() {
           </div>
 
           <h2 className="nonBold">
-            <span className="bulletPoint">⊢ </span>full-stack software engineer
+            <span className="bulletPoint">⊢ </span>software engineer
           </h2>
 
           <h2 className="nonBold">

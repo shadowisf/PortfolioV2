@@ -1,8 +1,10 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useGlobalState } from "../../providers/GlobalStateProvider";
 
 export function usePageTransition() {
   const { contextSafe } = useGSAP();
+  const { setInMenu } = useGlobalState();
 
   const duration = 0.75;
   const ease = "power4.inOut";
@@ -40,6 +42,8 @@ export function usePageTransition() {
         duration: duration,
       });
     });
+
+    setInMenu(true);
   });
 
   const closeMenu = contextSafe((instant: boolean) => {
@@ -62,6 +66,8 @@ export function usePageTransition() {
         },
       });
     }
+
+    setInMenu(false);
   });
 
   return {

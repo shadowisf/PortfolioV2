@@ -16,10 +16,10 @@ $fontVarThin: "wght" 1000, "CONT" 1000;
 
 $scaleOnHover: 1.05;
 
-$minMaxWidth: 1030px;
+$minMaxWidth: 1000px;
 
 :root {
-  --minMaxWidth: 1030px;
+  --minMaxWidth: 1000px;
 
   --theme: light dark;
 
@@ -428,9 +428,9 @@ footer {
       border-radius: $borderRadius;
       display: flex;
       align-items: center;
-      white-space: nowrap;
       justify-content: space-between;
       gap: 4rem;
+      text-wrap: nowrap;
 
       transition: scale 0.25s, box-shadow 0.25s, color 0.25s;
 
@@ -438,7 +438,6 @@ footer {
 
       .title {
         transition: font-variation-settings 0.5s;
-        white-space: nowrap;
       }
 
       .year {
@@ -487,8 +486,8 @@ footer {
         gap: 0.5rem;
 
         .swirlEmoji {
-          margin-top: 10px;
-          width: 50px;
+          margin-top: 0.5rem;
+          width: 3rem;
         }
       }
 
@@ -596,7 +595,6 @@ footer {
           box-shadow: $boxShadow;
 
           text-align: center;
-          white-space: nowrap;
 
           background-color: var(--background-color);
 
@@ -704,7 +702,6 @@ footer {
       align-items: center;
       gap: 1rem;
 
-      white-space: nowrap;
       flex-wrap: wrap;
 
       justify-content: space-around;
@@ -835,12 +832,10 @@ footer {
 
       .waveEmojiWrapper {
         transform: scaleX(-1);
-        display: inline-block;
 
         .waveEmoji {
-          margin-top: 10px;
-          display: inline-block;
-          width: 50px;
+          margin-top: 0.5rem;
+          width: 3rem;
         }
       }
     }
@@ -923,6 +918,7 @@ footer {
         gap: 1rem;
 
         select {
+          color: var(--text-color);
           border-radius: $borderRadius;
           font-size: var(--p);
           padding-top: 0.5rem;
@@ -1030,6 +1026,7 @@ footer {
 
 .infoOnHover {
   position: relative;
+  text-wrap: nowrap;
 
   &.top {
     &:hover::before {
@@ -1064,7 +1061,6 @@ footer {
     font-size: var(--smaller);
     pointer-events: none;
     font-weight: 400;
-    white-space: nowrap;
     border-radius: $borderRadius;
     font-variation-settings: $fontVarNormal;
     text-align: center;
@@ -1259,6 +1255,12 @@ footer {
   display: block;
 }
 
+@media screen and (max-width: ($minMaxWidth + 50px)) {
+  .homeWrapper {
+    gap: 4rem;
+  }
+}
+
 // mobile screen
 @media screen and (max-width: $minMaxWidth) {
   #fs {
@@ -1270,7 +1272,7 @@ footer {
   }
 
   :root {
-    --h0: calc(var(--h1) * 1.5);
+    --h0: calc(var(--h1) * 1.4);
     --h1: 2.027rem;
     --h2: 1.802rem;
     --h3: 1.602rem;
@@ -1299,6 +1301,15 @@ footer {
         width: 400px;
         height: auto;
         max-width: 75%;
+      }
+
+      .intro {
+        .waveEmojiWrapper {
+          .waveEmoji {
+            margin-top: 0.5rem;
+            width: 2.25rem;
+          }
+        }
       }
     }
 
@@ -1354,8 +1365,8 @@ footer {
 
         .intro {
           .swirlEmoji {
-            width: 35px;
-            margin-top: 5px;
+            margin-top: 0.5rem;
+            width: 2.25rem;
           }
         }
       }

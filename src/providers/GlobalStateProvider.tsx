@@ -15,6 +15,8 @@ type GlobalStateContextType = {
   ) => void;
   handleToggleTheme: (menu: boolean) => void;
   userTheme: string;
+  inMenu: boolean;
+  setInMenu: (value: boolean) => void;
 };
 
 type GlobalStateProviderProps = {
@@ -29,6 +31,8 @@ const GlobalStateContext = createContext<GlobalStateContextType>({
   executeTransition: () => {},
   handleToggleTheme: () => {},
   userTheme: "",
+  inMenu: false,
+  setInMenu: () => {},
 });
 
 export function useGlobalState() {
@@ -37,6 +41,7 @@ export function useGlobalState() {
 
 export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const [isMobile, setIsMobile] = useState(false);
+  const [inMenu, setInMenu] = useState(false);
   const [userTheme, setUserTheme] = useState("");
   const [currentPage, setCurrentPage] = useState("");
 
@@ -138,6 +143,8 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
         executeTransition,
         handleToggleTheme,
         userTheme,
+        inMenu,
+        setInMenu,
       }}
     >
       {children}

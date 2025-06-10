@@ -12,8 +12,10 @@ import YouAreLost from "./components/YouAreLost.tsx";
 import { GlobalStateProvider } from "./providers/GlobalStateProvider.tsx";
 import { workMapping } from "./utils/workMapping.ts";
 
+// for real reploy
 // firebase deploy --only hosting:les-ranalan
 
+// for test deploy
 // firebase hosting:channel:deploy les-ranalan
 
 const root = createRoot(document.getElementById("root")!);

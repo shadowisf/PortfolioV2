@@ -230,7 +230,6 @@ export default function About() {
               <option value={"2"}>intermediate</option>
               <option value={"1"}>beginner</option>
             </select>
-            <small>(try it :p)</small>
           </div>
 
           <div className="skills">

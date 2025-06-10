@@ -5,7 +5,7 @@ import { workMapping } from "../workMapping";
 
 export function useWorkAnimation() {
   const { contextSafe } = useGSAP();
-  const { currentPage, isMobile } = useGlobalState();
+  const { currentPage, isMobile, inMenu } = useGlobalState();
 
   const startup = contextSafe(() => {
     const projectRoutes = Object.entries(workMapping).map(([key, project]) => ({
@@ -28,7 +28,7 @@ export function useWorkAnimation() {
     const bottomNav = document.querySelector(".workWrapper .bottomNav");
 
     const startupDuration = 1;
-    const startupDelay = isMobile ? 1.25 : 0.25;
+    const startupDelay = isMobile && inMenu ? 1.25 : 0.25;
     const startupEase = "power2.out";
     const startupStagger = 0.075;
     const startupScaleInitial = 0.9;
