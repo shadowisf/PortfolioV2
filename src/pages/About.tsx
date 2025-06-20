@@ -181,7 +181,7 @@ export default function About() {
               img={<img src={IconBriefcase} />}
               verticalLine={true}
             >
-              worked as part-time full-stack web developer for whealthy vessel
+              worked as freelance full-stack web developer for whealthy vessel
             </TimelineRow>
 
             <TimelineRow
@@ -205,7 +205,7 @@ export default function About() {
               img={<img src={IconBriefcase} />}
               verticalLine={false}
             >
-              worked as part-time full-stack web developer for let there be
+              worked as freelance full-stack web developer for let there be
               fragrance
             </TimelineRow>
           </div>
