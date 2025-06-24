@@ -42,6 +42,7 @@ export default function About() {
   return (
     <main className="aboutWrapper">
       <section className="bio">
+        {/* mobile header */}
         <div id="hs">
           <div className="intro">
             <h1 className="extra header">hey, i'm les!</h1>
@@ -66,6 +67,7 @@ export default function About() {
         />
 
         <div className="content">
+          {/* desktop header */}
           <div id="fs">
             <div className="intro">
               <h1 className="extra header">hey, i'm les!</h1>
@@ -173,7 +175,7 @@ export default function About() {
               >
                 winc
               </LinkWithNoIcon>{" "}
-              with diploma in engineering
+              w/ diploma in engineering
             </TimelineRow>
 
             <TimelineRow
@@ -181,7 +183,8 @@ export default function About() {
               img={<img src={IconBriefcase} />}
               verticalLine={true}
             >
-              worked as freelance full-stack web developer for whealthy vessel
+              worked as remote freelance full-stack web developer @ whealthy
+              vessel
             </TimelineRow>
 
             <TimelineRow
@@ -197,7 +200,7 @@ export default function About() {
               >
                 uogm
               </LinkWithNoIcon>{" "}
-              with beng (hons) software engineering
+              w/ beng (hons) software engineering
             </TimelineRow>
 
             <TimelineRow
@@ -205,7 +208,7 @@ export default function About() {
               img={<img src={IconBriefcase} />}
               verticalLine={false}
             >
-              worked as freelance full-stack web developer for let there be
+              worked as remote freelance full-stack web developer @ let there be
               fragrance
             </TimelineRow>
           </div>

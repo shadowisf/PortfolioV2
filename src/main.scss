@@ -802,6 +802,7 @@ footer {
       height: 425px;
       padding: 75px;
       box-shadow: $boxShadow;
+      border-radius: $borderRadius;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -1310,6 +1311,11 @@ footer {
             width: 2.25rem;
           }
         }
+      }
+
+      .spinner {
+        width: 200px;
+        height: 200px;
       }
     }
 

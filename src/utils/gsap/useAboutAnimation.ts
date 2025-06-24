@@ -43,6 +43,7 @@ export function useAboutAnimation() {
     const timelineStagger = 0.1;
     const skillsetStagger = 0.1;
 
+    // initial state
     gsap.set([scrollPrompt, timelineAllRows, skillsetAllSkills], {
       autoAlpha: 0,
     });
