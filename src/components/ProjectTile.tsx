@@ -25,7 +25,10 @@ export function ProjectTile(p: ProjectProps) {
   return (
     <Link
       to={`${title}`}
-      onClick={(e) => executeTransition(e, title, false)}
+      onClick={(e) => {
+        e.preventDefault();
+        executeTransition(title, false);
+      }}
       className="tile hover all"
       onMouseEnter={() => {
         isMobile ? null : togglePreview(p.dataID);

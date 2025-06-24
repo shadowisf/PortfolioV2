@@ -52,7 +52,10 @@ export default function Work(p: WorkProps) {
           to={`/${prevProjectTitle}`}
           className="nextPrevButton infoOnHover top"
           data-tooltip="prev"
-          onClick={(e) => executeTransition(e, prevProjectTitle, false)}
+          onClick={(e) => {
+            e.preventDefault();
+            executeTransition(prevProjectTitle, false);
+          }}
           style={
             prevProjectTitle === ""
               ? { opacity: "0.25", pointerEvents: "none" }
@@ -70,7 +73,10 @@ export default function Work(p: WorkProps) {
           to={`/${nextProjectTitle}`}
           className="nextPrevButton infoOnHover top"
           data-tooltip="next"
-          onClick={(e) => executeTransition(e, nextProjectTitle, false)}
+          onClick={(e) => {
+            e.preventDefault();
+            executeTransition(nextProjectTitle, false);
+          }}
           style={
             nextProjectTitle === ""
               ? { opacity: "0.25", pointerEvents: "none" }

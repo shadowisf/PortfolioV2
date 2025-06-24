@@ -28,7 +28,7 @@ export default function NavBar() {
     const projectPath = e.target.value;
 
     if (projectPath) {
-      executeTransition(null, projectPath, menu);
+      executeTransition(projectPath, menu);
     }
   }
 
@@ -38,7 +38,10 @@ export default function NavBar() {
         <Link
           to="/"
           className="logoButton alt"
-          onClick={(e) => executeTransition(e, "/", false)}
+          onClick={(e) => {
+            e.preventDefault();
+            executeTransition("/", false);
+          }}
         >
           ᜎ᜔ᜍ᜔
         </Link>
@@ -65,7 +68,10 @@ export default function NavBar() {
 
           <Link
             to="about"
-            onClick={(e) => executeTransition(e, "about", false)}
+            onClick={(e) => {
+              e.preventDefault();
+              executeTransition("about", false);
+            }}
           >
             about
           </Link>
@@ -87,7 +93,10 @@ export default function NavBar() {
         <Link
           to="/"
           className="logoButton"
-          onClick={(e) => executeTransition(e, "/", false)}
+          onClick={(e) => {
+            e.preventDefault();
+            executeTransition("/", false);
+          }}
         >
           ᜎ᜔ᜍ᜔
         </Link>
@@ -114,7 +123,10 @@ export default function NavBar() {
 
           <Link
             to="about"
-            onClick={(e) => executeTransition(e, "about", false)}
+            onClick={(e) => {
+              e.preventDefault();
+              executeTransition("about", false);
+            }}
           >
             about
           </Link>
@@ -161,7 +173,13 @@ export default function NavBar() {
           </select>
         </div>
 
-        <Link to="about" onClick={(e) => executeTransition(e, "about", true)}>
+        <Link
+          to="about"
+          onClick={(e) => {
+            e.preventDefault();
+            executeTransition("about", true);
+          }}
+        >
           about
         </Link>
 
