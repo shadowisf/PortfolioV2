@@ -12,11 +12,11 @@ import { useGSAP } from "@gsap/react";
 import { profilePicture } from "../utils/identitySetting";
 import {
   IconBriefcase,
-  IconCake,
-  IconGlasses,
-  IconGraduation,
+  IconPHP,
+  IconEye,
+  IconUniversity,
   IconHandWave,
-  IconPin,
+  IconUAE,
 } from "../utils/iconSetting";
 
 export default function About() {
@@ -140,7 +140,7 @@ export default function About() {
           <div className="timelineRows">
             <TimelineRow
               date="february 15, 2004"
-              img={<img src={IconCake} />}
+              img={<img src={IconPHP} />}
               verticalLine={true}
             >
               born in davao, philippines
@@ -148,7 +148,7 @@ export default function About() {
 
             <TimelineRow
               date="may 12, 2012"
-              img={<img src={IconPin} />}
+              img={<img src={IconUAE} />}
               verticalLine={true}
             >
               moved to dubai, united arab emirates
@@ -156,7 +156,7 @@ export default function About() {
 
             <TimelineRow
               date="april 6, 2018"
-              img={<img src={IconGlasses} />}
+              img={<img src={IconEye} />}
               verticalLine={true}
             >
               acquired first pair of eyeglasses
@@ -164,7 +164,7 @@ export default function About() {
 
             <TimelineRow
               date="september 3, 2022"
-              img={<img src={IconGraduation} />}
+              img={<img src={IconUniversity} />}
               verticalLine={true}
             >
               graduated from{" "}
@@ -183,24 +183,24 @@ export default function About() {
               img={<img src={IconBriefcase} />}
               verticalLine={true}
             >
-              worked as remote freelance full-stack web developer @ whealthy
+              worked remotely as freelance full-stack web developer @ whealthy
               vessel
             </TimelineRow>
 
             <TimelineRow
               date="may 8, 2025"
-              img={<img src={IconGraduation} />}
+              img={<img src={IconUniversity} />}
               verticalLine={true}
             >
               graduated from{" "}
               <LinkWithNoIcon
                 className="infoOnHover top alt"
-                href="https://www.bolton.ac.uk"
+                href="https://greatermanchester.ac.uk"
                 data-tooltip="university of greater manchester"
               >
                 uogm
               </LinkWithNoIcon>{" "}
-              w/ beng (hons) software engineering
+              w/ bachelor of engineering (honors) in software engineering
             </TimelineRow>
 
             <TimelineRow
@@ -208,8 +208,8 @@ export default function About() {
               img={<img src={IconBriefcase} />}
               verticalLine={false}
             >
-              worked as remote freelance full-stack web developer @ let there be
-              fragrance
+              worked remotely as freelance full-stack web developer @ let there
+              be fragrance
             </TimelineRow>
           </div>
         </section>

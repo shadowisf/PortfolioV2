@@ -10,8 +10,8 @@ import { resume, email, linkedin, github } from "../utils/identitySetting";
 import { workMapping } from "../utils/workMapping";
 import {
   IconBriefcase,
-  IconEmail,
-  IconMemo,
+  IconMailbox,
+  IconCards,
   IconOctopus,
   IconSwirl,
 } from "../utils/iconSetting";
@@ -73,11 +73,11 @@ export default function Home() {
           <br />
 
           <div className="links">
-            <LinkWithIcon img={<img src={IconMemo} />} href={resume}>
+            <LinkWithIcon img={<img src={IconCards} />} href={resume}>
               resume
             </LinkWithIcon>
 
-            <LinkWithIcon img={<img src={IconEmail} />} href={email}>
+            <LinkWithIcon img={<img src={IconMailbox} />} href={email}>
               email
             </LinkWithIcon>
 

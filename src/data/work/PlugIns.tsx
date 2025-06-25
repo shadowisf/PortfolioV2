@@ -1,6 +1,6 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
-import { IconMemo, IconOctopus } from "../../utils/iconSetting";
+import { IconCards, IconOctopus } from "../../utils/iconSetting";
 //
 import ImagePlugIns from "@/assets/ImagePlugIns.webp";
 import VideoPlugIns from "@/assets/VideoPlugIns.webm";
@@ -96,7 +96,7 @@ export const PlugIns: WorkEntry = {
         source code
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconMemo} />} href={FilePlugIns}>
+      <LinkWithIcon img={<img src={IconCards} />} href={FilePlugIns}>
         case study
       </LinkWithIcon>
     </>

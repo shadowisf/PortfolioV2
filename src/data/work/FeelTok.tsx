@@ -1,6 +1,6 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
-import { IconMemo, IconOctopus } from "../../utils/iconSetting";
+import { IconCards, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageFeelTok from "@/assets/ImageFeelTok.webp";
 import VideoFeelTok from "@/assets/VideoFeelTok.webm";
@@ -92,7 +92,7 @@ export const FeelTok: WorkEntry = {
         source code
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconMemo} />} href={FileFeelTok}>
+      <LinkWithIcon img={<img src={IconCards} />} href={FileFeelTok}>
         case study
       </LinkWithIcon>
     </>

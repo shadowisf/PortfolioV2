@@ -1027,7 +1027,7 @@ footer {
 
 .infoOnHover {
   position: relative;
-  text-wrap: nowrap;
+  white-space: nowrap;
 
   &.top {
     &:hover::before {
@@ -1425,6 +1425,10 @@ footer {
       &:hover::before {
         bottom: -100%;
       }
+    }
+
+    &:hover::before {
+      display: none;
     }
   }
 }

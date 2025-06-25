@@ -1,6 +1,6 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
-import { IconGlobe, IconMemo, IconOctopus } from "../../utils/iconSetting";
+import { IconGlobe, IconCards, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageApolloHospital from "@/assets/ImageApolloHospital.webp";
 import VideoApolloHospital from "@/assets/VideoApolloHospital.webm";
@@ -108,7 +108,7 @@ export const ApolloHospital: WorkEntry = {
         source code
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconMemo} />} href={FileApolloHospital}>
+      <LinkWithIcon img={<img src={IconCards} />} href={FileApolloHospital}>
         case study
       </LinkWithIcon>
     </>

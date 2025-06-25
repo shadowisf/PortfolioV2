@@ -1,6 +1,6 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
-import { IconMemo, IconOctopus } from "../../utils/iconSetting";
+import { IconCards, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageFunculator from "@/assets/ImageFunCulator.webp";
 import VideoFunCulator from "@/assets/VideoFunCulator.webm";
@@ -93,7 +93,7 @@ export const FunCulator: WorkEntry = {
         source code
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconMemo} />} href={FileFunculator}>
+      <LinkWithIcon img={<img src={IconCards} />} href={FileFunculator}>
         case study
       </LinkWithIcon>
     </>

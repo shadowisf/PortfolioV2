@@ -1,6 +1,6 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
-import { IconMemo, IconOctopus } from "../../utils/iconSetting";
+import { IconCards, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageCircuitCentral from "@/assets/ImageCircuitCentral.webp";
 import VideoCircuitCentral from "@/assets/VideoCircuitCentral.webm";
@@ -96,7 +96,7 @@ export const CircuitCentral: WorkEntry = {
         source code
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconMemo} />} href={FileCircuitCentral}>
+      <LinkWithIcon img={<img src={IconCards} />} href={FileCircuitCentral}>
         case study
       </LinkWithIcon>
     </>
