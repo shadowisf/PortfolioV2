@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   RiSunLine,
   RiMoonLine,
@@ -12,35 +11,19 @@ import { workMapping } from "../utils/workMapping";
 
 export default function NavBar() {
   const { openMenu, closeMenu } = usePageTransition();
-  const { executeTransition, isMobile, userTheme, handleToggleTheme } =
+  const { executeTransition, userTheme, handleToggleTheme, setInMenu } =
     useGlobalState();
-
-  useEffect(() => {
-    if (!isMobile) {
-      closeMenu(true);
-    }
-  }, [isMobile]);
-
-  function handleWorkSelect(
-    e: React.ChangeEvent<HTMLSelectElement>,
-    menu: boolean
-  ) {
-    const projectPath = e.target.value;
-
-    if (projectPath) {
-      executeTransition(projectPath, menu);
-    }
-  }
 
   return (
     <>
+      {/* desktop nav */}
       <div className="navAlt">
         <Link
           to="/"
           className="logoButton alt"
           onClick={(e) => {
             e.preventDefault();
-            executeTransition("/", false);
+            executeTransition("/");
           }}
         >
           ᜎ᜔ᜍ᜔
@@ -48,7 +31,10 @@ export default function NavBar() {
 
         <span className="navButtons alt">
           <div className="selectContainer">
-            <select onChange={(e) => handleWorkSelect(e, false)} value={"work"}>
+            <select
+              onChange={(e) => executeTransition(e.target.value)}
+              value={"work"}
+            >
               <option value={"work"} disabled>
                 work
               </option>
@@ -70,7 +56,7 @@ export default function NavBar() {
             to="about"
             onClick={(e) => {
               e.preventDefault();
-              executeTransition("about", false);
+              executeTransition("about");
             }}
           >
             about
@@ -89,21 +75,18 @@ export default function NavBar() {
         </span>
       </div>
 
+      {/* mobile nav */}
       <nav>
-        <Link
-          to="/"
-          className="logoButton"
-          onClick={(e) => {
-            e.preventDefault();
-            executeTransition("/", false);
-          }}
-        >
+        <Link to="/" className="logoButton">
           ᜎ᜔ᜍ᜔
         </Link>
 
         <span className="navButtons">
           <div className="selectContainer">
-            <select onChange={(e) => handleWorkSelect(e, false)} value={"work"}>
+            <select
+              onChange={(e) => executeTransition(e.target.value)}
+              value={"work"}
+            >
               <option value={"work"} disabled>
                 work
               </option>
@@ -121,15 +104,7 @@ export default function NavBar() {
             </select>
           </div>
 
-          <Link
-            to="about"
-            onClick={(e) => {
-              e.preventDefault();
-              executeTransition("about", false);
-            }}
-          >
-            about
-          </Link>
+          <Link to="about">about</Link>
 
           <button
             onClick={() => handleToggleTheme(false)}
@@ -143,19 +118,34 @@ export default function NavBar() {
           </button>
         </span>
 
-        <button className="hamburgerButton" onClick={openMenu}>
+        <button
+          className="hamburgerButton"
+          onClick={() => {
+            setInMenu(true);
+            openMenu();
+          }}
+        >
           <RiMenu4Line size={24} />
         </button>
       </nav>
 
       <div className="menu">
-        <button className="closeButton" onClick={() => closeMenu(false)}>
+        <button
+          className="closeButton"
+          onClick={() => {
+            setInMenu(false);
+            closeMenu();
+          }}
+        >
           <RiCloseLargeFill size={24} />
         </button>
 
         <div className="selectContainer alt">
           work
-          <select onChange={(e) => handleWorkSelect(e, true)} value={"work"}>
+          <select
+            onChange={(e) => executeTransition(e.target.value)}
+            value={"work"}
+          >
             <option value={"work"} disabled>
               work
             </option>
@@ -177,7 +167,7 @@ export default function NavBar() {
           to="about"
           onClick={(e) => {
             e.preventDefault();
-            executeTransition("about", true);
+            executeTransition("about");
           }}
         >
           about

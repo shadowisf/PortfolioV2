@@ -1,19 +1,14 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useGlobalState } from "../../providers/GlobalStateProvider";
-import { workMapping } from "../workMapping";
 
 export function useWorkAnimation() {
   const { contextSafe } = useGSAP();
-  const { currentPage, isMobile, inMenu } = useGlobalState();
+  const { isMobile, inMenu, skipStart, setSkipStart } = useGlobalState();
 
   const startup = contextSafe(() => {
-    const projectRoutes = Object.entries(workMapping).map(([key, project]) => ({
-      key: Number(key),
-      path: project.name.replace(/\s+/g, "-"),
-    }));
-
-    if (projectRoutes.some((route) => route.path === currentPage)) {
+    if (skipStart) {
+      setSkipStart(false);
       return;
     }
 

@@ -10,7 +10,7 @@ export type ProjectProps = {
 };
 
 export function ProjectTile(p: ProjectProps) {
-  const { isMobile, executeTransition } = useGlobalState();
+  const { isMobile, executeTransition, setInMenu } = useGlobalState();
   const { togglePreview, resetPreview, movePreview } = useHomeAnimation();
 
   const [isHighlighted, setIsHighlighted] = useState(false);
@@ -19,7 +19,7 @@ export function ProjectTile(p: ProjectProps) {
   const title = project.name.replace(/\s+/g, "-") || "";
 
   useEffect(() => {
-    isMobile && isHighlighted ? resetPreview() : "";
+    isMobile && isHighlighted ? resetPreview() : null;
   }, [isMobile]);
 
   return (
@@ -27,7 +27,8 @@ export function ProjectTile(p: ProjectProps) {
       to={`${title}`}
       onClick={(e) => {
         e.preventDefault();
-        executeTransition(title, false);
+        setInMenu(false);
+        executeTransition(title);
       }}
       className="tile hover all"
       onMouseEnter={() => {

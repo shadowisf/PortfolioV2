@@ -59,6 +59,10 @@ export default function Home() {
           </h2>
 
           <h2 className="nonBold">
+            <span className="bulletPoint">⊢ </span>web developer
+          </h2>
+
+          <h2 className="nonBold">
             <span className="bulletPoint">⊢ </span>based in dubai
           </h2>
 

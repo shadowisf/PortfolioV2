@@ -8,11 +8,13 @@ type GlobalStateContextType = {
   isMobile: boolean;
   currentPage: string;
   setCurrentPage: (url: string) => void;
-  executeTransition: (url: string, skipStart: boolean) => void;
+  executeTransition: (url: string) => void;
   handleToggleTheme: (menu: boolean) => void;
   userTheme: string;
   inMenu: boolean;
   setInMenu: (value: boolean) => void;
+  skipStart: boolean;
+  setSkipStart: (value: boolean) => void;
 };
 
 type GlobalStateProviderProps = {
@@ -29,6 +31,8 @@ const GlobalStateContext = createContext<GlobalStateContextType>({
   userTheme: "",
   inMenu: false,
   setInMenu: () => {},
+  skipStart: false,
+  setSkipStart: () => {},
 });
 
 export function useGlobalState() {
@@ -40,16 +44,27 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const [inMenu, setInMenu] = useState(false);
   const [userTheme, setUserTheme] = useState("");
   const [currentPage, setCurrentPage] = useState("");
+  const [hasMounted, setHasMounted] = useState(false);
+  const [skipStart, setSkipStart] = useState(false);
 
   const { contextSafe } = useGSAP();
-  const { closeMenu /* , startTransition, endTransition */ } =
-    usePageTransition();
+  const { closeMenu } = usePageTransition();
 
   const navigate = useNavigate();
 
   const minMaxWidth = getComputedStyle(document.documentElement)
     .getPropertyValue("--minMaxWidth")
     .trim();
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile && hasMounted) {
+      closeMenu();
+    }
+  }, [isMobile, hasMounted]);
 
   useEffect(() => {
     handleResize();
@@ -89,7 +104,7 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
     localStorage.setItem("theme", newTheme);
 
     if (menu) {
-      closeMenu(false);
+      closeMenu();
     }
   }
 
@@ -104,17 +119,14 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   }
 
   // execute page transition
-  const executeTransition = contextSafe((url: string, skipStart?: boolean) => {
-    if (currentPage === url && !isMobile) {
+  const executeTransition = contextSafe((url: string) => {
+    if (url === currentPage) {
+      isMobile && closeMenu();
       return;
-    } else if (currentPage === url && isMobile) {
-      closeMenu(false);
-    } else if (skipStart === true) {
-      navigate(url);
-      closeMenu(false);
-    } else {
-      navigate(url);
     }
+
+    navigate(url);
+    isMobile && closeMenu();
   });
 
   return (
@@ -128,6 +140,8 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
         userTheme,
         inMenu,
         setInMenu,
+        skipStart,
+        setSkipStart,
       }}
     >
       {children}

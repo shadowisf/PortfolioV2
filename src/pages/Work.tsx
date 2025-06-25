@@ -15,7 +15,7 @@ type WorkProps = {
 };
 
 export default function Work(p: WorkProps) {
-  const { executeTransition, setCurrentPage } = useGlobalState();
+  const { setCurrentPage, setSkipStart } = useGlobalState();
   const { scrollToTop } = useScrollingAnimation();
   const { startup } = useWorkAnimation();
 
@@ -52,15 +52,12 @@ export default function Work(p: WorkProps) {
           to={`/${prevProjectTitle}`}
           className="nextPrevButton infoOnHover top"
           data-tooltip="prev"
-          onClick={(e) => {
-            e.preventDefault();
-            executeTransition(prevProjectTitle, false);
-          }}
           style={
             prevProjectTitle === ""
               ? { opacity: "0.25", pointerEvents: "none" }
               : {}
           }
+          onClick={() => setSkipStart(true)}
         >
           ←
         </Link>
@@ -73,15 +70,12 @@ export default function Work(p: WorkProps) {
           to={`/${nextProjectTitle}`}
           className="nextPrevButton infoOnHover top"
           data-tooltip="next"
-          onClick={(e) => {
-            e.preventDefault();
-            executeTransition(nextProjectTitle, false);
-          }}
           style={
             nextProjectTitle === ""
               ? { opacity: "0.25", pointerEvents: "none" }
               : {}
           }
+          onClick={() => setSkipStart(true)}
         >
           →
         </Link>
