@@ -232,7 +232,11 @@ export default function About() {
               verticalLine={false}
             >
               working as web developer @{" "}
-              <LinkWithNoIcon href="https://www.rayfitout.com">
+              <LinkWithNoIcon
+                className="infoOnHover top"
+                data-tooltip="an award-winning design & build company"
+                href="https://www.rayfitout.com"
+              >
                 rayfitout
               </LinkWithNoIcon>
             </TimelineRow>
