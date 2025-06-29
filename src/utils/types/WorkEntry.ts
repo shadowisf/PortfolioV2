@@ -9,8 +9,8 @@ export type WorkEntry = {
   imageAlt: string;
   video: string;
   videoFlex: string;
+  status: ReactElement;
   description: ReactElement;
   myRole: ReactElement;
   links: ReactElement;
-  attributions?: string[];
 };

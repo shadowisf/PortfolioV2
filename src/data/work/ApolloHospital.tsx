@@ -28,6 +28,11 @@ export const ApolloHospital: WorkEntry = {
     "an image of the apollo hospital project; it is viewing the patient records section wherein it displays the list of patient information. additionally, the ui has buttons for CRUD operations.",
   video: VideoApolloHospital,
   videoFlex: "1.599074",
+  status: (
+    <>
+      apollo hospital was completed on <u>december 20, 2023</u>.
+    </>
+  ),
   description: (
     <>
       apollo hospital is a <u>web-based hospital management system</u> for
@@ -68,7 +73,7 @@ export const ApolloHospital: WorkEntry = {
   ),
   myRole: (
     <>
-      apollo hospital is a <u>group project</u> where i:
+      apollo hospital is a <u>collaborative side project</u> where i:
       <ul>
         <li>
           designed 10+ interactive webpages (html/css/bootstrap) with consistent

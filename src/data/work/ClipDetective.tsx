@@ -23,9 +23,14 @@ export const ClipDetective: WorkEntry = {
   image: ImageClipDetective,
   imageFlex: "1.6",
   imageAlt:
-    "image of the index page of the clipdetective web app. there is a text introducing the website, a text saying 'can you guess 5-second clips from movies/series?', and three buttons at the bottom: an option to play with series, to play with movies, and a help button.",
+    "an image of the index page of the clipdetective web app. there is a text introducing the website, a text saying 'can you guess 5-second clips from movies/series?', and three buttons at the bottom: an option to play with series, to play with movies, and a help button.",
   video: VideoClipDetective,
   videoFlex: "1.599074",
+  status: (
+    <>
+      clipdetective is currently a <u>work in progress</u>.
+    </>
+  ),
   description: (
     <>
       clipdetective is a <u>web-based mini game</u> that challenges users to
@@ -62,7 +67,7 @@ export const ClipDetective: WorkEntry = {
   ),
   myRole: (
     <>
-      clipdetective is a <u>solo project</u> where i:
+      clipdetective is a <u>solo side project</u> where i:
       <ul>
         <li>structured the quiz flow and ui entirely from scratch.</li>
         <li>

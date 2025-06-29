@@ -18,6 +18,7 @@ import {
   FaPython,
   FaAngular,
   FaVuejs,
+  FaStripeS,
 } from "react-icons/fa";
 import { GiSpermWhale } from "react-icons/gi";
 import { GoCommandPalette } from "react-icons/go";
@@ -247,5 +248,9 @@ export const techStackStyling: Record<
   webflow: {
     icon: SiWebflow,
     color: "light-dark(rgb(51, 108, 236), rgb(51, 108, 236))",
+  },
+  stripe: {
+    icon: FaStripeS,
+    color: "light-dark(rgb(105, 108, 229), rgb(105, 108, 229))",
   },
 };

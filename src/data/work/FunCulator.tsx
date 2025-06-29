@@ -18,6 +18,11 @@ export const FunCulator: WorkEntry = {
     "an image of the funculator project. it is currently viewing the menu section where it is displaying all of the possible operations such as factorial, min&max, fibonacci, etc.",
   video: VideoFunCulator,
   videoFlex: "1.891626",
+  status: (
+    <>
+      funculator was completed on <u>december 21, 2023</u>.
+    </>
+  ),
   description: (
     <>
       funculator is an <u>all-in-one calculator application</u> designed to
@@ -63,7 +68,7 @@ export const FunCulator: WorkEntry = {
   ),
   myRole: (
     <>
-      funculator is a <u>group project</u> where i:
+      funculator is a <u>collaborative side project</u> where i:
       <ul>
         <li>
           designed pixel-art ui (gimp) and integrated assets into swing

@@ -18,6 +18,11 @@ export const BellHospital: WorkEntry = {
     "an image of the bell hospital project. it is currently viewing the patients records section where it is displaying all patient information (note that this is a CLI project). additionally, there are commands for CRUD operations.",
   video: VideoBellHospital,
   videoFlex: "1.598148",
+  status: (
+    <>
+      bell hospital was completed on <u>december 21, 2022</u>.
+    </>
+  ),
   description: (
     <>
       bell hospital is a <u>cli-based hospital management system</u> built with
@@ -60,7 +65,7 @@ export const BellHospital: WorkEntry = {
   ),
   myRole: (
     <>
-      bell hospital is a <u>solo project</u> where i:
+      bell hospital is a <u>solo side project</u> where i:
       <ul>
         <li>
           designed class structures mirroring real-world relationships

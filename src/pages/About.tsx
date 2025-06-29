@@ -183,8 +183,15 @@ export default function About() {
               img={<img src={IconBriefcase} />}
               verticalLine={true}
             >
-              worked remotely as freelance full-stack web developer @ whealthy
-              vessel
+              worked remotely as freelance full-stack web developer @{" "}
+              <LinkWithNoIcon
+                className="infoOnHover top alt"
+                data-tooltip="this project is currently a work in progress"
+                href="/whealthy-vessel"
+                sameTab={true}
+              >
+                whealthy vessel
+              </LinkWithNoIcon>
             </TimelineRow>
 
             <TimelineRow
@@ -206,10 +213,28 @@ export default function About() {
             <TimelineRow
               date="may 12, 2025"
               img={<img src={IconBriefcase} />}
+              verticalLine={true}
+            >
+              worked remotely as freelance full-stack web developer @{" "}
+              <LinkWithNoIcon
+                className="infoOnHover top alt"
+                data-tooltip="this project is currently a work in progress"
+                href="/let-there-be-fragrance"
+                sameTab={true}
+              >
+                let there be fragrance
+              </LinkWithNoIcon>
+            </TimelineRow>
+
+            <TimelineRow
+              date="june 30, 2025"
+              img={<img src={IconBriefcase} />}
               verticalLine={false}
             >
-              worked remotely as freelance full-stack web developer @ let there
-              be fragrance
+              working as web developer @{" "}
+              <LinkWithNoIcon href="https://www.rayfitout.com">
+                rayfitout
+              </LinkWithNoIcon>
             </TimelineRow>
           </div>
         </section>

@@ -27,9 +27,14 @@ export const Examiq: WorkEntry = {
   image: ImageExamiq,
   imageFlex: "1.735986",
   imageAlt:
-    "image of examiq, an ai-powered proctorig system. currently, it's in the exam page wherein it's displaying all of the questions of an exam in a form format. while at it, on the top left, there is a camera showing the face of the user and the system is scanning the fact, specifically the eyes. you can then see a red dot on the screen, tracking the user's gaze.",
+    "an image of examiq, an ai-powered proctorig system. currently, it's in the exam page wherein it's displaying all of the questions of an exam in a form format. while at it, on the top left, there is a camera showing the face of the user and the system is scanning the fact, specifically the eyes. you can then see a red dot on the screen, tracking the user's gaze.",
   video: VideoExamiq,
   videoFlex: "1.726",
+  status: (
+    <>
+      examiq was completed on <u>may 11, 2025</u>.
+    </>
+  ),
   description: (
     <>
       examiq is a <u>web-based ai-powered proctoring system</u> that features
@@ -61,7 +66,7 @@ export const Examiq: WorkEntry = {
   ),
   myRole: (
     <>
-      examiq is a <u>solo project</u> where i:
+      examiq is a <u>solo side project</u> where i:
       <ul>
         <li>
           designed entity-relationship diagram (erd), data-flow diagrams (dfd)
@@ -98,5 +103,4 @@ export const Examiq: WorkEntry = {
       </LinkWithIcon>
     </>
   ),
-  attributions: ["remix icons: https://github.com/xiaochunjimmy"],
 };

@@ -10,7 +10,7 @@ const GitHubPlugIns = "https://github.com/shadowisf/PlugIns";
 
 export const PlugIns: WorkEntry = {
   name: "plug-ins",
-  year: "2022",
+  year: "2023",
   techStack: ["*php", "*xampp", "*mariadb", "git"],
   image: ImagePlugIns,
   imageFlex: "1.879195",
@@ -18,6 +18,11 @@ export const PlugIns: WorkEntry = {
     "an image of the plug-ins project. it is currently viewing the products page",
   video: VideoPlugIns,
   videoFlex: "1.599074",
+  status: (
+    <>
+      plug-ins was completed on <u>april 19, 2023</u>.
+    </>
+  ),
   description: (
     <>
       plug-ins is a <u>web database solution</u> that automates operations for
@@ -66,7 +71,7 @@ export const PlugIns: WorkEntry = {
   ),
   myRole: (
     <>
-      plug-ins is a <u>solo project</u> where i:
+      plug-ins is a <u>solo side project</u> where i:
       <ul>
         <li>
           designed the er diagram and normalized database structure to third

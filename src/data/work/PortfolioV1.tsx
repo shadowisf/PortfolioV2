@@ -15,9 +15,14 @@ export const PortfolioV1: WorkEntry = {
   image: ImageV1Portfolio,
   imageFlex: "1.6",
   imageAlt:
-    "image of the about section in my portfolio project. it has a cartoon illustration of me and and text introducing myself.",
+    "an image of the about section in my portfolio project. it has a cartoon illustration of me and and text introducing myself.",
   video: VideoV1Portfolio,
   videoFlex: "1.599074",
+  status: (
+    <>
+      portfolio v1 was completed on <u>september 23, 2024</u>.
+    </>
+  ),
   description: (
     <>
       portfolio v1 is a <u>dynamic and cartoonish-themed personal website</u>{" "}
@@ -48,7 +53,7 @@ export const PortfolioV1: WorkEntry = {
   ),
   myRole: (
     <>
-      portfolio v1 is a <u>solo project</u> where i:
+      portfolio v1 is a <u>solo side project</u> where i:
       <ul>
         <li>
           translated awwwards-inspired aesthetics into a cohesive and custom ui.
@@ -81,12 +86,4 @@ export const PortfolioV1: WorkEntry = {
       </LinkWithIcon>
     </>
   ),
-  attributions: [
-    "typedcss: https://github.com/brandonmcconnell",
-    "react-toastify: https://github.com/fkhadra",
-    "medium zoom: https://github.com/francoischalifour",
-    "theme engine: https://www.linkedin.com/in/frankmyles/",
-    "gsap: https://github.com/jackdoyle",
-    "remix icons: https://github.com/xiaochunjimmy",
-  ],
 };

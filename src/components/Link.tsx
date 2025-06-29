@@ -5,6 +5,7 @@ type LinkProps = {
   img?: React.ReactNode;
   className?: string;
   label?: string;
+  sameTab?: boolean;
 };
 
 export function LinkWithNoIcon({
@@ -12,13 +13,14 @@ export function LinkWithNoIcon({
   href,
   onClick,
   children,
+  sameTab,
   ...props
 }: LinkProps) {
   return (
     <a
       className={`${className} linkWithNoIcon`}
       href={href}
-      target="_blank"
+      target={sameTab ? "_self" : "_blank"}
       onClick={onClick}
       {...props}
     >

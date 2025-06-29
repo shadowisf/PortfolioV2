@@ -24,6 +24,11 @@ export const CircuitCentral: WorkEntry = {
     "an image of the circuitcentral project; it is viewing the orders section wherein it displays a list of products that are currently in a cart. additionally, the ui has buttons for CRUD operations.",
   video: VideoCircuitCentral,
   videoFlex: "1.687037",
+  status: (
+    <>
+      circuitcentral was completed on <u>april 29, 2024</u>.
+    </>
+  ),
   description: (
     <>
       circuitcentral is a <u>windows forms e-commerce management system</u> for
@@ -64,7 +69,7 @@ export const CircuitCentral: WorkEntry = {
   ),
   myRole: (
     <>
-      circuitcentral is a <u>solo project</u> where i:
+      circuitcentral is a <u>solo side project</u> where i:
       <ul>
         <li>
           designed 10+ winforms screens (login, product catalog, order

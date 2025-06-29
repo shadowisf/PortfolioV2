@@ -130,6 +130,13 @@ export default function Work(p: WorkProps) {
 
         {/* content */}
         <div className="paragraph">
+          <h1>status:</h1>
+          {project.status}
+
+          <br />
+          <br />
+          <br />
+
           <h1>description:</h1>
           {project.description}
 

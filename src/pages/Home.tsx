@@ -1,7 +1,7 @@
 import { ProjectTile } from "../components/ProjectTile";
 import { useEffect } from "react";
 import { ProjectPreview } from "../components/ProjectPreview";
-import { LinkWithIcon } from "../components/Link";
+import { LinkWithIcon, LinkWithNoIcon } from "../components/Link";
 import { useGlobalState } from "../providers/GlobalStateProvider";
 import { useScrollingAnimation } from "../utils/gsap/useScrollingAnimation";
 import { useHomeAnimation } from "../utils/gsap/useHomeAnimation";
@@ -55,19 +55,18 @@ export default function Home() {
           </div>
 
           <h2 className="nonBold">
+            <span className="bulletPoint">⊢ </span>web developer @{" "}
+            <LinkWithNoIcon href="https://www.rayfitout.com">
+              ray fitout
+            </LinkWithNoIcon>
+          </h2>
+
+          <h2 className="nonBold">
             <span className="bulletPoint">⊢ </span>software engineer
           </h2>
 
           <h2 className="nonBold">
-            <span className="bulletPoint">⊢ </span>web developer
-          </h2>
-
-          <h2 className="nonBold">
             <span className="bulletPoint">⊢ </span>based in dubai
-          </h2>
-
-          <h2 className="nonBold">
-            <span className="bulletPoint">⊢ </span>open to work
           </h2>
 
           <br />

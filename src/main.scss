@@ -8,7 +8,7 @@ $darkBoxShadow: rgba(0, 0, 0, 0.5);
 $boxShadow: 0 0 48px 1px light-dark($lightBoxShadow, $darkBoxShadow);
 
 $maxWidthDesktop: 700px;
-$maxWidthDesktopWide: 75%;
+$maxWidthDesktopWide: 80%;
 $maxWidthMobile: 90%;
 
 $fontVarNormal: "wght" 400, "CONT" 0;
@@ -16,10 +16,10 @@ $fontVarThin: "wght" 1000, "CONT" 1000;
 
 $scaleOnHover: 1.05;
 
-$minMaxWidth: 1000px;
+$minMaxWidth: 1030px;
 
 :root {
-  --minMaxWidth: 1000px;
+  --minMaxWidth: 1030px;
 
   --theme: light dark;
 
@@ -1256,7 +1256,7 @@ footer {
   display: block;
 }
 
-@media screen and (max-width: ($minMaxWidth + 50px)) {
+@media screen and (max-width: ($minMaxWidth + 100px)) {
   .homeWrapper {
     gap: 4rem;
   }

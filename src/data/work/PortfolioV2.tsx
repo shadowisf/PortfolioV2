@@ -23,9 +23,14 @@ export const PortfolioV2: WorkEntry = {
   image: ImageV2Portfolio,
   imageFlex: "1.6",
   imageAlt:
-    "image of the about section in my portfolio v2 project. there is a picture of me and a text introducing myself, with a button at the very bottom which downloads my resume. at the bottom portion, there is a timeline where it showcases all important events that happened in my life. on the right side of the timeline, it showcases my skillset wherein you can filter by my skill level such as all, expert, intermediate, and beginner.",
+    "an image of the about section in my portfolio v2 project. there is a picture of me and a text introducing myself, with a button at the very bottom which downloads my resume. at the bottom portion, there is a timeline where it showcases all important events that happened in my life. on the right side of the timeline, it showcases my skillset wherein you can filter by my skill level such as all, expert, intermediate, and beginner.",
   video: VideoV2Portfolio,
   videoFlex: "1.598148",
+  status: (
+    <>
+      portfolio v2 is currently a <u>work in progress with constant updates</u>.
+    </>
+  ),
   description: (
     <>
       portfolio v2 is a <u>complete redesign of my original portfolio</u>,
@@ -58,7 +63,7 @@ export const PortfolioV2: WorkEntry = {
   ),
   myRole: (
     <>
-      portfolio v2 is a <u>solo project</u> where i:
+      portfolio v2 is a <u>solo side project</u> where i:
       <ul>
         <li>
           audited v1’s pain points and iterated on layout, color, and motion.
@@ -83,9 +88,4 @@ export const PortfolioV2: WorkEntry = {
       </LinkWithIcon>
     </>
   ),
-  attributions: [
-    "zoom-vanilla.js: https://github.com/spinningarrow",
-    "gsap: https://github.com/jackdoyle",
-    "remix icons: https://github.com/kamijin-fanta",
-  ],
 };
