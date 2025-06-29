@@ -26,7 +26,7 @@ $minMaxWidth: 1030px;
   --text-color: light-dark(rgb(0, 0, 0), white);
   --background-color: light-dark(rgb(229, 229, 234), rgb(28, 28, 30));
   --faded-color: rgb(129, 126, 131);
-  --accent-color: light-dark(rgb(99, 32, 238), rgb(128, 117, 255));
+  /* --accent-color: light-dark(rgb(99, 32, 238), rgb(128, 117, 255)); */
   /* --accent-color: light-dark(rgb(255, 59, 48), rgb(255, 69, 58)); */
   /* --accent-color: light-dark(rgb(0, 122, 255), #0a84ff); */
   /* --accent-color: light-dark(rgb(160, 174, 140), rgb(180, 192, 157)); */
@@ -178,7 +178,7 @@ nav {
   z-index: 5;
 
   .hamburgerButton {
-    transition: scale 0.25s;
+    transition: scale 0.5s;
 
     &:hover {
       scale: $scaleOnHover;
@@ -189,7 +189,7 @@ nav {
       outline: none;
       display: flex;
 
-      transition: fill 0.25s;
+      transition: fill 0.5s;
     }
 
     &:hover svg {
@@ -232,7 +232,7 @@ nav {
   button {
     color: var(--background-color);
 
-    transition: scale 0.25s, font-variation-settings 0.5s;
+    transition: scale 0.5s, font-variation-settings 0.5s;
 
     font-variation-settings: $fontVarNormal;
 
@@ -257,7 +257,7 @@ nav {
 }
 
 .logoButton {
-  transition: color 0.25s, scale 0.25s;
+  transition: color 0.5s, scale 0.5s;
   font-family: $bayBayinFont;
 
   &:hover {
@@ -280,7 +280,7 @@ nav {
   select {
     all: unset;
 
-    transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
+    transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
 
     font-variation-settings: $fontVarNormal;
 
@@ -306,7 +306,7 @@ nav {
   &.alt {
     color: var(--background-color);
 
-    transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
+    transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
 
     font-variation-settings: $fontVarNormal;
 
@@ -354,7 +354,7 @@ nav {
   }
 
   a {
-    transition: color 0.25s, scale 0.25s, font-variation-settings 0.5s;
+    transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
 
     font-variation-settings: $fontVarNormal;
 
@@ -367,12 +367,12 @@ nav {
 
   .themeButton {
     position: relative;
-    transition: scale 0.25s;
+    transition: scale 0.5s;
 
     svg {
       display: flex;
       fill: var(--text-color);
-      transition: fill 0.25s;
+      transition: fill 0.5s;
     }
 
     &:hover {
@@ -432,7 +432,7 @@ footer {
       gap: 4rem;
       text-wrap: nowrap;
 
-      transition: scale 0.25s, box-shadow 0.25s, color 0.25s;
+      transition: scale 0.5s, box-shadow 0.5s, color 0.5s;
 
       font-variation-settings: $fontVarNormal;
 
@@ -632,18 +632,19 @@ footer {
     display: flex;
     justify-content: center;
 
-    h1 {
+    a {
       text-align: center;
       justify-self: center;
 
       display: grid;
+      font-size: var(--h1);
 
       gap: 0.25rem;
       margin-top: 4rem;
       width: fit-content;
 
       font-variation-settings: $fontVarNormal;
-      transition: color 0.25s, font-variation-settings 0.5s;
+      transition: color 0.5s, font-variation-settings 0.5s, scale 0.5s;
 
       &:hover {
         color: var(--accent-color);
@@ -720,7 +721,7 @@ footer {
     }
 
     .nextPrevButton {
-      transition: color 0.25s, font-variation-settings 0.5s;
+      transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
       font-size: var(--h1);
       font-variation-settings: $fontVarNormal;
 
@@ -1029,42 +1030,39 @@ footer {
   position: relative;
   white-space: nowrap;
 
-  &.top {
-    &:hover::before {
-      bottom: 75%;
-      background-color: var(--accent-color);
-      color: var(--background-color);
-    }
-  }
-
-  &.bottom {
-    &:hover::before {
-      bottom: -75%;
-      background-color: var(--accent-color);
-      color: var(--background-color);
-    }
-  }
-
-  &.alt {
-    &:hover::before {
-      background-color: var(--accent-color);
-      color: var(--background-color);
-    }
-  }
-
-  &:hover::before {
+  &::before {
     content: attr(data-tooltip);
     position: absolute;
     left: 50%;
     translate: -50% -0.5rem;
-    color: var(--text-color);
     padding: 0.5rem;
     font-size: var(--smaller);
-    pointer-events: none;
     font-weight: 400;
     border-radius: $borderRadius;
     font-variation-settings: $fontVarNormal;
     text-align: center;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s, visibility 0.5s, scale 0.5s;
+    z-index: 10;
+    background-color: var(--text-color);
+    color: var(--background-color);
+    border: var(--background-color) 1px solid;
+  }
+
+  &:hover::before {
+    opacity: 1;
+    visibility: visible;
+    scale: $scaleOnHover;
+  }
+
+  &.top::before {
+    bottom: 75%;
+  }
+
+  &.bottom::before {
+    bottom: -75%;
   }
 }
 
@@ -1080,7 +1078,7 @@ footer {
 
   gap: 0.5rem;
 
-  transition: font-variation-settings 0.5s, color 0.5s, scale 0.25s;
+  transition: font-variation-settings 0.5s, color 0.5s, scale 0.5s;
 
   font-variation-settings: $fontVarNormal;
 
@@ -1098,7 +1096,7 @@ footer {
       background-color: currentColor;
       transform-origin: left;
       transform: scaleX(0);
-      transition: transform 0.5s ease, background-color 0.5s ease;
+      transition: transform 0.5s, background-color 0.5s;
     }
   }
 
@@ -1152,7 +1150,7 @@ footer {
 
   border-bottom: 1px dashed;
 
-  transition: font-variation-settings 0.5s, color 0.5s, scale 0.25s;
+  transition: font-variation-settings 0.5s, color 0.5s, scale 0.5s;
 
   font-variation-settings: $fontVarNormal;
 
@@ -1194,7 +1192,7 @@ footer {
   display: block;
   line-height: normal;
 
-  transition: scale 0.25s;
+  transition: scale 0.5s;
 
   svg {
     display: flex;

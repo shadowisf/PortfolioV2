@@ -150,13 +150,17 @@ export default function Work(p: WorkProps) {
       </section>
 
       <section className="bottomNav">
-        <h1
+        <Link
           className="infoOnHover bottom"
-          onClick={() => scrollToTop(0.25)}
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToTop(0.25);
+          }}
           data-tooltip="top"
+          to={"#"}
         >
           ↑
-        </h1>
+        </Link>
       </section>
     </main>
   );

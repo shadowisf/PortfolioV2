@@ -56,7 +56,11 @@ export default function Home() {
 
           <h2 className="nonBold">
             <span className="bulletPoint">⊢ </span>web developer @{" "}
-            <LinkWithNoIcon href="https://www.rayfitout.com">
+            <LinkWithNoIcon
+              className="infoOnHover top"
+              data-tooltip="an award-winning design & build company"
+              href="https://www.rayfitout.com"
+            >
               ray fitout
             </LinkWithNoIcon>
           </h2>

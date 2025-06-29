@@ -116,7 +116,7 @@ export default function About() {
           <p>
             i got into programming through{" "}
             <LinkWithNoIcon
-              className="infoOnHover faded top alt"
+              className="infoOnHover faded top"
               href="https://scratch.mit.edu"
               data-tooltip="it literally does not need type safety"
             >
@@ -169,7 +169,7 @@ export default function About() {
             >
               graduated from{" "}
               <LinkWithNoIcon
-                className="infoOnHover top alt"
+                className="infoOnHover top"
                 href="https://wincedu.uk"
                 data-tooltip="western international college"
               >
@@ -185,7 +185,7 @@ export default function About() {
             >
               worked remotely as freelance full-stack web developer @{" "}
               <LinkWithNoIcon
-                className="infoOnHover top alt"
+                className="infoOnHover top"
                 data-tooltip="this project is currently a work in progress"
                 href="/whealthy-vessel"
                 sameTab={true}
@@ -201,7 +201,7 @@ export default function About() {
             >
               graduated from{" "}
               <LinkWithNoIcon
-                className="infoOnHover top alt"
+                className="infoOnHover top"
                 href="https://greatermanchester.ac.uk"
                 data-tooltip="university of greater manchester"
               >
@@ -217,7 +217,7 @@ export default function About() {
             >
               worked remotely as freelance full-stack web developer @{" "}
               <LinkWithNoIcon
-                className="infoOnHover top alt"
+                className="infoOnHover top"
                 data-tooltip="this project is currently a work in progress"
                 href="/let-there-be-fragrance"
                 sameTab={true}
