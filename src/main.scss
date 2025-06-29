@@ -1045,7 +1045,6 @@ footer {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s, visibility 0.5s, scale 0.5s;
-    z-index: 10;
     background-color: var(--text-color);
     color: var(--background-color);
     border: var(--background-color) 1px solid;
@@ -1413,7 +1412,7 @@ footer {
   }
 
   .infoOnHover {
-    &.top {
+    /*     &.top {
       &:hover::before {
         bottom: 75%;
       }
@@ -1423,7 +1422,7 @@ footer {
       &:hover::before {
         bottom: -100%;
       }
-    }
+    } */
 
     &:hover::before {
       display: none;

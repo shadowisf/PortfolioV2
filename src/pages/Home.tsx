@@ -54,6 +54,9 @@ export default function Home() {
             />
           </div>
 
+          <br />
+          <br />
+
           <h2 className="nonBold">
             <span className="bulletPoint">⊢ </span>web developer @{" "}
             <LinkWithNoIcon
@@ -61,7 +64,7 @@ export default function Home() {
               data-tooltip="an award-winning design & build company"
               href="https://www.rayfitout.com"
             >
-              ray fitout
+              rayfitout
             </LinkWithNoIcon>
           </h2>
 
@@ -73,6 +76,7 @@ export default function Home() {
             <span className="bulletPoint">⊢ </span>based in dubai
           </h2>
 
+          <br />
           <br />
 
           <div className="links">

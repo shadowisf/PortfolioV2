@@ -51,7 +51,7 @@ export default function Work(p: WorkProps) {
         <Link
           to={`/${prevProjectTitle}`}
           className="nextPrevButton infoOnHover top"
-          data-tooltip="prev"
+          data-tooltip="previous project"
           style={
             prevProjectTitle === ""
               ? { opacity: "0.25", pointerEvents: "none" }
@@ -69,7 +69,7 @@ export default function Work(p: WorkProps) {
         <Link
           to={`/${nextProjectTitle}`}
           className="nextPrevButton infoOnHover top"
-          data-tooltip="next"
+          data-tooltip="next project"
           style={
             nextProjectTitle === ""
               ? { opacity: "0.25", pointerEvents: "none" }
@@ -156,7 +156,7 @@ export default function Work(p: WorkProps) {
             e.preventDefault();
             scrollToTop(0.25);
           }}
-          data-tooltip="top"
+          data-tooltip="back to top"
           to={"#"}
         >
           ↑

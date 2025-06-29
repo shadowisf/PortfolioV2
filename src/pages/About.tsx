@@ -231,7 +231,7 @@ export default function About() {
               img={<img src={IconBriefcase} />}
               verticalLine={false}
             >
-              working as web developer @{" "}
+              working on-site as full-time web developer @{" "}
               <LinkWithNoIcon
                 className="infoOnHover top"
                 data-tooltip="an award-winning design & build company"
