@@ -12,6 +12,7 @@ export function useWorkAnimation() {
       return;
     }
 
+    const nav = document.querySelector(".projectNav");
     const header = document.querySelector(".workWrapper .header");
     const year = document.querySelector(".workWrapper .year");
     const techStackItems = document.querySelectorAll(
@@ -36,42 +37,69 @@ export function useWorkAnimation() {
       delay: startupDelay,
     });
 
-    gsap.set(
-      [header, year, ...techStackItems, ...media, links, paragraph, bottomNav],
-      {
-        autoAlpha: 0,
-        scale: startupScaleInitial,
-        pointerEvents: "none",
-      }
-    );
+    // Initial state
+    const allElements = [
+      header,
+      year,
+      ...techStackItems,
+      ...media,
+      links,
+      paragraph,
+      bottomNav,
+      nav,
+    ];
 
-    tl.to(header, { autoAlpha: 1, scale: 1 }, 0)
-      .to(year, { autoAlpha: 1, scale: 1 }, 0)
+    gsap.set(allElements, {
+      autoAlpha: 0,
+      scale: startupScaleInitial,
+      pointerEvents: "none",
+    });
+
+    // Title
+    tl.to([nav, header, year], {
+      autoAlpha: 1,
+      scale: 1,
+      stagger: 0.1,
+    })
+
+      // Tech stack
       .to(
         techStackItems,
-        { autoAlpha: 1, scale: 1, stagger: startupStagger },
-        0
+        {
+          autoAlpha: 1,
+          scale: 1,
+          stagger: startupStagger,
+        },
+        "<"
       )
-      .to(media, { autoAlpha: 1, scale: 1, stagger: startupStagger }, 0)
-      .to(links, { autoAlpha: 1, scale: 1 }, 0)
-      .to(paragraph, { autoAlpha: 1, scale: 1 }, 0)
-      .to(bottomNav, { autoAlpha: 1, scale: 1 }, 0)
 
+      // Media
+      .to(
+        media,
+        {
+          autoAlpha: 1,
+          scale: 1,
+          stagger: startupStagger,
+        },
+        "<"
+      )
+
+      // Content
+      .to(
+        [links, paragraph, bottomNav],
+        {
+          autoAlpha: 1,
+          scale: 1,
+          stagger: 0.05,
+        },
+        "<"
+      )
+
+      // Cleanup
       .add(() => {
-        gsap.set(
-          [
-            header,
-            year,
-            ...techStackItems,
-            ...media,
-            links,
-            paragraph,
-            bottomNav,
-          ],
-          {
-            clearProps: "pointerEvents",
-          }
-        );
+        gsap.set(allElements, {
+          clearProps: "pointerEvents",
+        });
       });
   });
 

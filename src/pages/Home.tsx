@@ -58,7 +58,7 @@ export default function Home() {
           <br />
 
           <h2 className="nonBold">
-            <span className="bulletPoint">⊢ </span>web developer @{" "}
+            <span className="bulletPoint">⊢ </span>web dev @{" "}
             <LinkWithNoIcon
               className="infoOnHover top"
               data-tooltip="an award-winning design & build company"

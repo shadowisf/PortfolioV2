@@ -438,6 +438,9 @@ footer {
 
       .title {
         transition: font-variation-settings 0.5s;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .year {
@@ -628,23 +631,17 @@ footer {
     align-items: center;
   }
 
-  .bottomNav {
+  .projectNav {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 
-    a {
-      text-align: center;
-      justify-self: center;
-
-      display: grid;
-      font-size: var(--h1);
-
-      gap: 0.25rem;
-      margin-top: 4rem;
-      width: fit-content;
-
+    .nextPrevButton {
+      transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
+      font-size: var(--p);
       font-variation-settings: $fontVarNormal;
-      transition: color 0.5s, font-variation-settings 0.5s, scale 0.5s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
 
       &:hover {
         color: var(--accent-color);
@@ -710,27 +707,24 @@ footer {
   }
 
   .header {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
+    text-align: center;
 
     .title {
       color: var(--accent-color);
       text-align: center;
     }
+  }
 
-    .nextPrevButton {
-      transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
-      font-size: var(--h1);
-      font-variation-settings: $fontVarNormal;
+  .nextPrevButton {
+    transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
+    font-size: var(--smaller);
+    font-variation-settings: $fontVarNormal;
 
-      &:hover {
-        color: var(--accent-color);
-        scale: $scaleOnHover;
-        cursor: pointer;
-        font-variation-settings: $fontVarThin;
-      }
+    &:hover {
+      color: var(--accent-color);
+      scale: $scaleOnHover;
+      cursor: pointer;
+      font-variation-settings: $fontVarThin;
     }
   }
 

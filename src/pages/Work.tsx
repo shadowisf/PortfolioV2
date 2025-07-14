@@ -46,12 +46,11 @@ export default function Work(p: WorkProps) {
 
   return (
     <main className="workWrapper">
-      <section className="header">
+      <section className="projectNav">
         {/* previous project */}
         <Link
           to={`/${prevProjectTitle}`}
-          className="nextPrevButton infoOnHover top"
-          data-tooltip="previous project"
+          className="nextPrevButton"
           style={
             prevProjectTitle === ""
               ? { opacity: "0.25", pointerEvents: "none" }
@@ -59,17 +58,13 @@ export default function Work(p: WorkProps) {
           }
           onClick={() => setSkipStart(true)}
         >
-          ←
+          ← <span>prev</span>
         </Link>
-
-        {/* title */}
-        <h1 className="title">{project.name}</h1>
 
         {/* next project */}
         <Link
           to={`/${nextProjectTitle}`}
-          className="nextPrevButton infoOnHover top"
-          data-tooltip="next project"
+          className="nextPrevButton"
           style={
             nextProjectTitle === ""
               ? { opacity: "0.25", pointerEvents: "none" }
@@ -77,8 +72,16 @@ export default function Work(p: WorkProps) {
           }
           onClick={() => setSkipStart(true)}
         >
-          →
+          <span>next</span> →
         </Link>
+      </section>
+
+      <br />
+      <br />
+
+      <section className="header">
+        {/* title */}
+        <h1 className="title">{project.name}</h1>
       </section>
 
       {/* year */}
@@ -135,32 +138,16 @@ export default function Work(p: WorkProps) {
 
           <br />
           <br />
-          <br />
 
           <h1>description:</h1>
           {project.description}
 
           <br />
           <br />
-          <br />
 
           <h1>my role:</h1>
           {project.myRole}
         </div>
-      </section>
-
-      <section className="bottomNav">
-        <Link
-          className="infoOnHover bottom"
-          onClick={(e) => {
-            e.preventDefault();
-            scrollToTop(0.25);
-          }}
-          data-tooltip="back to top"
-          to={"#"}
-        >
-          ↑
-        </Link>
       </section>
     </main>
   );
