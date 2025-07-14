@@ -138,16 +138,31 @@ export default function Work(p: WorkProps) {
 
           <br />
           <br />
+          <br />
 
           <h1>description:</h1>
           {project.description}
 
           <br />
           <br />
+          <br />
 
           <h1>my role:</h1>
           {project.myRole}
         </div>
+      </section>
+
+      <section className="bottomNav">
+        <Link
+          to={`/${nextProjectTitle}`}
+          className="topButton"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToTop(0.25);
+          }}
+        >
+          ↑ <span>top</span>
+        </Link>
       </section>
     </main>
   );

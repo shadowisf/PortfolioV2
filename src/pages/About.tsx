@@ -22,7 +22,7 @@ import {
 export default function About() {
   const { scrollToTop } = useScrollingAnimation();
   const { startup, filterSkill, resetSkill, waveOnHover } = useAboutAnimation();
-  const { setCurrentPage } = useGlobalState();
+  const { setCurrentPage, isMobile } = useGlobalState();
 
   const [imageLoading, setImageLoading] = useState(true);
 
@@ -104,7 +104,9 @@ export default function About() {
             <LinkWithNoIcon
               className="infoOnHover faded top"
               href="/memes"
-              data-tooltip="there is where productivity goes to die"
+              data-tooltip={
+                isMobile ? "" : "there is where productivity goes to die"
+              }
             >
               memes
             </LinkWithNoIcon>
@@ -118,7 +120,9 @@ export default function About() {
             <LinkWithNoIcon
               className="infoOnHover faded top"
               href="https://scratch.mit.edu"
-              data-tooltip="it literally does not need type safety"
+              data-tooltip={
+                isMobile ? "" : "it literally does not need type safety"
+              }
             >
               scratch
             </LinkWithNoIcon>{" "}

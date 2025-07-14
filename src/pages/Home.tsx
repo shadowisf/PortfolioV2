@@ -17,7 +17,7 @@ import {
 } from "../utils/iconSetting";
 
 export default function Home() {
-  const { setCurrentPage } = useGlobalState();
+  const { setCurrentPage, isMobile } = useGlobalState();
   const { scrollToTop } = useScrollingAnimation();
   const { startup, swirlOnHover, swirlOnLeave } = useHomeAnimation();
 
@@ -58,10 +58,12 @@ export default function Home() {
           <br />
 
           <h2 className="nonBold">
-            <span className="bulletPoint">⊢ </span>web dev @{" "}
+            <span className="bulletPoint">⊢ </span>web developer @{" "}
             <LinkWithNoIcon
               className="infoOnHover top"
-              data-tooltip="an award-winning design & build company"
+              data-tooltip={
+                isMobile ? "" : "an award-winning design & build company"
+              }
               href="https://www.rayfitout.com"
             >
               rayfitout

@@ -16,10 +16,10 @@ $fontVarThin: "wght" 1000, "CONT" 1000;
 
 $scaleOnHover: 1.05;
 
-$minMaxWidth: 1030px;
+$minMaxWidth: 1045px;
 
 :root {
-  --minMaxWidth: 1030px;
+  --minMaxWidth: 1045px;
 
   --theme: light dark;
 
@@ -629,6 +629,30 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .bottomNav {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+
+    .topButton {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
+      font-size: var(--p);
+      font-variation-settings: $fontVarNormal;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        color: var(--accent-color);
+        scale: $scaleOnHover;
+        cursor: pointer;
+        font-variation-settings: $fontVarThin;
+      }
+    }
   }
 
   .projectNav {
