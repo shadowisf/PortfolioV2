@@ -105,15 +105,24 @@ export const ApolloHospital: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon img={<img src={IconGlobe} />} href={DemoApolloHospital}>
+      <LinkWithIcon
+        img={<img alt="globe icon" src={IconGlobe} />}
+        href={DemoApolloHospital}
+      >
         live website
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconOctopus} />} href={GitHubApolloHospital}>
+      <LinkWithIcon
+        img={<img alt="octopus icon" src={IconOctopus} />}
+        href={GitHubApolloHospital}
+      >
         source code
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconCards} />} href={FileApolloHospital}>
+      <LinkWithIcon
+        img={<img alt="cards icon" src={IconCards} />}
+        href={FileApolloHospital}
+      >
         case study
       </LinkWithIcon>
     </>

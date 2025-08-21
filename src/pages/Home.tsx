@@ -47,6 +47,7 @@ export default function Home() {
           <div className="intro">
             <h1 className="extra name accent">les ranalan</h1>
             <img
+              alt="swirl icon"
               className="swirlEmoji"
               src={IconSwirl}
               onMouseEnter={swirlOnHover}
@@ -71,7 +72,7 @@ export default function Home() {
           </h2>
 
           <h2 className="nonBold">
-            <span className="bulletPoint">⊢ </span>software engineer
+            <span className="bulletPoint">⊢ </span>software engineering graduate
           </h2>
 
           <h2 className="nonBold">
@@ -82,19 +83,31 @@ export default function Home() {
           <br />
 
           <div className="links">
-            <LinkWithIcon img={<img src={IconCards} />} href={resume}>
+            <LinkWithIcon
+              img={<img alt="resume icon" src={IconCards} />}
+              href={resume}
+            >
               resume
             </LinkWithIcon>
 
-            <LinkWithIcon img={<img src={IconMailbox} />} href={email}>
+            <LinkWithIcon
+              img={<img alt="mail icon" src={IconMailbox} />}
+              href={email}
+            >
               email
             </LinkWithIcon>
 
-            <LinkWithIcon img={<img src={IconBriefcase} />} href={linkedin}>
+            <LinkWithIcon
+              img={<img alt="briefcase icon" src={IconBriefcase} />}
+              href={linkedin}
+            >
               linkedin
             </LinkWithIcon>
 
-            <LinkWithIcon img={<img src={IconOctopus} />} href={github}>
+            <LinkWithIcon
+              img={<img alt="github icon" src={IconOctopus} />}
+              href={github}
+            >
               github
             </LinkWithIcon>
           </div>

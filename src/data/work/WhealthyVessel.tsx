@@ -74,18 +74,24 @@ export const WhealthyVessel: WorkEntry = {
         </li>
       </ul>
       <br />
-      This project allowed me to combine performance-focused frontend
+      this project allowed me to combine performance-focused frontend
       engineering with a clean product showcase experience, aligned with brand
       aesthetics.
     </>
   ),
   links: (
     <>
-      <LinkWithIcon img={<img src={IconGlobe} />} href={DemoWhealthyVessel}>
+      <LinkWithIcon
+        img={<img alt="globe icon" src={IconGlobe} />}
+        href={DemoWhealthyVessel}
+      >
         live website
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconOctopus} />} href={GitHubWhealthyVessel}>
+      <LinkWithIcon
+        img={<img alt="octopus icon" src={IconOctopus} />}
+        href={GitHubWhealthyVessel}
+      >
         source code
       </LinkWithIcon>
     </>

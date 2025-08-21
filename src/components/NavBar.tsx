@@ -31,7 +31,11 @@ export default function NavBar() {
 
         <span className="navButtons alt">
           <div className="selectContainer">
+            <label htmlFor="workSelect" className="hidden">
+              choose work
+            </label>
             <select
+              id="workSelect"
               onChange={(e) => executeTransition(e.target.value)}
               value={"work"}
             >
@@ -65,6 +69,7 @@ export default function NavBar() {
           <button
             onClick={() => handleToggleTheme(false)}
             className="themeButton"
+            aria-label="toggle theme"
           >
             {userTheme === "dark" ? (
               <RiSunLine size={24} />
@@ -83,7 +88,11 @@ export default function NavBar() {
 
         <span className="navButtons">
           <div className="selectContainer">
+            <label htmlFor="workSelect" className="hidden">
+              choose work
+            </label>
             <select
+              id="workSelect"
               onChange={(e) => executeTransition(e.target.value)}
               value={"work"}
             >
@@ -107,6 +116,7 @@ export default function NavBar() {
           <Link to="about">about</Link>
 
           <button
+            aria-label="toggle theme"
             onClick={() => handleToggleTheme(false)}
             className="themeButton"
           >
@@ -119,6 +129,7 @@ export default function NavBar() {
         </span>
 
         <button
+          aria-label="open hamburger menu"
           className="hamburgerButton"
           onClick={() => {
             setInMenu(true);
@@ -131,6 +142,7 @@ export default function NavBar() {
 
       <div className="menu">
         <button
+          aria-label="close hamburger menu"
           className="closeButton"
           onClick={() => {
             setInMenu(false);

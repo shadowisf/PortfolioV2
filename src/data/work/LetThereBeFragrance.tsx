@@ -70,8 +70,8 @@ export const LetThereBeFragrance: WorkEntry = {
   ),
   myRole: (
     <>
-      this was a <u>collaborative freelance project</u>, partnered with a visual
-      designer, where i:
+      let there be fragrance was a <u>collaborative freelance project</u>,
+      partnered with a visual designer, where i:
       <ul>
         <li>
           designed the full system architecture including product, order, and
@@ -103,14 +103,14 @@ export const LetThereBeFragrance: WorkEntry = {
   links: (
     <>
       <LinkWithIcon
-        img={<img src={IconGlobe} />}
+        img={<img alt="globe icon" src={IconGlobe} />}
         href={DemoLetThereBeFragrance}
       >
         live website
       </LinkWithIcon>
 
       <LinkWithIcon
-        img={<img src={IconOctopus} />}
+        img={<img alt="octopus icon" src={IconOctopus} />}
         href={GitHubLetThereBeFragrance}
       >
         source code

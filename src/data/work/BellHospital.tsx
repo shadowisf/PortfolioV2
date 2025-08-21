@@ -86,11 +86,17 @@ export const BellHospital: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon img={<img src={IconOctopus} />} href={GitHubBellHospital}>
+      <LinkWithIcon
+        img={<img alt="octopus icon" src={IconOctopus} />}
+        href={GitHubBellHospital}
+      >
         source code
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconCards} />} href={FileBellHospital}>
+      <LinkWithIcon
+        img={<img alt="cards icon" src={IconCards} />}
+        href={FileBellHospital}
+      >
         case study
       </LinkWithIcon>
     </>

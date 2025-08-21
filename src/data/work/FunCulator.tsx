@@ -94,11 +94,17 @@ export const FunCulator: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon img={<img src={IconOctopus} />} href={GitHubFunCulator}>
+      <LinkWithIcon
+        img={<img alt="octopus icon" src={IconOctopus} />}
+        href={GitHubFunCulator}
+      >
         source code
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconCards} />} href={FileFunculator}>
+      <LinkWithIcon
+        img={<img alt="cards icon" src={IconCards} />}
+        href={FileFunculator}
+      >
         case study
       </LinkWithIcon>
     </>

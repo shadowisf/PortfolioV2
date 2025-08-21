@@ -97,11 +97,17 @@ export const PlugIns: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon img={<img src={IconOctopus} />} href={GitHubPlugIns}>
+      <LinkWithIcon
+        img={<img alt="octopus icon" src={IconOctopus} />}
+        href={GitHubPlugIns}
+      >
         source code
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconCards} />} href={FilePlugIns}>
+      <LinkWithIcon
+        img={<img alt="card icon" src={IconCards} />}
+        href={FilePlugIns}
+      >
         case study
       </LinkWithIcon>
     </>

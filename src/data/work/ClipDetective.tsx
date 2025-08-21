@@ -85,11 +85,17 @@ export const ClipDetective: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon img={<img src={IconGlobe} />} href={DemoClipDetective}>
+      <LinkWithIcon
+        img={<img alt="globe icon" src={IconGlobe} />}
+        href={DemoClipDetective}
+      >
         live website
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconOctopus} />} href={GitHubClipDetective}>
+      <LinkWithIcon
+        img={<img alt="octopus icon" src={IconOctopus} />}
+        href={GitHubClipDetective}
+      >
         source code
       </LinkWithIcon>
     </>

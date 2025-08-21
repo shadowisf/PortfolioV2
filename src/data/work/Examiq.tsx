@@ -90,15 +90,24 @@ export const Examiq: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon img={<img src={IconGlobe} />} href={DemoExamiq}>
+      <LinkWithIcon
+        img={<img alt="globe icon" src={IconGlobe} />}
+        href={DemoExamiq}
+      >
         live website
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconOctopus} />} href={GitHubExamiq}>
+      <LinkWithIcon
+        img={<img alt="octopus icon" src={IconOctopus} />}
+        href={GitHubExamiq}
+      >
         source code
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconCards} />} href={FileExamiq}>
+      <LinkWithIcon
+        img={<img alt="cards icon" src={IconCards} />}
+        href={FileExamiq}
+      >
         case study
       </LinkWithIcon>
     </>

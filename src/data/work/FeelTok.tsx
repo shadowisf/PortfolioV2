@@ -93,11 +93,17 @@ export const FeelTok: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon img={<img src={IconOctopus} />} href={GitHubFeelTok}>
+      <LinkWithIcon
+        img={<img alt="octopus icon" src={IconOctopus} />}
+        href={GitHubFeelTok}
+      >
         source code
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconCards} />} href={FileFeelTok}>
+      <LinkWithIcon
+        img={<img alt="cards icon" src={IconCards} />}
+        href={FileFeelTok}
+      >
         case study
       </LinkWithIcon>
     </>

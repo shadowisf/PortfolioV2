@@ -97,11 +97,17 @@ export const CircuitCentral: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon img={<img src={IconOctopus} />} href={GitHubCircuitCentral}>
+      <LinkWithIcon
+        img={<img alt="octopus icon" src={IconOctopus} />}
+        href={GitHubCircuitCentral}
+      >
         source code
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconCards} />} href={FileCircuitCentral}>
+      <LinkWithIcon
+        img={<img alt="cards icon" src={IconCards} />}
+        href={FileCircuitCentral}
+      >
         case study
       </LinkWithIcon>
     </>

@@ -48,6 +48,7 @@ export default function About() {
             <h1 className="extra header">hey, i'm les!</h1>
             <span className="waveEmojiWrapper">
               <img
+                alt="waving hand icon"
                 className="waveEmoji"
                 src={IconHandWave}
                 onMouseEnter={waveOnHover}
@@ -73,6 +74,7 @@ export default function About() {
               <h1 className="extra header">hey, i'm les!</h1>
               <span className="waveEmojiWrapper">
                 <img
+                  alt="waving hand icon"
                   className="waveEmoji"
                   src={IconHandWave}
                   onMouseEnter={waveOnHover}
@@ -144,7 +146,7 @@ export default function About() {
           <div className="timelineRows">
             <TimelineRow
               date="february 15, 2004"
-              img={<img src={IconPHP} />}
+              img={<img alt="philippines flag icon" src={IconPHP} />}
               verticalLine={true}
             >
               born in davao, philippines
@@ -152,7 +154,7 @@ export default function About() {
 
             <TimelineRow
               date="may 12, 2012"
-              img={<img src={IconUAE} />}
+              img={<img alt="united arab emirates flag icon" src={IconUAE} />}
               verticalLine={true}
             >
               moved to dubai, united arab emirates
@@ -160,7 +162,7 @@ export default function About() {
 
             <TimelineRow
               date="april 6, 2018"
-              img={<img src={IconEye} />}
+              img={<img alt="eye icon" src={IconEye} />}
               verticalLine={true}
             >
               acquired first pair of eyeglasses
@@ -168,7 +170,7 @@ export default function About() {
 
             <TimelineRow
               date="september 3, 2022"
-              img={<img src={IconUniversity} />}
+              img={<img alt="university icon" src={IconUniversity} />}
               verticalLine={true}
             >
               graduated from{" "}
@@ -184,7 +186,7 @@ export default function About() {
 
             <TimelineRow
               date="february 5, 2025"
-              img={<img src={IconBriefcase} />}
+              img={<img alt="briefcase icon" src={IconBriefcase} />}
               verticalLine={true}
             >
               worked remotely as freelance full-stack web developer @{" "}
@@ -200,7 +202,7 @@ export default function About() {
 
             <TimelineRow
               date="may 8, 2025"
-              img={<img src={IconUniversity} />}
+              img={<img alt="university icon" src={IconUniversity} />}
               verticalLine={true}
             >
               graduated from{" "}
@@ -216,7 +218,7 @@ export default function About() {
 
             <TimelineRow
               date="may 12, 2025"
-              img={<img src={IconBriefcase} />}
+              img={<img alt="briefcase icon" src={IconBriefcase} />}
               verticalLine={true}
             >
               worked remotely as freelance full-stack web developer @{" "}
@@ -232,7 +234,7 @@ export default function About() {
 
             <TimelineRow
               date="june 30, 2025"
-              img={<img src={IconBriefcase} />}
+              img={<img alt="briefcase icon" src={IconBriefcase} />}
               verticalLine={false}
             >
               working on-site as full-time web developer @{" "}
@@ -256,8 +258,9 @@ export default function About() {
           <h1 className="header">my skillset</h1>
 
           <div className="filter">
-            <span>filter by skill level:</span>
+            <label htmlFor="skillsetFilter">filter by skill level:</label>
             <select
+              id="skillsetFilter"
               onMouseDown={(e) => resetSkill(e)}
               onChange={(e) => filterSkill(e)}
             >

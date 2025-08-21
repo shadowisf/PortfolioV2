@@ -77,11 +77,17 @@ export const PortfolioV1: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon img={<img src={IconGlobe} />} href={DemoV1Portfolio}>
+      <LinkWithIcon
+        img={<img alt="globe icon" src={IconGlobe} />}
+        href={DemoV1Portfolio}
+      >
         live website
       </LinkWithIcon>
 
-      <LinkWithIcon img={<img src={IconOctopus} />} href={GitHubV1Portfolio}>
+      <LinkWithIcon
+        img={<img alt="octopus icon" src={IconOctopus} />}
+        href={GitHubV1Portfolio}
+      >
         source code
       </LinkWithIcon>
     </>
