@@ -10,6 +10,7 @@ const GitHubApolloHospital = "https://github.com/shadowisf/ApolloHospital";
 const DemoApolloHospital = "https://apollohospital.pythonanywhere.com";
 
 export const ApolloHospital: WorkEntry = {
+  type: "personal project",
   name: "apollo hospital",
   year: "2023",
   techStack: [

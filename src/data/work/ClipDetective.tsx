@@ -9,6 +9,7 @@ const GitHubClipDetective = "https://github.com/shadowisf/ClipDetective";
 const DemoClipDetective = "https://clipdetective-2b40e.web.app";
 
 export const ClipDetective: WorkEntry = {
+  type: "personal project",
   name: "clipdetective",
   year: "2024",
   techStack: [

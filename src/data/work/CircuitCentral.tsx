@@ -9,6 +9,7 @@ import FileCircuitCentral from "@/assets/FileCircuitCentral.pdf";
 const GitHubCircuitCentral = "https://github.com/shadowisf/CircuitCentral";
 
 export const CircuitCentral: WorkEntry = {
+  type: "personal project",
   name: "circuitcentral",
   year: "2024",
   techStack: [

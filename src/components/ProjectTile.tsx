@@ -43,7 +43,10 @@ export function ProjectTile(p: ProjectProps) {
         isMobile ? null : movePreview(p.dataID, event);
       }}
     >
-      <h5 className="title">{project.name}</h5>
+      <div>
+        <h5 className="title">{project.name}</h5>
+        <small className="type">{project.type}</small>
+      </div>
       <small className="year">{project.year}</small>
     </Link>
   );

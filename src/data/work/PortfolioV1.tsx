@@ -9,6 +9,7 @@ const GitHubV1Portfolio = "https://github.com/shadowisf/PortfolioV1";
 const DemoV1Portfolio = "https://v1-lesranalan.web.app";
 
 export const PortfolioV1: WorkEntry = {
+  type: "personal project",
   name: "portfolio v1",
   year: "2024",
   techStack: ["vite", "*react.js", "*typescript", "*scss", "*firebase", "git"],

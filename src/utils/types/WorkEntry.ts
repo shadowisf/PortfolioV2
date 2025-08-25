@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
 
 export type WorkEntry = {
+  type: string;
   name: string;
   year: string;
   techStack: string[];

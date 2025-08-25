@@ -1,7 +1,7 @@
 import { ProjectTile } from "../components/ProjectTile";
 import { useEffect } from "react";
 import { ProjectPreview } from "../components/ProjectPreview";
-import { LinkWithIcon, LinkWithNoIcon } from "../components/Link";
+import { LinkWithIcon } from "../components/Link";
 import { useGlobalState } from "../providers/GlobalStateProvider";
 import { useScrollingAnimation } from "../utils/gsap/useScrollingAnimation";
 import { useHomeAnimation } from "../utils/gsap/useHomeAnimation";
@@ -17,7 +17,7 @@ import {
 } from "../utils/iconSetting";
 
 export default function Home() {
-  const { setCurrentPage, isMobile } = useGlobalState();
+  const { setCurrentPage } = useGlobalState();
   const { scrollToTop } = useScrollingAnimation();
   const { startup, swirlOnHover, swirlOnLeave } = useHomeAnimation();
 
@@ -59,16 +59,11 @@ export default function Home() {
           <br />
 
           <h2 className="nonBold">
-            <span className="bulletPoint">⊢ </span>web developer @{" "}
-            <LinkWithNoIcon
-              className="infoOnHover top"
-              data-tooltip={
-                isMobile ? "" : "an award-winning design & build company"
-              }
-              href="https://www.rayfitout.com"
-            >
-              rayfitout
-            </LinkWithNoIcon>
+            <span className="bulletPoint">⊢ </span>open to work
+          </h2>
+
+          <h2 className="nonBold">
+            <span className="bulletPoint">⊢ </span>full stack developer
           </h2>
 
           <h2 className="nonBold">

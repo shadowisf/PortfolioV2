@@ -10,6 +10,7 @@ const GitHubLetThereBeFragrance =
 const DemoLetThereBeFragrance = "https://let-there-be-fragrance.vercel.app";
 
 export const LetThereBeFragrance: WorkEntry = {
+  type: "freelance project",
   name: "let there be fragrance",
   year: "2025",
   techStack: [
@@ -32,7 +33,7 @@ export const LetThereBeFragrance: WorkEntry = {
   videoFlex: "1.601113",
   status: (
     <>
-      let there be fragrance is currently a <u>work in progress</u>.
+      let there be fragrance is currently under <u>active development</u>.
     </>
   ),
   description: (
@@ -106,7 +107,7 @@ export const LetThereBeFragrance: WorkEntry = {
         img={<img alt="globe icon" src={IconGlobe} />}
         href={DemoLetThereBeFragrance}
       >
-        live website
+        preview website
       </LinkWithIcon>
 
       <LinkWithIcon

@@ -9,6 +9,7 @@ const GitHubV2Portfolio = "https://github.com/shadowisf/PortfolioV2";
 const DemoV2Portfolio = "https://les-ranalan.web.app";
 
 export const PortfolioV2: WorkEntry = {
+  type: "personal project",
   name: "portfolio v2",
   year: "2024",
   techStack: [
@@ -28,7 +29,7 @@ export const PortfolioV2: WorkEntry = {
   videoFlex: "1.598148",
   status: (
     <>
-      portfolio v2 is currently a <u>work in progress with constant updates</u>.
+      portfolio v2 is currently <u>work in progress with regular updates</u>.
     </>
   ),
   description: (

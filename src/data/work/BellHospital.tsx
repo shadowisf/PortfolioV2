@@ -9,6 +9,7 @@ import FileBellHospital from "@/assets/FileBellHospital.pdf";
 const GitHubBellHospital = "https://github.com/shadowisf/BellHospital";
 
 export const BellHospital: WorkEntry = {
+  type: "personal project",
   name: "bell hospital",
   year: "2022",
   techStack: ["*java", "*cli", "*file handling", "git"],

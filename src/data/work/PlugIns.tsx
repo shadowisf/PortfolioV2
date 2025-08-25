@@ -9,6 +9,7 @@ import FilePlugIns from "@/assets/FilePlugIns.pdf";
 const GitHubPlugIns = "https://github.com/shadowisf/PlugIns";
 
 export const PlugIns: WorkEntry = {
+  type: "personal project",
   name: "plug-ins",
   year: "2023",
   techStack: ["*php", "*xampp", "*mariadb", "git"],

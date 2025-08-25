@@ -9,6 +9,7 @@ const GitHubWhealthyVessel = "https://github.com/shadowisf/WhealthyVessel";
 const DemoWhealthyVessel = "https://whealthy-vessel.vercel.app";
 
 export const WhealthyVessel: WorkEntry = {
+  type: "freelance project",
   name: "whealthy vessel",
   year: "2025",
   techStack: ["vite", "*react.js", "*typescript", "*scss", "git"],
@@ -20,7 +21,7 @@ export const WhealthyVessel: WorkEntry = {
   videoFlex: "1.601113",
   status: (
     <>
-      whealthy vessel is currently a <u>work in progress</u>.
+      whealthy vessel is currently under <u>active development</u>.
     </>
   ),
   description: (
@@ -85,7 +86,7 @@ export const WhealthyVessel: WorkEntry = {
         img={<img alt="globe icon" src={IconGlobe} />}
         href={DemoWhealthyVessel}
       >
-        live website
+        preview website
       </LinkWithIcon>
 
       <LinkWithIcon

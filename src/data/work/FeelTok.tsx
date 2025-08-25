@@ -9,6 +9,7 @@ import FileFeelTok from "@/assets/FileFeelTok.pdf";
 const GitHubFeelTok = "https://github.com/shadowisf/FeelTok";
 
 export const FeelTok: WorkEntry = {
+  type: "personal project",
   name: "feeltok",
   year: "2024",
   techStack: [

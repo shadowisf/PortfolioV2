@@ -10,6 +10,7 @@ const GitHubExamiq = "https://github.com/shadowisf/Examiq";
 const DemoExamiq = "https://examiq-seven.vercel.app";
 
 export const Examiq: WorkEntry = {
+  type: "personal project",
   name: "examiq",
   year: "2025",
   techStack: [

@@ -169,7 +169,7 @@ export default function About() {
             </TimelineRow>
 
             <TimelineRow
-              date="september 3, 2022"
+              date="august 29, 2021 — september 3, 2022 "
               img={<img alt="university icon" src={IconUniversity} />}
               verticalLine={true}
             >
@@ -185,7 +185,7 @@ export default function About() {
             </TimelineRow>
 
             <TimelineRow
-              date="february 5, 2025"
+              date="february 5, 2025 — february 27, 2025"
               img={<img alt="briefcase icon" src={IconBriefcase} />}
               verticalLine={true}
             >
@@ -201,7 +201,7 @@ export default function About() {
             </TimelineRow>
 
             <TimelineRow
-              date="may 8, 2025"
+              date="september 19, 2022 — may 8, 2025"
               img={<img alt="university icon" src={IconUniversity} />}
               verticalLine={true}
             >
@@ -217,7 +217,7 @@ export default function About() {
             </TimelineRow>
 
             <TimelineRow
-              date="may 12, 2025"
+              date="may 12, 2025 — june 6, 2025"
               img={<img alt="briefcase icon" src={IconBriefcase} />}
               verticalLine={true}
             >
@@ -233,11 +233,11 @@ export default function About() {
             </TimelineRow>
 
             <TimelineRow
-              date="june 30, 2025"
+              date="june 30, 2025 — august 25, 2025"
               img={<img alt="briefcase icon" src={IconBriefcase} />}
               verticalLine={false}
             >
-              working on-site as full-time web developer @{" "}
+              worked on-site as full-time web developer @{" "}
               <LinkWithNoIcon
                 className="infoOnHover top"
                 data-tooltip="an award-winning design & build company"

@@ -9,6 +9,7 @@ import { LetThereBeFragrance } from "../data/work/LetThereBeFragrance";
 import { PlugIns } from "../data/work/PlugIns";
 import { PortfolioV1 } from "../data/work/PortfolioV1";
 import { PortfolioV2 } from "../data/work/PortfolioV2";
+import { Rayfitout } from "../data/work/Rayfitout";
 import { WhealthyVessel } from "../data/work/WhealthyVessel";
 import { WorkEntry } from "./types/WorkEntry";
 
@@ -27,4 +28,5 @@ export const workMapping: {
   9: Examiq,
   10: WhealthyVessel,
   11: LetThereBeFragrance,
+  12: Rayfitout,
 };

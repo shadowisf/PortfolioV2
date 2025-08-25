@@ -52,6 +52,6 @@ export const skillsetRating: { [key: string]: number } = {
   // pocketbase: 0,
   jira: 2,
   figma: 3,
-  webflow: 2,
+  webflow: 3,
   stripe: 1,
 };

@@ -9,6 +9,7 @@ import FileFunculator from "@/assets/FileFunCulator.pdf";
 const GitHubFunCulator = "https://github.com/shadowisf/FunCulator";
 
 export const FunCulator: WorkEntry = {
+  type: "personal project",
   name: "funculator",
   year: "2022",
   techStack: ["*java", "*swing", "git"],
