@@ -48,7 +48,7 @@ export const skillsetRating: { [key: string]: number } = {
   // "microsoft sql server": 0,
   // vercel: 0,
   gsap: 2,
-  // "framer motion": 0,
+  "framer motion": 1,
   // pocketbase: 0,
   jira: 2,
   figma: 3,

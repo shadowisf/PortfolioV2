@@ -58,21 +58,19 @@ export default function Home() {
           <br />
           <br />
 
-          <h2 className="nonBold">
-            <span className="bulletPoint">⊢ </span>open to work
-          </h2>
+          <h5 className="nonBold">
+            <span className="bulletPoint">⊢ </span>full-stack software engineer
+          </h5>
 
-          <h2 className="nonBold">
-            <span className="bulletPoint">⊢ </span>full stack developer
-          </h2>
+          <h5 className="nonBold">
+            <span className="bulletPoint">⊢ </span>beng (hons) software
+            engineering
+          </h5>
 
-          <h2 className="nonBold">
-            <span className="bulletPoint">⊢ </span>software engineering graduate
-          </h2>
-
-          <h2 className="nonBold">
-            <span className="bulletPoint">⊢ </span>based in dubai
-          </h2>
+          <h5 className="nonBold">
+            <span className="bulletPoint">⊢ </span>based in dubai, united arab
+            emirates
+          </h5>
 
           <br />
           <br />

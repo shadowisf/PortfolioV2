@@ -8,7 +8,7 @@ import Footer from "./components/Footer.tsx";
 import Home from "./pages/Home.tsx";
 import About from "./pages/About.tsx";
 import Work from "./pages/Work.tsx";
-import YouAreLost from "./components/YouAreLost.tsx";
+import YouAreLost from "./pages/_Lost.tsx";
 import { GlobalStateProvider } from "./providers/GlobalStateProvider.tsx";
 import { workMapping } from "./utils/workMapping.ts";
 

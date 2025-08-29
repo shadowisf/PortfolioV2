@@ -29,7 +29,7 @@ export default function TechStackTile(p: TechStackTileProps) {
       {cleanItem}
     </small>
   ) : (
-    <span
+    <small
       className={p.classNameContainer}
       style={{ backgroundColor: data.color }}
       data-key={p.dataKey}
@@ -38,6 +38,6 @@ export default function TechStackTile(p: TechStackTileProps) {
         <data.icon />
       </span>
       {cleanItem}
-    </span>
+    </small>
   );
 }

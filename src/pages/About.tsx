@@ -85,10 +85,10 @@ export default function About() {
 
           <br />
 
-          <h2>
+          <h4>
             i build functional, performant, and scalable apps — with a focus on
             long-term maintainability.
-          </h2>
+          </h4>
 
           <br />
 
@@ -141,7 +141,7 @@ export default function About() {
 
       <section className="timelineAndSkillset">
         <section className="timeline">
-          <h1 className="header">my life's arc</h1>
+          <h2 className="header">my life's arc</h2>
 
           <div className="timelineRows">
             <TimelineRow
@@ -192,7 +192,7 @@ export default function About() {
               worked remotely as freelance full-stack web developer @{" "}
               <LinkWithNoIcon
                 className="infoOnHover top"
-                data-tooltip="this project is currently a work in progress"
+                data-tooltip="a premium & high-quality cookware company"
                 href="/whealthy-vessel"
                 sameTab={true}
               >
@@ -224,7 +224,7 @@ export default function About() {
               worked remotely as freelance full-stack web developer @{" "}
               <LinkWithNoIcon
                 className="infoOnHover top"
-                data-tooltip="this project is currently a work in progress"
+                data-tooltip="a unique & niche fragrance house company"
                 href="/let-there-be-fragrance"
                 sameTab={true}
               >
@@ -255,7 +255,7 @@ export default function About() {
         </section>
 
         <section className="skillset">
-          <h1 className="header">my skillset</h1>
+          <h2 className="header">my skillset</h2>
 
           <div className="filter">
             <label htmlFor="skillsetFilter">filter by skill level:</label>

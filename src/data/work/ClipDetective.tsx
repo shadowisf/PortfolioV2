@@ -29,59 +29,69 @@ export const ClipDetective: WorkEntry = {
   videoFlex: "1.599074",
   status: (
     <>
-      clipdetective is currently a <u>work in progress</u>.
+      clipdetective is currently under <u>active development</u>.
     </>
   ),
   description: (
     <>
       clipdetective is a <u>web-based mini game</u> that challenges users to
-      identify scenes from shows and movies i’ve binge-watched. designed as a
-      solo side project, it pushed me to work independently with react.js and
-      tailwind css, avoiding tutorials or external guides. key features include:
+      identify scenes from shows and movies i’ve binge-watched. it pushed me to
+      work independently with react.js and tailwind css, avoiding tutorials or
+      external guides. key features include:
       <ul>
         <li>
-          <b>interactive quizzes</b>: users guess clips from random snippets of
-          my favorite media.
+          <b>interactive quizzes:</b> users guess clips from random snippets of
+          media.
         </li>
         <li>
-          <b>self-directed learning</b>: built entirely through personal
-          problem-solving and documentation.
+          <b>letter-by-letter clues:</b> incomplete words are revealed one
+          letter at a time to help the player.
         </li>
         <li>
-          <b>minimalist design</b>: tailwind’s utility-first css for rapid,
-          clean styling.
+          <b>dynamic feedback:</b> real-time scoring and results to keep users
+          engaged.
         </li>
         <li>
-          <b>react.js implementation</b>: real-time state management for scores
-          and progress.
-        </li>
-        <li>
-          <b>dynamic rendering</b>: conditionally displays questions, feedback
-          and results.
-        </li>
-        <li>
-          <b>custom logic</b>: clip randomization and non-repeating question
-          flow.
+          <b>minimalist design:</b> clean and intuitive user interface for
+          smooth gameplay.
         </li>
       </ul>
     </>
   ),
   myRole: (
     <>
-      clipdetective is a <u>solo side project</u> where i:
+      clipdetective was a <u>solo personal project</u> where i:
       <ul>
-        <li>structured the quiz flow and ui entirely from scratch.</li>
         <li>
-          wrote react.js hooks for state, built clip-triggering logic, and
-          styled with tailwind.
+          structured the full quiz flow, including non-repeating questions and
+          clip randomization logic.
         </li>
-        <li>handpicked and edited clips for the game library.</li>
-        <li>debugged challenges like clip preloading and score persistence.</li>
+        <li>
+          implemented real-time state management with react.js hooks for scores,
+          progress, and feedback.
+        </li>
+        <li>
+          styled the entire application using tailwind css for a clean and
+          responsive UI.
+        </li>
+        <li>
+          built dynamic rendering to conditionally display questions, feedback,
+          and results.
+        </li>
+        <li>preloaded and managed media clips to ensure smooth gameplay.</li>
+        <li>
+          debugged issues such as score persistence, clip triggering, and user
+          interface responsiveness.
+        </li>
+        <li>handpicked and edited all clips for the game library.</li>
+        <li>
+          worked independently, conceptualizing, building, and shipping the full
+          web application.
+        </li>
       </ul>
       <br />
-      this passion project demonstrates my ability to independently
-      conceptualize, build and ship complete web applications while expanding my
-      react.js expertise.
+      this project demonstrates my ability to independently conceptualize, build
+      and ship complete web applications while expanding my react.js expertise.
     </>
   ),
   links: (

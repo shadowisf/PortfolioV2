@@ -18,7 +18,7 @@ export function TimelineRow(p: TimelineProps) {
       <svg
         style={p.verticalLine ? { display: "block" } : { display: "none" }}
         width="40"
-        height="50"
+        height="30"
         className="verticalLine"
       >
         <path

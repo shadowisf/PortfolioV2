@@ -16,10 +16,10 @@ export function ProjectPreview(p: ProjectProps) {
 
   return (
     <div data-key={p.dataID} className="preview">
-      {p.dataID === 6 ? (
-        <h1 className="currentPortfolio">
+      {project.name === "portfolio v2" ? (
+        <p className="currentPortfolio">
           you are currently viewing portfolio v2
-        </h1>
+        </p>
       ) : (
         <div className="videoContainer">
           {loading && <Spinner />}

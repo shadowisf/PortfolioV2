@@ -43,44 +43,54 @@ export const Examiq: WorkEntry = {
       during remote assessments. it offers:
       <ul>
         <li>
-          <b>role-based dashboards</b>: unique dashboards based on role
-          (admin/teacher/student).
+          <b>role-based authentication & dashboards</b>: persistent login with
+          full-crud features for courses, exams, results, and account
+          management.
         </li>
         <li>
-          <b>privacy-focused design</b>: client-side gaze analysis, encrypted
-          data.
+          <b>secure monitoring</b>: client-side gaze, input, and behavior
+          analysis with no external data transfer, ensuring privacy.
         </li>
         <li>
-          <b>next.js (typescript)</b>: server-rendered frontend with
-          role-specific user interfaces.
+          <b>ai-powered evaluation</b>: automated grading including paragraph
+          and open-ended questions via artificial intelligence, plus summarized
+          results with clear cheating indicators for teachers.
         </li>
         <li>
-          <b>supabase</b>: postgresql database with real-time authentication and
-          create/read/update/delete (crud) operations.
+          <b>exam duration & attempt control</b>: exams set with specific
+          deadlines, allowing only one attempt per student.
         </li>
         <li>
-          <b>ai integration</b>: webgazer.js for gaze-tracking (no external data
-          transfer), deepseek v3 api for grading open-ended responses.
+          <b>minimal & performance-focused ui</b>: lightweight, distraction-free
+          design for students to stay focused during exams.
+        </li>
+        <li>
+          <b>unique exam items</b>: diverse question types like coding
+          challenges to make exams engaging and fun.
         </li>
       </ul>
     </>
   ),
   myRole: (
     <>
-      examiq is a <u>solo side project</u> where i:
+      examiq was a <u>solo personal project</u> where i:
       <ul>
         <li>
           designed entity-relationship diagram (erd), data-flow diagrams (dfd)
           and implemented supabase schema.
         </li>
         <li>
-          built all frontend components (next.js) including admin user
-          management, teacher exam/course creation, and student exam interface
-          with gaze calibration.
+          built all frontend components (next.js + typescript) including admin
+          user management, teacher exam/course creation, and student exam
+          interface with gaze calibration.
         </li>
         <li>
           integrated webgazer.js for real-time cheating detection and configured
-          deepseek v3 for automated essay grading.
+          deepseek v3 api for automated essay grading.
+        </li>
+        <li>
+          set up role-based authentication, persistent login, and dashboards
+          with crud functionality.
         </li>
         <li>authored test cases for all user flows and deployed via vercel.</li>
       </ul>

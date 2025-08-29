@@ -1,5 +1,5 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
-import { LinkWithIcon } from "../../components/Link";
+import { LinkWithIcon, LinkWithNoIcon } from "../../components/Link";
 import { IconGlobe, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageV1Portfolio from "@/assets/ImageV1Portfolio.webp";
@@ -7,6 +7,11 @@ import VideoV1Portfolio from "@/assets/VideoV1Portfolio.webm";
 //
 const GitHubV1Portfolio = "https://github.com/shadowisf/PortfolioV1";
 const DemoV1Portfolio = "https://v1-lesranalan.web.app";
+
+const minMaxWidth = getComputedStyle(document.documentElement)
+  .getPropertyValue("--minMaxWidth")
+  .trim();
+const isMobile = window.matchMedia(minMaxWidth).matches;
 
 export const PortfolioV1: WorkEntry = {
   type: "personal project",
@@ -28,47 +33,55 @@ export const PortfolioV1: WorkEntry = {
     <>
       portfolio v1 is a <u>dynamic and cartoonish-themed personal website</u>{" "}
       designed to showcase creativity while exploring foundational web
-      development technologies. inspired by award-winning designs from awwwards,
-      this project blends playful aesthetics with functional interactivity. key
-      features include:
+      development technologies. inspired by award-winning designs from{" "}
+      <LinkWithNoIcon
+        className="infoOnHover top"
+        href="https://www.awwwards.com/"
+        data-tooltip={isMobile ? "" : "tryhards love this website"}
+      >
+        awwwards
+      </LinkWithNoIcon>
+      , this project blends playful aesthetics with functional interactivity.
+      key features include:
       <ul>
         <li>
-          <b>react.js (typescript) framework</b>: leveraged functional
-          components, hooks (e.g., <code>useState</code>), and props for
-          reusable ui elements.
+          <b>responsive and adaptive design:</b> works seamlessly across desktop
+          and mobile screens.
         </li>
         <li>
-          <b>responsive design</b>: fluid layouts adapting to desktop and mobile
-          screens.
+          <b>interactive elements:</b> animated transitions, dynamic content,
+          playful ui interactions, and font animations.
         </li>
         <li>
-          <b>interactive elements</b>: animated transitions and dynamic content
-          rendering.
+          <b>creative layout:</b> unique, award-inspired designs that reflect
+          personality and style.
         </li>
         <li>
-          <b>modern workflows</b>: component-based architecture and state-driven
-          rendering.
+          <b>dynamic color themes:</b> ability to randomly generate new color
+          themes.
         </li>
       </ul>
     </>
   ),
   myRole: (
     <>
-      portfolio v1 is a <u>solo side project</u> where i:
+      portfolio v1 was a <u>solo personal project</u> where i:
       <ul>
         <li>
-          translated awwwards-inspired aesthetics into a cohesive and custom ui.
+          designed and implemented a playful, cartoonish interface inspired by
+          awwwards designs.
         </li>
         <li>
-          implemented react.js (typescript) components, structured css with bem
-          naming conventions, and debugged rendering issues.
+          structured content and layouts for a smooth, responsive experience
+          across devices.
         </li>
         <li>
-          ensured cross-browser compatibility and performance via lazy loading.
+          ensured interactive features like animations and dynamic transitions
+          worked consistently.
         </li>
         <li>
-          refactored code to improve readability (e.g., abstracting repeated
-          logic into utility functions).
+          continuously iterated on design and content to keep the portfolio
+          fresh and evolving.
         </li>
       </ul>
       <br />

@@ -44,48 +44,70 @@ export const FeelTok: WorkEntry = {
       architecture. it streamlines:
       <ul>
         <li>
-          <b>react native (typescript)</b>: component-based ui with
-          cross-platform compatibility.
+          <b>uploading capabilities:</b> upload photos and videos and pick
+          unique emotions for each post, with captions.
         </li>
         <li>
-          <b>firebase backend</b>: firestore for user/post data and auth for
-          email/google sign-in.
+          <b>authentication & profiles:</b> secure login with two-factor
+          authentication, edit profile details, choose google sign-in or manual
+          account creation with email.
         </li>
         <li>
-          <b>cloudinary</b>: image storage for profiles/posts.
+          <b>social features:</b> view other users' profiles, dynamic post
+          themes for different emotions, post comments, and a usage timer to
+          prevent social media addiction.
         </li>
         <li>
-          <b>emailjs</b>: email-based two-factor authentication (2fa)
-          implementation.
+          <b>reporting & moderation:</b> report posts and accounts, with admins
+          able to view and manage reports via a full-featured admin panel.
         </li>
         <li>
-          <b>expo</b>: device feature access (camera/gallery) without native
-          code.
-        </li>
-        <li>
-          <b>moderation tools</b>: admin dashboard for content/user management.
-        </li>
-        <li>
-          <b>wellbeing features</b>: usage timer to prevent over-engagement.
+          <b>user experience:</b> fun, engaging, and colorful light theme
+          representing the six pillars.
         </li>
       </ul>
     </>
   ),
   myRole: (
     <>
-      feeltok is a <u>collaborative side project</u> where i:
+      feeltok was a <u>collaborative personal project</u>, partnered with other
+      developers, where i:
       <ul>
-        <li>designed theme system, reusable components (buttons/modals).</li>
-        <li>architected firestore database schema.</li>
-        <li>implemented authentication flows (email/google).</li>
-        <li>developed image uploads to cloudinary.</li>
-        <li>built admin moderation tools.</li>
-        <li>implemented timer/reminder functionality.</li>
         <li>
-          implemented email.js api integration for two-factor authentication
-          (2fa).
+          designed the firestore database schema for users, posts, profiles, and
+          reports.
         </li>
-        <li>ensured comprehensive error handling.</li>
+        <li>
+          implemented authentication flows including email/google sign-in and
+          two-factor authentication via email.js.
+        </li>
+        <li>
+          built cross-platform mobile ui with react native + expo, including
+          camera/gallery access for uploading media.
+        </li>
+        <li>
+          developed emotion-based post themes and reusable ui components
+          (buttons, modals).
+        </li>
+        <li>
+          implemented full crud functionality for posts, accounts, and admin
+          moderation tools.
+        </li>
+        <li>
+          created reporting system allowing users to report posts/accounts and
+          admins to manage and resolve reports.
+        </li>
+        <li>
+          ensured secure and persistent login with role-based access control.
+        </li>
+        <li>
+          added a fun, light, and distraction-free theme focused on digital
+          wellbeing, including usage timers and reminders.
+        </li>
+        <li>
+          handled media uploads via cloudinary and implemented comprehensive
+          error handling.
+        </li>
       </ul>
       <br />
       this project demonstrated full-stack mobile development skills while

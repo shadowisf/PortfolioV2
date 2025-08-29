@@ -40,41 +40,30 @@ export const ApolloHospital: WorkEntry = {
       managing patient, doctor, and staff records. it streamlines:
       <ul>
         <li>
-          <b>core operations</b>: patient/doctor record management, appointment
-          scheduling, prescription tracking, and billing.
+          <b>dynamic workflow:</b> starts from patient registration →
+          receptionist → doctor appointments → laboratory → prescriptions →
+          billing.
         </li>
         <li>
-          <b>user roles</b>: secure login for receptionists (patient records),
-          doctors (medical records), and staff (test reports), all equipped with
-          create/read/update/delete (crud) operations.
+          <b>downloadable records:</b> pdf export of patient records for easy
+          reference and sharing.
         </li>
         <li>
-          <b>data integrity</b>: mariadb database with relational tables
-          (patient ↔ appointment ↔ doctor) and input validation to prevent
-          duplicates/invalid entries.
+          <b>role-based dashboards & authentication:</b> each user has secure
+          login credentials with access and create/read/update/delete (crud)
+          privileges based on their role.
         </li>
         <li>
-          <b>workflow automation</b>: digitalized processes replace paper-based
-          systems, reducing errors and improving accessibility.
-        </li>
-        <li>
-          <b>responsive frontend</b>: bootstrap css with dynamic tables, modals,
-          and pdf report generation.
-        </li>
-        <li>
-          <b>robust backend</b>: flask routes handling crud operations with
-          mysql-connector integration.
-        </li>
-        <li>
-          <b>error handling</b>: form validation, sql exception management, and
-          duplicate entry prevention.
+          <b>simple ui & layout:</b> straightforward tables and clear interface
+          for fast navigation and usability.
         </li>
       </ul>
     </>
   ),
   myRole: (
     <>
-      apollo hospital is a <u>collaborative side project</u> where i:
+      apollo hospital was a <u>collaborative personal project</u>, partnered
+      with other developers, where i:
       <ul>
         <li>
           designed 10+ interactive webpages (html/css/bootstrap) with consistent
@@ -92,11 +81,15 @@ export const ApolloHospital: WorkEntry = {
         </li>
         <li>
           added input validation (e.g., date formats) and error handling (sql
-          exceptions).
+          exceptions, duplicate prevention).
         </li>
         <li>
-          coordinated frontend-backend workflows (ajax calls, json responses)
-          and documented api endpoints.
+          coordinated frontend-backend workflows (ajax calls, json responses),
+          pdf report generation, and documented api endpoints.
+        </li>
+        <li>
+          ensured each user role (patient, receptionist, doctor, staff) had a
+          dedicated dashboard with full CRUD operations.
         </li>
       </ul>
       <br />

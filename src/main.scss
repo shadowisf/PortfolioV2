@@ -1,7 +1,7 @@
 $primaryFont: "Kyiv Type Sans", Arial, sans-serif;
 $bayBayinFont: "Noto Sans Tagalog";
 
-$borderRadius: 8px;
+$borderRadius: 4px;
 
 $lightBoxShadow: rgba(0, 0, 0, 0.25);
 $darkBoxShadow: rgba(0, 0, 0, 0.5);
@@ -185,15 +185,11 @@ nav {
     }
 
     svg {
-      fill: white;
+      color: var(--accent-color);
       outline: none;
       display: flex;
 
       transition: fill 0.5s;
-    }
-
-    &:hover svg {
-      fill: var(--accent-color);
     }
 
     &:hover {
@@ -330,7 +326,6 @@ nav {
       position: absolute;
       top: 0;
       left: 0;
-      font-size: var(--h4);
 
       width: 100%;
       min-height: 100%;
@@ -515,10 +510,6 @@ footer {
       }
     }
 
-    h2 {
-      font-size: var(--h5);
-    }
-
     .preview {
       display: flex;
       flex-direction: column;
@@ -543,6 +534,7 @@ footer {
         box-shadow: $boxShadow;
         background-color: var(--accent-color);
         color: var(--background-color);
+        font-size: var(--h1);
       }
 
       .videoContainer {
@@ -645,7 +637,6 @@ footer {
       flex-direction: column;
       justify-content: center;
       transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
-      font-size: var(--p);
       font-variation-settings: $fontVarNormal;
       display: flex;
       align-items: center;
@@ -665,7 +656,6 @@ footer {
 
     .nextPrevButton {
       transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
-      font-size: var(--p);
       font-variation-settings: $fontVarNormal;
       display: flex;
       align-items: center;
@@ -692,10 +682,8 @@ footer {
       gap: 1rem;
 
       .spinner {
-        border-radius: $borderRadius;
         width: 100%;
         min-height: 400px;
-        box-shadow: $boxShadow;
         padding: 75px 0;
         display: flex;
 
@@ -716,12 +704,10 @@ footer {
 
     .paragraph {
       line-height: 2rem;
-
       text-align: justify;
 
-      h1 {
-        font-size: var(--h5);
-        color: var(--accent-color);
+      h4 {
+        margin-bottom: 10px;
       }
     }
 
@@ -738,7 +724,6 @@ footer {
 
   .nextPrevButton {
     transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
-    font-size: var(--smaller);
     font-variation-settings: $fontVarNormal;
 
     &:hover {
@@ -814,18 +799,12 @@ footer {
     }
 
     .spinner {
-      width: 750px;
-      height: 425px;
+      width: 500px;
+      height: 375px;
       padding: 75px;
-      box-shadow: $boxShadow;
-      border-radius: $borderRadius;
       display: flex;
       justify-content: center;
       align-items: center;
-    }
-
-    h2 {
-      font-size: var(--h4);
     }
 
     p {
@@ -1027,19 +1006,23 @@ footer {
     }
   }
 
-  strong {
-    font-size: var(--h0);
-    color: var(--accent-color);
-  }
-
-  p {
-    font-size: var(--h6);
-  }
-
   .links {
     display: flex;
     gap: 8rem;
     justify-content: center;
+  }
+
+  .spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    padding: 75px;
+  }
+
+  p {
+    color: var(--faded-color);
   }
 }
 
@@ -1065,6 +1048,7 @@ footer {
     background-color: var(--text-color);
     color: var(--background-color);
     border: var(--background-color) 1px solid;
+    line-height: normal;
   }
 
   &:hover::before {
@@ -1337,10 +1321,6 @@ footer {
 
     .timelineAndSkillset {
       flex-direction: column;
-
-      .header {
-        font-size: var(--h0);
-      }
 
       .skillset {
         height: 500px;

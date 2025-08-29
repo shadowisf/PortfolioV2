@@ -38,9 +38,11 @@ export const LetThereBeFragrance: WorkEntry = {
   ),
   description: (
     <>
-      let there be fragrance is a <u>web-based e-commerce platform</u> focused
-      on fragrances. it is built to deliver a smooth shopping experience through
-      fast performance, intuitive ui, and essential user-centric features:
+      let there be fragrance is a niche fragrance house, offering a curated
+      collection of different and unique scents. i developed a{" "}
+      <u>web-based e-commerce platform</u> focused on delivering a smooth
+      shopping experience through fast performance, intuitive ui, and essential
+      user-centric features:
       <ul>
         <li>
           <b>shopping bag & wishlist system</b>: persistent cart and wishlist
@@ -55,25 +57,26 @@ export const LetThereBeFragrance: WorkEntry = {
           confirmation screen.
         </li>
         <li>
-          <b>responsive UI & animations</b>: styled with tailwind css and
-          enhanced with framer motion for fluid transitions.
+          <b>design & animations</b>: user-focused design with animations to
+          enhance navigation and overall shopping experience.
         </li>
         <li>
-          <b>next.js (typescript)</b>: server-rendered frontend for SEO and
-          performance, with reusable components.
-        </li>
-        <li>
-          <b>supabase</b>: postgresql-powered backend with authentication,
-          real-time cart/wishlist sync, and product CRUD.
+          <b>authentication & profile dashboards</b>: secure user login with
+          personal dashboards for managing orders, wishlist, and account
+          settings.
         </li>
       </ul>
     </>
   ),
   myRole: (
     <>
-      let there be fragrance was a <u>collaborative freelance project</u>,
-      partnered with a visual designer, where i:
+      let there be fragrance is a <u>collaborative freelance project</u>,
+      partnered with a visual designer and a project coordinator, where i:
       <ul>
+        <li>
+          implemented next.js (typescript) frontend with server-side rendering,
+          reusable components, and optimized SEO and performance.
+        </li>
         <li>
           designed the full system architecture including product, order, and
           user schemas in supabase/postgresql.
@@ -87,8 +90,8 @@ export const LetThereBeFragrance: WorkEntry = {
           with validation and loading states.
         </li>
         <li>
-          added responsive animations using framer motion to enhance navigation
-          and microinteractions.
+          added responsive user interface & animations using tailwind css and
+          framer motion to enhance navigation and microinteractions.
         </li>
         <li>
           implemented reusable components for product grids, modals, and

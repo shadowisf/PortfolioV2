@@ -36,41 +36,33 @@ export const CircuitCentral: WorkEntry = {
       managing electronic product sales. it streamlines:
       <ul>
         <li>
-          <b>user workflows</b>: customer product browsing, order creation, and
-          order tracking.
+          <b>user experience & streamlined ordering:</b> customers can browse
+          products, add multiple items to the cart, place orders easily, and
+          track order status efficiently.
         </li>
         <li>
-          <b>admin operations</b>: create/read/update/delete (crud) operations
-          for customers, staff, suppliers, and products via winforms ui.
+          <b>admin capabilities:</b> admins can confirm orders, add products to
+          catalogs, and have full create/read/update/delete (crud) control of
+          customer details, staff details, supplier details, and their sales.
         </li>
         <li>
-          <b>
-            data integrity: relational database with foreign key constraints
-            (customer ↔ order ↔ product) and input validation.
-          </b>
+          <b>ui & usability:</b> simple and intuitive interface with product
+          images for easy identification.
         </li>
         <li>
-          <b>role-based access</b>: separate views for customers (order-focused)
-          and admins with full create/read/update/delete (crud) privileges.
+          <b>data accuracy & validation:</b> the system prevents mistakes by
+          checking for missing or incorrect information before saving.
         </li>
         <li>
-          <b>winforms ui</b>: data grid view tables, modal forms, and
-          role-specific views.
-        </li>
-        <li>
-          <b>sql server</b>: optimized queries with joins and transaction
-          management.
-        </li>
-        <li>
-          <b>error handling</b>: null checks, duplicate prevention, and
-          constraint management.
+          <b>role-based access & authentication:</b> separate access for
+          customers and admins to protect sensitive operations.
         </li>
       </ul>
     </>
   ),
   myRole: (
     <>
-      circuitcentral is a <u>solo side project</u> where i:
+      circuitcentral was a <u>solo personal project</u> where i:
       <ul>
         <li>
           designed 10+ winforms screens (login, product catalog, order

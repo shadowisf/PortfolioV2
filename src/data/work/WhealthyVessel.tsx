@@ -26,36 +26,34 @@ export const WhealthyVessel: WorkEntry = {
   ),
   description: (
     <>
-      whealthy vessel is a <u>showcase website</u> built to highlight the
-      premium quality and features of the brand's cookware products. it
-      features:
+      whealthy vessel is a high-quality and premium cookware brand, offering
+      health-focused solutions and culinary excellence. i developed a{" "}
+      <u>corporate-style website</u>, showcasing the quality and features of the
+      brand's products and also to provide better user experience for employees:
       <ul>
         <li>
           <b>poduct showcase system</b>: interactive display of various cookware
           items with media-rich content.
         </li>
         <li>
-          <b>component-based architecture</b>: reusable and modular components
-          for scalability and maintainability.
+          <b>employee operations management</b>: internal portal for staff to
+          manage tasks, access resources, and monitor operational workflows.
         </li>
         <li>
-          <b>responsive scss styling</b>: handcrafted layouts using scss with
-          mobile-first responsiveness.
+          <b>recipe system</b>: displays curated, unique recipes to highlight
+          product use and inspire users in their culinary journey.
         </li>
         <li>
-          <b>performance-first setup</b>: built using vite for fast load times
-          and optimized builds.
-        </li>
-        <li>
-          <b>react.js (typescript)</b>: strongly typed frontend with dynamic
-          routing and clean state management.
+          <b>dual language support</b>: fully supports english and arabic
+          interfaces for a bilingual user experience.
         </li>
       </ul>
     </>
   ),
   myRole: (
     <>
-      whealthy vessel is a <u>collaborative freelance project</u> where i:
+      whealthy vessel is a <u>collaborative freelance project</u>, partnered
+      with a project coordinator, where i:
       <ul>
         <li>
           developed key site features, including product gallery layouts, hover
@@ -64,6 +62,15 @@ export const WhealthyVessel: WorkEntry = {
         <li>
           configured vite build tooling for optimal performance and fast dev
           experience.
+        </li>
+        <li>
+          implemented react.js (typescript) frontend with dynamic routing and
+          clean state management.
+        </li>
+        <li>created responsive scss styling for mobile-first layouts.</li>
+        <li>
+          developed component-based architecture with reusable, modular
+          components for scalability and maintainability.
         </li>
         <li>
           maintained semantic html and accessibility-friendly markup to support

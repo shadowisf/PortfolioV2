@@ -58,7 +58,7 @@ export default function Work(p: WorkProps) {
           }
           onClick={() => setSkipStart(true)}
         >
-          ← <span>prev</span>
+          ← <small>prev</small>
         </Link>
 
         {/* next project */}
@@ -72,7 +72,7 @@ export default function Work(p: WorkProps) {
           }
           onClick={() => setSkipStart(true)}
         >
-          <span>next</span> →
+          <small>next</small> →
         </Link>
       </section>
 
@@ -133,21 +133,21 @@ export default function Work(p: WorkProps) {
 
         {/* content */}
         <div className="paragraph">
-          <h1>status:</h1>
+          <h4>status:</h4>
           {project.status}
 
           <br />
           <br />
           <br />
 
-          <h1>description:</h1>
+          <h4>description:</h4>
           {project.description}
 
           <br />
           <br />
           <br />
 
-          <h1>my role:</h1>
+          <h4>my role:</h4>
           {project.myRole}
         </div>
       </section>
@@ -161,7 +161,7 @@ export default function Work(p: WorkProps) {
             scrollToTop(0.25);
           }}
         >
-          ↑ <span>top</span>
+          ↑ <small>top</small>
         </Link>
       </section>
     </main>

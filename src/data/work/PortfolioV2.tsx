@@ -29,7 +29,8 @@ export const PortfolioV2: WorkEntry = {
   videoFlex: "1.598148",
   status: (
     <>
-      portfolio v2 is currently <u>work in progress with regular updates</u>.
+      portfolio v2 is currently under{" "}
+      <u>active development with regular updates</u>.
     </>
   ),
   description: (
@@ -40,36 +41,39 @@ export const PortfolioV2: WorkEntry = {
       bio, research), this iteration prioritizes:
       <ul>
         <li>
-          <b>optimized performance</b>: removed bulky libraries and streamlined
-          functions for faster loading.
+          <b>optimized performance:</b> faster loading and smooth navigation for
+          a seamless experience.
         </li>
         <li>
-          <b>enhanced animations</b>: replaced css animations with gsap for
-          smoother, more controlled motion design.
+          <b>enhanced animations:</b> smoother and more engaging motion design
+          for visual appeal.
         </li>
         <li>
-          <b>cleaner aesthetics</b>: balanced visual hierarchy and whitespace
-          for better readability.
+          <b>cleaner aesthetics:</b> balanced layout, whitespace, and
+          readability for better presentation.
         </li>
         <li>
-          <b>performance focus</b>: lazy loading, image optimization, dependency
-          optimization.
+          <b>scalable content:</b> organized structure that allows for easy
+          future updates.
         </li>
         <li>
-          <b>scalable architecture</b>: modular components with typescript
-          interfaces.
+          <b>refined user experience:</b> intuitive interaction and consistent
+          design across devices.
         </li>
       </ul>
     </>
   ),
   myRole: (
     <>
-      portfolio v2 is a <u>solo side project</u> where i:
+      portfolio v2 was a <u>solo personal project</u> where i:
       <ul>
         <li>
           audited v1’s pain points and iterated on layout, color, and motion.
         </li>
-        <li>crafted gsap sequences (e.g., mobile transitions).</li>
+        <li>
+          crafted gsap sequences (e.g., startup animations, hover animations,
+          mobile transitions, etc.).
+        </li>
         <li>migrated from css to scss modules, trimmed unused dependencies.</li>
         <li>ported all v1 content while improving its presentation.</li>
       </ul>
