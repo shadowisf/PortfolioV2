@@ -75,7 +75,6 @@ export function useHomeAnimation() {
     ease: "power2.inOut",
   };
 
-  // Cache map setup (run once)
   const previewMap: Record<
     string,
     { container: Element; video?: HTMLVideoElement }
@@ -90,34 +89,25 @@ export function useHomeAnimation() {
     };
   });
 
-  // ✅ Toggle preview using cache
   const togglePreview = contextSafe((targetID: number) => {
     const entry = previewMap[String(targetID)];
     if (!entry) return;
 
     const { container, video } = entry;
 
-    if (video) {
-      // Load src on demand
-      if (!video.src) {
-        const dataSrc = video.getAttribute("data-src");
-        if (dataSrc) video.src = dataSrc;
-      }
-
-      if (video.readyState >= 2) {
-        video.play();
-      } else {
-        video.addEventListener("loadeddata", () => video.play(), {
-          once: true,
-        });
-      }
-    }
-
     gsap.to(container, previewEnter);
     gsap.to(heroContainer, previewExit);
+
+    if (video) {
+      const playVideo = () => video.play().catch(() => {});
+      if (video.readyState >= 3) {
+        playVideo();
+      } else {
+        video.addEventListener("canplay", playVideo, { once: true });
+      }
+    }
   });
 
-  // ✅ Reset all previews (stop and reset videos)
   const resetPreview = contextSafe(() => {
     Object.values(previewMap).forEach(({ container, video }) => {
       if (video) {
@@ -130,7 +120,6 @@ export function useHomeAnimation() {
     gsap.to(heroContainer, previewEnter);
   });
 
-  // ✅ Move preview with cached container
   const movePreview = contextSafe(
     (targetID: number, event: React.MouseEvent) => {
       const entry = previewMap[String(targetID)];

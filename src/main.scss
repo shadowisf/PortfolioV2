@@ -433,9 +433,10 @@ footer {
 
       .title {
         transition: font-variation-settings 0.5s;
-        max-width: 100%;
+        width: 300px;
         overflow: hidden;
         text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .year,
@@ -1249,9 +1250,13 @@ footer {
   display: block;
 }
 
-@media screen and (max-width: ($minMaxWidth + 100px)) {
+@media screen and (max-width: ($minMaxWidth + 175px)) {
   .homeWrapper {
-    gap: 4rem;
+    gap: 2rem;
+
+    .right {
+      scale: 0.75;
+    }
   }
 }
 
@@ -1341,15 +1346,19 @@ footer {
 
     .left {
       margin: 0;
+
+      .tile {
+        .title {
+          width: 50dvw;
+        }
+      }
     }
 
     .right {
+      scale: 1;
       display: block;
-
       position: static;
-
       height: fit-content;
-
       padding: 0 1rem;
 
       .hero {

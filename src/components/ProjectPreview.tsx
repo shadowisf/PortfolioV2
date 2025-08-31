@@ -1,4 +1,4 @@
-import { useRef, useState, Key } from "react";
+import { useState, Key } from "react";
 import { workMapping } from "../utils/workMapping";
 import TechStackTile from "./TechStackTile";
 import { ProjectProps } from "./ProjectTile";
@@ -6,7 +6,6 @@ import Spinner from "./Spinner";
 
 export function ProjectPreview(p: ProjectProps) {
   const project = workMapping[p.dataID];
-  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const [loading, setLoading] = useState(true);
 
@@ -24,7 +23,7 @@ export function ProjectPreview(p: ProjectProps) {
         <div className="videoContainer">
           {loading && <Spinner />}
           <video
-            ref={videoRef}
+            src={project.video}
             muted
             loop
             playsInline
@@ -33,7 +32,6 @@ export function ProjectPreview(p: ProjectProps) {
               visibility: loading ? "hidden" : "visible",
             }}
             preload="metadata"
-            data-src={project.video}
           />
         </div>
       )}
