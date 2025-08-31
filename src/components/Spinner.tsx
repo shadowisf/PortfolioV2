@@ -1,9 +1,9 @@
-import { FadeLoader } from "react-spinners";
+import { MoonLoader } from "react-spinners";
 
 export default function Spinner() {
   return (
     <div className="spinner">
-      <FadeLoader color="currentColor" />
+      <MoonLoader color="currentColor" speedMultiplier={0.5} />
     </div>
   );
 }

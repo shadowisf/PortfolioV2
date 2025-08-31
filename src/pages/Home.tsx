@@ -62,7 +62,7 @@ export default function Home() {
             ⊢ full-stack software engineer <small>(open to work)</small>
           </h5>
 
-          <h5 className="nonBold">⊢ beng (hons) software engineering</h5>
+          <h5 className="nonBold">⊢ beng (hons) software eng.</h5>
 
           <h5 className="nonBold">⊢ dubai, uae</h5>
 

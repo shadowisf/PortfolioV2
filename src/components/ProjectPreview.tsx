@@ -25,13 +25,15 @@ export function ProjectPreview(p: ProjectProps) {
           {loading && <Spinner />}
           <video
             ref={videoRef}
-            src={project.video}
             muted
             loop
+            playsInline
             onCanPlay={onCanPlay}
             style={{
               visibility: loading ? "hidden" : "visible",
             }}
+            preload="metadata"
+            data-src={project.video}
           />
         </div>
       )}
@@ -39,7 +41,7 @@ export function ProjectPreview(p: ProjectProps) {
       <span className="techStack">
         {project.techStack
           .filter((item: string) => item.startsWith("*"))
-          .map((item: string, index: Key | null | undefined) => (
+          .map((item: string, index: Key) => (
             <TechStackTile
               techStackItem={item}
               key={index}

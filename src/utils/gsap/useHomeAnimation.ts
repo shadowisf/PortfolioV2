@@ -75,62 +75,74 @@ export function useHomeAnimation() {
     ease: "power2.inOut",
   };
 
-  const togglePreview = contextSafe((targetID: number) => {
-    previewContainer?.forEach((container) => {
-      const dataKey = container.getAttribute("data-key");
-      const video = container.querySelector("video");
+  // Cache map setup (run once)
+  const previewMap: Record<
+    string,
+    { container: Element; video?: HTMLVideoElement }
+  > = {};
 
-      if (dataKey === targetID.toString()) {
-        if (video) {
-          if (video.readyState >= 2) {
-            video.play();
-          } else {
-            video.addEventListener(
-              "loadeddata",
-              () => {
-                video.play();
-              },
-              { once: true }
-            );
-          }
-        }
-
-        gsap.to(container, previewEnter);
-        gsap.to(heroContainer, previewExit);
-      }
-    });
+  previewContainer?.forEach((container) => {
+    const key = container.getAttribute("data-key");
+    if (!key) return;
+    previewMap[key] = {
+      container,
+      video: container.querySelector("video") ?? undefined,
+    };
   });
 
+  // ✅ Toggle preview using cache
+  const togglePreview = contextSafe((targetID: number) => {
+    const entry = previewMap[String(targetID)];
+    if (!entry) return;
+
+    const { container, video } = entry;
+
+    if (video) {
+      // Load src on demand
+      if (!video.src) {
+        const dataSrc = video.getAttribute("data-src");
+        if (dataSrc) video.src = dataSrc;
+      }
+
+      if (video.readyState >= 2) {
+        video.play();
+      } else {
+        video.addEventListener("loadeddata", () => video.play(), {
+          once: true,
+        });
+      }
+    }
+
+    gsap.to(container, previewEnter);
+    gsap.to(heroContainer, previewExit);
+  });
+
+  // ✅ Reset all previews (stop and reset videos)
   const resetPreview = contextSafe(() => {
-    previewContainer?.forEach((container) => {
-      const video = container.querySelector("video");
+    Object.values(previewMap).forEach(({ container, video }) => {
       if (video) {
         video.currentTime = 0;
         video.pause();
       }
-
       gsap.to(container, previewExit);
     });
+
     gsap.to(heroContainer, previewEnter);
   });
 
+  // ✅ Move preview with cached container
   const movePreview = contextSafe(
     (targetID: number, event: React.MouseEvent) => {
-      previewContainer?.forEach((container) => {
-        const dataKey = container.getAttribute("data-key");
+      const entry = previewMap[String(targetID)];
+      if (!entry) return;
 
-        if (dataKey === targetID.toString()) {
-          const quickX = gsap.quickTo(container, "xPercent", {
-            duration: 0.2,
-          });
-          const quickY = gsap.quickTo(container, "yPercent", {
-            duration: 0.2,
-          });
+      const { container } = entry;
 
-          quickX((event.clientX / window.innerWidth) * 10 - 2);
-          quickY((event.clientY / window.innerHeight) * 10 - 2);
-        }
-      });
+      const quickX = gsap.quickTo(container, "xPercent", { duration: 0.2 });
+      const quickY = gsap.quickTo(container, "yPercent", { duration: 0.2 });
+
+      quickX((event.clientX / window.innerWidth) * 10 - 2);
+      quickY((event.clientY / window.innerHeight) * 10 - 2);
     }
   );
 
