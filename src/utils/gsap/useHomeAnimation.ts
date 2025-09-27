@@ -99,24 +99,11 @@ export function useHomeAnimation() {
     gsap.to(heroContainer, previewExit);
 
     if (video) {
-      if (!video.src) {
-        const dataSrc = video.getAttribute("data-src");
-        if (dataSrc) {
-          video.src = dataSrc;
-          video.preload = "auto";
-        }
-      }
-
-      if (video.readyState >= 4) {
-        video.play().catch(() => {});
+      const playVideo = () => video.play().catch(() => {});
+      if (video.readyState >= 3) {
+        playVideo();
       } else {
-        video.addEventListener(
-          "canplaythrough",
-          () => {
-            video.play().catch(() => {});
-          },
-          { once: true }
-        );
+        video.addEventListener("canplay", playVideo, { once: true });
       }
     }
   });

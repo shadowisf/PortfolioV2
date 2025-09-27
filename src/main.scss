@@ -551,7 +551,8 @@ footer {
           left: 0;
         }
 
-        video {
+        video,
+        img {
           /* margin-top: 50px; */
           border-radius: $borderRadius;
           width: auto;

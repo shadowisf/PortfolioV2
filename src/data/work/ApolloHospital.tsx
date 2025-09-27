@@ -11,7 +11,7 @@ const DemoApolloHospital = "https://apollohospital.pythonanywhere.com";
 
 export const ApolloHospital: WorkEntry = {
   type: "personal project",
-  name: "apollo hospital",
+  name: "apollo",
   year: "2023",
   techStack: [
     "*django",
@@ -31,13 +31,13 @@ export const ApolloHospital: WorkEntry = {
   videoFlex: "1.599074",
   status: (
     <>
-      apollo hospital was completed on <u>december 20, 2023</u>.
+      apollo was completed on <u>december 20, 2023</u>.
     </>
   ),
   description: (
     <>
-      apollo hospital is a <u>web-based hospital management system</u> for
-      managing patient, doctor, and staff records. it streamlines:
+      apollo is a <u>web-based hospital management system</u> for managing
+      patient, doctor, and staff records. it streamlines:
       <ul>
         <li>
           <b>dynamic workflow:</b> starts from patient registration →
@@ -62,8 +62,8 @@ export const ApolloHospital: WorkEntry = {
   ),
   myRole: (
     <>
-      apollo hospital was a <u>collaborative personal project</u>, partnered
-      with other developers, where i:
+      apollo was a <u>collaborative personal project</u>, partnered with other
+      developers, where i:
       <ul>
         <li>
           designed 10+ interactive webpages (html/css/bootstrap) with consistent
