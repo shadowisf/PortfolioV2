@@ -213,7 +213,7 @@ export default function About() {
               >
                 uogm
               </LinkWithNoIcon>{" "}
-              w/ bachelor of engineering (honors) in software engineering
+              w/ bachelor of engineering (honours) in software engineering
             </TimelineRow>
 
             <TimelineRow
