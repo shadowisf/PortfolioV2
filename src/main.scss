@@ -11,8 +11,12 @@ $maxWidthDesktop: 700px;
 $maxWidthDesktopWide: 80%;
 $maxWidthMobile: 90%;
 
-$fontVarNormal: "wght" 400, "CONT" 0;
-$fontVarThin: "wght" 1000, "CONT" 1000;
+$fontVarNormal:
+  "wght" 400,
+  "CONT" 0;
+$fontVarThin:
+  "wght" 1000,
+  "CONT" 1000;
 
 /* $scaleOnHover: 1.05; */
 $scaleOnHover: 1;
@@ -229,7 +233,9 @@ nav {
   button {
     color: var(--background-color);
 
-    transition: scale 0.5s, font-variation-settings 0.5s;
+    transition:
+      scale 0.5s,
+      font-variation-settings 0.5s;
 
     font-variation-settings: $fontVarNormal;
 
@@ -254,7 +260,9 @@ nav {
 }
 
 .logoButton {
-  transition: color 0.5s, scale 0.5s;
+  transition:
+    color 0.5s,
+    scale 0.5s;
   font-family: $bayBayinFont;
 
   &:hover {
@@ -277,7 +285,10 @@ nav {
   select {
     all: unset;
 
-    transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
+    transition:
+      color 0.5s,
+      scale 0.5s,
+      font-variation-settings 0.5s;
 
     font-variation-settings: $fontVarNormal;
 
@@ -303,7 +314,10 @@ nav {
   &.alt {
     color: var(--background-color);
 
-    transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
+    transition:
+      color 0.5s,
+      scale 0.5s,
+      font-variation-settings 0.5s;
 
     font-variation-settings: $fontVarNormal;
 
@@ -350,7 +364,10 @@ nav {
   }
 
   a {
-    transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
+    transition:
+      color 0.5s,
+      scale 0.5s,
+      font-variation-settings 0.5s;
 
     font-variation-settings: $fontVarNormal;
 
@@ -402,6 +419,47 @@ footer {
 }
 
 // wrappers
+.homeLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+
+  opacity: 1;
+  transition: opacity 0.5s ease;
+
+  &.fadeOut {
+    opacity: 0;
+  }
+
+  .loaderContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 200px;
+
+    small {
+      font-variation-settings: $fontVarNormal;
+    }
+
+    .progressBar {
+      width: 100%;
+      height: 4px;
+      background: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
+      border-radius: 999px;
+      overflow: hidden;
+
+      .progressFill {
+        height: 100%;
+        background: var(--accent-color);
+        border-radius: 999px;
+        transition: width 0.3s ease;
+      }
+    }
+  }
+}
+
 .homeWrapper {
   max-width: $maxWidthDesktopWide;
   margin: auto;
@@ -428,7 +486,10 @@ footer {
       gap: 4rem;
       text-wrap: nowrap;
 
-      transition: scale 0.5s, box-shadow 0.5s, color 0.5s;
+      transition:
+        scale 0.5s,
+        box-shadow 0.5s,
+        color 0.5s;
 
       font-variation-settings: $fontVarNormal;
 
@@ -641,7 +702,10 @@ footer {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
+      transition:
+        color 0.5s,
+        scale 0.5s,
+        font-variation-settings 0.5s;
       font-variation-settings: $fontVarNormal;
       display: flex;
       align-items: center;
@@ -660,7 +724,10 @@ footer {
     justify-content: space-between;
 
     .nextPrevButton {
-      transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
+      transition:
+        color 0.5s,
+        scale 0.5s,
+        font-variation-settings 0.5s;
       font-variation-settings: $fontVarNormal;
       display: flex;
       align-items: center;
@@ -728,7 +795,10 @@ footer {
   }
 
   .nextPrevButton {
-    transition: color 0.5s, scale 0.5s, font-variation-settings 0.5s;
+    transition:
+      color 0.5s,
+      scale 0.5s,
+      font-variation-settings 0.5s;
     font-variation-settings: $fontVarNormal;
 
     &:hover {
@@ -1049,7 +1119,10 @@ footer {
     pointer-events: none;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.5s, visibility 0.5s, scale 0.5s;
+    transition:
+      opacity 0.5s,
+      visibility 0.5s,
+      scale 0.5s;
     background-color: var(--text-color);
     color: var(--background-color);
     border: var(--background-color) 1px solid;
@@ -1083,7 +1156,10 @@ footer {
 
   gap: 0.5rem;
 
-  transition: font-variation-settings 0.5s, color 0.5s, scale 0.5s;
+  transition:
+    font-variation-settings 0.5s,
+    color 0.5s,
+    scale 0.5s;
 
   font-variation-settings: $fontVarNormal;
 
@@ -1101,7 +1177,9 @@ footer {
       background-color: currentColor;
       transform-origin: left;
       transform: scaleX(0);
-      transition: transform 0.5s, background-color 0.5s;
+      transition:
+        transform 0.5s,
+        background-color 0.5s;
     }
   }
 
@@ -1156,7 +1234,10 @@ footer {
 
   border-bottom: 1px dashed;
 
-  transition: font-variation-settings 0.5s, color 0.5s, scale 0.5s;
+  transition:
+    font-variation-settings 0.5s,
+    color 0.5s,
+    scale 0.5s;
 
   font-variation-settings: $fontVarNormal;
 
@@ -1184,7 +1265,9 @@ footer {
     transform: scaleX(0);
     transform-origin: left;
     background-color: var(--text-color);
-    transition: transform 0.5s, background-color 0.5s;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
   }
 
   &:hover::after {

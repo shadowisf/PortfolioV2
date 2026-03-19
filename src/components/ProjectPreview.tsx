@@ -70,7 +70,7 @@ export function ProjectPreview(p: ProjectProps) {
                 style={{
                   visibility: loading ? "hidden" : "visible",
                 }}
-                preload="none"
+                preload="auto"
                 onLoadedData={() => {
                   setLoading(false);
                 }}
