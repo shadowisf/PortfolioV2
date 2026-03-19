@@ -19,10 +19,12 @@ import {
   FaAngular,
   FaVuejs,
   FaStripeS,
+  FaAws,
 } from "react-icons/fa";
 import { GiSpermWhale } from "react-icons/gi";
-import { GoCommandPalette } from "react-icons/go";
+import { GoCommandPalette, GoDatabase } from "react-icons/go";
 import { GrMysql } from "react-icons/gr";
+import { MdOutlinePermIdentity } from "react-icons/md";
 import {
   SiDotnet,
   SiFlask,
@@ -47,7 +49,9 @@ import {
   SiJira,
   SiFigma,
   SiWebflow,
+  SiLucid,
 } from "react-icons/si";
+import { TiCloudStorageOutline } from "react-icons/ti";
 
 export const techStackStyling: Record<
   string,
@@ -252,5 +256,29 @@ export const techStackStyling: Record<
   stripe: {
     icon: FaStripeS,
     color: "light-dark(rgb(105, 108, 229), rgb(105, 108, 229))",
+  },
+  "amazon web services": {
+    icon: FaAws,
+    color: "light-dark(rgb(233, 158, 57), rgb(233, 158, 57))",
+  },
+  "amazon rds": {
+    icon: GoDatabase,
+    color: "light-dark(rgb(233, 158, 57), rgb(233, 158, 57))",
+  },
+  "amazon cognito": {
+    icon: MdOutlinePermIdentity,
+    color: "light-dark(rgb(233, 158, 57), rgb(233, 158, 57))",
+  },
+  "amazon s3": {
+    icon: TiCloudStorageOutline,
+    color: "light-dark(rgb(233, 158, 57), rgb(233, 158, 57))",
+  },
+  "react-pdf": {
+    icon: SiFramework,
+    color: "light-dark(rgb(148, 148, 148), rgb(128, 128, 128))",
+  },
+  lucidchart: {
+    icon: SiLucid,
+    color: "light-dark(rgb(245, 101, 101), rgb(203, 83, 83))",
   },
 };

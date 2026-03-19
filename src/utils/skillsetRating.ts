@@ -53,5 +53,6 @@ export const skillsetRating: { [key: string]: number } = {
   jira: 2,
   figma: 3,
   webflow: 3,
-  stripe: 1,
+  // stripe: 1,
+  "amazon web services": 3,
 };

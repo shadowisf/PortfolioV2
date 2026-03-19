@@ -28,7 +28,8 @@ export const BellHospital: WorkEntry = {
     <>
       bell hospital is a <u>cli-based hospital management system</u> built with
       java to streamline healthcare administration. the system combines oop
-      principles with practical file-based persistence to manage:
+      principles with practical file-based persistence to manage. key features
+      include:
       <ul>
         <li>
           <b>core entities</b>: patient/doctor records, appointment scheduling

@@ -14,7 +14,8 @@ $maxWidthMobile: 90%;
 $fontVarNormal: "wght" 400, "CONT" 0;
 $fontVarThin: "wght" 1000, "CONT" 1000;
 
-$scaleOnHover: 1.05;
+/* $scaleOnHover: 1.05; */
+$scaleOnHover: 1;
 
 $minMaxWidth: 1045px;
 
@@ -419,7 +420,7 @@ footer {
     height: fit-content;
 
     .tile {
-      padding: 1rem;
+      padding: 1rem 2rem;
       border-radius: $borderRadius;
       display: flex;
       align-items: center;
@@ -513,6 +514,7 @@ footer {
       align-items: center;
 
       position: absolute;
+      max-width: 100%;
 
       pointer-events: none;
 
@@ -532,6 +534,11 @@ footer {
         background-color: var(--accent-color);
         color: var(--background-color);
         font-size: var(--h1);
+      }
+
+      .previewContent {
+        display: flex;
+        flex-direction: column;
       }
 
       .videoContainer {
@@ -575,6 +582,7 @@ footer {
         flex-wrap: wrap;
 
         .item {
+          flex: 1;
           border-radius: $borderRadius;
 
           display: flex;
@@ -588,6 +596,7 @@ footer {
           box-shadow: $boxShadow;
 
           text-align: center;
+          white-space: nowrap;
 
           background-color: var(--background-color);
 

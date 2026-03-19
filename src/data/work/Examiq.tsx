@@ -40,7 +40,7 @@ export const Examiq: WorkEntry = {
     <>
       examiq is a <u>web-based ai-powered proctoring system</u> that features
       gaze tracking, input tracking, and behavior tracking to prevent cheating
-      during remote assessments. it offers:
+      during remote assessments. key features include:
       <ul>
         <li>
           <b>role-based authentication & dashboards</b>: persistent login with

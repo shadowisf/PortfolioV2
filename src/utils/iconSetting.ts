@@ -9,6 +9,7 @@ import IconBriefcase from "@/assets/IconBriefcase.svg";
 import IconHandWave from "@/assets/IconHandWave.svg";
 import IconMailbox from "@/assets/IconMailbox.svg";
 import IconSwirl from "@/assets/IconSwirl.svg";
+import IconLightBulb from "@/assets/IconLightBulb.svg";
 
 export {
   IconOctopus,
@@ -22,4 +23,5 @@ export {
   IconHandWave,
   IconMailbox,
   IconSwirl,
+  IconLightBulb,
 };

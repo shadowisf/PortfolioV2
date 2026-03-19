@@ -1,3 +1,3 @@
 export default function Footer() {
-  return <footer>august 2025</footer>;
+  return <footer>march 2026</footer>;
 }

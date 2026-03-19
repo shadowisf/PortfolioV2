@@ -9,7 +9,8 @@ import { LetThereBeFragrance } from "../data/work/LetThereBeFragrance";
 /* import { PlugIns } from "../data/work/PlugIns"; */
 import { PortfolioV1 } from "../data/work/PortfolioV1";
 import { PortfolioV2 } from "../data/work/PortfolioV2";
-import { Rayfitout } from "../data/work/Rayfitout";
+/* import { RayfitoutInternal } from "../data/work/RayfitoutInternal"; */
+import { RayfitoutWeb } from "../data/work/RayfitoutWeb";
 import { WhealthyVessel } from "../data/work/WhealthyVessel";
 import { WorkEntry } from "./types/WorkEntry";
 
@@ -26,7 +27,8 @@ const projects = [
   Examiq,
   WhealthyVessel,
   LetThereBeFragrance,
-  Rayfitout,
+  RayfitoutWeb,
+  /* RayfitoutInternal, */
 ];
 
 export const workMapping: { [key: number]: WorkEntry } = projects.reduce(

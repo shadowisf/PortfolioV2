@@ -37,7 +37,7 @@ export const ApolloHospital: WorkEntry = {
   description: (
     <>
       apollo is a <u>web-based hospital management system</u> for managing
-      patient, doctor, and staff records. it streamlines:
+      patient, doctor, and staff records. key features include:
       <ul>
         <li>
           <b>dynamic workflow:</b> starts from patient registration →

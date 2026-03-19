@@ -29,7 +29,8 @@ export const WhealthyVessel: WorkEntry = {
       whealthy vessel is a high-quality and premium cookware brand, offering
       health-focused solutions and culinary excellence. i developed a{" "}
       <u>corporate-style website</u>, showcasing the quality and features of the
-      brand's products and also to provide better user experience for employees:
+      brand's products and also to provide better user experience for employees.
+      key features include:
       <ul>
         <li>
           <b>poduct showcase system</b>: interactive display of various cookware

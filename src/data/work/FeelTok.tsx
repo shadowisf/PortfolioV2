@@ -41,7 +41,7 @@ export const FeelTok: WorkEntry = {
       feeltok is a <u>mobile-first social media platform</u> promoting authentic
       emotional expression through six core pillars (love, gratitude, apology,
       appreciation, mindfulness, thankfulness), built with modern serverless
-      architecture. it streamlines:
+      architecture. key features include:
       <ul>
         <li>
           <b>uploading capabilities:</b> upload photos and videos and pick

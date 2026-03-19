@@ -2,34 +2,35 @@ import { WorkEntry } from "../../utils/types/WorkEntry";
 import { IconGlobe } from "../../utils/iconSetting";
 import { LinkWithIcon } from "../../components/Link";
 //
-import ImageRayfitout from "@/assets/ImageRayfitout.webp";
-import VideoRayfitout from "@/assets/VideoRayfitout.webm";
+import ImageRayfitoutWeb from "@/assets/ImageRayfitoutWeb.webp";
+import VideoRayfitoutWeb from "@/assets/VideoRayfitoutWeb.webm";
 //
-const LiveRayfitout = "https://www.rayfitout.com";
+const LiveRayfitoutWeb = "https://www.rayfitout.com";
 
-export const Rayfitout: WorkEntry = {
+export const RayfitoutWeb: WorkEntry = {
   type: "professional experience",
-  name: "rayfitout",
+  name: "rayfitout - web",
   year: "2025",
   techStack: ["*webflow", "*html", "*css", "*javascript", "*gsap", "*figma"],
-  image: ImageRayfitout,
+  image: ImageRayfitoutWeb,
   imageFlex: "1.729285",
   imageAlt:
     "an image of the rayfitout website, where it showcases all their architecture and interior design projects. each project shows a unique and beautiful image of the interior of a villa.",
-  video: VideoRayfitout,
+  video: VideoRayfitoutWeb,
   videoFlex: "1.722",
   status: (
     <>
-      rayfitout is a project i <u>previously worked on</u> during my time with
-      the company.
+      rayfitout - web is a project i <u>am currently working on</u> with the
+      company.
     </>
   ),
   description: (
     <>
-      rayfitout is an award-winning interior design and fit-out firm
+      rayfitout is an award-winning interior design and fit-out company
       specializing in high-end residential, commercial, and bespoke joinery
       projects across the middle east, europe, and africa. i contributed to
-      enhancing the company's <u>visually appealing website</u>. it offers:
+      enhancing the company's <u>visually appealing website</u>. key features
+      include:
       <ul>
         <li>
           <b>featured projects gallery</b>: showcase of high-end residential,
@@ -64,8 +65,8 @@ export const Rayfitout: WorkEntry = {
   ),
   myRole: (
     <>
-      rayfitout was a <u>collaborative professional project</u>, partnered with
-      a ui/ux designer and a marketing manager, where i:
+      rayfitout - web is a <u>collaborative professional project</u>, partnered
+      with a ui/ux designer and a marketing manager, where i:
       <ul>
         <li>
           implemented best search engine optimization (seo) practices, achieving
@@ -101,7 +102,7 @@ export const Rayfitout: WorkEntry = {
     <>
       <LinkWithIcon
         img={<img alt="globe icon" src={IconGlobe} />}
-        href={LiveRayfitout}
+        href={LiveRayfitoutWeb}
       >
         live website
       </LinkWithIcon>

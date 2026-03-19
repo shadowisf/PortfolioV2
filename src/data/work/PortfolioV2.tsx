@@ -38,7 +38,7 @@ export const PortfolioV2: WorkEntry = {
       portfolio v2 is a <u>complete redesign of my original portfolio</u>,
       moving beyond the cartoonish minimalism of v1 into a more refined,
       performance-focused experience. while keeping the core content (projects,
-      bio, research), this iteration prioritizes:
+      bio, research). key features include:
       <ul>
         <li>
           <b>optimized performance:</b> faster loading and smooth navigation for

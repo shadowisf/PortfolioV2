@@ -28,7 +28,8 @@ export const PlugIns: WorkEntry = {
     <>
       plug-ins is a <u>web database solution</u> that automates operations for
       an electronics retail business, combining robust backend architecture with
-      user-friendly interfaces. the system demonstrates key database principles:
+      user-friendly interfaces. the system demonstrates key database principles.
+      key features include:
       <ul>
         <li>
           <b>relational design</b>: tables like <code>customer</code>,{" "}

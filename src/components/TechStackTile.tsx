@@ -9,9 +9,7 @@ type TechStackTileProps = {
 };
 
 export default function TechStackTile(p: TechStackTileProps) {
-  const unwantedChars = /[3210*]/g;
-
-  const cleanItem = p.techStackItem.replace(unwantedChars, "");
+  const cleanItem = p.techStackItem.replace(/^[*0123]+/, "");
   const data = techStackStyling[cleanItem];
 
   if (!data) {

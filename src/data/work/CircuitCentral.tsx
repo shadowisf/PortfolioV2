@@ -33,7 +33,7 @@ export const CircuitCentral: WorkEntry = {
   description: (
     <>
       circuitcentral is a <u>windows forms e-commerce management system</u> for
-      managing electronic product sales. it streamlines:
+      managing electronic product sales. key features include:
       <ul>
         <li>
           <b>user experience & streamlined ordering:</b> customers can browse

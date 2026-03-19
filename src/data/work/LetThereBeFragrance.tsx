@@ -42,7 +42,7 @@ export const LetThereBeFragrance: WorkEntry = {
       collection of different and unique scents. i developed a{" "}
       <u>web-based e-commerce platform</u> focused on delivering a smooth
       shopping experience through fast performance, intuitive ui, and essential
-      user-centric features:
+      user-centric features. key features include:
       <ul>
         <li>
           <b>shopping bag & wishlist system</b>: persistent cart and wishlist

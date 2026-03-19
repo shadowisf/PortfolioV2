@@ -28,7 +28,7 @@ export const FunCulator: WorkEntry = {
     <>
       funculator is an <u>all-in-one calculator application</u> designed to
       support students with diverse mathematical operations, built using java’s
-      core programming paradigms:
+      core programming paradigms. key features include:
       <ul>
         <li>
           <b>multi-mode functionality</b>: arithmetic, fibonacci sequences,

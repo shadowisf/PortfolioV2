@@ -104,6 +104,7 @@ export function useHomeAnimation() {
         playVideo();
       } else {
         video.addEventListener("canplay", playVideo, { once: true });
+        video.load();
       }
     }
   });
