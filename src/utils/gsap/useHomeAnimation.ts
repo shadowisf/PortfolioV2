@@ -58,9 +58,6 @@ export function useHomeAnimation() {
     });
   });
 
-  const previewContainer = document.querySelectorAll(".homeWrapper .preview");
-  const heroContainer = document.querySelector(".homeWrapper .hero");
-
   const previewEnter = {
     transform: "scale(1)",
     autoAlpha: 1,
@@ -75,21 +72,34 @@ export function useHomeAnimation() {
     ease: "power2.inOut",
   };
 
-  const previewMap: Record<
+  let previewMap: Record<
     string,
     { container: Element; video?: HTMLVideoElement }
   > = {};
+  let heroContainer: Element | null = null;
+  let initialized = false;
 
-  previewContainer?.forEach((container) => {
-    const key = container.getAttribute("data-key");
-    if (!key) return;
-    previewMap[key] = {
-      container,
-      video: container.querySelector("video") ?? undefined,
-    };
-  });
+  function ensureInitialized() {
+    if (initialized) return;
+    const previewContainer = document.querySelectorAll(
+      ".homeWrapper .preview"
+    );
+    heroContainer = document.querySelector(".homeWrapper .hero");
+    if (!previewContainer.length) return;
+
+    previewContainer.forEach((container) => {
+      const key = container.getAttribute("data-key");
+      if (!key) return;
+      previewMap[key] = {
+        container,
+        video: container.querySelector("video") ?? undefined,
+      };
+    });
+    initialized = true;
+  }
 
   const togglePreview = contextSafe((targetID: number) => {
+    ensureInitialized();
     const entry = previewMap[String(targetID)];
     if (!entry) return;
 
@@ -110,6 +120,7 @@ export function useHomeAnimation() {
   });
 
   const resetPreview = contextSafe(() => {
+    ensureInitialized();
     Object.values(previewMap).forEach(({ container, video }) => {
       if (video) {
         video.currentTime = 0;
@@ -123,6 +134,7 @@ export function useHomeAnimation() {
 
   const movePreview = contextSafe(
     (targetID: number, event: React.MouseEvent) => {
+      ensureInitialized();
       const entry = previewMap[String(targetID)];
       if (!entry) return;
 

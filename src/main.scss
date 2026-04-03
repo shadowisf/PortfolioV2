@@ -137,7 +137,9 @@ code {
   padding: 2px;
 }
 
-p {
+p,
+span,
+label {
   font-size: var(--p);
 }
 
@@ -1363,7 +1365,7 @@ footer {
     display: block;
   }
 
-  :root {
+  /* :root {
     --h0: calc(var(--h1) * 1.4);
     --h1: 2.027rem;
     --h2: 1.802rem;
@@ -1373,6 +1375,19 @@ footer {
     --h6: 1.125rem;
     --p: 1rem;
     --small: 0.889rem;
+    --smaller: calc(var(--small) / 1.25);
+  } */
+
+  :root {
+    --h0: calc(var(--h1) * 1.4);
+    --h1: 1.622rem;
+    --h2: 1.442rem;
+    --h3: 1.282rem;
+    --h4: 1.139rem;
+    --h5: 1.013rem;
+    --h6: 0.9rem;
+    --p: 0.8rem;
+    --small: 0.711rem;
     --smaller: calc(var(--small) / 1.25);
   }
 
@@ -1441,6 +1456,8 @@ footer {
       margin: 0;
 
       .tile {
+        padding: 1rem 1rem;
+
         .title {
           width: 50dvw;
         }
@@ -1504,7 +1521,7 @@ footer {
   }
 
   .menu {
-    font-size: 10vh;
+    font-size: 7.5dvh;
   }
 
   .infoOnHover {

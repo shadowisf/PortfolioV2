@@ -47,8 +47,8 @@ export default function Home() {
       {!showHome && (
         <main
           className={`homeLoader ${fadingOut ? "fadeOut" : ""}`}
-          onTransitionEnd={() => {
-            if (fadingOut) {
+          onTransitionEnd={(e) => {
+            if (fadingOut && e.target === e.currentTarget) {
               setShowHome(true);
             }
           }}
@@ -56,10 +56,7 @@ export default function Home() {
           <div className="loaderContent">
             <small>{progress}%</small>
             <div className="progressBar">
-              <div
-                className="progressFill"
-                style={{ width: `${progress}%` }}
-              />
+              <div className="progressFill" style={{ width: `${progress}%` }} />
             </div>
           </div>
         </main>

@@ -54,5 +54,5 @@ root.render(
         <Footer />
       </GlobalStateProvider>
     </BrowserRouter>
-  </StrictMode>
+  </StrictMode>,
 );

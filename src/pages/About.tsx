@@ -17,7 +17,6 @@ import {
   IconUniversity,
   IconHandWave,
   IconUAE,
-  IconLightBulb,
 } from "../utils/iconSetting";
 
 export default function About() {
@@ -94,9 +93,9 @@ export default function About() {
           <br />
 
           <p>
-            my current tech stack includes next.js, typescript, scss, amazon web services (aws), and
-            sql. but i’m always open to new tools, frameworks, or languages — i
-            adapt fast.
+            my current tech stack includes next.js, typescript, scss, amazon web
+            services (aws), and sql. but i’m always open to new tools,
+            frameworks, or languages — i adapt fast.
           </p>
 
           <br />
@@ -234,7 +233,7 @@ export default function About() {
             </TimelineRow>
 
             <TimelineRow
-              date="june 30, 2025 — august 25, 2025"
+              date="june 30, 2025 — november 3, 2025"
               img={<img alt="briefcase icon" src={IconBriefcase} />}
               verticalLine={true}
             >
@@ -249,20 +248,11 @@ export default function About() {
             </TimelineRow>
 
             <TimelineRow
-              date="august 26, 2025 — november 2, 2025"
-              img={<img alt="briefcase icon" src={IconLightBulb} />}
-              verticalLine={true}
-            >
-              completed a professional development period to expand technical
-              capabilities
-            </TimelineRow>
-
-            <TimelineRow
               date="november 3, 2025 — present"
               img={<img alt="briefcase icon" src={IconBriefcase} />}
               verticalLine={false}
             >
-              working remotely as full-time software engineer @{" "}
+              promoted and working remotely as full-time software engineer @{" "}
               <LinkWithNoIcon
                 className="infoOnHover top"
                 data-tooltip="an award-winning design & build company"

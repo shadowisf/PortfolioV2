@@ -53,8 +53,8 @@ export function LinkWithIconOnly(p: LinkProps) {
       target="_blank"
       className={`linkWithIconOnly ${p.className}`}
     >
-      <span className="label">{p.label}</span>
       {p.img}
+      <span className="label">{p.label}</span>
     </a>
   );
 }
