@@ -35,7 +35,7 @@ export const RayfitoutInternal: WorkEntry = {
   videoFlex: "1.7338965153",
   status: (
     <>
-      rayfitout - internal was a project <u>i previously worked on</u> with the
+      rayfitout (internal) was a project <u>i previously worked on</u> with the
       company.
     </>
   ),
