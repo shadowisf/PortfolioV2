@@ -916,9 +916,9 @@ footer {
 
     .links {
       display: flex;
-      justify-content: space-between;
+      /* justify-content: space-between; */
 
-      gap: 1rem;
+      gap: 2rem;
 
       .icons {
         gap: 1rem;
@@ -1074,12 +1074,17 @@ footer {
 
   .memeContainer {
     img {
-      max-width: 75%;
-      max-height: 80vh;
+      /* max-width: 75%; */
+      max-height: 60dvh;
       width: auto;
       height: auto;
       display: block;
       margin: 0 auto;
+    }
+
+    p {
+      text-align: right;
+      margin-top: 10px;
     }
   }
 

@@ -10,7 +10,7 @@ const GitHubRayfitoutInternal = "https://github.com/shadowisf/RayfitoutERP";
 
 export const RayfitoutInternal: WorkEntry = {
   type: "professional experience",
-  name: "rayfitout — internal",
+  name: "rayfitout (internal)",
   year: "2025",
   techStack: [
     "*next.js",
@@ -35,17 +35,20 @@ export const RayfitoutInternal: WorkEntry = {
   videoFlex: "1.7338965153",
   status: (
     <>
-      rayfitout - internal is a project <u>i am currently working on</u> with
-      the company.
+      rayfitout - internal was a project <u>i previously worked on</u> with the
+      company.
     </>
   ),
   description: (
     <>
-      rayfitout - internal is a comprehensive{" "}
+      rayfitout is an award-winning interior design and fit-out company
+      specializing in high-end residential, commercial, and bespoke joinery
+      projects across the middle east, europe, and africa. i contributed to
+      creating the company's{" "}
       <u>enterprise resource planning (erp) application</u> designed to
       streamline internal operations, procurement, and financial workflows. the
       platform centralizes key business processes into a single, efficient
-      system. key features include:
+      system. key features include:.
       <ul>
         <li>
           <b>material request management</b>: enables teams to create, track,
@@ -87,7 +90,7 @@ export const RayfitoutInternal: WorkEntry = {
   ),
   myRole: (
     <>
-      rayfitout - internal is a <u>collaborative professional project</u> where
+      rayfitout (internal) is a <u>collaborative professional project</u> where
       i took ownership of the entire technical implementation, collaborating
       with a ui/ux designer, a marketing manager and a general operations
       manager, where i:

@@ -1,7 +1,7 @@
 import { ProjectTile } from "../components/ProjectTile";
 import { useEffect, useState } from "react";
 import { ProjectPreview } from "../components/ProjectPreview";
-import { LinkWithIcon, LinkWithNoIcon } from "../components/Link";
+import { LinkWithIcon } from "../components/Link";
 import { useGlobalState } from "../providers/GlobalStateProvider";
 import { useScrollingAnimation } from "../utils/gsap/useScrollingAnimation";
 import { useHomeAnimation } from "../utils/gsap/useHomeAnimation";
@@ -90,16 +90,7 @@ export default function Home() {
               <br />
               <br />
 
-              <h5 className="nonBold">
-                ⊢ software engineer @{" "}
-                <LinkWithNoIcon
-                  className="infoOnHover top"
-                  data-tooltip="an award-winning design & build company"
-                  href="https://www.rayfitout.com"
-                >
-                  rayfitout
-                </LinkWithNoIcon>
-              </h5>
+              <h5 className="nonBold">⊢ open to work</h5>
 
               <h5 className="nonBold">⊢ beng (hons) software eng.</h5>
 

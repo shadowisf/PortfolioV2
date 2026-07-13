@@ -27,7 +27,7 @@ export const skillsetRating: { [key: string]: number } = {
   python: 2,
   // postgresql: 0,
   javascript: 3,
-  "restful api": 2,
+  "restful api": 3,
   // angular: 0,
   // vue: 0,
   // svelte: 0,

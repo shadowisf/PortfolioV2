@@ -9,7 +9,7 @@ const LiveRayfitoutWeb = "https://www.rayfitout.com";
 
 export const RayfitoutWeb: WorkEntry = {
   type: "professional experience",
-  name: "rayfitout — web",
+  name: "rayfitout (web)",
   year: "2025",
   techStack: ["*webflow", "*html", "*css", "*javascript", "*gsap", "*figma"],
   image: ImageRayfitoutWeb,
@@ -20,7 +20,7 @@ export const RayfitoutWeb: WorkEntry = {
   videoFlex: "1.722",
   status: (
     <>
-      rayfitout - web is a project <u>i am currently working on</u> with the
+      rayfitout (web) was a project <u>i previously worked on</u> with the
       company.
     </>
   ),
@@ -65,7 +65,7 @@ export const RayfitoutWeb: WorkEntry = {
   ),
   myRole: (
     <>
-      rayfitout - web is a <u>collaborative professional project</u>, partnered
+      rayfitout (web) is a <u>collaborative professional project</u>, partnered
       with a ui/ux designer and a marketing manager, where i:
       <ul>
         <li>

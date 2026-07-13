@@ -1,7 +1,7 @@
 import { TimelineRow } from "../components/Timeline";
 import { useEffect, useState } from "react";
 import TechStackTile from "../components/TechStackTile";
-import { LinkWithNoIcon } from "../components/Link";
+import { LinkWithIcon, LinkWithNoIcon } from "../components/Link";
 import Spinner from "../components/Spinner";
 import { useMemo } from "react";
 import { useGlobalState } from "../providers/GlobalStateProvider";
@@ -9,7 +9,13 @@ import { useScrollingAnimation } from "../utils/gsap/useScrollingAnimation";
 import { useAboutAnimation } from "../utils/gsap/useAboutAnimation";
 import { skillsetRating } from "../utils/skillsetRating";
 import { useGSAP } from "@gsap/react";
-import { profilePicture } from "../utils/identitySetting";
+import {
+  email,
+  github,
+  linkedin,
+  profilePicture,
+  resume,
+} from "../utils/identitySetting";
 import {
   IconBriefcase,
   IconPHP,
@@ -17,6 +23,9 @@ import {
   IconUniversity,
   IconHandWave,
   IconUAE,
+  IconCards,
+  IconMailbox,
+  IconOctopus,
 } from "../utils/iconSetting";
 
 export default function About() {
@@ -128,9 +137,42 @@ export default function About() {
             >
               scratch
             </LinkWithNoIcon>{" "}
-            in high school, where i made a pong game with drag-and-drop blocks.
-            since then, i’ve been hooked.
+            in high school, where i made a pong game using its built-in
+            drag-and-drop logic blocks which made coding simpler. since then,
+            i’ve been hooked into more complex systems.
           </p>
+
+          <br />
+
+          <div className="links">
+            <LinkWithIcon
+              img={<img alt="resume icon" src={IconCards} />}
+              href={resume}
+            >
+              resume
+            </LinkWithIcon>
+
+            <LinkWithIcon
+              img={<img alt="mail icon" src={IconMailbox} />}
+              href={email}
+            >
+              email
+            </LinkWithIcon>
+
+            <LinkWithIcon
+              img={<img alt="briefcase icon" src={IconBriefcase} />}
+              href={linkedin}
+            >
+              linkedin
+            </LinkWithIcon>
+
+            <LinkWithIcon
+              img={<img alt="github icon" src={IconOctopus} />}
+              href={github}
+            >
+              github
+            </LinkWithIcon>
+          </div>
         </div>
       </section>
 
@@ -213,7 +255,7 @@ export default function About() {
               >
                 uogm
               </LinkWithNoIcon>{" "}
-              w/ bachelor of engineering (honours) in software engineering
+              w/ bachelor of engineering (hons) in software engineering
             </TimelineRow>
 
             <TimelineRow
@@ -248,11 +290,11 @@ export default function About() {
             </TimelineRow>
 
             <TimelineRow
-              date="november 3, 2025 — present"
+              date="november 3, 2025 — june 8, 2026"
               img={<img alt="briefcase icon" src={IconBriefcase} />}
               verticalLine={false}
             >
-              promoted and working remotely as full-time software engineer @{" "}
+              promoted and worked remotely as full-time software engineer @{" "}
               <LinkWithNoIcon
                 className="infoOnHover top"
                 data-tooltip="an award-winning design & build company"
