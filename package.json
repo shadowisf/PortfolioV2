@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "publish-live": "./scripts/publish-to-live.sh",
+    "publish-test": "./scripts/publish-to-test.sh"
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
