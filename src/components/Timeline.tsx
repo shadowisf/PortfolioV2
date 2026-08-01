@@ -11,18 +11,17 @@ export function TimelineRow(p: TimelineProps) {
       <section className="timelineRow">
         {p.img}
         <span className="timelineCaption">
-          <span>{p.children}</span> <span className="date">{p.date}</span>
+          <p>{p.children}</p> <small className="date">{p.date}</small>
         </span>
       </section>
 
       <svg
         style={p.verticalLine ? { display: "block" } : { display: "none" }}
-        width="40"
-        height="30"
+        height="24"
         className="verticalLine"
       >
         <path
-          d="M 20 0 L 20 1000"
+          d="M 18 0 L 18 1000"
           style={{
             stroke: "var(--faded-color)",
           }}

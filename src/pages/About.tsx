@@ -212,7 +212,13 @@ export default function About() {
 
             <TimelineRow
               date="august 29, 2021 — september 3, 2022 "
-              img={<img alt="university icon" src={IconUniversity} />}
+              img={
+                <img
+                  style={{ marginBottom: "7px" }}
+                  alt="university icon"
+                  src={IconUniversity}
+                />
+              }
               verticalLine={true}
             >
               graduated from{" "}
@@ -228,7 +234,13 @@ export default function About() {
 
             <TimelineRow
               date="february 5, 2025 — february 27, 2025"
-              img={<img alt="briefcase icon" src={IconBriefcase} />}
+              img={
+                <img
+                  style={{ marginBottom: "6px" }}
+                  alt="briefcase icon"
+                  src={IconBriefcase}
+                />
+              }
               verticalLine={true}
             >
               worked remotely as freelance full-stack web developer @{" "}
@@ -244,7 +256,13 @@ export default function About() {
 
             <TimelineRow
               date="september 19, 2022 — may 8, 2025"
-              img={<img alt="university icon" src={IconUniversity} />}
+              img={
+                <img
+                  style={{ marginBottom: "7px" }}
+                  alt="university icon"
+                  src={IconUniversity}
+                />
+              }
               verticalLine={true}
             >
               graduated from{" "}
@@ -255,15 +273,21 @@ export default function About() {
               >
                 uogm
               </LinkWithNoIcon>{" "}
-              w/ bachelor of engineering (hons) in software engineering
+              w/ beng (hons) in software engineering
             </TimelineRow>
 
             <TimelineRow
               date="may 12, 2025 — june 6, 2025"
-              img={<img alt="briefcase icon" src={IconBriefcase} />}
+              img={
+                <img
+                  style={{ marginBottom: "6px" }}
+                  alt="briefcase icon"
+                  src={IconBriefcase}
+                />
+              }
               verticalLine={true}
             >
-              worked remotely as freelance full-stack web developer @{" "}
+              worked remotely as freelance full-stack developer @{" "}
               <LinkWithNoIcon
                 className="infoOnHover top"
                 data-tooltip="a unique & niche fragrance house company"
@@ -276,10 +300,16 @@ export default function About() {
 
             <TimelineRow
               date="june 30, 2025 — november 3, 2025"
-              img={<img alt="briefcase icon" src={IconBriefcase} />}
+              img={
+                <img
+                  style={{ marginBottom: "6px" }}
+                  alt="briefcase icon"
+                  src={IconBriefcase}
+                />
+              }
               verticalLine={true}
             >
-              worked on-site as full-time web developer @{" "}
+              worked on-site as full-time developer @{" "}
               <LinkWithNoIcon
                 className="infoOnHover top"
                 data-tooltip="an award-winning design & build company"
@@ -291,10 +321,16 @@ export default function About() {
 
             <TimelineRow
               date="november 3, 2025 — june 8, 2026"
-              img={<img alt="briefcase icon" src={IconBriefcase} />}
-              verticalLine={false}
+              img={
+                <img
+                  style={{ marginBottom: "6px" }}
+                  alt="briefcase icon"
+                  src={IconBriefcase}
+                />
+              }
+              verticalLine={true}
             >
-              promoted and worked remotely as full-time software engineer @{" "}
+              promoted & worked remotely as full-time software engineer @{" "}
               <LinkWithNoIcon
                 className="infoOnHover top"
                 data-tooltip="an award-winning design & build company"
@@ -303,6 +339,35 @@ export default function About() {
                 rayfitout
               </LinkWithNoIcon>
             </TimelineRow>
+
+            <TimelineRow
+              date="july 27, 2026 - present"
+              img={
+                <img
+                  style={{ marginBottom: "6px" }}
+                  alt="briefcase icon"
+                  src={IconBriefcase}
+                />
+              }
+              verticalLine={false}
+            >
+              working on-site as full-time full-stack developer @{" "}
+              <LinkWithNoIcon
+                className="infoOnHover top"
+                data-tooltip="an award-winning raw pet nutrition company"
+                href="https://furchildpets.com/"
+              >
+                furchild
+              </LinkWithNoIcon>
+            </TimelineRow>
+
+            {/* <TimelineRow
+              date="???"
+              img={<img alt="briefcase icon" src={IconBriefcase} />}
+              verticalLine={false}
+            >
+              acquired driving license
+            </TimelineRow> */}
           </div>
         </section>
 

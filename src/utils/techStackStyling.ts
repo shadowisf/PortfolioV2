@@ -50,6 +50,7 @@ import {
   SiFigma,
   SiWebflow,
   SiLucid,
+  SiYii,
 } from "react-icons/si";
 import { TiCloudStorageOutline } from "react-icons/ti";
 
@@ -280,5 +281,9 @@ export const techStackStyling: Record<
   lucidchart: {
     icon: SiLucid,
     color: "light-dark(rgb(245, 101, 101), rgb(203, 83, 83))",
+  },
+  yii2: {
+    icon: SiYii,
+    color: "light-dark(rgb(134, 198, 69), rgb(143, 189, 97))",
   },
 };

@@ -1,7 +1,7 @@
 import { ProjectTile } from "../components/ProjectTile";
 import { useEffect, useState } from "react";
 import { ProjectPreview } from "../components/ProjectPreview";
-import { LinkWithIcon } from "../components/Link";
+import { LinkWithIcon, LinkWithNoIcon } from "../components/Link";
 import { useGlobalState } from "../providers/GlobalStateProvider";
 import { useScrollingAnimation } from "../utils/gsap/useScrollingAnimation";
 import { useHomeAnimation } from "../utils/gsap/useHomeAnimation";
@@ -90,9 +90,18 @@ export default function Home() {
               <br />
               <br />
 
-              <h5 className="nonBold">⊢ open to work</h5>
+              <h5 className="nonBold">
+                ⊢ full-stack developer @{" "}
+                <LinkWithNoIcon
+                  className="infoOnHover top"
+                  data-tooltip="an award-winning raw pet nutrition company"
+                  href="https://furchildpets.com/"
+                >
+                  furchild
+                </LinkWithNoIcon>
+              </h5>
 
-              <h5 className="nonBold">⊢ beng (hons) software eng.</h5>
+              <h5 className="nonBold">⊢ beng (hons) software engineering</h5>
 
               <h5 className="nonBold">⊢ united arab emirates</h5>
 

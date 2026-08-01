@@ -948,7 +948,7 @@ footer {
       width: 100%;
 
       .verticalLine {
-        margin: 1rem 0;
+        margin: 0.25rem 0;
       }
 
       .timelineRow {
@@ -967,12 +967,11 @@ footer {
         }
 
         img {
-          width: 40px;
-          height: 40px;
+          width: 36px;
+          height: 36px;
         }
 
         svg {
-          min-width: 40px;
           display: flex;
           align-items: center;
         }
