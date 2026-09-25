@@ -1,5 +1,5 @@
 import { ProjectTile } from "../components/ProjectTile";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { ProjectPreview } from "../components/ProjectPreview";
 import { LinkWithIcon, LinkWithNoIcon } from "../components/Link";
 import { useGlobalState } from "../providers/GlobalStateProvider";
@@ -8,7 +8,7 @@ import { useHomeAnimation } from "../utils/gsap/useHomeAnimation";
 import { useGSAP } from "@gsap/react";
 import { resume, email, linkedin, github } from "../utils/identitySetting";
 import { workMapping } from "../utils/workMapping";
-import { useVideoPreloader } from "../utils/useVideoPreloader";
+import { usePreviewPrefetch } from "../utils/usePreviewPrefetch";
 import {
   IconBriefcase,
   IconMailbox,
@@ -18,129 +18,98 @@ import {
 } from "../utils/iconSetting";
 
 export default function Home() {
-  const { setCurrentPage } = useGlobalState();
+  const { setCurrentPage, isMobile } = useGlobalState();
   const { scrollToTop } = useScrollingAnimation();
   const { startup, swirlOnHover, swirlOnLeave } = useHomeAnimation();
-  const { progress, done } = useVideoPreloader();
-  const [fadingOut, setFadingOut] = useState(false);
-  const [showHome, setShowHome] = useState(false);
+
+  usePreviewPrefetch(!isMobile);
 
   useEffect(() => {
     setCurrentPage("/");
     scrollToTop(0);
   }, []);
 
-  useEffect(() => {
-    if (done && !fadingOut && !showHome) {
-      setFadingOut(true);
-    }
-  }, [done]);
-
   useGSAP(() => {
-    if (showHome) {
-      startup();
-    }
-  }, [showHome]);
+    startup();
+  }, []);
 
   return (
-    <>
-      {!showHome && (
-        <main
-          className={`homeLoader ${fadingOut ? "fadeOut" : ""}`}
-          onTransitionEnd={(e) => {
-            if (fadingOut && e.target === e.currentTarget) {
-              setShowHome(true);
-            }
-          }}
-        >
-          <div className="loaderContent">
-            <small>{progress}%</small>
-            <div className="progressBar">
-              <div className="progressFill" style={{ width: `${progress}%` }} />
-            </div>
+    <main className="homeWrapper">
+      <section className="left">
+        {Object.keys(workMapping).map((id) => (
+          <ProjectTile key={id} dataID={Number(id)} />
+        ))}
+      </section>
+
+      <section className="right">
+        {Object.keys(workMapping).map((id) => (
+          <ProjectPreview key={id} dataID={Number(id)} />
+        ))}
+
+        <div className="hero">
+          <div className="intro">
+            <h1 className="extra name accent">les ranalan</h1>
+            <img
+              alt="swirl icon"
+              className="swirlEmoji"
+              src={IconSwirl}
+              onMouseEnter={swirlOnHover}
+              onMouseLeave={swirlOnLeave}
+            />
           </div>
-        </main>
-      )}
 
-      {showHome && (
-        <main className="homeWrapper">
-          <section className="left">
-            {Object.keys(workMapping).map((id) => (
-              <ProjectTile key={id} dataID={Number(id)} />
-            ))}
-          </section>
+          <br />
+          <br />
 
-          <section className="right">
-            {Object.keys(workMapping).map((id) => (
-              <ProjectPreview key={id} dataID={Number(id)} />
-            ))}
+          <h5 className="nonBold">
+            ⊢ full-stack developer @{" "}
+            <LinkWithNoIcon
+              className="infoOnHover top"
+              data-tooltip="an award-winning raw pet nutrition company"
+              href="https://furchildpets.com/"
+            >
+              furchild
+            </LinkWithNoIcon>
+          </h5>
 
-            <div className="hero">
-              <div className="intro">
-                <h1 className="extra name accent">les ranalan</h1>
-                <img
-                  alt="swirl icon"
-                  className="swirlEmoji"
-                  src={IconSwirl}
-                  onMouseEnter={swirlOnHover}
-                  onMouseLeave={swirlOnLeave}
-                />
-              </div>
+          <h5 className="nonBold">⊢ beng (hons) software engineering</h5>
 
-              <br />
-              <br />
+          <h5 className="nonBold">⊢ united arab emirates</h5>
 
-              <h5 className="nonBold">
-                ⊢ full-stack developer @{" "}
-                <LinkWithNoIcon
-                  className="infoOnHover top"
-                  data-tooltip="an award-winning raw pet nutrition company"
-                  href="https://furchildpets.com/"
-                >
-                  furchild
-                </LinkWithNoIcon>
-              </h5>
+          <br />
+          <br />
 
-              <h5 className="nonBold">⊢ beng (hons) software engineering</h5>
+          <div className="links">
+            <LinkWithIcon
+              img={<img alt="resume icon" src={IconCards} />}
+              href={resume}
+            >
+              resume
+            </LinkWithIcon>
 
-              <h5 className="nonBold">⊢ united arab emirates</h5>
+            <LinkWithIcon
+              img={<img alt="mail icon" src={IconMailbox} />}
+              href={email}
+            >
+              email
+            </LinkWithIcon>
 
-              <br />
-              <br />
+            <LinkWithIcon
+              img={<img alt="briefcase icon" src={IconBriefcase} />}
+              href={linkedin}
+            >
+              linkedin
+            </LinkWithIcon>
 
-              <div className="links">
-                <LinkWithIcon
-                  img={<img alt="resume icon" src={IconCards} />}
-                  href={resume}
-                >
-                  resume
-                </LinkWithIcon>
-
-                <LinkWithIcon
-                  img={<img alt="mail icon" src={IconMailbox} />}
-                  href={email}
-                >
-                  email
-                </LinkWithIcon>
-
-                <LinkWithIcon
-                  img={<img alt="briefcase icon" src={IconBriefcase} />}
-                  href={linkedin}
-                >
-                  linkedin
-                </LinkWithIcon>
-
-                <LinkWithIcon
-                  img={<img alt="github icon" src={IconOctopus} />}
-                  href={github}
-                >
-                  github
-                </LinkWithIcon>
-              </div>
-            </div>
-          </section>
-        </main>
-      )}
-    </>
+            <LinkWithIcon
+              img={<img alt="github icon" src={IconOctopus} />}
+              href={github}
+            >
+              github
+            </LinkWithIcon>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

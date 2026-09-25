@@ -1,6 +1,40 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+// chromium spins up (and keeps) a decode pipeline for every <video> that has a
+// source attached -- even a paused one. mounting all fourteen previews at once
+// is what stalls the main thread, so previews start with no src and we only
+// ever keep the few most recently hovered ones loaded.
+const MAX_LOADED_PREVIEWS = 3;
+const loadedPreviews: HTMLVideoElement[] = [];
+
+function attachPreviewSource(video: HTMLVideoElement) {
+  const src = video.dataset.src;
+  if (!src) return;
+
+  // most recently hovered goes to the back of the eviction queue
+  const queued = loadedPreviews.indexOf(video);
+  if (queued > -1) loadedPreviews.splice(queued, 1);
+  loadedPreviews.push(video);
+
+  if (video.dataset.loaded !== "true") {
+    video.src = src;
+    video.dataset.loaded = "true";
+    video.load();
+  }
+
+  while (loadedPreviews.length > MAX_LOADED_PREVIEWS) {
+    const stale = loadedPreviews.shift()!;
+    stale.pause();
+    stale.removeAttribute("src");
+    delete stale.dataset.loaded;
+    stale.load(); // releases the decoder and falls back to the poster
+  }
+}
+
+// which tile the cursor is on, so a slow load cannot play over a later hover
+let activePreviewKey: string | null = null;
+
 export function useHomeAnimation() {
   const { contextSafe } = useGSAP();
 
@@ -100,31 +134,40 @@ export function useHomeAnimation() {
 
   const togglePreview = contextSafe((targetID: number) => {
     ensureInitialized();
-    const entry = previewMap[String(targetID)];
+    const key = String(targetID);
+    const entry = previewMap[key];
     if (!entry) return;
 
     const { container, video } = entry;
+    activePreviewKey = key;
 
     gsap.to(container, previewEnter);
     gsap.to(heroContainer, previewExit);
 
     if (video) {
-      const playVideo = () => video.play().catch(() => {});
+      attachPreviewSource(video);
+
+      const playVideo = () => {
+        if (activePreviewKey !== key) return; // cursor already moved on
+        video.play().catch(() => {});
+      };
+
       if (video.readyState >= 3) {
         playVideo();
       } else {
         video.addEventListener("canplay", playVideo, { once: true });
-        video.load();
       }
     }
   });
 
   const resetPreview = contextSafe(() => {
     ensureInitialized();
+    activePreviewKey = null;
+
     Object.values(previewMap).forEach(({ container, video }) => {
-      if (video) {
-        video.currentTime = 0;
+      if (video && video.dataset.loaded === "true") {
         video.pause();
+        video.currentTime = 0;
       }
       gsap.to(container, previewExit);
     });

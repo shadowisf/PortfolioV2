@@ -2,9 +2,10 @@ import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
 import { IconCards, IconOctopus } from "../../utils/iconSetting";
 //
-import ImageFunculator from "@/assets/ImageFunCulator.webp";
-import VideoFunCulator from "@/assets/VideoFunCulator.webm";
-import FileFunculator from "@/assets/FileFunCulator.pdf";
+import ImageFunculator from "@/assets/images/ImageFunCulator.webp";
+import VideoFunCulator from "@/assets/videos_master/VideoFunCulator.webm";
+import VideoFunCulatorPreview from "@/assets/video_previews/VideoFunCulator.webm";
+import FileFunculator from "@/assets/files/FileFunCulator.pdf";
 //
 const GitHubFunCulator = "https://github.com/shadowisf/FunCulator";
 
@@ -18,6 +19,7 @@ export const FunCulator: WorkEntry = {
   imageAlt:
     "an image of the funculator project. it is currently viewing the menu section where it is displaying all of the possible operations such as factorial, min&max, fibonacci, etc.",
   video: VideoFunCulator,
+  videoPreview: VideoFunCulatorPreview,
   videoFlex: "1.891626",
   status: (
     <>

@@ -1,15 +1,15 @@
-import IconOctopus from "@/assets/IconOctopus.svg";
-import IconGlobe from "@/assets/IconGlobe.svg";
-import IconCards from "@/assets/IconCards.svg";
-import IconPHP from "@/assets/IconPHP.svg";
-import IconUAE from "@/assets/IconUAE.svg";
-import IconEye from "@/assets/IconEye.svg";
-import IconUniversity from "@/assets/IconUniversity.svg";
-import IconBriefcase from "@/assets/IconBriefcase.svg";
-import IconHandWave from "@/assets/IconHandWave.svg";
-import IconMailbox from "@/assets/IconMailbox.svg";
-import IconSwirl from "@/assets/IconSwirl.svg";
-import IconLightBulb from "@/assets/IconLightBulb.svg";
+import IconOctopus from "@/assets/icons/IconOctopus.svg";
+import IconGlobe from "@/assets/icons/IconGlobe.svg";
+import IconCards from "@/assets/icons/IconCards.svg";
+import IconPHP from "@/assets/icons/IconPHP.svg";
+import IconUAE from "@/assets/icons/IconUAE.svg";
+import IconEye from "@/assets/icons/IconEye.svg";
+import IconUniversity from "@/assets/icons/IconUniversity.svg";
+import IconBriefcase from "@/assets/icons/IconBriefcase.svg";
+import IconHandWave from "@/assets/icons/IconHandWave.svg";
+import IconMailbox from "@/assets/icons/IconMailbox.svg";
+import IconSwirl from "@/assets/icons/IconSwirl.svg";
+import IconLightBulb from "@/assets/icons/IconLightBulb.svg";
 
 export {
   IconOctopus,

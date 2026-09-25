@@ -2,8 +2,9 @@ import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
 import { IconGlobe, IconOctopus } from "../../utils/iconSetting";
 //
-import ImageV2Portfolio from "@/assets/ImageV2Portfolio.webp";
-import VideoV2Portfolio from "@/assets/VideoV2Portfolio.webm";
+import ImageV2Portfolio from "@/assets/images/ImageV2Portfolio.webp";
+import VideoV2Portfolio from "@/assets/videos_master/VideoV2Portfolio.webm";
+import VideoV2PortfolioPreview from "@/assets/video_previews/VideoV2Portfolio.webm";
 //
 const GitHubV2Portfolio = "https://github.com/shadowisf/PortfolioV2";
 const DemoV2Portfolio = "https://les-ranalan.web.app";
@@ -26,6 +27,7 @@ export const PortfolioV2: WorkEntry = {
   imageAlt:
     "an image of the about section in my portfolio v2 project. there is a picture of me and a text introducing myself, with a button at the very bottom which downloads my resume. at the bottom portion, there is a timeline where it showcases all important events that happened in my life. on the right side of the timeline, it showcases my skillset wherein you can filter by my skill level such as all, expert, intermediate, and beginner.",
   video: VideoV2Portfolio,
+  videoPreview: VideoV2PortfolioPreview,
   videoFlex: "1.598148",
   status: (
     <>

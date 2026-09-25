@@ -9,6 +9,7 @@ export type WorkEntry = {
   imageFlex: string;
   imageAlt: string;
   video: string;
+  videoPreview: string;
   videoFlex: string;
   status: ReactElement;
   description: ReactElement;

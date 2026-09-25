@@ -2,8 +2,9 @@ import { LinkWithIcon } from "../../components/Link";
 import { IconGlobe, IconOctopus } from "../../utils/iconSetting";
 import { WorkEntry } from "../../utils/types/WorkEntry";
 //
-import ImageWhealthyVessel from "@/assets/ImageWhealthyVessel.webp";
-import VideoWhealthyVessel from "@/assets/VideoWhealthyVessel.webm";
+import ImageWhealthyVessel from "@/assets/images/ImageWhealthyVessel.webp";
+import VideoWhealthyVessel from "@/assets/videos_master/VideoWhealthyVessel.webm";
+import VideoWhealthyVesselPreview from "@/assets/video_previews/VideoWhealthyVessel.webm";
 //
 const GitHubWhealthyVessel = "https://github.com/shadowisf/WhealthyVessel";
 const DemoWhealthyVessel = "https://whealthy-vessel.vercel.app";
@@ -18,6 +19,7 @@ export const WhealthyVessel: WorkEntry = {
   imageAlt:
     "an image of the whealthy vessel website, it is currently in the recipe corner page. on the top of the page, there is a banner with a background image and a text saying recipe corner. just below that, there are shortcut buttons such as entree and dessert. below the said banner are the grid of all recipes.",
   video: VideoWhealthyVessel,
+  videoPreview: VideoWhealthyVesselPreview,
   videoFlex: "1.601113",
   status: (
     <>

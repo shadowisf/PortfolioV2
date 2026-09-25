@@ -15,6 +15,7 @@ export const Project: WorkEntry = {
   imageFlex: "",
   imageAlt: "",
   video: "",
+  videoPreview: "",
   videoFlex: "",
   status: (
     <>

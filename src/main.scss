@@ -161,6 +161,7 @@ html {
   color: var(--text-color);
   font-family: $primaryFont;
   color-scheme: var(--theme);
+  overflow-x: hidden;
 }
 
 a {
@@ -421,47 +422,6 @@ footer {
 }
 
 // wrappers
-.homeLoader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100dvh;
-
-  opacity: 1;
-  transition: opacity 0.5s ease;
-
-  &.fadeOut {
-    opacity: 0;
-  }
-
-  .loaderContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    width: 200px;
-
-    small {
-      font-variation-settings: $fontVarNormal;
-    }
-
-    .progressBar {
-      width: 100%;
-      height: 4px;
-      background: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
-      border-radius: 999px;
-      overflow: hidden;
-
-      .progressFill {
-        height: 100%;
-        background: var(--accent-color);
-        border-radius: 999px;
-        transition: width 0.3s ease;
-      }
-    }
-  }
-}
-
 .homeWrapper {
   max-width: $maxWidthDesktopWide;
   margin: auto;
@@ -606,20 +566,6 @@ footer {
 
       .videoContainer {
         position: relative;
-
-        .spinner {
-          width: 100%;
-          height: 100%;
-          padding: 75px;
-          display: flex;
-
-          justify-content: center;
-          align-items: center;
-
-          position: absolute;
-          top: 0;
-          left: 0;
-        }
 
         video,
         img {
@@ -948,6 +894,7 @@ footer {
       width: 100%;
 
       .verticalLine {
+        width: 36px;
         margin: 0.25rem 0;
       }
 
@@ -1390,7 +1337,7 @@ footer {
     --h4: 1.139rem;
     --h5: 1.013rem;
     --h6: 0.9rem;
-    --p: 0.8rem;
+    --p: 0.75rem;
     --small: 0.711rem;
     --smaller: calc(var(--small) / 1.25);
   }
@@ -1427,6 +1374,11 @@ footer {
       .spinner {
         width: 200px;
         height: 200px;
+      }
+
+      .links {
+        flex-wrap: wrap;
+        justify-content: center;
       }
     }
 

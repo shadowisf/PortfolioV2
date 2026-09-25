@@ -2,9 +2,10 @@ import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
 import { IconCards, IconOctopus } from "../../utils/iconSetting";
 //
-import ImageCircuitCentral from "@/assets/ImageCircuitCentral.webp";
-import VideoCircuitCentral from "@/assets/VideoCircuitCentral.webm";
-import FileCircuitCentral from "@/assets/FileCircuitCentral.pdf";
+import ImageCircuitCentral from "@/assets/images/ImageCircuitCentral.webp";
+import VideoCircuitCentral from "@/assets/videos_master/VideoCircuitCentral.webm";
+import VideoCircuitCentralPreview from "@/assets/video_previews/VideoCircuitCentral.webm";
+import FileCircuitCentral from "@/assets/files/FileCircuitCentral.pdf";
 //
 const GitHubCircuitCentral = "https://github.com/shadowisf/CircuitCentral";
 
@@ -24,6 +25,7 @@ export const CircuitCentral: WorkEntry = {
   imageAlt:
     "an image of the circuitcentral project; it is viewing the orders section wherein it displays a list of products that are currently in a cart. additionally, the ui has buttons for CRUD operations.",
   video: VideoCircuitCentral,
+  videoPreview: VideoCircuitCentralPreview,
   videoFlex: "1.687037",
   status: (
     <>

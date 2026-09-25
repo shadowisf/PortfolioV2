@@ -2,7 +2,6 @@ import { useState, Key, useRef, useCallback } from "react";
 import { workMapping } from "../utils/workMapping";
 import TechStackTile from "./TechStackTile";
 import { ProjectProps } from "./ProjectTile";
-import Spinner from "./Spinner";
 
 function useResizeWidth() {
   const [width, setWidth] = useState<number | undefined>(undefined);
@@ -27,7 +26,6 @@ function useResizeWidth() {
 export function ProjectPreview(p: ProjectProps) {
   const project = workMapping[p.dataID];
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [loading, setLoading] = useState(true);
   const { width: contentWidth, ref: contentRef } = useResizeWidth();
 
   return (
@@ -56,24 +54,22 @@ export function ProjectPreview(p: ProjectProps) {
         <>
           <div className="previewContent">
             <div className="videoContainer">
-              {loading && <Spinner />}
-
+              {/*
+                no src until the tile is hovered -- useHomeAnimation attaches
+                data-src on demand. the poster sizes the element and shows
+                instantly, so there is nothing to spin on.
+              */}
               <video
                 ref={(el) => {
                   videoRef.current = el;
                   contentRef(el);
                 }}
-                src={project.video}
+                data-src={project.videoPreview}
+                poster={project.image}
                 muted
                 loop
                 playsInline
-                style={{
-                  visibility: loading ? "hidden" : "visible",
-                }}
-                preload="auto"
-                onLoadedData={() => {
-                  setLoading(false);
-                }}
+                preload="none"
               />
             </div>
           </div>

@@ -2,8 +2,9 @@ import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
 import { IconGlobe, IconOctopus } from "../../utils/iconSetting";
 //
-import ImageClipDetective from "@/assets/ImageClipDetective.webp";
-import VideoClipDetective from "@/assets/VideoClipDetective.webm";
+import ImageClipDetective from "@/assets/images/ImageClipDetective.webp";
+import VideoClipDetective from "@/assets/videos_master/VideoClipDetective.webm";
+import VideoClipDetectivePreview from "@/assets/video_previews/VideoClipDetective.webm";
 //
 const GitHubClipDetective = "https://github.com/shadowisf/ClipDetective";
 const DemoClipDetective = "https://clipdetective-2b40e.web.app";
@@ -26,6 +27,7 @@ export const ClipDetective: WorkEntry = {
   imageAlt:
     "an image of the index page of the clipdetective web app. there is a text introducing the website, a text saying 'can you guess 5-second clips from movies/series?', and three buttons at the bottom: an option to play with series, to play with movies, and a help button.",
   video: VideoClipDetective,
+  videoPreview: VideoClipDetectivePreview,
   videoFlex: "1.599074",
   status: (
     <>

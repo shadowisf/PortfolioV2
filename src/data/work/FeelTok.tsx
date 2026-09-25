@@ -2,9 +2,10 @@ import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
 import { IconCards, IconOctopus } from "../../utils/iconSetting";
 //
-import ImageFeelTok from "@/assets/ImageFeelTok.webp";
-import VideoFeelTok from "@/assets/VideoFeelTok.webm";
-import FileFeelTok from "@/assets/FileFeelTok.pdf";
+import ImageFeelTok from "@/assets/images/ImageFeelTok.webp";
+import VideoFeelTok from "@/assets/videos_master/VideoFeelTok.webm";
+import VideoFeelTokPreview from "@/assets/video_previews/VideoFeelTok.webm";
+import FileFeelTok from "@/assets/files/FileFeelTok.pdf";
 //
 const GitHubFeelTok = "https://github.com/shadowisf/FeelTok";
 
@@ -30,6 +31,7 @@ export const FeelTok: WorkEntry = {
   imageAlt:
     "an image of the feeltok admin dashboard. right now, it is viewing the posts tab wherein all post details can be seen. on the very right of each post entry, there are two buttons: view and delete. clicking the view button will bring up a modal on what the post actually looks like from the user's perspective, while the delete button will delete the post.",
   video: VideoFeelTok,
+  videoPreview: VideoFeelTokPreview,
   videoFlex: "0.47901",
   status: (
     <>

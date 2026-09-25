@@ -2,9 +2,10 @@ import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
 import { IconGlobe, IconCards, IconOctopus } from "../../utils/iconSetting";
 //
-import ImageApolloHospital from "@/assets/ImageApolloHospital.webp";
-import VideoApolloHospital from "@/assets/VideoApolloHospital.webm";
-import FileApolloHospital from "@/assets/FileApolloHospital.pdf";
+import ImageApolloHospital from "@/assets/images/ImageApolloHospital.webp";
+import VideoApolloHospital from "@/assets/videos_master/VideoApolloHospital.webm";
+import VideoApolloHospitalPreview from "@/assets/video_previews/VideoApolloHospital.webm";
+import FileApolloHospital from "@/assets/files/FileApolloHospital.pdf";
 //
 const GitHubApolloHospital = "https://github.com/shadowisf/ApolloHospital";
 const DemoApolloHospital = "https://apollohospital.pythonanywhere.com";
@@ -28,6 +29,7 @@ export const ApolloHospital: WorkEntry = {
   imageAlt:
     "an image of the apollo hospital project; it is viewing the patient records section wherein it displays the list of patient information. additionally, the ui has buttons for CRUD operations.",
   video: VideoApolloHospital,
+  videoPreview: VideoApolloHospitalPreview,
   videoFlex: "1.599074",
   status: (
     <>

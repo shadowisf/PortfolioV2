@@ -2,8 +2,9 @@ import { WorkEntry } from "../../utils/types/WorkEntry";
 import { IconGlobe } from "../../utils/iconSetting";
 import { LinkWithIcon } from "../../components/Link";
 //
-import ImageRayfitoutWeb from "@/assets/ImageRayfitoutWeb.webp";
-import VideoRayfitoutWeb from "@/assets/VideoRayfitoutWeb.webm";
+import ImageRayfitoutWeb from "@/assets/images/ImageRayfitoutWeb.webp";
+import VideoRayfitoutWeb from "@/assets/videos_master/VideoRayfitoutWeb.webm";
+import VideoRayfitoutWebPreview from "@/assets/video_previews/VideoRayfitoutWeb.webm";
 //
 const LiveRayfitoutWeb = "https://www.rayfitout.com";
 
@@ -17,6 +18,7 @@ export const RayfitoutWeb: WorkEntry = {
   imageAlt:
     "an image of the rayfitout website, where it showcases all their architecture and interior design projects. each project shows a unique and beautiful image of the interior of a villa.",
   video: VideoRayfitoutWeb,
+  videoPreview: VideoRayfitoutWebPreview,
   videoFlex: "1.722",
   status: (
     <>

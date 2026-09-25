@@ -20,7 +20,6 @@ export default function Work(p: WorkProps) {
   const { startup } = useWorkAnimation();
 
   const [imageLoading, setImageLoading] = useState(true);
-  const [videoLoading, setVideoLoading] = useState(true);
 
   const project = workMapping[p.dataID];
   const currentProjectTitle = project.name.replace(/\s+/g, "-");
@@ -117,13 +116,17 @@ export default function Work(p: WorkProps) {
           </div>
 
           <div style={{ flex: project.videoFlex, width: "100%" }}>
-            {videoLoading && <Spinner />}
+            {/*
+              preload="none" means not a single video byte is fetched until the
+              visitor actually hits play -- the poster stands in for it, so
+              there is nothing to wait on and nothing to spin.
+            */}
             <video
               controls
               muted
+              preload="none"
+              poster={project.image}
               src={project.video}
-              onLoadedMetadata={() => setVideoLoading(false)}
-              style={{ display: videoLoading ? "none" : "block" }}
             />
           </div>
         </div>

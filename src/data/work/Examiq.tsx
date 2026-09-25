@@ -2,9 +2,10 @@ import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
 import { IconGlobe, IconCards, IconOctopus } from "../../utils/iconSetting";
 //
-import ImageExamiq from "@/assets/ImageExamiq.webp";
-import VideoExamiq from "@/assets/VideoExamiq.webm";
-import FileExamiq from "@/assets/FileExamiq.pdf";
+import ImageExamiq from "@/assets/images/ImageExamiq.webp";
+import VideoExamiq from "@/assets/videos_master/VideoExamiq.webm";
+import VideoExamiqPreview from "@/assets/video_previews/VideoExamiq.webm";
+import FileExamiq from "@/assets/files/FileExamiq.pdf";
 //
 const GitHubExamiq = "https://github.com/shadowisf/Examiq";
 const DemoExamiq = "https://examiq-seven.vercel.app";
@@ -30,6 +31,7 @@ export const Examiq: WorkEntry = {
   imageAlt:
     "an image of examiq, an ai-powered proctorig system. currently, it's in the exam page wherein it's displaying all of the questions of an exam in a form format. while at it, on the top left, there is a camera showing the face of the user and the system is scanning the fact, specifically the eyes. you can then see a red dot on the screen, tracking the user's gaze.",
   video: VideoExamiq,
+  videoPreview: VideoExamiqPreview,
   videoFlex: "1.726",
   status: (
     <>

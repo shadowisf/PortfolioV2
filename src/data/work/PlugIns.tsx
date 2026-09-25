@@ -2,9 +2,10 @@ import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
 import { IconCards, IconOctopus } from "../../utils/iconSetting";
 //
-import ImagePlugIns from "@/assets/ImagePlugIns.webp";
-import VideoPlugIns from "@/assets/VideoPlugIns.webm";
-import FilePlugIns from "@/assets/FilePlugIns.pdf";
+import ImagePlugIns from "@/assets/images/ImagePlugIns.webp";
+import VideoPlugIns from "@/assets/videos_master/VideoPlugIns.webm";
+import VideoPlugInsPreview from "@/assets/video_previews/VideoPlugIns.webm";
+import FilePlugIns from "@/assets/files/FilePlugIns.pdf";
 //
 const GitHubPlugIns = "https://github.com/shadowisf/PlugIns";
 
@@ -18,6 +19,7 @@ export const PlugIns: WorkEntry = {
   imageAlt:
     "an image of the plug-ins project. it is currently viewing the products page",
   video: VideoPlugIns,
+  videoPreview: VideoPlugInsPreview,
   videoFlex: "1.599074",
   status: (
     <>

@@ -2,9 +2,10 @@ import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon } from "../../components/Link";
 import { IconCards, IconOctopus } from "../../utils/iconSetting";
 //
-import ImageBellHospital from "@/assets/ImageBellHospital.webp";
-import VideoBellHospital from "@/assets/VideoBellHospital.webm";
-import FileBellHospital from "@/assets/FileBellHospital.pdf";
+import ImageBellHospital from "@/assets/images/ImageBellHospital.webp";
+import VideoBellHospital from "@/assets/videos_master/VideoBellHospital.webm";
+import VideoBellHospitalPreview from "@/assets/video_previews/VideoBellHospital.webm";
+import FileBellHospital from "@/assets/files/FileBellHospital.pdf";
 //
 const GitHubBellHospital = "https://github.com/shadowisf/BellHospital";
 
@@ -18,6 +19,7 @@ export const BellHospital: WorkEntry = {
   imageAlt:
     "an image of the bell hospital project. it is currently viewing the patients records section where it is displaying all patient information (note that this is a CLI project). additionally, there are commands for CRUD operations.",
   video: VideoBellHospital,
+  videoPreview: VideoBellHospitalPreview,
   videoFlex: "1.598148",
   status: (
     <>

@@ -225,7 +225,7 @@ export default function About() {
               <LinkWithNoIcon
                 className="infoOnHover top"
                 href="https://wincedu.uk"
-                data-tooltip="western international college"
+                data-tooltip={isMobile ? "" : "western international college"}
               >
                 winc
               </LinkWithNoIcon>{" "}
@@ -246,7 +246,9 @@ export default function About() {
               worked remotely as freelance full-stack web developer @{" "}
               <LinkWithNoIcon
                 className="infoOnHover top"
-                data-tooltip="a premium & high-quality cookware company"
+                data-tooltip={
+                  isMobile ? "" : "a premium & high-quality cookware company"
+                }
                 href="/whealthy-vessel"
                 sameTab={true}
               >
@@ -269,7 +271,9 @@ export default function About() {
               <LinkWithNoIcon
                 className="infoOnHover top"
                 href="https://greatermanchester.ac.uk"
-                data-tooltip="university of greater manchester"
+                data-tooltip={
+                  isMobile ? "" : "university of greater manchester"
+                }
               >
                 uogm
               </LinkWithNoIcon>{" "}
@@ -290,7 +294,9 @@ export default function About() {
               worked remotely as freelance full-stack developer @{" "}
               <LinkWithNoIcon
                 className="infoOnHover top"
-                data-tooltip="a unique & niche fragrance house company"
+                data-tooltip={
+                  isMobile ? "" : "a unique & niche fragrance house company"
+                }
                 href="/let-there-be-fragrance"
                 sameTab={true}
               >
@@ -309,10 +315,12 @@ export default function About() {
               }
               verticalLine={true}
             >
-              worked on-site as full-time developer @{" "}
+              worked on-site as full-time web developer @{" "}
               <LinkWithNoIcon
                 className="infoOnHover top"
-                data-tooltip="an award-winning design & build company"
+                data-tooltip={
+                  isMobile ? "" : "an award-winning design & build company"
+                }
                 href="https://www.rayfitout.com"
               >
                 rayfitout
@@ -333,7 +341,9 @@ export default function About() {
               promoted & worked remotely as full-time software engineer @{" "}
               <LinkWithNoIcon
                 className="infoOnHover top"
-                data-tooltip="an award-winning design & build company"
+                data-tooltip={
+                  isMobile ? "" : "an award-winning design & build company"
+                }
                 href="https://www.rayfitout.com"
               >
                 rayfitout
@@ -354,7 +364,9 @@ export default function About() {
               working on-site as full-time full-stack developer @{" "}
               <LinkWithNoIcon
                 className="infoOnHover top"
-                data-tooltip="an award-winning raw pet nutrition company"
+                data-tooltip={
+                  isMobile ? "" : "an award-winning raw pet nutrition company"
+                }
                 href="https://furchildpets.com/"
               >
                 furchild

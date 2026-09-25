@@ -26,6 +26,7 @@ export const LectraAI: WorkEntry = {
   imageFlex: "",
   imageAlt: "",
   video: "",
+  videoPreview: "",
   videoFlex: "",
   status: (
     <>

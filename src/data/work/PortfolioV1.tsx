@@ -2,8 +2,9 @@ import { WorkEntry } from "../../utils/types/WorkEntry";
 import { LinkWithIcon, LinkWithNoIcon } from "../../components/Link";
 import { IconGlobe, IconOctopus } from "../../utils/iconSetting";
 //
-import ImageV1Portfolio from "@/assets/ImageV1Portfolio.webp";
-import VideoV1Portfolio from "@/assets/VideoV1Portfolio.webm";
+import ImageV1Portfolio from "@/assets/images/ImageV1Portfolio.webp";
+import VideoV1Portfolio from "@/assets/videos_master/VideoV1Portfolio.webm";
+import VideoV1PortfolioPreview from "@/assets/video_previews/VideoV1Portfolio.webm";
 //
 const GitHubV1Portfolio = "https://github.com/shadowisf/PortfolioV1";
 const DemoV1Portfolio = "https://v1-lesranalan.web.app";
@@ -23,6 +24,7 @@ export const PortfolioV1: WorkEntry = {
   imageAlt:
     "an image of the about section in my portfolio project. it has a cartoon illustration of me and and text introducing myself.",
   video: VideoV1Portfolio,
+  videoPreview: VideoV1PortfolioPreview,
   videoFlex: "1.599074",
   status: (
     <>

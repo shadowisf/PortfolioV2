@@ -5,14 +5,38 @@ import {
   RiCloseLargeFill,
 } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import gsap from "gsap";
 import { useGlobalState } from "../providers/GlobalStateProvider";
 import { usePageTransition } from "../utils/gsap/usePageTransition";
 import { workMapping } from "../utils/workMapping";
 
 export default function NavBar() {
   const { openMenu, closeMenu } = usePageTransition();
-  const { executeTransition, userTheme, handleToggleTheme, setInMenu } =
-    useGlobalState();
+  const {
+    executeTransition,
+    userTheme,
+    handleToggleTheme,
+    setInMenu,
+    isMobile,
+  } = useGlobalState();
+
+  useEffect(() => {
+    const navElements = [".logoButton.alt", ".navButtons.alt", "nav"];
+
+    gsap.set(navElements, { autoAlpha: 0 });
+
+    const tween = gsap.to(navElements, {
+      autoAlpha: 1,
+      duration: 1,
+      delay: isMobile ? 1.25 : 0.25,
+      ease: "power2.out",
+    });
+
+    return () => {
+      tween.kill();
+    };
+  }, []);
 
   return (
     <>
