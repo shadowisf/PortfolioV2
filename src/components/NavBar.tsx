@@ -19,12 +19,17 @@ export default function NavBar() {
     handleToggleTheme,
     setInMenu,
     isMobile,
+    contentReady,
   } = useGlobalState();
 
   useEffect(() => {
     const navElements = [".logoButton.alt", ".navButtons.alt", "nav"];
 
     gsap.set(navElements, { autoAlpha: 0 });
+
+    // stay down while the home page is still loading -- this reruns and plays
+    // the same reveal the moment the bar hands over
+    if (!contentReady) return;
 
     const tween = gsap.to(navElements, {
       autoAlpha: 1,
@@ -36,7 +41,7 @@ export default function NavBar() {
     return () => {
       tween.kill();
     };
-  }, []);
+  }, [contentReady]);
 
   return (
     <>

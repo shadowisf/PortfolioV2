@@ -2,6 +2,7 @@ import { Key } from "react";
 import { workMapping } from "../utils/workMapping";
 import TechStackTile from "./TechStackTile";
 import { ProjectProps } from "./ProjectTile";
+import Spinner from "./Spinner";
 
 // A nominal display height, deliberately not the encode height -- previews are
 // encoded at 360 but shown larger, and max-width caps the result anyway. This
@@ -64,6 +65,13 @@ export function ProjectPreview(p: ProjectProps) {
                 playsInline
                 preload="none"
               />
+
+              {/*
+                shown only while the box is genuinely empty -- useHomeAnimation
+                hides it the moment the first frame decodes, so a preview
+                already in the cache never flashes one.
+              */}
+              <Spinner />
             </div>
           </div>
 

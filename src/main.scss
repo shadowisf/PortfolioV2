@@ -607,6 +607,22 @@ footer {
       .videoContainer {
         position: relative;
 
+        // sits over the empty video box. starts hidden so it cannot flash
+        // before gsap takes it over on the first hover.
+        .spinner {
+          position: absolute;
+          inset: 0;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          pointer-events: none;
+
+          opacity: 0;
+          visibility: hidden;
+        }
+
         // previewContent is a column flex, so without this the container
         // stretches to the column width and the clip floats in dead space
         align-self: center;

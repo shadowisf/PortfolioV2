@@ -15,6 +15,10 @@ type GlobalStateContextType = {
   setInMenu: (value: boolean) => void;
   skipStart: boolean;
   setSkipStart: (value: boolean) => void;
+  // false while the home page is still on its loading bar, so the chrome
+  // around the page can stay out of the way until there is a page to frame
+  contentReady: boolean;
+  setContentReady: (value: boolean) => void;
 };
 
 type GlobalStateProviderProps = {
@@ -33,6 +37,8 @@ const GlobalStateContext = createContext<GlobalStateContextType>({
   setInMenu: () => {},
   skipStart: false,
   setSkipStart: () => {},
+  contentReady: true,
+  setContentReady: () => {},
 });
 
 export function useGlobalState() {
@@ -46,6 +52,8 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const [currentPage, setCurrentPage] = useState("");
   const [hasMounted, setHasMounted] = useState(false);
   const [skipStart, setSkipStart] = useState(false);
+  // true by default: every route except home has nothing to wait for
+  const [contentReady, setContentReady] = useState(true);
 
   const { contextSafe } = useGSAP();
   const { closeMenu } = usePageTransition();
@@ -142,6 +150,8 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
         setInMenu,
         skipStart,
         setSkipStart,
+        contentReady,
+        setContentReady,
       }}
     >
       {children}

@@ -1,5 +1,5 @@
 import { ProjectTile } from "../components/ProjectTile";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { ProjectPreview } from "../components/ProjectPreview";
 import { LinkWithIcon, LinkWithNoIcon } from "../components/Link";
 import { useGlobalState } from "../providers/GlobalStateProvider";
@@ -18,7 +18,7 @@ import {
 } from "../utils/iconSetting";
 
 export default function Home() {
-  const { setCurrentPage, isMobile } = useGlobalState();
+  const { setCurrentPage, isMobile, setContentReady } = useGlobalState();
   const { scrollToTop } = useScrollingAnimation();
   const { startup, swirlOnHover, swirlOnLeave } = useHomeAnimation();
 
@@ -40,6 +40,19 @@ export default function Home() {
     setCurrentPage("/");
     scrollToTop(0);
   }, []);
+
+  // A layout effect, not a passive one: NavBar and Footer sit above this in the
+  // tree and their reveal runs on mount, so the flag has to be down before they
+  // get a chance to fade themselves in over the loading bar. Restored on the
+  // way out, or leaving mid-load would strand them hidden on the next page.
+  useLayoutEffect(() => {
+    setContentReady(false);
+    return () => setContentReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (showHome) setContentReady(true);
+  }, [showHome]);
 
   useEffect(() => {
     if (!done || fadingOut || showHome) return;

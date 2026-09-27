@@ -108,7 +108,7 @@ export function useHomeAnimation() {
 
   let previewMap: Record<
     string,
-    { container: Element; video?: HTMLVideoElement }
+    { container: Element; video?: HTMLVideoElement; spinner?: HTMLElement }
   > = {};
   let heroContainer: Element | null = null;
   let initialized = false;
@@ -127,6 +127,7 @@ export function useHomeAnimation() {
       previewMap[key] = {
         container,
         video: container.querySelector("video") ?? undefined,
+        spinner: container.querySelector<HTMLElement>(".spinner") ?? undefined,
       };
     });
     initialized = true;
@@ -138,7 +139,7 @@ export function useHomeAnimation() {
     const entry = previewMap[key];
     if (!entry) return;
 
-    const { container, video } = entry;
+    const { container, video, spinner } = entry;
     activePreviewKey = key;
 
     gsap.to(container, previewEnter);
@@ -146,6 +147,20 @@ export function useHomeAnimation() {
 
     if (video) {
       attachPreviewSource(video);
+
+      // readyState 2 is HAVE_CURRENT_DATA -- the first frame has decoded and
+      // there is finally something in the box. anything below that and the
+      // box is blank, which is the only time a spinner earns its place.
+      if (spinner) {
+        gsap.set(spinner, { autoAlpha: video.readyState >= 2 ? 0 : 1 });
+      }
+
+      // assigned rather than addEventListener so re-hovering the same tile
+      // replaces the handler instead of stacking another one
+      video.onloadeddata = () => {
+        if (!spinner || activePreviewKey !== key) return;
+        gsap.to(spinner, { autoAlpha: 0, duration: 0.2 });
+      };
 
       // previews run the full length of the clip now, so each project picks
       // where its hover starts rather than the cut being baked into the file
@@ -181,7 +196,8 @@ export function useHomeAnimation() {
     ensureInitialized();
     activePreviewKey = null;
 
-    Object.values(previewMap).forEach(({ container, video }) => {
+    Object.values(previewMap).forEach(({ container, video, spinner }) => {
+      if (spinner) gsap.set(spinner, { autoAlpha: 0 });
       if (video && video.dataset.loaded === "true") {
         video.pause();
         // back to this project's own start, not to zero
