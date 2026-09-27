@@ -35,6 +35,25 @@ function attachPreviewSource(video: HTMLVideoElement) {
 // which tile the cursor is on, so a slow load cannot play over a later hover
 let activePreviewKey: string | null = null;
 
+// A preview that is already in the http cache decodes its first frame in a few
+// tens of milliseconds, but readyState is still 0 the instant the source is
+// attached. Showing the spinner immediately meant every tile flashed one on the
+// way past. So it waits: if the clip beats this, no spinner is ever shown, and
+// only a load that is genuinely slow gets one.
+const SPINNER_DELAY_MS = 220;
+
+// Module level, like activePreviewKey: the tile being left and the tile being
+// entered are different component instances, so the leave must cancel a pending
+// show from the enter.
+let spinnerTimer: number | null = null;
+
+function cancelSpinnerDelay() {
+  if (spinnerTimer !== null) {
+    window.clearTimeout(spinnerTimer);
+    spinnerTimer = null;
+  }
+}
+
 export function useHomeAnimation() {
   const { contextSafe } = useGSAP();
 
@@ -151,15 +170,45 @@ export function useHomeAnimation() {
       // readyState 2 is HAVE_CURRENT_DATA -- the first frame has decoded and
       // there is finally something in the box. anything below that and the
       // box is blank, which is the only time a spinner earns its place.
+      cancelSpinnerDelay();
+
       if (spinner) {
-        gsap.set(spinner, { autoAlpha: video.readyState >= 2 ? 0 : 1 });
+        // always start down, even when the box is empty -- it only comes up if
+        // the clip is still not ready once the delay is out
+        gsap.set(spinner, { autoAlpha: 0 });
+
+        if (video.readyState < 2) {
+          spinnerTimer = window.setTimeout(() => {
+            spinnerTimer = null;
+            // cursor moved on, or the clip arrived while we waited
+            if (activePreviewKey !== key || video.readyState >= 2) return;
+            gsap.to(spinner, { autoAlpha: 1, duration: 0.15 });
+          }, SPINNER_DELAY_MS);
+        }
       }
 
-      // assigned rather than addEventListener so re-hovering the same tile
-      // replaces the handler instead of stacking another one
-      video.onloadeddata = () => {
-        if (!spinner || activePreviewKey !== key) return;
-        gsap.to(spinner, { autoAlpha: 0, duration: 0.2 });
+      // Deliberately unguarded by activePreviewKey: hiding a spinner is always
+      // safe, and every guard here was just another way to leave one stranded
+      // over a playing clip.
+      const hideSpinner = () => {
+        if (!spinner) return;
+        // timeupdate fires several times a second, so bail once it is already
+        // down rather than spawning a tween per frame of playback
+        if (Number(gsap.getProperty(spinner, "opacity")) === 0) return;
+        gsap.to(spinner, { autoAlpha: 0, duration: 0.2, overwrite: "auto" });
+      };
+
+      // Several events, not just loadeddata: that one fires once per load, and
+      // seeking to this project's start can drop readyState back below 2
+      // without it ever firing again. timeupdate is the backstop -- it fires
+      // several times a second while playing, so a visible frame always wins.
+      // Assigned rather than addEventListener so re-hovering replaces the
+      // handlers instead of stacking more.
+      video.onloadeddata = hideSpinner;
+      video.oncanplay = hideSpinner;
+      video.onplaying = hideSpinner;
+      video.ontimeupdate = () => {
+        if (video.readyState >= 2) hideSpinner();
       };
 
       // previews run the full length of the clip now, so each project picks
@@ -195,6 +244,8 @@ export function useHomeAnimation() {
   const resetPreview = contextSafe(() => {
     ensureInitialized();
     activePreviewKey = null;
+
+    cancelSpinnerDelay();
 
     Object.values(previewMap).forEach(({ container, video, spinner }) => {
       if (spinner) gsap.set(spinner, { autoAlpha: 0 });

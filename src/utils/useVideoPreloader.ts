@@ -9,11 +9,20 @@ import { workMapping } from "./workMapping";
 // from being swamped while the bar still moves steadily.
 const CONCURRENCY = 3;
 
+// Once per session, not once per mount. Home unmounts when you navigate to a
+// work page or about, so without this, coming back re-ran the whole pass and
+// put the bar up again every single time -- even though every preview was
+// already sitting in the http cache.
+let previewsWarmed = false;
+
 export function useVideoPreloader(enabled: boolean) {
-  const [progress, setProgress] = useState(0);
-  const [done, setDone] = useState(false);
+  const [progress, setProgress] = useState(previewsWarmed ? 100 : 0);
+  const [done, setDone] = useState(previewsWarmed);
 
   useEffect(() => {
+    // already warmed earlier in this session -- nothing to wait for
+    if (previewsWarmed) return;
+
     // previews only ever play on hover, so a touch device would be paying for
     // megabytes it can never use
     if (!enabled) {
@@ -63,7 +72,11 @@ export function useVideoPreloader(enabled: boolean) {
     const pool = Array.from({ length: Math.min(CONCURRENCY, urls.length) }, worker);
 
     Promise.all(pool).then(() => {
-      if (!cancelled) setDone(true);
+      if (cancelled) return;
+      // only latch on a pass that actually finished; an aborted one should be
+      // retried on the next visit rather than assumed warm
+      previewsWarmed = true;
+      setDone(true);
     });
 
     return () => {
