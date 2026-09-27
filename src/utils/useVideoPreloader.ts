@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { workMapping } from "./workMapping";
 
 // How many previews are in flight at once. The queue is the point: the old
@@ -15,21 +15,17 @@ const CONCURRENCY = 3;
 // already sitting in the http cache.
 let previewsWarmed = false;
 
+// Nothing is returned on purpose. The page does not wait on this, so reporting
+// progress would only re-render Home once per file -- and every ProjectPreview
+// with it -- for a bar no one is looking at.
 export function useVideoPreloader(enabled: boolean) {
-  const [progress, setProgress] = useState(previewsWarmed ? 100 : 0);
-  const [done, setDone] = useState(previewsWarmed);
-
   useEffect(() => {
     // already warmed earlier in this session -- nothing to wait for
     if (previewsWarmed) return;
 
     // previews only ever play on hover, so a touch device would be paying for
     // megabytes it can never use
-    if (!enabled) {
-      setProgress(100);
-      setDone(true);
-      return;
-    }
+    if (!enabled) return;
 
     // the previews, never the originals -- those are ~150MB and only ever
     // load when someone presses play on a work page
@@ -37,16 +33,11 @@ export function useVideoPreloader(enabled: boolean) {
       .map((project) => project.videoPreview)
       .filter((url) => url.length > 0);
 
-    if (urls.length === 0) {
-      setProgress(100);
-      setDone(true);
-      return;
-    }
+    if (urls.length === 0) return;
 
     const controller = new AbortController();
     let cancelled = false;
     let cursor = 0;
-    let loaded = 0;
 
     const worker = async () => {
       while (!cancelled) {
@@ -64,19 +55,15 @@ export function useVideoPreloader(enabled: boolean) {
         }
 
         if (cancelled) return;
-        loaded++;
-        setProgress(Math.round((loaded / urls.length) * 100));
       }
     };
 
     const pool = Array.from({ length: Math.min(CONCURRENCY, urls.length) }, worker);
 
     Promise.all(pool).then(() => {
-      if (cancelled) return;
       // only latch on a pass that actually finished; an aborted one should be
       // retried on the next visit rather than assumed warm
-      previewsWarmed = true;
-      setDone(true);
+      if (!cancelled) previewsWarmed = true;
     });
 
     return () => {
@@ -84,6 +71,4 @@ export function useVideoPreloader(enabled: boolean) {
       controller.abort();
     };
   }, [enabled]);
-
-  return { progress, done };
 }

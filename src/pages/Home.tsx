@@ -1,5 +1,5 @@
 import { ProjectTile } from "../components/ProjectTile";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect } from "react";
 import { ProjectPreview } from "../components/ProjectPreview";
 import { LinkWithIcon, LinkWithNoIcon } from "../components/Link";
 import { useGlobalState } from "../providers/GlobalStateProvider";
@@ -18,90 +18,26 @@ import {
 } from "../utils/iconSetting";
 
 export default function Home() {
-  const { setCurrentPage, isMobile, setContentReady } = useGlobalState();
+  const { setCurrentPage, isMobile } = useGlobalState();
   const { scrollToTop } = useScrollingAnimation();
   const { startup, swirlOnHover, swirlOnLeave } = useHomeAnimation();
 
-  const { progress, done } = useVideoPreloader(!isMobile);
-  const [loaderShown, setLoaderShown] = useState(false);
-  const [fadingOut, setFadingOut] = useState(false);
-  const [showHome, setShowHome] = useState(false);
-
-  // On a repeat visit every preview is already in the http cache, so the
-  // preloader finishes almost immediately and a bar would just flash. Only put
-  // one up if the fetches are still going after this long.
-  useEffect(() => {
-    if (done || loaderShown) return;
-    const timer = window.setTimeout(() => setLoaderShown(true), 200);
-    return () => window.clearTimeout(timer);
-  }, [done, loaderShown]);
+  // Fire and forget: this only warms the http cache so the first hover is
+  // instant. The page never waits on it -- previews load on hover by
+  // themselves, and a spinner appears only if one is genuinely slow.
+  useVideoPreloader(!isMobile);
 
   useEffect(() => {
     setCurrentPage("/");
     scrollToTop(0);
   }, []);
 
-  // A layout effect, not a passive one: NavBar and Footer sit above this in the
-  // tree and their reveal runs on mount, so the flag has to be down before they
-  // get a chance to fade themselves in over the loading bar. Restored on the
-  // way out, or leaving mid-load would strand them hidden on the next page.
-  useLayoutEffect(() => {
-    setContentReady(false);
-    return () => setContentReady(true);
+  useGSAP(() => {
+    startup();
   }, []);
 
-  useEffect(() => {
-    if (showHome) setContentReady(true);
-  }, [showHome]);
-
-  useEffect(() => {
-    if (!done || fadingOut || showHome) return;
-    // nothing was ever on screen to fade, so go straight in
-    if (!loaderShown) {
-      setShowHome(true);
-      return;
-    }
-    setFadingOut(true);
-  }, [done, fadingOut, showHome, loaderShown]);
-
-  // transitionend never fires while the tab is in the background, so someone
-  // who opened the site in an unfocused tab would come back to a loading bar
-  // stuck at 100% forever. this is the backstop -- the transition is 0.5s, so
-  // normally it wins the race and this never fires.
-  useEffect(() => {
-    if (!fadingOut || showHome) return;
-    const timer = window.setTimeout(() => setShowHome(true), 800);
-    return () => window.clearTimeout(timer);
-  }, [fadingOut, showHome]);
-
-  useGSAP(() => {
-    if (showHome) {
-      startup();
-    }
-  }, [showHome]);
-
   return (
-    <>
-      {!showHome && loaderShown && (
-        <main
-          className={`homeLoader ${fadingOut ? "fadeOut" : ""}`}
-          onTransitionEnd={(e) => {
-            if (fadingOut && e.target === e.currentTarget) {
-              setShowHome(true);
-            }
-          }}
-        >
-          <div className="loaderContent">
-            <small>{progress}%</small>
-            <div className="progressBar">
-              <div className="progressFill" style={{ width: `${progress}%` }} />
-            </div>
-          </div>
-        </main>
-      )}
-
-      {showHome && (
-      <main className="homeWrapper">
+    <main className="homeWrapper">
       <section className="left">
         {Object.keys(workMapping).map((id) => (
           <ProjectTile key={id} dataID={Number(id)} />
@@ -177,8 +113,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      </main>
-      )}
-    </>
+    </main>
   );
 }

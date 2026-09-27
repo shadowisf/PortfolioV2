@@ -3,14 +3,12 @@ import gsap from "gsap";
 import { useGlobalState } from "../providers/GlobalStateProvider";
 
 export default function Footer() {
-  const { isMobile, contentReady } = useGlobalState();
+  const { isMobile } = useGlobalState();
 
-  // the same reveal NavBar uses, on the same beat, so the two ends of the page
-  // arrive together once the home loading bar hands over
+  // the same reveal NavBar uses, on the same beat, so both ends of the page
+  // arrive together instead of the footer just being there from the start
   useEffect(() => {
     gsap.set("footer", { autoAlpha: 0 });
-
-    if (!contentReady) return;
 
     const tween = gsap.to("footer", {
       autoAlpha: 1,
@@ -22,7 +20,7 @@ export default function Footer() {
     return () => {
       tween.kill();
     };
-  }, [contentReady]);
+  }, []);
 
   return <footer>september 2026</footer>;
 }

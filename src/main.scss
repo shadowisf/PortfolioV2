@@ -8,7 +8,6 @@ $darkBoxShadow: rgba(0, 0, 0, 0.5);
 $boxShadow: 0 0 48px 1px light-dark($lightBoxShadow, $darkBoxShadow);
 
 $maxWidthDesktop: 700px;
-$maxWidthDesktopWide: 80%;
 $maxWidthMobile: 90%;
 
 $fontVarNormal:
@@ -21,10 +20,23 @@ $fontVarThin:
 /* $scaleOnHover: 1.05; */
 $scaleOnHover: 1;
 
-$minMaxWidth: 1045px;
+$minMaxWidth: 1338px;
 
 :root {
-  --minMaxWidth: 1045px;
+  --minMaxWidth: 1338px;
+
+  // Wide wrappers take a flat share of the viewport on smaller screens, and a
+  // fixed gutter on larger ones. The two are deliberately equal at exactly
+  // 1600px (80% of 1600 = 1280 = 1600 - 320), so the handover is seamless --
+  // a media query swapping the percentage instead made the layout jump 129px
+  // wider the moment you crossed the breakpoint.
+  --maxWidthShare: 80%;
+  --maxWidthGutter: 320px; // 160px a side
+
+  // ...and never past this. Longer lines get hard to read and the about page is
+  // prose. Beyond here the screen adds margin, not content -- the deliberate
+  // trade, and why 4k shows wide gutters.
+  --maxWidthCap: 1600px;
 
   --theme: light dark;
 
@@ -422,49 +434,11 @@ footer {
 }
 
 // wrappers
-.homeLoader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100dvh;
-
-  opacity: 1;
-  transition: opacity 0.5s ease;
-
-  &.fadeOut {
-    opacity: 0;
-  }
-
-  .loaderContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    width: 200px;
-
-    small {
-      font-variation-settings: $fontVarNormal;
-    }
-
-    .progressBar {
-      width: 100%;
-      height: 4px;
-      background: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
-      border-radius: 999px;
-      overflow: hidden;
-
-      .progressFill {
-        height: 100%;
-        background: var(--accent-color);
-        border-radius: 999px;
-        transition: width 0.3s ease;
-      }
-    }
-  }
-}
-
 .homeWrapper {
-  max-width: $maxWidthDesktopWide;
+  max-width: min(
+    max(var(--maxWidthShare), calc(100% - var(--maxWidthGutter))),
+    var(--maxWidthCap)
+  );
   margin: auto;
 
   display: flex;
@@ -656,12 +630,16 @@ footer {
         display: flex;
         justify-content: center;
 
-        // .preview is a column flex sized by its widest child, which is the
-        // clip, so stretching lines the tiles up with the clip's edges. this
-        // used to be a ResizeObserver measuring the video, but it could never
-        // fire -- .preview is visibility:hidden until hover, and chrome does
-        // not report resizes inside a hidden subtree.
-        align-self: stretch;
+        // .preview is a column flex, so it sizes to its widest child -- and
+        // with nine tech tiles that child was this row, not the clip, which
+        // left the clip centred in a box wider than itself. width:0 keeps the
+        // row out of that intrinsic measurement (percentages are ignored while
+        // it happens), then min-width pulls it back out to whatever width the
+        // clip settled on. A ResizeObserver cannot do this job: .preview is
+        // visibility:hidden until hover and chrome reports no resizes inside a
+        // hidden subtree.
+        width: 0;
+        min-width: 100%;
 
         gap: 0.5rem;
 
@@ -790,13 +768,36 @@ footer {
         align-items: center;
       }
 
-      img,
+      // `width: 100%` and `max-height` used to fight each other: past ~800px of
+      // column a 1.6 clip wants 500px+ of height, the clamp cut it back, and
+      // the box stopped matching its content. <img> defaults to
+      // object-fit: fill so it stretched; <video> defaults to contain so it
+      // pillarboxed and showed the background through the gap. Same rule, two
+      // different symptoms. The width has to give way instead.
+      img {
+        border-radius: $borderRadius;
+        box-shadow: $boxShadow;
+
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        // generous on purpose: at a fixed 500px a 1.6 still could never exceed
+        // 800px wide and sat marooned in the middle of a wider column. This
+        // only bites on something genuinely tall, like the portrait clip.
+        max-height: 85vh;
+      }
+
       video {
         border-radius: $borderRadius;
         box-shadow: $boxShadow;
-        height: auto;
+
+        // stays full-width so the box is the right size before metadata
+        // arrives, but capped at whatever width makes this clip 85vh tall -- a
+        // max-height here would break the aspect ratio instead of the width.
         width: 100%;
-        max-height: 500px;
+        height: auto;
+        max-width: var(--clipMaxWidth, none);
+
         background-color: var(--faded-color);
       }
     }
@@ -804,6 +805,7 @@ footer {
     .paragraph {
       line-height: 2rem;
       text-align: justify;
+      font-size: var(--p);
 
       h4 {
         margin-bottom: 10px;
@@ -877,7 +879,10 @@ footer {
 }
 
 .aboutWrapper {
-  max-width: $maxWidthDesktopWide;
+  max-width: min(
+    max(var(--maxWidthShare), calc(100% - var(--maxWidthGutter))),
+    var(--maxWidthCap)
+  );
 
   margin: auto;
   padding: 8rem 0;
@@ -1375,15 +1380,6 @@ footer {
   display: block;
 }
 
-@media screen and (max-width: ($minMaxWidth + 175px)) {
-  .homeWrapper {
-    gap: 2rem;
-
-    .right {
-      scale: 0.75;
-    }
-  }
-}
 
 // mobile screen
 @media screen and (max-width: $minMaxWidth) {
@@ -1408,16 +1404,22 @@ footer {
     --smaller: calc(var(--small) / 1.25);
   } */
 
+  // Fluid, because this tier now spans 320px to 1338px -- a phone and a small
+  // laptop. Fixed sizes meant the type that looks right at 334px was still the
+  // same 26px headline at 1300px, which reads as everything having shrunk.
+  //
+  // Each value interpolates from its phone size at 320px to exactly the
+  // desktop size at 1338px, so nothing jumps when the breakpoint hands over.
   :root {
-    --h0: calc(var(--h1) * 1.4);
-    --h1: 1.622rem;
-    --h2: 1.442rem;
-    --h3: 1.282rem;
-    --h4: 1.139rem;
-    --h5: 1.013rem;
-    --h6: 0.9rem;
-    --p: 0.75rem;
-    --small: 0.711rem;
+    --h0: clamp(2.2708rem, calc(1.5767rem + 3.4706vw), 4.479rem);
+    --h1: clamp(1.622rem, calc(1.1932rem + 2.1438vw), 2.986rem);
+    --h2: clamp(1.442rem, calc(1.1132rem + 1.644vw), 2.488rem);
+    --h3: clamp(1.282rem, calc(1.033rem + 1.2448vw), 2.074rem);
+    --h4: clamp(1.139rem, calc(0.9539rem + 0.9257vw), 1.728rem);
+    --h5: clamp(1.013rem, calc(0.8788rem + 0.6711vw), 1.44rem);
+    --h6: clamp(0.9rem, calc(0.8057rem + 0.4715vw), 1.2rem);
+    --p: clamp(0.75rem, calc(0.6714rem + 0.3929vw), 1.0rem);
+    --small: clamp(0.711rem, calc(0.6727rem + 0.1917vw), 0.833rem);
     --smaller: calc(var(--small) / 1.25);
   }
 
@@ -1477,7 +1479,10 @@ footer {
   }
 
   .homeWrapper {
-    max-width: $maxWidthMobile;
+    // full width on purpose, unlike the other wrappers: the tiles and the hero
+    // already carry their own 1rem of padding, so a 90% cap here stacked a
+    // second gutter on top of it and ate ~19% of a 348px screen.
+    max-width: 100%;
 
     padding: 8rem 0;
     margin: auto;
@@ -1491,7 +1496,22 @@ footer {
       margin: 0;
 
       .tile {
-        padding: 1rem 1rem;
+        // there is no real hover on a touch screen: a tap leaves :hover
+        // applied, so the shadow stayed lit under a row the finger had
+        // already left
+        &:hover {
+          box-shadow: none;
+        }
+
+        // 2rem to sit on the same line as the navbar logo and the footer,
+        // which both use `2rem` horizontally. The wrapper is full-bleed, so
+        // this padding is the only thing setting the edge -- and the tile's
+        // hover highlight still runs the full width of the screen.
+        padding: 1rem 2rem;
+
+        // the desktop 4rem would not survive 320px once the padding doubled;
+        // space-between still pushes the year to the right edge anyway
+        gap: 1rem;
 
         .title {
           width: 50dvw;
@@ -1500,11 +1520,11 @@ footer {
     }
 
     .right {
-      scale: 1;
       display: block;
       position: static;
       height: fit-content;
-      padding: 0 1rem;
+      // same 2rem edge as the tiles, the navbar and the footer
+      padding: 0 2rem;
 
       .hero {
         .links {
@@ -1527,7 +1547,15 @@ footer {
   .workWrapper {
     max-width: $maxWidthMobile;
 
+    ul {
+      margin-left: 32px;
+    }
+
     .content {
+      .paragraph {
+        line-height: 1.75rem;
+      }
+
       .media {
         .spinner {
           padding: 50px 0;

@@ -128,7 +128,13 @@ export default function Work(p: WorkProps) {
               muted
               preload="metadata"
               src={project.video}
-              style={{ aspectRatio: project.videoFlex }}
+              style={
+                {
+                  aspectRatio: project.videoFlex,
+                  // the width at which this clip is exactly 85vh tall
+                  "--clipMaxWidth": `calc(85vh * ${project.videoFlex})`,
+                } as React.CSSProperties
+              }
             />
           </div>
         </div>
