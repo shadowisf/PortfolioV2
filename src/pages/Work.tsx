@@ -117,16 +117,18 @@ export default function Work(p: WorkProps) {
 
           <div style={{ flex: project.videoFlex, width: "100%" }}>
             {/*
-              preload="none" means not a single video byte is fetched until the
-              visitor actually hits play -- the poster stands in for it, so
-              there is nothing to wait on and nothing to spin.
+              "metadata" fetches only the header and first cluster -- 16-256KB
+              depending on the clip, against originals up to 76MB -- which is
+              what paints a real first frame instead of an empty grey box.
+              The rest of the file still waits for an actual press of play.
+              aspectRatio holds the box steady until that frame arrives.
             */}
             <video
               controls
               muted
-              preload="none"
-              poster={project.image}
+              preload="metadata"
               src={project.video}
+              style={{ aspectRatio: project.videoFlex }}
             />
           </div>
         </div>

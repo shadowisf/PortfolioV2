@@ -32,6 +32,7 @@ export const Examiq: WorkEntry = {
     "an image of examiq, an ai-powered proctorig system. currently, it's in the exam page wherein it's displaying all of the questions of an exam in a form format. while at it, on the top left, there is a camera showing the face of the user and the system is scanning the fact, specifically the eyes. you can then see a red dot on the screen, tracking the user's gaze.",
   video: VideoExamiq,
   videoPreview: VideoExamiqPreview,
+  previewStart: 12,
   videoFlex: "1.726",
   status: (
     <>

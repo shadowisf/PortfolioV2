@@ -20,6 +20,7 @@ export const PlugIns: WorkEntry = {
     "an image of the plug-ins project. it is currently viewing the products page",
   video: VideoPlugIns,
   videoPreview: VideoPlugInsPreview,
+  previewStart: 16,
   videoFlex: "1.599074",
   status: (
     <>

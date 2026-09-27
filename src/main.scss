@@ -422,6 +422,47 @@ footer {
 }
 
 // wrappers
+.homeLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+
+  opacity: 1;
+  transition: opacity 0.5s ease;
+
+  &.fadeOut {
+    opacity: 0;
+  }
+
+  .loaderContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 200px;
+
+    small {
+      font-variation-settings: $fontVarNormal;
+    }
+
+    .progressBar {
+      width: 100%;
+      height: 4px;
+      background: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
+      border-radius: 999px;
+      overflow: hidden;
+
+      .progressFill {
+        height: 100%;
+        background: var(--accent-color);
+        border-radius: 999px;
+        transition: width 0.3s ease;
+      }
+    }
+  }
+}
+
 .homeWrapper {
   max-width: $maxWidthDesktopWide;
   margin: auto;
@@ -435,7 +476,6 @@ footer {
 
     display: flex;
     flex-direction: column-reverse;
-    gap: 0.25rem;
 
     height: fit-content;
 
@@ -567,6 +607,22 @@ footer {
       .videoContainer {
         position: relative;
 
+        // previewContent is a column flex, so without this the container
+        // stretches to the column width and the clip floats in dead space
+        align-self: center;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        // a portrait clip (feeltok) is only ~258px wide, which would collapse
+        // the whole preview into a narrow column and squeeze the tech stack
+        // beneath it. only those get a wider box -- landscape clips hug their
+        // own edges, no padding.
+        &.portrait {
+          min-width: min(600px, 70vw);
+        }
+
         video,
         img {
           /* margin-top: 50px; */
@@ -583,6 +639,13 @@ footer {
       .techStack {
         display: flex;
         justify-content: center;
+
+        // .preview is a column flex sized by its widest child, which is the
+        // clip, so stretching lines the tiles up with the clip's edges. this
+        // used to be a ResizeObserver measuring the video, but it could never
+        // fire -- .preview is visibility:hidden until hover, and chrome does
+        // not report resizes inside a hidden subtree.
+        align-self: stretch;
 
         gap: 0.5rem;
 

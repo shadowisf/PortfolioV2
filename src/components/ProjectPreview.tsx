@@ -1,32 +1,22 @@
-import { useState, Key, useRef, useCallback } from "react";
+import { Key } from "react";
 import { workMapping } from "../utils/workMapping";
 import TechStackTile from "./TechStackTile";
 import { ProjectProps } from "./ProjectTile";
 
-function useResizeWidth() {
-  const [width, setWidth] = useState<number | undefined>(undefined);
-  const observerRef = useRef<ResizeObserver | null>(null);
-
-  const ref = useCallback((el: HTMLElement | null) => {
-    if (observerRef.current) {
-      observerRef.current.disconnect();
-      observerRef.current = null;
-    }
-    if (el) {
-      observerRef.current = new ResizeObserver(() => {
-        setWidth(el.offsetWidth);
-      });
-      observerRef.current.observe(el);
-    }
-  }, []);
-
-  return { width, ref };
-}
+// A nominal display height, deliberately not the encode height -- previews are
+// encoded at 360 but shown larger, and max-width caps the result anyway. This
+// only has to establish the box before a src exists, and it has to be an inline
+// style: the width/height attributes are presentational hints and lose to the
+// stylesheet's `width: auto`. Without it a source-less <video> is 300x150 and
+// the box jumps to its real size on first hover.
+const PREVIEW_DISPLAY_HEIGHT = 540;
 
 export function ProjectPreview(p: ProjectProps) {
   const project = workMapping[p.dataID];
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const { width: contentWidth, ref: contentRef } = useResizeWidth();
+  // a portrait clip needs a wider box so the tech stack below it is not
+  // squeezed into the clip's own narrow width
+  const previewRatio = Number(project.videoFlex) || 1.6;
+  const isPortrait = previewRatio < 1;
 
   return (
     <div data-key={p.dataID} className="preview">
@@ -53,34 +43,31 @@ export function ProjectPreview(p: ProjectProps) {
       ) : (
         <>
           <div className="previewContent">
-            <div className="videoContainer">
+            <div
+              className={`videoContainer${isPortrait ? " portrait" : ""}`}
+            >
               {/*
                 no src until the tile is hovered -- useHomeAnimation attaches
-                data-src on demand. the poster sizes the element and shows
-                instantly, so there is nothing to spin on.
+                data-src on demand, by which point the preloader has already
+                pulled the file into the http cache. aspectRatio holds the box
+                at the right shape before any metadata exists, so nothing
+                reflows when the clip appears.
               */}
               <video
-                ref={(el) => {
-                  videoRef.current = el;
-                  contentRef(el);
-                }}
                 data-src={project.videoPreview}
-                poster={project.image}
+                data-start={project.previewStart ?? 0}
+                style={{
+                  width: Math.round(PREVIEW_DISPLAY_HEIGHT * previewRatio),
+                  aspectRatio: previewRatio,
+                }}
                 muted
-                loop
                 playsInline
                 preload="none"
               />
             </div>
           </div>
 
-          <span
-            className="techStack"
-            style={{
-              width: contentWidth ? `${contentWidth}px` : undefined,
-              maxWidth: "100%",
-            }}
-          >
+          <span className="techStack">
             {project.techStack
               .filter((item: string) => item.startsWith("*"))
               .map((item: string, index: Key) => (

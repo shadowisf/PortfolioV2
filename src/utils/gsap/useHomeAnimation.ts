@@ -28,7 +28,7 @@ function attachPreviewSource(video: HTMLVideoElement) {
     stale.pause();
     stale.removeAttribute("src");
     delete stale.dataset.loaded;
-    stale.load(); // releases the decoder and falls back to the poster
+    stale.load(); // releases the decoder; the box keeps its shape via aspectRatio
   }
 }
 
@@ -147,15 +147,32 @@ export function useHomeAnimation() {
     if (video) {
       attachPreviewSource(video);
 
-      const playVideo = () => {
-        if (activePreviewKey !== key) return; // cursor already moved on
+      // previews run the full length of the clip now, so each project picks
+      // where its hover starts rather than the cut being baked into the file
+      const startAt = Number(video.dataset.start) || 0;
+
+      // looping natively would return to 0, not to the chosen start. assigning
+      // the property (rather than addEventListener) keeps this idempotent
+      // across re-hovers and evictions.
+      video.onended = () => {
+        video.currentTime = startAt;
         video.play().catch(() => {});
       };
 
-      if (video.readyState >= 3) {
-        playVideo();
+      const seekAndPlay = () => {
+        if (activePreviewKey !== key) return; // cursor already moved on
+        // a seek lands on the nearest keyframe, so only correct a real drift
+        if (Math.abs(video.currentTime - startAt) > 0.5) {
+          video.currentTime = startAt;
+        }
+        video.play().catch(() => {});
+      };
+
+      // readyState 1 is HAVE_METADATA -- seeking before that is not allowed
+      if (video.readyState >= 1) {
+        seekAndPlay();
       } else {
-        video.addEventListener("canplay", playVideo, { once: true });
+        video.addEventListener("loadedmetadata", seekAndPlay, { once: true });
       }
     }
   });
@@ -167,7 +184,8 @@ export function useHomeAnimation() {
     Object.values(previewMap).forEach(({ container, video }) => {
       if (video && video.dataset.loaded === "true") {
         video.pause();
-        video.currentTime = 0;
+        // back to this project's own start, not to zero
+        video.currentTime = Number(video.dataset.start) || 0;
       }
       gsap.to(container, previewExit);
     });

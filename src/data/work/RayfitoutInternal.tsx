@@ -34,6 +34,7 @@ export const RayfitoutInternal: WorkEntry = {
     "a dashboard view of the manager user in the enterprise resource planning web application, with widgets for active material requests, pending approval of material requests, pending payments of material requests, outbound payments of local purchase orders, pending deliveries of local purchase orders. on the bottom of that are two widgets for quick approvals: initial approval and price approval for each items in a material request with approve or reject buttons and selection of vendors. on the left side of the screen is the navigation bar, with icons for dashboard, procurement tracker, projects, local purchase order list, bill of quantity list, vendor and subcontractor list, and inventory list.",
   video: VideoRayfitoutInternal,
   videoPreview: VideoRayfitoutInternalPreview,
+  previewStart: 24,
   videoFlex: "1.7338965153",
   status: (
     <>

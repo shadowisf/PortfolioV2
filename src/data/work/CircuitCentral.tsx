@@ -26,6 +26,7 @@ export const CircuitCentral: WorkEntry = {
     "an image of the circuitcentral project; it is viewing the orders section wherein it displays a list of products that are currently in a cart. additionally, the ui has buttons for CRUD operations.",
   video: VideoCircuitCentral,
   videoPreview: VideoCircuitCentralPreview,
+  previewStart: 15,
   videoFlex: "1.687037",
   status: (
     <>

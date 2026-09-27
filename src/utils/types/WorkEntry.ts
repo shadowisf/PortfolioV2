@@ -10,6 +10,8 @@ export type WorkEntry = {
   imageAlt: string;
   video: string;
   videoPreview: string;
+  // seconds into the preview that the hover starts playing; omit for 0
+  previewStart?: number;
   videoFlex: string;
   status: ReactElement;
   description: ReactElement;

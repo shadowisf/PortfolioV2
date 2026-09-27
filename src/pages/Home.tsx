@@ -1,5 +1,5 @@
 import { ProjectTile } from "../components/ProjectTile";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ProjectPreview } from "../components/ProjectPreview";
 import { LinkWithIcon, LinkWithNoIcon } from "../components/Link";
 import { useGlobalState } from "../providers/GlobalStateProvider";
@@ -8,7 +8,7 @@ import { useHomeAnimation } from "../utils/gsap/useHomeAnimation";
 import { useGSAP } from "@gsap/react";
 import { resume, email, linkedin, github } from "../utils/identitySetting";
 import { workMapping } from "../utils/workMapping";
-import { usePreviewPrefetch } from "../utils/usePreviewPrefetch";
+import { useVideoPreloader } from "../utils/useVideoPreloader";
 import {
   IconBriefcase,
   IconMailbox,
@@ -22,19 +22,73 @@ export default function Home() {
   const { scrollToTop } = useScrollingAnimation();
   const { startup, swirlOnHover, swirlOnLeave } = useHomeAnimation();
 
-  usePreviewPrefetch(!isMobile);
+  const { progress, done } = useVideoPreloader(!isMobile);
+  const [loaderShown, setLoaderShown] = useState(false);
+  const [fadingOut, setFadingOut] = useState(false);
+  const [showHome, setShowHome] = useState(false);
+
+  // On a repeat visit every preview is already in the http cache, so the
+  // preloader finishes almost immediately and a bar would just flash. Only put
+  // one up if the fetches are still going after this long.
+  useEffect(() => {
+    if (done || loaderShown) return;
+    const timer = window.setTimeout(() => setLoaderShown(true), 200);
+    return () => window.clearTimeout(timer);
+  }, [done, loaderShown]);
 
   useEffect(() => {
     setCurrentPage("/");
     scrollToTop(0);
   }, []);
 
+  useEffect(() => {
+    if (!done || fadingOut || showHome) return;
+    // nothing was ever on screen to fade, so go straight in
+    if (!loaderShown) {
+      setShowHome(true);
+      return;
+    }
+    setFadingOut(true);
+  }, [done, fadingOut, showHome, loaderShown]);
+
+  // transitionend never fires while the tab is in the background, so someone
+  // who opened the site in an unfocused tab would come back to a loading bar
+  // stuck at 100% forever. this is the backstop -- the transition is 0.5s, so
+  // normally it wins the race and this never fires.
+  useEffect(() => {
+    if (!fadingOut || showHome) return;
+    const timer = window.setTimeout(() => setShowHome(true), 800);
+    return () => window.clearTimeout(timer);
+  }, [fadingOut, showHome]);
+
   useGSAP(() => {
-    startup();
-  }, []);
+    if (showHome) {
+      startup();
+    }
+  }, [showHome]);
 
   return (
-    <main className="homeWrapper">
+    <>
+      {!showHome && loaderShown && (
+        <main
+          className={`homeLoader ${fadingOut ? "fadeOut" : ""}`}
+          onTransitionEnd={(e) => {
+            if (fadingOut && e.target === e.currentTarget) {
+              setShowHome(true);
+            }
+          }}
+        >
+          <div className="loaderContent">
+            <small>{progress}%</small>
+            <div className="progressBar">
+              <div className="progressFill" style={{ width: `${progress}%` }} />
+            </div>
+          </div>
+        </main>
+      )}
+
+      {showHome && (
+      <main className="homeWrapper">
       <section className="left">
         {Object.keys(workMapping).map((id) => (
           <ProjectTile key={id} dataID={Number(id)} />
@@ -110,6 +164,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </main>
+      </main>
+      )}
+    </>
   );
 }

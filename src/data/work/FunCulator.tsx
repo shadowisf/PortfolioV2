@@ -20,6 +20,7 @@ export const FunCulator: WorkEntry = {
     "an image of the funculator project. it is currently viewing the menu section where it is displaying all of the possible operations such as factorial, min&max, fibonacci, etc.",
   video: VideoFunCulator,
   videoPreview: VideoFunCulatorPreview,
+  previewStart: 6,
   videoFlex: "1.891626",
   status: (
     <>

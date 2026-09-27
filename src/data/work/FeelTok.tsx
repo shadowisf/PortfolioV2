@@ -32,6 +32,7 @@ export const FeelTok: WorkEntry = {
     "an image of the feeltok admin dashboard. right now, it is viewing the posts tab wherein all post details can be seen. on the very right of each post entry, there are two buttons: view and delete. clicking the view button will bring up a modal on what the post actually looks like from the user's perspective, while the delete button will delete the post.",
   video: VideoFeelTok,
   videoPreview: VideoFeelTokPreview,
+  previewStart: 16,
   videoFlex: "0.47901",
   status: (
     <>

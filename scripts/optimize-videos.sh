@@ -2,7 +2,7 @@
 # Cuts the home page hover previews from the originals:
 #
 #   src/assets/videos_master/<Name>.webm    original, played as-is on the work page
-#   src/assets/video_previews/<Name>.webm  short, small, 60fps clip for the hover
+#   src/assets/video_previews/<Name>.webm  full-length, low-res, 60fps hover clip
 #
 # The originals are only ever read. Re-run this whenever you add or replace one.
 
@@ -13,21 +13,18 @@ cd "$(dirname "$0")/.."
 SOURCE_DIR="src/assets/videos_master"
 PREVIEW_DIR="src/assets/video_previews"
 
-# first PREVIEW_SECONDS, fits inside PREVIEW_W x PREVIEW_H, at the source frame
-# rate (the originals are all ~60fps)
-PREVIEW_SECONDS=15
-PREVIEW_W=960
-PREVIEW_H=540
+# Full length at the source frame rate (the originals are all ~60fps), shrunk
+# hard. Full length is the point: the hover seeks to whatever timestamp a
+# project sets as previewStart, so retiming is a data edit rather than a
+# re-encode.
+PREVIEW_W=640
+PREVIEW_H=360
 PREVIEW_CRF=40
 # A ceiling, not a target: simple clips still come in well under it, but a
 # high-motion one cannot balloon to several MB. The whole preview set gets
 # prefetched on desktop, so its total size is the number that matters.
-PREVIEW_MAXRATE=500k
+PREVIEW_MAXRATE=300k
 
-# a few clips open on a title card or a blank frame -- start their preview later
-declare -A PREVIEW_START=(
-  # [VideoExamiq]=5
-)
 
 command -v ffmpeg >/dev/null || { echo "ffmpeg not on PATH -- brew install ffmpeg" >&2; exit 1; }
 
@@ -54,7 +51,17 @@ verify() { # decode every frame; anything the demuxer or decoder complains about
 human() { du -h "$1" | cut -f1 | tr -d ' '; }
 
 shopt -s nullglob
-sources=("$SOURCE_DIR"/*.webm)
+if [ $# -gt 0 ]; then
+  # re-cut just the named clips, e.g. ./scripts/optimize-videos.sh VideoExamiq
+  sources=()
+  for name in "$@"; do
+    candidate="$SOURCE_DIR/${name%.webm}.webm"
+    [ -f "$candidate" ] || { echo "no such video: $candidate" >&2; exit 1; }
+    sources+=("$candidate")
+  done
+else
+  sources=("$SOURCE_DIR"/*.webm)
+fi
 [ ${#sources[@]} -gt 0 ] || { echo "no videos in $SOURCE_DIR" >&2; exit 1; }
 
 total=0
@@ -62,10 +69,9 @@ total=0
 for source in "${sources[@]}"; do
   name="$(basename "$source" .webm)"
   preview="$PREVIEW_DIR/$name.webm"
-  start="${PREVIEW_START[$name]:-0}"
 
-  echo "==> $name (${PREVIEW_SECONDS}s from ${start}s, <=${PREVIEW_W}x${PREVIEW_H})"
-  "$FFMPEG_BIN" -nostdin -v error -y -ss "$start" -t "$PREVIEW_SECONDS" -i "$source" \
+  echo "==> $name (full length, <=${PREVIEW_W}x${PREVIEW_H})"
+  "$FFMPEG_BIN" -nostdin -v error -y -i "$source" \
     -vf "scale=w=min($PREVIEW_W\,iw):h=min($PREVIEW_H\,ih):force_original_aspect_ratio=decrease,scale=trunc(iw/2)*2:trunc(ih/2)*2" \
     -c:v libvpx-vp9 -crf "$PREVIEW_CRF" -b:v "$PREVIEW_MAXRATE" \
     -row-mt 1 -tile-columns 2 -cpu-used 4 -deadline good \

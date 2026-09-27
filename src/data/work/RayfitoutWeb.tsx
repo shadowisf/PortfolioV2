@@ -19,7 +19,7 @@ export const RayfitoutWeb: WorkEntry = {
     "an image of the rayfitout website, where it showcases all their architecture and interior design projects. each project shows a unique and beautiful image of the interior of a villa.",
   video: VideoRayfitoutWeb,
   videoPreview: VideoRayfitoutWebPreview,
-  videoFlex: "1.722",
+  videoFlex: "1.642",
   status: (
     <>
       rayfitout (web) was a project <u>i previously worked on</u> with the
