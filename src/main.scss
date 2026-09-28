@@ -948,7 +948,8 @@ footer {
       display: flex;
       /* justify-content: space-between; */
 
-      gap: 2rem;
+      row-gap: 0.75rem;
+      column-gap: 2rem;
 
       .icons {
         gap: 1rem;
@@ -1425,6 +1426,7 @@ footer {
 
   .aboutWrapper {
     max-width: $maxWidthMobile;
+    gap: 2rem;
 
     h1 {
       text-align: center;
@@ -1465,6 +1467,7 @@ footer {
 
     .timelineAndSkillset {
       flex-direction: column;
+      gap: 2rem;
 
       .skillset {
         height: 500px;
@@ -1490,7 +1493,7 @@ footer {
     display: flex;
     flex-direction: column-reverse;
 
-    gap: 4rem;
+    gap: 2rem;
 
     .left {
       margin: 0;

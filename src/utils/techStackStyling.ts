@@ -24,7 +24,7 @@ import {
 import { GiSpermWhale } from "react-icons/gi";
 import { GoCommandPalette, GoDatabase } from "react-icons/go";
 import { GrMysql } from "react-icons/gr";
-import { MdOutlinePermIdentity } from "react-icons/md";
+import { MdOutlinePermIdentity, MdShoppingCartCheckout } from "react-icons/md";
 import {
   SiDotnet,
   SiFlask,
@@ -51,7 +51,11 @@ import {
   SiWebflow,
   SiLucid,
   SiYii,
+  SiDocker,
+  SiPaypal,
+  SiPosthog,
 } from "react-icons/si";
+import { TbMailBolt, TbMailForward } from "react-icons/tb";
 import { TiCloudStorageOutline } from "react-icons/ti";
 
 export const techStackStyling: Record<
@@ -285,5 +289,29 @@ export const techStackStyling: Record<
   yii2: {
     icon: SiYii,
     color: "light-dark(rgb(134, 198, 69), rgb(143, 189, 97))",
+  },
+  docker: {
+    icon: SiDocker,
+    color: "light-dark(rgb(0, 183, 255), rgb(0, 96, 135))",
+  },
+    paypal: {
+    icon: SiPaypal,
+    color: "light-dark(rgb(0, 156, 222), rgb(0, 48, 135))",
+  },
+  "checkout.com": {
+    icon: MdShoppingCartCheckout,
+    color: "light-dark(rgb(24, 106, 255), rgb(12, 53, 128))",
+  },
+  klaviyo: {
+    icon: TbMailBolt,
+    color: "light-dark(rgb(40, 200, 120), rgb(20, 100, 60))",
+  },
+  sendgrid: {
+    icon: TbMailForward,
+    color: "light-dark(rgb(26, 130, 226), rgb(13, 65, 113))",
+  },
+  posthog: {
+    icon: SiPosthog,
+    color: "light-dark(rgb(245, 78, 0), rgb(122, 39, 0))",
   },
 };
