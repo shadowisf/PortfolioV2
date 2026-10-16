@@ -1,10 +1,11 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
-import { LinkWithIcon } from "../../components/Link";
-import { IconGlobe, IconCards, IconOctopus } from "../../utils/iconSetting";
+import { ActionLink } from "../../components/Link";
+// import { IconGlobe, IconCards, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageApolloHospital from "@/assets/images/ImageApolloHospital.webp";
 import VideoApolloHospital from "@/assets/videos_master/VideoApolloHospital.webm";
 import VideoApolloHospitalPreview from "@/assets/video_previews/VideoApolloHospital.webm";
+import VideoApolloHospitalPoster from "@/assets/video_posters/VideoApolloHospital.webp";
 import FileApolloHospital from "@/assets/files/FileApolloHospital.pdf";
 //
 const GitHubApolloHospital = "https://github.com/shadowisf/ApolloHospital";
@@ -14,6 +15,7 @@ export const ApolloHospital: WorkEntry = {
   type: "personal project",
   name: "apollo",
   year: "2023",
+  tagline: "a hospital management system",
   techStack: [
     "*django",
     "*python",
@@ -24,22 +26,24 @@ export const ApolloHospital: WorkEntry = {
     "*pythonanywhere",
     "git",
   ],
+  keyStack: ["bootstrap css", "django", "mariadb"],
   image: ImageApolloHospital,
   imageFlex: "1.876047",
   imageAlt:
     "an image of the apollo hospital project; it is viewing the patient records section wherein it displays the list of patient information. additionally, the ui has buttons for CRUD operations.",
   video: VideoApolloHospital,
   videoPreview: VideoApolloHospitalPreview,
+  videoPoster: VideoApolloHospitalPoster,
   videoFlex: "1.599074",
   status: (
     <>
-      apollo was completed on <u>december 20, 2023</u>.
+      completed on <u>december 20, 2023</u>.
     </>
   ),
   description: (
     <>
-      apollo is a <u>web-based hospital management system</u> for managing
-      patient, doctor, and staff records. key features include:
+      a <u>web-based hospital management system</u> for managing patient,
+      doctor, and staff records. key features include:
       <ul>
         <li>
           <b>dynamic workflow:</b> starts from patient registration →
@@ -64,8 +68,7 @@ export const ApolloHospital: WorkEntry = {
   ),
   myRole: (
     <>
-      apollo was a <u>collaborative personal project</u>, partnered with other
-      developers, where i:
+      working alongside other developers, i handled the following:
       <ul>
         <li>
           designed 10+ interactive webpages (html/css/bootstrap) with consistent
@@ -101,26 +104,23 @@ export const ApolloHospital: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img alt="globe icon" src={IconGlobe} />}
+      <ActionLink /* img={<img alt="globe icon" src={IconGlobe} />} */
         href={DemoApolloHospital}
       >
         live website
-      </LinkWithIcon>
+      </ActionLink>
 
-      <LinkWithIcon
-        img={<img alt="octopus icon" src={IconOctopus} />}
+      <ActionLink /* img={<img alt="octopus icon" src={IconOctopus} />} */
         href={GitHubApolloHospital}
       >
         source code
-      </LinkWithIcon>
+      </ActionLink>
 
-      <LinkWithIcon
-        img={<img alt="cards icon" src={IconCards} />}
+      <ActionLink /* img={<img alt="cards icon" src={IconCards} />} */
         href={FileApolloHospital}
       >
         case study
-      </LinkWithIcon>
+      </ActionLink>
     </>
   ),
 };

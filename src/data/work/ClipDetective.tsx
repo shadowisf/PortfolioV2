@@ -1,10 +1,11 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
-import { LinkWithIcon } from "../../components/Link";
-import { IconGlobe, IconOctopus } from "../../utils/iconSetting";
+import { ActionLink } from "../../components/Link";
+// import { IconGlobe, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageClipDetective from "@/assets/images/ImageClipDetective.webp";
 import VideoClipDetective from "@/assets/videos_master/VideoClipDetective.webm";
 import VideoClipDetectivePreview from "@/assets/video_previews/VideoClipDetective.webm";
+import VideoClipDetectivePoster from "@/assets/video_posters/VideoClipDetective.webp";
 //
 const GitHubClipDetective = "https://github.com/shadowisf/ClipDetective";
 const DemoClipDetective = "https://clipdetective-2b40e.web.app";
@@ -28,18 +29,15 @@ export const ClipDetective: WorkEntry = {
     "an image of the index page of the clipdetective web app. there is a text introducing the website, a text saying 'can you guess 5-second clips from movies/series?', and three buttons at the bottom: an option to play with series, to play with movies, and a help button.",
   video: VideoClipDetective,
   videoPreview: VideoClipDetectivePreview,
+  videoPoster: VideoClipDetectivePoster,
   videoFlex: "1.599074",
-  status: (
-    <>
-      clipdetective is currently under <u>active development</u>.
-    </>
-  ),
+  status: <>in active development.</>,
   description: (
     <>
-      clipdetective is a <u>web-based mini game</u> that challenges users to
-      identify scenes from shows and movies i’ve binge-watched. it pushed me to
-      work independently with react.js and tailwind css, avoiding tutorials or
-      external guides. key features include:
+      a <u>web-based mini game</u> that challenges users to identify scenes from
+      shows and movies i’ve binge-watched. it pushed me to work independently
+      with react.js and tailwind css, avoiding tutorials or external guides. key
+      features include:
       <ul>
         <li>
           <b>interactive quizzes:</b> users guess clips from random snippets of
@@ -62,7 +60,7 @@ export const ClipDetective: WorkEntry = {
   ),
   myRole: (
     <>
-      clipdetective was a <u>solo personal project</u> where i:
+      i built this on my own, from start to finish:
       <ul>
         <li>
           structured the full quiz flow, including non-repeating questions and
@@ -98,19 +96,17 @@ export const ClipDetective: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img alt="globe icon" src={IconGlobe} />}
+      <ActionLink /* img={<img alt="globe icon" src={IconGlobe} />} */
         href={DemoClipDetective}
       >
         live website
-      </LinkWithIcon>
+      </ActionLink>
 
-      <LinkWithIcon
-        img={<img alt="octopus icon" src={IconOctopus} />}
+      <ActionLink /* img={<img alt="octopus icon" src={IconOctopus} />} */
         href={GitHubClipDetective}
       >
         source code
-      </LinkWithIcon>
+      </ActionLink>
     </>
   ),
 };

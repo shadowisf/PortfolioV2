@@ -1,10 +1,11 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
-import { LinkWithIcon } from "../../components/Link";
-import { IconCards, IconOctopus } from "../../utils/iconSetting";
+import { ActionLink } from "../../components/Link";
+// import { IconCards, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageBellHospital from "@/assets/images/ImageBellHospital.webp";
 import VideoBellHospital from "@/assets/videos_master/VideoBellHospital.webm";
 import VideoBellHospitalPreview from "@/assets/video_previews/VideoBellHospital.webm";
+import VideoBellHospitalPoster from "@/assets/video_posters/VideoBellHospital.webp";
 import FileBellHospital from "@/assets/files/FileBellHospital.pdf";
 //
 const GitHubBellHospital = "https://github.com/shadowisf/BellHospital";
@@ -20,18 +21,18 @@ export const BellHospital: WorkEntry = {
     "an image of the bell hospital project. it is currently viewing the patients records section where it is displaying all patient information (note that this is a CLI project). additionally, there are commands for CRUD operations.",
   video: VideoBellHospital,
   videoPreview: VideoBellHospitalPreview,
+  videoPoster: VideoBellHospitalPoster,
   videoFlex: "1.598148",
   status: (
     <>
-      bell hospital was completed on <u>december 21, 2022</u>.
+      completed on <u>december 21, 2022</u>.
     </>
   ),
   description: (
     <>
-      bell hospital is a <u>cli-based hospital management system</u> built with
-      java to streamline healthcare administration. the system combines oop
-      principles with practical file-based persistence to manage. key features
-      include:
+      a <u>cli-based hospital management system</u> built with java to
+      streamline healthcare administration. the system combines oop principles
+      with practical file-based persistence to manage. key features include:
       <ul>
         <li>
           <b>core entities</b>: patient/doctor records, appointment scheduling
@@ -69,7 +70,7 @@ export const BellHospital: WorkEntry = {
   ),
   myRole: (
     <>
-      bell hospital is a <u>solo side project</u> where i:
+      i built this on my own, from start to finish:
       <ul>
         <li>
           designed class structures mirroring real-world relationships
@@ -90,19 +91,17 @@ export const BellHospital: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img alt="octopus icon" src={IconOctopus} />}
+      <ActionLink /* img={<img alt="octopus icon" src={IconOctopus} />} */
         href={GitHubBellHospital}
       >
         source code
-      </LinkWithIcon>
+      </ActionLink>
 
-      <LinkWithIcon
-        img={<img alt="cards icon" src={IconCards} />}
+      <ActionLink /* img={<img alt="cards icon" src={IconCards} />} */
         href={FileBellHospital}
       >
         case study
-      </LinkWithIcon>
+      </ActionLink>
     </>
   ),
 };

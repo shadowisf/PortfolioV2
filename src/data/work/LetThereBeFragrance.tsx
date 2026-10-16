@@ -1,10 +1,12 @@
-import { LinkWithIcon } from "../../components/Link";
-import { IconGlobe, IconOctopus } from "../../utils/iconSetting";
+import { ActionLink } from "../../components/Link";
+import { CompanyLink } from "../../components/CompanyLink";
+// import { IconGlobe, IconOctopus } from "../../utils/iconSetting";
 import { WorkEntry } from "../../utils/types/WorkEntry";
 //
 import ImageLetThereBeFragrance from "@/assets/images/ImageLetThereBeFragrance.webp";
 import VideoLetThereBeFragrance from "@/assets/videos_master/VideoLetThereBeFragrance.webm";
 import VideoLetThereBeFragrancePreview from "@/assets/video_previews/VideoLetThereBeFragrance.webm";
+import VideoLetThereBeFragrancePoster from "@/assets/video_posters/VideoLetThereBeFragrance.webp";
 //
 const GitHubLetThereBeFragrance =
   "https://github.com/shadowisf/LetThereBeFragrance";
@@ -14,6 +16,7 @@ export const LetThereBeFragrance: WorkEntry = {
   type: "freelance project",
   name: "let there be fragrance",
   year: "2025",
+  tagline: "e-commerce for a niche fragrance house",
   techStack: [
     "*next.js",
     "*typescript",
@@ -26,24 +29,22 @@ export const LetThereBeFragrance: WorkEntry = {
     "git",
     "*figma",
   ],
+  keyStack: ["next.js", "supabase", "postgresql"],
   image: ImageLetThereBeFragrance,
   imageFlex: "1.6",
   imageAlt:
     "an image of let there be fragrance e-commerce website. right now, it's in the product catalogue page where it shows a grid of all of the fragrances. on the top side, there are filter options such as 2025 collection, for her, for him, etc. on the other right of that is a sort by option such as alphaetical from a to z or vice versa, price low to high or vice versa, etc.",
   video: VideoLetThereBeFragrance,
   videoPreview: VideoLetThereBeFragrancePreview,
-  previewStart: 26,
+  videoPoster: VideoLetThereBeFragrancePoster,
+  previewStart: 16,
   videoFlex: "1.601113",
-  status: (
-    <>
-      let there be fragrance is currently under <u>active development</u>.
-    </>
-  ),
+  status: <>in active development.</>,
   description: (
     <>
-      let there be fragrance is a niche fragrance house, offering a curated
-      collection of different and unique scents. i developed a{" "}
-      <u>web-based e-commerce platform</u> focused on delivering a smooth
+      <CompanyLink name="let there be fragrance" /> is a niche fragrance house,
+      offering a curated collection of different and unique scents. i developed
+      a <u>web-based e-commerce platform</u> focused on delivering a smooth
       shopping experience through fast performance, intuitive ui, and essential
       user-centric features. key features include:
       <ul>
@@ -73,8 +74,8 @@ export const LetThereBeFragrance: WorkEntry = {
   ),
   myRole: (
     <>
-      let there be fragrance is a <u>collaborative freelance project</u>,
-      partnered with a visual designer and a project coordinator, where i:
+      working with a visual designer and a project coordinator, i handled the
+      following:
       <ul>
         <li>
           implemented next.js (typescript) frontend with server-side rendering,
@@ -109,19 +110,17 @@ export const LetThereBeFragrance: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img alt="globe icon" src={IconGlobe} />}
+      <ActionLink /* img={<img alt="globe icon" src={IconGlobe} />} */
         href={DemoLetThereBeFragrance}
       >
         preview website
-      </LinkWithIcon>
+      </ActionLink>
 
-      <LinkWithIcon
-        img={<img alt="octopus icon" src={IconOctopus} />}
+      <ActionLink /* img={<img alt="octopus icon" src={IconOctopus} />} */
         href={GitHubLetThereBeFragrance}
       >
         source code
-      </LinkWithIcon>
+      </ActionLink>
     </>
   ),
 };

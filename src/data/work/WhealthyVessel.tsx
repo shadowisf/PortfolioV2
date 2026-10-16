@@ -1,10 +1,12 @@
-import { LinkWithIcon } from "../../components/Link";
-import { IconGlobe, IconOctopus } from "../../utils/iconSetting";
+import { ActionLink } from "../../components/Link";
+import { CompanyLink } from "../../components/CompanyLink";
+// import { IconGlobe, IconOctopus } from "../../utils/iconSetting";
 import { WorkEntry } from "../../utils/types/WorkEntry";
 //
 import ImageWhealthyVessel from "@/assets/images/ImageWhealthyVessel.webp";
 import VideoWhealthyVessel from "@/assets/videos_master/VideoWhealthyVessel.webm";
 import VideoWhealthyVesselPreview from "@/assets/video_previews/VideoWhealthyVessel.webm";
+import VideoWhealthyVesselPoster from "@/assets/video_posters/VideoWhealthyVessel.webp";
 //
 const GitHubWhealthyVessel = "https://github.com/shadowisf/WhealthyVessel";
 const DemoWhealthyVessel = "https://whealthy-vessel.vercel.app";
@@ -13,26 +15,25 @@ export const WhealthyVessel: WorkEntry = {
   type: "freelance project",
   name: "whealthy vessel",
   year: "2025",
+  tagline: "a corporate site for a premium cookware brand",
   techStack: ["vite", "*react.js", "*typescript", "*scss", "git"],
+  keyStack: ["react.js"],
   image: ImageWhealthyVessel,
   imageFlex: "1.6",
   imageAlt:
     "an image of the whealthy vessel website, it is currently in the recipe corner page. on the top of the page, there is a banner with a background image and a text saying recipe corner. just below that, there are shortcut buttons such as entree and dessert. below the said banner are the grid of all recipes.",
   video: VideoWhealthyVessel,
   videoPreview: VideoWhealthyVesselPreview,
+  videoPoster: VideoWhealthyVesselPoster,
   videoFlex: "1.601113",
-  status: (
-    <>
-      whealthy vessel is currently under <u>active development</u>.
-    </>
-  ),
+  status: <>in active development.</>,
   description: (
     <>
-      whealthy vessel is a high-quality and premium cookware brand, offering
-      health-focused solutions and culinary excellence. i developed a{" "}
-      <u>corporate-style website</u>, showcasing the quality and features of the
-      brand's products and also to provide better user experience for employees.
-      key features include:
+      <CompanyLink name="whealthy vessel" /> is a high-quality and premium
+      cookware brand, offering health-focused solutions and culinary excellence.
+      i developed a <u>corporate-style website</u>, showcasing the quality and
+      features of the brand's products and also to provide better user
+      experience for employees. key features include:
       <ul>
         <li>
           <b>poduct showcase system</b>: interactive display of various cookware
@@ -55,8 +56,7 @@ export const WhealthyVessel: WorkEntry = {
   ),
   myRole: (
     <>
-      whealthy vessel is a <u>collaborative freelance project</u>, partnered
-      with a project coordinator, where i:
+      working with a project coordinator, i handled the following:
       <ul>
         <li>
           developed key site features, including product gallery layouts, hover
@@ -92,19 +92,17 @@ export const WhealthyVessel: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img alt="globe icon" src={IconGlobe} />}
+      <ActionLink /* img={<img alt="globe icon" src={IconGlobe} />} */
         href={DemoWhealthyVessel}
       >
         preview website
-      </LinkWithIcon>
+      </ActionLink>
 
-      <LinkWithIcon
-        img={<img alt="octopus icon" src={IconOctopus} />}
+      <ActionLink /* img={<img alt="octopus icon" src={IconOctopus} />} */
         href={GitHubWhealthyVessel}
       >
         source code
-      </LinkWithIcon>
+      </ActionLink>
     </>
   ),
 };

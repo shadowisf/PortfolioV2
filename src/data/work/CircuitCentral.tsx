@@ -1,10 +1,11 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
-import { LinkWithIcon } from "../../components/Link";
-import { IconCards, IconOctopus } from "../../utils/iconSetting";
+import { ActionLink } from "../../components/Link";
+// import { IconCards, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageCircuitCentral from "@/assets/images/ImageCircuitCentral.webp";
 import VideoCircuitCentral from "@/assets/videos_master/VideoCircuitCentral.webm";
 import VideoCircuitCentralPreview from "@/assets/video_previews/VideoCircuitCentral.webm";
+import VideoCircuitCentralPoster from "@/assets/video_posters/VideoCircuitCentral.webp";
 import FileCircuitCentral from "@/assets/files/FileCircuitCentral.pdf";
 //
 const GitHubCircuitCentral = "https://github.com/shadowisf/CircuitCentral";
@@ -13,6 +14,7 @@ export const CircuitCentral: WorkEntry = {
   type: "personal project",
   name: "circuitcentral",
   year: "2024",
+  tagline: "sales management for an electronics store",
   techStack: [
     "*c#",
     "*windows forms",
@@ -20,23 +22,25 @@ export const CircuitCentral: WorkEntry = {
     "*transact-sql",
     "git",
   ],
+  keyStack: ["windows forms", "c#", "microsoft sql server"],
   image: ImageCircuitCentral,
   imageFlex: "1.683857",
   imageAlt:
     "an image of the circuitcentral project; it is viewing the orders section wherein it displays a list of products that are currently in a cart. additionally, the ui has buttons for CRUD operations.",
   video: VideoCircuitCentral,
   videoPreview: VideoCircuitCentralPreview,
+  videoPoster: VideoCircuitCentralPoster,
   previewStart: 15,
   videoFlex: "1.687037",
   status: (
     <>
-      circuitcentral was completed on <u>april 29, 2024</u>.
+      completed on <u>april 29, 2024</u>.
     </>
   ),
   description: (
     <>
-      circuitcentral is a <u>windows forms e-commerce management system</u> for
-      managing electronic product sales. key features include:
+      a <u>windows forms e-commerce management system</u> for managing
+      electronic product sales. key features include:
       <ul>
         <li>
           <b>user experience & streamlined ordering:</b> customers can browse
@@ -65,7 +69,7 @@ export const CircuitCentral: WorkEntry = {
   ),
   myRole: (
     <>
-      circuitcentral was a <u>solo personal project</u> where i:
+      i built this on my own, from start to finish:
       <ul>
         <li>
           designed 10+ winforms screens (login, product catalog, order
@@ -93,19 +97,17 @@ export const CircuitCentral: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img alt="octopus icon" src={IconOctopus} />}
+      <ActionLink /* img={<img alt="octopus icon" src={IconOctopus} />} */
         href={GitHubCircuitCentral}
       >
         source code
-      </LinkWithIcon>
+      </ActionLink>
 
-      <LinkWithIcon
-        img={<img alt="cards icon" src={IconCards} />}
+      <ActionLink /* img={<img alt="cards icon" src={IconCards} />} */
         href={FileCircuitCentral}
       >
         case study
-      </LinkWithIcon>
+      </ActionLink>
     </>
   ),
 };

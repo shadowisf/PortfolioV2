@@ -7,17 +7,14 @@ import "zoom-vanilla.js/dist/zoom-vanilla.min.js";
 import Spinner from "../components/Spinner";
 import { useGlobalState } from "../providers/GlobalStateProvider";
 import { useScrollingAnimation } from "../utils/gsap/useScrollingAnimation";
-import { useGSAP } from "@gsap/react";
-import { useWorkAnimation } from "../utils/gsap/useWorkAnimation";
 
 type WorkProps = {
   dataID: number;
 };
 
 export default function Work(p: WorkProps) {
-  const { setCurrentPage, setSkipStart } = useGlobalState();
+  const { setCurrentPage } = useGlobalState();
   const { scrollToTop } = useScrollingAnimation();
-  const { startup } = useWorkAnimation();
 
   const [imageLoading, setImageLoading] = useState(true);
 
@@ -39,141 +36,119 @@ export default function Work(p: WorkProps) {
     scrollToTop(0);
   }, [currentProjectTitle]);
 
-  useGSAP(() => {
-    startup();
-  });
-
   return (
     <main className="workWrapper">
-      <section className="projectNav">
-        {/* previous project */}
-        <Link
-          to={`/${prevProjectTitle}`}
-          className="nextPrevButton"
-          style={
-            prevProjectTitle === ""
-              ? { opacity: "0.25", pointerEvents: "none" }
-              : {}
-          }
-          onClick={() => setSkipStart(true)}
-        >
-          ← <small>prev</small>
-        </Link>
-
-        {/* next project */}
-        <Link
-          to={`/${nextProjectTitle}`}
-          className="nextPrevButton"
-          style={
-            nextProjectTitle === ""
-              ? { opacity: "0.25", pointerEvents: "none" }
-              : {}
-          }
-          onClick={() => setSkipStart(true)}
-        >
-          <small>next</small> →
-        </Link>
-      </section>
-
-      <br />
-      <br />
-
+      {/* what it is at a glance: what kind of work and when (the eyebrow, as
+          apple sets a category over a product name), the name, where it
+          stands now, and where to go and see it */}
       <section className="header">
-        {/* title */}
-        <h1 className="title">{project.name}</h1>
-      </section>
-
-      {/* year */}
-      <small className="year">{project.year}</small>
-
-      {/* tech stack */}
-      <section className="techStack">
-        {project.techStack?.map(
-          (item: string, index: Key | null | undefined) => (
-            <TechStackTile
-              techStackItem={item}
-              key={index}
-              classNameContainer="item"
-              classNameIcon="icon"
-              preview={false}
-            />
-          )
-        )}
-      </section>
-
-      <section className="content">
-        {/* images & videos */}
-        <div className="media">
-          <div style={{ flex: project.imageFlex, width: "100%" }}>
-            {imageLoading && <Spinner />}
-            <img
-              src={project.image}
-              alt={project.imageAlt}
-              data-action="zoom"
-              onLoad={() => setImageLoading(false)}
-              style={{ display: imageLoading ? "none" : "block" }}
-            />
-          </div>
-
-          <div style={{ flex: project.videoFlex, width: "100%" }}>
-            {/*
-              "metadata" fetches only the header and first cluster -- 16-256KB
-              depending on the clip, against originals up to 76MB -- which is
-              what paints a real first frame instead of an empty grey box.
-              The rest of the file still waits for an actual press of play.
-              aspectRatio holds the box steady until that frame arrives.
-            */}
-            <video
-              controls
-              muted
-              preload="metadata"
-              src={project.video}
-              style={
-                {
-                  aspectRatio: project.videoFlex,
-                  // the width at which this clip is exactly 85vh tall
-                  "--clipMaxWidth": `calc(85vh * ${project.videoFlex})`,
-                } as React.CSSProperties
-              }
-            />
-          </div>
-        </div>
-
-        {/* links */}
+        <small className="meta">
+          {project.type}
+          <span className="metaDot">•</span>
+          {project.year}
+        </small>
+        <h1 className="extra title">{project.name}</h1>
+        <p className="status">{project.status}</p>
         <div className="links">{project.links}</div>
+      </section>
 
-        {/* content */}
-        <div className="paragraph">
-          <h4>status:</h4>
-          {project.status}
+      <section className="media">
+        <div style={{ flex: project.imageFlex, width: "100%" }}>
+          {imageLoading && <Spinner />}
+          <img
+            src={project.image}
+            alt={project.imageAlt}
+            data-action="zoom"
+            onLoad={() => setImageLoading(false)}
+            style={{ display: imageLoading ? "none" : "block" }}
+          />
+        </div>
 
-          <br />
-          <br />
-          <br />
-
-          <h4>description:</h4>
-          {project.description}
-
-          <br />
-          <br />
-          <br />
-
-          <h4>my role:</h4>
-          {project.myRole}
+        <div style={{ flex: project.videoFlex, width: "100%" }}>
+          {/*
+            "metadata" fetches only the header and first cluster -- 16-256KB
+            depending on the clip, against originals up to 76MB -- which is
+            what paints a real first frame instead of an empty grey box.
+            The rest of the file still waits for an actual press of play.
+            aspectRatio holds the box steady until that frame arrives.
+          */}
+          <video
+            controls
+            muted
+            preload="metadata"
+            src={project.video}
+            style={
+              {
+                aspectRatio: project.videoFlex,
+              } as React.CSSProperties
+            }
+          />
         </div>
       </section>
 
+      {/* the reading, in the order someone deciding about the work wants it:
+          what it is, what i did, then what it was built with */}
+      <section className="details">
+        <section className="spec">
+          <h4>overview</h4>
+          <div className="paragraph">{project.description}</div>
+        </section>
+
+        <section className="spec">
+          <h4>role</h4>
+          <div className="paragraph">{project.myRole}</div>
+        </section>
+
+        <section className="spec">
+          <h4>techstack</h4>
+          <div className="techStack">
+            {project.techStack?.map(
+              (item: string, index: Key | null | undefined) => (
+                <TechStackTile
+                  techStackItem={item}
+                  key={index}
+                  classNameContainer="item"
+                />
+              )
+            )}
+          </div>
+        </section>
+      </section>
+
+      {/* prev and next sit down here, where a reader who finished this
+          project is already looking */}
       <section className="bottomNav">
+        {/* the projects either side, by name, apple's "next" style */}
+        {prevProject ? (
+          <Link to={`/${prevProjectTitle}`} className="nextPrevButton prev">
+            <small>← previous</small>
+            <span>{prevProject.name}</span>
+          </Link>
+        ) : (
+          <span className="nextPrevButton prev" />
+        )}
+
+        {/* back to the top of this project, by name like the two either side */}
         <Link
-          to={`/${nextProjectTitle}`}
-          className="topButton"
+          to={`/${currentProjectTitle}`}
+          className="nextPrevButton top"
           onClick={(e) => {
             e.preventDefault();
             scrollToTop(0.25);
           }}
         >
-          ↑ <small>top</small>
+          <small>↑ top</small>
+          <span>{project.name}</span>
         </Link>
+
+        {nextProject ? (
+          <Link to={`/${nextProjectTitle}`} className="nextPrevButton next">
+            <small>next →</small>
+            <span>{nextProject.name}</span>
+          </Link>
+        ) : (
+          <span className="nextPrevButton next" />
+        )}
       </section>
     </main>
   );

@@ -2,13 +2,15 @@ type LinkProps = {
   href?: string;
   children?: React.ReactNode;
   onClick?: () => void;
+  // the emoji icons are switched off for now -- every place that had one keeps
+  // it as a comment, so uncommenting it there brings it straight back
   img?: React.ReactNode;
   className?: string;
-  label?: string;
   sameTab?: boolean;
 };
 
-export function LinkWithNoIcon({
+// a link inside a sentence
+export function InlineLink({
   className,
   href,
   onClick,
@@ -18,7 +20,7 @@ export function LinkWithNoIcon({
 }: LinkProps) {
   return (
     <a
-      className={`${className} linkWithNoIcon`}
+      className={className ? `${className} inlineLink` : "inlineLink"}
       href={href}
       target={sameTab ? "_self" : "_blank"}
       onClick={onClick}
@@ -29,32 +31,26 @@ export function LinkWithNoIcon({
   );
 }
 
-export function LinkWithIcon(p: LinkProps) {
+// A link standing on its own: resume, email, live website, source code. One
+// that leaves the site says so with an arrow -- a character, not an icon.
+export function ActionLink(p: LinkProps) {
   return (
     <a
       onClick={p.onClick}
       href={p.href}
       target="_blank"
-      className={`linkWithIcon ${p.className}`}
+      className={p.className ? `actionLink ${p.className}` : "actionLink"}
     >
       {p.img}
-      <span className={p.className === "faded" ? "faded" : ""}>
+      {/* the arrow sits inside the label, so one underline runs under both */}
+      <span className={p.className === "faded" ? "label faded" : "label"}>
         {p.children}
+        {p.href && (
+          <span className="arrow" aria-hidden="true">
+            ↗
+          </span>
+        )}
       </span>
-    </a>
-  );
-}
-
-export function LinkWithIconOnly(p: LinkProps) {
-  return (
-    <a
-      onClick={p.onClick}
-      href={p.href}
-      target="_blank"
-      className={`linkWithIconOnly ${p.className}`}
-    >
-      {p.img}
-      <span className="label">{p.label}</span>
     </a>
   );
 }

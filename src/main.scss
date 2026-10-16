@@ -1,11 +1,20 @@
 $primaryFont: "Kyiv Type Sans", Arial, sans-serif;
 $bayBayinFont: "Noto Sans Tagalog";
 
-$borderRadius: 4px;
+// Two corner sizes: a small one for controls and chips, a larger one for
+// media and cards. Kept on the square side -- 10/18 read as too soft, and the
+// original 4px everywhere read as a template.
+$radiusSmall: 6px;
+$radiusLarge: 10px;
 
-$lightBoxShadow: rgba(0, 0, 0, 0.25);
-$darkBoxShadow: rgba(0, 0, 0, 0.5);
-$boxShadow: 0 0 48px 1px light-dark($lightBoxShadow, $darkBoxShadow);
+// Depth without a glow. In light mode, a soft shadow sitting close under the
+// surface; in dark mode a shadow is invisible against near-black, so a hairline
+// ring does the separating instead. light-dark() only takes colours, hence a
+// transparent layer on the side that should not show.
+$shadowRaised:
+  0 0 0 1px light-dark(rgba(0, 0, 0, 0.04), rgba(255, 255, 255, 0.08)),
+  0 2px 6px light-dark(rgba(0, 0, 0, 0.04), transparent),
+  0 12px 32px light-dark(rgba(0, 0, 0, 0.1), transparent);
 
 $maxWidthDesktop: 700px;
 $maxWidthMobile: 90%;
@@ -41,7 +50,8 @@ $minMaxWidth: 1338px;
   --theme: light dark;
 
   --text-color: light-dark(rgb(0, 0, 0), white);
-  --background-color: light-dark(rgb(229, 229, 234), rgb(28, 28, 30));
+  // light mode: a white page under a grey bar; dark: the reverse step
+  --background-color: light-dark(rgb(255, 255, 255), rgb(28, 28, 30));
   --faded-color: rgb(129, 126, 131);
   /* --accent-color: light-dark(rgb(99, 32, 238), rgb(128, 117, 255)); */
   /* --accent-color: light-dark(rgb(255, 59, 48), rgb(255, 69, 58)); */
@@ -49,9 +59,66 @@ $minMaxWidth: 1338px;
   /* --accent-color: light-dark(rgb(160, 174, 140), rgb(180, 192, 157)); */
   /* --accent-color: light-dark(rgb(227, 191, 213), rgb(255, 210, 237)); */
   --accent-color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));
+  // the one colour on the site: the * beside the page you are on, in the
+  // drawer and the mobile menu -- apple's system green, light and dark
+  --marker-color: light-dark(rgb(52, 199, 89), rgb(48, 209, 88));
 
-  --h0: calc(var(--h1) * 1.5);
-  --h1: 2.986rem;
+  // quiet fills for chips and hovered rows, and the hairline for edges
+  --surface: light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.07));
+  --hairline: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
+
+  // The nav's shade, only just off the page so it is felt more than seen: a
+  // whisper of grey over the white page, a hair above the near-black in dark.
+  // Solid for the open work dropdown, which the desktop bar joins; 72%
+  // opaque for the frosted mobile bar.
+  --barSolid: light-dark(rgb(242, 242, 247), rgb(36, 36, 38));
+
+  // One curve and one duration for every css transition, so the whole site
+  // moves the same way: quick to respond, long gentle settle.
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration: 0.35s;
+  // the same timing, but only for transitions that move something (scale, the
+  // underline drawing across a link) -- the one reduced motion switches off
+  --motion: 0.35s;
+
+  // The hover weight change keeps its original slower, even timing: on the
+  // curve above it lands within the first tenth of a second and just reads as
+  // a jump. It is also deliberately left out of the reduced-motion override
+  // below -- the glyphs thicken in place, nothing travels across the screen.
+  --fontMorphDuration: 0.5s;
+  --fontMorph: var(--fontMorphDuration) ease;
+
+  // The work dropdown sliding down and back up. Also left out of the reduced-
+  // motion override, by choice: the slide is the point of the dropdown.
+  --flyoutSlide: 0.45s;
+
+  // The theme toggle's sun and moon morphing into each other -- left out of the
+  // reduced-motion override too, like the two above.
+  --themeMorph: 0.5s;
+
+  // Spacing. Every gap, margin and padding is a step of one scale, on a 4px
+  // grid: 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3, 4, 6, 8rem. The page's
+  // own rhythm is named here, and every page uses it: the room above the
+  // first thing on a page (under the bar) and below the last, the space
+  // between its sections, and between a title and the subtitle under it.
+  // A row of links after a title block sits 0.5rem further down still.
+  --page-top: 8rem;
+  --page-bottom: 6rem;
+  --section-gap: 6rem;
+  --title-gap: 1.5rem;
+
+  // Leading, by kind of text: display headings set close, a page's subtitle
+  // a little looser, running text looser still. Opened up a touch on a
+  // phone (below), where the lines are short and the type small.
+  --leading-display: 1.08;
+  --leading-subtitle: 1.25;
+  --leading-body: 1.55;
+
+  // h0 and h1 keep the exact formulas the mobile tier uses below, so the
+  // 1338px handover stays seamless -- they just carry on growing on big
+  // screens up to a higher cap, instead of freezing at their 1338px size.
+  --h0: clamp(4.479rem, calc(1.5767rem + 3.4706vw), 6rem);
+  --h1: clamp(2.986rem, calc(1.1932rem + 2.1438vw), 3.75rem);
   --h2: 2.488rem;
   --h3: 2.074rem;
   --h4: 1.728rem;
@@ -97,6 +164,12 @@ $minMaxWidth: 1338px;
   padding: 0;
   margin: 0;
   backface-visibility: hidden;
+}
+
+// large type set close: leading that suits body text is loose at 90px
+h1,
+h2 {
+  line-height: var(--leading-display);
 }
 
 h1 {
@@ -193,12 +266,17 @@ nav {
   display: none;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 2rem;
+  // the desktop bar's height, so the menu below can start at its foot
+  height: 4rem;
+  padding: 0 2rem;
 
-  z-index: 5;
+  // over the menu, which drops from under it
+  z-index: 990;
 
   .hamburgerButton {
-    transition: scale 0.5s;
+    display: flex;
+
+    transition: scale var(--motion) var(--ease);
 
     &:hover {
       scale: $scaleOnHover;
@@ -209,7 +287,7 @@ nav {
       outline: none;
       display: flex;
 
-      transition: fill 0.5s;
+      transition: fill var(--duration) var(--ease);
     }
 
     &:hover {
@@ -218,66 +296,560 @@ nav {
   }
 }
 
+// The mobile menu, dropped down from under the bar: a panel in the bar's own
+// grey, so the bar reads as having pulled down to fill the screen, with the
+// logo and the button (now a cross) still on it above. The frame is fixed
+// from the bar's foot down and clips the panel, which slides down out of it
+// and back up into it -- as the work drawer does on desktop. Left-aligned:
+// work and its projects by kind, as in the drawer, then about, and the theme
+// at the foot. Scrolls on a small phone.
+//
+// Deliberately plays with reduced motion on, like the drawer's slide.
 .menu {
   position: fixed;
-
-  font-size: 7vw;
-
-  width: 100%;
-  height: 100vh;
-
-  z-index: 999;
-
-  display: none;
-
-  opacity: 0;
-  visibility: hidden;
-
+  top: 4rem;
+  left: 0;
+  right: 0;
+  // as tall as what is in it, the rest of the screen at most (where it
+  // scrolls), with the page blurred below it (.menuScrim)
+  max-height: calc(100dvh - 4rem);
+  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  // under the bar, so the panel comes out from behind it
+  z-index: 980;
+  overflow: hidden;
 
-  gap: 4rem;
+  // hidden once the panel is back up, so nothing under it is blocked
+  visibility: hidden;
+  transition: visibility 0s var(--flyoutSlide);
+
+  color: var(--text-color);
+
+  &.open {
+    visibility: visible;
+    transition: visibility 0s;
+  }
+
+  .menuPanel {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding: 2rem 2rem calc(2rem + env(safe-area-inset-bottom));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    // a hair short of solid, as the work drawer is, and for the same reason:
+    // over the blur, a fully opaque panel's edge caught a glow
+    background-color: color-mix(in srgb, var(--barSolid) 99%, transparent);
+    translate: 0 -100%;
+    transition: translate var(--flyoutSlide) var(--ease);
+    will-change: translate;
+  }
+
+  &.open .menuPanel {
+    translate: 0 0;
+  }
+
+  span {
+    font-size: inherit;
+  }
 
   svg {
     position: relative;
-    fill: var(--background-color);
+    fill: var(--text-color);
   }
 
-  a,
-  button {
-    color: var(--background-color);
+  .menuLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
 
-    transition:
-      scale 0.5s,
-      font-variation-settings 0.5s;
-
+  // work and about: large, with the site's weight change
+  .menuHeading {
+    font-size: var(--h2);
+    line-height: 1.1;
+    color: inherit;
     font-variation-settings: $fontVarNormal;
+    transition: font-variation-settings var(--fontMorph);
 
-    &:hover {
-      scale: $scaleOnHover;
+    &.active,
+    &:is(a, button):hover {
       font-variation-settings: $fontVarThin;
+    }
+
+    // about, when it is the page you are on (not work: the project inside
+    // carries the marker)
+    &.active:is(a)::after {
+      @extend %pageMarker;
     }
   }
 
-  .closeButton {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-top: 1.25rem;
-    margin-right: 2rem;
+  // work, ruled off from the theme at the foot by the page's own hairline,
+  // with the same room either side of it (the panel's gap below)
+  .menuWork {
+    display: flex;
+    flex-direction: column;
+
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--hairline);
   }
 
-  .closeButton:hover,
-  .themeButton:hover {
+  // "work" as the accordion's button: the heading across the panel, a
+  // chevron at its end that turns up while it is open
+  .menuToggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+
+    .menuChevron {
+      width: 1.5rem;
+      height: 1.5rem;
+      flex-shrink: 0;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: rotate var(--flyoutSlide) var(--ease);
+    }
+
+    &.open .menuChevron {
+      rotate: 180deg;
+    }
+
+    // set as the menu opens: already turned, not turning
+    &.instant .menuChevron {
+      transition: none;
+    }
+  }
+
+  // Its projects, slid open and shut: the row grows from nothing to its
+  // content's height (a grid row can ease between the two, where height
+  // cannot reach auto). Like the drawer's slide, it plays with reduced
+  // motion on.
+  .menuWorkList {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--flyoutSlide) var(--ease);
+
+    &.open {
+      grid-template-rows: 1fr;
+    }
+
+    // set as the menu opens: already open (or shut), not sliding
+    &.instant {
+      transition: none;
+    }
+  }
+
+  // what closes: nothing of it shows at 0fr -- so the space under "work"
+  // is inside it, on the groups, where it closes too
+  .menuWorkInner {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  // the kinds of work apart by space alone, no rules between them -- and
+  // set in from the left, under "work", so they read as its contents
+  .menuWorkGroups {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 1.5rem;
+    padding-left: 1.25rem;
+  }
+
+  // Each kind of work its own group: the label small over its projects,
+  // close below it, so it reads as their heading and not as one of them.
+  .menuGroup {
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  // a fixed 12px: legible on a phone, well under the names' size
+  .menuGroupLabel {
+    font-size: 0.75rem;
+    opacity: 0.6;
+  }
+
+  // a project: its name, its year at the far end -- the name alone the link
+  .menuProject {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1.5rem;
+    color: inherit;
+    font-size: var(--h5);
+
+    .menuName {
+      min-width: 0;
+      color: inherit;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-variation-settings: $fontVarNormal;
+      transition: font-variation-settings var(--fontMorph);
+    }
+
+    // always the plain weight, the row's own active weight notwithstanding
+    .menuYear {
+      flex-shrink: 0;
+      font-size: var(--small);
+      opacity: 0.6;
+      font-variant-numeric: tabular-nums;
+      font-variation-settings: $fontVarNormal;
+    }
+
+    .menuName.active,
+    a.menuName:hover {
+      font-variation-settings: $fontVarThin;
+    }
+
+    a.menuName.active::after {
+      @extend %pageMarker;
+    }
+
+    // still to come: greyed, nothing to tap
+    &.upcoming {
+      opacity: 0.45;
+    }
+  }
+
+  // the theme, at the foot on the right: its icon and which one it is
+  .themeButton {
+    margin-top: auto;
+    align-self: flex-end;
+
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    color: inherit;
+    font-family: inherit;
+    font-size: var(--h5);
     cursor: pointer;
   }
 }
 
-.logoButton {
+// The desktop bar. The logo and the buttons inside are position: fixed
+// themselves, but backdrop-filter makes this their containing block, so their
+// 1.25rem margins now measure from this bar -- which sits at the top edge
+// anyway, so nothing moves. 4rem is those margins either side of a 24px row.
+.navAlt {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rem;
+
+  // under the image zoom overlay (420) like the buttons always were
+  z-index: 200;
+
+  // Clear: the logo and links sit straight on the page. When the work drawer
+  // is open, the strip it brings down with it fills in behind them instead.
+  background-color: transparent;
+}
+
+
+// "work" in the desktop bar: a button now, opening the flyout
+.workTrigger {
+  display: flex;
+  align-items: center;
+
+  font-family: inherit;
+  font-size: var(--p);
+  color: var(--text-color);
+  cursor: pointer;
+
+  font-variation-settings: $fontVarNormal;
   transition:
-    color 0.5s,
-    scale 0.5s;
+    color var(--duration) var(--ease),
+    font-variation-settings var(--fontMorph);
+
+  // stays lit for as long as its panel is down, like apple's
+  &:hover,
+  &.open {
+    color: var(--accent-color);
+    font-variation-settings: $fontVarThin;
+  }
+}
+
+.workFlyout {
+  // The whole height from the top of the screen: the drawer comes down from
+  // above it and goes back up past it, behind the logo and links.
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  // under the bar, over the scrim, and under the image zoom overlay (420)
+  z-index: 199;
+
+  overflow: hidden;
+
+  // Nothing here is clickable while it is up out of sight. Visibility flips at
+  // the start of the slide down and at the end of the slide up.
+  visibility: hidden;
+  transition: visibility 0s var(--flyoutSlide);
+
+  &.open {
+    visibility: visible;
+    transition: visibility 0s;
+  }
+
+  // the panel itself, with the bar's fill riding above it as a strip
+  .workFlyoutInner {
+    position: relative;
+    margin-top: 4rem; // its resting place, straight under the bar
+
+    display: flex;
+    align-items: flex-start;
+    // room between the kinds of work, so each column reads as its own
+    gap: 6rem;
+
+    // 2rem either side, the same edges as the logo and the bar's buttons
+    padding: 2.5rem 2rem 3rem;
+
+    // No edge line, like the bar: its shade, a step off the page's, and the
+    // blurred page behind are what set it apart. A hair short of solid, on
+    // purpose: fully opaque, the browser stopped the blur at the drawer's
+    // edge and a glow showed along it; at 99% the blur runs on underneath as
+    // one sheet, and the 1% is too little to see. (99.9% would round to
+    // solid -- colour alpha has 256 steps -- and the glow would be back.)
+    background-color: color-mix(in srgb, var(--barSolid) 99%, transparent);
+
+    // closed: all of it -- its own height plus the strip's -- above the top
+    // edge of the screen
+    translate: 0 calc(-100% - 4rem);
+    transition: translate var(--flyoutSlide) var(--ease);
+    // kept on its own layer for good, not only while it slides: dropped back
+    // into the page's own painting once still, it was drawn afresh over the
+    // blur and its edge bled into it
+    will-change: translate;
+
+    // the bar's fill: lands behind the logo and links as the drawer arrives
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 100%;
+      height: 4rem;
+      background-color: inherit;
+    }
+  }
+
+  &.open .workFlyoutInner {
+    translate: 0 0;
+  }
+
+  .workFlyoutColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    // Two tracks, name and year, shared by every row in the column through
+    // subgrid, so the years all start on the same line however long the name.
+    ul {
+      list-style: none;
+
+      display: grid;
+      grid-template-columns: max-content max-content;
+      column-gap: 4rem;
+      row-gap: 0.5rem;
+    }
+
+    li,
+    li > .upcoming {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: subgrid;
+      align-items: baseline;
+    }
+
+    // set at the names' size, the year in its own (below)
+    li {
+      font-size: var(--h5);
+      line-height: 1.2;
+    }
+  }
+
+  // plain lowercase body text, grey, so the project names still lead
+  .workFlyoutHeading {
+    color: var(--faded-color);
+    font-size: var(--p);
+  }
+
+  a {
+    font-size: var(--h5);
+    line-height: 1.2;
+
+    transition: color var(--duration) var(--ease);
+
+    &:hover {
+      color: var(--accent-color);
+    }
+  }
+
+  // The weight change and the underline belong to the name alone; the year
+  // beside it stays as it is.
+  // Long names end in "…" at the same 300px the home list gives a title, so
+  // one long project cannot stretch its column and crowd the others.
+  .workFlyoutName {
+    // the link's size -- the global span rule would otherwise pin it to body text
+    font-size: inherit;
+
+    // only as wide as its own text, not the whole name column, so the line
+    // under the current project stops where its name does
+    justify-self: start;
+
+    min-width: 0;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-variation-settings: $fontVarNormal;
+    transition: font-variation-settings var(--fontMorph);
+  }
+
+  a.workFlyoutName:hover {
+    font-variation-settings: $fontVarThin;
+  }
+
+  // the project you are on: the heavy weight, and the marker after it
+  a.workFlyoutName.active {
+    font-variation-settings: $fontVarThin;
+
+    &::after {
+      @extend %pageMarker;
+    }
+  }
+
+  .workFlyoutYear {
+    color: var(--faded-color);
+    font-size: var(--smaller);
+    font-variant-numeric: tabular-nums;
+  }
+
+  // still to come: set like a link, but greyed and inert
+  .upcoming {
+    font-size: var(--h5);
+    line-height: 1.2;
+    color: var(--faded-color);
+    cursor: default;
+  }
+
+  // A project was clicked: no slide back up -- the panel is simply gone, and
+  // the new page is what you see next.
+  &.instant,
+  &.instant .workFlyoutInner {
+    transition: none !important;
+  }
+}
+
+// The page below the open panel, blurred -- not darkened, so there is no
+// shadow about the panel, only the soft page. A click on it closes the panel
+// rather than landing on whatever is beneath. The whole screen, behind the
+// panel as well.
+// The page you are on, in the drawer and the mobile menu: a * after its
+// name, in the site's one colour -- as tall as a capital, and centred on the
+// whole name, ascenders and all. Measured in Kyiv Type Sans, the glyph's ink
+// runs from 0.454em to 0.794em above the baseline (0.34em tall, its middle
+// at 0.624em), up where a footnote mark sits; the cap height is 0.7em. So it
+// is drawn 0.7 / 0.34 = 2.06 times the size, and dropped until its middle is
+// on the cap height's middle (0.35em): (0.624 x 2.06 - 0.35) / 2.06 = 0.454em
+// of its own size -- its ink then running from the baseline to the cap
+// height, like a capital's. line-height 0 keeps the larger glyph from opening
+// up the line. It stands about a word space off the name: 0.15em of its own
+// size, 0.3em of the name's.
+%pageMarker {
+  content: "*";
+  // always the regular cut, the one measured above -- the heavy one the
+  // active name takes draws its * larger and lower
+  font-variation-settings: $fontVarNormal;
+  font-size: 2.06em;
+  line-height: 0;
+  position: relative;
+  top: 0.454em;
+  margin-left: 0.15em;
+  color: var(--marker-color);
+}
+
+// The page blurred under a panel come down from the bar: the work drawer's,
+// and the mobile menu's. A placeholder both extend, so a rule for one alone
+// (the drawer's, hidden on mobile) stays its own.
+%pageBlur {
+  position: fixed;
+  inset: 0;
+
+  // The blur itself eases in and out -- from none to its full 12px and back
+  // -- rather than a fully blurred layer fading in. A fade showed the sharp
+  // page and a blurred copy of it at once, part-way, and the copy read as a
+  // glow round the page's text.
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+
+  visibility: hidden;
+  transition:
+    backdrop-filter var(--duration) var(--ease),
+    -webkit-backdrop-filter var(--duration) var(--ease),
+    visibility 0s var(--duration);
+
+  &.open {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    visibility: visible;
+    transition:
+      backdrop-filter var(--duration) var(--ease),
+      -webkit-backdrop-filter var(--duration) var(--ease),
+      visibility 0s;
+  }
+
+  // gone at once along with the panel when a project is clicked
+  &.instant {
+    transition: none !important;
+  }
+}
+
+.workFlyoutScrim {
+  @extend %pageBlur;
+  z-index: 198;
+}
+
+// the same blur under the mobile menu, just beneath it and the bar
+.menuScrim {
+  @extend %pageBlur;
+  z-index: 970;
+}
+
+.logoButton {
+  // a box of its own around the mark, centred in the bar like everything
+  // else in it, rather than sitting on the bar's text baseline
+  display: flex;
+  align-items: center;
+
+  transition:
+    color var(--duration) var(--ease),
+    scale var(--motion) var(--ease);
   font-family: $bayBayinFont;
 
   &:hover {
@@ -286,11 +858,68 @@ nav {
     color: var(--accent-color);
   }
 
+  // on the bar's midline (the bar is 4rem tall), whatever the logo's size
   &.alt {
     position: fixed;
-    top: 0;
-    left: 0;
-    margin: 1.25rem 2rem;
+    top: 2rem;
+    left: 2rem;
+    translate: 0 -50%;
+  }
+}
+
+// The logo, drawn from the fonts' own outlines (LogoMark.tsx). The drawing
+// spans every form the name takes -- 5713 x 1109 units at 1000 to the em -- and
+// is dropped by its 294-unit descent so its baseline sits on the line's. At
+// rest only ᜎ is there, so only that much answers the cursor; written out, the
+// whole name does.
+.logoMark {
+  // its own size, larger than the bar's text; every measure below is in em,
+  // so the whole mark scales with this
+  font-size: 1.75rem;
+  // ᜎ sits 0.0525em above the middle of its box (whose height takes in the
+  // marks above and below the full name): down by that, the letter itself is
+  // centred in the bar
+  translate: 0 0.0525em;
+
+  display: inline-block;
+  vertical-align: -0.294em;
+  width: 0.907em; // ᜎ alone, to its ink and a hair
+  height: 1.109em;
+
+  &.open {
+    width: 5.713em;
+  }
+
+  // Always the full name's width, spilling out of the box while closed. The
+  // box alone takes the pointer, so the link is only as wide as what shows:
+  // the mark while closed, the whole name once written out.
+  svg {
+    display: block;
+    width: 5.713em;
+    height: 100%;
+    overflow: visible;
+    fill: currentColor;
+    pointer-events: none;
+  }
+
+  // Traced while being written: a hairline the shape's own colour, which
+  // stays on once filled. The single shape the name morphs as carries the
+  // same line, so at the hand-over from the letters to it, and back, the
+  // name keeps its exact weight rather than thinning and thickening.
+  .logoGlyphs path,
+  .logoMorph {
+    stroke: currentColor;
+    stroke-width: 14;
+  }
+
+  // hidden until written, even before the script has set them up
+  .logoFull {
+    fill-opacity: 0;
+    stroke-dasharray: 0 100000;
+  }
+
+  .logoMorph {
+    visibility: hidden;
   }
 }
 
@@ -301,9 +930,9 @@ nav {
     all: unset;
 
     transition:
-      color 0.5s,
-      scale 0.5s,
-      font-variation-settings 0.5s;
+      color var(--duration) var(--ease),
+      scale var(--motion) var(--ease),
+      font-variation-settings var(--fontMorph);
 
     font-variation-settings: $fontVarNormal;
 
@@ -330,9 +959,9 @@ nav {
     color: var(--background-color);
 
     transition:
-      color 0.5s,
-      scale 0.5s,
-      font-variation-settings 0.5s;
+      color var(--duration) var(--ease),
+      scale var(--motion) var(--ease),
+      font-variation-settings var(--fontMorph);
 
     font-variation-settings: $fontVarNormal;
 
@@ -380,9 +1009,9 @@ nav {
 
   a {
     transition:
-      color 0.5s,
-      scale 0.5s,
-      font-variation-settings 0.5s;
+      color var(--duration) var(--ease),
+      scale var(--motion) var(--ease),
+      font-variation-settings var(--fontMorph);
 
     font-variation-settings: $fontVarNormal;
 
@@ -395,12 +1024,12 @@ nav {
 
   .themeButton {
     position: relative;
-    transition: scale 0.5s;
+    transition: scale var(--motion) var(--ease);
 
     svg {
       display: flex;
       fill: var(--text-color);
-      transition: fill 0.5s;
+      transition: fill var(--duration) var(--ease);
     }
 
     &:hover {
@@ -417,262 +1046,515 @@ nav {
   }
 }
 
+// the section you are in, in the bar and in the mobile menu: the heavy
+// weight the hover uses, no underline
+.navButtons .active,
+.menu .active {
+  font-variation-settings: $fontVarThin;
+}
+
+// and the page marker beside it: in the desktop bar after work (on any
+// project) and about, each holding its room even when unmarked, so the bar's
+// links, set against its right edge, never shift as it moves between them
+.navButtons.alt > .workTrigger::after,
+.navButtons.alt > a::after {
+  @extend %pageMarker;
+  visibility: hidden;
+}
+
+.navButtons.alt > .workTrigger.active::after,
+.navButtons.alt > a.active::after {
+  visibility: visible;
+}
+
+// the work button lays its contents out as a flex row: on their baseline,
+// the marker sits as it does after plain text (centred, it was its own box,
+// and the drop put it too low)
+.navButtons.alt > .workTrigger {
+  align-items: baseline;
+}
+
+// in the mobile menu, after "work" on any project (nothing follows it there,
+// so no room is held)
+.menu .menuToggle.active .menuToggleLabel::after {
+  @extend %pageMarker;
+}
+
+// At the very end of the page, scrolling with it: the copyright at the left,
+// 2rem in, in line with the logo above.
+// Padding rather than margins, which would collapse away at the page's end;
+// and clear of an iphone's home bar.
 footer {
   color: var(--faded-color);
-  position: fixed;
-
-  bottom: 0;
-  right: 0;
 
   display: flex;
 
-  justify-content: flex-end;
+  justify-content: space-between;
 
-  margin: 1.5rem 2rem;
+  padding: 2rem 2rem calc(2rem + env(safe-area-inset-bottom));
 
   font-size: var(--smaller);
+
+  span {
+    font-size: inherit;
+  }
+
 }
 
 // wrappers
-.homeWrapper {
-  max-width: min(
-    max(var(--maxWidthShare), calc(100% - var(--maxWidthGutter))),
-    var(--maxWidthCap)
-  );
-  margin: auto;
+// The home page: an opening line, then the work as a calm grid -- the
+// screenshots clean, the words underneath them, never on top.
+// The home page's cursor over its project tiles (TileCursor): a small tile in
+// the work drawer's grey, no border, rounded like every other panel -- the
+// project's name in the text colour, its year in grey on the line beneath,
+// and a link's arrow. Always as it is in the dark theme, in either theme.
+// GSAP moves it.
+.tileCursor {
+  // there over a project, gone elsewhere (.shown, set by TileCursor): no
+  // fade either way; its position follows the pointer exactly
+  opacity: 0;
+  visibility: hidden;
+
+  &.shown {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  // every light-dark() colour inside it takes its dark side -- or its light
+  // one, over a project whose clip is too dark for it (overlayTheme) and
+  // over a project still to come
+  color-scheme: dark;
+
+  &.light {
+    color-scheme: light;
+  }
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  // less above than below: the font's line box already leaves more room over
+  // the letters than under the year's baseline, so this evens out the ink
+  padding: 0.5rem 0.5rem 0.75rem 0.75rem;
+  border-radius: $radiusLarge;
+  // a hair short of solid, like the work drawer
+  background-color: color-mix(in srgb, var(--barSolid) 99%, transparent);
+  color: var(--text-color);
+  pointer-events: none;
 
   display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
 
-  gap: 8rem;
+  .tileCursorText {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    line-height: 1.15;
+  }
 
-  .left {
-    margin: 8rem 0;
+  // the name, in the site's hover weight
+  .tileCursorName {
+    font-size: var(--small);
+    font-variation-settings: $fontVarThin;
+  }
+
+  .tileCursorMeta {
+    color: var(--faded-color);
+    font-size: 0.7rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tileCursorArrow {
+    display: block;
+    flex-shrink: 0;
+    width: 0.9rem;
+    height: 0.9rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+@keyframes cardLoadingTurn {
+  to {
+    rotate: 360deg;
+  }
+}
+
+// The home page, in one 1260px column: the opening line, the bento grid of
+// the work, and a way on to about.
+.homeWrapper {
+  max-width: calc(1260px + 4rem);
+  margin: 0 auto;
+  padding: var(--page-top) 2rem var(--page-bottom);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+
+  --gap: 1.5rem;
+
+  // The bento: rows whose tiles share one height. Each tile grows by its
+  // clip's aspect ratio (--ratio) from nothing, so its share of the row's
+  // width is in proportion -- and its frame, at that same ratio, comes out
+  // exactly as tall as every other frame in the row. Different sizes, row by
+  // row, and not a pixel of any clip cropped.
+  .bento {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+  }
+
+  .bentoRow {
+    display: flex;
+    gap: var(--gap);
+  }
+
+  .bentoTile,
+  .bentoStack {
+    flex: var(--ratio) 1 0;
+    min-width: 0;
 
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
+    gap: var(--gap);
 
-    height: fit-content;
+    > .card {
+      flex: 1;
+    }
+  }
 
-    .tile {
-      padding: 1rem 2rem;
-      border-radius: $borderRadius;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 4rem;
-      text-wrap: nowrap;
+  .homeIntro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--title-gap);
 
-      transition:
-        scale 0.5s,
-        box-shadow 0.5s,
-        color 0.5s;
+    .lede {
+      max-width: 30ch;
+      color: var(--faded-color);
+      font-size: var(--h4);
+      // a subtitle, so the regular weight, as every page's subtitle is
+      font-weight: 400;
+      line-height: var(--leading-subtitle);
 
-      font-variation-settings: $fontVarNormal;
-
-      .title {
-        transition: font-variation-settings 0.5s;
-        width: 300px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .year,
-      .type {
-        color: var(--faded-color);
-      }
-
-      &:hover {
-        cursor: pointer !important;
-
-        box-shadow: $boxShadow;
-
-        color: var(--accent-color);
-        scale: $scaleOnHover;
-
-        .title {
-          font-variation-settings: $fontVarThin;
-        }
+      .emphasis {
+        color: var(--text-color);
+        font-size: inherit;
       }
     }
   }
 
-  .right {
-    width: 100%;
-    height: 100dvh;
+  // The finish: a hairline, then where to find me. Plain, no slogan.
+  // laid out as the opening is: title, subtitle a --title-gap under it, and
+  // the link 0.5rem further on, as after every title block
+  .homeAbout {
+    padding-top: 2rem;
+    border-top: 1px solid var(--hairline);
 
-    position: sticky;
+    // set to the right, the close of the page answering the opening line
+    // on the left
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    gap: var(--title-gap);
 
-    top: 0;
+    > .actionLink {
+      margin-top: 0.5rem;
+    }
+  }
 
-    display: grid;
-    place-items: center;
+  // two-tone, like the opening line: the claim, then the detail in grey --
+  // each its own line, and a line that has to wrap broken evenly rather
+  // than leaving one word behind
+  // its title set as the page's own, "les ranalan" -- the same size, weight
+  // and leading
+  .homeAboutTitle {
+    font-size: var(--h0);
+  }
 
-    .hero {
-      .name {
-        color: var(--accent-color);
-        width: fit-content;
-        white-space: nowrap;
+  // the line under it set exactly as the opening line is: its size, weight
+  // and leading
+  .homeAboutLine {
+    text-wrap: balance;
+    color: var(--faded-color);
+    font-size: var(--h4);
+    font-weight: 400;
+    line-height: var(--leading-subtitle);
+  }
+
+  .groupLabel {
+    font-size: var(--h4);
+    font-weight: 400;
+    color: var(--text-color);
+  }
+
+  // a project: a panel in the work drawer's grey, set off from the page --
+  // the frame at its clip's shape, the caption beneath it
+  .card {
+    // a stack chip's height, the gap between chips, and their inset from
+    // the frame's edges -- smaller than the about page's, sitting over the
+    // work rather than beside it
+    --chip: 1.4rem;
+    --chipGap: 0.3rem;
+    --chipInset: 0.75rem;
+
+    overflow: hidden;
+    border-radius: $radiusLarge;
+    background-color: var(--barSolid);
+    transition: opacity 0.5s ease;
+
+    display: flex;
+    flex-direction: column;
+
+    // the frame: the still, then the playing preview, whole -- fitted rather
+    // than filled, so even a hair's mismatch in shape cannot crop it
+    .cardMedia {
+      position: relative;
+      aspect-ratio: var(--ratio);
+      overflow: hidden;
+
+      video,
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
       }
 
-      .intro {
-        display: flex;
-        gap: 0.5rem;
+      // in grey until it is actually playing, then into colour, and back out
+      // when it pauses -- a fade, so it plays under reduce motion too
+      video {
+        filter: grayscale(1);
+        transition: filter 0.5s ease;
 
-        .swirlEmoji {
-          margin-top: 1rem;
-          width: 60px;
-          height: 60px;
-        }
-      }
-
-      .links {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        div {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 1rem;
-        }
-
-        span {
-          display: flex;
-          align-items: center;
+        &[data-playing] {
+          filter: none;
         }
       }
     }
 
-    .preview {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    // The stack at a glance, inside the frame at its foot: the about page's
+    // chips, solid, so they read over any frame. Two
+    // lines at most, should three long names not fit on one in a small tile.
+    .cardStack {
+      // always the dark theme's chips, in either theme: every light-dark()
+      // colour inside takes its dark side -- or the light theme's, over a
+      // clip too dark for them (overlayTheme, below)
+      color-scheme: dark;
+
+      // only while the tile is hovered, wherever there is hover at all --
+      // fading in and out at the pace of the weight change; a touch screen,
+      // with none, shows them throughout
+      @media (hover: hover) and (pointer: fine) {
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity var(--fontMorph),
+          visibility 0s var(--fontMorphDuration);
+      }
 
       position: absolute;
-      max-width: 100%;
-
+      left: var(--chipInset);
+      right: var(--chipInset);
+      bottom: var(--chipInset);
+      max-height: calc(2 * var(--chip) + var(--chipGap));
+      overflow: hidden;
       pointer-events: none;
 
-      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--chipGap);
 
-      opacity: 0;
-      visibility: hidden;
-
-      .currentPortfolio {
-        text-align: center;
-        width: auto;
-        max-width: 700px;
-        height: auto;
-        padding: 75px;
-        border-radius: $borderRadius;
-        box-shadow: $boxShadow;
-        background-color: var(--accent-color);
-        color: var(--background-color);
-        font-size: var(--h1);
-      }
-
-      .previewContent {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .videoContainer {
-        position: relative;
-
-        // sits over the empty video box. starts hidden so it cannot flash
-        // before gsap takes it over on the first hover.
-        .spinner {
-          position: absolute;
-          inset: 0;
-
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          pointer-events: none;
-
-          opacity: 0;
-          visibility: hidden;
-        }
-
-        // previewContent is a column flex, so without this the container
-        // stretches to the column width and the clip floats in dead space
-        align-self: center;
+      .chip {
+        height: var(--chip);
+        padding: 0 0.5rem;
+        border-radius: $radiusSmall;
+        font-size: 0.7rem;
+        // the drawer's grey, a hair short of solid, like the drawer itself
+        background-color: color-mix(in srgb, var(--barSolid) 99%, transparent);
+        color: var(--text-color);
+        white-space: nowrap;
 
         display: flex;
         align-items: center;
-        justify-content: center;
+      }
+    }
 
-        // a portrait clip (feeltok) is only ~258px wide, which would collapse
-        // the whole preview into a narrow column and squeeze the tech stack
-        // beneath it. only those get a wider box -- landscape clips hug their
-        // own edges, no padding.
-        &.portrait {
-          min-width: min(600px, 70vw);
-        }
+    // A portrait clip (feeltok's phone recording): its frame is its own shape
+    // on a wide screen, but on a phone the frame is a set 4:5, where it sits
+    // whole in the middle. The phone is cut out of its recording
+    // (scripts/optimize-videos.sh), so round it is simply the panel's own
+    // grey, light or dark with the theme.
 
-        video,
-        img {
-          /* margin-top: 50px; */
-          border-radius: $borderRadius;
-          width: auto;
-          max-width: 100%;
-          height: auto;
-          /* max-height: 675px; */
-          max-height: 70vh;
-          box-shadow: $boxShadow;
-        }
+    // The phone fills its recording to the edges, so the frame's usual inset
+    // would lay the stack across the phone's bezel and the curve of its
+    // screen. It sits inside the screen instead, measured off the recording
+    // (516 x 1080): the screen starts 19 in from the left, and its bottom
+    // corner curves in over its last 40 -- so 7.6% in, clear of both, and
+    // 5.5% up, above the corner and the home bar.
+    // a clip too dark for the dark chips (overlayTheme): the light ones
+    &[data-overlay="light"] .cardStack {
+      color-scheme: light;
+    }
+
+    &.portrait .cardStack {
+      left: 7.6%;
+      right: 7.6%;
+      bottom: 5.5%;
+    }
+
+    // the name and year: on the cursor wherever there is one (TileCursor),
+    // so here only on a touch screen -- except on a tile still to come, where
+    // the name is all there is
+    &:not(.upcoming) .cardCaption {
+      @media (hover: hover) and (pointer: fine) {
+        display: none;
+      }
+    }
+
+    .cardCaption {
+      padding: 1rem 1.25rem 1.25rem;
+
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .cardTitle {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: var(--h6);
+      font-variation-settings: $fontVarNormal;
+      transition: font-variation-settings var(--fontMorph);
+    }
+
+    .cardYear {
+      color: var(--faded-color);
+      font-variant-numeric: tabular-nums;
+    }
+
+    // the site's signature weight change, on the name -- not on one still
+    // to come
+    &:not(.upcoming):hover .cardTitle {
+      font-variation-settings: $fontVarThin;
+    }
+
+    // Still to come: an empty panel, greyed, the name at its foot -- the empty
+    // frame takes whatever its stacked share of the row leaves. It takes
+    // the pointer, so the drawn cursor shows its arrow over it as over any
+    // tile, but it is not a link -- a click goes nowhere.
+    &.upcoming {
+      user-select: none;
+
+      .cardMedia {
+        flex: 1;
+        aspect-ratio: auto;
       }
 
-      .techStack {
-        display: flex;
-        justify-content: center;
-
-        // .preview is a column flex, so it sizes to its widest child -- and
-        // with nine tech tiles that child was this row, not the clip, which
-        // left the clip centred in a box wider than itself. width:0 keeps the
-        // row out of that intrinsic measurement (percentages are ignored while
-        // it happens), then min-width pulls it back out to whatever width the
-        // clip settled on. A ResizeObserver cannot do this job: .preview is
-        // visibility:hidden until hover and chrome reports no resizes inside a
-        // hidden subtree.
-        width: 0;
-        min-width: 100%;
-
-        gap: 0.5rem;
-
-        margin-top: 0.5rem;
-
-        flex-wrap: wrap;
-
-        .item {
-          flex: 1;
-          border-radius: $borderRadius;
-
-          display: flex;
-          gap: 0.5rem;
-
-          align-items: center;
-          justify-content: center;
-
-          padding: 0.5rem 0.75rem;
-
-          box-shadow: $boxShadow;
-
-          text-align: center;
-          white-space: nowrap;
-
-          background-color: var(--background-color);
-
-          color: white !important;
-
-          .icon {
-            display: flex;
-          }
-        }
+      .cardTitle {
+        color: var(--faded-color);
       }
+    }
+  }
+
+  // Every tile sits back -- faded, as well as grey -- until its own preview
+  // is playing, when it comes forward, and goes back when it stops. Like the
+  // grey, it follows the playing itself, and it is a fade, so it plays under
+  // reduce motion too.
+  .card:not(:has(video[data-playing])) {
+    opacity: 0.4;
+  }
+
+  .card:hover .cardStack {
+    opacity: 1;
+    visibility: visible;
+    transition:
+      opacity var(--fontMorph),
+      visibility 0s;
+  }
+
+  // The loading ring: over the clip's frame, exactly -- as wide as the tile,
+  // the frame's shape, from its top -- centred, on a dark disc that reads
+  // over any frame. It shows a quarter of a second after a preview is wanted
+  // and not yet playing, or the moment it stalls to buffer, and goes the
+  // moment it moves. Spinning only while it shows.
+  .cardLoading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    aspect-ratio: var(--ratio);
+    pointer-events: none;
+
+    display: grid;
+    place-items: center;
+
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .cardLoadingRing {
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-top-color: white;
+    box-shadow: 0 0 0 0.45rem rgba(0, 0, 0, 0.45);
+    background-color: rgba(0, 0, 0, 0.45);
+    animation: cardLoadingTurn 0.8s linear infinite paused;
+  }
+
+  .card:has(video[data-wanted]:not([data-playing])) .cardLoading,
+  .card:has(video[data-waiting]) .cardLoading {
+    opacity: 1;
+    transition-delay: 0.25s;
+
+    .cardLoadingRing {
+      animation-play-state: running;
+    }
+  }
+
+  // the drawn cursor (TileCursor) stands in for the system's over a tile
+  .card,
+  .card * {
+    cursor: none;
+  }
+}
+
+// On a phone, one tile under another, full width, each frame at its clip's
+// shape -- but a portrait clip in a set 4:5 frame, so it is not a screen and
+// a half tall.
+@media screen and (max-width: 760px) {
+  .homeWrapper {
+    .bentoRow {
+      flex-direction: column;
+    }
+
+    .bentoTile,
+    .bentoStack {
+      flex: none;
+    }
+
+    .card.portrait .cardMedia {
+      aspect-ratio: 4 / 5;
+    }
+
+    // there the phone is centred in the 4:5 frame, 0.478 / 0.8 = 59.75% of
+    // its width, so its screen's 7.6% lands 20.1% + 7.6% x 0.5975 in
+    .card.portrait .cardStack {
+      left: 24.6%;
+      right: 24.6%;
+    }
+
+    // nothing to show yet: just the caption
+    .card.upcoming .cardMedia {
+      display: none;
     }
   }
 }
@@ -680,155 +1562,203 @@ footer {
 .workWrapper {
   max-width: $maxWidthDesktop;
 
-  padding: 8rem 0;
+  padding: var(--page-top) 0 var(--page-bottom);
   margin: auto;
 
-  display: grid;
+  // one left-aligned column: header, media, details, then the nav
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
 
   ul {
-    margin-left: 48px;
+    margin-left: 3rem;
+    margin-top: 1rem;
   }
 
-  .title {
-    text-align: center;
-  }
-
-  .year {
-    color: var(--faded-color);
-    text-align: center;
-  }
-
-  .bottomNav {
+  .header {
     display: flex;
-    justify-content: center;
-    margin-top: 5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--title-gap);
 
-    .topButton {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      transition:
-        color 0.5s,
-        scale 0.5s,
-        font-variation-settings 0.5s;
-      font-variation-settings: $fontVarNormal;
-      display: flex;
-      align-items: center;
+    // the eyebrow over the title
+    .meta {
+      color: var(--faded-color);
+      font-variant-numeric: tabular-nums;
 
-      &:hover {
-        color: var(--accent-color);
-        scale: $scaleOnHover;
-        cursor: pointer;
-        font-variation-settings: $fontVarThin;
-      }
-    }
-  }
-
-  .projectNav {
-    display: flex;
-    justify-content: space-between;
-
-    .nextPrevButton {
-      transition:
-        color 0.5s,
-        scale 0.5s,
-        font-variation-settings 0.5s;
-      font-variation-settings: $fontVarNormal;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-
-      &:hover {
-        color: var(--accent-color);
-        scale: $scaleOnHover;
-        cursor: pointer;
-        font-variation-settings: $fontVarThin;
-      }
-    }
-  }
-
-  .content {
-    display: grid;
-    gap: 4rem;
-
-    .media {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-
-      .spinner {
-        width: 100%;
-        min-height: 400px;
-        padding: 75px 0;
-        display: flex;
-
-        justify-content: center;
-        align-items: center;
-      }
-
-      // `width: 100%` and `max-height` used to fight each other: past ~800px of
-      // column a 1.6 clip wants 500px+ of height, the clamp cut it back, and
-      // the box stopped matching its content. <img> defaults to
-      // object-fit: fill so it stretched; <video> defaults to contain so it
-      // pillarboxed and showed the background through the gap. Same rule, two
-      // different symptoms. The width has to give way instead.
-      img {
-        border-radius: $borderRadius;
-        box-shadow: $boxShadow;
-
-        width: auto;
-        height: auto;
-        max-width: 100%;
-        // generous on purpose: at a fixed 500px a 1.6 still could never exceed
-        // 800px wide and sat marooned in the middle of a wider column. This
-        // only bites on something genuinely tall, like the portrait clip.
-        max-height: 85vh;
-      }
-
-      video {
-        border-radius: $borderRadius;
-        box-shadow: $boxShadow;
-
-        // stays full-width so the box is the right size before metadata
-        // arrives, but capped at whatever width makes this clip 85vh tall -- a
-        // max-height here would break the aspect ratio instead of the width.
-        width: 100%;
-        height: auto;
-        max-width: var(--clipMaxWidth, none);
-
-        background-color: var(--faded-color);
+      // the dot between type and year, with room either side
+      .metaDot {
+        margin-inline: 0.5em;
+        font-size: inherit;
       }
     }
 
-    .paragraph {
-      line-height: 2rem;
-      text-align: justify;
-      font-size: var(--p);
-
-      h4 {
-        margin-bottom: 10px;
-      }
+    // the status sentence, the page's subtitle, set as every page's is: the
+    // opening line's size, weight and leading
+    .status {
+      color: var(--faded-color);
+      font-size: var(--h4);
+      font-weight: 400;
+      line-height: var(--leading-subtitle);
     }
 
     .links {
       display: flex;
-      align-items: center;
-      gap: 1rem;
-
       flex-wrap: wrap;
-
-      justify-content: space-around;
+      gap: 0.75rem 2rem;
+      margin-top: 0.5rem;
     }
   }
 
+  .media {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+
+    .spinner {
+      width: 100%;
+      min-height: 400px;
+      padding: 4rem 0;
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+    }
+
+    // `width: 100%` and `max-height` used to fight each other: past ~800px of
+    // column a 1.6 clip wants 500px+ of height, the clamp cut it back, and
+    // the box stopped matching its content. <img> defaults to
+    // object-fit: fill so it stretched; <video> defaults to contain so it
+    // pillarboxed and showed the background through the gap. Same rule, two
+    // different symptoms. The width has to give way instead.
+    img {
+      border-radius: $radiusLarge;
+      box-shadow: $shadowRaised;
+
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      // generous on purpose: at a fixed 500px a 1.6 still could never exceed
+      // 800px wide and sat marooned in the middle of a wider column. This
+      // only bites on something genuinely tall, like the portrait clip.
+      max-height: 85vh;
+    }
+
+    // Always the full column wide. A portrait clip (feeltok) would otherwise
+    // be a narrow strip; instead its box is capped at 85vh tall and the clip
+    // sits in the middle of it on a quiet fill, like a tall product shot in
+    // a tile. Landscape clips are shorter than the cap, so they fill it edge
+    // to edge with no fill showing.
+    video {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 85vh;
+      object-fit: contain;
+
+      border-radius: $radiusLarge;
+      box-shadow: $shadowRaised;
+      background-color: var(--barSolid);
+    }
+
+  }
+
+  // A spec table, after apple's tech specs: each section's name in a narrow
+  // column on the left, its content on the right, a hairline between.
+  .details {
+    display: flex;
+    flex-direction: column;
+
+    .spec {
+      display: grid;
+      grid-template-columns: 9rem 1fr;
+      column-gap: 2rem;
+
+      padding: 2rem 0;
+      border-top: 1px solid var(--hairline);
+
+      &:last-child {
+        border-bottom: 1px solid var(--hairline);
+      }
+
+      h4 {
+        font-size: var(--h6);
+        line-height: 1.6;
+      }
+    }
+
+    // ragged right, not justified: in a 700px column justify opened up
+    // uneven gaps between words
+    .paragraph {
+      line-height: 2rem;
+      font-size: var(--p);
+    }
+  }
+
+  // chips at their own width, wrapping from the left
+  .techStack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    // each row's chips share out the room left at its end, so every row
+    // runs the full width -- the name centred in its widened chip
+    .item {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+
+      padding: 0.5rem 0.75rem;
+      border-radius: $radiusSmall;
+
+      background-color: var(--surface);
+      color: var(--text-color);
+      white-space: nowrap;
+    }
+  }
+
+  // the previous project on the left, back to the top in the middle, the next
+  // project on the right -- each named, a small grey label over the name
+  .bottomNav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 2rem;
+  }
+
   .nextPrevButton {
-    transition:
-      color 0.5s,
-      scale 0.5s,
-      font-variation-settings 0.5s;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    small {
+      color: var(--faded-color);
+    }
+
+    // the project's name the same size as "previous" / "next" above it,
+    // told apart by colour alone
+    span {
+      font-size: var(--small);
+    }
+
+    &.next {
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    &.top {
+      align-items: center;
+      text-align: center;
+    }
+
     font-variation-settings: $fontVarNormal;
+    transition:
+      color var(--duration) var(--ease),
+      scale var(--motion) var(--ease),
+      font-variation-settings var(--fontMorph);
 
     &:hover {
       color: var(--accent-color);
@@ -837,250 +1767,205 @@ footer {
       font-variation-settings: $fontVarThin;
     }
   }
-
-  .techStack {
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    margin-left: 0;
-    padding-left: 0;
-
-    flex-wrap: wrap;
-
-    margin-top: 2rem;
-    margin-bottom: 4rem;
-
-    gap: 0.5rem;
-
-    .item {
-      border-radius: $borderRadius;
-
-      display: flex;
-      gap: 0.5rem;
-
-      align-items: center;
-      justify-content: center;
-
-      padding: 0.5rem 0.75rem;
-
-      white-space: nowrap;
-
-      flex: 1;
-
-      color: white !important;
-
-      .icon {
-        display: flex;
-      }
-    }
-  }
 }
 
 .aboutWrapper {
-  max-width: min(
-    max(var(--maxWidthShare), calc(100% - var(--maxWidthGutter))),
-    var(--maxWidthCap)
-  );
+  // the same reading column as the project pages
+  max-width: $maxWidthDesktop;
 
   margin: auto;
-  padding: 8rem 0;
+  padding: var(--page-top) 0 var(--page-bottom);
 
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: var(--section-gap);
 
-  .scrollPrompt {
-    display: grid;
-    place-items: center;
+  .header {
+    color: var(--accent-color);
   }
 
-  .bio {
+  // Section headlines at display size, set tight, apple fashion -- big enough
+  // that each section reads as its own chapter.
+  section > h2.header {
+    font-size: var(--h1);
+    margin-bottom: 2rem;
+  }
+
+  // who i am in a line, the longer version, then where to find me
+  .intro {
     display: flex;
-    align-items: center;
-    gap: 4rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--title-gap);
 
-    .header {
-      color: var(--accent-color);
-    }
+    // the waving hand, switched off for now (About.tsx)
+    // .waveEmojiWrapper {
+    //   transform: scaleX(-1);
+    //
+    //   .waveEmoji {
+    //     margin-top: 0.5rem;
+    //     width: 56px;
+    //     height: 56px;
+    //   }
+    // }
 
-    .spinner {
-      width: 500px;
-      height: 375px;
-      padding: 75px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    p {
+    // The page's headline, two-tone: the claim in the text colour, the
+    // qualifier in grey, both at the same large size.
+    // the same size as the section headings below it, and set like them
+    // (the h1's own leading)
+    .lede {
       color: var(--faded-color);
+      // the page's opening headline, set as its section headings are: their
+      // size and their weight
+      font-size: var(--h1);
+      font-weight: 700;
+
+      .emphasis {
+        color: var(--text-color);
+        font-size: inherit;
+      }
     }
 
-    .profilePicture {
-      flex: 1;
-      box-shadow: $boxShadow;
-      border-radius: $borderRadius;
-      width: 375px;
-      height: auto;
-      max-width: 35%;
-    }
-
-    .intro {
-      text-wrap: nowrap;
+    .body {
       display: flex;
-      align-items: center;
-      gap: 1rem;
+      flex-direction: column;
+      gap: 1.25rem;
 
-      .waveEmojiWrapper {
-        transform: scaleX(-1);
-
-        .waveEmoji {
-          margin-top: 0.5rem;
-          width: 56px;
-          height: 56px;
-        }
+      p {
+        color: var(--faded-color);
+        font-size: var(--h6);
+        line-height: var(--leading-body);
       }
     }
 
     .links {
       display: flex;
-      /* justify-content: space-between; */
+      flex-wrap: wrap;
+      gap: 0.75rem 2rem;
+      margin-top: 0.5rem;
+    }
+  }
 
-      row-gap: 0.75rem;
-      column-gap: 2rem;
+  // The facts as tiles on the nav's off-page shade: a small grey label over a
+  // large value, the wide tile across the top.
+  .glance .tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
 
-      .icons {
-        gap: 1rem;
+    .tile {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+
+      padding: 2rem;
+      border-radius: $radiusLarge;
+      background-color: var(--barSolid);
+
+      &.wide {
+        grid-column: 1 / -1;
       }
 
-      span {
-        display: flex;
-        align-items: center;
+      small {
+        color: var(--faded-color);
+      }
+
+      p {
+        font-size: var(--h4);
+        line-height: 1.2;
       }
     }
   }
 
-  .timelineAndSkillset {
+  // its heading's own margin is the space above the rows, as in every other
+  // section -- no gap of its own on top of it
+  .timeline {
     display: flex;
-    gap: 8rem;
+    flex-direction: column;
+    width: 100%;
 
-    .scrollPrompt {
-      &.mobile {
-        display: none;
-      }
-    }
-
-    .timeline {
+    // Set as a table, after fredrikprida.com's about: a hairline between
+    // rows (and closing the last), years in a narrow left column.
+    .timelineRows {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
-      width: 100%;
+    }
 
-      .verticalLine {
-        width: 36px;
-        margin: 0.25rem 0;
+    .timelineRow {
+      display: grid;
+      grid-template-columns: 7.5rem 1fr;
+      column-gap: 1.5rem;
+      align-items: baseline;
+
+      padding: 1rem 0;
+      border-top: 1px solid var(--hairline);
+
+      &:last-child {
+        border-bottom: 1px solid var(--hairline);
       }
 
-      .timelineRow {
+      .years {
+        color: var(--faded-color);
+        font-variant-numeric: tabular-nums;
+      }
+
+      // the · between the place and how it was worked, half an em either
+      // side, as on a project's eyebrow
+      .metaDot {
+        margin-inline: 0.5em;
+      }
+
+      .timelineCaption {
         display: flex;
-        align-items: center;
-        gap: 1rem;
+        flex-direction: column;
+        gap: 0.25rem;
 
-        .timelineCaption {
-          display: flex;
-          flex-direction: column;
-          gap: 0.25rem;
-
-          .date {
-            color: var(--faded-color);
-          }
-        }
-
-        img {
-          width: 36px;
-          height: 36px;
-        }
-
-        svg {
-          display: flex;
-          align-items: center;
+        .date {
+          color: var(--faded-color);
+          font-size: var(--smaller);
         }
       }
     }
+  }
 
-    .skillset {
-      width: 100%;
 
+  .skillset {
+    display: flex;
+    flex-direction: column;
+
+    .skills {
       display: flex;
-      flex-direction: column;
-      gap: 2rem;
+      gap: 0.5rem;
 
-      .filter {
+      flex-wrap: wrap;
+      // the rows packed at the top, each chip its own height: the box is held
+      // at the height of every skill (About.tsx), and a filtered few would
+      // otherwise be stretched to fill it
+      align-content: flex-start;
+      // and never what the browser holds the view still against: chips
+      // sliding about under the filter would drag the page with them
+      overflow-anchor: none;
+
+      // each row's chips share out the room left at its end, so every row
+      // runs the full width (the name stays centred)
+      .item {
+        flex-grow: 1;
+        padding: 0.5rem 0.75rem;
+
+        background-color: var(--surface);
+        border-radius: $radiusSmall;
+
+        white-space: nowrap;
+
+        text-align: center;
+
         display: flex;
         align-items: center;
-
-        gap: 1rem;
-
-        select {
-          color: var(--text-color);
-          border-radius: $borderRadius;
-          font-size: var(--p);
-          padding-top: 0.5rem;
-          padding-bottom: 0.5rem;
-          padding-left: 0.5rem;
-          font-family: $primaryFont;
-          background-color: var(--background-color);
-          border: 2px solid var(--faded-color);
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          appearance: none;
-          background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDE2IDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEuNSAyTDggN0wxNC41IDJMITFaIiBzdHJva2U9IiM4MTdlODMiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgLz48L3N2Zz4=");
-          background-repeat: no-repeat;
-          background-position: right 1rem center;
-          background-size: 12px 6px;
-          padding-right: 2.5rem;
-          width: fit-content;
-
-          option {
-            color: var(--text-color);
-          }
-
-          &:focus {
-            outline: none;
-          }
-        }
-      }
-
-      .skills {
-        display: flex;
         justify-content: center;
+
         gap: 0.5rem;
 
-        flex-wrap: wrap;
-
-        .item {
-          flex: 1;
-          padding: 0.5rem 0.75rem;
-          border-radius: $borderRadius;
-
-          white-space: nowrap;
-
-          text-align: center;
-
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          gap: 0.5rem;
-
-          color: white !important;
-
-          .icon {
-            display: flex;
-          }
-        }
+        color: var(--text-color);
       }
     }
   }
@@ -1089,7 +1974,7 @@ footer {
 .lostWrapper {
   max-width: $maxWidthDesktop;
 
-  padding: 8rem 0;
+  padding: var(--page-top) 0 var(--page-bottom);
   margin: auto;
 
   display: flex;
@@ -1115,7 +2000,7 @@ footer {
 
     p {
       text-align: right;
-      margin-top: 10px;
+      margin-top: 0.5rem;
     }
   }
 
@@ -1131,7 +2016,7 @@ footer {
     align-items: center;
     width: 300px;
     height: 300px;
-    padding: 75px;
+    padding: 4rem;
   }
 
   p {
@@ -1151,26 +2036,32 @@ footer {
     padding: 0.5rem;
     font-size: var(--smaller);
     font-weight: 400;
-    border-radius: $borderRadius;
+    border-radius: $radiusSmall;
     font-variation-settings: $fontVarNormal;
     text-align: center;
     pointer-events: none;
+    // fading in and out at the pace of the link's weight change, the two
+    // together -- hidden outright only once the fade out has finished
     opacity: 0;
     visibility: hidden;
     transition:
-      opacity 0.5s,
-      visibility 0.5s,
-      scale 0.5s;
+      opacity var(--fontMorph),
+      visibility 0s var(--fontMorphDuration);
     background-color: var(--text-color);
     color: var(--background-color);
     border: var(--background-color) 1px solid;
     line-height: normal;
   }
 
-  &:hover::before {
-    opacity: 1;
-    visibility: visible;
-    scale: $scaleOnHover;
+  // a mouse's hover only, like the link it explains
+  @media (hover: hover) and (pointer: fine) {
+    &:hover::before {
+      opacity: 1;
+      visibility: visible;
+      transition:
+        opacity var(--fontMorph),
+        visibility 0s;
+    }
   }
 
   &.top::before {
@@ -1182,7 +2073,74 @@ footer {
   }
 }
 
-.linkWithIcon {
+// the skillset's chips under their level filter (SkillFilter.tsx)
+.skillFilter {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  // a grid column's child: let the chips wrap rather than widen it
+  min-width: 0;
+
+  // the chips' box measures a hidden copy of itself in here
+  position: relative;
+}
+
+// A segmented control, like apple's: one quiet track, the chosen segment
+// lifted out of it on the page colour. The home list's filter and the about
+// page's skillset both use it.
+.segmented {
+  display: inline-flex;
+  align-self: flex-start;
+  gap: 0.25rem;
+
+  padding: 0.25rem;
+  border-radius: $radiusSmall;
+  background-color: var(--barSolid);
+
+  button {
+    font-family: inherit;
+    font-size: var(--small);
+    color: var(--faded-color);
+    cursor: pointer;
+
+    padding: 0.5rem 1rem;
+    border-radius: calc(#{$radiusSmall} - 2px);
+
+    font-variation-settings: $fontVarNormal;
+    transition:
+      color var(--duration) var(--ease),
+      font-variation-settings var(--fontMorph);
+
+    // the site's weight change on hover, as on every link
+    &:hover {
+      color: var(--text-color);
+      font-variation-settings: $fontVarThin;
+    }
+
+    // the chosen level: the page's own colour against the control's grey, and
+    // the heavier weight -- no ring or shadow round it
+    &.active {
+      color: var(--text-color);
+      background-color: var(--background-color);
+      font-variation-settings: $fontVarThin;
+    }
+
+    // while what it controls is still moving (SkillFilter): greyed out, the
+    // chosen level as well, and no hover
+    &:disabled {
+      color: var(--faded-color);
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    &:disabled:not(.active) {
+      font-variation-settings: $fontVarNormal;
+    }
+  }
+}
+
+// a link standing on its own
+.actionLink {
   position: relative;
   text-decoration: none;
   color: var(--text-color);
@@ -1192,16 +2150,17 @@ footer {
   justify-content: center;
   padding: 0;
 
-  gap: 0.5rem;
-
   transition:
-    font-variation-settings 0.5s,
-    color 0.5s,
-    scale 0.5s;
+    font-variation-settings var(--fontMorph),
+    color var(--duration) var(--ease),
+    scale var(--motion) var(--ease);
 
   font-variation-settings: $fontVarNormal;
 
-  span {
+  // Dashed, and solid while hovered: a solid line laid over the dashes
+  // fades in, at the pace of the weight change (::after, on the border's
+  // own pixel row).
+  .label {
     position: relative;
     border-bottom: 1px dashed var(--text-color);
 
@@ -1209,90 +2168,76 @@ footer {
       content: "";
       position: absolute;
       left: 0;
+      right: 0;
       bottom: -1px;
-      width: 100%;
       height: 1px;
       background-color: currentColor;
-      transform-origin: left;
-      transform: scaleX(0);
-      transition:
-        transform 0.5s,
-        background-color 0.5s;
+      opacity: 0;
+      transition: opacity var(--fontMorph);
     }
   }
 
-  img {
-    display: flex;
-    width: 24px;
-    height: 24px;
-    pointer-events: none;
-  }
-
-  svg {
-    fill: var(--text-color);
-    transition: fill 0.5s;
+  // ↗, for a link that leaves the site -- inside the label, so the label's
+  // underline carries on under it
+  // Sized and set so the arrow sits on the line like a letter: its tail on
+  // the baseline, its tip at the height of the lowercase. Measured in Kyiv
+  // Type Sans, the glyph's ink runs from 0.075em to 0.604em above the
+  // baseline -- 0.529em tall -- so 0.945em of the label puts its height on
+  // the label's 0.5em x-height, and dropping it 0.075em puts the tail down on
+  // the baseline. Relative positioning moves only the glyph; the underline,
+  // which belongs to the label, stays put.
+  .arrow {
+    margin-left: 0.3em;
+    font-size: 0.945em;
+    position: relative;
+    top: 0.075em;
   }
 
   &.faded {
     color: var(--faded-color);
 
-    span {
+    .label {
       border-bottom: 1px dashed var(--faded-color);
-
-      &::after {
-        background-color: var(--faded-color);
-      }
-    }
-
-    svg {
-      fill: var(--faded-color);
     }
   }
 
-  &:hover {
-    font-variation-settings: $fontVarThin;
-    color: var(--accent-color);
-    scale: $scaleOnHover;
+  // a mouse's hover only: a tap on a phone changes nothing, not even the
+  // hover a touch screen leaves behind after one
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      font-variation-settings: $fontVarThin;
+      color: var(--accent-color);
+      scale: $scaleOnHover;
 
-    svg {
-      fill: var(--accent-color);
-    }
-
-    span::after {
-      transform: scaleX(1);
-      background-color: var(--accent-color);
+      .label::after {
+        opacity: 1;
+      }
     }
   }
 }
 
-.linkWithNoIcon {
+// a link inside a sentence, in the colour of the words around it -- grey in
+// a grey line, the text colour in a plain one -- until it is hovered
+.inlineLink {
   position: relative;
   text-decoration: none;
-  color: var(--text-color);
+  color: inherit;
 
   border-bottom: 1px dashed;
 
   transition:
-    font-variation-settings 0.5s,
-    color 0.5s,
-    scale 0.5s;
+    font-variation-settings var(--fontMorph),
+    color var(--duration) var(--ease),
+    scale var(--motion) var(--ease);
 
   font-variation-settings: $fontVarNormal;
 
   &.faded {
     color: var(--faded-color);
-
-    &::after {
-      background-color: var(--faded-color);
-    }
   }
 
-  &:hover {
-    font-variation-settings: $fontVarThin;
-    color: var(--accent-color);
-    scale: $scaleOnHover;
-  }
-
+  // dashed, and solid while hovered: a solid line laid over the dashes fades
+  // in, at the pace of the weight change -- as on a link standing on its own
   &::after {
     content: "";
     position: absolute;
@@ -1300,97 +2245,27 @@ footer {
     bottom: -1px;
     width: 100%;
     height: 1px;
-    transform: scaleX(0);
-    transform-origin: left;
-    background-color: var(--text-color);
-    transition:
-      transform 0.5s,
-      background-color 0.5s;
-  }
-
-  &:hover::after {
-    transform: scaleX(1);
-    background-color: var(--accent-color);
-  }
-}
-
-.linkWithIconOnly {
-  position: relative;
-  display: block;
-  line-height: normal;
-
-  transition: scale 0.5s;
-
-  svg {
-    display: flex;
-    transition: fill 0.5s;
-  }
-
-  .label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 0px;
+    background-color: currentColor;
     opacity: 0;
+    transition: opacity var(--fontMorph);
   }
 
-  &.faded {
-    color: var(--faded-color);
-
-    svg {
-      fill: var(--faded-color);
+  // a mouse's hover only: a tap on a phone changes nothing
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      font-variation-settings: $fontVarThin;
+      color: var(--accent-color);
+      scale: $scaleOnHover;
     }
-  }
 
-  &:hover {
-    scale: $scaleOnHover;
-    cursor: pointer !important;
-
-    svg {
-      fill: var(--accent-color);
+    &:hover::after {
+      opacity: 1;
     }
   }
 }
-
-.transitionGrid {
-  margin: 0;
-  padding: 0;
-  position: fixed;
-  gap: 0;
-  inset: 0;
-  grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: repeat(1, 1fr);
-  width: 100%;
-  height: 100dvh;
-  z-index: 998;
-
-  display: none;
-
-  .transitionItem {
-    width: 100%;
-    height: 100%;
-    background: var(--accent-color);
-  }
-}
-
-#hs {
-  display: none;
-}
-
-#fs {
-  display: block;
-}
-
 
 // mobile screen
 @media screen and (max-width: $minMaxWidth) {
-  #fs {
-    display: none;
-  }
-
-  #hs {
-    display: block;
-  }
 
   /* :root {
     --h0: calc(var(--h1) * 1.4);
@@ -1419,129 +2294,180 @@ footer {
     --h4: clamp(1.139rem, calc(0.9539rem + 0.9257vw), 1.728rem);
     --h5: clamp(1.013rem, calc(0.8788rem + 0.6711vw), 1.44rem);
     --h6: clamp(0.9rem, calc(0.8057rem + 0.4715vw), 1.2rem);
-    --p: clamp(0.75rem, calc(0.6714rem + 0.3929vw), 1.0rem);
+    // body text no smaller than 14px, however narrow the phone
+    --p: clamp(0.875rem, calc(0.8357rem + 0.1965vw), 1rem);
     --small: clamp(0.711rem, calc(0.6727rem + 0.1917vw), 0.833rem);
-    --smaller: calc(var(--small) / 1.25);
+    // and the fine print no smaller than 11px
+    --smaller: max(0.6875rem, calc(var(--small) / 1.25));
+
+    // the page's rhythm, closer on a phone
+    --page-top: 6rem;
+    --page-bottom: 4rem;
+    --section-gap: 4rem;
+
+    // and its lines a little further apart, the narrow column wrapping
+    // more of them: a heading broken over two lines kept from crowding, a
+    // subtitle's lines still reading as one statement, running text at the
+    // leading small type reads best at
+    --leading-display: 1.12;
+    --leading-subtitle: 1.35;
+    --leading-body: 1.65;
   }
 
   .aboutWrapper {
     max-width: $maxWidthMobile;
-    gap: 2rem;
 
-    h1 {
-      text-align: center;
-    }
+    // one tile per line on a phone
+    .glance .tiles {
+      grid-template-columns: 1fr;
 
-    .bio {
-      flex-direction: column;
-      gap: 0;
-
-      .profilePicture {
-        flex: 1;
-        margin-top: 1rem;
-        width: 400px;
-        height: auto;
-        max-width: 75%;
-      }
-
-      .intro {
-        .waveEmojiWrapper {
-          .waveEmoji {
-            margin-top: 0.5rem;
-            width: 40px;
-            height: 40px;
-          }
-        }
-      }
-
-      .spinner {
-        width: 200px;
-        height: 200px;
-      }
-
-      .links {
-        flex-wrap: wrap;
-        justify-content: center;
+      .tile {
+        padding: 1.5rem;
       }
     }
 
-    .timelineAndSkillset {
-      flex-direction: column;
-      gap: 2rem;
-
-      .skillset {
-        height: 500px;
-      }
-
-      .scrollPrompt {
-        &.mobile {
-          display: grid;
-        }
-      }
-    }
   }
 
   .homeWrapper {
-    // full width on purpose, unlike the other wrappers: the tiles and the hero
-    // already carry their own 1rem of padding, so a 90% cap here stacked a
-    // second gutter on top of it and ate ~19% of a 348px screen.
-    max-width: 100%;
 
-    padding: 8rem 0;
-    margin: auto;
+    // At mobile widths the work is a carousel per kind of work
+    // (ProjectRow), not the bento: the kind's label, bare arrows beside it,
+    // then its projects edge to edge, one in view, the next peeking in.
+    .homeRows {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
 
-    display: flex;
-    flex-direction: column-reverse;
+    .projectGroup {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
 
-    gap: 2rem;
+    .groupHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-    .left {
-      margin: 0;
+    // bare arrows, the heading's size, the site's weight change on a press
+    .paddles {
+      display: flex;
+      gap: 1.25rem;
 
-      .tile {
-        // there is no real hover on a touch screen: a tap leaves :hover
-        // applied, so the shadow stayed lit under a row the finger had
-        // already left
-        &:hover {
-          box-shadow: none;
+      button {
+        padding: 0;
+        background: none;
+        color: var(--text-color);
+        font-family: inherit;
+        font-size: var(--h4);
+        line-height: 1;
+        font-variation-settings: $fontVarNormal;
+        cursor: pointer;
+        transition:
+          opacity var(--duration) var(--ease),
+          font-variation-settings var(--fontMorph);
+
+        &:hover:not(:disabled) {
+          font-variation-settings: $fontVarThin;
         }
 
-        // 2rem to sit on the same line as the navbar logo and the footer,
-        // which both use `2rem` horizontally. The wrapper is full-bleed, so
-        // this padding is the only thing setting the edge -- and the tile's
-        // hover highlight still runs the full width of the screen.
-        padding: 1rem 2rem;
-
-        // the desktop 4rem would not survive 320px once the padding doubled;
-        // space-between still pushes the year to the right edge anyway
-        gap: 1rem;
-
-        .title {
-          width: 50dvw;
+        &:disabled {
+          opacity: 0.35;
+          cursor: default;
         }
       }
     }
 
-    .right {
-      display: block;
-      position: static;
-      height: fit-content;
-      // same 2rem edge as the tiles, the navbar and the footer
-      padding: 0 2rem;
+    // Out past the page's 2rem margins to the screen's edges, so the next
+    // tile shows; tiles snap to the column's edge.
+    .row {
+      margin-inline: -2rem;
+      padding-inline: 2rem;
+      scroll-padding-inline: 2rem;
 
-      .hero {
-        .links {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 0.25rem;
+      // two tiles in view on a tablet or small laptop, one on a phone
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: calc((100% - 0.75rem) / 2);
+      column-gap: 0.75rem;
+
+      @media (max-width: 760px) {
+        grid-auto-columns: 100%;
+      }
+
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      // Every frame 16:10, so a row's tiles match, each clip fitted whole.
+      // The stack comes out of the frame to the tile's foot, under the name:
+      // the frame's box gives way (display: contents), so the clip, the
+      // name and the stack are the tile's own column, stack last.
+      .card {
+        --ratio: 1.6;
+        scroll-snap-align: start;
+        // the loading ring's anchor, the frame's own box having given way
+        position: relative;
+
+        // the clip fills its frame, cropped from the top edge down -- no band
+        // of empty frame where its shape is not quite 16:10 -- except a
+        // phone, which would show only its top: that stays whole, and with
+        // its backdrop cut out it simply stands on the tile
+        .cardMedia {
+          display: contents;
+
+          video,
+          img {
+            height: auto;
+            aspect-ratio: var(--ratio);
+            object-fit: cover;
+            object-position: top center;
+          }
         }
 
-        .intro {
-          .swirlEmoji {
-            margin-top: 0.5rem;
-            width: 40px;
-            height: 40px;
+        &.portrait .cardMedia video {
+          object-fit: contain;
+          object-position: center;
+        }
+
+        // shown for a mouse too: the cursor tile is desktop's alone
+        .cardCaption {
+          display: flex;
+          order: 1;
+          padding-bottom: 0.75rem;
+        }
+
+        // under the video, on the tile's own panel: in the theme's colours
+        // rather than the dark ones the chips keep over a video -- each
+        // the page's colour, set off from the panel's grey
+        .cardStack {
+          order: 2;
+          position: static;
+          opacity: 1;
+          visibility: visible;
+          max-height: none;
+          padding: 0 1.25rem 1.25rem;
+          color-scheme: inherit;
+
+          // light in either theme: on the dark panel they read as the
+          // light theme's white chips
+          .chip {
+            color-scheme: light;
+            background-color: color-mix(in srgb, var(--background-color) 99%, transparent);
           }
+        }
+
+        // still to come: an empty frame, then the name, like the rest
+        &.upcoming .cardMedia {
+          display: block;
+          aspect-ratio: var(--ratio);
         }
       }
     }
@@ -1550,26 +2476,26 @@ footer {
   .workWrapper {
     max-width: $maxWidthMobile;
 
-    ul {
-      margin-left: 32px;
+    // unitless, so it scales with the fluid body size: the old fixed 1.75rem
+    // was more than twice the 12px text on a small phone
+    .details .paragraph {
+      line-height: var(--leading-body);
     }
 
-    .content {
-      .paragraph {
-        line-height: 1.75rem;
-      }
+    .details .spec {
+      grid-template-columns: 1fr;
+      row-gap: 0.75rem;
+    }
 
-      .media {
-        .spinner {
-          padding: 50px 0;
-        }
-      }
+
+    .media .spinner {
+      padding: 3rem 0;
     }
   }
 
+  // the mobile bar: solid, the drawer's grey -- no frosted blur
   nav {
-    background-color: var(--background-color);
-    box-shadow: $boxShadow;
+    background-color: var(--barSolid);
 
     display: flex;
 
@@ -1578,16 +2504,10 @@ footer {
     }
   }
 
-  .navAlt {
+  .navAlt,
+  .workFlyout,
+  .workFlyoutScrim {
     display: none;
-  }
-
-  footer {
-    position: unset;
-  }
-
-  .menu {
-    font-size: 7.5dvh;
   }
 
   .infoOnHover {
@@ -1606,6 +2526,67 @@ footer {
     &:hover::before {
       display: none;
     }
+  }
+}
+
+// Reduced motion is about things travelling, not about change itself: colour
+// and opacity fades (--duration) and the weight change (--fontMorph) carry on
+// as normal, and only the transitions that move something stop moving. The
+// work dropdown's slide (--flyoutSlide) is the one deliberate exception.
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion: 0.01ms;
+  }
+}
+
+// Set on <html> for the instant the theme flips. Links, rows and nav items
+// each fade their colour on hover, so without this a theme change made them
+// trail behind the plain text, which snaps -- the page appeared to animate in
+// pieces. Only for that moment; hover transitions, the weight change
+// included, behave normally either side of it.
+//
+// The theme toggle's icon is left out: its sun-to-moon morph is the one thing
+// meant to animate on exactly this change.
+.themeSwitching,
+.themeSwitching *:not(.themeIcon, .themeIcon *),
+.themeSwitching *::before,
+.themeSwitching *::after {
+  transition: none !important;
+}
+
+// the crossfade between the two themes (handleToggleTheme): as long as the
+// sun and moon take to turn into each other
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--themeMorph);
+  animation-timing-function: ease;
+}
+
+// The toggle's sun and moon (ThemeIcon.tsx). The morph itself is gsap's; all
+// css does here is the hover, on separate elements so the two never fight.
+.themeIcon {
+  overflow: visible;
+
+  .themeIconRaysTurn {
+    transform-box: view-box;
+    transform-origin: 12px 12px;
+    transition: transform var(--themeMorph) var(--ease);
+  }
+}
+
+.navButtons .themeButton .themeIcon,
+.menu .themeButton .themeIcon {
+  transition: rotate var(--themeMorph) var(--ease);
+}
+
+// hovered: the sun's rays turn one step round, the moon rocks back
+.themeButton:hover {
+  .themeIcon.isSun .themeIconRaysTurn {
+    transform: rotate(45deg);
+  }
+
+  .themeIcon.isMoon {
+    rotate: -25deg;
   }
 }
 

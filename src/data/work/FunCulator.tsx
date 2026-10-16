@@ -1,10 +1,11 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
-import { LinkWithIcon } from "../../components/Link";
-import { IconCards, IconOctopus } from "../../utils/iconSetting";
+import { ActionLink } from "../../components/Link";
+// import { IconCards, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageFunculator from "@/assets/images/ImageFunCulator.webp";
 import VideoFunCulator from "@/assets/videos_master/VideoFunCulator.webm";
 import VideoFunCulatorPreview from "@/assets/video_previews/VideoFunCulator.webm";
+import VideoFunCulatorPoster from "@/assets/video_posters/VideoFunCulator.webp";
 import FileFunculator from "@/assets/files/FileFunCulator.pdf";
 //
 const GitHubFunCulator = "https://github.com/shadowisf/FunCulator";
@@ -20,18 +21,19 @@ export const FunCulator: WorkEntry = {
     "an image of the funculator project. it is currently viewing the menu section where it is displaying all of the possible operations such as factorial, min&max, fibonacci, etc.",
   video: VideoFunCulator,
   videoPreview: VideoFunCulatorPreview,
+  videoPoster: VideoFunCulatorPoster,
   previewStart: 6,
   videoFlex: "1.891626",
   status: (
     <>
-      funculator was completed on <u>december 21, 2023</u>.
+      completed on <u>december 21, 2023</u>.
     </>
   ),
   description: (
     <>
-      funculator is an <u>all-in-one calculator application</u> designed to
-      support students with diverse mathematical operations, built using java’s
-      core programming paradigms. key features include:
+      an <u>all-in-one calculator application</u> designed to support students
+      with diverse mathematical operations, built using java’s core programming
+      paradigms. key features include:
       <ul>
         <li>
           <b>multi-mode functionality</b>: arithmetic, fibonacci sequences,
@@ -72,7 +74,7 @@ export const FunCulator: WorkEntry = {
   ),
   myRole: (
     <>
-      funculator is a <u>collaborative side project</u> where i:
+      working alongside other developers, i handled the following:
       <ul>
         <li>
           designed pixel-art ui (gimp) and integrated assets into swing
@@ -98,19 +100,17 @@ export const FunCulator: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img alt="octopus icon" src={IconOctopus} />}
+      <ActionLink /* img={<img alt="octopus icon" src={IconOctopus} />} */
         href={GitHubFunCulator}
       >
         source code
-      </LinkWithIcon>
+      </ActionLink>
 
-      <LinkWithIcon
-        img={<img alt="cards icon" src={IconCards} />}
+      <ActionLink /* img={<img alt="cards icon" src={IconCards} />} */
         href={FileFunculator}
       >
         case study
-      </LinkWithIcon>
+      </ActionLink>
     </>
   ),
 };

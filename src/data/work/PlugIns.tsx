@@ -1,10 +1,11 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
-import { LinkWithIcon } from "../../components/Link";
-import { IconCards, IconOctopus } from "../../utils/iconSetting";
+import { ActionLink } from "../../components/Link";
+// import { IconCards, IconOctopus } from "../../utils/iconSetting";
 //
 import ImagePlugIns from "@/assets/images/ImagePlugIns.webp";
 import VideoPlugIns from "@/assets/videos_master/VideoPlugIns.webm";
 import VideoPlugInsPreview from "@/assets/video_previews/VideoPlugIns.webm";
+import VideoPlugInsPoster from "@/assets/video_posters/VideoPlugIns.webp";
 import FilePlugIns from "@/assets/files/FilePlugIns.pdf";
 //
 const GitHubPlugIns = "https://github.com/shadowisf/PlugIns";
@@ -20,17 +21,18 @@ export const PlugIns: WorkEntry = {
     "an image of the plug-ins project. it is currently viewing the products page",
   video: VideoPlugIns,
   videoPreview: VideoPlugInsPreview,
+  videoPoster: VideoPlugInsPoster,
   previewStart: 16,
   videoFlex: "1.599074",
   status: (
     <>
-      plug-ins was completed on <u>april 19, 2023</u>.
+      completed on <u>april 19, 2023</u>.
     </>
   ),
   description: (
     <>
-      plug-ins is a <u>web database solution</u> that automates operations for
-      an electronics retail business, combining robust backend architecture with
+      a <u>web database solution</u> that automates operations for an
+      electronics retail business, combining robust backend architecture with
       user-friendly interfaces. the system demonstrates key database principles.
       key features include:
       <ul>
@@ -76,7 +78,7 @@ export const PlugIns: WorkEntry = {
   ),
   myRole: (
     <>
-      plug-ins is a <u>solo side project</u> where i:
+      i built this on my own, from start to finish:
       <ul>
         <li>
           designed the er diagram and normalized database structure to third
@@ -102,19 +104,17 @@ export const PlugIns: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img alt="octopus icon" src={IconOctopus} />}
+      <ActionLink /* img={<img alt="octopus icon" src={IconOctopus} />} */
         href={GitHubPlugIns}
       >
         source code
-      </LinkWithIcon>
+      </ActionLink>
 
-      <LinkWithIcon
-        img={<img alt="card icon" src={IconCards} />}
+      <ActionLink /* img={<img alt="card icon" src={IconCards} />} */
         href={FilePlugIns}
       >
         case study
-      </LinkWithIcon>
+      </ActionLink>
     </>
   ),
 };

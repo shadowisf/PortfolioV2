@@ -1,10 +1,11 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
-import { LinkWithIcon, LinkWithNoIcon } from "../../components/Link";
-import { IconGlobe, IconOctopus } from "../../utils/iconSetting";
+import { ActionLink, InlineLink } from "../../components/Link";
+// import { IconGlobe, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageV1Portfolio from "@/assets/images/ImageV1Portfolio.webp";
 import VideoV1Portfolio from "@/assets/videos_master/VideoV1Portfolio.webm";
 import VideoV1PortfolioPreview from "@/assets/video_previews/VideoV1Portfolio.webm";
+import VideoV1PortfolioPoster from "@/assets/video_posters/VideoV1Portfolio.webp";
 //
 const GitHubV1Portfolio = "https://github.com/shadowisf/PortfolioV1";
 const DemoV1Portfolio = "https://v1-lesranalan.web.app";
@@ -25,24 +26,25 @@ export const PortfolioV1: WorkEntry = {
     "an image of the about section in my portfolio project. it has a cartoon illustration of me and and text introducing myself.",
   video: VideoV1Portfolio,
   videoPreview: VideoV1PortfolioPreview,
+  videoPoster: VideoV1PortfolioPoster,
   videoFlex: "1.599074",
   status: (
     <>
-      portfolio v1 was completed on <u>september 23, 2024</u>.
+      completed on <u>september 23, 2024</u>.
     </>
   ),
   description: (
     <>
-      portfolio v1 is a <u>dynamic and cartoonish-themed personal website</u>{" "}
-      designed to showcase creativity while exploring foundational web
-      development technologies. inspired by award-winning designs from{" "}
-      <LinkWithNoIcon
+      a <u>dynamic and cartoonish-themed personal website</u> designed to
+      showcase creativity while exploring foundational web development
+      technologies. inspired by award-winning designs from{" "}
+      <InlineLink
         className="infoOnHover top"
         href="https://www.awwwards.com/"
         data-tooltip={isMobile ? "" : "tryhards love this website"}
       >
         awwwards
-      </LinkWithNoIcon>
+      </InlineLink>
       , this project blends playful aesthetics with functional interactivity.
       key features include:
       <ul>
@@ -67,7 +69,7 @@ export const PortfolioV1: WorkEntry = {
   ),
   myRole: (
     <>
-      portfolio v1 was a <u>solo personal project</u> where i:
+      i built this on my own, from start to finish:
       <ul>
         <li>
           designed and implemented a playful, cartoonish interface inspired by
@@ -93,19 +95,17 @@ export const PortfolioV1: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img alt="globe icon" src={IconGlobe} />}
+      <ActionLink /* img={<img alt="globe icon" src={IconGlobe} />} */
         href={DemoV1Portfolio}
       >
         live website
-      </LinkWithIcon>
+      </ActionLink>
 
-      <LinkWithIcon
-        img={<img alt="octopus icon" src={IconOctopus} />}
+      <ActionLink /* img={<img alt="octopus icon" src={IconOctopus} />} */
         href={GitHubV1Portfolio}
       >
         source code
-      </LinkWithIcon>
+      </ActionLink>
     </>
   ),
 };

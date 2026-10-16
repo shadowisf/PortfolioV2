@@ -1,38 +1,43 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
-import { IconGlobe } from "../../utils/iconSetting";
-import { LinkWithIcon } from "../../components/Link";
+import { ActionLink } from "../../components/Link";
+import { CompanyLink } from "../../components/CompanyLink";
+// import { IconGlobe } from "../../utils/iconSetting";
 //
 import ImageRayfitoutWeb from "@/assets/images/ImageRayfitoutWeb.webp";
 import VideoRayfitoutWeb from "@/assets/videos_master/VideoRayfitoutWeb.webm";
 import VideoRayfitoutWebPreview from "@/assets/video_previews/VideoRayfitoutWeb.webm";
+import VideoRayfitoutWebPoster from "@/assets/video_posters/VideoRayfitoutWeb.webp";
 //
 const LiveRayfitoutWeb = "https://www.rayfitout.com";
 
 export const RayfitoutWeb: WorkEntry = {
   type: "professional experience",
-  name: "rayfitout (web)",
+  name: "rayfitout web",
   year: "2025",
+  tagline: "the website for an award-winning fit-out company",
   techStack: ["*webflow", "*html", "*css", "*javascript", "*gsap", "*figma"],
+  keyStack: ["webflow"],
   image: ImageRayfitoutWeb,
   imageFlex: "1.729285",
   imageAlt:
     "an image of the rayfitout website, where it showcases all their architecture and interior design projects. each project shows a unique and beautiful image of the interior of a villa.",
   video: VideoRayfitoutWeb,
   videoPreview: VideoRayfitoutWebPreview,
+  videoPoster: VideoRayfitoutWebPoster,
+  previewStart: 0.5,
   videoFlex: "1.642",
   status: (
     <>
-      rayfitout (web) was a project <u>i previously worked on</u> with the
-      company.
+      built during my time at <CompanyLink name="rayfitout" />.
     </>
   ),
   description: (
     <>
-      rayfitout is an award-winning interior design and fit-out company
-      specializing in high-end residential, commercial, and bespoke joinery
-      projects across the middle east, europe, and africa. i contributed to
-      enhancing the company's <u>visually appealing website</u>. key features
-      include:
+      <CompanyLink name="rayfitout" /> is an award-winning interior design and
+      fit-out company specializing in high-end residential, commercial, and
+      bespoke joinery projects across the middle east, europe, and africa. i
+      contributed to enhancing the company's <u>visually appealing website</u>.
+      key features include:
       <ul>
         <li>
           <b>featured projects gallery</b>: showcase of high-end residential,
@@ -40,8 +45,8 @@ export const RayfitoutWeb: WorkEntry = {
         </li>
         <li>
           <b>product catalog features</b>: dedicated showcase for interior
-          solutions—such as interior doors, wardrobes, windows, kitchen systems,
-          and walk-in closets—reinforcing their bespoke offerings
+          solutions, such as interior doors, wardrobes, windows, kitchen
+          systems, and walk-in closets, reinforcing their bespoke offerings
         </li>
         <li>
           <b>in-depth process & services pages</b>: detailed breakdown of design
@@ -67,8 +72,8 @@ export const RayfitoutWeb: WorkEntry = {
   ),
   myRole: (
     <>
-      rayfitout (web) is a <u>collaborative professional project</u>, partnered
-      with a ui/ux designer and a marketing manager, where i:
+      working with a ui/ux designer and a marketing manager, i handled the
+      following:
       <ul>
         <li>
           implemented best search engine optimization (seo) practices, achieving
@@ -102,12 +107,11 @@ export const RayfitoutWeb: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img alt="globe icon" src={IconGlobe} />}
+      <ActionLink /* img={<img alt="globe icon" src={IconGlobe} />} */
         href={LiveRayfitoutWeb}
       >
         live website
-      </LinkWithIcon>
+      </ActionLink>
     </>
   ),
 };

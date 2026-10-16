@@ -1,10 +1,11 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
-import { LinkWithIcon } from "../../components/Link";
-import { IconGlobe, IconCards, IconOctopus } from "../../utils/iconSetting";
+import { ActionLink } from "../../components/Link";
+// import { IconGlobe, IconCards, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageExamiq from "@/assets/images/ImageExamiq.webp";
 import VideoExamiq from "@/assets/videos_master/VideoExamiq.webm";
 import VideoExamiqPreview from "@/assets/video_previews/VideoExamiq.webm";
+import VideoExamiqPoster from "@/assets/video_posters/VideoExamiq.webp";
 import FileExamiq from "@/assets/files/FileExamiq.pdf";
 //
 const GitHubExamiq = "https://github.com/shadowisf/Examiq";
@@ -13,7 +14,10 @@ const DemoExamiq = "https://examiq-seven.vercel.app";
 export const Examiq: WorkEntry = {
   type: "personal project",
   name: "examiq",
+  // a dark screen recording: light chips and cursor read over it
+  overlayTheme: "light",
   year: "2025",
+  tagline: "ai-powered proctoring for remote exams",
   techStack: [
     "*next.js",
     "*typescript",
@@ -26,24 +30,26 @@ export const Examiq: WorkEntry = {
     "*vercel",
     "git",
   ],
+  keyStack: ["next.js", "supabase", "postgresql"],
   image: ImageExamiq,
   imageFlex: "1.735986",
   imageAlt:
     "an image of examiq, an ai-powered proctorig system. currently, it's in the exam page wherein it's displaying all of the questions of an exam in a form format. while at it, on the top left, there is a camera showing the face of the user and the system is scanning the fact, specifically the eyes. you can then see a red dot on the screen, tracking the user's gaze.",
   video: VideoExamiq,
   videoPreview: VideoExamiqPreview,
+  videoPoster: VideoExamiqPoster,
   previewStart: 12,
   videoFlex: "1.726",
   status: (
     <>
-      examiq was completed on <u>may 11, 2025</u>.
+      completed on <u>may 11, 2025</u>.
     </>
   ),
   description: (
     <>
-      examiq is a <u>web-based ai-powered proctoring system</u> that features
-      gaze tracking, input tracking, and behavior tracking to prevent cheating
-      during remote assessments. key features include:
+      a <u>web-based ai-powered proctoring system</u> that features gaze
+      tracking, input tracking, and behavior tracking to prevent cheating during
+      remote assessments. key features include:
       <ul>
         <li>
           <b>role-based authentication & dashboards</b>: persistent login with
@@ -76,7 +82,7 @@ export const Examiq: WorkEntry = {
   ),
   myRole: (
     <>
-      examiq was a <u>solo personal project</u> where i:
+      i built this on my own, from start to finish:
       <ul>
         <li>
           designed entity-relationship diagram (erd), data-flow diagrams (dfd)
@@ -104,26 +110,23 @@ export const Examiq: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img alt="globe icon" src={IconGlobe} />}
+      <ActionLink /* img={<img alt="globe icon" src={IconGlobe} />} */
         href={DemoExamiq}
       >
         live website
-      </LinkWithIcon>
+      </ActionLink>
 
-      <LinkWithIcon
-        img={<img alt="octopus icon" src={IconOctopus} />}
+      <ActionLink /* img={<img alt="octopus icon" src={IconOctopus} />} */
         href={GitHubExamiq}
       >
         source code
-      </LinkWithIcon>
+      </ActionLink>
 
-      <LinkWithIcon
-        img={<img alt="cards icon" src={IconCards} />}
+      <ActionLink /* img={<img alt="cards icon" src={IconCards} />} */
         href={FileExamiq}
       >
         case study
-      </LinkWithIcon>
+      </ActionLink>
     </>
   ),
 };

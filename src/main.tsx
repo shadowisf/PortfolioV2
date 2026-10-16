@@ -2,8 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./main.scss";
 import NavBar from "./components/NavBar.tsx";
-import { PixelGrid } from "./components/TransitionPanel.tsx";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer.tsx";
 import Home from "./pages/Home.tsx";
 import About from "./pages/About.tsx";
@@ -26,7 +25,6 @@ root.render(
       future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
     >
       <GlobalStateProvider>
-        <PixelGrid />
         <NavBar />
 
         <Routes>
@@ -46,6 +44,16 @@ root.render(
               />
             );
           })}
+
+          {/* the rayfitout pages' old addresses, from before their renaming */}
+          <Route
+            path="/rayfitout-(internal)"
+            element={<Navigate to="/rayfitout-ops" replace />}
+          />
+          <Route
+            path="/rayfitout-(web)"
+            element={<Navigate to="/rayfitout-web" replace />}
+          />
 
           {/* lost */}
           <Route path="*" element={<YouAreLost />} />

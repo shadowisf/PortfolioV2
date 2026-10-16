@@ -1,20 +1,18 @@
 import { useGSAP } from "@gsap/react";
 import { createContext, useContext, useEffect, useState } from "react";
+import { flushSync } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
-import { usePageTransition } from "../utils/gsap/usePageTransition";
 
 type GlobalStateContextType = {
   isMobile: boolean;
   currentPage: string;
   setCurrentPage: (url: string) => void;
-  executeTransition: (url: string) => void;
-  handleToggleTheme: (menu: boolean) => void;
+  executeTransition: (url: string, keepMenu?: boolean) => void;
+  handleToggleTheme: () => void;
   userTheme: string;
   inMenu: boolean;
   setInMenu: (value: boolean) => void;
-  skipStart: boolean;
-  setSkipStart: (value: boolean) => void;
 };
 
 type GlobalStateProviderProps = {
@@ -31,8 +29,6 @@ const GlobalStateContext = createContext<GlobalStateContextType>({
   userTheme: "",
   inMenu: false,
   setInMenu: () => {},
-  skipStart: false,
-  setSkipStart: () => {},
 });
 
 export function useGlobalState() {
@@ -42,13 +38,20 @@ export function useGlobalState() {
 export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [inMenu, setInMenu] = useState(false);
-  const [userTheme, setUserTheme] = useState("");
+  // Read straight away rather than starting empty: with "" the first render
+  // drew the toggle for the wrong theme, and correcting it a moment later
+  // played the sun/moon morph on every page load.
+  const [userTheme, setUserTheme] = useState(
+    () =>
+      localStorage.getItem("theme") ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light")
+  );
   const [currentPage, setCurrentPage] = useState("");
   const [hasMounted, setHasMounted] = useState(false);
-  const [skipStart, setSkipStart] = useState(false);
 
   const { contextSafe } = useGSAP();
-  const { closeMenu } = usePageTransition();
 
   const navigate = useNavigate();
 
@@ -60,9 +63,10 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
     setHasMounted(true);
   }, []);
 
+  // widening past the mobile layout takes the menu with it
   useEffect(() => {
     if (!isMobile && hasMounted) {
-      closeMenu();
+      setInMenu(false);
     }
   }, [isMobile, hasMounted]);
 
@@ -84,28 +88,42 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
 
     setUserTheme(theme);
 
-    document.documentElement.style.setProperty("--theme", theme);
+    // flip every colour in one frame -- see .themeSwitching in main.scss
+    const root = document.documentElement;
+    root.classList.add("themeSwitching");
+    root.style.setProperty("--theme", theme);
+    // reading a computed style forces the new colours to resolve while
+    // transitions are still off, so removing the class cannot replay them
+    void getComputedStyle(root).color;
+    window.setTimeout(() => root.classList.remove("themeSwitching"), 0);
 
+    // the browser's own top bar takes the nav bar's shade, so the two join up
     if (theme === "dark") {
-      themeColorMetaTag?.setAttribute("content", "rgb(28, 28, 30)");
+      themeColorMetaTag?.setAttribute("content", "rgb(36, 36, 38)");
     }
 
     if (theme === "light") {
-      themeColorMetaTag?.setAttribute("content", "rgb(229, 229, 234)");
+      themeColorMetaTag?.setAttribute("content", "rgb(242, 242, 247)");
     }
   }, [userTheme]);
 
-  // handle theme toggle
-  function handleToggleTheme(menu: boolean) {
+  // The theme toggle. The page crossfades from one theme to the other as a
+  // whole (a view transition): the browser holds a picture of it in the old
+  // colours, flips them underneath in one frame (.themeSwitching), and fades
+  // the picture out over the page in the new -- so everything changes
+  // together, images, blur and all, with the sun and moon morphing live
+  // beneath. Where a browser has no view transitions, the flip is simply
+  // instant. Like the site's other chosen motion, it plays with reduced
+  // motion on.
+  function handleToggleTheme() {
     const newTheme = userTheme === "dark" ? "light" : "dark";
-
-    setUserTheme(newTheme);
-
     localStorage.setItem("theme", newTheme);
 
-    if (menu) {
-      closeMenu();
-    }
+    // rendered, and the colours applied (the effect above), before the
+    // browser takes the new picture
+    const flip = () => flushSync(() => setUserTheme(newTheme));
+    if ("startViewTransition" in document) document.startViewTransition(flip);
+    else flip();
   }
 
   // handle window resize, set mobile state
@@ -119,14 +137,14 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   }
 
   // execute page transition
-  const executeTransition = contextSafe((url: string) => {
-    if (url === currentPage) {
-      isMobile && closeMenu();
-      return;
-    }
+  // keepMenu: the mobile menu left open, for it to close itself once the
+  // new page is in (NavBar)
+  const executeTransition = contextSafe((url: string, keepMenu = false) => {
+    // the mobile menu goes up either way, if it was open
+    if (!keepMenu) setInMenu(false);
+    if (url === currentPage) return;
 
     navigate(url);
-    isMobile && closeMenu();
   });
 
   return (
@@ -140,8 +158,6 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
         userTheme,
         inMenu,
         setInMenu,
-        skipStart,
-        setSkipStart,
       }}
     >
       {children}

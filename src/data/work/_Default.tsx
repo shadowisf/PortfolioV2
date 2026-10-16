@@ -1,6 +1,6 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
-import { LinkWithIcon } from "../../components/Link";
-import { IconOctopus } from "../../utils/iconSetting";
+import { ActionLink } from "../../components/Link";
+// import { IconOctopus } from "../../utils/iconSetting";
 //
 /* INSERT MEDIA HERE */
 //
@@ -16,15 +16,16 @@ export const Project: WorkEntry = {
   imageAlt: "",
   video: "",
   videoPreview: "",
+  videoPoster: "",
   videoFlex: "",
   status: (
     <>
-      project was completed on <u>december 20, 2023</u>.
+      completed on <u>december 20, 2023</u>.
     </>
   ),
   description: (
     <>
-      project is a <u>web-based hospital management system</u> for managing
+      a <u>web-based hospital management system</u> for managing
       patient, doctor, and staff records. key features include:
       <ul>
         <li>
@@ -37,8 +38,7 @@ export const Project: WorkEntry = {
   ),
   myRole: (
     <>
-      project was a <u>collaborative personal project</u>, partnered with other
-      developers, where i:
+      working alongside other developers, i handled the following:
       <ul>
         <li>
           designed 10+ interactive webpages (html/css/bootstrap) with consistent
@@ -54,9 +54,9 @@ export const Project: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon img={<img alt="globe icon" src={IconOctopus} />} href={""}>
+      <ActionLink /* img={<img alt="globe icon" src={IconOctopus} />} */ href={""}>
         placeholder
-      </LinkWithIcon>
+      </ActionLink>
     </>
   ),
 };

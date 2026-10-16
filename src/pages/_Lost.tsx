@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { LinkWithIcon } from "../components/Link";
+import { ActionLink } from "../components/Link";
 import Spinner from "../components/Spinner";
-import { IconSwirl } from "../utils/iconSetting";
+// import { IconSwirl } from "../utils/iconSetting";
 
 type MemeData = {
   postLink: string;
@@ -118,9 +118,9 @@ export default function YouAreLost() {
       </section>
 
       <section className="links">
-        <LinkWithIcon onClick={() => fetchMeme()} img={<img src={IconSwirl} />}>
+        <ActionLink /* img={<img src={IconSwirl} />} */ onClick={() => fetchMeme()}>
           generate new meme
-        </LinkWithIcon>
+        </ActionLink>
       </section>
     </main>
   );

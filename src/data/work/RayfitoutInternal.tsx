@@ -1,18 +1,21 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
-import { IconOctopus } from "../../utils/iconSetting";
-import { LinkWithIcon } from "../../components/Link";
+import { ActionLink } from "../../components/Link";
+import { CompanyLink } from "../../components/CompanyLink";
+// import { IconOctopus } from "../../utils/iconSetting";
 //
 import ImageRayfitoutInternal from "@/assets/images/ImageRayfitoutInternal.webp";
 import VideoRayfitoutInternal from "@/assets/videos_master/VideoRayfitoutInternal.webm";
 import VideoRayfitoutInternalPreview from "@/assets/video_previews/VideoRayfitoutInternal.webm";
+import VideoRayfitoutInternalPoster from "@/assets/video_posters/VideoRayfitoutInternal.webp";
 //
 const GitHubRayfitoutInternal = "https://github.com/shadowisf/RayfitoutERP";
 /* const LiveRayfitoutInternal = "https://rayfitout-erp-preview.vercel.app/"; */
 
 export const RayfitoutInternal: WorkEntry = {
   type: "professional experience",
-  name: "rayfitout (internal)",
+  name: "rayfitout ops",
   year: "2025",
+  tagline: "an erp for an award-winning fit-out company",
   techStack: [
     "*next.js",
     "*typescript",
@@ -28,30 +31,31 @@ export const RayfitoutInternal: WorkEntry = {
     "git",
     "*figma",
   ],
+  keyStack: ["next.js", "restful api", "mysql"],
   image: ImageRayfitoutInternal,
   imageFlex: "1.6",
   imageAlt:
     "a dashboard view of the manager user in the enterprise resource planning web application, with widgets for active material requests, pending approval of material requests, pending payments of material requests, outbound payments of local purchase orders, pending deliveries of local purchase orders. on the bottom of that are two widgets for quick approvals: initial approval and price approval for each items in a material request with approve or reject buttons and selection of vendors. on the left side of the screen is the navigation bar, with icons for dashboard, procurement tracker, projects, local purchase order list, bill of quantity list, vendor and subcontractor list, and inventory list.",
   video: VideoRayfitoutInternal,
   videoPreview: VideoRayfitoutInternalPreview,
-  previewStart: 24,
+  videoPoster: VideoRayfitoutInternalPoster,
+  previewStart: 26,
   videoFlex: "1.7338965153",
   status: (
     <>
-      rayfitout (internal) was a project <u>i previously worked on</u> with the
-      company.
+      built during my time at <CompanyLink name="rayfitout" />.
     </>
   ),
   description: (
     <>
-      rayfitout is an award-winning interior design and fit-out company
-      specializing in high-end residential, commercial, and bespoke joinery
-      projects across the middle east, europe, and africa. i contributed to
-      creating the company's{" "}
+      <CompanyLink name="rayfitout" /> is an award-winning interior design and
+      fit-out company specializing in high-end residential, commercial, and
+      bespoke joinery projects across the middle east, europe, and africa. i
+      contributed to creating the company's{" "}
       <u>enterprise resource planning (erp) application</u> designed to
       streamline internal operations, procurement, and financial workflows. the
       platform centralizes key business processes into a single, efficient
-      system. key features include:.
+      system. key features include:
       <ul>
         <li>
           <b>material request management</b>: enables teams to create, track,
@@ -93,10 +97,8 @@ export const RayfitoutInternal: WorkEntry = {
   ),
   myRole: (
     <>
-      rayfitout (internal) is a <u>collaborative professional project</u> where
-      i took ownership of the entire technical implementation, collaborating
-      with a ui/ux designer, a marketing manager and a general operations
-      manager, where i:
+      working with a ui/ux designer, a marketing manager, and a general
+      operations manager, i owned the entire technical implementation:
       <ul>
         <li>
           architected and selected the complete tech stack, ensuring
@@ -140,18 +142,16 @@ export const RayfitoutInternal: WorkEntry = {
   ),
   links: (
     <>
-      {/*  <LinkWithIcon
-        img={<img alt="globe icon" src={IconGlobe} />}
+      {/*  <ActionLink img={<img alt="globe icon" src={IconGlobe} />}
         href={LiveRayfitoutInternal}
       >
         preview website
-      </LinkWithIcon> */}
-      <LinkWithIcon
-        img={<img alt="octopus icon" src={IconOctopus} />}
+      </ActionLink> */}
+      <ActionLink /* img={<img alt="octopus icon" src={IconOctopus} />} */
         href={GitHubRayfitoutInternal}
       >
-        github
-      </LinkWithIcon>
+        source code
+      </ActionLink>
     </>
   ),
 };

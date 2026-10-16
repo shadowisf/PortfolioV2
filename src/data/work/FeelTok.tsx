@@ -1,10 +1,12 @@
 import { WorkEntry } from "../../utils/types/WorkEntry";
-import { LinkWithIcon } from "../../components/Link";
-import { IconCards, IconOctopus } from "../../utils/iconSetting";
+import { ActionLink } from "../../components/Link";
+// import { IconCards, IconOctopus } from "../../utils/iconSetting";
 //
 import ImageFeelTok from "@/assets/images/ImageFeelTok.webp";
 import VideoFeelTok from "@/assets/videos_master/VideoFeelTok.webm";
 import VideoFeelTokPreview from "@/assets/video_previews/VideoFeelTok.webm";
+import VideoFeelTokPreviewHevc from "@/assets/video_previews/VideoFeelTok.mov";
+import VideoFeelTokPoster from "@/assets/video_posters/VideoFeelTok.webp";
 import FileFeelTok from "@/assets/files/FileFeelTok.pdf";
 //
 const GitHubFeelTok = "https://github.com/shadowisf/FeelTok";
@@ -13,6 +15,7 @@ export const FeelTok: WorkEntry = {
   type: "personal project",
   name: "feeltok",
   year: "2024",
+  tagline: "a social platform for authentic emotional expression",
   techStack: [
     "*next.js",
     "*expo",
@@ -26,23 +29,26 @@ export const FeelTok: WorkEntry = {
     "*jira",
     "*figma",
   ],
+  keyStack: ["expo", "firebase", "nosql"],
   image: ImageFeelTok,
   imageFlex: "1.600556",
   imageAlt:
     "an image of the feeltok admin dashboard. right now, it is viewing the posts tab wherein all post details can be seen. on the very right of each post entry, there are two buttons: view and delete. clicking the view button will bring up a modal on what the post actually looks like from the user's perspective, while the delete button will delete the post.",
   video: VideoFeelTok,
   videoPreview: VideoFeelTokPreview,
+  videoPreviewHevc: VideoFeelTokPreviewHevc,
+  videoPoster: VideoFeelTokPoster,
   previewStart: 16,
   videoFlex: "0.47901",
   status: (
     <>
-      feeltok was completed on <u>december 18, 2024</u>.
+      completed on <u>december 18, 2024</u>.
     </>
   ),
   description: (
     <>
-      feeltok is a <u>mobile-first social media platform</u> promoting authentic
-      emotional expression through six core pillars (love, gratitude, apology,
+      a <u>mobile-first social media platform</u> promoting authentic emotional
+      expression through six core pillars (love, gratitude, apology,
       appreciation, mindfulness, thankfulness), built with modern serverless
       architecture. key features include:
       <ul>
@@ -73,8 +79,7 @@ export const FeelTok: WorkEntry = {
   ),
   myRole: (
     <>
-      feeltok was a <u>collaborative personal project</u>, partnered with other
-      developers, where i:
+      working alongside other developers, i handled the following:
       <ul>
         <li>
           designed the firestore database schema for users, posts, profiles, and
@@ -119,19 +124,17 @@ export const FeelTok: WorkEntry = {
   ),
   links: (
     <>
-      <LinkWithIcon
-        img={<img alt="octopus icon" src={IconOctopus} />}
+      <ActionLink /* img={<img alt="octopus icon" src={IconOctopus} />} */
         href={GitHubFeelTok}
       >
         source code
-      </LinkWithIcon>
+      </ActionLink>
 
-      <LinkWithIcon
-        img={<img alt="cards icon" src={IconCards} />}
+      <ActionLink /* img={<img alt="cards icon" src={IconCards} />} */
         href={FileFeelTok}
       >
         case study
-      </LinkWithIcon>
+      </ActionLink>
     </>
   ),
 };

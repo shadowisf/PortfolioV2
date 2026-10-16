@@ -27,18 +27,15 @@ export const LectraAI: WorkEntry = {
   imageAlt: "",
   video: "",
   videoPreview: "",
+  videoPoster: "",
   videoFlex: "",
-  status: (
-    <>
-      lectra ai is currently under <u>active development</u>.
-    </>
-  ),
+  status: <>in active development.</>,
   description: (
     <>
-      lectra ai is an <u>ai-powered learning platform</u> designed to transform
-      study materials into structured, engaging, and interactive content. the
-      platform leverages advanced artificial intelligence to simplify complex
-      information and enhance the learning experience. key features include:
+      an <u>ai-powered learning platform</u> designed to transform study
+      materials into structured, engaging, and interactive content. the platform
+      leverages advanced artificial intelligence to simplify complex information
+      and enhance the learning experience. key features include:
       <ul>
         <li>
           <b>intelligent content summarization</b>: automatically reads and
@@ -79,9 +76,8 @@ export const LectraAI: WorkEntry = {
   ),
   myRole: (
     <>
-      lectra ai is a <u>collaborative project</u> where i contributed from a
-      strategic and operational perspective with another software engineer,
-      where i:
+      working with another software engineer, i handled the strategic and
+      operational side:
       <ul>
         <li>
           provided product feedback and feature suggestions, helping shape the
