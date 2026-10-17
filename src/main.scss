@@ -1347,17 +1347,6 @@ footer {
       // clip too dark for them (overlayTheme, below)
       color-scheme: dark;
 
-      // only while the tile is hovered, wherever there is hover at all --
-      // fading in and out at the pace of the weight change; a touch screen,
-      // with none, shows them throughout
-      @media (hover: hover) and (pointer: fine) {
-        opacity: 0;
-        visibility: hidden;
-        transition:
-          opacity var(--fontMorph),
-          visibility 0s var(--fontMorphDuration);
-      }
-
       position: absolute;
       left: var(--chipInset);
       right: var(--chipInset);
@@ -1369,6 +1358,17 @@ footer {
       display: flex;
       flex-wrap: wrap;
       gap: var(--chipGap);
+
+      // only while the tile is hovered, wherever there is hover at all --
+      // fading in and out at the pace of the weight change; a touch screen,
+      // with none, shows them throughout
+      @media (hover: hover) and (pointer: fine) {
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity var(--fontMorph),
+          visibility 0s var(--fontMorphDuration);
+      }
 
       .chip {
         height: var(--chip);
