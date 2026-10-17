@@ -138,7 +138,7 @@ export default function About() {
             date="august 29, 2021 - september 3, 2022 "
             /* img={<img style={{ marginBottom: "7px" }} alt="university icon" src={IconUniversity} />} */
           >
-            diploma in engineering,{" "}
+            acquired diploma in engineering from{" "}
             <InlineLink
               className="infoOnHover top"
               href="https://wincedu.uk"
@@ -152,7 +152,7 @@ export default function About() {
             date="february 5, 2025 - february 27, 2025"
             /* img={<img style={{ marginBottom: "6px" }} alt="briefcase icon" src={IconBriefcase} />} */
           >
-            full-stack developer,{" "}
+            worked as full-stack developer at{" "}
             <CompanyLink name="whealthy vessel" />
             <span className="metaDot" aria-hidden="true">·</span>
             remote
@@ -162,7 +162,7 @@ export default function About() {
             date="september 19, 2022 - may 8, 2025"
             /* img={<img style={{ marginBottom: "7px" }} alt="university icon" src={IconUniversity} />} */
           >
-            beng (hons) in software engineering,{" "}
+            acquired beng (hons) in software engineering from{" "}
             <InlineLink
               className="infoOnHover top"
               href="https://greatermanchester.ac.uk"
@@ -178,7 +178,7 @@ export default function About() {
             date="may 12, 2025 - june 6, 2025"
             /* img={<img style={{ marginBottom: "6px" }} alt="briefcase icon" src={IconBriefcase} />} */
           >
-            full-stack developer,{" "}
+            worked as full-stack developer at{" "}
             <CompanyLink name="let there be fragrance" />
             <span className="metaDot" aria-hidden="true">·</span>
             remote
@@ -188,7 +188,7 @@ export default function About() {
             date="june 30, 2025 - november 3, 2025"
             /* img={<img style={{ marginBottom: "6px" }} alt="briefcase icon" src={IconBriefcase} />} */
           >
-            web developer,{" "}
+            worked as web developer at{" "}
             <InlineLink
               className="infoOnHover top"
               data-tooltip={
@@ -206,7 +206,7 @@ export default function About() {
             date="november 3, 2025 - june 8, 2026"
             /* img={<img style={{ marginBottom: "6px" }} alt="briefcase icon" src={IconBriefcase} />} */
           >
-            promoted to software engineer,{" "}
+            promoted to software engineer at{" "}
             <InlineLink
               className="infoOnHover top"
               data-tooltip={
@@ -224,7 +224,7 @@ export default function About() {
             date="july 27, 2026 - present"
             /* img={<img style={{ marginBottom: "6px" }} alt="briefcase icon" src={IconBriefcase} />} */
           >
-            full-stack developer,{" "}
+            working as full-stack developer at{" "}
             <InlineLink
               className="infoOnHover top"
               data-tooltip={

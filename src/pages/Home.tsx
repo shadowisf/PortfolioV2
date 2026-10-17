@@ -20,12 +20,12 @@ const KINDS = [
 // The bento, row by row. Every tile is its own clip's shape, never cropped:
 // a row's tiles share one height, so each is as wide as its clip's aspect
 // ratio makes it -- a big tile beside a narrow one, a pair, a trio, and the
-// projects still to come stacked in a column beside the last.
+// projects still to come stacked in a column, the last row opening with them.
 //
 //   rayfitout ops, big | feeltok, narrow and tall
 //   rayfitout web | let there be fragrance
 //   whealthy vessel | circuitcentral | apollo
-//   examiq, big | still to come, stacked
+//   still to come, stacked | examiq, big
 //
 // A project not named here still shows, in rows of three at the end.
 const UPCOMING = "still to come";
@@ -33,7 +33,7 @@ const ROWS = [
   ["rayfitout ops", "feeltok"],
   ["rayfitout web", "let there be fragrance"],
   ["whealthy vessel", "circuitcentral", "apollo"],
-  ["examiq", UPCOMING],
+  [UPCOMING, "examiq"],
 ];
 // the stacked column's share of its row, as if it were a clip of this shape
 const STACK_RATIO = 0.75;

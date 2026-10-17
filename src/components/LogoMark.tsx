@@ -43,7 +43,117 @@ const FULL: [string, string][] = [
   ["naMark", "M5319.00 1109.00L5319.00 1040.00L5249.00 1040.00L5249.00 990.00L5319.00 990.00L5319.00 920.00L5369.00 920.00L5369.00 990.00L5438.00 990.00L5438.00 1040.00L5369.00 1040.00L5369.00 1109.00L5319.00 1109.00Z"],
 ];
 
-// the writing's timings are in logoWriting.ts, shared with the skillset
+// the writing's timings are in logoWriting.ts
+
+// how far right a shape reaches, in em (1000 units): every command is
+// absolute (M, L, Q), so every other number is an x
+function rightEdge(d: string) {
+  const numbers = d.match(/-?\d+(\.\d+)?/g)?.map(Number) ?? [];
+  return Math.max(...numbers.filter((_, i) => i % 2 === 0)) / 1000;
+}
+
+// The page-you-are-on *'s course through the writing, CURVE_RATE samples a
+// second (em), worked out once for both bars' logos. First where the ink
+// reaches furthest right at each moment: each letter's outline, traced
+// TRACE_SECONDS long a STAGGER_SECONDS step behind the last, studied in a
+// hidden svg -- how far right its line has been at each point along it,
+// every separate piece of it taken as drawn that far at once (the dash runs
+// along each). That edge comes in bursts (the line goes right, then up and
+// back round the letter), so the * does not follow it step for step: it
+// keeps to the ink's upper hull -- the tightest course of straight runs,
+// each slower than the last, that is never behind it (read MARKER_LEAD
+// ahead) -- with the corners between runs rounded off over MARKER_SMOOTH.
+// Where the rounding cuts a corner it can dip a hair below the ink's edge;
+// the * sits 0.15 of its own size (0.18em of the mark) clear of its
+// position, which keeps the * itself clear.
+const CURVE_RATE = 240;
+const REACH_STEPS = 200;
+const TRACE_EASE = "power1.inOut";
+const MARKER_LEAD = 0.03;
+// the span the *'s turns are rounded over (s)
+const MARKER_SMOOTH = 0.1;
+// the hairline the outlines are traced in (main.scss), in font units
+const HAIRLINE = 14;
+
+function inkReach(d: string) {
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.style.cssText = "position: absolute; width: 0; height: 0; visibility: hidden";
+  document.body.append(svg);
+  const pieces = d.split(/(?=M)/).map((piece) => {
+    const path = document.createElementNS(ns, "path");
+    path.setAttribute("d", piece);
+    svg.append(path);
+    return path;
+  });
+  const total = pieces.reduce((sum, path) => sum + path.getTotalLength(), 0);
+  const reach = [-Infinity];
+  for (let k = 1; k <= REACH_STEPS; k++) {
+    const drawn = (total * k) / REACH_STEPS;
+    let x = reach[k - 1];
+    pieces.forEach((path) => {
+      const length = Math.min(drawn, path.getTotalLength());
+      for (let j = 1; j <= 20; j++) {
+        x = Math.max(x, (path.getPointAtLength((length * j) / 20).x + HAIRLINE / 2) / 1000);
+      }
+    });
+    reach.push(x);
+  }
+  svg.remove();
+  return reach;
+}
+
+let markerCourse: number[] | null = null;
+function planMarker() {
+  if (markerCourse) return markerCourse;
+  const reaches = FULL.map(([, shape]) => inkReach(shape));
+  const ease = gsap.parseEase(TRACE_EASE);
+  const end = (FULL.length - 1) * STAGGER_SECONDS + TRACE_SECONDS;
+  const count = Math.ceil(end * CURVE_RATE) + 1;
+  const from = rightEdge(LOGO.la);
+  const ink = Array.from({ length: count }, (_, k) => {
+    const t = k / CURVE_RATE;
+    let x = from;
+    reaches.forEach((reach, i) => {
+      const into = (t - i * STAGGER_SECONDS) / TRACE_SECONDS;
+      if (into <= 0) return;
+      x = Math.max(x, reach[Math.round(ease(Math.min(into, 1)) * REACH_STEPS)]);
+    });
+    return x;
+  });
+  const lead = Math.round(MARKER_LEAD * CURVE_RATE);
+  const ahead = ink.map((_, k) => ink[Math.min(k + lead, count - 1)]);
+
+  // the upper hull of (time, ink ahead), left to right: straight runs, each
+  // slower than the last, never behind it
+  const hull: number[] = [];
+  const turn = (a: number, b: number, c: number) =>
+    (b - a) * (ahead[c] - ahead[a]) - (ahead[b] - ahead[a]) * (c - a);
+  ahead.forEach((_, k) => {
+    while (hull.length >= 2 && turn(hull[hull.length - 2], hull[hull.length - 1], k) >= 0) {
+      hull.pop();
+    }
+    hull.push(k);
+  });
+  let run = 0;
+  const runs = ahead.map((_, k) => {
+    while (run < hull.length - 2 && hull[run + 1] < k) run++;
+    const [a, b] = [hull[run], hull[run + 1] ?? hull[run]];
+    return b === a ? ahead[a] : ahead[a] + ((ahead[b] - ahead[a]) * (k - a)) / (b - a);
+  });
+
+  // their corners rounded, so it never jolts: each moment averaged over
+  // MARKER_SMOOTH around it
+  const half = Math.round((MARKER_SMOOTH * CURVE_RATE) / 2);
+  markerCourse = runs.map((_, k) => {
+    let sum = 0;
+    for (let j = k - half; j <= k + half; j++) {
+      sum += runs[Math.min(Math.max(j, 0), count - 1)];
+    }
+    return sum / (2 * half + 1);
+  });
+  return markerCourse;
+}
 
 // The whole baybayin name as one shape, and "les ranalan" in the site's font
 // as one shape -- the two ends of the morph.
@@ -66,14 +176,20 @@ const LATIN_SHAPE =
 // once, then morphed to "les ranalan" and back, over and over. Stopped, it
 // plays back to the logo as a hover does when the cursor leaves -- or,
 // `instant`, is simply the logo again, on the spot.
+//
+// `marked` (on the home page, which the logo links to) shows the green * the
+// site puts after the page you are on: just right of the logo, gliding out
+// ahead of the writing to the name's end (planMarker), and back with it.
 export function LogoMark({
   auto = false,
   playing = true,
   instant = false,
+  marked = false,
 }: {
   auto?: boolean;
   playing?: boolean;
   instant?: boolean;
+  marked?: boolean;
 }) {
   const root = useRef<HTMLSpanElement | null>(null);
   const timer = useRef<number | null>(null);
@@ -88,6 +204,7 @@ export function LogoMark({
       const q = gsap.utils.selector(root);
       gsap.set(q(".logoFull"), { drawSVG: "0%", fillOpacity: 0 });
       gsap.set(q(".logoMorph"), { autoAlpha: 0 });
+      gsap.set(q(".logoMarker"), { "--at": rightEdge(LOGO.la) });
 
       write.current = gsap
         .timeline({
@@ -112,6 +229,28 @@ export function LogoMark({
           { fillOpacity: 1, duration: FILL_SECONDS, stagger: STAGGER_SECONDS },
           `<${FILL_AFTER_SECONDS}`
         );
+
+      // the * along its course (planMarker), just ahead of the ink; played
+      // back, it follows the ink home
+      const marker = q(".logoMarker")[0] as HTMLElement | undefined;
+      const course = planMarker();
+      const step = 1 / CURVE_RATE;
+      const clock = { t: 0 };
+      write.current.to(
+        clock,
+        {
+          t: (course.length - 1) * step,
+          duration: (course.length - 1) * step,
+          ease: "none",
+          onUpdate: () => {
+            const at = clock.t / step;
+            const i = Math.min(Math.floor(at), course.length - 2);
+            const x = course[i] + (course[i + 1] - course[i]) * (at - i);
+            marker?.style.setProperty("--at", String(x));
+          },
+        },
+        0
+      );
     },
     { scope: root }
   );
@@ -135,9 +274,20 @@ export function LogoMark({
     gsap.set(q(".logoGlyphs"), { autoAlpha: show ? 0 : 1 });
   });
 
+  // the * to the end of whichever form is showing, as it morphs
+  const markerTo = contextSafe((shape: string, duration: number) => {
+    gsap.to(".logoMarker", {
+      "--at": rightEdge(shape),
+      duration,
+      ease: "power2.inOut",
+      overwrite: true,
+    });
+  });
+
   const toLatin = contextSafe(() => {
     if (!hovered.current) return;
     showMorph(true);
+    markerTo(LATIN_SHAPE, MORPH_SECONDS);
     gsap.to(".logoMorph", {
       morphSVG: LATIN_SHAPE,
       duration: MORPH_SECONDS,
@@ -150,6 +300,7 @@ export function LogoMark({
   });
 
   const toBaybayin = contextSafe(() => {
+    markerTo(FULL_SHAPE, MORPH_SECONDS);
     gsap.to(".logoMorph", {
       morphSVG: FULL_SHAPE,
       duration: MORPH_SECONDS,
@@ -172,9 +323,10 @@ export function LogoMark({
   const reset = contextSafe(() => {
     hovered.current = false;
     clearTimer();
-    gsap.killTweensOf(gsap.utils.selector(root)(".logoMorph"));
+    gsap.killTweensOf(gsap.utils.selector(root)(".logoMorph, .logoMarker"));
     showMorph(false);
     write.current?.pause(0);
+    gsap.set(gsap.utils.selector(root)(".logoMarker"), { "--at": rightEdge(LOGO.la) });
     root.current?.classList.remove("open");
   });
 
@@ -222,6 +374,7 @@ export function LogoMark({
     const unwrite = () => write.current?.timeScale(2).reverse();
     if (morphShowing.current) {
       // back to baybayin first, quickly, then play the writing back
+      markerTo(FULL_SHAPE, 0.4);
       gsap.to(".logoMorph", {
         morphSVG: FULL_SHAPE,
         duration: 0.4,
@@ -255,6 +408,7 @@ export function LogoMark({
         </g>
         <path className="logoMorph" d={FULL_SHAPE} />
       </svg>
+      <span className={`logoMarker${marked ? " shown" : ""}`} aria-hidden="true" />
     </span>
   );
 }

@@ -269,7 +269,7 @@ export default function NavBar() {
             executeTransition("/");
           }}
         >
-          <LogoMark auto={workOpen && !drawerLeft} />
+          <LogoMark auto={workOpen && !drawerLeft} marked={currentPage === "/"} />
         </Link>
 
         <span className="navButtons alt">
@@ -305,7 +305,7 @@ export default function NavBar() {
             className="themeButton"
             aria-label="toggle theme"
           >
-            <ThemeIcon dark={userTheme === "dark"} size={24} />
+            <ThemeIcon dark={userTheme === "dark"} size={24} place="bar" />
           </button>
         </span>
       </div>
@@ -380,7 +380,12 @@ export default function NavBar() {
             goFromMenu("/");
           }}
         >
-          <LogoMark auto playing={inMenu && !logoStopped} instant={logoInstant} />
+          <LogoMark
+            auto
+            playing={inMenu && !logoStopped}
+            instant={logoInstant}
+            marked={currentPage === "/"}
+          />
         </Link>
 
         <span className="navButtons">
@@ -417,7 +422,7 @@ export default function NavBar() {
             onClick={handleToggleTheme}
             className="themeButton"
           >
-            <ThemeIcon dark={userTheme === "dark"} size={24} />
+            <ThemeIcon dark={userTheme === "dark"} size={24} place="mobileBar" />
           </button>
         </span>
 
@@ -544,7 +549,7 @@ export default function NavBar() {
             onClick={handleToggleTheme}
             className="themeButton menuFoot"
           >
-            <ThemeIcon dark={userTheme === "dark"} size={24} />
+            <ThemeIcon dark={userTheme === "dark"} size={24} place="menu" />
             <span>{userTheme === "dark" ? "dark" : "light"}</span>
           </button>
         </div>

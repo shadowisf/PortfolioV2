@@ -7,6 +7,8 @@ type LinkProps = {
   img?: React.ReactNode;
   className?: string;
   sameTab?: boolean;
+  // the word shown over it on hover (with .infoOnHover)
+  "data-tooltip"?: string;
 };
 
 // a link inside a sentence
@@ -27,6 +29,17 @@ export function InlineLink({
       {...props}
     >
       {children}
+      {/* a hand-drawn arrow, looping up from the word to its popup */}
+      {props["data-tooltip"] && (
+        <svg className="hoverArrow" viewBox="0 0 28 36" aria-hidden="true">
+          <path
+            className="hoverArrowLine"
+            pathLength={1}
+            d="M9 34C4 26 6 18 14 19C22 20 22 28 15 27C8 26 10 12 16 4"
+          />
+          <path className="hoverArrowHead" pathLength={1} d="M10.3 5.9L16 4L15.8 10" />
+        </svg>
+      )}
     </a>
   );
 }

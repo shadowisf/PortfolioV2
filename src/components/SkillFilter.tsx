@@ -72,27 +72,29 @@ export function SkillFilter({ items, className, label }: SkillFilterProps) {
   return (
     <div className="skillFilter">
       {segments.length > 0 && (
-        <div
-          className={`segmented${sorting ? " busy" : ""}`}
-          role="group"
-          aria-label={label}
-          aria-busy={sorting}
-        >
-          {segments.map(([key, name]) => (
-            <button
-              key={key}
-              className={key === level ? "active" : undefined}
-              aria-pressed={key === level}
-              disabled={sorting}
-              onClick={() => {
-                if (key === level) return;
-                setLevel(key);
-                setSorting(true);
-                filterSkill(key, () => setSorting(false));
-              }}
-            >
-              {name}
-            </button>
+        // all in a track of its own, the levels together in the next
+        <div className="segmentedRow" role="group" aria-label={label} aria-busy={sorting}>
+          {[segments.slice(0, 1), segments.slice(1)].map((track) => (
+            <div className={`segmented${sorting ? " busy" : ""}`} key={track[0][0]}>
+              {track.map(([key, name]) => (
+                <button
+                  key={key}
+                  className={key === level ? "active" : undefined}
+                  aria-pressed={key === level}
+                  disabled={sorting}
+                  onClick={() => {
+                    if (key === level) return;
+                    setLevel(key);
+                    setSorting(true);
+                    filterSkill(key, () => setSorting(false));
+                  }}
+                >
+                  <span className="segmentedLabel" data-label={name}>
+                    <span className="segmentedText">{name}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
           ))}
         </div>
       )}

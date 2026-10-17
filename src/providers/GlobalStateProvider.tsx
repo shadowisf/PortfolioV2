@@ -3,6 +3,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { flushSync } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
+import faviconLight from "../favicons/favicon-light.svg";
+import faviconDark from "../favicons/favicon-dark.svg";
 
 type GlobalStateContextType = {
   isMobile: boolean;
@@ -99,11 +101,21 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
 
     // the browser's own top bar takes the nav bar's shade, so the two join up
     if (theme === "dark") {
-      themeColorMetaTag?.setAttribute("content", "rgb(36, 36, 38)");
+      themeColorMetaTag?.setAttribute("content", "rgb(44, 44, 46)");
     }
 
     if (theme === "light") {
-      themeColorMetaTag?.setAttribute("content", "rgb(242, 242, 247)");
+      themeColorMetaTag?.setAttribute("content", "rgb(242, 242, 242)");
+    }
+
+    // and the tab's icon is drawn for the site's theme rather than the
+    // system's (favicon.svg's own, until this runs) -- a new link in the old
+    // one's place, since browsers do not all look again at a changed href
+    const icon = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
+    if (icon) {
+      const next = icon.cloneNode() as HTMLLinkElement;
+      next.href = theme === "dark" ? faviconDark : faviconLight;
+      icon.replaceWith(next);
     }
   }, [userTheme]);
 

@@ -12,7 +12,7 @@ $radiusLarge: 10px;
 // ring does the separating instead. light-dark() only takes colours, hence a
 // transparent layer on the side that should not show.
 $shadowRaised:
-  0 0 0 1px light-dark(rgba(0, 0, 0, 0.04), rgba(255, 255, 255, 0.08)),
+  0 0 0 1px var(--surface),
   0 2px 6px light-dark(rgba(0, 0, 0, 0.04), transparent),
   0 12px 32px light-dark(rgba(0, 0, 0, 0.1), transparent);
 
@@ -52,6 +52,9 @@ $minMaxWidth: 1338px;
   --text-color: light-dark(rgb(0, 0, 0), white);
   // light mode: a white page under a grey bar; dark: the reverse step
   --background-color: light-dark(rgb(255, 255, 255), rgb(28, 28, 30));
+  // the other theme's page colour: near-black in the light theme, white in
+  // the dark
+  --background-inverse: light-dark(rgb(28, 28, 30), rgb(255, 255, 255));
   --faded-color: rgb(129, 126, 131);
   /* --accent-color: light-dark(rgb(99, 32, 238), rgb(128, 117, 255)); */
   /* --accent-color: light-dark(rgb(255, 59, 48), rgb(255, 69, 58)); */
@@ -63,15 +66,12 @@ $minMaxWidth: 1338px;
   // drawer and the mobile menu -- apple's system green, light and dark
   --marker-color: light-dark(rgb(52, 199, 89), rgb(48, 209, 88));
 
-  // quiet fills for chips and hovered rows, and the hairline for edges
-  --surface: light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.07));
-  --hairline: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
-
-  // The nav's shade, only just off the page so it is felt more than seen: a
-  // whisper of grey over the white page, a hair above the near-black in dark.
-  // Solid for the open work dropdown, which the desktop bar joins; 72%
-  // opaque for the frosted mobile bar.
-  --barSolid: light-dark(rgb(242, 242, 247), rgb(36, 36, 38));
+  // The one grey for every panel, chip and line: the drawer, the mobile bar
+  // and menu, the home tiles, the about cards, the segmented control, the
+  // chips, and the hairlines between rows. Solid, so a panel over the page
+  // hides what is under it -- the colours the old 5% and 7% washes made over
+  // the page, white and near-black.
+  --surface: light-dark(rgb(242, 242, 242), rgb(44, 44, 46));
 
   // One curve and one duration for every css transition, so the whole site
   // moves the same way: quick to respond, long gentle settle.
@@ -341,7 +341,7 @@ nav {
 
     // a hair short of solid, as the work drawer is, and for the same reason:
     // over the blur, a fully opaque panel's edge caught a glow
-    background-color: color-mix(in srgb, var(--barSolid) 99%, transparent);
+    background-color: color-mix(in srgb, var(--surface) 99%, transparent);
     translate: 0 -100%;
     transition: translate var(--flyoutSlide) var(--ease);
     will-change: translate;
@@ -386,14 +386,16 @@ nav {
     }
   }
 
-  // work, ruled off from the theme at the foot by the page's own hairline,
-  // with the same room either side of it (the panel's gap below)
+  // work, ruled off from the theme at the foot, with the same room either
+  // side of it (the panel's gap below). The line is the other theme's page
+  // colour, white in the dark and near-black in the light: the panel is
+  // --surface itself, so a --surface line would not show on it.
   .menuWork {
     display: flex;
     flex-direction: column;
 
     padding-bottom: 2.5rem;
-    border-bottom: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--background-inverse);
   }
 
   // "work" as the accordion's button: the heading across the panel, a
@@ -634,7 +636,7 @@ nav {
     // edge and a glow showed along it; at 99% the blur runs on underneath as
     // one sheet, and the 1% is too little to see. (99.9% would round to
     // solid -- colour alpha has 256 steps -- and the glow would be back.)
-    background-color: color-mix(in srgb, var(--barSolid) 99%, transparent);
+    background-color: color-mix(in srgb, var(--surface) 99%, transparent);
 
     // closed: all of it -- its own height plus the strip's -- above the top
     // edge of the screen
@@ -794,6 +796,14 @@ nav {
   color: var(--marker-color);
 }
 
+// The other theme's grey and words, for the cursor over a project still to
+// come: the light theme's in the dark, the dark theme's in the light. The
+// same values as --surface and --text-color, each side swapped.
+%otherTheme {
+  --surface: light-dark(rgb(44, 44, 46), rgb(242, 242, 242));
+  --text-color: light-dark(white, rgb(0, 0, 0));
+}
+
 // The page blurred under a panel come down from the bar: the work drawer's,
 // and the mobile menu's. A placeholder both extend, so a rule for one alone
 // (the drawer's, hidden on mobile) stays its own.
@@ -881,6 +891,7 @@ nav {
   // centred in the bar
   translate: 0 0.0525em;
 
+  position: relative;
   display: inline-block;
   vertical-align: -0.294em;
   width: 0.907em; // ᜎ alone, to its ink and a hair
@@ -920,6 +931,41 @@ nav {
 
   .logoMorph {
     visibility: hidden;
+  }
+
+  // The page-you-are-on * (LogoMark's `marked`), at --at: the right edge of
+  // what is written, in em, the script gliding it ahead of the writing --
+  // from the logo's own edge to start with. Its own box is the mark's size,
+  // so --at counts in the mark's em; the * inside is set at the nav's.
+  // Set as the bar's other *s are (%pageMarker): 2.06 times the bar's 1rem
+  // text, 0.15 of that clear of what it follows, its ink from the bar's
+  // text baseline up to the caps. Measured: that baseline sits 0.2115em
+  // (the mark's) below the mark's box top, less the 0.4438 of the *'s size
+  // its ink stands above the top of a line box one size tall.
+  .logoMarker {
+    // the mark's size, so its em is the mark's -- not every span's 1rem
+    font-size: inherit;
+    position: absolute;
+    top: 0.2115em;
+    left: calc(var(--at, 0.877) * 1em);
+    pointer-events: none;
+    visibility: hidden;
+
+    &.shown {
+      visibility: visible;
+    }
+
+    &::after {
+      content: "*";
+      display: block;
+      // the site's own *, not the logo's baybayin font's
+      font-family: $primaryFont;
+      font-size: 2.06rem;
+      line-height: 1;
+      margin-left: 0.15em;
+      font-variation-settings: $fontVarNormal;
+      color: var(--marker-color);
+    }
   }
 }
 
@@ -1104,11 +1150,10 @@ footer {
 // wrappers
 // The home page: an opening line, then the work as a calm grid -- the
 // screenshots clean, the words underneath them, never on top.
-// The home page's cursor over its project tiles (TileCursor): a small tile in
-// the work drawer's grey, no border, rounded like every other panel -- the
-// project's name in the text colour, its year in grey on the line beneath,
-// and a link's arrow. Always as it is in the dark theme, in either theme.
-// GSAP moves it.
+// The home page's cursor over its project tiles (TileCursor): a small tile
+// in the site's grey (--surface), no border, rounded like every other
+// panel -- the project's name in the text colour, its year in grey on the
+// line beneath, and a link's arrow. GSAP moves it.
 .tileCursor {
   // there over a project, gone elsewhere (.shown, set by TileCursor): no
   // fade either way; its position follows the pointer exactly
@@ -1120,13 +1165,18 @@ footer {
     visibility: visible;
   }
 
-  // every light-dark() colour inside it takes its dark side -- or its light
-  // one, over a project whose clip is too dark for it (overlayTheme) and
-  // over a project still to come
+  // Always the dark theme's, in either theme -- the light theme's over a
+  // clip too dark for it (overlayTheme), and over a project still to come
+  // the other theme's, whichever the page is in
   color-scheme: dark;
 
   &.light {
     color-scheme: light;
+  }
+
+  &.other {
+    color-scheme: inherit;
+    @extend %otherTheme;
   }
 
   position: fixed;
@@ -1137,8 +1187,7 @@ footer {
   // the letters than under the year's baseline, so this evens out the ink
   padding: 0.5rem 0.5rem 0.75rem 0.75rem;
   border-radius: $radiusLarge;
-  // a hair short of solid, like the work drawer
-  background-color: color-mix(in srgb, var(--barSolid) 99%, transparent);
+  background-color: var(--surface);
   color: var(--text-color);
   pointer-events: none;
 
@@ -1154,10 +1203,46 @@ footer {
     line-height: 1.15;
   }
 
-  // the name, in the site's hover weight
+  // The name and the arrow change weight back and forth, over every project
+  // and those still to come, as a link does on hover, at the same pace
+  // (--fontMorph). As wide
+  // as the name at its widest, light or heavy: two hidden copies, one at
+  // each, size it, and the name itself sits over them, out of the layout --
+  // the weights between are a hair wider still -- so the tile never shifts
+  // as the weight changes.
   .tileCursorName {
+    position: relative;
+    display: grid;
     font-size: var(--small);
     font-variation-settings: $fontVarThin;
+
+    &::before,
+    &::after {
+      content: attr(data-label);
+      grid-area: 1 / 1;
+      visibility: hidden;
+      font-variation-settings: $fontVarNormal;
+    }
+
+    &::after {
+      font-variation-settings: $fontVarThin;
+    }
+
+    .tileCursorNameText {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: inherit;
+    }
+  }
+
+  // Each change at a link's own hover pace (--fontMorph: 0.5s, ease),
+  // resting 0.7s at each weight between: 2.4s a round. Begun afresh each
+  // time it appears (only while .shown), from the regular weight, so it
+  // opens as a link does when hovered -- regular, then heavy.
+  &.shown .tileCursorNameText,
+  &.shown .tileCursorArrow {
+    animation: weightChange calc(var(--fontMorphDuration) * 2 + 1.4s) infinite;
   }
 
   .tileCursorMeta {
@@ -1166,16 +1251,33 @@ footer {
     font-variant-numeric: tabular-nums;
   }
 
+  // ↗, as on a link that leaves the site, in its box whichever its weight
   .tileCursorArrow {
-    display: block;
     flex-shrink: 0;
-    width: 0.9rem;
-    height: 0.9rem;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    width: 1em;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1;
+    font-variation-settings: $fontVarThin;
+  }
+}
+
+// A link's weight change on hover, played back and forth with a rest at
+// each end (the cursor tile): over its 2.4s, from regular to heavy in 0.5s,
+// heavy for 0.7s, back to regular in 0.5s, regular for 0.7s.
+@keyframes weightChange {
+  0% {
+    font-variation-settings: $fontVarNormal;
+    animation-timing-function: ease;
+  }
+  20.83%,
+  50% {
+    font-variation-settings: $fontVarThin;
+    animation-timing-function: ease;
+  }
+  70.83%,
+  100% {
+    font-variation-settings: $fontVarNormal;
   }
 }
 
@@ -1253,7 +1355,7 @@ footer {
   // the link 0.5rem further on, as after every title block
   .homeAbout {
     padding-top: 2rem;
-    border-top: 1px solid var(--hairline);
+    border-top: 1px solid var(--surface);
 
     // set to the right, the close of the page answering the opening line
     // on the left
@@ -1305,7 +1407,7 @@ footer {
 
     overflow: hidden;
     border-radius: $radiusLarge;
-    background-color: var(--barSolid);
+    background-color: var(--surface);
     transition: opacity 0.5s ease;
 
     display: flex;
@@ -1342,9 +1444,8 @@ footer {
     // chips, solid, so they read over any frame. Two
     // lines at most, should three long names not fit on one in a small tile.
     .cardStack {
-      // always the dark theme's chips, in either theme: every light-dark()
-      // colour inside takes its dark side -- or the light theme's, over a
-      // clip too dark for them (overlayTheme, below)
+      // always the dark theme's chips, in either theme -- the light theme's
+      // over a clip too dark for them (overlayTheme, below)
       color-scheme: dark;
 
       position: absolute;
@@ -1375,8 +1476,8 @@ footer {
         padding: 0 0.5rem;
         border-radius: $radiusSmall;
         font-size: 0.7rem;
-        // the drawer's grey, a hair short of solid, like the drawer itself
-        background-color: color-mix(in srgb, var(--barSolid) 99%, transparent);
+        // (on a phone, under the clip, the page's colour instead: below)
+        background-color: var(--surface);
         color: var(--text-color);
         white-space: nowrap;
 
@@ -1659,7 +1760,7 @@ footer {
 
       border-radius: $radiusLarge;
       box-shadow: $shadowRaised;
-      background-color: var(--barSolid);
+      background-color: var(--surface);
     }
 
   }
@@ -1676,10 +1777,10 @@ footer {
       column-gap: 2rem;
 
       padding: 2rem 0;
-      border-top: 1px solid var(--hairline);
+      border-top: 1px solid var(--surface);
 
       &:last-child {
-        border-bottom: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--surface);
       }
 
       h4 {
@@ -1860,7 +1961,7 @@ footer {
 
       padding: 2rem;
       border-radius: $radiusLarge;
-      background-color: var(--barSolid);
+      background-color: var(--surface);
 
       &.wide {
         grid-column: 1 / -1;
@@ -1898,10 +1999,10 @@ footer {
       align-items: baseline;
 
       padding: 1rem 0;
-      border-top: 1px solid var(--hairline);
+      border-top: 1px solid var(--surface);
 
       &:last-child {
-        border-bottom: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--surface);
       }
 
       .years {
@@ -2024,16 +2125,30 @@ footer {
   }
 }
 
+// The top of the word's ink, below the link's box top: the font's ascent
+// (1em) less its tallest lowercase (the i's dot, 0.745em -- in either cut).
+// Registered as a length so it is worked out in the link's own em, the
+// word's size, and the popup -- set in smaller type -- inherits that.
+@property --inkTop {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
 .infoOnHover {
   position: relative;
   white-space: nowrap;
+  --inkTop: 0.255em;
+  // the same room from the word's letters to the arrow's foot as from the
+  // arrow's tip to the popup
+  --arrowGap: 0.25rem;
 
   &::before {
     content: attr(data-tooltip);
     position: absolute;
     left: 50%;
     translate: -50% -0.5rem;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     font-size: var(--smaller);
     font-weight: 400;
     border-radius: $radiusSmall;
@@ -2047,9 +2162,12 @@ footer {
     transition:
       opacity var(--fontMorph),
       visibility 0s var(--fontMorphDuration);
+    // the text colour, its words in the page's: white in the dark theme,
+    // black in the light
     background-color: var(--text-color);
     color: var(--background-color);
-    border: var(--background-color) 1px solid;
+    // edged in the site's grey, in either theme
+    border: 1px solid var(--surface);
     line-height: normal;
   }
 
@@ -2064,8 +2182,84 @@ footer {
     }
   }
 
+  // Above the arrow, --arrowGap clear of its tip, and a little to the
+  // word's right, where the arrow leans. The arrow's box (below) has its
+  // bottom at the word's ink top less the gap and 0.0503rem; its tip's ink
+  // is 0.1475rem below its 1.75rem box's top -- the tip at 4 of its 36,
+  // less half its line.
   &.top::before {
-    bottom: 75%;
+    bottom: 100%;
+    translate: calc(-50% + 1.5rem)
+      calc(var(--inkTop) - 2 * var(--arrowGap) - 1.5522rem);
+  }
+
+  // The arrow from the word up to its popup: drawn by hand, a loop on the
+  // way, in the words' colour. On hover it writes itself in from the word,
+  // as the logo does, the head flicked on last; off hover the same in
+  // reverse -- the head first, then the line drawn back into the word.
+  // Its foot sits --arrowGap over the word's tallest letters, off to the
+  // word's right: the foot's ink is 0.0503rem above the box's bottom (the
+  // foot at 34 of its 36, less half its line).
+  .hoverArrow {
+    position: absolute;
+    left: 70%;
+    bottom: calc(100% - var(--inkTop) + var(--arrowGap) - 0.0503rem);
+    translate: -50% 0;
+    // 28 x 36, as drawn, at seven ninths: its tip just under the popup
+    width: 1.361rem;
+    height: 1.75rem;
+    overflow: visible;
+    pointer-events: none;
+
+    fill: none;
+    stroke: var(--text-color);
+    // 1.5px at that scale
+    stroke-width: 1.93;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    // In step with the link's weight change (--fontMorph): drawn in that
+    // long, the line over the first four fifths and the head over the last,
+    // and drawn back just as long -- the head, then the line -- and hidden
+    // outright once it has gone.
+    visibility: hidden;
+    transition: visibility 0s var(--fontMorphDuration);
+
+    // Undrawn, the dash moved clear past the line's end: a dash of no length
+    // left at the end still drew its round cap, a dot at the tip before the
+    // head came, and where the line started as it went. The gap is longer
+    // than the line, so no second dash comes round.
+    path {
+      stroke-dasharray: 1 2;
+      stroke-dashoffset: 1.01;
+    }
+
+    .hoverArrowHead {
+      transition: stroke-dashoffset calc(var(--fontMorphDuration) * 0.2) ease;
+    }
+
+    .hoverArrowLine {
+      transition: stroke-dashoffset calc(var(--fontMorphDuration) * 0.8) ease
+        calc(var(--fontMorphDuration) * 0.2);
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover .hoverArrow {
+      visibility: visible;
+      transition: none;
+
+      .hoverArrowLine {
+        stroke-dashoffset: 0;
+        transition: stroke-dashoffset calc(var(--fontMorphDuration) * 0.8) ease;
+      }
+
+      .hoverArrowHead {
+        stroke-dashoffset: 0;
+        transition: stroke-dashoffset calc(var(--fontMorphDuration) * 0.2) ease
+          calc(var(--fontMorphDuration) * 0.8);
+      }
+    }
   }
 
   &.bottom::before {
@@ -2085,31 +2279,89 @@ footer {
   position: relative;
 }
 
-// A segmented control, like apple's: one quiet track, the chosen segment
-// lifted out of it on the page colour. The home list's filter and the about
-// page's skillset both use it.
+// the skillset's two tracks side by side: all, then the levels
+.segmentedRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+// A segmented control: one quiet track, the chosen segment marked with the
+// site's * rather than lifted out of it. The about page's skillset uses it.
 .segmented {
+  position: relative;
   display: inline-flex;
   align-self: flex-start;
   gap: 0.25rem;
 
   padding: 0.25rem;
   border-radius: $radiusSmall;
-  background-color: var(--barSolid);
+  background-color: var(--surface);
 
   button {
+    position: relative;
     font-family: inherit;
     font-size: var(--small);
     color: var(--faded-color);
     cursor: pointer;
 
-    padding: 0.5rem 1rem;
-    border-radius: calc(#{$radiusSmall} - 2px);
+    padding: 0.5rem 1.5rem;
 
+    // the name, then the *'s own room after it, on one baseline
+    display: inline-flex;
+    align-items: baseline;
     font-variation-settings: $fontVarNormal;
     transition:
       color var(--duration) var(--ease),
       font-variation-settings var(--fontMorph);
+
+    // As wide as the name at its widest, light or heavy, whatever weight it
+    // is at: two hidden copies, one at each, size its cell, and the name
+    // itself sits over them. Its weight change would otherwise nudge every
+    // segment after it.
+    .segmentedLabel {
+      display: inline-grid;
+      white-space: nowrap;
+      // the button's size, the chips' -- not every span's 1rem
+      font-size: inherit;
+
+      &::before,
+      &::after {
+        content: attr(data-label);
+        grid-area: 1 / 1;
+        visibility: hidden;
+        font-variation-settings: $fontVarNormal;
+      }
+
+      &::after {
+        font-variation-settings: $fontVarThin;
+      }
+
+      .segmentedText {
+        grid-area: 1 / 1;
+        font-size: inherit;
+      }
+    }
+
+    // The chosen level is marked as the page you are on is, in the drawer
+    // and the menu: the green * after it. Every segment keeps the *'s room,
+    // hidden, so marking one moves nothing -- and the same room again before
+    // the name, never shown, so the name sits in the middle.
+    &::after {
+      @extend %pageMarker;
+      visibility: hidden;
+    }
+
+    &::before {
+      @extend %pageMarker;
+      visibility: hidden;
+      margin-left: 0;
+      margin-right: 0.15em;
+    }
+
+    &.active::after {
+      visibility: visible;
+    }
 
     // the site's weight change on hover, as on every link
     &:hover {
@@ -2117,11 +2369,10 @@ footer {
       font-variation-settings: $fontVarThin;
     }
 
-    // the chosen level: the page's own colour against the control's grey, and
-    // the heavier weight -- no ring or shadow round it
+    // the chosen level: its words in the text colour and the heavier
+    // weight, and the * (above)
     &.active {
       color: var(--text-color);
-      background-color: var(--background-color);
       font-variation-settings: $fontVarThin;
     }
 
@@ -2444,9 +2695,11 @@ footer {
           padding-bottom: 0.75rem;
         }
 
-        // under the video, on the tile's own panel: in the theme's colours
-        // rather than the dark ones the chips keep over a video -- each
-        // the page's colour, set off from the panel's grey
+        // Under the video, on the tile's own panel, each chip in the other
+        // theme's page colour: the light theme's white, with black words,
+        // in the dark theme, and the dark theme's near-black, with white
+        // words, in the light -- whatever the clip (overlayTheme is for
+        // chips over a clip).
         .cardStack {
           order: 2;
           position: static;
@@ -2456,11 +2709,9 @@ footer {
           padding: 0 1.25rem 1.25rem;
           color-scheme: inherit;
 
-          // light in either theme: on the dark panel they read as the
-          // light theme's white chips
           .chip {
-            color-scheme: light;
-            background-color: color-mix(in srgb, var(--background-color) 99%, transparent);
+            background-color: var(--background-inverse);
+            color: light-dark(rgb(255, 255, 255), rgb(0, 0, 0));
           }
         }
 
@@ -2495,7 +2746,7 @@ footer {
 
   // the mobile bar: solid, the drawer's grey -- no frosted blur
   nav {
-    background-color: var(--barSolid);
+    background-color: var(--surface);
 
     display: flex;
 
@@ -2560,6 +2811,24 @@ footer {
 ::view-transition-new(root) {
   animation-duration: var(--themeMorph);
   animation-timing-function: ease;
+}
+
+// The toggle's icon is left out of the crossfade: it has its morph, and
+// fading it as well doubled the change. Each icon is its own layer (a name
+// of its own from ThemeIcon's `place` -- match-element, naming them
+// automatically, made chrome abort the whole transition), only its live new
+// self shown, as it is, while it morphs -- the frozen old one not at all.
+.themeIcon {
+  view-transition-class: themeIcon;
+}
+
+::view-transition-group(*.themeIcon),
+::view-transition-new(*.themeIcon) {
+  animation: none;
+}
+
+::view-transition-old(*.themeIcon) {
+  display: none;
 }
 
 // The toggle's sun and moon (ThemeIcon.tsx). The morph itself is gsap's; all

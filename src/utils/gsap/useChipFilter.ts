@@ -17,12 +17,14 @@ const STAGGER = 0.02;
 const LEAVE_SECONDS = 0.4;
 const SLIDE_SECONDS = 0.6;
 const GROW_SECONDS = 0.5;
-// From one level to another, the chips only passing back through all come
-// back blurred this much (px), so all never reads, for that moment, as the
-// level just picked -- the new level's alone in focus. Softer than the
-// 12px under the mobile menu and the work drawer (%pageBlur in main.scss):
-// on a chip that small, 12px left no shape of the name at all.
+// From one level to another, once every skill is back, the ones not in the
+// new level blur this much (px) before they go -- the new level's alone in
+// focus. Softer than the 12px under the mobile menu and the work drawer
+// (%pageBlur in main.scss): on a chip that small, 12px left no shape of the
+// name at all.
 const PASSING_BLUR = 6;
+const BLUR_SECONDS = 0.4;
+const BLUR_EASE = "power2.inOut";
 const blur = (px: number) => `blur(${px}px)`;
 
 // A skill-level filter over a box of tech chips (SkillFilter.tsx): the chips
@@ -86,22 +88,15 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
   // Re-sort the chips to one level ("3" expert, "2" intermediate, "1"
   // beginner) or every skill ("0"), in three turns that never overlap, so no
   // chip ever lands on another: the ones leaving shrink away; once they are
-  // gone, the ones staying slide to their new places (any only passing
-  // through blurring as they go); once those have landed, the ones arriving
-  // grow in where they belong. Each turn ripples
+  // gone, the ones staying slide to their new places; once those have
+  // landed, the ones arriving grow in where they belong. Each turn ripples
   // along the chips, one a moment after another. A turn left waiting by a
-  // switch since made (still() false) is dropped. Each chip ends as sharp
-  // as blurOf says (in focus, unless passing through).
+  // switch since made (still() false) is dropped.
   //
   // Deliberately animates even with reduced motion on: the chips re-sorting
   // is how the filter shows what it did, so it is kept like the dropdown's
   // slide and the hover weight change.
-  const sortTo = (
-    level: string,
-    still: () => boolean,
-    onComplete: () => void,
-    blurOf: (chip: HTMLElement) => number = () => 0
-  ) => {
+  const sortTo = (level: string, still: () => boolean, onComplete: () => void) => {
     const all = chips();
     const leaving = all.filter((chip) => isShown(chip) && !belongs(chip, level));
     const arriving = all.filter((chip) => !isShown(chip) && belongs(chip, level));
@@ -109,9 +104,6 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
 
     // the turns at their own timings, end to end, and the pace that brings
     // that to RESORT_SECONDS
-    // the stayers only passing through, to blur as they slide
-    const blurring = staying.filter((chip) => blurOf(chip) !== 0);
-
     const turn = (chipsIn: HTMLElement[], seconds: number) =>
       chipsIn.length ? seconds + STAGGER * (chipsIn.length - 1) : 0;
     const natural =
@@ -125,7 +117,6 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
       if (!arriving.length) return onComplete();
       gsap.to(arriving, {
         autoAlpha: 1,
-        filter: (_, chip: HTMLElement) => blur(blurOf(chip)),
         scale: 1,
         duration: GROW_SECONDS / pace,
         ease: GROW_EASE,
@@ -144,19 +135,6 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
         gsap.set(chip, { display: "flex", autoAlpha: 0, scale: 0, filter: blur(0) })
       );
       if (!staying.length) return growIn();
-      // the stayers only passing through blur as they slide, over the
-      // whole of the slide, so the two move as one
-      if (blurring.length) {
-        gsap.fromTo(
-          blurring,
-          { filter: blur(0) },
-          {
-            filter: (_, chip: HTMLElement) => blur(blurOf(chip)),
-            duration: turn(staying, SLIDE_SECONDS) / pace,
-            ease: SLIDE_EASE,
-          }
-        );
-      }
       // lifted out of the row while they travel (absolute), each at its own
       // size: left in it, the row's flex-grow shared its room out on top of
       // the width flip gives them, so they flew at the wrong widths and
@@ -167,11 +145,8 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
         stagger: STAGGER / pace,
         absolute: true,
         // (flip puts each one's inline styles back as it found them on
-        // landing, so the blurred are blurred again there)
-        onComplete: () => {
-          blurring.forEach((chip) => gsap.set(chip, { filter: blur(blurOf(chip)) }));
-          growIn();
-        },
+        // landing -- a blur among them, should a stayer have one)
+        onComplete: growIn,
       });
     };
 
@@ -187,10 +162,9 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
   };
 
   // Show the skills at a level. From one level straight to another, every
-  // skill comes back first -- the chips back in their original places, all
-  // but the new level's blurred (PASSING_BLUR) --
-  // and the new level is filtered from there, rather than one set swapping
-  // for the other. A switch made while one is still going first puts every
+  // skill comes back first, the chips back in their original places; then
+  // all but the new level's blur (PASSING_BLUR), and the new level is
+  // filtered from there, rather than one set swapping for the other. A switch made while one is still going first puts every
   // chip where that one was headed (settle), and starts from there; a step
   // still waiting from it is dropped. Throughout, the page holds still
   // (holdScroll). onDone is called once the chips have all landed.
@@ -207,12 +181,21 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
     };
 
     if (from !== "0" && level !== "0" && from !== level) {
-      sortTo(
-        "0",
-        still,
-        () => sortTo(level, still, release),
-        (chip) => (belongs(chip, level) ? 0 : PASSING_BLUR)
-      );
+      const blurOthers = () => {
+        if (!still()) return;
+        gsap.to(
+          chips().filter((chip) => !belongs(chip, level)),
+          {
+            filter: blur(PASSING_BLUR),
+            duration: BLUR_SECONDS,
+            ease: BLUR_EASE,
+            onComplete: () => {
+              if (still()) sortTo(level, still, release);
+            },
+          }
+        );
+      };
+      sortTo("0", still, blurOthers);
     } else {
       sortTo(level, still, release);
     }

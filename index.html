@@ -7,11 +7,15 @@
   <meta name="description" content="website portfolio by les ranalan">
   <title>les ranalan</title>
 
-  <!-- the logo's letter, ᜎ. The svg follows the browser's light or dark tabs;
-       the .ico is for anything that cannot read it. Those two, the manifest
+  <!-- the logo's letter, ᜎ, and the green * the site marks the page you are
+       on with. The svg follows the system's light or dark until the page
+       loads, then the site's own theme (GlobalStateProvider swaps in
+       favicon-light or favicon-dark); the .ico is for anything that cannot
+       read it. The .ico says only 32x32: listing 16x16 made chrome take it,
+       the exact size for a tab, over the svg, which then never changed. Those two, the manifest
        and its icons sit in public/, at the fixed paths browsers look for;
        the rest go through the build, so a change gets a new name. -->
-  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/svg+xml" href="/src/favicons/favicon.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/src/favicons/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">

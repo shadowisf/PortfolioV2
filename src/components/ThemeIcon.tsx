@@ -11,6 +11,10 @@ type ThemeIconProps = {
   // in light
   dark: boolean;
   size?: number;
+  // where it is (the bar, the menu...): its own name in the theme change's
+  // crossfade, which it is kept out of (main.scss) -- each on the page needs
+  // a different one
+  place: string;
 };
 
 const MORPH_SECONDS = THEME_MORPH_SECONDS;
@@ -39,7 +43,7 @@ const rays = Array.from({ length: 8 }, (_, i) => {
 // between them, with the rays turning and shrinking into the moon and back out.
 // A real outline rather than a masked circle: a mask scales along with the
 // shape it is on, which kept the bite far bigger than intended.
-export function ThemeIcon({ dark, size = 24 }: ThemeIconProps) {
+export function ThemeIcon({ dark, size = 24, place }: ThemeIconProps) {
   const root = useRef<SVGSVGElement | null>(null);
   // The page loads already drawn in the right state (the markup below), and
   // only a real change of theme animates. Comparing with what is drawn, rather
@@ -75,6 +79,7 @@ export function ThemeIcon({ dark, size = 24 }: ThemeIconProps) {
     <svg
       ref={root}
       className={`themeIcon ${dark ? "isMoon" : "isSun"}`}
+      style={{ viewTransitionName: `themeIcon-${place}` }}
       width={size}
       height={size}
       viewBox="0 0 24 24"
