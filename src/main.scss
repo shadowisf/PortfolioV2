@@ -1237,12 +1237,12 @@ footer {
   }
 
   // Each change at a link's own hover pace (--fontMorph: 0.5s, ease),
-  // resting 0.7s at each weight between: 2.4s a round. Begun afresh each
+  // resting 1.5s at each weight between: 4s a round. Begun afresh each
   // time it appears (only while .shown), from the regular weight, so it
   // opens as a link does when hovered -- regular, then heavy.
   &.shown .tileCursorNameText,
   &.shown .tileCursorArrow {
-    animation: weightChange calc(var(--fontMorphDuration) * 2 + 1.4s) infinite;
+    animation: weightChange calc(var(--fontMorphDuration) * 2 + 3s) infinite;
   }
 
   .tileCursorMeta {
@@ -1263,19 +1263,19 @@ footer {
 }
 
 // A link's weight change on hover, played back and forth with a rest at
-// each end (the cursor tile): over its 2.4s, from regular to heavy in 0.5s,
-// heavy for 0.7s, back to regular in 0.5s, regular for 0.7s.
+// each end (the cursor tile): over its 4s, from regular to heavy in 0.5s,
+// heavy for 1.5s, back to regular in 0.5s, regular for 1.5s.
 @keyframes weightChange {
   0% {
     font-variation-settings: $fontVarNormal;
     animation-timing-function: ease;
   }
-  20.83%,
+  12.5%,
   50% {
     font-variation-settings: $fontVarThin;
     animation-timing-function: ease;
   }
-  70.83%,
+  62.5%,
   100% {
     font-variation-settings: $fontVarNormal;
   }
