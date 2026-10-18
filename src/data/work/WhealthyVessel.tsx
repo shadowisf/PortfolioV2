@@ -6,6 +6,7 @@ import { WorkEntry } from "../../utils/types/WorkEntry";
 import ImageWhealthyVessel from "@/assets/images/ImageWhealthyVessel.webp";
 import VideoWhealthyVessel from "@/assets/videos_master/VideoWhealthyVessel.webm";
 import VideoWhealthyVesselPreview from "@/assets/video_previews/VideoWhealthyVessel.webm";
+import VideoWhealthyVesselPreviewHevc from "@/assets/video_previews/VideoWhealthyVessel.mp4";
 import VideoWhealthyVesselPoster from "@/assets/video_posters/VideoWhealthyVessel.webp";
 //
 const GitHubWhealthyVessel = "https://github.com/shadowisf/WhealthyVessel";
@@ -24,6 +25,7 @@ export const WhealthyVessel: WorkEntry = {
     "an image of the whealthy vessel website, it is currently in the recipe corner page. on the top of the page, there is a banner with a background image and a text saying recipe corner. just below that, there are shortcut buttons such as entree and dessert. below the said banner are the grid of all recipes.",
   video: VideoWhealthyVessel,
   videoPreview: VideoWhealthyVesselPreview,
+  videoPreviewHevc: VideoWhealthyVesselPreviewHevc,
   videoPoster: VideoWhealthyVesselPoster,
   videoFlex: "1.601113",
   status: <>in active development.</>,

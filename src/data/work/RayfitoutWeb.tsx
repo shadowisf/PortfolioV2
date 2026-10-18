@@ -6,6 +6,7 @@ import { CompanyLink } from "../../components/CompanyLink";
 import ImageRayfitoutWeb from "@/assets/images/ImageRayfitoutWeb.webp";
 import VideoRayfitoutWeb from "@/assets/videos_master/VideoRayfitoutWeb.webm";
 import VideoRayfitoutWebPreview from "@/assets/video_previews/VideoRayfitoutWeb.webm";
+import VideoRayfitoutWebPreviewHevc from "@/assets/video_previews/VideoRayfitoutWeb.mp4";
 import VideoRayfitoutWebPoster from "@/assets/video_posters/VideoRayfitoutWeb.webp";
 //
 const LiveRayfitoutWeb = "https://www.rayfitout.com";
@@ -23,6 +24,7 @@ export const RayfitoutWeb: WorkEntry = {
     "an image of the rayfitout website, where it showcases all their architecture and interior design projects. each project shows a unique and beautiful image of the interior of a villa.",
   video: VideoRayfitoutWeb,
   videoPreview: VideoRayfitoutWebPreview,
+  videoPreviewHevc: VideoRayfitoutWebPreviewHevc,
   videoPoster: VideoRayfitoutWebPoster,
   previewStart: 0.5,
   videoFlex: "1.642",

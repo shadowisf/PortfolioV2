@@ -6,6 +6,7 @@ import { WorkEntry } from "../../utils/types/WorkEntry";
 import ImageLetThereBeFragrance from "@/assets/images/ImageLetThereBeFragrance.webp";
 import VideoLetThereBeFragrance from "@/assets/videos_master/VideoLetThereBeFragrance.webm";
 import VideoLetThereBeFragrancePreview from "@/assets/video_previews/VideoLetThereBeFragrance.webm";
+import VideoLetThereBeFragrancePreviewHevc from "@/assets/video_previews/VideoLetThereBeFragrance.mp4";
 import VideoLetThereBeFragrancePoster from "@/assets/video_posters/VideoLetThereBeFragrance.webp";
 //
 const GitHubLetThereBeFragrance =
@@ -36,6 +37,7 @@ export const LetThereBeFragrance: WorkEntry = {
     "an image of let there be fragrance e-commerce website. right now, it's in the product catalogue page where it shows a grid of all of the fragrances. on the top side, there are filter options such as 2025 collection, for her, for him, etc. on the other right of that is a sort by option such as alphaetical from a to z or vice versa, price low to high or vice versa, etc.",
   video: VideoLetThereBeFragrance,
   videoPreview: VideoLetThereBeFragrancePreview,
+  videoPreviewHevc: VideoLetThereBeFragrancePreviewHevc,
   videoPoster: VideoLetThereBeFragrancePoster,
   previewStart: 16,
   videoFlex: "1.601113",

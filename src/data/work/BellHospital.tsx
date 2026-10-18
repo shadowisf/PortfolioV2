@@ -5,6 +5,7 @@ import { ActionLink } from "../../components/Link";
 import ImageBellHospital from "@/assets/images/ImageBellHospital.webp";
 import VideoBellHospital from "@/assets/videos_master/VideoBellHospital.webm";
 import VideoBellHospitalPreview from "@/assets/video_previews/VideoBellHospital.webm";
+import VideoBellHospitalPreviewHevc from "@/assets/video_previews/VideoBellHospital.mp4";
 import VideoBellHospitalPoster from "@/assets/video_posters/VideoBellHospital.webp";
 import FileBellHospital from "@/assets/files/FileBellHospital.pdf";
 //
@@ -21,6 +22,7 @@ export const BellHospital: WorkEntry = {
     "an image of the bell hospital project. it is currently viewing the patients records section where it is displaying all patient information (note that this is a CLI project). additionally, there are commands for CRUD operations.",
   video: VideoBellHospital,
   videoPreview: VideoBellHospitalPreview,
+  videoPreviewHevc: VideoBellHospitalPreviewHevc,
   videoPoster: VideoBellHospitalPoster,
   videoFlex: "1.598148",
   status: (

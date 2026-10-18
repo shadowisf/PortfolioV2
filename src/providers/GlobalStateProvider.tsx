@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import faviconLight from "../favicons/favicon-light.svg";
 import faviconDark from "../favicons/favicon-dark.svg";
+// files of their own, not inlined as data urls -- a precaution for safari,
+// which is choosier about its tab icons than chromium
+import faviconLightPng from "../favicons/favicon-light.png?no-inline";
+import faviconDarkPng from "../favicons/favicon-dark.png?no-inline";
 
 type GlobalStateContextType = {
   isMobile: boolean;
@@ -108,15 +112,25 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
       themeColorMetaTag?.setAttribute("content", "rgb(242, 242, 242)");
     }
 
-    // and the tab's icon is drawn for the site's theme rather than the
-    // system's (favicon.svg's own, until this runs) -- a new link in the old
-    // one's place, since browsers do not all look again at a changed href
-    const icon = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
-    if (icon) {
+    // And the tab's icon is drawn for the site's theme rather than the
+    // system's (favicon.svg's own, until this runs): the svg for chromium
+    // and firefox, and in the .ico's place a png of the same, which is what
+    // safari reads. Each a new link in the old one's place, its address
+    // made new, since browsers do not all look again at a changed href.
+    const icons: [string, string][] = [
+      ['link[rel="icon"][type="image/svg+xml"]', theme === "dark" ? faviconDark : faviconLight],
+      ['link[rel="icon"]:not([type="image/svg+xml"])', theme === "dark" ? faviconDarkPng : faviconLightPng],
+    ];
+    icons.forEach(([selector, href]) => {
+      const icon = document.querySelector(selector);
+      if (!icon) return;
       const next = icon.cloneNode() as HTMLLinkElement;
-      next.href = theme === "dark" ? faviconDark : faviconLight;
+      next.href = href.startsWith("data:")
+        ? href
+        : `${href}${href.includes("?") ? "&" : "?"}theme=${theme}`;
+      if (!next.type) next.type = "image/png";
       icon.replaceWith(next);
-    }
+    });
   }, [userTheme]);
 
   // The theme toggle. The page crossfades from one theme to the other as a

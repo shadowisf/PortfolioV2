@@ -5,6 +5,7 @@ import { ActionLink } from "../../components/Link";
 import ImageApolloHospital from "@/assets/images/ImageApolloHospital.webp";
 import VideoApolloHospital from "@/assets/videos_master/VideoApolloHospital.webm";
 import VideoApolloHospitalPreview from "@/assets/video_previews/VideoApolloHospital.webm";
+import VideoApolloHospitalPreviewHevc from "@/assets/video_previews/VideoApolloHospital.mp4";
 import VideoApolloHospitalPoster from "@/assets/video_posters/VideoApolloHospital.webp";
 import FileApolloHospital from "@/assets/files/FileApolloHospital.pdf";
 //
@@ -33,6 +34,7 @@ export const ApolloHospital: WorkEntry = {
     "an image of the apollo hospital project; it is viewing the patient records section wherein it displays the list of patient information. additionally, the ui has buttons for CRUD operations.",
   video: VideoApolloHospital,
   videoPreview: VideoApolloHospitalPreview,
+  videoPreviewHevc: VideoApolloHospitalPreviewHevc,
   videoPoster: VideoApolloHospitalPoster,
   videoFlex: "1.599074",
   status: (

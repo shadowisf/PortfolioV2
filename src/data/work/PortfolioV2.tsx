@@ -5,6 +5,7 @@ import { ActionLink } from "../../components/Link";
 import ImageV2Portfolio from "@/assets/images/ImageV2Portfolio.webp";
 import VideoV2Portfolio from "@/assets/videos_master/VideoV2Portfolio.webm";
 import VideoV2PortfolioPreview from "@/assets/video_previews/VideoV2Portfolio.webm";
+import VideoV2PortfolioPreviewHevc from "@/assets/video_previews/VideoV2Portfolio.mp4";
 import VideoV2PortfolioPoster from "@/assets/video_posters/VideoV2Portfolio.webp";
 //
 const GitHubV2Portfolio = "https://github.com/shadowisf/PortfolioV2";
@@ -29,6 +30,7 @@ export const PortfolioV2: WorkEntry = {
     "an image of the about section in my portfolio v2 project. there is a picture of me and a text introducing myself, with a button at the very bottom which downloads my resume. at the bottom portion, there is a timeline where it showcases all important events that happened in my life. on the right side of the timeline, it showcases my skillset wherein you can filter by my skill level such as all, expert, intermediate, and beginner.",
   video: VideoV2Portfolio,
   videoPreview: VideoV2PortfolioPreview,
+  videoPreviewHevc: VideoV2PortfolioPreviewHevc,
   videoPoster: VideoV2PortfolioPoster,
   videoFlex: "1.598148",
   status: <>in active development, with regular updates.</>,

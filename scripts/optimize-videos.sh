@@ -3,8 +3,9 @@
 #
 #   src/assets/videos_master/<Name>.webm    original, played as-is on the work page
 #   src/assets/video_previews/<Name>.webm  full-length, up to 1080p, 60fps hover clip
-#   src/assets/video_previews/<Name>.mov   the same as hevc, for a clip cut out to a
-#                                          transparent background (see CUTOUT below)
+#   src/assets/video_previews/<Name>.mp4   the same as hevc, safari's copy (see SAFARI below)
+#   src/assets/video_previews/<Name>.mov   the same as hevc with alpha, safari's copy of a
+#                                          clip cut out to a transparent background (CUTOUT)
 #   src/assets/video_posters/<Name>.webp   the frame its hover starts on, shown until hovered
 #
 # The originals are only ever read. Re-run this whenever you add or replace one.
@@ -13,6 +14,7 @@
 #   ./scripts/optimize-videos.sh VideoExamiq            just the named clips
 #   ./scripts/optimize-videos.sh --posters-only [...]   posters from the previews already cut --
 #                                                       re-run after changing a previewStart
+#   ./scripts/optimize-videos.sh --safari-only [...]    just safari's hevc copies
 
 set -euo pipefail
 
@@ -38,14 +40,25 @@ PREVIEW_CRF=32
 PREVIEW_MAXRATE=2M
 # the hevc copy of a cut-out clip (videotoolbox's constant quality, 1-100)
 HEVC_QUALITY=45
+# SAFARI: safari decodes vp9 in software on many macs, and seeks slowly in
+# webm -- a hovered 1080p60 preview sat on its loading ring, the others
+# loading beside it starving it -- so every clip gets a hevc copy, which macs
+# and iphones decode in hardware. A keyframe every second, so the seek to a
+# previewStart decodes at most that much; the index at the front (faststart),
+# so it plays before the whole file is in.
+SAFARI_QUALITY=50
 
 # The poster is cut from the preview itself, at the project's previewStart, so
 # the still a tile shows is exactly the frame its hover opens on.
 POSTER_QUALITY=80
 
 posters_only=false
+safari_only=false
 if [ "${1:-}" = "--posters-only" ]; then
   posters_only=true
+  shift
+elif [ "${1:-}" = "--safari-only" ]; then
+  safari_only=true
   shift
 fi
 
@@ -113,6 +126,7 @@ fi
 [ ${#sources[@]} -gt 0 ] || { echo "no videos in $SOURCE_DIR" >&2; exit 1; }
 
 total=0
+safari_copies=0
 
 for source in "${sources[@]}"; do
   name="$(basename "$source" .webm)"
@@ -132,6 +146,26 @@ for source in "${sources[@]}"; do
   trap 'rm -f "$partial"' EXIT
 
   scale="scale=w=min($PREVIEW_W\,iw):h=min($PREVIEW_H\,ih):force_original_aspect_ratio=decrease,scale=trunc(iw/2)*2:trunc(ih/2)*2"
+
+  # SAFARI's copy of an opaque clip (a cut-out one gets its .mov, below)
+  case "$name" in
+    VideoFeelTok) ;;
+    *)
+      mp4="$PREVIEW_DIR/$name.mp4"
+      mp4_partial="$PREVIEW_DIR/.$name.partial.mp4"
+      trap 'rm -f "$partial" "$mp4_partial"' EXIT
+      "$FFMPEG_BIN" -nostdin -v error -y -i "$source" \
+        -vf "$scale,format=yuv420p" \
+        -c:v hevc_videotoolbox -q:v "$SAFARI_QUALITY" -g 60 -tag:v hvc1 -an \
+        -movflags +faststart -f mp4 "$mp4_partial"
+      verify "$mp4_partial"
+      mv "$mp4_partial" "$mp4"
+      total=$(( total + $(stat -f%z "$mp4") ))
+      safari_copies=$(( safari_copies + 1 ))
+      echo "==> $name: safari's copy -> $(human "$mp4")"
+      ;;
+  esac
+  if $safari_only; then continue; fi
 
   # CUTOUT: a phone recording shown on its own (feeltok) is cut out of the
   # simulator window it was recorded in, so the page shows round the phone.
@@ -195,5 +229,6 @@ if [ "$("$FFMPEG_BIN" -version 2>/dev/null | head -1)" != "$FFMPEG_VERSION" ]; t
 fi
 
 $posters_only && { printf '\n%s posters\n' "${#sources[@]}"; exit 0; }
+$safari_only && { printf '\n%s safari copies, all verified, %s KB total\n' "$safari_copies" "$(( total / 1024 ))"; exit 0; }
 
 printf '\n%s previews, all verified, %s KB total\n' "${#sources[@]}" "$(( total / 1024 ))"

@@ -5,6 +5,7 @@ import { ActionLink } from "../../components/Link";
 import ImageExamiq from "@/assets/images/ImageExamiq.webp";
 import VideoExamiq from "@/assets/videos_master/VideoExamiq.webm";
 import VideoExamiqPreview from "@/assets/video_previews/VideoExamiq.webm";
+import VideoExamiqPreviewHevc from "@/assets/video_previews/VideoExamiq.mp4";
 import VideoExamiqPoster from "@/assets/video_posters/VideoExamiq.webp";
 import FileExamiq from "@/assets/files/FileExamiq.pdf";
 //
@@ -37,6 +38,7 @@ export const Examiq: WorkEntry = {
     "an image of examiq, an ai-powered proctorig system. currently, it's in the exam page wherein it's displaying all of the questions of an exam in a form format. while at it, on the top left, there is a camera showing the face of the user and the system is scanning the fact, specifically the eyes. you can then see a red dot on the screen, tracking the user's gaze.",
   video: VideoExamiq,
   videoPreview: VideoExamiqPreview,
+  videoPreviewHevc: VideoExamiqPreviewHevc,
   videoPoster: VideoExamiqPoster,
   previewStart: 12,
   videoFlex: "1.726",

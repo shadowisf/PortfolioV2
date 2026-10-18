@@ -5,6 +5,7 @@ import { ActionLink, InlineLink } from "../../components/Link";
 import ImageV1Portfolio from "@/assets/images/ImageV1Portfolio.webp";
 import VideoV1Portfolio from "@/assets/videos_master/VideoV1Portfolio.webm";
 import VideoV1PortfolioPreview from "@/assets/video_previews/VideoV1Portfolio.webm";
+import VideoV1PortfolioPreviewHevc from "@/assets/video_previews/VideoV1Portfolio.mp4";
 import VideoV1PortfolioPoster from "@/assets/video_posters/VideoV1Portfolio.webp";
 //
 const GitHubV1Portfolio = "https://github.com/shadowisf/PortfolioV1";
@@ -26,6 +27,7 @@ export const PortfolioV1: WorkEntry = {
     "an image of the about section in my portfolio project. it has a cartoon illustration of me and and text introducing myself.",
   video: VideoV1Portfolio,
   videoPreview: VideoV1PortfolioPreview,
+  videoPreviewHevc: VideoV1PortfolioPreviewHevc,
   videoPoster: VideoV1PortfolioPoster,
   videoFlex: "1.599074",
   status: (

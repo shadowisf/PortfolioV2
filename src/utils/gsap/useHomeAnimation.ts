@@ -1,3 +1,5 @@
+import { webkitOnly } from "../webkit";
+
 // Hover playback for the home page's project tiles.
 
 // chromium spins up (and keeps) a decode pipeline for every <video> that has a
@@ -5,7 +7,12 @@
 // stalls the main thread, so previews start with no src, and only those near
 // the screen are loaded (primeWhenNear) -- the few most recently used, about a
 // screen's worth and the next.
-const MAX_LOADED_PREVIEWS = 6;
+//
+// Safari (webkit) loads fewer, and only their start ahead of a hover:
+// readied with preload "auto", each may buffer far ahead, several at once,
+// leaving the one hovered to wait behind them on its loading ring.
+const MAX_LOADED_PREVIEWS = webkitOnly ? 4 : 6;
+const READY_PRELOAD = webkitOnly ? "metadata" : "auto";
 const loadedPreviews: HTMLVideoElement[] = [];
 
 function attachPreviewSource(video: HTMLVideoElement) {
@@ -19,7 +26,7 @@ function attachPreviewSource(video: HTMLVideoElement) {
 
   if (video.dataset.loaded !== "true") {
     // loaded and buffering ahead of a hover, not waiting for one
-    video.preload = "auto";
+    video.preload = READY_PRELOAD;
     video.src = src;
     video.dataset.loaded = "true";
     video.load();
@@ -78,6 +85,8 @@ export function playPreview(video: HTMLVideoElement) {
   // the cursor has moved on, or (on mobile) the tile has scrolled away
   video.dataset.wanted = "true";
   attachPreviewSource(video);
+  // wanted now: the whole of it, wherever it was readied with less
+  video.preload = "auto";
 
   const startAt = Number(video.dataset.start) || 0;
   video.onended = () => {

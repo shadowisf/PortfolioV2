@@ -5,6 +5,7 @@ import { ActionLink } from "../../components/Link";
 import ImagePlugIns from "@/assets/images/ImagePlugIns.webp";
 import VideoPlugIns from "@/assets/videos_master/VideoPlugIns.webm";
 import VideoPlugInsPreview from "@/assets/video_previews/VideoPlugIns.webm";
+import VideoPlugInsPreviewHevc from "@/assets/video_previews/VideoPlugIns.mp4";
 import VideoPlugInsPoster from "@/assets/video_posters/VideoPlugIns.webp";
 import FilePlugIns from "@/assets/files/FilePlugIns.pdf";
 //
@@ -21,6 +22,7 @@ export const PlugIns: WorkEntry = {
     "an image of the plug-ins project. it is currently viewing the products page",
   video: VideoPlugIns,
   videoPreview: VideoPlugInsPreview,
+  videoPreviewHevc: VideoPlugInsPreviewHevc,
   videoPoster: VideoPlugInsPoster,
   previewStart: 16,
   videoFlex: "1.599074",

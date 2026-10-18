@@ -375,9 +375,15 @@ nav {
     font-variation-settings: $fontVarNormal;
     transition: font-variation-settings var(--fontMorph);
 
-    &.active,
-    &:is(a, button):hover {
+    &.active {
       font-variation-settings: $fontVarThin;
+    }
+
+    // a mouse's hover only: a tap on a phone leaves no weight behind
+    @media (hover: hover) and (pointer: fine) {
+      &:is(a, button):hover {
+        font-variation-settings: $fontVarThin;
+      }
     }
 
     // about, when it is the page you are on (not work: the project inside
@@ -388,15 +394,19 @@ nav {
   }
 
   // work, ruled off from the theme at the foot, with the same room either
-  // side of it (the panel's gap below). The line is the other theme's page
-  // colour, white in the dark and near-black in the light: the panel is
-  // --surface itself, so a --surface line would not show on it.
+  // side of it (the panel's gap below), by a hairline a step off the
+  // panel's own grey (--surface): a tenth darker in the light theme, a
+  // tenth lighter in the dark
   .menuWork {
     display: flex;
     flex-direction: column;
 
     padding-bottom: 2.5rem;
-    border-bottom: 1px solid var(--background-inverse);
+    border-bottom: 1px solid
+      light-dark(
+        color-mix(in srgb, var(--surface), black 10%),
+        color-mix(in srgb, var(--surface), white 10%)
+      );
   }
 
   // "work" as the accordion's button: the heading across the panel, a
@@ -521,9 +531,14 @@ nav {
       font-variation-settings: $fontVarNormal;
     }
 
-    .menuName.active,
-    a.menuName:hover {
+    .menuName.active {
       font-variation-settings: $fontVarThin;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      a.menuName:hover {
+        font-variation-settings: $fontVarThin;
+      }
     }
 
     a.menuName.active::after {
@@ -1146,6 +1161,12 @@ footer {
     font-size: inherit;
   }
 
+  // On a phone, room besides for the browser's own bar along the bottom
+  // (safari's floats over the page, on a backing of its own that no page can
+  // take away): the last line scrolls up clear of it rather than under it.
+  @media (hover: none) and (pointer: coarse) {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+  }
 }
 
 // wrappers
@@ -1429,14 +1450,21 @@ footer {
         object-fit: contain;
       }
 
-      // in grey until it is actually playing, then into colour, and back out
-      // when it pauses -- a fade, so it plays under reduce motion too
+      // In grey until it is actually playing, then into colour, and back out
+      // when it pauses -- a fade, so it plays under reduce motion too. Not a
+      // fade in safari (.webkit), where a filter changing over a 1080p clip
+      // just setting off is costly, and frames go missing: it turns at once
+      // there, the tile's own fade forward (below) carrying the change.
       video {
         filter: grayscale(1);
         transition: filter 0.5s ease;
 
         &[data-playing] {
           filter: none;
+        }
+
+        .webkit & {
+          transition: none;
         }
       }
     }
@@ -2006,6 +2034,16 @@ footer {
         border-bottom: 1px solid var(--surface);
       }
 
+      // On a phone, closer: the years' column just wider than its widest
+      // ("2022 - 2025", 6.5 times the years' size, --small, as a <small>'s),
+      // so it keeps pace with the type, a smaller gap after it, and less
+      // room above and below
+      @media (max-width: 760px) {
+        grid-template-columns: calc(var(--small) * 7) 1fr;
+        column-gap: 1.75rem;
+        padding: 0.75rem 0;
+      }
+
       .years {
         color: var(--faded-color);
         font-variant-numeric: tabular-nums;
@@ -2285,6 +2323,69 @@ footer {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+
+  // On a phone, at their full padding (and the *'s room either side), the
+  // two did not fit one line. There they are tightened to: all with a
+  // little padding, the levels filling the rest of the line, the three
+  // sharing it with none. No room is kept for the * either side, so every
+  // name sits in the middle of its button; the chosen one's * hangs just
+  // past its name instead, in its own room (a negative margin of its whole
+  // width: the 0.15em before it and the glyph's 0.39em), taking none of
+  // the button's, so marking one moves nothing. The gap between the two
+  // tracks stays. Narrower still (under ~350px), the levels drop to a line
+  // of their own.
+  @media (max-width: 480px) {
+    .segmented {
+      button {
+        justify-content: center;
+
+        &::before,
+        &::after {
+          display: none;
+        }
+
+        // Chosen, the name moves left by half of what the * adds to its ink
+        // (the 0.15em gap and the glyph's ink to 0.36em, at 2.06 times the
+        // name's size: 1.05em), so the name and its * together sit in the
+        // middle, as the name alone does unchosen -- a move of its own, so
+        // nothing else shifts.
+        .segmentedText {
+          position: relative;
+          transition: translate var(--fontMorph);
+        }
+
+        &.active .segmentedText {
+          translate: -0.525em 0;
+        }
+
+        // as %pageMarker (which cannot be extended in here)
+        &.active .segmentedText::after {
+          content: "*";
+          font-variation-settings: $fontVarNormal;
+          font-size: 2.06em;
+          line-height: 0;
+          position: relative;
+          top: 0.454em;
+          margin-left: 0.15em;
+          margin-right: -0.54em;
+          color: var(--marker-color);
+        }
+      }
+
+      &:first-child button {
+        padding-inline: 1rem;
+      }
+
+      &:last-child {
+        flex: 1 1 auto;
+
+        button {
+          flex: 1 1 auto;
+          padding-inline: 0;
+        }
+      }
+    }
+  }
 }
 
 // A segmented control: one quiet track, the chosen segment marked with the

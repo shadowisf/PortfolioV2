@@ -4,14 +4,7 @@ import { workMapping } from "../utils/workMapping";
 import { useGlobalState } from "../providers/GlobalStateProvider";
 import { playPreview, primeWhenNear, stopPreview } from "../utils/gsap/useHomeAnimation";
 import TechStackTile from "./TechStackTile";
-
-// Safari, and every browser on ios (all of them webkit), cannot show a
-// transparent webm -- they play it on black. A preview cut out to a
-// transparent background comes as hevc with alpha for them instead.
-const ua = typeof navigator === "undefined" ? "" : navigator.userAgent;
-const webkitOnly =
-  /iP(hone|ad|od)/.test(ua) ||
-  (/Safari\//.test(ua) && !/Chrome|Chromium|Edg|Firefox|OPR/.test(ua));
+import { webkitOnly } from "../utils/webkit";
 
 type ProjectCardProps = {
   dataID: number;

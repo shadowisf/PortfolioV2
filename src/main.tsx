@@ -10,6 +10,10 @@ import Work from "./pages/Work.tsx";
 import YouAreLost from "./pages/_Lost.tsx";
 import { GlobalStateProvider } from "./providers/GlobalStateProvider.tsx";
 import { workMapping } from "./utils/workMapping.ts";
+import { webkitOnly } from "./utils/webkit.ts";
+
+// what main.scss eases off on for safari and ios (webkit)
+if (webkitOnly) document.documentElement.classList.add("webkit");
 
 // for real reploy
 // firebase deploy --only hosting:les-ranalan

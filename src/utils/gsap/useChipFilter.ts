@@ -2,6 +2,7 @@ import { RefObject, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { Flip } from "gsap/all";
 import gsap from "gsap";
+import { webkitOnly } from "../webkit";
 
 gsap.registerPlugin(Flip);
 
@@ -23,6 +24,26 @@ const GROW_SECONDS = 0.5;
 // (%pageBlur in main.scss): on a chip that small, 12px left no shape of the
 // name at all.
 const PASSING_BLUR = 6;
+// Safari cannot draw a score of css-blurred chips moving at once: it left
+// undrawn patches (magenta) between them and cut each blur off square at
+// its box. There the blur is painted instead, with no filter: the words
+// gone see-through, only a soft shadow of them left, and the chip's grey
+// feathered out past its edge by a shadow of the same grey -- the look of
+// the blur, from things safari paints like any other.
+// A shadow's blur is twice the spread of the filter's for the same number
+// (it is the blur's whole width, the filter's its standard deviation), so
+// twice PASSING_BLUR matches the filter's softness elsewhere.
+const PAINTED_SOFTNESS = PASSING_BLUR * 2;
+const PAINTED_BLUR = (chip: HTMLElement) => {
+  const { color, backgroundColor } = getComputedStyle(chip);
+  return {
+    color: "transparent",
+    textShadow: `0 0 ${PAINTED_SOFTNESS}px ${color}`,
+    boxShadow: `0 0 ${PAINTED_SOFTNESS}px ${PAINTED_SOFTNESS / 3}px ${backgroundColor}`,
+  };
+};
+// what the painted blur leaves on a chip, cleared once it is done with
+const PAINTED_PROPS = "color,textShadow,boxShadow";
 const BLUR_SECONDS = 0.4;
 const BLUR_EASE = "power2.inOut";
 const blur = (px: number) => `blur(${px}px)`;
@@ -39,7 +60,8 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
   const releaseScroll = useRef<(() => void) | null>(null);
 
   const chips = () => [...(box.current?.children ?? [])] as HTMLElement[];
-  const isShown = (chip: HTMLElement) => getComputedStyle(chip).display !== "none";
+  const isShown = (chip: HTMLElement) =>
+    getComputedStyle(chip).display !== "none";
   const belongs = (chip: HTMLElement, level: string) =>
     level === "0" || chip.getAttribute("data-key") === level;
 
@@ -55,7 +77,8 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
         autoAlpha: 1,
         scale: 1,
         filter: "none",
-      })
+        clearProps: PAINTED_PROPS,
+      }),
     );
   };
 
@@ -79,7 +102,9 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
       if (Math.abs(window.scrollY - y) > 0.5) window.scrollTo(0, y);
       frame = requestAnimationFrame(keep);
     };
-    ownMove.forEach((type) => window.addEventListener(type, release, { passive: true }));
+    ownMove.forEach((type) =>
+      window.addEventListener(type, release, { passive: true }),
+    );
     frame = requestAnimationFrame(keep);
     releaseScroll.current = release;
     return release;
@@ -96,10 +121,18 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
   // Deliberately animates even with reduced motion on: the chips re-sorting
   // is how the filter shows what it did, so it is kept like the dropdown's
   // slide and the hover weight change.
-  const sortTo = (level: string, still: () => boolean, onComplete: () => void) => {
+  const sortTo = (
+    level: string,
+    still: () => boolean,
+    onComplete: () => void,
+  ) => {
     const all = chips();
-    const leaving = all.filter((chip) => isShown(chip) && !belongs(chip, level));
-    const arriving = all.filter((chip) => !isShown(chip) && belongs(chip, level));
+    const leaving = all.filter(
+      (chip) => isShown(chip) && !belongs(chip, level),
+    );
+    const arriving = all.filter(
+      (chip) => !isShown(chip) && belongs(chip, level),
+    );
     const staying = all.filter((chip) => isShown(chip) && belongs(chip, level));
 
     // the turns at their own timings, end to end, and the pace that brings
@@ -130,9 +163,17 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
     const slide = () => {
       if (!still()) return;
       const state = Flip.getState(staying);
-      leaving.forEach((chip) => gsap.set(chip, { display: "none", autoAlpha: 1, scale: 1 }));
+      leaving.forEach((chip) =>
+        gsap.set(chip, { display: "none", autoAlpha: 1, scale: 1 }),
+      );
       arriving.forEach((chip) =>
-        gsap.set(chip, { display: "flex", autoAlpha: 0, scale: 0, filter: blur(0) })
+        gsap.set(chip, {
+          display: "flex",
+          autoAlpha: 0,
+          scale: 0,
+          filter: blur(0),
+          clearProps: PAINTED_PROPS,
+        }),
       );
       if (!staying.length) return growIn();
       // lifted out of the row while they travel (absolute), each at its own
@@ -163,10 +204,11 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
 
   // Show the skills at a level. From one level straight to another, every
   // skill comes back first, the chips back in their original places; then
-  // all but the new level's blur (PASSING_BLUR), and the new level is
-  // filtered from there, rather than one set swapping for the other. A switch made while one is still going first puts every
-  // chip where that one was headed (settle), and starts from there; a step
-  // still waiting from it is dropped. Throughout, the page holds still
+  // all but the new level's blur (PASSING_BLUR; in Safari, painted --
+  // PAINTED_BLUR), and the new level is filtered from there, rather than
+  // one set swapping for the other. A switch made while one is still going
+  // first puts every chip where that one was headed (settle), and starts
+  // from there; a step still waiting from it is dropped. Throughout, the page holds still
   // (holdScroll). onDone is called once the chips have all landed.
   const filterSkill = contextSafe((level: string, onDone?: () => void) => {
     const ticket = ++switches.current;
@@ -183,17 +225,34 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
     if (from !== "0" && level !== "0" && from !== level) {
       const blurOthers = () => {
         if (!still()) return;
-        gsap.to(
-          chips().filter((chip) => !belongs(chip, level)),
-          {
-            filter: blur(PASSING_BLUR),
-            duration: BLUR_SECONDS,
-            ease: BLUR_EASE,
-            onComplete: () => {
-              if (still()) sortTo(level, still, release);
-            },
-          }
-        );
+        const passing = chips().filter((chip) => !belongs(chip, level));
+        // safari's: each chip's painted blur, worked out from its own colours,
+        // from none of it
+        if (webkitOnly) {
+          passing.forEach((chip) => {
+            const { color, backgroundColor } = getComputedStyle(chip);
+            gsap.set(chip, {
+              textShadow: `0 0 0px ${color}`,
+              boxShadow: `0 0 0px 0px ${backgroundColor}`,
+            });
+          });
+        }
+        gsap.to(passing, {
+          ...(webkitOnly
+            ? {
+                color: "transparent",
+                textShadow: (_: number, chip: HTMLElement) =>
+                  PAINTED_BLUR(chip).textShadow,
+                boxShadow: (_: number, chip: HTMLElement) =>
+                  PAINTED_BLUR(chip).boxShadow,
+              }
+            : { filter: blur(PASSING_BLUR) }),
+          duration: BLUR_SECONDS,
+          ease: BLUR_EASE,
+          onComplete: () => {
+            if (still()) sortTo(level, still, release);
+          },
+        });
       };
       sortTo("0", still, blurOthers);
     } else {

@@ -7,6 +7,7 @@ import "zoom-vanilla.js/dist/zoom-vanilla.min.js";
 import Spinner from "../components/Spinner";
 import { useGlobalState } from "../providers/GlobalStateProvider";
 import { useScrollingAnimation } from "../utils/gsap/useScrollingAnimation";
+import { webkitOnly } from "../utils/webkit";
 
 type WorkProps = {
   dataID: number;
@@ -72,11 +73,22 @@ export default function Work(p: WorkProps) {
             The rest of the file still waits for an actual press of play.
             aspectRatio holds the box steady until that frame arrives.
           */}
+          {/* safari's is the hevc preview -- the same clip, full length, up
+              to 1080p -- which it decodes in hardware (webkitOnly); not a
+              cut-out one (.mov), which would show this page a different
+              picture */}
           <video
             controls
             muted
             preload="metadata"
-            src={project.video}
+            src={
+              // safari, readying only the start (metadata), paints no frame
+              // and leaves the box empty until played; asked for the clip
+              // from a hair past zero, it fetches and shows that frame
+              webkitOnly && project.videoPreviewHevc?.includes(".mp4")
+                ? `${project.videoPreviewHevc}#t=0.001`
+                : project.video
+            }
             style={
               {
                 aspectRatio: project.videoFlex,

@@ -5,6 +5,7 @@ import { ActionLink } from "../../components/Link";
 import ImageFunculator from "@/assets/images/ImageFunCulator.webp";
 import VideoFunCulator from "@/assets/videos_master/VideoFunCulator.webm";
 import VideoFunCulatorPreview from "@/assets/video_previews/VideoFunCulator.webm";
+import VideoFunCulatorPreviewHevc from "@/assets/video_previews/VideoFunCulator.mp4";
 import VideoFunCulatorPoster from "@/assets/video_posters/VideoFunCulator.webp";
 import FileFunculator from "@/assets/files/FileFunCulator.pdf";
 //
@@ -21,6 +22,7 @@ export const FunCulator: WorkEntry = {
     "an image of the funculator project. it is currently viewing the menu section where it is displaying all of the possible operations such as factorial, min&max, fibonacci, etc.",
   video: VideoFunCulator,
   videoPreview: VideoFunCulatorPreview,
+  videoPreviewHevc: VideoFunCulatorPreviewHevc,
   videoPoster: VideoFunCulatorPoster,
   previewStart: 6,
   videoFlex: "1.891626",

@@ -16,8 +16,10 @@ export type WorkEntry = {
   imageAlt: string;
   video: string;
   videoPreview: string;
-  // for a preview cut out to a transparent background: the same clip as hevc
-  // with alpha, for safari and ios, which show a transparent webm on black
+  // the same clip as hevc, for safari and ios (scripts/optimize-videos.sh):
+  // they decode vp9 in software, if at all, and a 1080p60 preview stalled;
+  // hevc they decode in hardware. With alpha for a preview cut out to a
+  // transparent background, which they would show on black as a webm.
   videoPreviewHevc?: string;
   // the frame the hover starts on (previewStart), cut by
   // scripts/optimize-videos.sh -- the still its home page tile shows until
