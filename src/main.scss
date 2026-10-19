@@ -49,6 +49,8 @@ $minMaxWidth: 1338px;
 
   --theme: light dark;
 
+  // (each light-dark() colour here is listed too in GlobalStateProvider's
+  // THEME_COLORS, which safari's live theme fade moves)
   --text-color: light-dark(rgb(0, 0, 0), white);
   // light mode: a white page under a grey bar; dark: the reverse step
   --background-color: light-dark(rgb(255, 255, 255), rgb(28, 28, 30));
@@ -279,7 +281,9 @@ nav {
 
     transition: scale var(--motion) var(--ease);
 
-    &:hover {
+    // a cursor's only, as the theme button's -- its bars shuffle too
+    // (MenuIcon) -- and never what a finger's tap leaves behind
+    .hasCursor &:hover {
       scale: $scaleOnHover;
     }
 
@@ -367,8 +371,10 @@ nav {
     gap: 2.5rem;
   }
 
-  // work and about: large, with the site's weight change
+  // work and about: large, with the site's weight change; about's link only
+  // as wide as the word, so only the word takes a tap
   .menuHeading {
+    align-self: flex-start;
     font-size: var(--h2);
     line-height: 1.1;
     color: inherit;
@@ -411,6 +417,8 @@ nav {
 
   // "work" as the accordion's button: the heading across the panel, a
   // chevron at its end that turns up while it is open
+  // Across the panel, its chevron at the far end -- but only the word and
+  // the chevron take a tap (pointer-events), not the row between them.
   .menuToggle {
     display: flex;
     justify-content: space-between;
@@ -422,6 +430,12 @@ nav {
     font-family: inherit;
     text-align: left;
     cursor: pointer;
+    pointer-events: none;
+
+    .menuToggleLabel,
+    .menuChevron {
+      pointer-events: auto;
+    }
 
     .menuChevron {
       width: 1.5rem;
@@ -564,6 +578,62 @@ nav {
     font-family: inherit;
     font-size: var(--h5);
     cursor: pointer;
+    transition:
+      color var(--duration) var(--ease),
+      scale var(--motion) var(--ease);
+
+    span {
+      font-variation-settings: $fontVarNormal;
+      transition: font-variation-settings var(--fontMorph);
+    }
+
+    // The word, as wide as the wider of "dark" and "light" (two hidden
+    // copies), from the icon's side, so the icon never moves as it changes;
+    // the morph's outlines over it while it does (ThemeWord).
+    .themeWord {
+      position: relative;
+      display: inline-grid;
+      justify-items: start;
+
+      &::before,
+      &::after {
+        grid-area: 1 / 1;
+        visibility: hidden;
+      }
+
+      &::before {
+        content: "dark";
+      }
+
+      &::after {
+        content: "light";
+      }
+
+      .themeWordText {
+        grid-area: 1 / 1;
+      }
+
+      svg {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: visible;
+        fill: currentColor;
+        pointer-events: none;
+      }
+    }
+
+    // hovered as the bar's theme button is, by a cursor only -- grown a
+    // little, in the accent, its word heavier, its sun or moon turning
+    .hasCursor &:hover {
+      scale: $scaleOnHover;
+      color: var(--accent-color);
+
+      span {
+        font-variation-settings: $fontVarThin;
+      }
+    }
   }
 }
 
@@ -815,6 +885,7 @@ nav {
 // The other theme's grey and words, for the cursor over a project still to
 // come: the light theme's in the dark, the dark theme's in the light. The
 // same values as --surface and --text-color, each side swapped.
+// (also written out for the carousel's chips, inside a media query)
 %otherTheme {
   --surface: light-dark(rgb(44, 44, 46), rgb(242, 242, 242));
   --text-color: light-dark(white, rgb(0, 0, 0));
@@ -1094,11 +1165,8 @@ nav {
       transition: fill var(--duration) var(--ease);
     }
 
-    &:hover {
+    .hasCursor &:hover {
       scale: $scaleOnHover;
-    }
-
-    &:hover {
       cursor: pointer;
 
       svg {
@@ -1161,12 +1229,6 @@ footer {
     font-size: inherit;
   }
 
-  // On a phone, room besides for the browser's own bar along the bottom
-  // (safari's floats over the page, on a backing of its own that no page can
-  // take away): the last line scrolls up clear of it rather than under it.
-  @media (hover: none) and (pointer: coarse) {
-    padding-bottom: calc(5rem + env(safe-area-inset-bottom));
-  }
 }
 
 // wrappers
@@ -1175,7 +1237,8 @@ footer {
 // The home page's cursor over its project tiles (TileCursor): a small tile
 // in the site's grey (--surface), no border, rounded like every other
 // panel -- the project's name in the text colour, its year in grey on the
-// line beneath, and a link's arrow. GSAP moves it.
+// line beneath, and a link's arrow. GSAP moves it: the whole of it, a
+// point at the pointer with the tile centred on it.
 .tileCursor {
   // there over a project, gone elsewhere (.shown, set by TileCursor): no
   // fade either way; its position follows the pointer exactly
@@ -1191,6 +1254,13 @@ footer {
   // clip too dark for it (overlayTheme), and over a project still to come
   // the other theme's, whichever the page is in
   color-scheme: dark;
+  // the tenth of black or white its edge is tinted by (.tileCursorShape)
+  --edgeTint: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
+  --way: var(--text-color);
+
+  &.off {
+    --way: var(--faded-color);
+  }
 
   &.light {
     color-scheme: light;
@@ -1205,18 +1275,73 @@ footer {
   top: 0;
   left: 0;
   z-index: 1000;
-  // less above than below: the font's line box already leaves more room over
-  // the letters than under the year's baseline, so this evens out the ink
-  padding: 0.5rem 0.5rem 0.75rem 0.75rem;
-  border-radius: $radiusLarge;
-  background-color: var(--surface);
+  width: 0;
+  height: 0;
   color: var(--text-color);
   pointer-events: none;
+  will-change: transform;
 
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  white-space: nowrap;
+  // The tile, and the smaller one it becomes over a carousel's edge
+  // (.edge): one panel, always the words' size, cut down by its clip -- so
+  // the morph (TileCursor, GSAP, on the clip alone) moves nothing and lays
+  // nothing out, only repaints, and the words never spill past it.
+  .tileCursorShape {
+    position: absolute;
+    top: 0;
+    left: 0;
+    translate: -50% -50%;
+    // never narrower than the way's tile it closes to
+    min-width: 5rem;
+    // less above than below: the font's line box already leaves more room
+    // over the letters than under the year's baseline, so this evens out
+    // the ink
+    padding: 0.5rem 0.5rem 0.75rem 0.75rem;
+    // The edge, a step off the grey -- darker in the light theme, lighter
+    // in the dark, as the menu's hairline is: the panel in the grey, a tenth
+    // of black or white over it (::after), and its fill (::before) cut 1px
+    // further in by the same clip, so the edge follows the shape through the
+    // morph as a border could not. TileCursor sets the clip's lengths. Plain
+    // colours, not a color-mix: a mix fades in another colour space, out of
+    // step with the fill and the words.
+    --clipY: 0px;
+    --clipX: 0px;
+    --clipR: #{$radiusLarge};
+    background-color: var(--surface);
+    clip-path: inset(var(--clipY) var(--clipX) round var(--clipR));
+    isolation: isolate;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background-color: var(--edgeTint);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-color: var(--surface);
+      clip-path: inset(
+        calc(var(--clipY) + 1px) calc(var(--clipX) + 1px)
+          round calc(var(--clipR) - 1px)
+      );
+    }
+
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  // the words and ↗, in or out together as the shape morphs (TileCursor
+  // shrinks and fades them)
+  .tileCursorLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
   .tileCursorText {
     display: flex;
@@ -1267,10 +1392,11 @@ footer {
     animation: weightChange calc(var(--fontMorphDuration) * 2 + 3s) infinite;
   }
 
+  // proportional figures, a year alone needing none even -- and as the
+  // morph's outlines are drawn (cursorGlyphs)
   .tileCursorMeta {
     color: var(--faded-color);
     font-size: 0.7rem;
-    font-variant-numeric: tabular-nums;
   }
 
   // ↗, as on a link that leaves the site, in its box whichever its weight
@@ -1281,6 +1407,68 @@ footer {
     font-size: 1rem;
     line-height: 1;
     font-variation-settings: $fontVarThin;
+  }
+
+  // Over a carousel's edge: the way, named, at the panel's centre -- "←
+  // prev", "next →", the name's size, in a box of its own, padded as a
+  // tile, which the clip closes to; faded with nowhere to go (.off).
+  // TileCursor shows the one or the other.
+  .tileCursorEdge {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+  }
+
+  .tileCursorEdgeText {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3em;
+    padding: 0.5rem 0.75rem;
+    font-size: var(--small);
+    line-height: 1.15;
+    opacity: 0;
+
+    &.prev {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .tileCursorEdgeWord,
+  .tileCursorEdgeArrow {
+    font-size: inherit;
+    font-variation-settings: $fontVarThin;
+  }
+
+  // in a colour of its own (--way), the words' or, with nowhere to go, the
+  // faded -- one of the colours a fade eases (TileCursor), so the one turns
+  // into the other too
+  .tileCursorEdgeText {
+    color: var(--way);
+  }
+
+  &.shown.edge .tileCursorEdgeWord,
+  &.shown.edge .tileCursorEdgeArrow {
+    animation: weightChange calc(var(--fontMorphDuration) * 2 + 3s) infinite;
+  }
+
+  // While it morphs: the letters as outlines, over the panel, in its clip
+  // (TileCursor) -- the words' weight changes held, to start afresh
+  .tileCursorMorph {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: visible;
+  }
+
+  &.shown.morphing {
+    .tileCursorNameText,
+    .tileCursorArrow,
+    .tileCursorEdgeWord,
+    .tileCursorEdgeArrow {
+      animation: none;
+    }
   }
 }
 
@@ -1467,6 +1655,25 @@ footer {
           transition: none;
         }
       }
+
+      // Safari's poster (ProjectCard): over the video, as it is drawn and
+      // in grey like it, until the clip has played -- gone at the moment it
+      // plays. Elsewhere the video's own poster serves.
+      .cardPoster {
+        position: absolute;
+        inset: 0;
+        filter: grayscale(1);
+        pointer-events: none;
+        display: none;
+
+        .webkit & {
+          display: block;
+        }
+      }
+
+      video[data-played] ~ .cardPoster {
+        visibility: hidden;
+      }
     }
 
     // The stack at a glance, inside the frame at its foot: the about page's
@@ -1538,13 +1745,11 @@ footer {
       bottom: 5.5%;
     }
 
-    // the name and year: on the cursor wherever there is one (TileCursor),
-    // so here only on a touch screen -- except on a tile still to come, where
-    // the name is all there is
-    &:not(.upcoming) .cardCaption {
-      @media (hover: hover) and (pointer: fine) {
-        display: none;
-      }
+    // the name and year: on the cursor wherever there is one (TileCursor,
+    // html.hasCursor), so here only on a touch screen -- a tile still to come
+    // as much as the rest. (The carousels show them whatever, below.)
+    .hasCursor & .cardCaption {
+      display: none;
     }
 
     .cardCaption {
@@ -1575,7 +1780,8 @@ footer {
       font-variation-settings: $fontVarThin;
     }
 
-    // Still to come: an empty panel, greyed, the name at its foot -- the empty
+    // Still to come: an empty panel, greyed, the logo at its centre and the
+    // name at its foot (for a finger alone; a cursor tile carries it) -- the
     // frame takes whatever its stacked share of the row leaves. It takes
     // the pointer, so the drawn cursor shows its arrow over it as over any
     // tile, but it is not a link -- a click goes nowhere.
@@ -1585,6 +1791,15 @@ footer {
       .cardMedia {
         flex: 1;
         aspect-ratio: auto;
+        display: grid;
+        place-items: center;
+      }
+
+      // the logo, small at the frame's centre, barely off the panel's grey
+      .cardMark {
+        height: 2.5rem;
+        width: auto;
+        fill: color-mix(in srgb, var(--surface), var(--text-color) 12%);
       }
 
       .cardTitle {
@@ -1596,8 +1811,9 @@ footer {
   // Every tile sits back -- faded, as well as grey -- until its own preview
   // is playing, when it comes forward, and goes back when it stops. Like the
   // grey, it follows the playing itself, and it is a fade, so it plays under
-  // reduce motion too.
-  .card:not(:has(video[data-playing])) {
+  // reduce motion too. Not one still to come: with no preview it would never
+  // come forward, and its greys are low enough already.
+  .card:not(.upcoming):not(:has(video[data-playing])) {
     opacity: 0.4;
   }
 
@@ -1650,9 +1866,10 @@ footer {
     }
   }
 
-  // the drawn cursor (TileCursor) stands in for the system's over a tile
-  .card,
-  .card * {
+  // the drawn cursor (TileCursor) stands in for the system's over a tile,
+  // wherever there is a cursor to draw (html.hasCursor)
+  .hasCursor & .card,
+  .hasCursor & .card * {
     cursor: none;
   }
 }
@@ -2049,12 +2266,6 @@ footer {
         font-variant-numeric: tabular-nums;
       }
 
-      // the · between the place and how it was worked, half an em either
-      // side, as on a project's eyebrow
-      .metaDot {
-        margin-inline: 0.5em;
-      }
-
       .timelineCaption {
         display: flex;
         flex-direction: column;
@@ -2181,12 +2392,16 @@ footer {
   // the same room from the word's letters to the arrow's foot as from the
   // arrow's tip to the popup
   --arrowGap: 0.25rem;
+  // the page's grey, kept for the popup's edge before it takes the other
+  // theme's
+  --pageSurface: var(--surface);
 
-  &::before {
+  // only with a cursor about (InlineLink leaves the words off otherwise)
+  &[data-tooltip]::before {
     content: attr(data-tooltip);
     position: absolute;
     left: 50%;
-    translate: -50% -0.5rem;
+    translate: calc(-50% + var(--popupShift, 0px)) -0.5rem;
     padding: 0.5rem 1rem;
     font-size: var(--smaller);
     font-weight: 400;
@@ -2201,24 +2416,24 @@ footer {
     transition:
       opacity var(--fontMorph),
       visibility 0s var(--fontMorphDuration);
-    // the text colour, its words in the page's: white in the dark theme,
-    // black in the light
-    background-color: var(--text-color);
-    color: var(--background-color);
-    // edged in the site's grey, in either theme
-    border: 1px solid var(--surface);
+    // the other theme's grey and words (%otherTheme): the light theme's, with
+    // black words, in the dark theme, the dark theme's, with white, in the
+    // light -- edged in the page's own grey (--pageSurface, from the link)
+    @extend %otherTheme;
+    background-color: var(--surface);
+    color: var(--text-color);
+    border: 1px solid var(--pageSurface);
     line-height: normal;
   }
 
-  // a mouse's hover only, like the link it explains
-  @media (hover: hover) and (pointer: fine) {
-    &:hover::before {
-      opacity: 1;
-      visibility: visible;
-      transition:
-        opacity var(--fontMorph),
-        visibility 0s;
-    }
+  // a cursor's hover only, like the link it explains -- an ipad's with a
+  // trackpad too, so not a media query, which some report as touch alone
+  .hasCursor &:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transition:
+      opacity var(--fontMorph),
+      visibility 0s;
   }
 
   // Above the arrow, --arrowGap clear of its tip, and a little to the
@@ -2226,9 +2441,11 @@ footer {
   // bottom at the word's ink top less the gap and 0.0503rem; its tip's ink
   // is 0.1475rem below its 1.75rem box's top -- the tip at 4 of its 36,
   // less half its line.
+  // Kept on the screen, 16px clear of either side: --popupShift moves it
+  // back in where it would run off (InlineLink), the arrow staying put.
   &.top::before {
     bottom: 100%;
-    translate: calc(-50% + 1.5rem)
+    translate: calc(-50% + 1.5rem + var(--popupShift, 0px))
       calc(var(--inkTop) - 2 * var(--arrowGap) - 1.5522rem);
   }
 
@@ -2281,23 +2498,29 @@ footer {
       transition: stroke-dashoffset calc(var(--fontMorphDuration) * 0.8) ease
         calc(var(--fontMorphDuration) * 0.2);
     }
+
+    // Edged as the popup is, in the grey, 1px each side (2.57 at that
+    // scale): the same strokes drawn wider underneath, drawn in and back
+    // with them, so it reads over the words it crosses.
+    .hoverArrowEdge {
+      stroke: var(--surface);
+      stroke-width: 4.5;
+    }
   }
 
-  @media (hover: hover) and (pointer: fine) {
-    &:hover .hoverArrow {
-      visibility: visible;
-      transition: none;
+  .hasCursor &:hover .hoverArrow {
+    visibility: visible;
+    transition: none;
 
-      .hoverArrowLine {
-        stroke-dashoffset: 0;
-        transition: stroke-dashoffset calc(var(--fontMorphDuration) * 0.8) ease;
-      }
+    .hoverArrowLine {
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset calc(var(--fontMorphDuration) * 0.8) ease;
+    }
 
-      .hoverArrowHead {
-        stroke-dashoffset: 0;
-        transition: stroke-dashoffset calc(var(--fontMorphDuration) * 0.2) ease
-          calc(var(--fontMorphDuration) * 0.8);
-      }
+    .hoverArrowHead {
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset calc(var(--fontMorphDuration) * 0.2) ease
+        calc(var(--fontMorphDuration) * 0.8);
     }
   }
 
@@ -2510,24 +2733,22 @@ footer {
 
   font-variation-settings: $fontVarNormal;
 
-  // Dashed, and solid while hovered: a solid line laid over the dashes
-  // fades in, at the pace of the weight change (::after, on the border's
-  // own pixel row).
+  // Underlined as any underlined words are (<u>), at the text's own
+  // place and weight, but dashed -- and solid while hovered: the words
+  // inside carry a solid underline of their own, on the same line, that
+  // fades in at the pace of the weight change.
+  // Unbroken under the space before the arrow, a character (Link.tsx)
+  // joined to the words' own -- where a margin would have had none, and a
+  // space of its own was drawn solid -- and lifted round a descender, as
+  // any underline is.
   .label {
-    position: relative;
-    border-bottom: 1px dashed var(--text-color);
+    text-decoration: underline dashed;
+  }
 
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -1px;
-      height: 1px;
-      background-color: currentColor;
-      opacity: 0;
-      transition: opacity var(--fontMorph);
-    }
+  .labelLine {
+    font-size: inherit;
+    text-decoration: underline solid transparent;
+    transition: text-decoration-color var(--fontMorph);
   }
 
   // ↗, for a link that leaves the site -- inside the label, so the label's
@@ -2537,21 +2758,15 @@ footer {
   // Type Sans, the glyph's ink runs from 0.075em to 0.604em above the
   // baseline -- 0.529em tall -- so 0.945em of the label puts its height on
   // the label's 0.5em x-height, and dropping it 0.075em puts the tail down on
-  // the baseline. Relative positioning moves only the glyph; the underline,
-  // which belongs to the label, stays put.
+  // the baseline. Lowered by its alignment, not by moving it, so the
+  // underline, which belongs to the label, stays put.
   .arrow {
-    margin-left: 0.3em;
     font-size: 0.945em;
-    position: relative;
-    top: 0.075em;
+    vertical-align: -0.075em;
   }
 
   &.faded {
     color: var(--faded-color);
-
-    .label {
-      border-bottom: 1px dashed var(--faded-color);
-    }
   }
 
   // a mouse's hover only: a tap on a phone changes nothing, not even the
@@ -2562,8 +2777,8 @@ footer {
       color: var(--accent-color);
       scale: $scaleOnHover;
 
-      .label::after {
-        opacity: 1;
+      .labelLine {
+        text-decoration-color: currentColor;
       }
     }
   }
@@ -2576,7 +2791,9 @@ footer {
   text-decoration: none;
   color: inherit;
 
-  border-bottom: 1px dashed;
+  // underlined as any underlined words are (<u>), lifted round a
+  // descender, but dashed
+  text-decoration: underline dashed;
 
   transition:
     font-variation-settings var(--fontMorph),
@@ -2589,18 +2806,13 @@ footer {
     color: var(--faded-color);
   }
 
-  // dashed, and solid while hovered: a solid line laid over the dashes fades
-  // in, at the pace of the weight change -- as on a link standing on its own
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -1px;
-    width: 100%;
-    height: 1px;
-    background-color: currentColor;
-    opacity: 0;
-    transition: opacity var(--fontMorph);
+  // solid while hovered: the words' own solid underline, on the same line,
+  // fading in at the pace of the weight change -- as on a link standing on
+  // its own
+  .inlineLinkText {
+    font-size: inherit;
+    text-decoration: underline solid transparent;
+    transition: text-decoration-color var(--fontMorph);
   }
 
   // a mouse's hover only: a tap on a phone changes nothing
@@ -2611,8 +2823,8 @@ footer {
       scale: $scaleOnHover;
     }
 
-    &:hover::after {
-      opacity: 1;
+    &:hover .inlineLinkText {
+      text-decoration-color: currentColor;
     }
   }
 }
@@ -2733,6 +2945,36 @@ footer {
       }
     }
 
+    // A row's edges, with a cursor about (ProjectRow): each a strip from
+    // the screen's edge a sixth of the way into the tile, as tall as the
+    // tile -- its name and stack too -- that
+    // pages along on a click -- and over which the cursor tile becomes that
+    // way's arrow (TileCursor), faded, as the paddles are, with nowhere to
+    // go.
+    .rowFrame {
+      position: relative;
+      // the strips a share of the row's width
+      container-type: inline-size;
+    }
+
+    .rowEdge {
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      width: calc(2rem + 100cqi / 6);
+      bottom: 0;
+      background: none;
+      cursor: none;
+
+      &.previous {
+        left: -2rem;
+      }
+
+      &.next {
+        right: -2rem;
+      }
+    }
+
     // Out past the page's 2rem margins to the screen's edges, so the next
     // tile shows; tiles snap to the column's edge.
     .row {
@@ -2740,15 +2982,11 @@ footer {
       padding-inline: 2rem;
       scroll-padding-inline: 2rem;
 
-      // two tiles in view on a tablet or small laptop, one on a phone
+      // one tile in view at a time, on a phone, a tablet or a small laptop
       display: grid;
       grid-auto-flow: column;
-      grid-auto-columns: calc((100% - 0.75rem) / 2);
+      grid-auto-columns: 100%;
       column-gap: 0.75rem;
-
-      @media (max-width: 760px) {
-        grid-auto-columns: 100%;
-      }
 
       overflow-x: auto;
       overscroll-behavior-x: contain;
@@ -2790,7 +3028,8 @@ footer {
           object-position: center;
         }
 
-        // shown for a mouse too: the cursor tile is desktop's alone
+        // shown for a cursor too, every tile's, those still to come with
+        // the rest: a phone and a tablet alike, with a trackpad or without
         .cardCaption {
           display: flex;
           order: 1;
@@ -2798,8 +3037,8 @@ footer {
         }
 
         // Under the video, on the tile's own panel, each chip in the other
-        // theme's page colour: the light theme's white, with black words,
-        // in the dark theme, and the dark theme's near-black, with white
+        // theme's grey and words (%otherTheme): the light theme's, with
+        // black words, in the dark theme, and the dark theme's, with white
         // words, in the light -- whatever the clip (overlayTheme is for
         // chips over a clip).
         .cardStack {
@@ -2811,15 +3050,19 @@ footer {
           padding: 0 1.25rem 1.25rem;
           color-scheme: inherit;
 
+          // (%otherTheme's own two colours, written out: a placeholder
+          // cannot be extended from inside a media query)
           .chip {
-            background-color: var(--background-inverse);
-            color: light-dark(rgb(255, 255, 255), rgb(0, 0, 0));
+            --surface: light-dark(rgb(44, 44, 46), rgb(242, 242, 242));
+            --text-color: light-dark(white, rgb(0, 0, 0));
+            background-color: var(--surface);
+            color: var(--text-color);
           }
         }
 
         // still to come: an empty frame, then the name, like the rest
         &.upcoming .cardMedia {
-          display: block;
+          display: grid;
           aspect-ratio: var(--ratio);
         }
       }
@@ -2863,23 +3106,6 @@ footer {
     display: none;
   }
 
-  .infoOnHover {
-    /*     &.top {
-      &:hover::before {
-        bottom: 75%;
-      }
-    }
-
-    &.bottom {
-      &:hover::before {
-        bottom: -100%;
-      }
-    } */
-
-    &:hover::before {
-      display: none;
-    }
-  }
 }
 
 // Reduced motion is about things travelling, not about change itself: colour
@@ -2920,7 +3146,8 @@ footer {
 // of its own from ThemeIcon's `place` -- match-element, naming them
 // automatically, made chrome abort the whole transition), only its live new
 // self shown, as it is, while it morphs -- the frozen old one not at all.
-.themeIcon {
+.themeIcon,
+.themeWord {
   view-transition-class: themeIcon;
 }
 
@@ -2950,8 +3177,9 @@ footer {
   transition: rotate var(--themeMorph) var(--ease);
 }
 
-// hovered: the sun's rays turn one step round, the moon rocks back
-.themeButton:hover {
+// hovered: the sun's rays turn one step round, the moon rocks back -- by a
+// cursor, on a phone or a tablet as on a desktop, never a finger's tap
+.hasCursor .themeButton:hover {
   .themeIcon.isSun .themeIconRaysTurn {
     transform: rotate(45deg);
   }

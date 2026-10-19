@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { useGSAP } from "@gsap/react";
+import { useHasCursor } from "../utils/hasCursor";
 import {
   FILL_AFTER_SECONDS,
   FILL_SECONDS,
@@ -75,31 +76,81 @@ const MARKER_SMOOTH = 0.1;
 // the hairline the outlines are traced in (main.scss), in font units
 const HAIRLINE = 14;
 
+// Each piece of the outline worked out by hand, not by the browser's
+// getPointAtLength -- slow enough that sampling it held the page up two
+// seconds on load: its straight runs as they are, its curves (Q) as
+// CURVE_STEPS short ones, every point with how far along the piece it is
+// and the furthest right the piece has reached by then. (The outlines are
+// M, L, Q and Z alone, all absolute.)
+const CURVE_STEPS = 12;
+
+function outline(piece: string) {
+  const tokens = piece.match(/[MLQZ]|-?\d+(?:\.\d+)?/g) ?? [];
+  const points: [number, number][] = [];
+  let i = 0;
+  let command = "";
+  let start: [number, number] = [0, 0];
+  let at: [number, number] = [0, 0];
+  const num = () => Number(tokens[i++]);
+  while (i < tokens.length) {
+    if (/[MLQZ]/.test(tokens[i])) command = tokens[i++];
+    if (command === "M") {
+      at = start = [num(), num()];
+      points.push(at);
+      command = "L"; // numbers after a move are lines
+    } else if (command === "L") {
+      at = [num(), num()];
+      points.push(at);
+    } else if (command === "Q") {
+      const [cx, cy, x, y] = [num(), num(), num(), num()];
+      for (let step = 1; step <= CURVE_STEPS; step++) {
+        const t = step / CURVE_STEPS;
+        const u = 1 - t;
+        points.push([u * u * at[0] + 2 * u * t * cx + t * t * x, u * u * at[1] + 2 * u * t * cy + t * t * y]);
+      }
+      at = [x, y];
+    } else if (command === "Z") {
+      points.push(start);
+      at = start;
+      command = "";
+    } else i++;
+  }
+  // along the piece, and the furthest right by then
+  const along = [0];
+  const furthest = [points[0]?.[0] ?? -Infinity];
+  for (let k = 1; k < points.length; k++) {
+    const [[x0, y0], [x1, y1]] = [points[k - 1], points[k]];
+    along.push(along[k - 1] + Math.hypot(x1 - x0, y1 - y0));
+    furthest.push(Math.max(furthest[k - 1], x1));
+  }
+  return { points, along, furthest, length: along[along.length - 1] };
+}
+
 function inkReach(d: string) {
-  const ns = "http://www.w3.org/2000/svg";
-  const svg = document.createElementNS(ns, "svg");
-  svg.style.cssText = "position: absolute; width: 0; height: 0; visibility: hidden";
-  document.body.append(svg);
-  const pieces = d.split(/(?=M)/).map((piece) => {
-    const path = document.createElementNS(ns, "path");
-    path.setAttribute("d", piece);
-    svg.append(path);
-    return path;
-  });
-  const total = pieces.reduce((sum, path) => sum + path.getTotalLength(), 0);
+  const pieces = d.split(/(?=M)/).map(outline);
+  const total = pieces.reduce((sum, piece) => sum + piece.length, 0);
+  // where each piece's drawing has got to, kept as it only goes on
+  const upTo = pieces.map(() => 0);
   const reach = [-Infinity];
   for (let k = 1; k <= REACH_STEPS; k++) {
+    // every piece drawn this far at once (the dash runs along each)
     const drawn = (total * k) / REACH_STEPS;
     let x = reach[k - 1];
-    pieces.forEach((path) => {
-      const length = Math.min(drawn, path.getTotalLength());
-      for (let j = 1; j <= 20; j++) {
-        x = Math.max(x, (path.getPointAtLength((length * j) / 20).x + HAIRLINE / 2) / 1000);
+    pieces.forEach(({ points, along, furthest, length }, p) => {
+      const to = Math.min(drawn, length);
+      while (upTo[p] < along.length - 2 && along[upTo[p] + 1] <= to) upTo[p]++;
+      const j = upTo[p];
+      // the furthest so far, and the point the line has reached on its way
+      // to the next
+      let edge = furthest[j];
+      if (j + 1 < points.length && along[j + 1] > along[j]) {
+        const t = (to - along[j]) / (along[j + 1] - along[j]);
+        edge = Math.max(edge, points[j][0] + (points[j + 1][0] - points[j][0]) * Math.min(1, t));
       }
+      x = Math.max(x, (edge + HAIRLINE / 2) / 1000);
     });
     reach.push(x);
   }
-  svg.remove();
   return reach;
 }
 
@@ -192,6 +243,11 @@ export function LogoMark({
   marked?: boolean;
 }) {
   const root = useRef<HTMLSpanElement | null>(null);
+  // A hover writes it out with a mouse -- and in the mobile bar too (auto)
+  // where there is a cursor, an ipad's trackpad, while it is not running by
+  // itself for the open menu.
+  const hasCursor = useHasCursor();
+  const hoverable = !auto || (hasCursor && !playing);
   const timer = useRef<number | null>(null);
   const write = useRef<gsap.core.Timeline | null>(null);
   const hovered = useRef(false);
@@ -392,12 +448,13 @@ export function LogoMark({
 
   return (
     // a mouse only: a tap on a phone goes home without writing anything out;
+    // in the mobile bar, only with a cursor about (hoverable);
     // and none at all while it runs by itself
     <span
       ref={root}
       className="logoMark"
-      onPointerEnter={(e) => !auto && e.pointerType === "mouse" && enter()}
-      onPointerLeave={(e) => !auto && e.pointerType === "mouse" && leave()}
+      onPointerEnter={(e) => hoverable && e.pointerType === "mouse" && enter()}
+      onPointerLeave={(e) => hoverable && e.pointerType === "mouse" && leave()}
     >
       <svg viewBox="0 0 5713 1109" aria-hidden="true">
         <g className="logoGlyphs">

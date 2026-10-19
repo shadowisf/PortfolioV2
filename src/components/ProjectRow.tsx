@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/all";
 import { playPreview, stopPreview } from "../utils/gsap/useHomeAnimation";
+import { useHasCursor } from "../utils/hasCursor";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -21,13 +22,15 @@ type ProjectRowProps = {
 // the edge. Swipe, or use the arrows beside the label -- which only appear
 // when there is more to see. With no hover to start it, a preview plays by
 // itself: the tile in view, in the row across the middle of the screen.
-// (Wider screens get the bento grid.)
+// With a cursor about, either edge of the row pages along too, the cursor
+// tile turning into that way's arrow over it. (Wider screens get the bento grid.)
 export function ProjectRow({ label, children }: ProjectRowProps) {
   const track = useRef<HTMLDivElement | null>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(true);
   // where a page in progress is headed, so taps in quick succession add up
   const heading = useRef<number | null>(null);
+  const hasCursor = useHasCursor();
 
   // whether the arrows have anywhere left to go
   function updateEnds() {
@@ -148,8 +151,32 @@ export function ProjectRow({ label, children }: ProjectRowProps) {
         )}
       </div>
 
-      <div className="row" ref={track} onScroll={updateEnds}>
-        {children}
+      <div className="rowFrame">
+        <div className="row" ref={track} onScroll={updateEnds}>
+          {children}
+        </div>
+
+        {/* the paddles' own, closer to hand, the cursor tile their arrow --
+            a second way, so kept from the keyboard and screen readers, who
+            have the paddles */}
+        {hasCursor && scrolls && (
+          <>
+            <button
+              className="rowEdge previous"
+              aria-hidden="true"
+              tabIndex={-1}
+              disabled={atStart}
+              onClick={() => page(-1)}
+            />
+            <button
+              className="rowEdge next"
+              aria-hidden="true"
+              tabIndex={-1}
+              disabled={atEnd}
+              onClick={() => page(1)}
+            />
+          </>
+        )}
       </div>
     </section>
   );

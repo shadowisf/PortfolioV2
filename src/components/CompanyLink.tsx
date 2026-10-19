@@ -1,9 +1,12 @@
 import { InlineLink } from "./Link";
-import { useGlobalState } from "../providers/GlobalStateProvider";
 
-// The companies named on the project pages: where each one's link goes, and
-// the word about it shown on hover -- the same words the about page uses.
+// The companies named across the site: where each one's link goes, and the
+// word about it shown on hover -- one set of words, wherever it is named.
 const COMPANIES = {
+  furchild: {
+    href: "https://furchildpets.com/",
+    about: "an award-winning raw pet nutrition company",
+  },
   rayfitout: {
     href: "https://www.rayfitout.com",
     about: "an award-winning design & build company",
@@ -18,17 +21,12 @@ const COMPANIES = {
   },
 };
 
-// a company, linked wherever it is named, with its word on hover (none on
-// mobile, where there is no hover to show it)
+// a company, linked wherever it is named, with its word on hover (wherever
+// there is a cursor to hover with: InlineLink)
 export function CompanyLink({ name }: { name: keyof typeof COMPANIES }) {
-  const { isMobile } = useGlobalState();
   const { href, about } = COMPANIES[name];
   return (
-    <InlineLink
-      className="infoOnHover top"
-      data-tooltip={isMobile ? "" : about}
-      href={href}
-    >
+    <InlineLink className="infoOnHover top" data-tooltip={about} href={href}>
       {name}
     </InlineLink>
   );

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useGlobalState } from "../providers/GlobalStateProvider";
 import { ThemeIcon } from "./ThemeIcon";
+import { ThemeWord } from "./ThemeWord";
 import { LogoMark } from "./LogoMark";
 import { MenuIcon } from "./MenuIcon";
 import { workMapping } from "../utils/workMapping";
@@ -59,17 +60,40 @@ export default function NavBar() {
   // a phone's touch scrolling, on ios least of all.)
   // A link followed from it leaves the page for another, which starts at
   // its top: there is nowhere to put back to (leftPage).
+  //
+  // Let go only once the panel is back up (--flyoutSlide): put back in the
+  // same moment it set off, the page's jump stopped safari playing the
+  // panel's slide at all -- it simply vanished. Opened again before then,
+  // the page is still pinned, and stays so.
   const leftPage = useRef(false);
+  const pinned = useRef<{ y: number; before: Partial<CSSStyleDeclaration> } | null>(null);
+  const letGo = useRef<number | null>(null);
   useEffect(() => {
     if (!inMenu) return;
-    const y = window.scrollY;
     const body = document.body.style;
-    const before = { position: body.position, top: body.top, width: body.width, overflow: body.overflow };
-    Object.assign(body, { position: "fixed", top: `-${y}px`, width: "100%", overflow: "hidden" });
+    if (letGo.current !== null) {
+      window.clearTimeout(letGo.current);
+      letGo.current = null;
+    }
+    if (!pinned.current) {
+      const y = window.scrollY;
+      pinned.current = {
+        y,
+        before: { position: body.position, top: body.top, width: body.width, overflow: body.overflow },
+      };
+      Object.assign(body, { position: "fixed", top: `-${y}px`, width: "100%", overflow: "hidden" });
+    }
     return () => {
-      Object.assign(body, before);
-      window.scrollTo(0, leftPage.current ? 0 : y);
-      leftPage.current = false;
+      const slide =
+        parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--flyoutSlide")) || 0;
+      letGo.current = window.setTimeout(() => {
+        letGo.current = null;
+        if (!pinned.current) return;
+        Object.assign(body, pinned.current.before);
+        window.scrollTo(0, leftPage.current ? 0 : pinned.current.y);
+        pinned.current = null;
+        leftPage.current = false;
+      }, slide * 1000);
     };
   }, [inMenu]);
 
@@ -550,7 +574,7 @@ export default function NavBar() {
             className="themeButton menuFoot"
           >
             <ThemeIcon dark={userTheme === "dark"} size={24} place="menu" />
-            <span>{userTheme === "dark" ? "dark" : "light"}</span>
+            <ThemeWord dark={userTheme === "dark"} place="menu" />
           </button>
         </div>
       </div>

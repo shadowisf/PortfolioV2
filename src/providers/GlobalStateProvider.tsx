@@ -1,14 +1,27 @@
 import { useGSAP } from "@gsap/react";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
+import { webkitOnly } from "../utils/webkit";
+import { THEME_MORPH_SECONDS } from "../utils/themeMorph";
 import faviconLight from "../favicons/favicon-light.svg";
 import faviconDark from "../favicons/favicon-dark.svg";
 // files of their own, not inlined as data urls -- a precaution for safari,
 // which is choosier about its tab icons than chromium
 import faviconLightPng from "../favicons/favicon-light.png?no-inline";
 import faviconDarkPng from "../favicons/favicon-dark.png?no-inline";
+
+// The theme's own colours, each light-dark() on main.scss's :root -- what
+// safari's live theme fade moves (the theme effect, below).
+const THEME_COLORS = [
+  "--text-color",
+  "--background-color",
+  "--background-inverse",
+  "--accent-color",
+  "--marker-color",
+  "--surface",
+];
 
 type GlobalStateContextType = {
   isMobile: boolean;
@@ -44,6 +57,9 @@ export function useGlobalState() {
 export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [inMenu, setInMenu] = useState(false);
+  // the next theme change to fade live rather than flip (handleToggleTheme)
+  const fadeTheme = useRef(false);
+
   // Read straight away rather than starting empty: with "" the first render
   // drew the toggle for the wrong theme, and correcting it a moment later
   // played the sun/moon morph on every page load.
@@ -94,14 +110,51 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
 
     setUserTheme(theme);
 
-    // flip every colour in one frame -- see .themeSwitching in main.scss
     const root = document.documentElement;
-    root.classList.add("themeSwitching");
-    root.style.setProperty("--theme", theme);
-    // reading a computed style forces the new colours to resolve while
-    // transitions are still off, so removing the class cannot replay them
-    void getComputedStyle(root).color;
-    window.setTimeout(() => root.classList.remove("themeSwitching"), 0);
+    if (fadeTheme.current) {
+      // Safari with the mobile menu open (handleToggleTheme): the theme's
+      // own colours (THEME_COLORS, main.scss) fade, live, from the old
+      // theme's to the new -- each read off in both, held on the root at
+      // the old, the theme flipped underneath, then moved to the new. Every
+      // colour drawn from them, words and all, moves together; a
+      // transition on each element instead left safari's text snapping,
+      // the colour it takes from its parent mid-change not followed. The
+      // elements' own transitions are off meanwhile (.themeSwitching), so
+      // nothing lags behind.
+      fadeTheme.current = false;
+      const probe = document.createElement("span");
+      document.body.append(probe);
+      const read = () =>
+        Object.fromEntries(
+          THEME_COLORS.map((name) => {
+            probe.style.color = `var(${name})`;
+            return [name, getComputedStyle(probe).color];
+          })
+        );
+      root.classList.add("themeSwitching");
+      const from = read();
+      root.style.setProperty("--theme", theme);
+      const to = read();
+      probe.remove();
+      THEME_COLORS.forEach((name) => root.style.setProperty(name, from[name]));
+      gsap.to(root, {
+        ...to,
+        duration: THEME_MORPH_SECONDS,
+        ease: "power1.inOut",
+        onComplete: () => {
+          THEME_COLORS.forEach((name) => root.style.removeProperty(name));
+          root.classList.remove("themeSwitching");
+        },
+      });
+    } else {
+      // flip every colour in one frame -- see .themeSwitching in main.scss
+      root.classList.add("themeSwitching");
+      root.style.setProperty("--theme", theme);
+      // reading a computed style forces the new colours to resolve while
+      // transitions are still off, so removing the class cannot replay them
+      void getComputedStyle(root).color;
+      window.setTimeout(() => root.classList.remove("themeSwitching"), 0);
+    }
 
     // the browser's own top bar takes the nav bar's shade, so the two join up
     if (theme === "dark") {
@@ -139,7 +192,11 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
   // the picture out over the page in the new -- so everything changes
   // together, images, blur and all, with the sun and moon morphing live
   // beneath. Where a browser has no view transitions, the flip is simply
-  // instant. Like the site's other chosen motion, it plays with reduced
+  // instant. In safari while the mobile menu is open, not the pictures
+  // either: they leave out the blur under the menu (backdrop-filter), so the
+  // page showed through sharp for the whole fade. There the theme's colours
+  // fade instead, live, at the same pace (fadeTheme), the blur working on
+  // throughout. Like the site's other chosen motion, it plays with reduced
   // motion on.
   function handleToggleTheme() {
     const newTheme = userTheme === "dark" ? "light" : "dark";
@@ -148,8 +205,12 @@ export function GlobalStateProvider({ children }: GlobalStateProviderProps) {
     // rendered, and the colours applied (the effect above), before the
     // browser takes the new picture
     const flip = () => flushSync(() => setUserTheme(newTheme));
-    if ("startViewTransition" in document) document.startViewTransition(flip);
-    else flip();
+    if (webkitOnly && inMenu) {
+      fadeTheme.current = true;
+      flip();
+    } else if ("startViewTransition" in document) {
+      document.startViewTransition(flip);
+    } else flip();
   }
 
   // handle window resize, set mobile state

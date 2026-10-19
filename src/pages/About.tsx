@@ -17,7 +17,7 @@ import {
 
 export default function About() {
   const { scrollToTop } = useScrollingAnimation();
-  const { setCurrentPage, isMobile } = useGlobalState();
+  const { setCurrentPage } = useGlobalState();
 
   const shuffledSkills = useMemo(() => {
     return Object.keys(skillsetRating).sort(() => Math.random() - 0.5);
@@ -87,15 +87,7 @@ export default function About() {
             <small>role</small>
             <p>
               full-stack developer at{" "}
-              <InlineLink
-                className="infoOnHover top"
-                data-tooltip={
-                  isMobile ? "" : "an award-winning raw pet nutrition company"
-                }
-                href="https://furchildpets.com/"
-              >
-                furchild
-              </InlineLink>
+              <CompanyLink name="furchild" />
             </p>
           </div>
           <div className="tile">
@@ -142,7 +134,7 @@ export default function About() {
             <InlineLink
               className="infoOnHover top"
               href="https://wincedu.uk"
-              data-tooltip={isMobile ? "" : "western international college"}
+              data-tooltip="western international college"
             >
               winc
             </InlineLink>
@@ -154,8 +146,7 @@ export default function About() {
           >
             worked as full-stack developer at{" "}
             <CompanyLink name="whealthy vessel" />
-            <span className="metaDot" aria-hidden="true">·</span>
-            remote
+            , remote
           </TimelineRow>
 
           <TimelineRow
@@ -166,9 +157,7 @@ export default function About() {
             <InlineLink
               className="infoOnHover top"
               href="https://greatermanchester.ac.uk"
-              data-tooltip={
-                isMobile ? "" : "university of greater manchester"
-              }
+              data-tooltip="university of greater manchester"
             >
               uogm
             </InlineLink>
@@ -180,8 +169,7 @@ export default function About() {
           >
             worked as full-stack developer at{" "}
             <CompanyLink name="let there be fragrance" />
-            <span className="metaDot" aria-hidden="true">·</span>
-            remote
+            , remote
           </TimelineRow>
 
           <TimelineRow
@@ -189,17 +177,8 @@ export default function About() {
             /* img={<img style={{ marginBottom: "6px" }} alt="briefcase icon" src={IconBriefcase} />} */
           >
             worked as web developer at{" "}
-            <InlineLink
-              className="infoOnHover top"
-              data-tooltip={
-                isMobile ? "" : "an award-winning design & build company"
-              }
-              href="https://www.rayfitout.com"
-            >
-              rayfitout
-            </InlineLink>
-            <span className="metaDot" aria-hidden="true">·</span>
-            on site
+            <CompanyLink name="rayfitout" />
+            , on site
           </TimelineRow>
 
           <TimelineRow
@@ -207,17 +186,8 @@ export default function About() {
             /* img={<img style={{ marginBottom: "6px" }} alt="briefcase icon" src={IconBriefcase} />} */
           >
             promoted to software engineer at{" "}
-            <InlineLink
-              className="infoOnHover top"
-              data-tooltip={
-                isMobile ? "" : "an award-winning design & build company"
-              }
-              href="https://www.rayfitout.com"
-            >
-              rayfitout
-            </InlineLink>
-            <span className="metaDot" aria-hidden="true">·</span>
-            remote
+            <CompanyLink name="rayfitout" />
+            , remote
           </TimelineRow>
 
           <TimelineRow
@@ -225,17 +195,8 @@ export default function About() {
             /* img={<img style={{ marginBottom: "6px" }} alt="briefcase icon" src={IconBriefcase} />} */
           >
             working as full-stack developer at{" "}
-            <InlineLink
-              className="infoOnHover top"
-              data-tooltip={
-                isMobile ? "" : "an award-winning raw pet nutrition company"
-              }
-              href="https://furchildpets.com/"
-            >
-              furchild
-            </InlineLink>
-            <span className="metaDot" aria-hidden="true">·</span>
-            on site
+            <CompanyLink name="furchild" />
+            , on site
           </TimelineRow>
 
           {/* <TimelineRow

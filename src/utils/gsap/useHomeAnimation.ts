@@ -8,11 +8,11 @@ import { webkitOnly } from "../webkit";
 // the screen are loaded (primeWhenNear) -- the few most recently used, about a
 // screen's worth and the next.
 //
-// Safari (webkit) loads fewer, and only their start ahead of a hover:
-// readied with preload "auto", each may buffer far ahead, several at once,
-// leaving the one hovered to wait behind them on its loading ring.
+// Safari (webkit) loads fewer: each may buffer far ahead, several at once,
+// leaving the one hovered to wait behind them on its loading ring. (Readied
+// with only their start, preload "metadata", every hover waited on the
+// network instead.)
 const MAX_LOADED_PREVIEWS = webkitOnly ? 4 : 6;
-const READY_PRELOAD = webkitOnly ? "metadata" : "auto";
 const loadedPreviews: HTMLVideoElement[] = [];
 
 function attachPreviewSource(video: HTMLVideoElement) {
@@ -26,7 +26,7 @@ function attachPreviewSource(video: HTMLVideoElement) {
 
   if (video.dataset.loaded !== "true") {
     // loaded and buffering ahead of a hover, not waiting for one
-    video.preload = READY_PRELOAD;
+    video.preload = "auto";
     video.src = src;
     video.dataset.loaded = "true";
     video.load();
@@ -41,6 +41,7 @@ function attachPreviewSource(video: HTMLVideoElement) {
     stale.removeAttribute("src");
     stale.preload = "none";
     delete stale.dataset.loaded;
+    delete stale.dataset.warmed;
     stale.load(); // releases the decoder and shows the poster again
   }
 }
@@ -50,14 +51,36 @@ function attachPreviewSource(video: HTMLVideoElement) {
 // changes to the eye -- so a hover only has to press play. Seeking there
 // means decoding from the keyframe before it, up to two seconds of clip;
 // done now, that is time no one waits through.
+//
+// Safari, besides, does not get a paused clip that has never played ready to
+// play: the hover still waited on its decoder starting and the data at the
+// start point coming in, behind the loading ring. So there it is warmed as
+// well -- played, muted, the moment it can, and paused at once -- unseen:
+// the tile neither colours nor comes forward for it (ProjectCard), and the
+// still is the same grey frame. A hover then only has to carry on.
 export function primePreview(video: HTMLVideoElement) {
   attachPreviewSource(video);
   const startAt = Number(video.dataset.start) || 0;
   const park = () => {
     if (video.paused && video.currentTime < startAt - 0.01) video.currentTime = startAt;
+    if (webkitOnly) video.addEventListener("canplay", () => warm(video), { once: true });
   };
   if (video.readyState >= 1) park();
   else video.addEventListener("loadedmetadata", park, { once: true });
+}
+
+function warm(video: HTMLVideoElement) {
+  if (video.dataset.warmed || video.dataset.wanted === "true") return;
+  video.dataset.warming = "true";
+  video
+    .play()
+    .then(() => {
+      // wanted meanwhile, it simply plays on
+      if (video.dataset.wanted !== "true") video.pause();
+      video.dataset.warmed = "true";
+    })
+    .catch(() => {})
+    .finally(() => delete video.dataset.warming);
 }
 
 // Prime each preview as its tile comes within a couple of hundred pixels of
@@ -85,8 +108,6 @@ export function playPreview(video: HTMLVideoElement) {
   // the cursor has moved on, or (on mobile) the tile has scrolled away
   video.dataset.wanted = "true";
   attachPreviewSource(video);
-  // wanted now: the whole of it, wherever it was readied with less
-  video.preload = "auto";
 
   const startAt = Number(video.dataset.start) || 0;
   video.onended = () => {
@@ -102,6 +123,8 @@ export function playPreview(video: HTMLVideoElement) {
     if (video.currentTime < startAt - 0.01) {
       video.currentTime = startAt;
     }
+    // caught still warming (Safari), already moving: no "playing" to come
+    if (!video.paused) video.dataset.playing = "true";
     video.play().catch(() => {});
   };
 

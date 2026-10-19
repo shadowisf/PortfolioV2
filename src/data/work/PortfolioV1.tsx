@@ -11,11 +11,6 @@ import VideoV1PortfolioPoster from "@/assets/video_posters/VideoV1Portfolio.webp
 const GitHubV1Portfolio = "https://github.com/shadowisf/PortfolioV1";
 const DemoV1Portfolio = "https://v1-lesranalan.web.app";
 
-const minMaxWidth = getComputedStyle(document.documentElement)
-  .getPropertyValue("--minMaxWidth")
-  .trim();
-const isMobile = window.matchMedia(minMaxWidth).matches;
-
 export const PortfolioV1: WorkEntry = {
   type: "personal project",
   name: "portfolio v1",
@@ -43,7 +38,7 @@ export const PortfolioV1: WorkEntry = {
       <InlineLink
         className="infoOnHover top"
         href="https://www.awwwards.com/"
-        data-tooltip={isMobile ? "" : "tryhards love this website"}
+        data-tooltip="tryhards love this website"
       >
         awwwards
       </InlineLink>

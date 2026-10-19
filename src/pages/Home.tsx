@@ -7,7 +7,8 @@ import { useScrollingAnimation } from "../utils/gsap/useScrollingAnimation";
 import { workMapping } from "../utils/workMapping";
 import { upcomingWork } from "../utils/upcomingWork";
 import { Link } from "react-router-dom";
-import { InlineLink } from "../components/Link";
+import { CompanyLink } from "../components/CompanyLink";
+import { useHasCursor } from "../utils/hasCursor";
 
 // At mobile widths, one carousel per kind of work instead, in this order; a
 // kind with nothing in it is skipped.
@@ -46,6 +47,7 @@ export default function Home() {
   const { setCurrentPage, isMobile, executeTransition } = useGlobalState();
   const { scrollToTop } = useScrollingAnimation();
   const grid = useRef<HTMLDivElement | null>(null);
+  const hasCursor = useHasCursor();
 
   useEffect(() => {
     setCurrentPage("/");
@@ -79,15 +81,7 @@ export default function Home() {
         <h4 className="lede">
           <span className="emphasis">
             full-stack developer at{" "}
-            <InlineLink
-              className="infoOnHover top"
-              data-tooltip={
-                isMobile ? "" : "an award-winning raw pet nutrition company"
-              }
-              href="https://furchildpets.com/"
-            >
-              furchild
-            </InlineLink>
+            <CompanyLink name="furchild" />
             .
           </span>
           <br />
@@ -165,17 +159,20 @@ export default function Home() {
           }}
         >
           <span className="label">
-            about
-            {/* → for a page on this site; ↗ is kept for leaving it */}
-            <span className="arrow" aria-hidden="true">
-              →
+            <span className="labelLine">
+              {"about\u00a0"}
+              {/* → for a page on this site; ↗ is kept for leaving it */}
+              <span className="arrow" aria-hidden="true">
+                →
+              </span>
             </span>
           </span>
         </Link>
       </section>
 
-      {/* the bento's alone: on the carousels the caption names each tile */}
-      {!isMobile && <TileCursor within={grid} />}
+      {/* wherever there is a cursor -- the bento's, and the carousels' on an
+          ipad with a trackpad -- but not for a finger alone */}
+      {hasCursor && <TileCursor within={grid} />}
     </main>
   );
 }
