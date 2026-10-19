@@ -27,11 +27,17 @@ const resumeAt = (video: HTMLVideoElement) =>
 // tile back to its first frame and started it over on the next hover. The
 // frame is drawn onto a canvas laid over the video, in its place and shape
 // and grey (.cardStill), the moment before its source goes, and stays until
-// the video has drawn a frame of its own again. Drawn and shown at once, nothing in between: a
-// still made into an image first let the video's own poster -- its first
-// frame -- show for a moment, a flicker, before it came.
+// the video has drawn a frame of its own again. Drawn and shown at once,
+// nothing in between: a still made into an image first let the video's own
+// poster -- its first frame -- show for a moment, a flicker, before it came.
+//
+// Whether letting it go will now show nothing: true for one that has not
+// played (it rests on the frame its poster already shows), and for one whose
+// frame was drawn -- not for one whose frame came out blank, as Safari can
+// draw a video, which is then best kept.
 function keepPlace(video: HTMLVideoElement) {
-  if (video.dataset.played !== "true" || !video.videoWidth) return;
+  if (video.dataset.played !== "true") return true;
+  if (!video.videoWidth) return false;
   video.dataset.resume = String(video.currentTime);
   video.parentElement?.querySelector(".cardStill")?.remove();
 
@@ -42,15 +48,24 @@ function keepPlace(video: HTMLVideoElement) {
   const scale = Math.min(1, shown / video.videoWidth || 1);
   canvas.width = Math.round(video.videoWidth * scale);
   canvas.height = Math.round(video.videoHeight * scale);
-  const drawing = canvas.getContext("2d");
-  drawing?.drawImage(video, 0, 0, canvas.width, canvas.height);
+  const drawing = canvas.getContext("2d", { willReadFrequently: true });
+  if (!drawing) return false;
+  drawing.drawImage(video, 0, 0, canvas.width, canvas.height);
+  // drawn at all? nine points across it, none with anything in
+  const blank = [0.25, 0.5, 0.75].every((fx) =>
+    [0.25, 0.5, 0.75].every((fy) => {
+      const [r, g, b, a] = drawing.getImageData(canvas.width * fx, canvas.height * fy, 1, 1).data;
+      return a === 0 || r + g + b === 0;
+    })
+  );
+  if (blank) return false;
   // A clip cut out of its recording (feeltok's phone) is see-through round
   // the cut-out, the panel's grey showing -- but Safari draws its hevc,
   // alpha and all, as solid, black where it should be clear. Its still has
   // the same cut-out, so the frame is cut back to that; on a clip with
   // none, the still is solid throughout and nothing is cut.
   const still = video.parentElement?.querySelector<HTMLImageElement>(".cardPoster");
-  if (drawing && still?.complete && still.naturalWidth) {
+  if (still?.complete && still.naturalWidth) {
     drawing.globalCompositeOperation = "destination-in";
     drawing.drawImage(still, 0, 0, canvas.width, canvas.height);
   }
@@ -80,6 +95,13 @@ function keepPlace(video: HTMLVideoElement) {
     },
     { once: true }
   );
+  return true;
+}
+
+// on the screen, any of it
+function onScreen(video: HTMLVideoElement) {
+  const box = video.getBoundingClientRect();
+  return box.bottom > 0 && box.top < window.innerHeight && box.right > 0 && box.left < window.innerWidth;
 }
 
 function attachPreviewSource(video: HTMLVideoElement) {
@@ -103,12 +125,15 @@ function attachPreviewSource(video: HTMLVideoElement) {
     video.load();
   }
 
-  // the longest unused goes -- never one that is playing
+  // Room made -- never by one that is playing: off the screen first, where
+  // there is nothing to see go, the longest unused of those; then the
+  // longest unused on it, if it can go unseen (keepPlace); else none.
   while (loadedPreviews.length > MAX_LOADED_PREVIEWS) {
-    const index = loadedPreviews.findIndex((v) => v.dataset.wanted !== "true");
-    if (index === -1) break;
-    const [stale] = loadedPreviews.splice(index, 1);
-    unload(stale);
+    const idle = loadedPreviews.filter((v) => v.dataset.wanted !== "true");
+    const order = [...idle.filter((v) => !onScreen(v)), ...idle.filter(onScreen)];
+    const freed = order.find(unload);
+    if (!freed) break;
+    loadedPreviews.splice(loadedPreviews.indexOf(freed), 1);
   }
 }
 
@@ -116,22 +141,29 @@ function attachPreviewSource(video: HTMLVideoElement) {
 // first (keepPlace), and its source taken away only two frames on, once that
 // frame is surely on the screen. Both at once, Safari cleared the video the
 // moment its source went but showed the frame only a frame later -- a blank
-// flash, then the picture. Wanted again in between, it simply stays.
+// flash, then the picture. Wanted again in between, it simply stays. One on
+// the screen whose frame could not be held is not let go at all (false).
 function unload(stale: HTMLVideoElement) {
   stale.pause();
-  keepPlace(stale);
+  if (!keepPlace(stale) && onScreen(stale)) return false;
   delete stale.dataset.loaded;
   stale.dataset.unloading = "true";
   requestAnimationFrame(() =>
     requestAnimationFrame(() => {
       if (stale.dataset.unloading !== "true") return;
       delete stale.dataset.unloading;
+      // Safari's own still (.cardPoster) back up in the same moment the
+      // video clears -- not when its "emptied" comes, a moment on, the tile
+      // blank in between
+      delete stale.dataset.played;
+      delete stale.dataset.playing;
       stale.removeAttribute("src");
       stale.preload = "none";
       delete stale.dataset.warmed;
       stale.load(); // releases the decoder
     })
   );
+  return true;
 }
 
 // Ready a preview before it is wanted: loaded, decoded and paused on the
