@@ -24,12 +24,13 @@ export function onceFrameShown(video: HTMLVideoElement, then: () => void) {
 // the screen are loaded (primeWhenNear) -- the few most recently used, about a
 // screen's worth and the next.
 //
-// Safari (webkit) keeps every one it has loaded. It once kept four, so
-// that several buffering at once would not leave the hovered one waiting on
-// its loading ring -- but letting one go flickered there however it was
-// done (its frame held over it, its source taken away frames later), and
-// once loaded they have soon buffered and leave the network be.
-const MAX_LOADED_PREVIEWS = webkitOnly ? Infinity : 6;
+// Safari (webkit) keeps fewer, and lets go only of those off the screen.
+// Each loaded one holds a decoder, and kept all at once, one left paused
+// would not play again -- stuck on its loading ring; but letting go of one
+// on the screen flickered there however it was done (its frame held over
+// it, its source taken away frames later), so those it keeps, over the
+// count if it must.
+const MAX_LOADED_PREVIEWS = webkitOnly ? 4 : 6;
 const loadedPreviews: HTMLVideoElement[] = [];
 
 // Where a preview takes up from: where it was last left, if it has been
@@ -137,10 +138,12 @@ function attachPreviewSource(video: HTMLVideoElement) {
 
   // Room made -- never by one that is playing: off the screen first, where
   // there is nothing to see go, the longest unused of those; then the
-  // longest unused on it, if it can go unseen (keepPlace); else none.
+  // longest unused on it, if it can go unseen (keepPlace) -- not in Safari
+  // (above); else none.
   while (loadedPreviews.length > MAX_LOADED_PREVIEWS) {
     const idle = loadedPreviews.filter((v) => v.dataset.wanted !== "true");
-    const order = [...idle.filter((v) => !onScreen(v)), ...idle.filter(onScreen)];
+    const offScreen = idle.filter((v) => !onScreen(v));
+    const order = webkitOnly ? offScreen : [...offScreen, ...idle.filter(onScreen)];
     const freed = order.find(unload);
     if (!freed) break;
     loadedPreviews.splice(loadedPreviews.indexOf(freed), 1);
@@ -259,6 +262,7 @@ export function playPreview(video: HTMLVideoElement) {
     // caught still warming (Safari), already moving: no "playing" to come
     if (!video.paused) video.dataset.playing = "true";
     video.play().catch(() => {});
+    rescueIfStuck(video);
   };
 
   // readyState 1 is HAVE_METADATA -- seeking before that is not allowed
@@ -267,6 +271,36 @@ export function playPreview(video: HTMLVideoElement) {
   } else {
     video.addEventListener("loadedmetadata", seekAndPlay, { once: true });
   }
+}
+
+// A preview pressed to play that has the data to, but two seconds on is still
+// not moving -- its decoder lost while it sat paused, as Safari can -- is
+// loaded afresh where it was and played. One still downloading is left to.
+const RESCUE_MS = 2000;
+const rescues = new WeakMap<HTMLVideoElement, number>();
+
+function rescueIfStuck(video: HTMLVideoElement) {
+  window.clearTimeout(rescues.get(video));
+  rescues.set(
+    video,
+    window.setTimeout(() => {
+      const stuck =
+        video.dataset.wanted === "true" &&
+        video.dataset.playing !== "true" &&
+        video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA;
+      if (!stuck) return;
+      const at = video.currentTime;
+      video.addEventListener(
+        "loadedmetadata",
+        () => {
+          video.currentTime = at;
+          if (video.dataset.wanted === "true") video.play().catch(() => {});
+        },
+        { once: true }
+      );
+      video.load();
+    }, RESCUE_MS)
+  );
 }
 
 // Pause it where it is, so the next hover carries on from there -- and let
