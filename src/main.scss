@@ -1674,6 +1674,15 @@ footer {
       video[data-played] ~ .cardPoster {
         visibility: hidden;
       }
+
+      // the frame a preview was paused on, held over it once it has been let
+      // go to make room (keepPlace, useHomeAnimation, which places it exactly
+      // over the video), in grey as it is at rest, until it plays again
+      .cardStill {
+        position: absolute;
+        filter: grayscale(1);
+        pointer-events: none;
+      }
     }
 
     // The stack at a glance, inside the frame at its foot: the about page's
@@ -1828,8 +1837,10 @@ footer {
   // The loading ring: over the clip's frame, exactly -- as wide as the tile,
   // the frame's shape, from its top -- centred, on a dark disc that reads
   // over any frame. It shows a quarter of a second after a preview is wanted
-  // and not yet playing, or the moment it stalls to buffer, and goes the
-  // moment it moves. Spinning only while it shows.
+  // -- hovered, or on a phone the one in view -- and not yet playing, or the
+  // moment a wanted one stalls to buffer, and goes the moment it moves or is
+  // let go: never on a tile left paused, nor on Safari's unseen warm-up.
+  // Spinning only while it shows.
   .cardLoading {
     position: absolute;
     top: 0;
@@ -1857,7 +1868,7 @@ footer {
   }
 
   .card:has(video[data-wanted]:not([data-playing])) .cardLoading,
-  .card:has(video[data-waiting]) .cardLoading {
+  .card:has(video[data-wanted][data-waiting]) .cardLoading {
     opacity: 1;
     transition-delay: 0.25s;
 

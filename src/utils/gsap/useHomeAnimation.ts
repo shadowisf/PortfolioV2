@@ -15,6 +15,62 @@ import { webkitOnly } from "../webkit";
 const MAX_LOADED_PREVIEWS = webkitOnly ? 4 : 6;
 const loadedPreviews: HTMLVideoElement[] = [];
 
+// Where a preview takes up from: where it was last left, if it has been
+// let go since (data-resume, keepPlace), or else the point its project
+// chose (data-start).
+const resumeAt = (video: HTMLVideoElement) =>
+  Number(video.dataset.resume ?? video.dataset.start) || 0;
+
+// Let go of to make room, a preview that has played keeps its place: where
+// it was paused, to carry on from, and the frame it was paused on, held
+// over it -- so letting it go shows nothing at all, where it once jumped the
+// tile back to its first frame and started it over on the next hover. The
+// frame is drawn onto a canvas laid over the video, in its place and shape
+// and grey (.cardStill), the moment before its source goes, and stays until
+// the video plays again. Drawn and shown at once, nothing in between: a
+// still made into an image first let the video's own poster -- its first
+// frame -- show for a moment, a flicker, before it came.
+function keepPlace(video: HTMLVideoElement) {
+  if (video.dataset.played !== "true" || !video.videoWidth) return;
+  video.dataset.resume = String(video.currentTime);
+  video.parentElement?.querySelector(".cardStill")?.remove();
+
+  const canvas = document.createElement("canvas");
+  canvas.className = "cardStill";
+  // as sharp as the tile is shown, no sharper
+  const shown = video.clientWidth * window.devicePixelRatio;
+  const scale = Math.min(1, shown / video.videoWidth || 1);
+  canvas.width = Math.round(video.videoWidth * scale);
+  canvas.height = Math.round(video.videoHeight * scale);
+  const drawing = canvas.getContext("2d");
+  drawing?.drawImage(video, 0, 0, canvas.width, canvas.height);
+  // A clip cut out of its recording (feeltok's phone) is see-through round
+  // the cut-out, the panel's grey showing -- but Safari draws its hevc,
+  // alpha and all, as solid, black where it should be clear. Its still has
+  // the same cut-out, so the frame is cut back to that; on a clip with
+  // none, the still is solid throughout and nothing is cut.
+  const still = video.parentElement?.querySelector<HTMLImageElement>(".cardPoster");
+  if (drawing && still?.complete && still.naturalWidth) {
+    drawing.globalCompositeOperation = "destination-in";
+    drawing.drawImage(still, 0, 0, canvas.width, canvas.height);
+  }
+  // exactly where the video is -- its frame's box is not always the one it
+  // is placed in (a phone's tile lets it go: display: contents) -- and
+  // fitted into it as the video is
+  const style = getComputedStyle(video);
+  Object.assign(canvas.style, {
+    top: `${video.offsetTop}px`,
+    left: `${video.offsetLeft}px`,
+    width: `${video.offsetWidth}px`,
+    height: `${video.offsetHeight}px`,
+    objectFit: style.objectFit,
+    objectPosition: style.objectPosition,
+  });
+  // over the video and Safari's poster, under the loading ring and stack
+  (video.parentElement?.querySelector(".cardPoster") ?? video).after(canvas);
+  video.addEventListener("playing", () => canvas.remove(), { once: true });
+}
+
 function attachPreviewSource(video: HTMLVideoElement) {
   const src = video.dataset.src;
   if (!src) return;
@@ -38,6 +94,7 @@ function attachPreviewSource(video: HTMLVideoElement) {
     if (index === -1) break;
     const [stale] = loadedPreviews.splice(index, 1);
     stale.pause();
+    keepPlace(stale);
     stale.removeAttribute("src");
     stale.preload = "none";
     delete stale.dataset.loaded;
@@ -60,7 +117,7 @@ function attachPreviewSource(video: HTMLVideoElement) {
 // still is the same grey frame. A hover then only has to carry on.
 export function primePreview(video: HTMLVideoElement) {
   attachPreviewSource(video);
-  const startAt = Number(video.dataset.start) || 0;
+  const startAt = resumeAt(video);
   const park = () => {
     if (video.paused && video.currentTime < startAt - 0.01) video.currentTime = startAt;
     if (webkitOnly) video.addEventListener("canplay", () => warm(video), { once: true });
@@ -114,15 +171,18 @@ export function playPreview(video: HTMLVideoElement) {
     video.currentTime = startAt;
     video.play().catch(() => {});
   };
+  const from = resumeAt(video);
 
   const seekAndPlay = () => {
     if (video.dataset.wanted !== "true") return; // no longer wanted
-    // still short of its start means it has not played yet (or was evicted
-    // and reloaded). The seek is frame-exact, so even a start a few frames in
-    // (a fraction of a second) is honoured; the leeway is under a frame.
-    if (video.currentTime < startAt - 0.01) {
-      video.currentTime = startAt;
+    // still short of where it takes up from means it has not played yet,
+    // or was let go and loaded again (keepPlace). The seek is frame-exact,
+    // so even a start a few frames in (a fraction of a second) is honoured;
+    // the leeway is under a frame.
+    if (video.currentTime < from - 0.01) {
+      video.currentTime = from;
     }
+    delete video.dataset.resume;
     // caught still warming (Safari), already moving: no "playing" to come
     if (!video.paused) video.dataset.playing = "true";
     video.play().catch(() => {});
@@ -136,9 +196,11 @@ export function playPreview(video: HTMLVideoElement) {
   }
 }
 
-// Pause it where it is, so the next hover carries on from there.
+// Pause it where it is, so the next hover carries on from there -- and let
+// go of any buffering it was caught in, which no "playing" will now clear.
 export function stopPreview(video: HTMLVideoElement) {
   delete video.dataset.wanted;
+  delete video.dataset.waiting;
   if (video.dataset.loaded !== "true") return;
   video.pause();
 }
