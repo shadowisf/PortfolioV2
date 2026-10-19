@@ -27,7 +27,7 @@ const resumeAt = (video: HTMLVideoElement) =>
 // tile back to its first frame and started it over on the next hover. The
 // frame is drawn onto a canvas laid over the video, in its place and shape
 // and grey (.cardStill), the moment before its source goes, and stays until
-// the video plays again. Drawn and shown at once, nothing in between: a
+// the video has drawn a frame of its own again. Drawn and shown at once, nothing in between: a
 // still made into an image first let the video's own poster -- its first
 // frame -- show for a moment, a flicker, before it came.
 function keepPlace(video: HTMLVideoElement) {
@@ -68,7 +68,18 @@ function keepPlace(video: HTMLVideoElement) {
   });
   // over the video and Safari's poster, under the loading ring and stack
   (video.parentElement?.querySelector(".cardPoster") ?? video).after(canvas);
-  video.addEventListener("playing", () => canvas.remove(), { once: true });
+  // Gone once the video has a frame of its own up -- not at "playing",
+  // which Safari sends before it has drawn one (its own poster goes then
+  // too, .cardPoster), so the tile went blank for a moment, a flicker --
+  // nor at the unseen warm-up's (primePreview), which may draw none.
+  video.addEventListener(
+    "playing",
+    () => {
+      if ("requestVideoFrameCallback" in video) video.requestVideoFrameCallback(() => canvas.remove());
+      else canvas.remove();
+    },
+    { once: true }
+  );
 }
 
 function attachPreviewSource(video: HTMLVideoElement) {

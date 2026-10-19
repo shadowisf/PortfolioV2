@@ -1638,16 +1638,18 @@ footer {
         object-fit: contain;
       }
 
-      // In grey until it is actually playing, then into colour, and back out
-      // when it pauses -- a fade, so it plays under reduce motion too. Not a
-      // fade in safari (.webkit), where a filter changing over a 1080p clip
-      // just setting off is costly, and frames go missing: it turns at once
+      // In grey until it is wanted -- hovered, or on a phone in view --
+      // then into colour, loading or playing, and back out when it is let
+      // go -- a fade, so it plays under reduce motion too. Not a fade in
+      // safari (.webkit), where a filter changing over a 1080p clip just
+      // setting off is costly, and frames go missing: it turns at once
       // there, the tile's own fade forward (below) carrying the change.
       video {
         filter: grayscale(1);
         transition: filter 0.5s ease;
 
-        &[data-playing] {
+        &[data-playing],
+        &[data-wanted] {
           filter: none;
         }
 
@@ -1663,6 +1665,7 @@ footer {
         position: absolute;
         inset: 0;
         filter: grayscale(1);
+        transition: filter 0.5s ease;
         pointer-events: none;
         display: none;
 
@@ -1681,7 +1684,19 @@ footer {
       .cardStill {
         position: absolute;
         filter: grayscale(1);
+        transition: filter 0.5s ease;
         pointer-events: none;
+      }
+
+      // in colour with the video, while it loads under them
+      video[data-wanted] ~ .cardPoster,
+      video[data-wanted] ~ .cardStill {
+        filter: none;
+      }
+
+      .webkit & .cardPoster,
+      .webkit & .cardStill {
+        transition: none;
       }
     }
 
@@ -1818,11 +1833,11 @@ footer {
   }
 
   // Every tile sits back -- faded, as well as grey -- until its own preview
-  // is playing, when it comes forward, and goes back when it stops. Like the
-  // grey, it follows the playing itself, and it is a fade, so it plays under
+  // is wanted, when it comes forward, still loading or playing, and goes
+  // back when it is let go. Like the grey, it is a fade, so it plays under
   // reduce motion too. Not one still to come: with no preview it would never
   // come forward, and its greys are low enough already.
-  .card:not(.upcoming):not(:has(video[data-playing])) {
+  .card:not(.upcoming):not(:has(video[data-playing], video[data-wanted])) {
     opacity: 0.4;
   }
 
