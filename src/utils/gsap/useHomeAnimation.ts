@@ -91,7 +91,11 @@ function attachPreviewSource(video: HTMLVideoElement) {
   if (queued > -1) loadedPreviews.splice(queued, 1);
   loadedPreviews.push(video);
 
-  if (video.dataset.loaded !== "true") {
+  if (video.dataset.unloading === "true") {
+    // taken back up before it was let go (unload): it still has its source
+    delete video.dataset.unloading;
+    video.dataset.loaded = "true";
+  } else if (video.dataset.loaded !== "true") {
     // loaded and buffering ahead of a hover, not waiting for one
     video.preload = "auto";
     video.src = src;
@@ -104,14 +108,30 @@ function attachPreviewSource(video: HTMLVideoElement) {
     const index = loadedPreviews.findIndex((v) => v.dataset.wanted !== "true");
     if (index === -1) break;
     const [stale] = loadedPreviews.splice(index, 1);
-    stale.pause();
-    keepPlace(stale);
-    stale.removeAttribute("src");
-    stale.preload = "none";
-    delete stale.dataset.loaded;
-    delete stale.dataset.warmed;
-    stale.load(); // releases the decoder and shows the poster again
+    unload(stale);
   }
+}
+
+// Let go of a preview to free its decoder: its paused frame put up over it
+// first (keepPlace), and its source taken away only two frames on, once that
+// frame is surely on the screen. Both at once, Safari cleared the video the
+// moment its source went but showed the frame only a frame later -- a blank
+// flash, then the picture. Wanted again in between, it simply stays.
+function unload(stale: HTMLVideoElement) {
+  stale.pause();
+  keepPlace(stale);
+  delete stale.dataset.loaded;
+  stale.dataset.unloading = "true";
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() => {
+      if (stale.dataset.unloading !== "true") return;
+      delete stale.dataset.unloading;
+      stale.removeAttribute("src");
+      stale.preload = "none";
+      delete stale.dataset.warmed;
+      stale.load(); // releases the decoder
+    })
+  );
 }
 
 // Ready a preview before it is wanted: loaded, decoded and paused on the
