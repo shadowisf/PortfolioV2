@@ -1491,12 +1491,6 @@ footer {
   }
 }
 
-@keyframes cardLoadingTurn {
-  to {
-    rotate: 360deg;
-  }
-}
-
 // The home page, in one 1260px column: the opening line, the bento grid of
 // the work, and a way on to about.
 .homeWrapper {
@@ -1849,13 +1843,14 @@ footer {
       visibility 0s;
   }
 
-  // The loading ring: over the clip's frame, exactly -- as wide as the tile,
-  // the frame's shape, from its top -- centred, on a dark disc that reads
-  // over any frame. It shows a quarter of a second after a preview is wanted
+  // The loading mark -- the project page's own (LoadingMark) -- over the
+  // clip's frame, exactly: as wide as the tile, the frame's shape, from its
+  // top, centred. It shows a quarter of a second after a preview is wanted
   // -- hovered, or on a phone the one in view -- and not yet playing, or the
   // moment a wanted one stalls to buffer, and goes the moment it moves or is
   // let go: never on a tile left paused, nor on Safari's unseen warm-up.
-  // Spinning only while it shows.
+  // Turning only while it shows (its animation is its own inline style, so
+  // held with !important).
   .cardLoading {
     position: absolute;
     top: 0;
@@ -1863,23 +1858,17 @@ footer {
     width: 100%;
     aspect-ratio: var(--ratio);
     pointer-events: none;
+    color: var(--text-color);
 
     display: grid;
     place-items: center;
 
     opacity: 0;
     transition: opacity 0.2s ease;
-  }
 
-  .cardLoadingRing {
-    width: 1.4rem;
-    height: 1.4rem;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.25);
-    border-top-color: white;
-    box-shadow: 0 0 0 0.45rem rgba(0, 0, 0, 0.45);
-    background-color: rgba(0, 0, 0, 0.45);
-    animation: cardLoadingTurn 0.8s linear infinite paused;
+    * {
+      animation-play-state: paused !important;
+    }
   }
 
   .card:has(video[data-wanted]:not([data-playing])) .cardLoading,
@@ -1887,8 +1876,8 @@ footer {
     opacity: 1;
     transition-delay: 0.25s;
 
-    .cardLoadingRing {
-      animation-play-state: running;
+    * {
+      animation-play-state: running !important;
     }
   }
 

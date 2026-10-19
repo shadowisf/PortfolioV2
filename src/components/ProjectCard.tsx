@@ -2,8 +2,14 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { workMapping } from "../utils/workMapping";
 import { useGlobalState } from "../providers/GlobalStateProvider";
-import { playPreview, primeWhenNear, stopPreview } from "../utils/gsap/useHomeAnimation";
+import {
+  onceFrameShown,
+  playPreview,
+  primeWhenNear,
+  stopPreview,
+} from "../utils/gsap/useHomeAnimation";
 import TechStackTile from "./TechStackTile";
+import { LoadingMark } from "./Spinner";
 import { webkitOnly } from "../utils/webkit";
 
 type ProjectCardProps = {
@@ -71,7 +77,9 @@ export function ProjectCard({ dataID, autoplay = false }: ProjectCardProps) {
             // one is still loading, and not once paused
             onPlaying={(e) => {
               const v = e.currentTarget;
-              v.dataset.played = "true";
+              // Safari's still (.cardPoster) let go only once the clip has
+              // a frame of its own up (onceFrameShown)
+              onceFrameShown(v, () => (v.dataset.played = "true"));
               delete v.dataset.waiting;
               // only warming up, out of sight (primePreview) -- unless it
               // was hovered meanwhile
@@ -100,12 +108,12 @@ export function ProjectCard({ dataID, autoplay = false }: ProjectCardProps) {
           <img className="cardPoster" src={project.videoPoster} alt="" />
         )}
 
-        {/* turns while a wanted preview is still loading, or buffering --
-            shown only after a moment, so a preview that starts at once
-            never flashes it */}
+        {/* the project page's loading mark, while a wanted preview is still
+            loading, or buffering -- shown only after a moment, so a preview
+            that starts at once never flashes it */}
         {project.videoPreview && (
           <span className="cardLoading">
-            <span className="cardLoadingRing" />
+            <LoadingMark />
           </span>
         )}
 

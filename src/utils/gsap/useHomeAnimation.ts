@@ -1,5 +1,21 @@
 import { webkitOnly } from "../webkit";
 
+// Once a video has a frame of its own on the screen: the frame handed to the
+// compositor (requestVideoFrameCallback), and the screen drawn once more
+// after it. Not at "playing", which Safari sends before it has drawn
+// anything -- what covered the video until then (Safari's still, a held
+// frame) went at once, and the tile showed blank for a moment, a flicker,
+// most of all on one loaded afresh. Not called at all for a video let go of
+// meanwhile.
+export function onceFrameShown(video: HTMLVideoElement, then: () => void) {
+  const shown = () =>
+    requestAnimationFrame(() => {
+      if (video.getAttribute("src")) then();
+    });
+  if ("requestVideoFrameCallback" in video) video.requestVideoFrameCallback(shown);
+  else shown();
+}
+
 // Hover playback for the home page's project tiles.
 
 // chromium spins up (and keeps) a decode pipeline for every <video> that has a
@@ -83,18 +99,11 @@ function keepPlace(video: HTMLVideoElement) {
   });
   // over the video and Safari's poster, under the loading ring and stack
   (video.parentElement?.querySelector(".cardPoster") ?? video).after(canvas);
-  // Gone once the video has a frame of its own up -- not at "playing",
-  // which Safari sends before it has drawn one (its own poster goes then
-  // too, .cardPoster), so the tile went blank for a moment, a flicker --
-  // nor at the unseen warm-up's (primePreview), which may draw none.
-  video.addEventListener(
-    "playing",
-    () => {
-      if ("requestVideoFrameCallback" in video) video.requestVideoFrameCallback(() => canvas.remove());
-      else canvas.remove();
-    },
-    { once: true }
-  );
+  // gone once the video has a frame of its own up (onceFrameShown) -- not
+  // at the unseen warm-up's "playing" (primePreview), which may draw none
+  video.addEventListener("playing", () => onceFrameShown(video, () => canvas.remove()), {
+    once: true,
+  });
   return true;
 }
 
