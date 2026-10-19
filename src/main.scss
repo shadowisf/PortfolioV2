@@ -1845,7 +1845,7 @@ footer {
 
   // The loading mark -- the project page's own (LoadingMark) -- over the
   // clip's frame, exactly: as wide as the tile, the frame's shape, from its
-  // top, centred. It shows a quarter of a second after a preview is wanted
+  // top, centred, on a disc (below). It shows a quarter of a second after a preview is wanted
   // -- hovered, or on a phone the one in view -- and not yet playing, or the
   // moment a wanted one stalls to buffer, and goes the moment it moves or is
   // let go: never on a tile left paused, nor on Safari's unseen warm-up.
@@ -1868,6 +1868,23 @@ footer {
 
     * {
       animation-play-state: paused !important;
+    }
+
+    // On a disc of the page's own colour, half see-through, so it reads over
+    // any frame -- a light clip in the dark theme, a dark one in the light:
+    // the mark and the disc in the one grid cell, a 0.75rem rim round the
+    // mark (78px across, its ring and all, measured).
+    &::before {
+      content: "";
+      grid-area: 1 / 1;
+      width: calc(78px + 1.5rem);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background-color: color-mix(in srgb, var(--background-color) 50%, transparent);
+    }
+
+    > * {
+      grid-area: 1 / 1;
     }
   }
 

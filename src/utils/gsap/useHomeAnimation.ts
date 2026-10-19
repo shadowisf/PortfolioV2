@@ -24,11 +24,12 @@ export function onceFrameShown(video: HTMLVideoElement, then: () => void) {
 // the screen are loaded (primeWhenNear) -- the few most recently used, about a
 // screen's worth and the next.
 //
-// Safari (webkit) loads fewer: each may buffer far ahead, several at once,
-// leaving the one hovered to wait behind them on its loading ring. (Readied
-// with only their start, preload "metadata", every hover waited on the
-// network instead.)
-const MAX_LOADED_PREVIEWS = webkitOnly ? 4 : 6;
+// Safari (webkit) keeps every one it has loaded. It once kept four, so
+// that several buffering at once would not leave the hovered one waiting on
+// its loading ring -- but letting one go flickered there however it was
+// done (its frame held over it, its source taken away frames later), and
+// once loaded they have soon buffered and leave the network be.
+const MAX_LOADED_PREVIEWS = webkitOnly ? Infinity : 6;
 const loadedPreviews: HTMLVideoElement[] = [];
 
 // Where a preview takes up from: where it was last left, if it has been
