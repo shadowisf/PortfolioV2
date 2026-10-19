@@ -9,7 +9,8 @@ import data from "../data/cursorGlyphs.json";
 type Weighted = { d: string; adv: number };
 type Glyph = { n: Weighted; t: Weighted; same: boolean };
 const glyphs = data.glyphs as Record<string, Glyph>;
-const kerning = data.kern as Record<string, [number, number]>;
+// each pair's kerning at the regular weight and the heavy
+const kerning: Record<string, number[]> = data.kern;
 const UPEM = data.unitsPerEm;
 
 // a glyph's path, split once into its commands and the numbers of each
