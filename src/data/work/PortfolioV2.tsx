@@ -36,7 +36,7 @@ export const PortfolioV2: WorkEntry = {
   status: <>in active development, with regular updates.</>,
   description: (
     <>
-      a <u>complete redesign of my original portfolio</u>, moving beyond the
+      a <strong>complete redesign of my original portfolio</strong>, moving beyond the
       cartoonish minimalism of v1 into a more refined, performance-focused
       experience. while keeping the core content (projects, bio, research). key
       features include:

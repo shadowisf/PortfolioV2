@@ -32,7 +32,7 @@ export const LectraAI: WorkEntry = {
   status: <>in active development.</>,
   description: (
     <>
-      an <u>ai-powered learning platform</u> designed to transform study
+      an <strong>ai-powered learning platform</strong> designed to transform study
       materials into structured, engaging, and interactive content. the platform
       leverages advanced artificial intelligence to simplify complex information
       and enhance the learning experience. key features include:

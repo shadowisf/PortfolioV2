@@ -28,12 +28,12 @@ export const FunCulator: WorkEntry = {
   videoFlex: "1.891626",
   status: (
     <>
-      completed on <u>december 21, 2023</u>.
+      completed on <strong>december 21, 2023</strong>.
     </>
   ),
   description: (
     <>
-      an <u>all-in-one calculator application</u> designed to support students
+      an <strong>all-in-one calculator application</strong> designed to support students
       with diverse mathematical operations, built using java’s core programming
       paradigms. key features include:
       <ul>

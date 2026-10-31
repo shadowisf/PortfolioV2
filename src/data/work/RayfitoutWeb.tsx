@@ -38,7 +38,7 @@ export const RayfitoutWeb: WorkEntry = {
       <CompanyLink name="rayfitout" /> is an award-winning interior design and
       fit-out company specializing in high-end residential, commercial, and
       bespoke joinery projects across the middle east, europe, and africa. i
-      contributed to enhancing the company's <u>visually appealing website</u>.
+      contributed to enhancing the company's <strong>visually appealing website</strong>.
       key features include:
       <ul>
         <li>

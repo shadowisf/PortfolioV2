@@ -159,12 +159,10 @@ export default function Home() {
           }}
         >
           <span className="label">
-            <span className="labelLine">
-              {"about\u00a0"}
-              {/* → for a page on this site; ↗ is kept for leaving it */}
-              <span className="arrow" aria-hidden="true">
-                →
-              </span>
+            {"about\u00a0"}
+            {/* → for a page on this site; ↗ is kept for leaving it */}
+            <span className="arrow" aria-hidden="true">
+              →
             </span>
           </span>
         </Link>

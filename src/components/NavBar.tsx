@@ -383,9 +383,8 @@ export default function NavBar() {
         </div>
       </div>
 
-      {/* Blurs the whole page, behind the panel as well as below it; a
-          click on it closes the panel. One unbroken sheet of blur, its top
-          edge off at the top of the screen, never at the panel's. */}
+      {/* Darkens the whole page, behind the panel as well as below it; a
+          click on it closes the panel. */}
       <div
         className={`workFlyoutScrim${workOpen ? " open" : ""}${workInstant ? " instant" : ""}`}
         onClick={() => setWorkNow(false)}

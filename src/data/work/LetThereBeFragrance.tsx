@@ -46,7 +46,7 @@ export const LetThereBeFragrance: WorkEntry = {
     <>
       <CompanyLink name="let there be fragrance" /> is a niche fragrance house,
       offering a curated collection of different and unique scents. i developed
-      a <u>web-based e-commerce platform</u> focused on delivering a smooth
+      a <strong>web-based e-commerce platform</strong> focused on delivering a smooth
       shopping experience through fast performance, intuitive ui, and essential
       user-centric features. key features include:
       <ul>

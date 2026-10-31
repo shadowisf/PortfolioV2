@@ -61,8 +61,7 @@ export function InlineLink({
       onPointerEnter={tooltip ? (e) => keepPopupOnScreen(e.currentTarget) : undefined}
       {...props}
     >
-      {/* the words, carrying the solid underline a hover fades in (main.scss) */}
-      <span className="inlineLinkText">{children}</span>
+      {children}
       {/* a hand-drawn arrow, looping up from the word to its popup */}
       {tooltip && (
         <svg className="hoverArrow" viewBox="0 0 28 36" aria-hidden="true">
@@ -88,19 +87,15 @@ export function ActionLink(p: LinkProps) {
       className={p.className ? `actionLink ${p.className}` : "actionLink"}
     >
       {p.img}
-      {/* the arrow sits inside the label, so one underline runs under both */}
+      {/* the arrow inside the label, so its underline runs on under it, and
+          the space before it joined to the words */}
       <span className={p.className === "faded" ? "label faded" : "label"}>
-        {/* carrying the solid underline a hover fades in (main.scss) */}
-        <span className="labelLine">
-          {/* the space before the arrow joined to the words, so one dashed
-              underline runs from them under it */}
-          {p.href && typeof p.children === "string" ? `${p.children}\u00a0` : p.children}
-          {p.href && (
-            <span className="arrow" aria-hidden="true">
-              ↗
-            </span>
-          )}
-        </span>
+        {p.href && typeof p.children === "string" ? `${p.children}\u00a0` : p.children}
+        {p.href && (
+          <span className="arrow" aria-hidden="true">
+            ↗
+          </span>
+        )}
       </span>
     </a>
   );

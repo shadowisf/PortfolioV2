@@ -36,7 +36,7 @@ export const ClipDetective: WorkEntry = {
   status: <>in active development.</>,
   description: (
     <>
-      a <u>web-based mini game</u> that challenges users to identify scenes from
+      a <strong>web-based mini game</strong> that challenges users to identify scenes from
       shows and movies i’ve binge-watched. it pushed me to work independently
       with react.js and tailwind css, avoiding tutorials or external guides. key
       features include:

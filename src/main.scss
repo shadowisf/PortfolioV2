@@ -106,7 +106,7 @@ $minMaxWidth: 1338px;
   // A row of links after a title block sits 0.5rem further down still.
   --page-top: 8rem;
   --page-bottom: 6rem;
-  --section-gap: 6rem;
+  --section-gap: 10rem;
   --title-gap: 1.5rem;
 
   // Leading, by kind of text: display headings set close, a page's subtitle
@@ -129,6 +129,11 @@ $minMaxWidth: 1338px;
   --p: 1rem;
   --small: 0.833rem;
   --smaller: calc(var(--small) / 1.25);
+
+  // The site's hairlines, in the panels' grey, as thick as a link's
+  // underline under the running text (the browser's own underline is a
+  // tenth of the type's size).
+  --hairline: calc(var(--p) * 0.1) solid var(--surface);
 }
 
 [data-rmiz-modal-overlay="visible"] {
@@ -316,7 +321,7 @@ nav {
   left: 0;
   right: 0;
   // as tall as what is in it, the rest of the screen at most (where it
-  // scrolls), with the page blurred below it (.menuScrim)
+  // scrolls), with the page darkened below it (.menuScrim)
   max-height: calc(100dvh - 4rem);
   display: flex;
   flex-direction: column;
@@ -344,9 +349,7 @@ nav {
     overflow-y: auto;
     overscroll-behavior: contain;
 
-    // a hair short of solid, as the work drawer is, and for the same reason:
-    // over the blur, a fully opaque panel's edge caught a glow
-    background-color: color-mix(in srgb, var(--surface) 99%, transparent);
+    background-color: var(--surface);
     translate: 0 -100%;
     transition: translate var(--flyoutSlide) var(--ease);
     will-change: translate;
@@ -400,19 +403,34 @@ nav {
   }
 
   // work, ruled off from the theme at the foot, with the same room either
-  // side of it (the panel's gap below), by a hairline a step off the
-  // panel's own grey (--surface): a tenth darker in the light theme, a
-  // tenth lighter in the dark
+  // side of it, by a hairline a step off the panel's own grey (--surface):
+  // a tenth darker in the light theme, a tenth lighter in the dark
+  // The room measured to the ink: under the line, the panel's gap and the
+  // theme icon's own margin in its box (the moon's edge and the rays' ends
+  // 10.5 from its centre, 1.5 in from the edge of its 24); over it, the same,
+  // less what is under the baseline of the text above it -- "work" (its
+  // leading of 1.1 halved, less the font's 0.2em below the baseline, as in
+  // "Spacing to the ink"), or with the list open its last project (leading
+  // normal: 0.2em) -- eased between the two as the list slides.
   .menuWork {
     display: flex;
     flex-direction: column;
 
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid
-      light-dark(
-        color-mix(in srgb, var(--surface), black 10%),
-        color-mix(in srgb, var(--surface), white 10%)
-      );
+    padding-bottom: calc(2.5rem + 1.5px - var(--h2) * 0.15);
+    border-bottom: var(--hairline);
+    transition: padding-bottom var(--flyoutSlide) var(--ease);
+
+    &:has(> .menuWorkList.open) {
+      padding-bottom: calc(2.5rem + 1.5px - var(--h5) * 0.2);
+    }
+
+    &:has(> .menuWorkList.instant) {
+      transition: none;
+    }
+    border-bottom-color: light-dark(
+      color-mix(in srgb, var(--surface), black 10%),
+      color-mix(in srgb, var(--surface), white 10%)
+    );
   }
 
   // "work" as the accordion's button: the heading across the panel, a
@@ -717,20 +735,13 @@ nav {
     padding: 2.5rem 2rem 3rem;
 
     // No edge line, like the bar: its shade, a step off the page's, and the
-    // blurred page behind are what set it apart. A hair short of solid, on
-    // purpose: fully opaque, the browser stopped the blur at the drawer's
-    // edge and a glow showed along it; at 99% the blur runs on underneath as
-    // one sheet, and the 1% is too little to see. (99.9% would round to
-    // solid -- colour alpha has 256 steps -- and the glow would be back.)
-    background-color: color-mix(in srgb, var(--surface) 99%, transparent);
+    // darkened page behind are what set it apart.
+    background-color: var(--surface);
 
     // closed: all of it -- its own height plus the strip's -- above the top
     // edge of the screen
     translate: 0 calc(-100% - 4rem);
     transition: translate var(--flyoutSlide) var(--ease);
-    // kept on its own layer for good, not only while it slides: dropped back
-    // into the page's own painting once still, it was drawn afresh over the
-    // blur and its edge bled into it
     will-change: translate;
 
     // the bar's fill: lands behind the logo and links as the drawer arrives
@@ -854,10 +865,6 @@ nav {
   }
 }
 
-// The page below the open panel, blurred -- not darkened, so there is no
-// shadow about the panel, only the soft page. A click on it closes the panel
-// rather than landing on whatever is beneath. The whole screen, behind the
-// panel as well.
 // The page you are on, in the drawer and the mobile menu: a * after its
 // name, in the site's one colour -- as tall as a capital, and centred on the
 // whole name, ascenders and all. Measured in Kyiv Type Sans, the glyph's ink
@@ -891,33 +898,28 @@ nav {
   --text-color: light-dark(white, rgb(0, 0, 0));
 }
 
-// The page blurred under a panel come down from the bar: the work drawer's,
-// and the mobile menu's. A placeholder both extend, so a rule for one alone
-// (the drawer's, hidden on mobile) stays its own.
-%pageBlur {
+// The page darkened under a panel come down from the bar: the work drawer's,
+// and the mobile menu's. The whole screen, behind the panel as well; a click
+// on it closes the panel rather than landing on whatever is beneath. A
+// placeholder both extend, so a rule for one alone (the drawer's, hidden on
+// mobile) stays its own.
+%pageDim {
   position: fixed;
   inset: 0;
 
-  // The blur itself eases in and out -- from none to its full 12px and back
-  // -- rather than a fully blurred layer fading in. A fade showed the sharp
-  // page and a blurred copy of it at once, part-way, and the copy read as a
-  // glow round the page's text.
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
+  background-color: transparent;
 
   visibility: hidden;
   transition:
-    backdrop-filter var(--duration) var(--ease),
-    -webkit-backdrop-filter var(--duration) var(--ease),
+    background-color var(--duration) var(--ease),
     visibility 0s var(--duration);
 
   &.open {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    // a lighter shade over the light page, where black shows more
+    background-color: light-dark(rgb(0 0 0 / 0.3), rgb(0 0 0 / 0.5));
     visibility: visible;
     transition:
-      backdrop-filter var(--duration) var(--ease),
-      -webkit-backdrop-filter var(--duration) var(--ease),
+      background-color var(--duration) var(--ease),
       visibility 0s;
   }
 
@@ -928,13 +930,13 @@ nav {
 }
 
 .workFlyoutScrim {
-  @extend %pageBlur;
+  @extend %pageDim;
   z-index: 198;
 }
 
-// the same blur under the mobile menu, just beneath it and the bar
+// the same under the mobile menu, just beneath it and the bar
 .menuScrim {
-  @extend %pageBlur;
+  @extend %pageDim;
   z-index: 970;
 }
 
@@ -1297,7 +1299,7 @@ footer {
     // the ink
     padding: 0.5rem 0.5rem 0.75rem 0.75rem;
     // The edge, a step off the grey -- darker in the light theme, lighter
-    // in the dark, as the menu's hairline is: the panel in the grey, a tenth
+    // in the dark: the panel in the grey, a tenth
     // of black or white over it (::after), and its fill (::before) cut 1px
     // further in by the same clip, so the edge follows the shape through the
     // morph as a border could not. TileCursor sets the clip's lengths. Plain
@@ -1558,9 +1560,6 @@ footer {
   // laid out as the opening is: title, subtitle a --title-gap under it, and
   // the link 0.5rem further on, as after every title block
   .homeAbout {
-    padding-top: 2rem;
-    border-top: 1px solid var(--surface);
-
     // set to the right, the close of the page answering the opening line
     // on the left
     display: flex;
@@ -2045,20 +2044,26 @@ footer {
 
   // A spec table, after apple's tech specs: each section's name in a narrow
   // column on the left, its content on the right, a hairline between.
+  // Every hairline in the middle of the room it divides: half a section gap
+  // either side of each row's, and the table drawn out into the section gaps
+  // above and below it, so its first and last hairlines sit halfway between
+  // it and the media over it, and the links under it.
   .details {
     display: flex;
     flex-direction: column;
+    margin-block: calc(var(--section-gap) / -2);
 
     .spec {
       display: grid;
       grid-template-columns: 9rem 1fr;
       column-gap: 2rem;
 
-      padding: 2rem 0;
-      border-top: 1px solid var(--surface);
+      // (the text trimmed to the ink: "Spacing to the ink")
+      padding: calc(var(--section-gap) / 2) 0;
+      border-top: var(--hairline);
 
       &:last-child {
-        border-bottom: 1px solid var(--surface);
+        border-bottom: var(--hairline);
       }
 
       h4 {
@@ -2165,9 +2170,9 @@ footer {
 
   // Section headlines at display size, set tight, apple fashion -- big enough
   // that each section reads as its own chapter.
+  // (2.5rem under it, to its letters: "Spacing to the ink")
   section > h2.header {
     font-size: var(--h1);
-    margin-bottom: 2rem;
   }
 
   // who i am in a line, the longer version, then where to find me
@@ -2263,11 +2268,18 @@ footer {
     flex-direction: column;
     width: 100%;
 
-    // Set as a table, after fredrikprida.com's about: a hairline between
-    // rows (and closing the last), years in a narrow left column.
+    // Years in a narrow left column, each row apart from the next by space
+    // alone: the hairlines are kept for the breaks between sections. The
+    // gap is to the letters (the rows' text trimmed to the ink: "Spacing to
+    // the ink").
     .timelineRows {
       display: flex;
       flex-direction: column;
+      gap: 2rem;
+
+      @media (max-width: 760px) {
+        gap: 1.5rem;
+      }
     }
 
     .timelineRow {
@@ -2276,21 +2288,12 @@ footer {
       column-gap: 1.5rem;
       align-items: baseline;
 
-      padding: 1rem 0;
-      border-top: 1px solid var(--surface);
-
-      &:last-child {
-        border-bottom: 1px solid var(--surface);
-      }
-
       // On a phone, closer: the years' column just wider than its widest
       // ("2022 - 2025", 6.5 times the years' size, --small, as a <small>'s),
-      // so it keeps pace with the type, a smaller gap after it, and less
-      // room above and below
+      // so it keeps pace with the type, and a smaller gap after it
       @media (max-width: 760px) {
         grid-template-columns: calc(var(--small) * 7) 1fr;
         column-gap: 1.75rem;
-        padding: 0.75rem 0;
       }
 
       .years {
@@ -2455,8 +2458,6 @@ footer {
     background-color: var(--surface);
     color: var(--text-color);
     border: 1px solid var(--pageSurface);
-    // not the link's letter edges (%linkDashes), in the page's colour
-    text-shadow: none;
     line-height: normal;
   }
 
@@ -2749,43 +2750,42 @@ footer {
   }
 }
 
-// A link's underline, drawn by the site rather than the browser: a
-// browser's own dashes are its own length, and differ from one to the next.
-// Dashed, 0.06em thick, each dash three times that and each gap half a dash
-// (0.18em and 0.09em), its top 0.07em under the baseline -- measured off
-// the underline as it was meant to look. The font's lines run 1em above the
-// baseline and 0.2em below on every platform (hhea and win alike), so the
-// baseline is 1em down the words' box everywhere, and the line 1.07em.
-// Clear of the letters that reach through it (g, p, y), as an underline
-// is: each letter edged in the page's colour (text-shadow), which covers
-// the line round them -- drawn under the letters, over the line.
-%linkDashes {
-  text-decoration: none;
-  background: linear-gradient(to right, currentColor 66.667%, transparent 66.667%) 0
-    1.07em / 0.27em 0.06em repeat-x;
-  text-shadow:
-    0.03em 0 var(--background-color),
-    -0.03em 0 var(--background-color),
-    0.06em 0 var(--background-color),
-    -0.06em 0 var(--background-color);
+// A link's line: the browser's own underline, as any underlined words have,
+// solid and always there -- in the page's grey at rest, turning to the text
+// colour on a hover, as the words change their font. (A link standing on its
+// own carries it on its label, so it runs on under the arrow.)
+.inlineLink,
+.actionLink .label {
+  text-decoration: underline;
+  text-decoration-color: var(--faded-color);
+  transition: text-decoration-color var(--duration) var(--ease);
 }
 
-// The solid line a hover lays over the dashes, on the same line, faded in
-// at the pace of the weight change (--solidLine, 0 to 1)
-@property --solidLine {
-  syntax: "<number>";
-  inherits: false;
-  initial-value: 0;
+@media (hover: hover) and (pointer: fine) {
+  .inlineLink:hover,
+  .actionLink:hover .label {
+    text-decoration-color: var(--text-color);
+  }
 }
 
-%linkSolid {
-  font-size: inherit;
-  background: linear-gradient(
-      color-mix(in srgb, currentColor calc(var(--solidLine) * 100%), transparent),
-      color-mix(in srgb, currentColor calc(var(--solidLine) * 100%), transparent)
-    )
-    0 1.07em / 100% 0.06em no-repeat;
-  transition: --solidLine var(--fontMorph);
+// ↗, for a link that leaves the site -- inside the label, so the label's
+// underline carries on under it. Sized and set so the arrow sits on the
+// line like a letter: its tail on the baseline, its tip at the height of
+// the lowercase. Measured in Kyiv Type Sans, the glyph's ink runs from
+// 0.075em to 0.604em above the baseline -- 0.529em tall -- so 0.945em of the
+// label puts its height on the label's 0.5em x-height, and dropping it
+// 0.075em puts the tail down on the baseline. Lowered by its alignment, not
+// by moving it, so the underline, which belongs to the words round it,
+// stays put.
+.actionLink .arrow {
+  font-size: 0.945em;
+  vertical-align: -0.075em;
+}
+
+// a work page's key words -- what was made, when it was done: bold, in the
+// heavy, high-contrast weight a hovered link takes
+strong {
+  font-variation-settings: $fontVarThin;
 }
 
 // a link standing on its own
@@ -2806,31 +2806,6 @@ footer {
 
   font-variation-settings: $fontVarNormal;
 
-  // Dashed (%linkDashes), and solid while hovered: the words inside carry
-  // the solid line (%linkSolid). The label's own, so it runs on under the
-  // arrow, unbroken under the space before it (a character, Link.tsx).
-  .label {
-    @extend %linkDashes;
-  }
-
-  .labelLine {
-    @extend %linkSolid;
-  }
-
-  // ↗, for a link that leaves the site -- inside the label, so the label's
-  // underline carries on under it
-  // Sized and set so the arrow sits on the line like a letter: its tail on
-  // the baseline, its tip at the height of the lowercase. Measured in Kyiv
-  // Type Sans, the glyph's ink runs from 0.075em to 0.604em above the
-  // baseline -- 0.529em tall -- so 0.945em of the label puts its height on
-  // the label's 0.5em x-height, and dropping it 0.075em puts the tail down on
-  // the baseline. Lowered by its alignment, not by moving it, so the line
-  // under it, which belongs to the label, stays put.
-  .arrow {
-    font-size: 0.945em;
-    vertical-align: -0.075em;
-  }
-
   &.faded {
     color: var(--faded-color);
   }
@@ -2842,10 +2817,6 @@ footer {
       font-variation-settings: $fontVarThin;
       color: var(--accent-color);
       scale: $scaleOnHover;
-
-      .labelLine {
-        --solidLine: 1;
-      }
     }
   }
 }
@@ -2855,24 +2826,18 @@ footer {
 .inlineLink {
   position: relative;
   color: inherit;
-  // dashed (%linkDashes)
-  @extend %linkDashes;
 
+  // its line's, above, kept with its own
   transition:
     font-variation-settings var(--fontMorph),
     color var(--duration) var(--ease),
-    scale var(--motion) var(--ease);
+    scale var(--motion) var(--ease),
+    text-decoration-color var(--duration) var(--ease);
 
   font-variation-settings: $fontVarNormal;
 
   &.faded {
     color: var(--faded-color);
-  }
-
-  // solid while hovered: the words' own solid line (%linkSolid), as on a
-  // link standing on its own
-  .inlineLinkText {
-    @extend %linkSolid;
   }
 
   // a mouse's hover only: a tap on a phone changes nothing
@@ -2882,11 +2847,87 @@ footer {
       color: var(--accent-color);
       scale: $scaleOnHover;
     }
-
-    &:hover .inlineLinkText {
-      --solidLine: 1;
-    }
   }
+}
+
+// Spacing to the ink. A line of text is set in a box taller than its
+// letters -- the leading over and under them, and the font's own room above
+// its tallest letters and below the baseline -- so a gap set between two
+// blocks of text came out larger on the page than the gap itself, and by a
+// different amount for every size and leading: sections 96px apart (the
+// --section-gap) sat 96 to 110px apart, and a hairline's text sat further
+// from the line above it than below. The text at the top and foot of every
+// section, row and title block is pulled in to its letters instead, so each
+// gap is exactly the room between the ink.
+//
+// Measured in Kyiv Type Sans: the font's box runs 1em above the baseline and
+// 0.2em below it; the lowercase's ascenders (l, d) and the figures stand
+// 0.71em tall. So a line (1lh) has half of what it is taller than the 1.2em
+// box over the box, then 0.29em of the box over the ascenders -- 0.5lh -
+// 0.31em in all; and under the baseline, the same half and the 0.2em --
+// 0.5lh - 0.4em. (text-box-trim does this, in a browser new enough.)
+@mixin trimStart($margin: 0px) {
+  margin-top: calc(#{$margin} + 0.31em - 0.5lh);
+}
+
+@mixin trimEnd($margin: 0px) {
+  margin-bottom: calc(#{$margin} + 0.4em - 0.5lh);
+}
+
+// one line or block, trimmed at both
+.homeIntro > h1,
+.homeIntro > .lede,
+.homeAbout > h2,
+.homeAbout > p,
+.homeAbout > .actionLink .label,
+.aboutWrapper .intro .lede,
+.aboutWrapper .intro .links .label,
+.workWrapper > .header > :not(.links),
+.workWrapper > .header .links .label,
+.workWrapper .spec > h4,
+.workWrapper .spec > .paragraph,
+.timelineRow .years {
+  @include trimStart;
+  @include trimEnd;
+}
+
+// a section's heading, its own room under it kept
+.aboutWrapper section > h2.header {
+  @include trimStart;
+  @include trimEnd(2.5rem);
+}
+
+// a stack of lines a row or block deep: trimmed at its top and its foot,
+// the gaps inside it left as they are
+.aboutWrapper .intro .body > :first-child,
+.timelineCaption > :first-child,
+.nextPrevButton > :first-child,
+.homeRows > :first-child .groupHeader {
+  @include trimStart;
+}
+
+.aboutWrapper .intro .body > :last-child,
+.timelineCaption > :last-child,
+.nextPrevButton > :last-child {
+  @include trimEnd;
+}
+
+// A hairline between every two sections of a page, in the middle of the
+// section gap: as far from the section over it as from the one under it.
+// (The project pages' spec table draws its own, between its rows and at
+// either end of it, the same distance out.)
+.homeIntro,
+.workWrapper > .header {
+  margin-bottom: calc(var(--section-gap) / -2);
+  padding-bottom: calc(var(--section-gap) / 2);
+  border-bottom: var(--hairline);
+}
+
+.homeAbout,
+.aboutWrapper > section + section {
+  margin-top: calc(var(--section-gap) / -2);
+  padding-top: calc(var(--section-gap) / 2);
+  border-top: var(--hairline);
 }
 
 // mobile screen
@@ -2925,10 +2966,11 @@ footer {
     // and the fine print no smaller than 11px
     --smaller: max(0.6875rem, calc(var(--small) / 1.25));
 
-    // the page's rhythm, closer on a phone
+    // the page's rhythm, closer on a phone: the gap between sections from
+    // 6.5rem at 320px to the desktop's 10rem at 1338px, as the type is
     --page-top: 6rem;
     --page-bottom: 4rem;
-    --section-gap: 4rem;
+    --section-gap: clamp(6.5rem, calc(5.4rem + 5.501vw), 10rem);
 
     // and its lines a little further apart, the narrow column wrapping
     // more of them: a heading broken over two lines kept from crowding, a
@@ -2970,10 +3012,14 @@ footer {
       gap: 1rem;
     }
 
+    // set in its label's type, so the label's leading, trimmed off the top
+    // of the first (see "Spacing to the ink"), is the header's own
     .groupHeader {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-size: var(--h4);
+      line-height: var(--leading-display);
     }
 
     // bare arrows, the heading's size, the site's weight change on a press

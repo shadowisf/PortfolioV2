@@ -39,12 +39,12 @@ export const ApolloHospital: WorkEntry = {
   videoFlex: "1.599074",
   status: (
     <>
-      completed on <u>december 20, 2023</u>.
+      completed on <strong>december 20, 2023</strong>.
     </>
   ),
   description: (
     <>
-      a <u>web-based hospital management system</u> for managing patient,
+      a <strong>web-based hospital management system</strong> for managing patient,
       doctor, and staff records. key features include:
       <ul>
         <li>

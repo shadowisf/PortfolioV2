@@ -54,7 +54,7 @@ export const RayfitoutInternal: WorkEntry = {
       fit-out company specializing in high-end residential, commercial, and
       bespoke joinery projects across the middle east, europe, and africa. i
       contributed to creating the company's{" "}
-      <u>enterprise resource planning (erp) application</u> designed to
+      <strong>enterprise resource planning (erp) application</strong> designed to
       streamline internal operations, procurement, and financial workflows. the
       platform centralizes key business processes into a single, efficient
       system. key features include:

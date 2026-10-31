@@ -27,12 +27,12 @@ export const BellHospital: WorkEntry = {
   videoFlex: "1.598148",
   status: (
     <>
-      completed on <u>december 21, 2022</u>.
+      completed on <strong>december 21, 2022</strong>.
     </>
   ),
   description: (
     <>
-      a <u>cli-based hospital management system</u> built with java to
+      a <strong>cli-based hospital management system</strong> built with java to
       streamline healthcare administration. the system combines oop principles
       with practical file-based persistence to manage. key features include:
       <ul>

@@ -20,12 +20,12 @@ export const Project: WorkEntry = {
   videoFlex: "",
   status: (
     <>
-      completed on <u>december 20, 2023</u>.
+      completed on <strong>december 20, 2023</strong>.
     </>
   ),
   description: (
     <>
-      a <u>web-based hospital management system</u> for managing
+      a <strong>web-based hospital management system</strong> for managing
       patient, doctor, and staff records. key features include:
       <ul>
         <li>

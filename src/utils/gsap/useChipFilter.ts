@@ -2,7 +2,6 @@ import { RefObject, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { Flip } from "gsap/all";
 import gsap from "gsap";
-import { webkitOnly } from "../webkit";
 
 gsap.registerPlugin(Flip);
 
@@ -19,34 +18,11 @@ const LEAVE_SECONDS = 0.4;
 const SLIDE_SECONDS = 0.6;
 const GROW_SECONDS = 0.5;
 // From one level to another, once every skill is back, the ones not in the
-// new level blur this much (px) before they go -- the new level's alone in
-// focus. Softer than the 12px under the mobile menu and the work drawer
-// (%pageBlur in main.scss): on a chip that small, 12px left no shape of the
-// name at all.
-const PASSING_BLUR = 6;
-// Safari cannot draw a score of css-blurred chips moving at once: it left
-// undrawn patches (magenta) between them and cut each blur off square at
-// its box. There the blur is painted instead, with no filter: the words
-// gone see-through, only a soft shadow of them left, and the chip's grey
-// feathered out past its edge by a shadow of the same grey -- the look of
-// the blur, from things safari paints like any other.
-// A shadow's blur is twice the spread of the filter's for the same number
-// (it is the blur's whole width, the filter's its standard deviation), so
-// twice PASSING_BLUR matches the filter's softness elsewhere.
-const PAINTED_SOFTNESS = PASSING_BLUR * 2;
-const PAINTED_BLUR = (chip: HTMLElement) => {
-  const { color, backgroundColor } = getComputedStyle(chip);
-  return {
-    color: "transparent",
-    textShadow: `0 0 ${PAINTED_SOFTNESS}px ${color}`,
-    boxShadow: `0 0 ${PAINTED_SOFTNESS}px ${PAINTED_SOFTNESS / 3}px ${backgroundColor}`,
-  };
-};
-// what the painted blur leaves on a chip, cleared once it is done with
-const PAINTED_PROPS = "color,textShadow,boxShadow";
-const BLUR_SECONDS = 0.4;
-const BLUR_EASE = "power2.inOut";
-const blur = (px: number) => `blur(${px}px)`;
+// new level fade to this before they go -- the new level's alone at full
+// strength.
+const PASSING_OPACITY = 0.25;
+const FADE_SECONDS = 0.4;
+const FADE_EASE = "power2.inOut";
 
 // A skill-level filter over a box of tech chips (SkillFilter.tsx): the chips
 // are the box's children, each carrying its level in data-key.
@@ -76,8 +52,6 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
         display: belongs(chip, level) ? "flex" : "none",
         autoAlpha: 1,
         scale: 1,
-        filter: "none",
-        clearProps: PAINTED_PROPS,
       }),
     );
   };
@@ -167,13 +141,7 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
         gsap.set(chip, { display: "none", autoAlpha: 1, scale: 1 }),
       );
       arriving.forEach((chip) =>
-        gsap.set(chip, {
-          display: "flex",
-          autoAlpha: 0,
-          scale: 0,
-          filter: blur(0),
-          clearProps: PAINTED_PROPS,
-        }),
+        gsap.set(chip, { display: "flex", autoAlpha: 0, scale: 0 }),
       );
       if (!staying.length) return growIn();
       // lifted out of the row while they travel (absolute), each at its own
@@ -185,8 +153,6 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
         ease: SLIDE_EASE,
         stagger: STAGGER / pace,
         absolute: true,
-        // (flip puts each one's inline styles back as it found them on
-        // landing -- a blur among them, should a stayer have one)
         onComplete: growIn,
       });
     };
@@ -204,12 +170,11 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
 
   // Show the skills at a level. From one level straight to another, every
   // skill comes back first, the chips back in their original places; then
-  // all but the new level's blur (PASSING_BLUR; in Safari, painted --
-  // PAINTED_BLUR), and the new level is filtered from there, rather than
-  // one set swapping for the other. A switch made while one is still going
-  // first puts every chip where that one was headed (settle), and starts
-  // from there; a step still waiting from it is dropped. Throughout, the page holds still
-  // (holdScroll). onDone is called once the chips have all landed.
+  // all but the new level's fade (PASSING_OPACITY), and the new level is
+  // filtered from there, rather than one set swapping for the other. A
+  // switch made while one is still going first puts every chip where that
+  // one was headed (settle), and starts from there; a step still waiting
+  // from it is dropped. Throughout, the page holds still (holdScroll). onDone is called once the chips have all landed.
   const filterSkill = contextSafe((level: string, onDone?: () => void) => {
     const ticket = ++switches.current;
     const still = () => switches.current === ticket;
@@ -223,38 +188,21 @@ export function useChipFilter(box: RefObject<HTMLElement | null>) {
     };
 
     if (from !== "0" && level !== "0" && from !== level) {
-      const blurOthers = () => {
+      const fadeOthers = () => {
         if (!still()) return;
-        const passing = chips().filter((chip) => !belongs(chip, level));
-        // safari's: each chip's painted blur, worked out from its own colours,
-        // from none of it
-        if (webkitOnly) {
-          passing.forEach((chip) => {
-            const { color, backgroundColor } = getComputedStyle(chip);
-            gsap.set(chip, {
-              textShadow: `0 0 0px ${color}`,
-              boxShadow: `0 0 0px 0px ${backgroundColor}`,
-            });
-          });
-        }
-        gsap.to(passing, {
-          ...(webkitOnly
-            ? {
-                color: "transparent",
-                textShadow: (_: number, chip: HTMLElement) =>
-                  PAINTED_BLUR(chip).textShadow,
-                boxShadow: (_: number, chip: HTMLElement) =>
-                  PAINTED_BLUR(chip).boxShadow,
-              }
-            : { filter: blur(PASSING_BLUR) }),
-          duration: BLUR_SECONDS,
-          ease: BLUR_EASE,
-          onComplete: () => {
-            if (still()) sortTo(level, still, release);
+        gsap.to(
+          chips().filter((chip) => !belongs(chip, level)),
+          {
+            autoAlpha: PASSING_OPACITY,
+            duration: FADE_SECONDS,
+            ease: FADE_EASE,
+            onComplete: () => {
+              if (still()) sortTo(level, still, release);
+            },
           },
-        });
+        );
       };
-      sortTo("0", still, blurOthers);
+      sortTo("0", still, fadeOthers);
     } else {
       sortTo(level, still, release);
     }

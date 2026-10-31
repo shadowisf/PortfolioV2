@@ -28,12 +28,12 @@ export const PlugIns: WorkEntry = {
   videoFlex: "1.599074",
   status: (
     <>
-      completed on <u>april 19, 2023</u>.
+      completed on <strong>april 19, 2023</strong>.
     </>
   ),
   description: (
     <>
-      a <u>web database solution</u> that automates operations for an
+      a <strong>web database solution</strong> that automates operations for an
       electronics retail business, combining robust backend architecture with
       user-friendly interfaces. the system demonstrates key database principles.
       key features include:

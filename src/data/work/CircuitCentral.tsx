@@ -36,12 +36,12 @@ export const CircuitCentral: WorkEntry = {
   videoFlex: "1.687037",
   status: (
     <>
-      completed on <u>april 29, 2024</u>.
+      completed on <strong>april 29, 2024</strong>.
     </>
   ),
   description: (
     <>
-      a <u>windows forms e-commerce management system</u> for managing
+      a <strong>windows forms e-commerce management system</strong> for managing
       electronic product sales. key features include:
       <ul>
         <li>

@@ -27,12 +27,12 @@ export const PortfolioV1: WorkEntry = {
   videoFlex: "1.599074",
   status: (
     <>
-      completed on <u>september 23, 2024</u>.
+      completed on <strong>september 23, 2024</strong>.
     </>
   ),
   description: (
     <>
-      a <u>dynamic and cartoonish-themed personal website</u> designed to
+      a <strong>dynamic and cartoonish-themed personal website</strong> designed to
       showcase creativity while exploring foundational web development
       technologies. inspired by award-winning designs from{" "}
       <InlineLink

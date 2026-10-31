@@ -42,12 +42,12 @@ export const FeelTok: WorkEntry = {
   videoFlex: "0.47901",
   status: (
     <>
-      completed on <u>december 18, 2024</u>.
+      completed on <strong>december 18, 2024</strong>.
     </>
   ),
   description: (
     <>
-      a <u>mobile-first social media platform</u> promoting authentic emotional
+      a <strong>mobile-first social media platform</strong> promoting authentic emotional
       expression through six core pillars (love, gratitude, apology,
       appreciation, mindfulness, thankfulness), built with modern serverless
       architecture. key features include:

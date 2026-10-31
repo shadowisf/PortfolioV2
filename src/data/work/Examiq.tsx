@@ -44,12 +44,12 @@ export const Examiq: WorkEntry = {
   videoFlex: "1.726",
   status: (
     <>
-      completed on <u>may 11, 2025</u>.
+      completed on <strong>may 11, 2025</strong>.
     </>
   ),
   description: (
     <>
-      a <u>web-based ai-powered proctoring system</u> that features gaze
+      a <strong>web-based ai-powered proctoring system</strong> that features gaze
       tracking, input tracking, and behavior tracking to prevent cheating during
       remote assessments. key features include:
       <ul>

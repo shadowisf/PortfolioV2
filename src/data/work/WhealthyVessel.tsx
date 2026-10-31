@@ -33,7 +33,7 @@ export const WhealthyVessel: WorkEntry = {
     <>
       <CompanyLink name="whealthy vessel" /> is a high-quality and premium
       cookware brand, offering health-focused solutions and culinary excellence.
-      i developed a <u>corporate-style website</u>, showcasing the quality and
+      i developed a <strong>corporate-style website</strong>, showcasing the quality and
       features of the brand's products and also to provide better user
       experience for employees. key features include:
       <ul>
