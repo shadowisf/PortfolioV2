@@ -2455,6 +2455,8 @@ footer {
     background-color: var(--surface);
     color: var(--text-color);
     border: 1px solid var(--pageSurface);
+    // not the link's letter edges (%linkDashes), in the page's colour
+    text-shadow: none;
     line-height: normal;
   }
 
@@ -2747,6 +2749,45 @@ footer {
   }
 }
 
+// A link's underline, drawn by the site rather than the browser: a
+// browser's own dashes are its own length, and differ from one to the next.
+// Dashed, 0.06em thick, each dash three times that and each gap half a dash
+// (0.18em and 0.09em), its top 0.07em under the baseline -- measured off
+// the underline as it was meant to look. The font's lines run 1em above the
+// baseline and 0.2em below on every platform (hhea and win alike), so the
+// baseline is 1em down the words' box everywhere, and the line 1.07em.
+// Clear of the letters that reach through it (g, p, y), as an underline
+// is: each letter edged in the page's colour (text-shadow), which covers
+// the line round them -- drawn under the letters, over the line.
+%linkDashes {
+  text-decoration: none;
+  background: linear-gradient(to right, currentColor 66.667%, transparent 66.667%) 0
+    1.07em / 0.27em 0.06em repeat-x;
+  text-shadow:
+    0.03em 0 var(--background-color),
+    -0.03em 0 var(--background-color),
+    0.06em 0 var(--background-color),
+    -0.06em 0 var(--background-color);
+}
+
+// The solid line a hover lays over the dashes, on the same line, faded in
+// at the pace of the weight change (--solidLine, 0 to 1)
+@property --solidLine {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+%linkSolid {
+  font-size: inherit;
+  background: linear-gradient(
+      color-mix(in srgb, currentColor calc(var(--solidLine) * 100%), transparent),
+      color-mix(in srgb, currentColor calc(var(--solidLine) * 100%), transparent)
+    )
+    0 1.07em / 100% 0.06em no-repeat;
+  transition: --solidLine var(--fontMorph);
+}
+
 // a link standing on its own
 .actionLink {
   position: relative;
@@ -2765,22 +2806,15 @@ footer {
 
   font-variation-settings: $fontVarNormal;
 
-  // Underlined as any underlined words are (<u>), at the text's own
-  // place and weight, but dashed -- and solid while hovered: the words
-  // inside carry a solid underline of their own, on the same line, that
-  // fades in at the pace of the weight change.
-  // Unbroken under the space before the arrow, a character (Link.tsx)
-  // joined to the words' own -- where a margin would have had none, and a
-  // space of its own was drawn solid -- and lifted round a descender, as
-  // any underline is.
+  // Dashed (%linkDashes), and solid while hovered: the words inside carry
+  // the solid line (%linkSolid). The label's own, so it runs on under the
+  // arrow, unbroken under the space before it (a character, Link.tsx).
   .label {
-    text-decoration: underline dashed;
+    @extend %linkDashes;
   }
 
   .labelLine {
-    font-size: inherit;
-    text-decoration: underline solid transparent;
-    transition: text-decoration-color var(--fontMorph);
+    @extend %linkSolid;
   }
 
   // ↗, for a link that leaves the site -- inside the label, so the label's
@@ -2790,8 +2824,8 @@ footer {
   // Type Sans, the glyph's ink runs from 0.075em to 0.604em above the
   // baseline -- 0.529em tall -- so 0.945em of the label puts its height on
   // the label's 0.5em x-height, and dropping it 0.075em puts the tail down on
-  // the baseline. Lowered by its alignment, not by moving it, so the
-  // underline, which belongs to the label, stays put.
+  // the baseline. Lowered by its alignment, not by moving it, so the line
+  // under it, which belongs to the label, stays put.
   .arrow {
     font-size: 0.945em;
     vertical-align: -0.075em;
@@ -2810,7 +2844,7 @@ footer {
       scale: $scaleOnHover;
 
       .labelLine {
-        text-decoration-color: currentColor;
+        --solidLine: 1;
       }
     }
   }
@@ -2820,12 +2854,9 @@ footer {
 // a grey line, the text colour in a plain one -- until it is hovered
 .inlineLink {
   position: relative;
-  text-decoration: none;
   color: inherit;
-
-  // underlined as any underlined words are (<u>), lifted round a
-  // descender, but dashed
-  text-decoration: underline dashed;
+  // dashed (%linkDashes)
+  @extend %linkDashes;
 
   transition:
     font-variation-settings var(--fontMorph),
@@ -2838,13 +2869,10 @@ footer {
     color: var(--faded-color);
   }
 
-  // solid while hovered: the words' own solid underline, on the same line,
-  // fading in at the pace of the weight change -- as on a link standing on
-  // its own
+  // solid while hovered: the words' own solid line (%linkSolid), as on a
+  // link standing on its own
   .inlineLinkText {
-    font-size: inherit;
-    text-decoration: underline solid transparent;
-    transition: text-decoration-color var(--fontMorph);
+    @extend %linkSolid;
   }
 
   // a mouse's hover only: a tap on a phone changes nothing
@@ -2856,7 +2884,7 @@ footer {
     }
 
     &:hover .inlineLinkText {
-      text-decoration-color: currentColor;
+      --solidLine: 1;
     }
   }
 }
