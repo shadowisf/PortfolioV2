@@ -96,7 +96,12 @@ export default function About() {
           </div>
           <div className="tile">
             <small>degree</small>
-            <p>beng (hons) software engineering</p>
+            {/* the degree, then its subject on a line of its own */}
+            <p>
+              beng (hons)
+              <br />
+              software engineering
+            </p>
           </div>
         </div>
       </section>
